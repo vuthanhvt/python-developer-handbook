@@ -1,0 +1,72 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="112.html" title="Metaclasses"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=113" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="113.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="114.html" title="Code Examples"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A34%3A17+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147032037054067155175126</font><a href="read6.asp?bookname=0672319942&snode=113&now=5%2F31%2F2002+4%3A34%3A17+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Summary</h3>
+				<p>Python is a language that implements object-oriented programming (OOP) by supporting classes and class instances.</p>
+
+				<P>A class is a template from which objects can be created. It has its own namespace and stores object attributes and methods, which can be inherited from other base classes—a process called <I>subclassing.</I></P>
+
+				<p>A class can also contain class variable assignments. These variables are shared by all the class instances, and they are part of the class namespace. All class attributes (variables and methods) are public.</p>
+
+				<p>In order to identify the right variable that is used when you get multiple variables with the same name within your code, the following search order is followed: instance variables, class variables, and base class variables.</p>
+
+				<P>Python has a module called <TT Class="monofont">pyclbr</TT> (Python Class Browser) that offers you the possibility of browsing all the information about classes that is stored in some other specific module. Note that most of this information can also be deduced through introspection. <TT class="monofont">pyclbr</tt> gives you another benefit in that you don't need to import the module.</p>
+
+				<p>Each object created from a class is an <i>instance</i> of a class, which has some specific properties: identity, object type, attributes, methods<i>,</i> and value.</p>
+
+				<p>Classes and instances have built-in attributes that provide access to their internal definitions (namespace, name, and so on).</p>
+
+				<p>The built-in functions <tt cLasS="monofont">isinstance()</tt> and <tT clasS="monofont">issubclass()</tt> are provided to help determine the inheritance properties of instance and class objects.</p>
+
+				<P>Each instance defines its own namespace of data, and it inherits behavior from the class (and possible base classes) that have originated it.</P>
+
+				<P>Python object attributes don't need to be declared inside the class before they get used because they can be created dynamically.</P>
+
+				<p>Class methods can be unbound and used outside a class definition. They also carry some special attributes that can be called from within the class that implements them. These attributes enable the access to the method's name, the method's documentation string, and so on.</p>
+
+				<p>All method definitions must carry the argument <tT CLAss="monofont">self,</tt> whose function is to transport a reference of the object in a way so that when a method is called, it knows which object should be affected.</P>
+
+				<P>Python exposes some special methods, such as <TT clasS="monofont">__init__(),</TT>
+					<Tt class="monofont">__str__(),</tt> and so on. These methods inherit built-in functions of the same name that are provided by Python itself.</p>
+
+				<p>Python operators can be re-created by remapping their built-in functions and methods. This feature is called <i>operator overloading.</i> Extensive support exists for operators overloading via the double-underscored special methods such as <tt class="monofont">__add__()</tT> and <tt ClasS="monofont">__div__().</tt></p>
+
+				<p>Python classes can be created from scratch by using single inheritance and multiple inheritance.</P>
+
+				<p>A <i>subclass</i> is a class that inherits attribute names from another class, whereas a <I>base class</I> is defined as a class that another class inherits attributes from. When you create a subclass, you can add or overwrite any method from its base classes. However, inherited methods of base classes aren't automatically called. It is necessary to call them explicitly.</P>
+
+				<P>The order used to inform the base classes in a class header is really important. The precedence order for attribute searches in the base classes starts at the class located at the left side.</p>
+
+				<p>Python doesn't offer type declaration because it doesn't know what type of object implements an interface until the program is running. This feature is called <i>runtime binding.</i></P>
+
+				<P>A single underscore preceding the attribute name is used to point out internal attributes that shouldn't be used externally. Attributes starting with double underscores aren't explicitly exported.</P>
+
+				<P>Python also offers you the possibility of operating its internal class handling engine by using metaclasses and metainstances. A metaclass is just a class used as a template to create class-like entities, and the use of metainstance makes it easier for you to handle the task of modifying the attribute lookup behavior of objects.</p>
+
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="112.html" title="Metaclasses"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=113" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="113.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="114.html" title="Code Examples"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

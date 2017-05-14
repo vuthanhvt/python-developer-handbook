@@ -1,0 +1,262 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Third-Party Internet Applications</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="171.html" class="navtitle">11. Web Development</a> &gt; <span class="nonavtitle">Third-Party Internet Applications</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="174.html" title="Configuring Web Servers for Python/CGI Scripts"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=175" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="175.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="176.html" title="Other Applications"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A43%3A36+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148047091216156219053001</font><a href="read9.asp?bookname=0672319942&snode=175&now=5%2F31%2F2002+4%3A43%3A36+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Third-Party Internet Applications</h3>
+				<p>Some completely developed Web applications, written in Python, are available for general use. You don't need to do any programming to use them. You just have to install, configure, and use them.</p>
+
+				
+					<H4>Grail Web Browser</H4>
+					<P>Grail is a free Web browser written entirely in Python, using the Tkinter GUI (Tk, which is a free UI toolkit developed by John Ousterhout). Grail has the capability to manipulate SGML, HTML, URL's, images, and sound. Besides, it is easily extended to offer new functionality.</P>
+
+					<p>Being written in Python helps Grail to have a high adhesion to the Python language. Something similar happens to HotJava, which is a browser written entirely in Java.</p>
+
+					<p>For documentation and downloads, check out the following sites:</p>
+
+					<P>
+						<A TArget="_blank" HREF="http://grail.python.org">http://grail.python.org</a> and <a target="_blank" href="http://grail.cnri.reston.va.us/grail/">http://grail.cnri.reston.va.us/grail/</a>
+					</p>
+
+					<p>Grail should run on any UNIX system to which Python and Tk have been ported—that is, almost all UNIX systems supporting X11. In particular, Grail is one of the few Web browsers that supports Solaris for Intel x86 processors. It now also runs on Windows and Macintosh because there are now stable ports of Tk to those platforms (you need a lot of RAM though). Grail supports the protocols and file formats commonly found on the World Wide Web, such as HTTP, FTP, and HTML. However, it is easily extended to support new protocols or file formats. Grail is distributed by CNRI in source form, free of charge (without warranties), and can be freely redistributed (within reason). Grail has not been worked on for a while, and doesn't support any of the latest standards you might expect in a browser.<a name="idx1073746260"></A><a nAme="idx1073746261"></a><A name="idx1073746262"></A><a naME="idx1073746263"></A><A name="idx1073746264"></A><A NAme="idx1073746265"></a><a NAME="idx1073746266"></a><a naME="idx1073746267"></A><A name="idx1073746268"></a><a name="idx1073746269"></a><a name="idx1073746270"></a><a naMe="idx1073746271"></a></P>
+
+					<p>Grail's design tries to provide a plug-in architecture, which allows the browser to easily support applets written in Python. Grail lets you download Python programs that execute inside Grail on your local machine. These little applications, which are called <a nAme="idx1073746272"></a><i>applets</I> can do things such as display animations, interact with the user in new ways, even create additional menus that pop up dialogs if you like. Grail applets run in a restricted execution environment, so broken or malicious applets (<a naME="idx1073746273"></A><I>Trojan Horses</i>) can't erase your files or crash your computer.</p>
+
+					<p>Grail's Web site has an applet demo collection that you can explore.</p>
+
+					<P>Grail has many positive qualities, such as support to full HTML 2.0, including images, forms and image maps, as well as many HTML 3.2 features. It uses asynchronous document transfer and supports printing and saving documents, searching, bookmarks, history, and more. It also supports frames, file upload in forms, support for JPEG, TIFF, and XBM images, image printing, and tables (within the limitations of the Tk toolkit). It has preference panels, an I/O status display, a remote control interface, and many other nice features.</P>
+
+					<P>Apart from running applets, Grail is extensible in other areas, by writing so-called Grail plug-in modules. Grail plug-ins can be written for a number of new  implementations, such as protocols (for example, CNRI's handle protocol), file formats (for example, for handling JPEG or sound directly), HTML tags (for example, tables), and preference panels. Check out the following site for more information:<A name="idx1073746274"></A><A NAme="idx1073746275"></a><a NAME="idx1073746276"></a><a name="idx1073746277"></a><a name="idx1073746278"></a><a name="idx1073746279"></a><a NamE="idx1073746280"></a></p>
+
+					<p><I>Grail—The Browser For The Rest Of Us (DRAFT),</i> by Guido van Rossum</p>
+
+					<p>
+						<a TargET="_blank" HRef="http://grail.cnri.reston.va.us/grail/info/papers/restofus.html">http://grail.cnri.reston.va.us/grail/info/papers/restofus.html</a><a NAME="idx1073746281"></a><a naME="idx1073746282"></A><A name="idx1073746283"></A><A NAme="idx1073746284"></a><a name="idx1073746285"></a>
+					</p>
+
+				
+				
+					<h4>Zope Web Application Server</h4>
+					<p>The Z Object Publishing Environment, also known as Zope, is an open source object publishing system for the Web, developed by a company called <a name="idx1073746286"></a>Digital Creations. Zope is a complete dynamic Web site management Web platform used for building high-performance, dynamic Web sites. Essentially, it is a very complete framework for building Web applications, written in Python.</p>
+
+					<P>Check out the following sites for details: </p>
+
+					<p><A tarGet="_blank" hrEf="http://www.digicool.com">http://www.digicool.com</a> and <a TARGet="_blank" hrEF="http://www.zope.org">http://www.zope.org</A></P>
+
+					<p>Zope is the leading Open Source Web-application server. Zope enables teams to collaborate in the creation and management of dynamic Web-based business applications such as intranets and portals. It also makes it easy to build features such as site search, news, personalization, and e-commerce into your Web applications.</p>
+
+					<p>Zope is a long running process, has a sophisticated authentication/authorization model, and has a useful SQL related product called <a NAME="idx1073746287"></a><a naME="idx1073746288"></A><A name="idx1073746289"></a><a name="idx1073746290"></a><i>ZSQLMethod,</i> which provides an easy way to access a database from the Web application.</p>
+
+					<p>The following link is a technical introduction to object publishing with Zope. The document introduces Zope's object publishing facilities and shows you how to write and publish your own objects in Python. It has an excellent tutorial on integrating a Python module with the Zope ORB, Templates and Object Database.<a name="idx1073746291"></A><a nAme="idx1073746292"></a><A name="idx1073746293"></A><a naME="idx1073746294"></A><A name="idx1073746295"></A><A NAme="idx1073746296"></a><a NAME="idx1073746297"></a><a naME="idx1073746298"></A><A name="idx1073746299"></a><a name="idx1073746300"></a><a name="idx1073746301"></a><a naMe="idx1073746302"></a></P>
+
+					<p><a tArget="_blank" Href="http://www.zope.org/Members/Amos/WhatIsObjectPublishing">http://www.zope.org/Members/Amos/WhatIsObjectPublishing</A></P>
+
+					<P>All requests made to the application server are mapped to Python objects. Therefore, whenever you make a call to a URL, as demonstrated in the following line of code</P>
+
+					<p><a taRGET="_blank" href="http://host/path/to/object?name1=value1&amp;name2=value2">http://host/path/to/object?name1=value1&amp;name2=value2</A></P>
+
+					<P>The server internally calls an object passing the pairs (name, value) as arguments.</P>
+
+					<p>Zope is not monolithic. Instead, it is composed of parts which can be deployed standalone with your own Python code support; for example, the Object Request Broker, HTML Templates (DTML) and the Object Database (ZOBD, Z Object Database, which stores Python objects) can all be abstracted from the mix.</p>
+
+					<p>Zope's templates are somehow similar to IIS ASP files. However, instead of being associated to Web pages, they are associated to Python objects.</p>
+
+					<P>You don't need to use Apache (PyApache/Httpdapy) in conjunction with Zope. In fact, Zope comes with a fast Web server of its own, which supports multiple protocols. On the other hand, it can also work with other Web servers as well. Most users do put Apache in front of Zope for reasons of flexibility. Because Zope is a long running process, they implement Persistent CGI, FastCGI, or ProxyPass.</P>
+
+					<P>If you need to find Web Hosting companies that support Zope, this might help:  <A target="_blank" href="http://www.zope.org/Resources/ZSP">http://www.zope.org/Resources/ZSP</a>.<a name="idx1073746303"></a><a naMe="idx1073746304"></a><A namE="idx1073746305"></a><a naMe="idx1073746306"></a><a NAME="idx1073746307"></a></p>
+
+				
+				<h4>Mailman—GNU Mailing List Manager</h4>
+					<P>Mailman is a Web integrated mailing list manager that helps manage email discussion lists, much like Majordomo and Smartmail. Unlike most similar products, Mailman gives each mailing list a Web page, and allows users to subscribe, unsubscribe, and so on, over the Web. Even the list manager can administer his list entirely from the Web. Both users and system administrator can do almost everything through an Internet connection. Mailman also integrates most things people want to do with mailing lists, including archiving, mail-to-news gateways, and so on.</P>
+
+					<P><A name="idx1073746308"></A><A NAme="idx1073746309"></a>Mailing lists are great for meeting people and sharing common interests. Within Mailman, each mailing list has its own page that makes it much simpler to use. Each mailing list's Web page has an extensive Web-based user interface that is customizable on a per-list basis. This allows users to manage their own subscriptions, with support for temporarily disabling their accounts, selecting digest modes, hiding their email addresses from other members, and so on.<a NAME="idx1073746310"></a><a name="idx1073746311"></a><a name="idx1073746312"></a><a name="idx1073746313"></a><a NamE="idx1073746314"></a><a nAme="idx1073746315"></a><a Name="idx1073746316"></A><A NAme="idx1073746317"></a><a NAME="idx1073746318"></a><a naME="idx1073746319"></A><A name="idx1073746320"></A><A NAme="idx1073746321"></a></p>
+
+					<p>All Mailman actions—including subscription requests, list administration, and management reports—can be performed either through a Web interface or more traditional textual commands.</p>
+
+					<p>In order to use Mailman, you will need the following:</p>
+
+					<ul>
+<li><p>A Web server that supports CGI scripts, such as Apache</p>
+</li>
+<li><p>An SMTP daemon (also known as mail transfer agents, MTAs, or mail servers), such as Sendmail, Qmail, or Postfix</p>
+</Li>
+<lI><p>Python 1.5 or newer</p>
+
+						</lI>
+</ul>
+					<p>Mailman currently doesn't work on Windows. Instead, it runs on most UNIX-like systems. It is also compatible with most Web servers, browsers, and most SMTP servers. Actually, the only thing Mailman really requires of the mail server is the ability to setup aliases that execute commands.</p>
+
+					<P>Mailman is written primary in Python (in approximately 13,000 lines) with a few modules written in C (600 lines) for improved security (the C parts are the wrappers that handle securely changing to the correct permissions). Mailman exposes Python as an extension language that allows for customization of Mailman's interfaces.</p>
+
+					<p>In case you need to build Mailman from the source, it is necessary to have in hand: the GNU-make utility, an ANSI C Compiler, such as <tT CLAss="monofont">gcc,</tt> and Python 1.5 or higher.<A NAMe="idx1073746322"></a><a nAME="idx1073746323"></A><a namE="idx1073746324"></A><A Name="idx1073746325"></a><a name="idx1073746326"></a><a name="idx1073746327"></a><a namE="idx1073746328"></a><a Name="idx1073746329"></A><a namE="idx1073746330"></a><a nAME="idx1073746331"></A><a namE="idx1073746332"></A><A Name="idx1073746333"></a></P>
+
+					<P>Mailman is brought to you by the <A Name="idx1073746334"></a>Mailman Cabal, which is currently composed of the following core developers: <A NAMe="idx1073746335"></a>Barry Warsaw, <a name="idx1073746336"></a>Harald Meland, <a name="idx1073746337"></a>Ken Manheimer, <a name="idx1073746338"></a>Scott Cotton, and <A naMe="idx1073746339"></a>John Viega. Mailman was originally written by John Viega. Mailman is free software. It is distributed under the GNU General Public License.</p>
+
+					<P>The following lists some of the main features implemented by Mailman:</p>
+
+					<ul>
+<lI><p>Automatic Web-based, hypermail-style archiving, including provisions for private archives.</p>
+</lI>
+<LI><P>Integrated gatewaying to and from Usenet.</p>
+</li>
+<lI><P>Smart bounce handling by using the <A Name="idx1073746340"></a><A NAMe="idx1073746341"></a>Delivery Status Notification (DSN), which is described in RFC 1894. This feature enables automatic disposition (that is, configurable disabling, unsubscribing).</p>
+</lI>
+<LI><P>Flexible and direct SMTP delivery of messages, including integrated fast bulk mailing.</p>
+</li>
+<li><p>Smart spam protection.</p>
+</li>
+<li><p>Multiple list owners and moderators are possible.</p>
+</li>
+<li><p>Supports RFC934 and MIME digest delivery.</p>
+</lI>
+<li><P>Support for virtual domains.</p>
+</li>
+<Li><p>Mail-based administrative commands.</p>
+</lI>
+<li><p>A Web-based list administration interface for all administrative-type tasks, including list configuration, moderation (post approvals), selection of posting and subscribing rules, management of user accounts via the Web, and so on.</P>
+
+						</LI>
+</Ul>
+					<p>Among other responsibilities, Mailman keeps track of the mailing lists of all <tt CLASs="monofont">python.org</tt> activities, including the Python Special Interest Groups (Python SIGs).<a NAME="idx1073746342"></a><a naME="idx1073746343"></A><A name="idx1073746344"></a><a name="idx1073746345"></a><a name="idx1073746346"></a><a naMe="idx1073746347"></a><A namE="idx1073746348"></a><a naMe="idx1073746349"></a><a NAME="idx1073746350"></a><a naME="idx1073746351"></A><A name="idx1073746352"></A><A NAme="idx1073746353"></a></p>
+
+					<P>As a practical matter, you'll need root access on your host to configure Mailman properly. Most open source products can be generated and initially tested by ordinary UNIX users. Some organizations have a policy that requires this. With Mailman, though, you'll at least need to create a new account and group (the default for both is "mailman") for Mailman's use.</P>
+
+					<P>Mailman, of course, powers the <Tt class="monofont">Python-list,</tt> which is a general discussion list for the Python programming language. You can see it working at</p>
+
+					<p><a target="_blank" hreF="http://www.python.org/mailman/listinfo/python-list">http://www.python.org/mailman/listinfo/python-list</a></p>
+
+					<P>Also check out the Mailman home page: </p>
+
+					<p><a TargeT="_blank" hreF="http://www.gnu.org/software/mailman/mailman.html">http://www.gnu.org/software/mailman/mailman.html</A></P>
+
+					<P>More information is also available at: <a tarGET="_blank" Href="http://www.list.org">http://www.list.org</a></P>
+
+					<P><A Name="idx1073746354"></a>Christopher Kolar has made Mailman documentation available, primarily for list owners who aren't necessarily technical, but who own Mailman mailing lists. The GNU Mailman Documentation can be found at the following site:</P>
+
+					<P><A Target="_blank" href="http://www.aurora.edu/~ckolar/mailman/">http://www.aurora.edu/~ckolar/mailman/</a><a name="idx1073746355"></a><a namE="idx1073746356"></a><a Name="idx1073746357"></A><a namE="idx1073746358"></a><a nAME="idx1073746359"></A>
+					</p>
+
+				
+				<h4>Medusa Internet Server</h4>
+					<p>Medusa is a Web server application that can be embeddable into a Python program, offering high-performance for HTTP, FTP, and other IP services. Medusa was written entirely in Python by <A NAMe="idx1073746360"></a>Sam Rushing.</p>
+
+					<p>Medusa provides an Internet server framework for implementing asynchronous socket-based servers—TCP/IP, and on UNIX, UNIX domain sockets. The first release includes HTTP, FTP, and monitor servers. Medusa can simultaneously support several instances of either the same or different server types. For example, you could start up two HTTP servers, an FTP server, and a monitor server. Then you could connect to the monitor server to control and manipulate Medusa while it is running, entering and evaluating Python expressions (basically, a remote Python interpreter capability).<A NAMe="idx1073746361"></a><a nAME="idx1073746362"></A><a name="idx1073746363"></a><a name="idx1073746364"></a><a name="idx1073746365"></a><a nAme="idx1073746366"></A><a naMe="idx1073746367"></a><a nAme="idx1073746368"></a><A NAMe="idx1073746369"></a><a nAME="idx1073746370"></A><a namE="idx1073746371"></A></P>
+
+					<P>Out of the box, Medusa can run an unlimited number of HTTP and FTP servers within a single address space, without the use of threads. Capable of impressive hit rates, this server can solve your performance problems while handing you the most powerful server-side scripting language available.</p>
+
+					<p>Because Medusa is written entirely in Python, it is portable to any platform that implements the <a nAME="idx1073746372"></A><a name="idx1073746373"></a><tt class="monofont">socket</tt> and <a name="idx1073746374"></A><a nAme="idx1073746375"></a><Tt claSs="monofont">select</tt> modules correctly. It has been tested on several UNIX platforms, Windows NT, and Windows 95.</P>
+
+					<P>Medusa is an elegant and efficient solution to a difficult programming problem. Medusa's core async-socket library is very stable because it has been in use virtually unchanged since 1995.</P>
+
+					<P>Medusa is an architecture for building long-running, very high-performance TCP/IP network servers (such as HTTP, FTP, and NNTP) in Python. Medusa is different from most other servers because it runs as a single process, multiplexing I/O with its various client and server connections within a single process/thread.</p>
+
+					<p>Medusa is in use now in several mission-critical applications, ranging from custom Web servers at extremely high-traffic sites to distributed data processing systems.</p>
+
+					<p>As Medusa is written in Python, it can be extended and modified at runtime, even by the end user. User scripts can be used to completely change the behavior of the server, and even add in completely new server types.</P>
+
+					<DIV clasS="note"><P CLass="notetitle"><b>Note</B></P><P>
+
+						<P>According to <a target="_blank" href="http://www.nightmare.com/medusa/license.html">http://www.nightmare.com/medusa/license.html</a>, Medusa is now Free Software under the same license as Python, so you don't need a commercial use license.</p>
+
+					</p></div>
+<br>
+<bR>
+
+					<p>For more details, check out the following site:</p>
+
+					<P><a taRget="_blank" hRef="http://www.nightmare.com/medusa/">http://www.nightmare.com/medusa/</a><A NAMe="idx1073746376"></a><a nAME="idx1073746377"></A><a namE="idx1073746378"></A><A Name="idx1073746379"></a><A NAMe="idx1073746380"></a><a name="idx1073746381"></a><a name="idx1073746382"></a><a name="idx1073746383"></a><A naMe="idx1073746384"></a><a Name="idx1073746385"></a><A namE="idx1073746386"></A></P>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="174.html" title="Configuring Web Servers for Python/CGI Scripts"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=175" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="175.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="176.html" title="Other Applications"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073746272">applets</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746269">Grail</a> <a href="#idx1073746283">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746264">Internet, third-party</a> <a href="#idx1073746278">2nd</a> <a href="#idx1073746295">3rd</a> <a href="#idx1073746314">4th</a> <a href="#idx1073746326">5th</a> <a href="#idx1073746346">6th</a> <a href="#idx1073746365">7th</a> <a href="#idx1073746380">8th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746318">Mailman</a> <a href="#idx1073746330">2nd</a> <a href="#idx1073746350">3rd</a> <a href="#idx1073746356">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746369">Medusa Internet Server</a> <a href="#idx1073746384">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746299">Z Object Publishing Environment (Zope)</a> <a href="#idx1073746304">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746288">ZSQLMethod</a><BR>
+browsers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746268">Grail</a> <a href="#idx1073746282">2nd</a><BR>
+ <a href="#idx1073746338">Cotton, Scott</a><BR>
+ <a href="#idx1073746340">Delivery Status Notification (DSN)</a><BR>
+development<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746262">third-party applications</a> <a href="#idx1073746276">2nd</a> <a href="#idx1073746293">3rd</a> <a href="#idx1073746312">4th</a> <a href="#idx1073746324">5th</a> <a href="#idx1073746344">6th</a> <a href="#idx1073746363">7th</a> <a href="#idx1073746378">8th</a><BR>
+ <a href="#idx1073746286">Digital Creations</a><BR>
+ <a href="#idx1073746341">DSN (Delivery Status Notification)</a><BR>
+ <a href="#idx1073746321">GNU Mailing List Manager (Mailman)</a> <a href="#idx1073746333">2nd</a> <a href="#idx1073746353">3rd</a> <a href="#idx1073746359">4th</a><BR>
+ <a href="#idx1073746267">Grail</a> <a href="#idx1073746281">2nd</a><BR>
+Internet<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development for<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746261">third-party applications</a> <a href="#idx1073746275">2nd</a> <a href="#idx1073746292">3rd</a> <a href="#idx1073746311">4th</a> <a href="#idx1073746323">5th</a> <a href="#idx1073746343">6th</a> <a href="#idx1073746362">7th</a> <a href="#idx1073746377">8th</a><BR>
+ <a href="#idx1073746354">Kolar, Christopher</a><BR>
+lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mailing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746308">Mailman</a><BR>
+mailing lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746309">Mailman</a><BR>
+ <a href="#idx1073746317">Mailman</a> <a href="#idx1073746329">2nd</a> <a href="#idx1073746349">3rd</a> <a href="#idx1073746355">4th</a><BR>
+ <a href="#idx1073746334">Mailman Cabal</a><BR>
+ <a href="#idx1073746337">Manheimer, Ken</a><BR>
+ <a href="#idx1073746368">Medusa Internet Server</a> <a href="#idx1073746383">2nd</a><BR>
+ <a href="#idx1073746336">Meland, Harald</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746375">select</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746372">socket</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746270">Grail</a> <a href="#idx1073746284">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746265">Internet, third-party</a> <a href="#idx1073746279">2nd</a> <a href="#idx1073746296">3rd</a> <a href="#idx1073746315">4th</a> <a href="#idx1073746327">5th</a> <a href="#idx1073746347">6th</a> <a href="#idx1073746366">7th</a> <a href="#idx1073746381">8th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746319">Mailman</a> <a href="#idx1073746331">2nd</a> <a href="#idx1073746351">3rd</a> <a href="#idx1073746357">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746370">Medusa Internet Server</a> <a href="#idx1073746385">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746300">Z Object Publishing Environment (Zope)</a> <a href="#idx1073746305">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746289">ZSQLMethod</a><BR>
+ <a href="#idx1073746360">Rushing, Sam</a><BR>
+ <a href="#idx1073746374">select module</a><BR>
+ <a href="#idx1073746373">socket module</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746271">Grail</a> <a href="#idx1073746285">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746266">Internet, third-party</a> <a href="#idx1073746280">2nd</a> <a href="#idx1073746297">3rd</a> <a href="#idx1073746316">4th</a> <a href="#idx1073746328">5th</a> <a href="#idx1073746348">6th</a> <a href="#idx1073746367">7th</a> <a href="#idx1073746382">8th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746320">Mailman</a> <a href="#idx1073746332">2nd</a> <a href="#idx1073746352">3rd</a> <a href="#idx1073746358">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746371">Medusa Internet Server</a> <a href="#idx1073746386">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746301">Z Object Publishing Environment (Zope)</a> <a href="#idx1073746306">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746290">ZSQLMethod</a><BR>
+ <a href="#idx1073746263">third-party Internet applications</a> <a href="#idx1073746277">2nd</a> <a href="#idx1073746294">3rd</a> <a href="#idx1073746313">4th</a> <a href="#idx1073746325">5th</a> <a href="#idx1073746345">6th</a> <a href="#idx1073746364">7th</a> <a href="#idx1073746379">8th</a><BR>
+ <a href="#idx1073746273">Trojan Horses</a><BR>
+ <a href="#idx1073746339">Viega, John</a><BR>
+ <a href="#idx1073746335">Warsaw, Barry</a><BR>
+World Wide Web<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development for<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746260">third-party applications</a> <a href="#idx1073746274">2nd</a> <a href="#idx1073746291">3rd</a> <a href="#idx1073746310">4th</a> <a href="#idx1073746322">5th</a> <a href="#idx1073746342">6th</a> <a href="#idx1073746361">7th</a> <a href="#idx1073746376">8th</a><BR>
+ <a href="#idx1073746298">Z Object Publishing Environment (Zope)</a> <a href="#idx1073746303">2nd</a><BR>
+ <a href="#idx1073746302">Zope (Z Object Publishing Environment)</a> <a href="#idx1073746307">2nd</a><BR>
+ <a href="#idx1073746287">ZSQLMethod</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

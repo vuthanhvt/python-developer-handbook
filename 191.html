@@ -1,0 +1,185 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; XML-RPC</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="187.html" class="navtitle">13. Data Manipulation</a> &gt; <span class="nonavtitle">XML-RPC</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="190.html" title="XML Processing"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=191" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="191.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="192.html" title="XDR Data Exchange Format"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A46%3A07+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148042031164044117125222</font><a href="read3.asp?bookname=0672319942&snode=191&now=5%2F31%2F2002+4%3A46%3A07+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+XML-RPC</h3>
+				<p>XML-RPC is a specification and a set of implementations that allow
+software running on different operating systems and different environments to
+make procedure calls over the Internet. As a simple RPC protocol, it converts
+simple data types into an XML-based format, and then ships them over the
+network using HTTP-POST requests as the transport and XML as the encoding. The
+procedure executes on the server and the value it returns is also formatted in
+XML. Procedure parameters can be scalars, numbers, strings, dates, and so on;
+they can also be complex record and list structures.</p>
+
+				<P>XML-RPC is designed to be as simple as possible, while allowing
+complex data structures to be transmitted, processed, and returned. This re-use
+of high-level ideas such as XML and HTTP makes it inefficient in comparison to
+a binary format, but it also makes it easy to implement; implementations
+already exist for Java, Python, Perl, and Tcl, and Zope 2.0.</P>
+
+				<P>The XML-RPC library is copyrighted, but can be used without fee. This
+also applies to commercial applications. For more information, check out</P>
+
+				<blocKQUOte>
+<p>
+						<p>XML-RPC</P>
+
+					</P>
+<P>
+						<P>
+							<a target="_blank" href="http://www.xmlrpc.com/">http://www.xmlrpc.com/</a></p>
+
+					</p>
+<p>
+						<p>The XML-RPC specification documents the XML-RPC protocol
+ implemented in Frontier 5.1.</p>
+
+					</p>
+<p>
+						<p>
+							<A taRget="_blank" Href="http://www.xml-rpc.com/spec/">http://www.xml-rpc.com/spec/</a></P>
+
+					</p>
+<p>
+						<p>
+							<A TARget="_blank" hREF="http://www.scripting.com/frontier5/xml/code/rpc.html">http://www.scripting.com/frontier5/xml/code/rpc.html</A></p>
+
+					</p>
+<p>
+						<p>XML-RPC for Newbies, by Dave Winer</P>
+
+					</P>
+<P>
+						<P>
+							<a tarGET="_blank" Href="http://davenet.userland.com/1998/07/14/xmlRpcForNewbies">http://davenet.userland.com/1998/07/14/xmlRpcForNewbies</a></p>
+
+					</p>
+</blockquote>
+				
+					<h4>The Python Implementation</h4>
+					<p>PythonWare's 
+  <a NamE="idx1073747293"></a>Fredrik Lundhs 
+  <a nAme="idx1073747294"></a>
+						<a Name="idx1073747295"></A><TT Class="monofont">xmlrpc</TT> package provides everything you
+  need to build clients and servers in Python:</P>
+
+					<P>
+						<a tarGET="_blank" Href="http://www.pythonware.com/products/xmlrpc/">http://www.pythonware.com/products/xmlrpc/</a>
+						<A NAMe="idx1073747296"></a>
+						<a name="idx1073747297"></a>
+						<a name="idx1073747298"></a>
+						<a name="idx1073747299"></a></P>
+
+					<p>
+						<a Name="idx1073747300"></A>Secret Labs'
+  <a namE="idx1073747301"></a>
+						<a nAME="idx1073747302"></A><tt clASS="monofont">xmlrpclib</Tt> module is a client-side
+  implementation of the XML-RPC protocol. This implementation is tightly
+  integrated with Python, which makes it very easy to call remote methods. For
+  example, here's the Python code needed to call one of Userland's sample
+  servers:</p>
+
+					<prE>
+						
+betty =
+ Server("http://betty.userland.com") print betty.examples.getStateName(41)
+ 
+					</PRE>
+
+					<p>This results in a remote call to the
+  <tt cLASS="monofont">examples.getStateName</tt> method published by the <tt class="monofont">betty
+  server,</tt> with the integer 41 as the single argument. The result from
+  this call is a string with the value <tt class="monofont">"South Dakota".</tt></P>
+
+					<p>The marshalling and parsing classes provided by this module can
+  also be used in XML-RPC server implementations. Sample code for Medusa and
+  Python's SocketServer module is also included in the current release.</p>
+
+				
+				
+					<H4>
+  
+  Working with Zope</h4>
+					<p>
+						<a Name="idx1073747303"></a>Amos Latteier at 
+  <A namE="idx1073747304"></A>Digital Creations has written an 
+  <A Name="idx1073747305"></a><I>XML-RPC How To for Zope Users</I>. Among
+  other things, it contains code to handle authentication issues and access
+  control.</P>
+
+					<P>The idea of using Zope to handle XML-RPC is based on the fact that
+  every Zope object can respond to HTTP requests.</p>
+
+					<p>The <i>How To</i> covers the use of Zope as an
+  XML-RPC server, and as an XML-RPC client. The document also shows how to extend
+  Fredrik Lundh's XML-RPC Python module to support sending requests with basic
+  authentication. It can be found at</P>
+
+					<P>
+						<A TargeT="_blank" HREf="http://www.zope.org/Members/Amos/XML-RPC">http://www.zope.org/Members/Amos/XML-RPC</a>
+						<a name="idx1073747306"></a>
+						<a name="idx1073747307"></a>
+						<a name="idx1073747308"></a>
+						<A naMe="idx1073747309"></a>
+						<a Name="idx1073747310"></a>
+						<A namE="idx1073747311"></A></P>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="190.html" title="XML Processing"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=191" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="191.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="192.html" title="XDR Data Exchange Format"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747296">XML-RPC library</a> <a href="#idx1073747306">2nd</a><BR>
+databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747310">Zope Object (ZODB)</a><BR>
+ <a href="#idx1073747304">Digital Creations</a><BR>
+ <a href="#idx1073747303">Latteier, Amos</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747299">XML-RPC</a> <a href="#idx1073747309">2nd</a><BR>
+ <a href="#idx1073747293">Lundhs, Fredrik</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747297">XML-RPC library</a> <a href="#idx1073747307">2nd</a><BR>
+packages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747295">xmlrpc</a><BR>
+ <a href="#idx1073747300">Secret Labs</a><BR>
+ <a href="#idx1073747305">XML-RPC How To for Zope Users</a><BR>
+XML-RPC library<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747298">manipulating data</a> <a href="#idx1073747308">2nd</a><BR>
+ <a href="#idx1073747294">xmlrpc package</a><BR>
+ <a href="#idx1073747301">xmlrpclib module</a> <a href="#idx1073747302">2nd</a><BR>
+ <a href="#idx1073747311">Zope Object Database (ZODB)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

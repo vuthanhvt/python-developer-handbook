@@ -1,0 +1,125 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Running JPython Applets</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">Running JPython Applets</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="250.html" title="jpythonc "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=251" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="251.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="252.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A26%3A47+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218070220044253084066134</font><a href="read6.asp?bookname=0672319942&snode=251&now=6%2F1%2F2002+6%3A26%3A47+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+Running JPython Applets</h3>
+				<p>Many people like Java because it makes easy the task of distributing interactive and dynamic pieces of code through the Web by using applets. An applet is a program written using the Java programming language, which can be included in an HTML page with the <a NAME="idx1073750749"></a>
+					<a naME="idx1073750750"></A>
+					<Tt claSS="monofont">&lt;APPLET&gt;</TT> tag. This tag needs to reference a class file that is not part of the HTML page on which it is embedded. Applets do this with the <a name="idx1073750751"></a>
+					<a name="idx1073750752"></a>
+					<tt class="monofont">CODE</tT> parameter, which tells the browser where to look for the compiled <tt ClasS="monofont">.class</tt> file. When your browser receives a request to load an applet from a site, it downloads the applet and uses your Java Virtual Machine to execute it.</p>
+
+				<p>Before you start <A namE="idx1073750753"></A>testing your applets, make sure that you are using a browser that supports Java jdk1.1. The list of browsers that are currently jdk1.1-compliant include Microsoft's Internet Explorer 4.0 or later<I>, </I>and Netscape's Navigator 4.06 or later<i>.</i>
+				</p>
+
+				<p>Okay. Now you also need to make sure that you don't have your class path variable pointing to any directories with JPython <TT CLass="monofont">.class</tT> files. If you are running JVM on UNIX, you need to check out your <TT Class="monofont">CLASSPATH</TT> environment variable. If you are running a Win32 virtual machine, you need to check out the registry entry <TT class="monofont">Classpath</tt> under <tt class="monofont">LOCAL_MACHINE/Software/Microsoft/JavaVM/.</tt>
+				</p>
+
+				<p>The next JPython applet has the goal of displaying the message <tt ClaSs="monofont">"Hello Python World".</tt>
+				</P>
+
+				<pre>
+					
+from java.applet import Applet
+class HelloPythonWorld(Applet):
+    def paint(self, gc):
+        gc.drawString("Hello Python World", 12, 14)
+
+				</pRe>
+
+				<p>If you want to test the applet to run it as a script too, add a few more lines to the end of the applet file. These lines will allow you to interactively test the applet functionality.</p>
+
+				<PRE>
+					
+if __name__ == '__main__':
+    import pawt
+    pawt.test(HelloPythonWorld())
+
+				</Pre>
+
+				<p>If you want to <a NAME="idx1073750754"></a>embed this applet in your Web page, you just need to inform the right values for the <tt cLASS="monofont">applet</tt> tag, such as</p>
+
+				<pRE>
+					
+&lt;applet code="HelloPythonWorld" archive="HelloPythonWorld.jar"
+ width = 50 height = 100&gt;
+
+				</PRe>
+
+				<p>JPython applets need to carry the whole set of JPython libraries, which adds about 150KB to the final size of your applet. Another important consideration is that you can only use <a name="idx1073750755"></a>
+					<a name="idx1073750756"></a>
+					<tt clasS="monofont">eval</tt> and <A namE="idx1073750757"></a>
+					<a naMe="idx1073750758"></a>
+					<tT CLAss="monofont">exec</tt> commands in signed applets, which complies with the Java security definition.</P>
+
+				<P>The following Web link takes you to the official home of JPython, specifically to the applets page:</P>
+
+				<P>
+					<a tarGET="_blank" Href="http://www.jpython.org/applets/">http://www.jpython.org/applets/</a>
+					<A NAMe="idx1073750759"></a>
+					<a name="idx1073750760"></a>
+					<a name="idx1073750761"></a>
+					<a name="idx1073750762"></a>
+				</P>
+
+			</foNt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="250.html" title="jpythonc "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=251" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="251.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="252.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750749">APPLET tag</a><BR>
+applets<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750762">JPython, running</a><BR>
+ <a href="#idx1073750751">CODE parameter</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750756">eval</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750758">exec</a><BR>
+embedding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750754">applets</a><BR>
+ <a href="#idx1073750755">eval command </a><BR>
+ <a href="#idx1073750757">exec command </a><BR>
+JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750759">running applets</a><BR>
+parameters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750752">CODE</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750760">running applets</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750761">JPython applets</a><BR>
+tags<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750750">APPLET</a><BR>
+testing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750753">applets</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

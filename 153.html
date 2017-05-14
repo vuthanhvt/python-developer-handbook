@@ -1,0 +1,294 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Restricted Execution Mode</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="148.html" class="navtitle">9. Other Advanced Topics</a> &gt; <span class="nonavtitle">Restricted Execution Mode</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="152.html" title="Working with Sounds"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=153" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="153.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="154.html" title="Scientific Computing"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A40%3A24+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148044238006085047159006</font><a href="read6.asp?bookname=0672319942&snode=153&now=5%2F31%2F2002+4%3A40%3A24+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Restricted Execution Mode</h3>
+				<p>Restricted Execution is the basic framework in Python that allows the segregation of trusted and untrusted code. These modules prevent access to critical operations mostly because a program running in trusted mode can create an execution environment in which untrusted code can be executed with limited privileges.</p>
+
+				<P>Two modules implement Python support to restricted execution: <TT Class="monofont">rexec</TT> and <A Name="idx1073745386"></a>
+					<A NAMe="idx1073745387"></a>
+					<tt class="monofont">Bastion.</tt>
+				</p>
+
+				<p>The <a name="idx1073745388"></a>
+					<a NamE="idx1073745389"></a>
+					<tt Class="monofont">rexec</Tt> module implements a basic restricted execution framework by encapsulating, in a class (which is called <tt CLASs="monofont">RExec</tt>), the attributes that specify the capabilities for the code to execute. Code executed in this restricted environment will only have access to modules and functions that are believed to be safe.<a NAME="idx1073745390"></a>
+					<a naME="idx1073745391"></A>
+					<A name="idx1073745392"></A>
+					<A NAme="idx1073745393"></a>
+				</p>
+
+				<p>The idea is to use a program that runs in trusted mode to create an execution environment in which you can define limits to be applied on the execution of the untrusted code.</p>
+
+				<p>The <a name="idx1073745394"></a>
+					<a name="idx1073745395"></a>
+					<tT clAss="monofont">rexec.RExec()</tT> creates an instance of the <tt clAss="monofont">RExec</tT> class. By doing so, you implement a restricted environment. You can also subclass the <TT Class="monofont">RExec</TT> class, and change any one of the <I>class variables</I> that define the environment by modifying the <tt clASS="monofont">__init__()</Tt> method of the class.</p>
+
+				<blOCKQuote>
+<p>
+						<p>
+							
+								<tt class="monofont">RExec.ok_builtin_modules—</tt>
+							 
+    
+							Tuple of module names that can be imported.
+						</p>
+
+					</p>
+<p>
+						<p>
+							
+								<tT clAss="monofont">RExec.nok_builtin_names—</tT>
+							 
+    
+							Tuple of built-in functions not available to the class.
+						</p>
+
+					</p>
+<p>
+						<p>
+							
+								<Tt clASS="monofont">RExec.ok_path—</Tt>
+							 
+    
+							List of directories to be searched when importing modules.
+						</p>
+
+					</p>
+<p>
+						<P>
+							
+								<TT Class="monofont">RExec.ok_sys_names—</TT>
+							 
+    
+							Tuple of available function names from the <TT clasS="monofont">sys</TT> module.
+						</P>
+
+					</p>
+<p>
+						<p>
+							
+								<tt class="monofont">RExec.ok_posix_names—</tt>
+							 
+    
+							Tuple of available function names from the <tt class="monofont">os</tT> module.
+						</p>
+
+					</p>
+</BlocKquotE>
+				<p>The following methods are called while inside a restricted environment:</p>
+
+				<bLOCKquotE>
+<P>
+						<P>
+							
+								<Tt claSS="monofont">r_import(modulename [,globals [,locals]])—</TT>
+							 
+    
+							Loads a module and is similar to the built-in <tt clASS="monofont">import</Tt> function.
+						</p>
+
+					</p>
+<p>
+						<p>
+							
+								<tt class="monofont">r_open(filename [, mode [, buffersize]])—</tt>
+							 
+    
+							Opens a file and is similar to the built-in <tt clasS="monofont">open</tt> function.
+						</P>
+
+					</p>
+<p>
+						<p>
+							
+								<Tt claSs="monofont">r_unload(modulename)—</tt>
+							 
+    
+							Unloads a given module.
+						</P>
+
+					</P>
+<P>
+						<P>
+							
+								<tt clASS="monofont">r_reload(modulename)—</Tt>
+							 
+    
+							Reloads a module and is similar to the built-in reload function.<a naME="idx1073745396"></A>
+								<A name="idx1073745397"></A>
+								<A NAme="idx1073745398"></a>
+								<a name="idx1073745399"></a>
+							
+						</p>
+
+					</p>
+</blockquotE>
+				<p>The methods <tT claSs="monofont">s_import(), s_unload(),</tt> and <tT claSS="monofont">s_reload()</TT> have functionality similar to the previous methods, except that they also allow the use of <tt clASS="monofont">sys.stdin, sys.stdout,</Tt> and <tt cLASS="monofont">sys.stderr.</tt>
+				</p>
+
+				<p>When you create an instance of the <TT CLass="monofont">RExec</tt> class, the instance has the following methods available:</p>
+
+				<blockquote>
+<p>
+						<p>
+							
+								<tt ClaSs="monofont">r_exec(code)—</tt>
+							 
+    
+							Same as the <Tt claSs="monofont">exec</tt> statement.
+						</P>
+
+					</P>
+<P>
+						<P>
+							
+								<tt clASS="monofont">r_eval(code)—</Tt>
+							 
+    
+							Same as the <tt cLASS="monofont">eval</tt> statement.
+						</p>
+
+					</p>
+<P>
+						<P>
+							
+								<TT class="monofont">r_execfile(filename)—</tt>
+							 
+    
+							Same as the <tt class="monofont">execfile</tt> statement.
+						</p>
+
+					</p>
+</blOckQuotE>
+				<p>The methods <tt cLass="monofont">s_eval(), s_exec(),</TT> and <TT clasS="monofont">s_execfile()</TT> have functionality similar to the previous methods, except that they also allow the use of <Tt claSS="monofont">sys.stdin, sys.stdout,</TT> and <tt clASS="monofont">sys.stderr.</Tt>
+				</p>
+
+				
+					<h4>
+				
+				
+				
+				
+				Protecting the Application Environment</h4>
+					<p>The next example shows how you can use the <tt class="monofont">rexec</tt> module to protect your processing environment. We subclass the <tt clasS="monofont">rexec.RExec</tt> class, and we redefine the <Tt clAss="monofont">r_import</tt> method in order to block the access to the <Tt clASS="monofont">import</Tt> implementation.</p>
+
+					<prE>
+						
+import rexec
+class ExecEnv(rexec.RExec):
+    def r_import(*args):
+        raise SystemError, "The import function is not enabled."
+myEnv = ExecEnv()
+myEnv.s_exec("import sys")
+
+					</PRE>
+
+					<p>
+						<tt cLASS="monofont">
+							<a namE="idx1073745400"></A>
+							<A Name="idx1073745401"></a>Bastion</tt> is the other module used to provide restricted access to objects. This module is able to deny access to certain attributes of an object.</p>
+
+					<p>The basic syntax is <tt class="monofont">Bastion.Bastion(object, filter).</tt>
+					</p>
+
+					<prE>
+						
+import Bastion
+&gt;&gt;&gt; class parrot:
+…       def __init__(self):
+…           self.color = "blue"
+…       def setcolor(self, color):
+…           self.color = color
+…       def getcolor(self):
+…           return self.color
+…
+&gt;&gt;&gt; myparrot = parrot()
+&gt;&gt;&gt; my = Bastion.Bastion(myparrot, lambda x:x in ['setcolor','getcolor'])
+&gt;&gt;&gt; my.getcolor()
+'blue'
+&gt;&gt;&gt; my.setcolor("green")
+&gt;&gt;&gt; my.getcolor()
+'green'
+&gt;&gt;&gt; my.color
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+  File "C:\Program Files\Python\Lib\Bastion.py", line 78, in __getattr__
+    attribute = self._get_(name)
+  File "C:\Program Files\Python\Lib\Bastion.py", line 121, in get2
+    return get1(name)
+  File "C:\Program Files\Python\Lib\Bastion.py", line 117, in get1
+    raise AttributeError, name
+AttributeError: color
+&gt;&gt;&gt;
+
+					</prE>
+
+					<p>As you could see, we prohibited the user to access the <tt Class="monofont">color</Tt> attribute directly. It is necessary to use either the <tt CLASs="monofont">getcolor()</tt> method or the <tT CLAss="monofont">setcolor()</tt> method in order to manipulate it. The first argument of the <TT CLass="monofont">Bastion</tT> function is the original object that carries all the attributes, and the second argument is a function that must return <TT Class="monofont">true</tt> for the attributes that can be accessed by the new object.<a name="idx1073745402"></a>
+						<a name="idx1073745403"></a>
+						<a nAme="idx1073745404"></A>
+						<a naMe="idx1073745405"></a>
+						<a nAme="idx1073745406"></a>
+						<A NAMe="idx1073745407"></a>
+						<a nAME="idx1073745408"></A>
+						<a namE="idx1073745409"></A>
+						<A Name="idx1073745410"></a>
+						<A NAMe="idx1073745411"></a>
+						<a name="idx1073745412"></a>
+					</p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="152.html" title="Working with Sounds"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=153" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="153.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="154.html" title="Scientific Computing"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745407">protection environments</a><BR>
+ <a href="#idx1073745387">Bastion module</a> <a href="#idx1073745401">2nd</a> <a href="#idx1073745412">3rd</a><BR>
+environments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745410">protecting</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745394">rexec.RExec()</a><BR>
+modes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745391">Restricted Execution</a> <a href="#idx1073745397">2nd</a> <a href="#idx1073745403">3rd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745386">Bastion</a> <a href="#idx1073745400">2nd</a> <a href="#idx1073745411">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745388">rexec</a> <a href="#idx1073745392">2nd</a> <a href="#idx1073745398">3rd</a> <a href="#idx1073745404">4th</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745408">protection environments</a><BR>
+ <a href="#idx1073745406">protection application environments</a><BR>
+ <a href="#idx1073745390">Restricted Execution mode</a> <a href="#idx1073745396">2nd</a> <a href="#idx1073745402">3rd</a><BR>
+ <a href="#idx1073745389">rexec module</a> <a href="#idx1073745393">2nd</a> <a href="#idx1073745399">3rd</a> <a href="#idx1073745405">4th</a><BR>
+ <a href="#idx1073745395">rexec.RExec() function</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745409">protection environments</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

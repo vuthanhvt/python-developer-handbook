@@ -1,0 +1,731 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Working with Sounds</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="148.html" class="navtitle">9. Other Advanced Topics</a> &gt; <span class="nonavtitle">Working with Sounds</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="151.html" title="Manipulating Images"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=152" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="152.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="153.html" title="Restricted Execution Mode"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A40%3A16+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148044238005059246049208</font><a href="read0.asp?bookname=0672319942&snode=152&now=5%2F31%2F2002+4%3A40%3A16+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Working with Sounds</h3>
+				<p>Python has many modules that can provide audio support for your programs by allowing you to listen to your favorite audio CDs and read/write audio files (such as <tT CLAss="monofont">.wav, .aifc,</tt> and so on). Next, I present some of the most important modules. However, keep in mind that other modules exist that are not mentioned here.</P>
+
+				
+					<H4>
+						<TT clasS="monofont">winsound</TT> Module</H4>
+					<p>The <tt class="monofont">winsound</tt> module implements an interface that grants access to the sound-playing environment provided by <tt class="monofont">Windows</tt> Platforms. This module is able to play wave sound files (<tT clAss="monofont">.wav</tT>).</p>
+
+					<p>This module implements the function <tt ClasS="monofont">PlaySound,</TT> which has the following syntax: <Tt claSS="monofont">PlaySound(sound, flags).</TT>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import winsound
+&gt;&gt;&gt; winsound.PlaySound(r'C:\WINNT\Media\tada.wav', winsound.SND_FILENAME)
+
+					</PRE>
+
+					<P>The following <a namE="idx1073745276"></A>
+						<A Name="idx1073745277"></a>
+						<a name="idx1073745278"></a>
+						<a name="idx1073745279"></a>
+						<a namE="idx1073745280"></a>
+						<a Name="idx1073745281"></A>
+						<tt clAss="monofont">flag</tT> constants, which are also defined by this module, can be used as bitwise arguments to the <TT Class="monofont">PlaySound</TT> function:</P>
+
+					<BlockQUOTe>
+<p>
+							<p>
+								
+									<tT CLAss="monofont">SND_FILENAME—</tt>
+								 
+    
+								The sound is a <tt class="monofont">wave</tt> filename.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt cLasS="monofont">SND_ALIAS—</tt>
+								 
+    
+								The sound is a control panel sound association name.
+							</p>
+
+						</P>
+<p>
+							<p>
+								
+									<tt ClasS="monofont">SND_LOOP—</TT>
+								 
+    
+								This plays the sound repeatedly; must also specify <Tt claSS="monofont">SND_ASYNC.</TT>
+								
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<TT CLass="monofont">SND_MEMORY—</tT>
+								 
+    
+								The sound is a memory image of a <TT Class="monofont">wave</tt> file.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt class="monofont">SND_PURGE—</tt>
+								 
+    
+								This stops all instances of the specified sound.
+							</p>
+
+						</P>
+<p>
+							<p>
+								
+									<Tt clAss="monofont">SND_ASYNC—</tt>
+								 
+    
+								The PlaySound returns immediately.<A namE="idx1073745282"></A>
+									<A Name="idx1073745283"></a>
+									<A NAMe="idx1073745284"></a>
+									<a nAME="idx1073745285"></A>
+								
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<TT CLass="monofont">SND_NODEFAULT—</tt>
+								 
+    
+								This does not play a default beep if the sound cannot be found.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt class="monofont">SND_NOSTOP—</tt>
+								 
+    
+								This does not interrupt any sounds currently playing.
+							</p>
+
+						</p>
+<P>
+							<p>
+								
+									<tT claSs="monofont">SND_NOWAIT—</tt>
+								 
+    
+								This returns immediately if the sound driver is busy.<a Name="idx1073745286"></A>
+									<A NAme="idx1073745287"></a>
+									<a NAME="idx1073745288"></a>
+									<a naME="idx1073745289"></A>
+									<A name="idx1073745290"></A>
+									<A NAme="idx1073745291"></a>
+								
+							</p>
+
+						</p>
+</blockquote>
+					<div clAss="note"><P claSs="notetitle"><b>Tip</b></p><P>
+
+						<p>Before going further in this topic, let me present a small introduction about audio concepts that is applicable for the understanding of the next couple of modules.</p>
+
+						<p>Audio files have a number of parameters that describe the audio data. The <A NAMe="idx1073745292"></a>
+							<a nAME="idx1073745293"></A>sampling rate or frame rate is the number of times per second the sound is sampled. The number of <a namE="idx1073745294"></A>channels indicate whether the audio is mono, stereo, or quadro. Each <A Name="idx1073745295"></a>frame consists of one sample per channel. The sample size is the size in bytes of each sample. Thus a frame consists of <TT CLass="monofont">nchannels*samplesize</tt> bytes, and a second's worth of audio consists of <tt class="monofont">nchannels*samplesize*framerate</tt> bytes.</p>
+
+						<p>For example, CD quality audio has a sample size of two bytes (16 bits), uses two channels (stereo), and has a frame rate of 44,100 frames/second. This gives a frame size of 4 bytes (2*2), and a second's worth occupies 2*2*44100 bytes, that is, 176,400 bytes.<a namE="idx1073745296"></a>
+							<a Name="idx1073745297"></A>
+						</p>
+
+					</p></diV>
+<br>
+<bR>
+
+				
+				
+					<H4>
+						<TT clasS="monofont">sndhdr</TT> Module</H4>
+					<p>The <tt cLASS="monofont">sndhdr</tt> module is a collection of routines that help recognize sound files.<a nAME="idx1073745298"></A>
+						<a name="idx1073745299"></a>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import sndhdr
+&gt;&gt;&gt; audioinfo = sndhdr.what("c:\windows\media\start.wav")
+('wav', 22050, 2, -1, 4)
+
+					</pre>
+
+					<p>The function <a name="idx1073745300"></a>
+						<A naMe="idx1073745301"></a>
+						<tT clasS="monofont">sndhdr.whathdr()</tt> recognizes various types of sound file headers as it understands almost all headers that <tT CLAss="monofont">SOX</tt> can decode. The function <A NAMe="idx1073745302"></a>
+						<a nAME="idx1073745303"></A>
+						<tt clASS="monofont">sndhdr.what()</Tt> calls <tt class="monofont">sndhdr.whathdr(),</tt> and the return tuple contains the following items, in this order:</p>
+
+					<ul>
+<li>
+							<p>file type (as SOX understands it)</p>
+
+						</li>
+<lI>
+							<p>sampling rate (<tT claSs="monofont">0</tt> if unknown or hard to decode)</p>
+
+						</Li>
+<li>
+							<P>number of channels (<TT Class="monofont">0</TT> if unknown or hard to decode)</P>
+
+						</Li>
+<li>
+							<p>number of frames in the file (<TT CLass="monofont">-1</tT> if unknown or hard to decode)</P>
+
+						</LI>
+<li>
+							<p>number of bits/sample; <tt class="monofont">'U'</tt> for U-LAW, or <tt class="monofont">'A'</tT> for A-LAW</p>
+
+						</lI>
+</ul>
+					<p>If the file doesn't have a recognizable type, it returns <Tt claSs="monofont">None;</tt> and if the file can't be opened, <TT CLass="monofont">IOError</tT> is raised.</P>
+
+					<P>To compute the total time, divide the number of frames by the sampling rate (a frame contains a sample for each channel).<A name="idx1073745304"></A>
+						<A NAme="idx1073745305"></a>
+					</p>
+
+				
+				
+					<H4>
+						<TT Class="monofont">wave</tt> Module</h4>
+					<p>This module enables you to read, parse, and create wave (<tt class="monofont">.wav</tt>) files where <tt cLasS="monofont">file</tt> is either the name of a file or an open file pointer. The open file pointer must have methods <tT clasS="monofont">read(), seek(),</tt> and <tT CLAss="monofont">close().</tt> When the <TT CLass="monofont">setpos()</tT> and <TT Class="monofont">rewind()</TT> methods are not used, the <TT class="monofont">seek()</tt> method is not necessary. This function returns an instance of a class with the following public methods:</p>
+
+					<p><table border="1" CelLspaCing="0" cEllpADDIng="1" wiDTH="100%">
+<CaptiON><H5>Table 9.1. 
+					  Public Methods Exposed by the <Tt claSS="monofont">wave</TT> Module for an Instance of a Class That Can Read from a File</h5></caption><colgroup aligN="left" spAn="2">
+<tr ValigN="top">
+<th>
+<fONT Size="2">Public Method</fONT></Th>
+<th>
+<fONT Size="2">Description</fONT></Th>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2">
+										<a nAme="idx1073745306"></a>
+										<A name="idx1073745307"></A>
+										<tt cLASS="monofont">getnchannels()</tt>
+									</foNT></TD>
+<td>
+<foNT SIze="2">Returns the number of audio channels (1 for mono, 2 for stereo).<a nAME="idx1073745308"></A>
+										<a name="idx1073745309"></a>
+										<a name="idx1073745310"></a>
+										<a name="idx1073745311"></a>
+										<a nAme="idx1073745312"></A>
+									</fonT></td>
+</tr>
+<Tr vaLIGN="top">
+<td>
+<foNT SIze="2">
+										<a nAME="idx1073745313"></A>
+										<a namE="idx1073745314"></A>
+										<TT class="monofont">getsampwidth()</tt>
+									</font></td>
+<td>
+<font sIze="2">Returns sample width in bytes.</Font></Td>
+</tr>
+<tR valIGN="top">
+<Td>
+<fonT SIZe="2">
+										<a naME="idx1073745315"></A>
+										<A name="idx1073745316"></A>
+										<TT Class="monofont">getframerate()</tt>
+									</font></td>
+<td>
+<font siZe="2">Returns sampling frequency.</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2">
+										<a namE="idx1073745317"></A>
+										<A Name="idx1073745318"></a>
+										<TT CLass="monofont">getnframes()</tt>
+									</font></td>
+<td>
+<font sizE="2">Returns number of audio frames.</foNt></td>
+</Tr>
+<tr vAligN="top">
+<TD>
+<Font sIZE="2">
+										<A name="idx1073745319"></A>
+										<A NAme="idx1073745320"></a>
+										<tT CLAss="monofont">getcomptype()</tt>
+									</font></td>
+<td>
+<font size="2">Returns compression type (<Tt cLass="monofont">'NONE'</Tt> for linear samples).</fonT></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2">
+										<A name="idx1073745321"></A>
+										<A NAme="idx1073745322"></a>
+										<tt class="monofont">getcompname()</tt>
+									</font></td>
+<td>
+<FonT sizE="2">Returns human-readable version of compression type (<tt clAss="monofont">'not compressed'</tT> linear samples)</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2">
+										<A name="idx1073745323"></a>
+										<a name="idx1073745324"></a>
+										<tt class="monofont">getparams()</tt>
+									</FonT></td>
+<tD>
+<font Size="2">Returns a tuple consisting of all the previous in the order shown.</FONT></td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt siZE="2">
+										<A Name="idx1073745325"></a>
+										<a name="idx1073745326"></a>
+										<tt class="monofont">getmarkers()</tt>
+									</fOnt></Td>
+<td>
+<Font sIze="2">Returns <tT CLAss="monofont">None</tt> (for compatibility with the <TT CLass="monofont">aifc</tT> module).</FONt></td>
+</tR>
+<TR Valign="top">
+<td>
+<font size="2">
+										<a name="idx1073745327"></A>
+										<a nAme="idx1073745328"></a>
+										<Tt claSs="monofont">getmark(id)</tt>
+									</FONT></td>
+<td>
+<FONT size="2">Raises an error because the mark does not exist (for compatibility with the <TT CLass="monofont">aifc</tT> module).</FONt></td>
+</tr>
+<tr valign="top">
+<td>
+<font sIze="2">
+										<A namE="idx1073745329"></a>
+										<a naMe="idx1073745330"></a>
+										<tT CLAss="monofont">readframes(n)</tt>
+									</FONT></td>
+<td>
+<FONT size="2">Returns at most <TT CLass="monofont">n</tt> frames of audio.</font></td>
+</tr>
+<tr valigN="top">
+<td>
+<Font Size="2">
+										<a Name="idx1073745331"></A>
+										<A NAme="idx1073745332"></a>
+										<tT CLAss="monofont">rewind()</tt>
+									</FONT></td>
+<td>
+<FONT size="2">Rewinds to the beginning of the audio stream.</font></td>
+</tr>
+<tr valign="top">
+<Td>
+<fOnt sIze="2">
+										<a nAme="idx1073745333"></a>
+										<A NAMe="idx1073745334"></a>
+										<tt CLASs="monofont">setpos(pos)</tt>
+									</fONT></Td>
+<td>
+<fONT Size="2">Seeks to the specified position.</font></td>
+</tr>
+<tr valign="top">
+<tD>
+<foNt siZe="2">
+										<a naMe="idx1073745335"></a>
+										<a NAME="idx1073745336"></a>
+										<tt cLASS="monofont">tell()</tt>
+									</foNT></TD>
+<td>
+<foNT SIze="2">Returns the current position.</font></td>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2">
+										<a namE="idx1073745337"></a>
+										<a nAME="idx1073745338"></A>
+										<tt clASS="monofont">close()</Tt>
+									</fonT></TD>
+<Td>
+<fonT SIZe="2">Closes the instance (makes it unusable).</font></td>
+</tr>
+</colgroup>
+</tabLe></p>
+
+					<P>The position returned by <tt cLass="monofont">tell()</tT> and the position given to <tt cLASS="monofont">setpos()</tt> are compatible and have nothing to do with the actual position in the file. The <tt CLASs="monofont">close()</tt> method is called automatically when the class instance is destroyed.</p>
+
+					<P>The <A NAme="idx1073745339"></a>
+						<a NAME="idx1073745340"></a>
+						<a name="idx1073745341"></a>
+						<a name="idx1073745342"></a>
+						<a name="idx1073745343"></a>syntax for writing wave files is <tT clAss="monofont">f = wave.open(file, 'w')</tT>where <tt clAss="monofont">file</tT> is either the name of a file or an open file pointer. The open file pointer must have methods <TT Class="monofont">write(), tell(), seek(),</TT> and <TT clasS="monofont">close().</TT> This function returns an instance of a class with the following public methods:</P>
+
+					<p><tabLE BOrder="1" cellspacing="0" cellpAddIng="1" wIdth="100%">
+<cAptiON><H5>Table 9.2. Public Methods Exposed by the <Tt claSS="monofont">wave</TT> Module for an Instance of a Class That Can Write to a File</h5></capTION><colgROUP align="left" span="2">
+<tr valign="top">
+<th>
+<fOnt Size="2">Public Method</Font></tH>
+<th>
+<fONT Size="2">Description</fONT></Th>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt size="2">
+										<a name="idx1073745344"></a>
+										<a name="idx1073745345"></a>
+										<tt cLasS="monofont">setnchannels(n)</tt>
+									</fOnt></td>
+<Td>
+<foNT SIze="2">Sets the number of channels.</foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+										<a name="idx1073745346"></a>
+										<a name="idx1073745347"></a>
+										<tt clAss="monofont">setsampwidth(n)</Tt>
+									</foNt></td>
+<tD>
+<fonT SIZe="2">Sets the sample width.</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">
+										<a name="idx1073745348"></a>
+										<a name="idx1073745349"></a>
+										<tt claSs="monofont">setframerate(n)</tT>
+									</fonT></td>
+<td>
+<Font SIZE="2">Sets the frame rate.</font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<foNT SIze="2">
+										<a name="idx1073745350"></a>
+										<a name="idx1073745351"></a>
+										<tt clasS="monofont">setnframes(n)</tt>
+									</Font></Td>
+<td>
+<fOnt sIZE="2">Sets the number of frames.</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+										<a name="idx1073745352"></a>
+										<a name="idx1073745353"></a>
+										<tt class="monofont">setcomptype(type, name)</Tt>
+									</fOnt></tD>
+<td>
+<foNt siZE="2">Sets the compression type and the human-readable compression type.</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2">
+										<a name="idx1073745354"></a>
+										<a name="idx1073745355"></a>
+										<tt class="monofont">setparams(tuple)</tT>
+									</foNt></td>
+<Td>
+<fonT sizE="2">Sets all parameters at once.<A NAme="idx1073745356"></a>
+										<a NAME="idx1073745357"></a>
+										<a naME="idx1073745358"></A>
+										<A name="idx1073745359"></A>
+									</FONt></td>
+</tr>
+<tr valign="top">
+<td>
+<font sIze="2">
+										<A namE="idx1073745360"></a>
+										<a naMe="idx1073745361"></a>
+										<tT CLAss="monofont">tell()</tt>
+									</FONT></td>
+<td>
+<FONT size="2">Returns current position in output file.</FONT></td>
+</tr>
+<tr valign="top">
+<td>
+<font siZe="2">
+										<a Name="idx1073745362"></A>
+										<a namE="idx1073745363"></a>
+										<tt CLASs="monofont">writeframesraw(data)</tt>
+									</fONT></Td>
+<td>
+<fONT Size="2">Writes audio frames without patching up the file header.</fONT></Td>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2">
+										<a nAme="idx1073745364"></a>
+										<A name="idx1073745365"></A>
+										<tt cLASS="monofont">writeframes(data)</tt>
+									</foNT></TD>
+<td>
+<foNT SIze="2">Writes audio frames and patches up the file header.</foNT></TD>
+</tr>
+<tr valign="top">
+<td>
+<font size="2">
+										<A naMe="idx1073745366"></a>
+										<a Name="idx1073745367"></a>
+										<Tt clASS="monofont">close()</Tt>
+									</fonT></TD>
+<Td>
+<fonT SIZe="2">Patches up the file header and closes the output file.<a naME="idx1073745368"></A>
+									</Font></td>
+</tr>
+</colgroup>
+</table></P>
+
+					<p>You should set the parameters before the first <tT claSs="monofont">writeframesraw</tt> or <tT claSS="monofont">writeframes.</TT> The total number of frames does not need to be set, but when it is set to the correct value, the header does not have to be patched up. It is best to first set all parameters, perhaps possibly the compression type, and then write audio frames using <tt clASS="monofont">writeframesraw.</Tt> When all frames have been written, either call <tt cLASS="monofont">writeframes('')</tt> or <tt CLASs="monofont">close()</tt> to patch up the sizes in the header. The <tt class="monofont">close()</tt> method is called automatically when the class instance is destroyed.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import wave
+&gt;&gt;&gt; audio = wave.open('c:\\windows\\media\\tada.wav', 'r')
+&gt;&gt;&gt; audio.getnchannels()
+2
+&gt;&gt;&gt; audio.getsampwidth()
+2
+&gt;&gt;&gt; audio.getframerate()
+22050
+&gt;&gt;&gt; audio.getnframes()
+42752
+				
+					</pre>
+
+				
+				
+					<h4>
+						<Tt cLass="monofont">
+							<A name="idx1073745369"></A>
+							<a naME="idx1073745370"></A>aifc</Tt> Module</h4>
+					<p>The <tT CLAss="monofont">aifc</tt> module, which stands for<A NAMe="idx1073745371"></a>
+						<a nAME="idx1073745372"></A>
+						<a name="idx1073745373"></a>
+						<i>Audio Interchange File Format,</i> is devoted to audio file access (reading/writing) in the <tt class="monofont">AIFF</tt> and <tt cLasS="monofont">AIFC</tt> formats. This module has some functionality that only works on IRIX systems, but it partially works fine on Windows systems, as well.</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; dev = aifc.open("test.aifc", "w")
+&gt;&gt;&gt; dev.setframerate(22050)
+&gt;&gt;&gt; dev.setsampwidth(2)
+&gt;&gt;&gt; dev.setnchannels(2)
+&gt;&gt;&gt; dev.writeframes('123456787654321'*20000)
+&gt;&gt;&gt; dev.close()
+				
+					</prE>
+
+					<p>Note that, the method <a nAME="idx1073745374"></A>
+						<a namE="idx1073745375"></A>
+						<TT clasS="monofont">aifc.writeframes()</TT> is equivalent to the <Tt claSS="monofont">audiodev.Audiodev.writeframesraw.</TT> Both methods write data to the output file, and they can only be called after the audio file parameters have been set.</p>
+
+					<p>You can hear the file that is generated by using the QuickTime Player on Macintosh systems, or the MediaPlayer on Windows systems.<a name="idx1073745376"></a>
+						<a name="idx1073745377"></a>
+					</p>
+
+				
+				
+					<h4>
+						<tt clAss="monofont">audiodev</Tt> Module</h4>
+					<p>The <Tt claSs="monofont">audiodev</tt> module provides a generic interface for audio output, which is used by Macintoshes, the SGI UNIX(IRIX) and SunOS/Solaris platforms. Note that there is a module called <TT CLass="monofont">linuxaudiodev</tT> specific for Linux systems.</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; import audiodev, aifc
+&gt;&gt;&gt; afile = aifc.open("test.aifc", "r")
+&gt;&gt;&gt; dev = audiodev.AudioDev()
+&gt;&gt;&gt; dev.setoutrate(afile.getframerate())
+&gt;&gt;&gt; dev.setsampwidth(afile.getsampwidth())
+&gt;&gt;&gt; dev.setnchannels(afile.getnchannels())
+&gt;&gt;&gt; data = afile.getsampwidth()*afile.getnchannels()*afile.getframerate()
+&gt;&gt;&gt; while 1:
+…       frames = afile.readframes(data)
+…       if not data:
+…           break
+…       dev.writeframes(frames)
+…
+&gt;&gt;&gt;
+
+					</pre>
+
+					<P>The <TT Class="monofont">setoutrate()</TT> method defines the frequency rate of the sound wave; in this case, it is set to 22.05Khz.</P>
+
+					<P>The <tt class="monofont">setsampwidth()</tt> method defines the sample width in number of bytes.</p>
+
+					<p>The <tt class="monofont">setnchannels()</tt> method establishes the number of channels that we want to use. The previous example defines that we want to hear the sound in stereo.</P>
+
+					<p>The previous modules are all part of the standard distribution. Now, I will talk about some third-party modules.<a Name="idx1073745378"></A>
+						<a namE="idx1073745379"></a>
+						<a nAME="idx1073745380"></A>
+						<a namE="idx1073745381"></A>
+					</P>
+
+					<P>The <i>PythonWare Sound Toolkit (PST)</i> reads sound files in different formats, and plays them on a variety of hardware platforms. Similar to Python itself, the PythonWare Sound Toolkit is copyrighted but can be used without a fee. This also applies to commercial applications. The current release reads <tt CLASs="monofont">AU, VOC,</tt> and <tT CLAss="monofont">WAV</tt> files, and plays them on Windows and Sun boxes.</p>
+
+					<p>For more information and download, visit the Web page:</p>
+
+					<pre>
+						
+					<a target="_blank" hreF="http://www.pythonware.com/products/pst/index.htm">http://www.pythonware.com/products/pst/index.htm</a>
+				
+					</pRe>
+
+					<p>The following link is an interesting resource that provides a Python package that plays audio CDs on your Linux system:</p>
+
+					<Pre>
+						
+					<a tArgeT="_blank" HREf="ftp://starship.python.net/pub/crew/amk/unmaintained/linux-cd.tgz">ftp://starship.python.net/pub/crew/amk/unmaintained/linux-cd.tgz</a>
+				
+					</prE>
+
+					<P>If you are really interested in playing around with audio CDs, you'd better check the <TT clasS="monofont">CDDB</TT> module. <Tt claSS="monofont">CDDB.py</TT> provides an easy way for Python programs to fetch track and disc information on audio CDs. This information is acquired from CDDB, a very large online database of track listings and other information on audio CDs. Included is a C extension module to enable Python to read track listings from audio CDs under Linux, FreeBSD, Solaris, and Win32. The interface to this extension module is portable and is intended to be ported to other operational systems easily.</p>
+
+					<p>You can check it out at <a target="_blank" href="http://csl.cse.ucsc.edu/~ben/python/">http://csl.cse.ucsc.edu/~ben/python/.</a>
+						<a name="idx1073745382"></a>
+						<A naMe="idx1073745383"></a>
+						<a Name="idx1073745384"></a>
+						<A namE="idx1073745385"></A>
+					</P>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="151.html" title="Manipulating Images"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=152" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="152.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="153.html" title="Restricted Execution Mode"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073745373">AIFC (Audio Interchange File Format)</a><BR>
+ <a href="#idx1073745370">aifc module</a> <a href="#idx1073745377">2nd</a><BR>
+ <a href="#idx1073745375">aifc.writeframes() method</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bitwise<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745279">PlaySound function</a> <a href="#idx1073745289">2nd</a><BR>
+ <a href="#idx1073745283">audio</a> <a href="#idx1073745299">2nd</a> <a href="#idx1073745309">3rd</a> <a href="#idx1073745357">4th</a> <a href="#idx1073745379">5th</a> <a href="#idx1073745383">6th</a><BR>
+ <a href="#idx1073745371">Audio Interchange File Format (AIFC)</a><BR>
+ <a href="#idx1073745381">audiodev module</a> <a href="#idx1073745385">2nd</a><BR>
+bitwise arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745278">PlaySound function</a> <a href="#idx1073745288">2nd</a><BR>
+channels<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745294">audio files</a><BR>
+ <a href="#idx1073745338">close() method</a> <a href="#idx1073745367">2nd</a><BR>
+constants<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745281">bitwise arguments, PlaySound function</a> <a href="#idx1073745291">2nd</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745343">wave files</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wave<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745342">writing</a><BR>
+flag constants<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745280">bitwise arguments, PlaySound function</a> <a href="#idx1073745290">2nd</a><BR>
+formats<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745372">Audio Interchange File (AIFC)</a><BR>
+ <a href="#idx1073745293">frame rate</a><BR>
+frames<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745295">audio files</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PlaySound<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745277">bitwise arguments</a> <a href="#idx1073745287">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745301">sndhdr.whathdr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745302">sndhdrwhat()</a><BR>
+ <a href="#idx1073745322">getcompname() method</a><BR>
+ <a href="#idx1073745320">getcomptype() method</a><BR>
+ <a href="#idx1073745316">getframerate() method</a><BR>
+ <a href="#idx1073745328">getmark(id) method</a><BR>
+ <a href="#idx1073745326">getmarkers() method</a><BR>
+ <a href="#idx1073745307">getnchannels() method</a><BR>
+ <a href="#idx1073745318">getnframes() method</a><BR>
+ <a href="#idx1073745324">getparams() method</a><BR>
+ <a href="#idx1073745314">getsampwidth() method</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745374">aifc.writeframes()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745337">close()</a> <a href="#idx1073745366">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745321">getcompname()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745319">getcomptype()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745315">getframerate()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745327">getmark(id)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745325">getmarkers()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745306">getnchannels()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745317">getnframes()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745323">getparams()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745313">getsampwidth()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745329">readframes(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745331">rewind()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745352">setcomptype(type, name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745348">setframerate(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745344">setnchannels(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745350">setnframes(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745354">setparams(tuple)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745333">setpos(pos)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745346">setsampwidth(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745335">tell()</a> <a href="#idx1073745360">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745312">wave module</a> <a href="#idx1073745368">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745364">writeframes(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745362">writeframesraw(data)</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745369">aifc</a> <a href="#idx1073745376">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745380">audiodev</a> <a href="#idx1073745384">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745304">sndhdr</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745310">wave</a> <a href="#idx1073745358">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745284">winsound</a> <a href="#idx1073745296">2nd</a><BR>
+PlaySound function<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745276">bitwise arguments</a> <a href="#idx1073745286">2nd</a><BR>
+ <a href="#idx1073745330">readframes(n) method</a><BR>
+ <a href="#idx1073745332">rewind() method</a><BR>
+ <a href="#idx1073745292">sampling rate</a><BR>
+ <a href="#idx1073745353">setcomptype(type, name) method</a><BR>
+ <a href="#idx1073745349">setframerate(n) method</a><BR>
+ <a href="#idx1073745345">setnchannels(n) method</a><BR>
+ <a href="#idx1073745351">setnframes(n) method</a><BR>
+ <a href="#idx1073745355">setparams(tuple) method</a><BR>
+ <a href="#idx1073745334">setpos(pos) method</a><BR>
+ <a href="#idx1073745347">setsampwidth(n) method</a><BR>
+ <a href="#idx1073745305">sndhdr module</a><BR>
+ <a href="#idx1073745300">sndhdr.whathdr() function</a><BR>
+ <a href="#idx1073745303">sndhdrwhat() function</a><BR>
+ <a href="#idx1073745282">sounds</a> <a href="#idx1073745298">2nd</a> <a href="#idx1073745308">3rd</a> <a href="#idx1073745356">4th</a> <a href="#idx1073745378">5th</a> <a href="#idx1073745382">6th</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745339">writing wave files</a><BR>
+ <a href="#idx1073745336">tell() method</a> <a href="#idx1073745361">2nd</a><BR>
+wave files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745341">writing</a><BR>
+ <a href="#idx1073745311">wave module</a> <a href="#idx1073745359">2nd</a><BR>
+ <a href="#idx1073745285">winsound module</a> <a href="#idx1073745297">2nd</a><BR>
+ <a href="#idx1073745365">writeframes(data) method</a><BR>
+ <a href="#idx1073745363">writeframesraw(data) method</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745340">wave files</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

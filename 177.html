@@ -1,0 +1,283 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Site Management Tools</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="171.html" class="navtitle">11. Web Development</a> &gt; <span class="nonavtitle">Site Management Tools</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="176.html" title="Other Applications"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=177" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="177.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="178.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A43%3A57+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148047091222021048126046</font><a href="read5.asp?bookname=0672319942&snode=177&now=5%2F31%2F2002+4%3A43%3A57+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Site Management Tools</h3>
+				<p>The following Python tools are used to manage Web sites. They implement several functions that simplify the daily tasks performed by webmasters, such as dead link checking, and object publishing.</p>
+
+				<H4>WebDAV/PyDAV</H4>
+					<P><I>WebDAV (World Wide Web Distributed Authoring and Versioning)</i> is a set of extensions to the HTTP/1.1 protocol, which allows users to collaboratively edit, manage, and update files safely on remote Web servers. It was developed by the WebDAV working group of the <a naME="idx1073746450"></A><A name="idx1073746451"></A>Internet Engineering Task Force (IETF).</P>
+
+					<P>WebDAV provides a standard infrastructure for asynchronous collaborative authoring across the Internet in order to turn the Web into a collaborative environment.</P>
+
+					<p>WebDAV has the following core features: Metadata management, Name space management, Collections, Overwrite prevention, Version management, Access Control, and Locking (concurrency control).</p>
+
+					<p>For more information about WebDAV, check out its Web site at</p>
+
+					<p><a target="_blank" href="http://www.webdav.org">http://www.webdav.org</a><a naMe="idx1073746452"></a><A namE="idx1073746453"></a><a naMe="idx1073746454"></a><a NAME="idx1073746455"></a></p>
+
+					<p>PyDAV is a WebDAV (also known as DAV) server implemented in Python. Check out its Web site at the following address:</p>
+
+					<P>
+						<A TArget="_blank" HREF="http://sandbox.xerox.com/webdav/">http://sandbox.xerox.com/webdav/</a><a naME="idx1073746456"></A><A name="idx1073746457"></a><a name="idx1073746458"></a><a name="idx1073746459"></a><a naMe="idx1073746460"></a><A namE="idx1073746461"></a><a naMe="idx1073746462"></a><a NAME="idx1073746463"></a><a naME="idx1073746464"></A><A name="idx1073746465"></A><A NAme="idx1073746466"></a><a NAME="idx1073746467"></a><a name="idx1073746468"></a><a name="idx1073746469"></a></p>
+
+				
+				<h4>Zebra</h4>
+					<p>Zebra is an XML-based preprocessing language that offers a compact syntax for expressing common Web design patterns. Similar to Zope, Zebra is a templating system that is able to preprocess Python code. Therefore, developers don't need to stick to the details of the language before starting a nice design. For more information, check out the following site:</p>
+
+					<p><a TarGet="_blank" hRef="http://zebra.sourceforge.net/">http://zebra.sourceforge.net/</a><a Name="idx1073746470"></A><A NAme="idx1073746471"></a><a NAME="idx1073746472"></a><a naME="idx1073746473"></A></P>
+
+				
+				<h4><tt cLASS="monofont">httpd_log</tt></h4>
+					<p>The HTTPD logfile reporting tool (<tt class="monofont">httpd_log</tt>) is a graphical Web statistics tool that analyzes HTTP log files and generates a page of summary information, complete with statistical graphs. Richard Jones developed this tool.</p>
+
+					<p>You'd better check out the new release 4.0b1 because it uses the more accurate <a name="idx1073746474"></A><a nAme="idx1073746475"></a><Tt claSs="monofont">PIL</tt> module, instead of using the old <A NAMe="idx1073746476"></a><a nAME="idx1073746477"></A><tt clASS="monofont">GD</Tt> graphic module. Although the release 3.0 is very stable, the graphing provided by the new release is more accurate.</p>
+
+					<p>Keep in mind that you need to install the PIL module (<tT CLAss="monofont">PILGraph-0.1a7.tar.gz</tt>) in order to use the release 4.0b1. For more information, check out</p>
+
+					<p><a target="_blank" href="http://starship.python.net/crew/richard/httpd_log/">http://starship.python.net/crew/richard/httpd_log/</a><a nAme="idx1073746478"></A><a naMe="idx1073746479"></a><a nAme="idx1073746480"></a><A NAMe="idx1073746481"></a></p>
+
+				
+				<h4>Linbot</H4>
+					<P>Linbot is a site management tool that analyzes a site and allows the user to view a site map, check for broken internal and external links, missing images, and list other problems that were found. It downloads each page from the Web site, and parses its contents in order to collect all the site's information. Linbot is extensible, so new tests can be added by writing some Python code.</P>
+
+					<P>Some of the things that Webmasters can do periodically and without user intervention when using Linbot are listed as follows:<a namE="idx1073746482"></A><A Name="idx1073746483"></a><A NAMe="idx1073746484"></a><a name="idx1073746485"></a><a name="idx1073746486"></a><a name="idx1073746487"></a><A naMe="idx1073746488"></a><a Name="idx1073746489"></a><A namE="idx1073746490"></A><A Name="idx1073746491"></a><A NAMe="idx1073746492"></a><a nAME="idx1073746493"></A><a namE="idx1073746494"></A></P>
+
+					<Ul>
+<li><p>View the structure of a Web site</p>
+</li>
+<li><p>Track down broken links in Web pages</p>
+</li>
+<li><p>Find potentially outdated Web pages</p>
+</li>
+<lI><p>List links pointing to external sites</p>
+</Li>
+<li><P>View portfolio of inline images</p>
+</li>
+<lI><p>Get a run down of problems sorted by author</p>
+</lI>
+<LI><P>Locate pages that might be slow to download:</p>
+
+							<p><a tARGEt="_blank" hreF="http://starship.python.net/crew/marduk/linbot/">http://starship.python.net/crew/marduk/linbot/</A><A Name="idx1073746495"></a><A NAMe="idx1073746496"></a><a name="idx1073746497"></a><a name="idx1073746498"></a></p>
+
+						</li>
+</ul>
+				
+				<h4>Python-Friendly Internet Solution Providers (ISPs)</H4>
+					<p>The Web site "Python-friendly ISPs" lists Web site providers that support the execution of CGI scripts written in Python. These lists are separated into some specific categories:</p>
+
+					<Ul>
+<li><P>Python Installed System-Wide</p>
+</li>
+<lI><p>User May Install Python in Own Directories</p>
+</lI>
+<LI><P>Providers with No Python Installed</p>
+</li>
+<lI><P>Other Providers (Python Support Unknown)</P>
+
+						</Li>
+</ul>
+					<p>The address is <A TARget="_blank" hREF="http://www.corrt.com/info/pyisp-list.html">http://www.corrt.com/info/pyisp-list.html</A><a name="idx1073746499"></a><a name="idx1073746500"></a><a name="idx1073746501"></a><a nAme="idx1073746502"></A><a naMe="idx1073746503"></a><a nAme="idx1073746504"></a><A NAMe="idx1073746505"></a><a nAME="idx1073746506"></A><a namE="idx1073746507"></A><A Name="idx1073746508"></a><A NAMe="idx1073746509"></a></p>
+
+				
+				<h4><tt class="monofont">mxCGIPython</tt></h4>
+					<p>Instead of looking for an ISP that supports Python, you might be interested in the <tt claSs="monofont">mxCGIPython</tT> tool, which helps you install Python on your ISP when your ISP either <i>won't</i> or <i>can't.</I> Marc-Andre Lemburg has put together a small Zip file, which contains all necessary <tt clAss="monofont">setup</tT> and <TT Class="monofont">config</TT> files. For more information, check out the following:</P>
+
+					<P><a tarGET="_blank" Href="http://starship.python.net/~lemburg/mxCGIPython.html">http://starship.python.net/~lemburg/mxCGIPython.html</a>
+					</P>
+
+				
+				<H4><TT class="monofont">HTMLgen</tt></h4>
+					<p>If you need a module to help you generate HTML, you should check out <tt class="monofont">HTMLgen,</tt> written by Robin Friedrich. It's a class library of objects corresponding to all the HTML 3.2 markup tags. It's used when you are writing in Python and want to synthesize HTML pages for generating a Web, for CGI forms, and so on. The following lines are some examples of using <tt ClaSs="monofont">HTMLgen:</tt></P>
+
+					<pre>
+						
+&gt;&gt;&gt; print H(1, "Welcome to Python World")
+&lt;H1&gt;Welcome to Python World&lt;/H1&gt;
+&gt;&gt;&gt; print A("http://www.python.org/", "Python Web site")
+&lt;A HREF="http://www.python.org/"&gt;Python Web site&lt;/A&gt;
+
+					</pRe>
+
+					<p>HTMLgen is available for download at:</p>
+
+					<P><A TArget="_blank" HREF="http://starship.python.net/crew/friedrich/HTMLgen/html/main.html">http://starship.python.net/crew/friedrich/HTMLgen/html/main.html</a></p>
+
+				
+				<h4>Document Template</h4>
+					<P>When talking about generating HTML code, it might also be useful to consider <TT Class="monofont">DocumentTemplate,</TT> which offers clear separation between Python code and HTML code. <TT class="monofont">DocumentTemplate</tt> is part of the Zope objects publishing system, but it can also be used independently. For more information, check out the following:</p>
+
+					<p>
+						<a target="_blank" href="http:/www.digicool.com/">http:/www.digicool.com/</A><a nAme="idx1073746510"></a><A name="idx1073746511"></A><a naME="idx1073746512"></A><A name="idx1073746513"></A></P>
+
+				
+				<H4>Persistent CGI</H4>
+					<p>Persistent CGI architecture provides a reasonably high-performance, transparent method of publishing objects as long running processes via the World Wide Web (WWW). The current alternatives to CGI that allow the publishing of long-running processes, such as FastCGI and ILU, have some level of Web server and platform dependencies. Persistent CGI allows a long running process to be published via the WWW on any server that supports CGI, and requires no specific support in the published application.<a naME="idx1073746514"></A><A name="idx1073746515"></A><A NAme="idx1073746516"></a><a name="idx1073746517"></a><a name="idx1073746518"></a><a name="idx1073746519"></A><a nAme="idx1073746520"></a><A name="idx1073746521"></A><a naME="idx1073746522"></A></P>
+
+					<div cLASS="note"><p claSS="notetitle"><B>Note</B></p><p>
+
+						<p>The latest version of Persistent CGI is bundled with the Zope software:</p>
+
+						<PRE>
+							
+<A target="_blank" href="http:/www.digicool.com/">http:/www.digicool.com/</a>
+
+						</pre>
+
+					</p></div>
+<br>
+<Br>
+
+				
+				<h4>Webchecker</H4>
+					<p>Webchecker is not a CGI application but a Web client application. The <tt Class="monofont">webchecker.py</Tt> script is located under the <tt CLASs="monofont">tools/webchecker/</tt> directory of your Python distribution. This tool enables you to check the validity of a site. In other words, given a Web page, it searches for bad links in it, and keeps a record of the links to other sites that exist in the page.</p>
+
+					<P>It requests all pages from the Web site via HTTP. After it loads a page, it parses the HTML code and collects the links. Pages are never requested more than once. The links found outside the original tree are treated as leaves, hence, they are checked, but their links won't be followed. Anyway, this script generates a report that contains all bad links and says which page(s) the links are referenced.</P>
+
+					<P>The <Tt claSS="monofont">Linbot</TT> system, as you will see later in this chapter, has a similar functionality, but its checks are more extensive than Web Checker's.</p>
+
+					<p>Check out the<a nAME="idx1073746523"></A><a name="idx1073746524"></a><tt class="monofont">websucker</tt> module, which is also part of the <tt claSs="monofont">tools/webchecker</tT> directory of the source. It mirrors a remote <tt cLass="monofont">url</tT> locally.<a naME="idx1073746525"></A><A name="idx1073746526"></A><A NAme="idx1073746527"></a><a NAME="idx1073746528"></a><a naME="idx1073746529"></A><A name="idx1073746530"></a><a name="idx1073746531"></a><a name="idx1073746532"></a><a naMe="idx1073746533"></a><A namE="idx1073746534"></a><a naMe="idx1073746535"></a><a NAME="idx1073746536"></a><a naME="idx1073746537"></A></P>
+
+				
+				<h4>LinkChecker</h4>
+					<p><tT CLAss="monofont">Pylice,</tt> a link checker written in Python, was renamed to <TT CLass="monofont">LinkChecker.</tt> With <tt class="monofont">LinkChecker</tt> you can check your HTML documents for broken links. The homepage for <tt clasS="monofont">LinkChecker</tt> moved to the following:</P>
+
+					<p><a tArget="_blank" Href="http://linkchecker.sourceforge.net">http://linkchecker.sourceforge.net</A></P>
+
+					<P>You can find more information at</P>
+
+					<p><a taRGET="_blank" href="http://fsinfo.cs.uni-sb.de/~calvin/software/">http://fsinfo.cs.uni-sb.de/~calvin/software/</A></P>
+
+				
+				<H4>FastCGI</H4>
+					<p>FastCGI is a fast, open, and secure Web server interface that solves the performance problems inherent in CGI, without introducing the overhead and complexity of proprietary <i>APIs (Application Programming Interfaces).</i></p>
+
+					<P>The FastCGI application library that implements the FastCGI protocol (hiding the protocol details from the developer) is based on code from Open Market, and is in the public domain while being fully supported by Fast Engines. This library makes implementing FastCGI programs as easy as writing CGI applications.</P>
+
+					<P>The FastCGI interface combines the best aspects of CGI and vendor APIs. Like CGI, FastCGI applications run in separate, isolated processes. The main advantages of using FastCGI are</P>
+
+					<ul>
+<li><p>Performance—FastCGI processes are persistent and do not create a new process for each request.</p>
+</li>
+<li><p>Simplicity—It is easily migrated from CGI.</p>
+</li>
+<li><p>Language independence—Like CGI, FastCGI applications can be written in any language.</p>
+</li>
+<Li><p>Process isolation—A buggy FastCGI application cannot crash or corrupt the core server or other applications.</P>
+</li>
+<lI><p>Non-proprietary—FastCGI was originally implemented in the Open Market Web server.<a naMe="idx1073746538"></a><a NAME="idx1073746539"></a><a naME="idx1073746540"></A><A name="idx1073746541"></A><A NAme="idx1073746542"></a><a NAME="idx1073746543"></a><a name="idx1073746544"></a><a name="idx1073746545"></a><a name="idx1073746546"></a><a NamE="idx1073746547"></a><a nAme="idx1073746548"></a><a Name="idx1073746549"></A><A NAme="idx1073746550"></a></p>
+</LI>
+<LI><p>Architecture independence—The FastCGI interface isn't tied to any particular server architecture.</p>
+</li>
+<LI><P>Support for distributed computing—FastCGI provides the ability to run applications remotely.</P>
+
+						</li>
+</ul>
+					<P>For details about the library, check out FASTCGI's official Web site at  <A TArget="_blank" href="http://www.fastcgi.org/">http://www.fastcgi.org/</a>.</p>
+
+					<p>The following link forwards you to a white paper that explains the minor details of FASTCGI:</p>
+
+					<p><a target="_blank" HreF="http://www.fastcgi.org/whitepapers/fcgi-whitepaper.shtml">http://www.fastcgi.org/whitepapers/fcgi-whitepaper.shtml</a></p>
+
+					<p>The best place to go for Python FastCGI support is at  <A targEt="_blank" hrEF="http://www.digicool.com/releases/fcgi/">http://www.digicool.com/releases/fcgi/</A>.</P>
+
+					<p>There is also an all Python (no extension module required) implementation of the FastCGI application interface located at <a taRGET="_blank" href="http://starship.python.net/crew/robind/">http://starship.python.net/crew/robind/</A>.<A NAme="idx1073746551"></a><a NAME="idx1073746552"></a><a name="idx1073746553"></a><a name="idx1073746554"></a><a name="idx1073746555"></a><a NamE="idx1073746556"></a><a nAme="idx1073746557"></a><a Name="idx1073746558"></A><A NAme="idx1073746559"></a><a NAME="idx1073746560"></a><a naME="idx1073746561"></A><A name="idx1073746562"></A><A NAme="idx1073746563"></a></p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="176.html" title="Other Applications"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=177" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="177.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="178.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746511">DocumentTemplate</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746548">FastCGI</a> <a href="#idx1073746561">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746479">httpd_log</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746492">Linbot</a> <a href="#idx1073746496">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746453">PyDAV</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746460">site management tools</a> <a href="#idx1073746486">2nd</a> <a href="#idx1073746503">3rd</a> <a href="#idx1073746518">4th</a> <a href="#idx1073746529">5th</a> <a href="#idx1073746542">6th</a> <a href="#idx1073746555">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746535">Webchecker</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746466">WebDAV (World Wide Web Distributed Authoring and Versioning)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746471">Zebra</a><BR>
+development<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746458">site management tools</a> <a href="#idx1073746484">2nd</a> <a href="#idx1073746501">3rd</a> <a href="#idx1073746516">4th</a> <a href="#idx1073746527">5th</a> <a href="#idx1073746540">6th</a> <a href="#idx1073746553">7th</a><BR>
+ <a href="#idx1073746510">DocumentTemplate</a><BR>
+ <a href="#idx1073746547">FastCGI</a> <a href="#idx1073746560">2nd</a><BR>
+ <a href="#idx1073746476">GD module</a><BR>
+ <a href="#idx1073746478">httpd_log</a><BR>
+ <a href="#idx1073746451">IETF (Internet Engineering Task Force)</a><BR>
+Internet<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development for<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746457">site management tools</a> <a href="#idx1073746483">2nd</a> <a href="#idx1073746500">3rd</a> <a href="#idx1073746515">4th</a> <a href="#idx1073746526">5th</a> <a href="#idx1073746539">6th</a> <a href="#idx1073746552">7th</a><BR>
+ <a href="#idx1073746450">Internet Engineering Task Force (IETF)</a><BR>
+Internet Solution Providers (ISPs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746508">Python-friendly</a><BR>
+ISPs (Internet Solution Providers)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746509">Python-friendly</a><BR>
+ <a href="#idx1073746491">Linbot</a> <a href="#idx1073746495">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746477">GD</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746475">PIL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746524">websucker</a><BR>
+ <a href="#idx1073746474">PIL module</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746512">DocumentTemplate</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746549">FastCGI</a> <a href="#idx1073746562">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746480">httpd_log</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746493">Linbot</a> <a href="#idx1073746497">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746454">PyDAV</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746461">site management tools</a> <a href="#idx1073746487">2nd</a> <a href="#idx1073746504">3rd</a> <a href="#idx1073746519">4th</a> <a href="#idx1073746530">5th</a> <a href="#idx1073746543">6th</a> <a href="#idx1073746556">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746536">Webchecker</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746467">WebDAV (World Wide Web Distributed Authoring and Versioning)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746472">Zebra</a><BR>
+ <a href="#idx1073746452">PyDAV</a><BR>
+ <a href="#idx1073746459">site management tools</a> <a href="#idx1073746485">2nd</a> <a href="#idx1073746502">3rd</a> <a href="#idx1073746517">4th</a> <a href="#idx1073746528">5th</a> <a href="#idx1073746541">6th</a> <a href="#idx1073746554">7th</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746513">DocumentTemplate</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746550">FastCGI</a> <a href="#idx1073746563">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746481">httpd_log</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746494">Linbot</a> <a href="#idx1073746498">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746455">PyDAV</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746462">site management tools</a> <a href="#idx1073746488">2nd</a> <a href="#idx1073746505">3rd</a> <a href="#idx1073746520">4th</a> <a href="#idx1073746531">5th</a> <a href="#idx1073746544">6th</a> <a href="#idx1073746557">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746537">Webchecker</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746468">WebDAV (World Wide Web Distributed Authoring and Versioning)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746473">Zebra</a><BR>
+tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746463">site management</a> <a href="#idx1073746489">2nd</a> <a href="#idx1073746506">3rd</a> <a href="#idx1073746521">4th</a> <a href="#idx1073746532">5th</a> <a href="#idx1073746545">6th</a> <a href="#idx1073746558">7th</a><BR>
+utilities<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746464">site management</a> <a href="#idx1073746490">2nd</a> <a href="#idx1073746507">3rd</a> <a href="#idx1073746522">4th</a> <a href="#idx1073746533">5th</a> <a href="#idx1073746546">6th</a> <a href="#idx1073746559">7th</a><BR>
+ <a href="#idx1073746534">Webchecker</a><BR>
+ <a href="#idx1073746465">WebDAV (World Wide Web Distributed Authoring and Versioning)</a><BR>
+ <a href="#idx1073746523">websucker module</a><BR>
+World Wide Web<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development for<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746456">site management tools</a> <a href="#idx1073746482">2nd</a> <a href="#idx1073746499">3rd</a> <a href="#idx1073746514">4th</a> <a href="#idx1073746525">5th</a> <a href="#idx1073746538">6th</a> <a href="#idx1073746551">7th</a><BR>
+ <a href="#idx1073746469">World Wide Web Distributed Authoring and Versioning (WebDAV)</a><BR>
+ <a href="#idx1073746470">Zebra</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

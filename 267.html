@@ -1,0 +1,281 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Defining New Object Types</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="255.html" class="navtitle">A. Python/C API</a> &gt; <span class="nonavtitle">Defining New Object Types</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="266.html" title="Memory Management"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=267" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="267.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="269.html" title="B. Running Python on Specific Platforms"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A30%3A53+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222219255189230213165015209</font><a href="read4.asp?bookname=0672319942&snode=267&now=6%2F1%2F2002+6%3A30%3A53+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Defining New Object Types</h3><prE>
+					
+PyObject* _PyObject_New(PyTypeObject *type)
+
+				</PRE>
+
+				<p>Return value: New reference.</p>
+
+				<prE>
+					
+PyObject* _PyObject_NewVar(PyTypeObject *type, int size)
+
+				</PRE>
+
+				<p>Return value: New reference.<a naME="idx1073751313"></A></P>
+
+				<h4>Common Object Structures</h4>
+					<p>Next, you have a list of object structures commonly used in type and method definitions.</p>
+
+					<p><table border="1" cellSpaCing="0" CellpAddiNG="1" WIdth="100%">
+<cOLGRoup aLIGN="left" span="3">
+<TR>
+<TD valign="top">
+<font size="2"><tt clasS="monofont">PyObject</tt>
+									</Font></Td>
+<td vAligN="top">
+<FONt sizE="2"><TT Class="monofont">PyVarObject</TT>
+									</FOnt></td>
+<TD VAlign="top">
+<font size="2"> </font></td>
+</tr>
+<Tr>
+<tD valIgn="top">
+<foNt siZE="2"><TT clasS="monofont">PyObject_HEAD</TT>
+									</Font></tD>
+<TD ValigN="top">
+<FONt size="2"><tt class="monofont">PyObject_HEAD_INIT</tt>
+									</font></td>
+<Td vAligN="top">
+<font Size="2"><TT CLass="monofont">PyObject_VAR_HEAD</tT>
+									</FONt></td>
+</tR>
+<TR>
+<Td valIGN="top">
+<Font size="2"><tt class="monofont">unaryfunc</tt>
+									</font></Td>
+<tD valIgn="top">
+<foNt siZE="2"><TT clasS="monofont">binaryfunc</TT>
+									</Font></tD>
+<TD ValigN="top">
+<FONt size="2"><tt class="monofont">ternaryfunc</tt>
+									</font></td>
+</Tr>
+<tR>
+<td vAlign="top">
+<Font SIZE="2"><tt clASS="monofont">inquiry</Tt>
+									</fonT></TD>
+<Td valIGN="top">
+<Font size="2"><tt class="monofont">coercion</tt>
+									</font></Td>
+<tD valIgn="top">
+<foNt siZE="2"><TT clasS="monofont">intargfunc</TT>
+									</Font></tD>
+</TR>
+<Tr>
+<td vALIGn="top">
+<font size="2"><tt class="monofont">intintargfunc</tt>
+									</foNt></tD>
+<td vAlign="top">
+<Font SIZE="2"><tt clASS="monofont">intobjargproc</Tt>
+									</fonT></TD>
+<Td valIGN="top">
+<Font size="2"><tt class="monofont">intintobjargproc</tt>
+									</font></Td>
+</tR>
+<tr>
+<tD valiGn="top">
+<foNT SIze="2"><tt CLASs="monofont">objobjargproc</tt>
+									</fONT></Td>
+<td vALIGn="top">
+<font size="2"><tt class="monofont">destructor</tt>
+									</foNt></tD>
+<td vAlign="top">
+<Font SIZE="2"><tt clASS="monofont">printfunc</Tt>
+									</fonT></TD>
+</Tr>
+<tr>
+<tD VALign="top">
+<font size="2"><tt class="monofont">getattrfunc</tt>
+									</FonT></td>
+<tD valiGn="top">
+<foNT SIze="2"><tt CLASs="monofont">getattrofunc</tt>
+									</fONT></Td>
+<td vALIGn="top">
+<font size="2"><tt class="monofont">setattrfunc</tt>
+									</foNt></tD>
+</tr>
+<tR>
+<td vaLign="top">
+<FONT size="2"><TT CLass="monofont">setattrofunc</tT>
+									</FONt></td>
+<tD VALign="top">
+<font size="2"><tt class="monofont">cmpfunc</tt>
+									</FonT></td>
+<tD valiGn="top">
+<foNT SIze="2"><tt CLASs="monofont">reprfunc</tt>
+									</fONT></Td>
+</tr>
+<tR>
+<TD Valign="top">
+<font size="2"><tt class="monofont">hashfunc<A naMe="idx1073751314"></a><a Name="idx1073751315"></a><A namE="idx1073751316"></A><A Name="idx1073751317"></a><A NAMe="idx1073751318"></a><a nAME="idx1073751319"></A></tt>
+									</foNT></TD>
+<td valign="top">
+<font size="2"> </font></Td>
+<tD valIgn="top">
+<foNt siZE="2"> </FOnt></td>
+</TR>
+</COlgroUP>
+</TAble></p>
+
+					<P>The document <A NAme="idx1073751320"></a><i>How to Write a Python Extension,</i> by <a name="idx1073751321"></a>Michael Reilly lists and explains the prototypes of these structures. It also demonstrates how to create new Python types.</p>
+
+					<p><a target="_blank" HreF="http://starship.python.net/crew/arcege/extwriting/pyext.html">http://starship.python.net/crew/arcege/extwriting/pyext.html</a></p>
+
+				
+				<h4>Mapping Object Structures</H4><pre>
+						
+PyMappingMethods
+
+					</pRe>
+
+					<p>Structure used to hold pointers to the functions used to implement the mapping protocol for an extension type.<a NAME="idx1073751322"></a><a naME="idx1073751323"></A></P>
+
+				
+				<h4>Number Object Structures</h4><prE>
+						
+PyNumberMethods
+
+					</PRE>
+
+					<p>Structure used to hold pointers to the functions, which an extension type uses to implement the number protocol.</p>
+
+				
+				<h4>Sequence Object Structures</h4><PRE>
+						
+PySequenceMethods
+
+					</Pre>
+
+					<p>Structure used to hold pointers to the functions which an object uses to implement the sequence protocol.</p>
+
+				
+				<a name="5"></a><h4>Buffer Object Structures</h4>
+					<p>The buffer interface exports a model where an object can expose its internal data as a set of chunks of data, where each chunk is specified as a pointer/length pair. These chunks are called segments and are presumed to be non-contiguous in memory.</p>
+
+					<p>If an object does not export the buffer interface, its <tt claSs="monofont">tp_as_buffer</tT> member in the PyTypeObject structure should be <tt cLass="monofont">NULL.</tT> Otherwise, the <tt cLASS="monofont">tp_as_buffer</tt> will point to a PyBufferProcs structure.<a nAME="idx1073751324"></A><a namE="idx1073751325"></A><A Name="idx1073751326"></a><A NAMe="idx1073751327"></a><a name="idx1073751328"></a><a name="idx1073751329"></a><a name="idx1073751330"></a><A naMe="idx1073751331"></a></p>
+
+					<Div clAss="note"><p CLASs="notetitle"><b>Note</b></p><P>
+
+						<P>It is very important that your PyTypeObject structure uses <TT clasS="monofont">Py_TPFLAGS_DEFAULT</TT> for the value of the <Tt claSS="monofont">tp_flags</TT> member rather than <tt class="monofont">0.</tt> This tells the Python runtime that your PyBufferProcs structure contains the <tt class="monofont">bf_getcharbuffer</tt> slot. Older versions of Python did not have this member, so a new Python interpreter using an old extension needs to be able to test for its presence before using it.</p>
+
+					</p></Div>
+<Br>
+<br>
+
+					<Pre>
+						
+PyBufferProcs
+
+					</prE>
+
+					<p>Structure used to hold the function pointers that define an implementation of the buffer protocol.</p>
+
+					<p>The first slot is <TT CLass="monofont">bf_getreadbuffer,</tT> of type <TT Class="monofont">getreadbufferproc.</TT> If this slot is <TT clasS="monofont">NULL,</TT> the object does not support reading from the internal data. This is nonsensical, so implementers should fill this in, but callers should test that the slot contains a non-<Tt class="monofont">NULL</tt> value.</p>
+
+					<p>The next slot is <tt class="monofont">bf_getwritebuffer</tt> having type <tT clAss="monofont">getwritebufferproc.</tT> This slot can be <tt clAss="monofont">NULL</tT> if the object does not allow writing into its returned buffers.</P>
+
+					<P>The third slot is <Tt claSS="monofont">bf_getsegcount,</TT> with type <tt clASS="monofont">getsegcountproc.</Tt> This slot must not be <tt cLASS="monofont">NULL</tt> and is used to inform the caller of how many segments the object contains. Simple objects such as <tt class="monofont">PyString_Type</tt> and <tt class="monofont">PyBuffer_Type</tt> contain a single segment.</P>
+
+					<p>The last slot is <tT claSs="monofont">bf_getcharbuffer,</tt> of type <tT claSS="monofont">getcharbufferproc.</TT> This slot will only be present if the <tt clASS="monofont">Py_TPFLAGS_HAVE_GETCHARBUFFER</Tt> flag is present in the <tt cLASS="monofont">tp_flags</tt> field of the object's <tt CLASs="monofont">PyTypeObject.</tt> Before using this slot, the caller should test whether it is present by using the <tt class="monofont">PyType_HasFeature()</tt> function. If present, it might be <tt class="monofont">NULL,</tT> indicating that the object's contents cannot be used as 8-bit characters. The slot function can also raise an error if the object's contents cannot be interpreted as 8-bit characters. For example, if the object is an array that is configured to hold floating point values, an exception might be raised if a caller attempts to use <tt ClasS="monofont">bf_getcharbuffer</tt> to fetch a sequence of 8-bit characters. This notion of exporting the internal buffers as text is used to distinguish between objects that are binary in nature, and those which have character-based content.<a nAme="idx1073751332"></a><A NAMe="idx1073751333"></a><a nAME="idx1073751334"></A><a namE="idx1073751335"></A><A Name="idx1073751336"></a><A NAMe="idx1073751337"></a><a name="idx1073751338"></a><a name="idx1073751339"></a></p>
+
+					<div clAss="note"><P claSs="notetitle"><b>Note</b></p><P>
+
+						<p>The current policy seems to state that these characters might be multibyte characters. This implies that a buffer size of <tt CLASs="monofont">N</tt> does not mean that there are <tT CLAss="monofont">N</tt> characters present.</P>
+
+					</P></DIv>
+<br>
+<bR>
+
+					<PRE>
+						
+Py_TPFLAGS_HAVE_GETCHARBUFFER
+
+					</pre>
+
+					<p>Flag bit set in the type structure to indicate that the <tt class="monofont">bf_getcharbuffer</tt> slot is known. This being set does not indicate that the object supports the buffer interface or that the <tt class="monofont">bf_getcharbuffer</Tt> slot is non-<tT claSs="monofont">NULL.</tt></p>
+
+					<Pre>
+						
+int (*getreadbufferproc) (PyObject *self, int segment, void **ptrptr)
+
+					</pRE>
+
+					<P>Returns a pointer to a readable segment of the buffer. This function is allowed to raise an exception, in which case it must return <Tt claSS="monofont">-1.</TT> The segment that is passed must be  zero or positive, and strictly less than the number of segments returned by the <tt clASS="monofont">bf_getsegcount</Tt> slot function. On success, returns <tt cLASS="monofont">0</tt> and sets <tt class="monofont">*ptrptr</tt> to a pointer to the buffer memory.</p>
+
+					<pre>
+						
+int (*getwritebufferproc) (PyObject *self, int segment, void **ptrptr)
+
+					</pre>
+
+					<p>Returns a pointer to a writable memory buffer in <tT clAss="monofont">*ptrptr</tT>; the memory buffer must correspond to buffer segment called <tt clAss="monofont">segment.</tT> Must return <TT Class="monofont">-1</TT> and set an exception on error. TypeError should be raised if the object only supports read-only buffers, and SystemError should be raised when <TT clasS="monofont">segment</TT> specifies a segment that doesn't exist.</P>
+
+					<pre>
+						
+int (*getsegcountproc) (PyObject *self, int *lenp)
+
+					</pRE>
+
+					<P>Returns the number of memory segments that comprise the buffer. If <Tt class="monofont">lenp</tt> is not <tt class="monofont">NULL,</tt> the implementation must report the sum of the sizes (in bytes) of all segments in <tt cLasS="monofont">*lenp.</tt> The function cannot fail.<tT clasS="monofont">int (*getsegcountproc) (PyObject *self, int *lenp)</tt></p>
+
+					<P>Returns the number of memory segments that comprise the buffer. If <TT Class="monofont">lenp</TT> is not <TT clasS="monofont">NULL,</TT> the implementation must report the sum of the sizes (in bytes) of all segments in <Tt claSS="monofont">*lenp.</TT> The function cannot fail.</p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="266.html" title="Memory Management"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=267" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="267.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="269.html" title="B. Running Python on Specific Platforms"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751315">defining object types</a> <a href="#idx1073751325">2nd</a> <a href="#idx1073751333">3rd</a><BR>
+ <a href="#idx1073751330">buffer object structures</a> <a href="#idx1073751338">2nd</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751319">object type definitions, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751329">2nd</a> <a href="#idx1073751337">3rd</a><BR>
+definitions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751318">object types, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751328">2nd</a> <a href="#idx1073751336">3rd</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751313">defining object types</a><BR>
+ <a href="#idx1073751320">How to Write a Python Extension</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751316">defining object types</a> <a href="#idx1073751326">2nd</a> <a href="#idx1073751334">3rd</a><BR>
+ <a href="#idx1073751322">mapping object structures</a><BR>
+object types<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751317">defining, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751327">2nd</a> <a href="#idx1073751335">3rd</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751314">defining object types</a> <a href="#idx1073751324">2nd</a> <a href="#idx1073751332">3rd</a><BR>
+ <a href="#idx1073751321">Reilly, Michael</a><BR>
+structures<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751331">buffer objects</a> <a href="#idx1073751339">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751323">mapping objects</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

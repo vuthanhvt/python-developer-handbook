@@ -1,0 +1,75 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Cryptographic</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">Cryptographic</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="82.html" title="Multimedia"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=83" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="83.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="84.html" title="UNIX Specific"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A30%3A19+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147036037064089094099064</font><a href="read7.asp?bookname=0672319942&snode=83&now=5%2F31%2F2002+4%3A30%3A19+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Cryptographic</h3>
+				<p>The following modules implement various algorithms of cryptographic nature.</p>
+
+				<P>For more information about this topic, you can also check out the following Web site:</P>
+
+				<P><A targET="_blank" HRef="http://starship.python.net/crew/amk/python/crypto.html">http://starship.python.net/crew/amk/python/crypto.html</a></p>
+
+				<P>It contains cryptographic modules written by Andrew Kuchling for reading and decrypting PGP files.</P>
+
+				<H4><Tt class="monofont">md5</tt></h4>
+					<p>The <tt class="monofont">md5</tt> module is a cryptographically secure hashing algorithm that implements an interface to RSA's MD5 message digest algorithm. Based on a given string, it calculates a 128-bit message signature.</p>
+
+				
+				<H4><tt ClasS="monofont">sha</tt></h4>
+					<p>The <Tt clASS="monofont">sha</Tt> module is a message digest algorithm that implements an interface to NIST's secure hash algorithm, known as <tt cLASS="monofont">sha.</tt> This module takes a sequence of input text and generates a 160-bit hash value.</p>
+
+				
+				<h4><TT CLass="monofont">mpz</tT></H4>
+					<P>The <Tt class="monofont">mpz</tt> module implements the interface to part of the GNU multiple precision integer libraries.</p>
+
+				
+				<h4><tt class="monofont">rotor</tt></h4>
+					<P>The <tt ClasS="monofont">rotor</tt> module implements a permutation-based encryption and decryption engine. (The design is derived from the <a nAme="idx1073742992"></a><A NAMe="idx1073742993"></a>Enigma device, a machine used by the Germans to encrypt messages during WWII.)</p>
+
+					<pRE>
+						
+&gt;&gt;&gt; import rotor
+&gt;&gt;&gt; message = raw_input("Enter the message")
+&gt;&gt;&gt; key = raw_input("Enter the key")
+&gt;&gt;&gt; newr = rotor.newrotor(key)
+&gt;&gt;&gt; enc = newr.encrypt(message)
+&gt;&gt;&gt; print "The encoded message is: ", repr(enc)
+&gt;&gt;&gt; dec = newr.decrypt(enc)
+&gt;&gt;&gt; print "The decoded message is: ", repr(dec)
+
+					</PRe>
+
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="82.html" title="Multimedia"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=83" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="83.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="84.html" title="UNIX Specific"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+devices<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742993">Enigma</a><BR>
+ <a href="#idx1073742992">Enigma device</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

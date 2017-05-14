@@ -1,0 +1,178 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Standard Exceptions (Getting Help from Other Modules)</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="91.html" class="navtitle">4. Exception Handling</a> &gt; <span class="nonavtitle">Standard Exceptions (Getting Help from Other Modules)</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="93.html" title="Exception Handling"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=94" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="94.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="95.html" title="Raising Exceptions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A31%3A49+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147037129069022086011090</font><a href="read3.asp?bookname=0672319942&snode=94&now=5%2F31%2F2002+4%3A31%3A49+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Standard Exceptions (Getting Help from Other Modules)</h3>
+				<p>Apart from the <tT CLAss="monofont">exception</tt> module, other Python modules offer you some advanced functionality to handle exceptions. We will talk about the <A NAMe="idx1073743098"></a><a nAME="idx1073743099"></A><tt class="monofont">sys</tt> and the <a name="idx1073743100"></a><a name="idx1073743101"></A><tt ClasS="monofont">traceback</tt> modules.</p>
+
+				<p>You can use the <Tt clASS="monofont">sys.exc_info()</Tt> thread-safe function to get information about the current exception being handled. This function returns a tuple of values that is equivalent to the values provided by three other <i><a nAME="idx1073743102"></A><a namE="idx1073743103"></A><A Name="idx1073743104"></a><A NAMe="idx1073743105"></a></i><i><tt class="monofont">sys module</tt></i> objects:</p>
+
+				<blockQuoTe>
+<p><p><A name="idx1073743106"></A><a naME="idx1073743107"></A>sys.exc_type—Returns the exception type</P>
+</p>
+<p><p><a NAME="idx1073743108"></a><a naME="idx1073743109"></A>sys.exc_value—Returns the exception value</P>
+</p>
+<p><p><a NAME="idx1073743110"></a><a name="idx1073743111"></a><tt class="monofont">sys.exc_traceback—</tt>Returns a traceback object<a namE="idx1073743112"></a><a Name="idx1073743113"></A></p>
+
+					</p>
+</blOckqUOTE>
+				<pre>
+					
+Note that these objects only work when called from within an except clause.&gt;&gt;&gt;
+import sys
+&gt;&gt;&gt; try:
+…       1/0
+… except:
+…     print sys.exc_type, ":", sys.exc_value
+exceptions.ZeroDivisionError : integer division or modulo
+
+				</pRE>
+
+				<P>The last example can also be implemented as</P>
+
+				<pre>
+					
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; try:
+…       1/0
+…   except:
+…       info = sys.exc_info()
+…       exc_type = info[0]
+…       exc_value = info[1]
+…       exc_traceback = info[2]
+…       print exc_type, ":", exc_value
+…
+exceptions.ZeroDivisionError : integer division or modulo
+
+				</pRE>
+
+				<P>A more compact way to assign the values to the variables is by using sequence unpacking, as is demonstrated by the following:<A name="idx1073743114"></A><A NAme="idx1073743115"></a><a name="idx1073743116"></a><a name="idx1073743117"></a><a name="idx1073743118"></A><a nAme="idx1073743119"></a></P>
+
+				<pre>
+					
+exc_type, exc_value, exc_traceback = self.exc_info()
+
+				</pRe>
+
+				<p>The Python module called <tT CLAss="monofont">traceback,</tt> which is part of the standard Python library, helps you to debug the <TT CLass="monofont">call stack</tT> after an exception has been raised.</P>
+
+				<PRe>
+					
+ 1: &gt;&gt;&gt; import traceback
+ 2: &gt;&gt;&gt; try:
+ 3: …       1/0
+ 4: …   except:
+ 5: …       print "The next lines show the traceback message"
+ 6: …       print "-----------------------------------------"
+ 7: …       traceback.print_exc()
+ 8: …       print "-----------------------------------------"
+ 9: …
+10: The next lines show the traceback message
+11: -----------------------------------------
+12: Traceback (innermost last):
+13:   File "&lt;stdin&gt;", line 2, in ?
+14: ZeroDivisionError: integer division or modulo
+15: -----------------------------------------
+
+				</pre>
+
+				<P>The previous program chooses the right time to display the traceback message by using the <A NAme="idx1073743120"></a><a name="idx1073743121"></a><tt class="monofont">traceback.</tt><tt ClaSs="monofont">print_exc()</tt> function (line 7).</P>
+
+				<p>You can also extract the traceback information by parsing the results of <a naMe="idx1073743122"></a><a NAME="idx1073743123"></a><tt cLASS="monofont">sys.exc_traceback.</tt></p>
+
+				<pRE>
+					
+&gt;&gt;&gt; import sys, traceback
+&gt;&gt;&gt; try:
+…          result = 1/0
+…   except:
+…          trace = traceback.extract_tb(sys.exc_traceback)
+…           for filename, lineno,function,message in trace:
+…              print "File name: ", filename
+…              print "Error message: ", message
+…              print "Line: ", lineno
+…              print "Function: ", function
+…
+
+				</PRe>
+
+				<p>By using the objects <a nAME="idx1073743124"></A><a name="idx1073743125"></a><tt class="monofont">sys.last_type,</tt>
+					<a name="idx1073743126"></A><a nAme="idx1073743127"></a><Tt claSs="monofont">sys.last_value,</tt> and <A NAMe="idx1073743128"></a><a nAME="idx1073743129"></A><tt clASS="monofont">sys.last_traceback,</Tt> you can get the details about the last <a naME="idx1073743130"></A><A name="idx1073743131"></a><i>uncaught</i> exception. When I say that, I mean the last exception that had a traceback message displayed.</p>
+
+				<pre>
+					
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; x = 0
+&gt;&gt;&gt; 1 / x
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+ZeroDivisionError: integer division or modulo
+&gt;&gt;&gt; 1.0 / 10
+0.1
+&gt;&gt;&gt; print sys.last_type
+exceptions.ZeroDivisionError
+&gt;&gt;&gt; print sys.last_value
+integer division or modulo
+
+				</pre>
+
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="93.html" title="Exception Handling"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=94" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="94.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="95.html" title="Raising Exceptions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743114">standard</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743131">uncaught</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743120">traceback.print_exc()</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743099">sys</a> <a href="#idx1073743103">2nd</a> <a href="#idx1073743117">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743101">tradeback</a> <a href="#idx1073743119">2nd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sys module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743105">values</a> <a href="#idx1073743113">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743128">sys.last_traceback</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743124">sys.last_type</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743126">sys.last_value</a><BR>
+ <a href="#idx1073743115">standard exceptions</a><BR>
+ <a href="#idx1073743098">sys module</a> <a href="#idx1073743102">2nd</a> <a href="#idx1073743116">3rd</a><BR>
+ <a href="#idx1073743111">sys.exe_traceback value</a> <a href="#idx1073743123">2nd</a><BR>
+ <a href="#idx1073743107">sys.exe_type value</a><BR>
+ <a href="#idx1073743109">sys.exe_value value</a><BR>
+ <a href="#idx1073743129">sys.last_traceback object</a><BR>
+ <a href="#idx1073743125">sys.last_type object</a><BR>
+ <a href="#idx1073743127">sys.last_value object</a><BR>
+ <a href="#idx1073743121">traceback.print_exc() function</a><BR>
+ <a href="#idx1073743100">tradeback module</a> <a href="#idx1073743118">2nd</a><BR>
+ <a href="#idx1073743130">uncaught exceptions</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743104">sys module objects</a> <a href="#idx1073743112">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743110">sys.exe_traceback</a> <a href="#idx1073743122">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743106">sys.exe_type</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743108">sys.exe_value</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,533 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Generic Operational System</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">Generic Operational System</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="74.html" title="Miscellaneous"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=75" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="75.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="76.html" title="Optional Operational System"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A28%3A52+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146114164077159075058132</font><a href="read1.asp?bookname=0672319942&snode=75&now=5%2F31%2F2002+4%3A28%3A52+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Generic Operational System</h3>
+				<p>This group of services provides interfaces to operating system features that you can use in almost every platform. Most of Python's operating system modules are based on the <tT CLAss="monofont">Posix</tt> interface.</P>
+
+				<H4><TT clasS="monofont">os</TT></H4>
+					<p>The <tt class="monofont">os</tt> module is a portable OS API that searches for Operating-System–dependent built-in modules (<tt class="monofont">mac,</tt>
+						<tT clAss="monofont">posix,</tT>
+						<tt clAss="monofont">nt</tT>), and exports their functionality using the same interface. Certain tools are available only on platforms that support them. However, it is highly recommended that you use this module instead of the platform-specific modules, which are really an implementation detail of <TT Class="monofont">os.</TT> By using the <TT clasS="monofont">os</TT> module, you make your program more portable.</P>
+
+					<h5><tt cLASS="monofont">os.environ</tt></h5>
+						<p>This is a <i>dictionary</i> that contains all the environment variables.</p>
+
+						<p>You can <a name="idx1073742845"></a><a name="idx1073742846"></a><A naMe="idx1073742847"></a>search for a specific variable:</p>
+
+						<Pre>
+							
+&gt;&gt;&gt; import os
+&gt;&gt;&gt; path = os.environ["PATH"]    #USER, EDITOR, etc…
+
+						</prE>
+
+						<p>or <a nAME="idx1073742848"></A><a namE="idx1073742849"></A>list all of them:</P>
+
+						<Pre>
+							
+&gt;&gt;&gt; for key in os.environ.keys():
+…        print key, " = " , os.environ[key]
+…
+
+						</prE>
+
+					
+					<H5><TT clasS="monofont">os.name</TT></H5>
+						<p>It returns the name of the current system.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; name = os.name      # "posix","dos","mac","nt"
+nt
+
+						</pre>
+
+					
+					<h5><tt class="monofont">os.getcwd()</tt></h5>
+						<p>This function returns the current working directory.</P>
+
+						<prE>
+							
+&gt;&gt;&gt; os.getcwd()
+'C:\ \ Program Files\ \ Python'
+
+						</pre>
+
+					
+					<H5><tt clAss="monofont">os.curdir</tT></H5>
+						<P>This is a simple constant that returns the OS-specific string used to identify the current directory.<A name="idx1073742850"></A><A NAme="idx1073742851"></a><a NAME="idx1073742852"></a><a naME="idx1073742853"></A></P>
+
+						<pre>
+							
+&gt;&gt;&gt; os.curdir
+'.'
+
+						</pre>
+
+					
+					<h5><tt class="monofont">os.listdir()</tt></h5>
+						<p>If <tt ClaSs="monofont">directory</tt> is omitted, it lists the filenames of the current directory. Otherwise, it lists the filenames of <Tt claSs="monofont">directory.</tt></P>
+
+						<P><A Name="idx1073742854"></a>basic syntax: <TT CLass="monofont">os.listdir(</tT><I><TT clasS="monofont">[directory]</TT></I><tt class="monofont">)</tt></p>
+
+						<pre>
+							
+&gt;&gt;&gt; files = os.listdir(os.curdir)
+
+						</pre>
+
+					
+					<h5><tt cLasS="monofont">os.rename()</tt></h5>
+						<P>It renames a file.</p>
+
+						<p><a nAme="idx1073742855"></a>basic syntax: <TT CLass="monofont">os.rename(</tT><I><TT clasS="monofont">oldfile, newfile</TT></I><tt clASS="monofont">)</Tt></p>
+
+					
+					<h5><tt class="monofont">os.chmod()</tt></h5>
+						<p>It changes the <tt clasS="monofont">file</tt>
+							<Tt clAss="monofont">mode.</tt> This is a UNIX command.</P>
+
+						<p><a nAME="idx1073742856"></A>basic syntax: <tt clASS="monofont">os.chmod(</Tt><i><tt CLASs="monofont">file, mode</tt></i><TT CLass="monofont">)</tt></p>
+
+					
+					<h5><tt class="monofont">os.system()</tt></h5>
+						<p>It opens an Operating System subshell and executes the command.</p>
+
+						<p><A naMe="idx1073742857"></a>basic syntax: <tT clasS="monofont">os.system(command)</tt></p>
+
+						<PRE>
+							
+&gt;&gt;&gt; os.system("rm -rf " + filename)
+
+						</Pre>
+
+					
+					<h5><tT CLAss="monofont">os.popen()</tt></H5>
+						<P>This is a UNIX function that returns a file-like object. It allows you to execute a <TT clasS="monofont">shell command</TT> and read the standard output of external pipes (by setting <Tt class="monofont">mode</tt> to <tt class="monofont">r</tt>) or write to their standard input (by setting <tt cLasS="monofont">mode</tt> to <tT clasS="monofont">w</tt>). The default mode is <tT CLAss="monofont">r.</tt> Note that even though <TT CLass="monofont">popen</tT> is a UNIX function, it is also implemented on the other Python ports.</P>
+
+						<P><A name="idx1073742858"></A>basic syntax: <TT Class="monofont">os.popen(</tt><i><tt class="monofont">shell command, mode</tt></i><tt cLasS="monofont">)</tt></p>
+
+						<Pre>
+							
+&gt;&gt;&gt; file = os.popen('sed \ 's/yes/no/g'&gt; output','w')
+&gt;&gt;&gt; file.write("yes\ n")
+&gt;&gt;&gt;
+&gt;&gt;&gt; file = os.popen('cat manual.txt', 'r')
+&gt;&gt;&gt; f = file.read()
+
+						</prE>
+
+					
+					<h5><tt CLASs="monofont">os.remove()</tt></h5>
+						<P>It deletes a <TT Class="monofont">file.</TT></P>
+
+						<P><a namE="idx1073742859"></A>basic syntax: <TT class="monofont">os.remove(</tt><i><tt class="monofont">file</tt></i><tt ClaSs="monofont">)</tt></P>
+
+					
+					<h5><tt cLass="monofont">os.mkdir()</TT></H5>
+						<P>It creates a new <tt clASS="monofont">directory.</Tt><a naME="idx1073742860"></A><A name="idx1073742861"></A><A NAme="idx1073742862"></a><a name="idx1073742863"></a></p>
+
+						<p><a name="idx1073742864"></a>basic syntax: <tt cLasS="monofont">os.mkdir(</tt><i><Tt claSs="monofont">directory</tt></I><TT Class="monofont">)</TT></P>
+
+					
+					<H5><tt clASS="monofont">os.rmdir()</Tt></h5>
+						<p>It removes an existing <tT CLAss="monofont">directory.</tt></p>
+
+						<p><a name="idx1073742865"></a>basic syntax: <tt class="monofont">os.rmdir(</tT><i><tT claSs="monofont">directory</tt></i><Tt clASS="monofont">)</Tt></p>
+
+					
+					<h5><tT CLAss="monofont">os.removedirs()</tt></H5>
+						<P>It is a wrapper for <TT clasS="monofont">rmdir</TT> that deletes everything under the <Tt class="monofont">directory.</tt></p>
+
+						<p><a name="idx1073742866"></a>basic syntax: <tt clAss="monofont">os.removedirs(</Tt><i><tT clasS="monofont">directory</tt></i><TT CLass="monofont">)<a NAME="idx1073742867"></a><a naME="idx1073742868"></A></Tt></p>
+
+					
+				
+				<h4><tT CLAss="monofont"><a name="idx1073742869"></a><a name="idx1073742870"></a>os.path</tt></h4>
+					<p>The <tt ClaSs="monofont">os.path</tt> is a module imported by the <Tt claSs="monofont">os</tt> module that exposes useful common functions to manipulate pathnames. Remember that you don't have to explicitly import <TT CLass="monofont">os.path.</tT> You get it for free when you import <TT Class="monofont">os.</TT></P>
+
+					<H5><tt clASS="monofont">os.path.exists()</Tt></h5>
+						<p>It returns <tt class="monofont">true</tt> if <tt class="monofont">path</tT> really exists.</p>
+
+						<p><A namE="idx1073742871"></a>basic syntax: <tt cLass="monofont">os.path.exists(</TT><I><Tt claSS="monofont">path</TT></i><tt cLASS="monofont">)</tt></p>
+
+					
+					<h5><TT CLass="monofont">os.path.isfile()</tt></h5>
+						<p>It returns <tt class="monofont">true</tt> if the specified <tt clAss="monofont">path</Tt> is a file.</p>
+
+						<p><A name="idx1073742872"></A>basic syntax: <tt cLASS="monofont">os.path.isfile(</tt><i><tT CLAss="monofont">path</tt></I><TT Class="monofont">)</TT></P>
+
+					
+					<H5><tt class="monofont">os.path.isdir()</tt></h5>
+						<p>It returns <tt class="monofont">true</tt> if the specified <Tt cLass="monofont">path</Tt> is a directory.</p>
+
+						<p><a Name="idx1073742873"></A>basic syntax: <TT Class="monofont">os.path.isdir(</TT><I><Tt claSS="monofont">path</TT></i><tt cLASS="monofont">)</tt></p>
+
+					
+					<h5><tt class="monofont">os.path.split()</tt></h5>
+						<p>It splits <tt claSs="monofont">filename,</tT> returning a tuple that contains the directory structure and filename, which together combine the original <tt cLass="monofont">filename</tT> argument.</p>
+
+						<p><a NAME="idx1073742874"></a>basic syntax: <tt cLASS="monofont">os.path.split(</tt><i><tT CLAss="monofont">filename</tt></I><TT Class="monofont">)</tt><a name="idx1073742875"></a><a name="idx1073742876"></a><a nAme="idx1073742877"></A><a naMe="idx1073742878"></a></p>
+
+					
+				
+				<h4><Tt clASS="monofont">dircache</Tt></h4>
+					<p>The <tT CLAss="monofont">dircache</tt> module reads directory listings using a cache. Note that this module will be replaced by the new module <TT CLass="monofont">filecmp</tT> in Python 1.6.</P>
+
+				
+				<H4><Tt class="monofont">stat</tt></h4>
+					<p>The <tt class="monofont">stat</tt> module works along with the <tT clAss="monofont">os</tT> module by interpreting information about existing files that is extracted by the <tt clAss="monofont">os.stat()</tT> function and stored on a tuple structure. This tuple contains the <TT Class="monofont">file size,</TT> the <TT clasS="monofont">file owner group,</TT> the file <Tt claSS="monofont">owner name,</TT> the <tt class="monofont">last accessed</tt> and <tt class="monofont">last modified</tt> dates, and its <tt ClaSs="monofont">mode.</tt><A name="idx1073742879"></A><a naME="idx1073742880"></A></P>
+
+				
+				<h4><tt cLASS="monofont">statcache</tt></h4>
+					<p>The <TT CLass="monofont">statcache</tT> module is a simple optimization of the <TT Class="monofont">os.stat()</tt> function.</p>
+
+				
+				<h4><tt class="monofont">statvfs</tt></h4>
+					<p>The <tT clAss="monofont">statvfs</tT> module stores constants that are used to interpret the results of a call to the <a namE="idx1073742881"></a><a nAME="idx1073742882"></A><tt clASS="monofont">os.statvfs()</Tt> function. By the way, the <tt cLASS="monofont">os.statvfs</tt> provides information about your file system.</p>
+
+					<pRE>
+						
+&gt;&gt;&gt; import statvfs, os
+&gt;&gt;&gt; stat = os.statvfs(".")
+&gt;&gt;&gt; maxfnl = stat[statvfs.F_NAMEMAX]
+&gt;&gt;&gt; print "%d is the maximum file name length" % maxfnl
+&gt;&gt;&gt; print "that is allowed on your file system."
+255
+
+					</PRe>
+
+				
+				<h4><tt class="monofont"><a name="idx1073742883"></a><a name="idx1073742884"></A>cmp</tt></H4>
+					<p>The <tt Class="monofont">cmp</Tt> module is used to compare files. Note that this module will be replaced by the new module <tt CLASs="monofont">filecmp</tt> in Python 1.6.</p>
+
+				
+				<H4><TT Class="monofont">cmpcache</TT></H4>
+					<P>The <tt clASS="monofont">cmpcache</Tt> module is a more efficient version of the <tt class="monofont">cmp</tt> module for file comparisons. Note that this module will be replaced by the new module <tt class="monofont">filecmp</tt> in Python 1.6.<a NamE="idx1073742885"></a><a nAme="idx1073742886"></a></p>
+
+				
+				<H4><tt cLASS="monofont">time</tt></h4>
+					<p>The <TT CLass="monofont">time</tT> module exposes functions for time access and conversion. It is important to remember that there are no Year 2000 issues in the Python language.</P>
+
+					<H5><Tt claSS="monofont">time.time()</TT></h5>
+						<p>It returns the current timestamp in seconds since the UNIX epoch began (start of 1970, UTC - Universal Time Coordinated).</p>
+
+						<p><a name="idx1073742887"></a>basic syntax: <tt class="monofont">time.time()</tt></p>
+
+					
+					<H5><tt ClasS="monofont">time.localtime()</tt></h5>
+						<p>It converts a time expressed in seconds into a time tuple. This tuple has the following format: (4digitsyear, month, day, hour, minute, second, day of week, day of year, daylight savings flag).</P>
+
+						<p>basic syntax: <tt CLASs="monofont">time.locatime(</tt><i><TT CLass="monofont">seconds</tT></I><TT clasS="monofont">)</TT></P>
+
+					
+					<h5><tt class="monofont">time.asctime()</tt></h5>
+						<p>It converts a time tuple into a 24-character string.</p>
+
+						<p><a name="idx1073742888"></a>basic syntax: <Tt cLass="monofont">time.asctime(</Tt><i><tt ClasS="monofont">tuple</TT></I><tt clASS="monofont">)</Tt></p>
+
+						<prE>
+							
+&gt;&gt;&gt; import time
+&gt;&gt;&gt; time.time()
+957044415.14
+&gt;&gt;&gt; time.localtime(time.time())
+(2000, 4, 29, 17, 42, 14, 5, 120, 1)
+&gt;&gt;&gt; time.asctime(time.localtime(time.time()))
+'Sat Apr 29 17:42:59 2000'
+
+						</PRE>
+
+					
+					<h5><tt cLASS="monofont">time.sleep()</tt></h5>
+						<p>It suspends the execution of a program for a specific number of <tt class="monofont">seconds.</tt></p>
+
+						<p><a name="idx1073742889"></A>basic syntax: <tt ClasS="monofont">time.sleep(</tt><i><tT claSS="monofont">seconds</TT></i><tt cLASS="monofont">)</tt></p>
+
+						<pRE>
+							
+&gt;&gt;&gt; import time
+&gt;&gt;&gt; time.sleep(10)     # waits for 10 seconds
+
+						</PRe>
+
+					
+				
+				<h4><tt CLASs="monofont"><a name="idx1073742890"></a><a name="idx1073742891"></a>sched</tt></h4>
+					<p>The <tt cLasS="monofont">sched</tt> module implements a general-purpose event scheduler.<a Name="idx1073742892"></a><A namE="idx1073742893"></A></P>
+
+				
+				<H4><tt clASS="monofont">getpass</Tt></h4>
+					<p>The <tT CLAss="monofont">getpass</tt> module implements a portable function that enables the user to type a password without echoing the entry in the screen.</P>
+
+					<P><A Name="idx1073742894"></a><a name="idx1073742895"></a><a name="idx1073742896"></a>basic syntax: <tt clAss="monofont">getpass.getpass(</Tt><i><tT clasS="monofont">[prompt]</tt></i><TT CLass="monofont">)</tT></P>
+
+					<P>This module also provides a function to collect information about the user's login.</P>
+
+					<p><a naME="idx1073742897"></A><A name="idx1073742898"></A><A NAme="idx1073742899"></a>basic syntax: <tt class="monofont">getpass.getuser()</tt></p>
+
+					<pre>
+						
+import getpass
+defaultpwd = "Ahhhhh"
+user = getpass.getuser()
+print "Hello %s," % user
+pass = getpass.getpass("Please, type the password. ")
+if pass == defaultpwd:
+     print "Welcome back to the system!!
+else:
+     print r"You've just activated the detonation process.Sorry"
+
+					</pre>
+
+				
+				<h4><Tt cLass="monofont"><A name="idx1073742900"></A><a naME="idx1073742901"></A>curses</Tt></h4>
+					<p>The <tT CLAss="monofont">curses</tt> module is a terminal independent I/O interface to the curses UNIX library.</P>
+
+					<P>For more details, check out the <TT clasS="monofont">curses</TT> HOWTO at <A target="_blank" href="http://www.python.org/doc/howto/curses/curses.html">http://www.python.org/doc/howto/curses/curses.html</a>.</p>
+
+				
+				<h4><tt class="monofont">getopt</Tt></h4>
+					<P>The <tt cLass="monofont">getopt</tT> module is a parser for command-line options and arguments (<tt cLASS="monofont">sys.argv</tt>). This module provides the standard C<tt CLASs="monofont"> getopt</tt> functionality.</p>
+
+					<PRE>
+						
+1: &gt;&gt;&gt; import getopt
+2: &gt;&gt;&gt; args = ['-h','-r','origin.txt','—file','work.txt','755','777']
+3: &gt;&gt;&gt; opts, pargs = getopt.getopt(args, 'hr:', ['file='])
+4: &gt;&gt;&gt; opts
+5: [('-h', ''), ('-r','origin.txt') , ('—file','work.txt')]
+6: &gt;&gt;&gt; pargs
+7: ['755','777']
+
+					</Pre>
+
+					<p>Before transporting arguments to this function, line 2 shows you that single options must be preceded by a single hyphen and long options must be preceded by double hyphens.<a NAME="idx1073742902"></a><a name="idx1073742903"></a></p>
+
+					<p>In line 3, note that single options that require an argument must end with a colon. On the other hand, long options that require an argument must end with an equal sign.</p>
+
+					<p>The <a name="idx1073742904"></a><a naMe="idx1073742905"></a><Tt clAss="monofont">getopt.getopt()</tt> returns two values: A tuple that contains pairs of <Tt clASS="monofont">(option, argument)</Tt> values (line 5), and a list of standalone arguments that aren't associated with any options (line 7).</p>
+
+				
+				<h4><tT CLAss="monofont">tempfile</tt></H4>
+					<P>The <TT clasS="monofont">tempfile</TT> module generates unique temporary filenames based on templates defined by the variables <Tt class="monofont">tempfile.tempdir</tt> and <tt class="monofont">tempfile.template.</tt></p>
+
+					<h5><tT clAss="monofont">tempfile.mktemp()</tT></h5>
+						<p>This function returns a temporary filename. It doesn't physically create or remove files.</p>
+
+						<p><A namE="idx1073742906"></A>basic syntax: <TT clasS="monofont">filename = tempfile.mktemp()</TT></P>
+
+						<pre>
+							
+&gt;&gt;&gt; import tempfile, os
+&gt;&gt;&gt; temp = tempfile.mktemp()
+&gt;&gt;&gt; open(temp, 'w')
+&gt;&gt;&gt; os.close(file)
+&gt;&gt;&gt; os.remove(file)
+
+						</pRE>
+
+					
+					<H5><Tt claSS="monofont">tempfile.TemporaryFile()</TT></h5>
+						<p>This function returns a file object that is saved in your temporary local folder (<tt class="monofont">/tmp</tt> or <tt class="monofont">c:/temp,</tt> for example). The system removes this file after it gets closed.</P>
+
+						<p><a Name="idx1073742907"></A>basic syntax: <tt clAss="monofont">fileobject = tempfile.TemporaryFile()</tT><A NAme="idx1073742908"></a><a NAME="idx1073742909"></a></p>
+
+					
+				
+				<h4><tT CLAss="monofont">errno</tt></H4>
+					<P>The <TT class="monofont">errno</tt> module makes available the standard <tt class="monofont">errno</tt> system symbols, such as <tt clAss="monofont">EACCES,</Tt>
+						<tt Class="monofont">EADDRINUSE,</Tt> and <tt CLASs="monofont">EDEADLOCK.</tt></p>
+
+					<P>Each symbol is associated to a constant error code value.</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; import errno
+&gt;&gt;&gt; errno.ELOOP
+10062
+
+					</pre>
+
+					<P>More information about this module and its symbols is provided in <A HRef="91.html">Chapter 4</a>.<a NAME="idx1073742910"></a><a name="idx1073742911"></a></p>
+
+				
+				<h4><tt class="monofont">glob</tt></h4>
+					<p>The <Tt cLass="monofont">glob</Tt> module finds and returns pathnames matching a specific <tt cLass="monofont">pattern,</TT> just like the <TT clasS="monofont">UNIX shell</TT> does.</P>
+
+					<p><a naME="idx1073742912"></A><A name="idx1073742913"></A><A NAme="idx1073742914"></a>basic syntax: <tt class="monofont">glob.glob(</tt><i><tt class="monofont">pattern</Tt></i><Tt clAss="monofont">)</tt></P>
+
+					<pre>
+						
+&gt;&gt;&gt; import glob
+&gt;&gt;&gt; lst = glob.glob("c:\ \ *.txt")
+&gt;&gt;&gt; print lst
+['c:\ \ FRUNLOG.TXT', 'c:\ \ DETLOG.TXT', 'c:\ \ BOOTLOG.TXT', 'c:\ \ SETUPLOG.TXT',
+ 'c:\ \ NETLOG.TXT', 'c:\ \ RESETLOG.TXT'] 
+
+					</PRE>
+
+				
+				
+					<H4><tt clASS="monofont"><A name="idx1073742915"></A><A NAme="idx1073742916"></a>fnmatch</tT></H4>
+					<P>The <Tt class="monofont">fnmatch</tt> module uses wildcards to provide support for UNIX shell-style filename pattern matching. These wildcards are different from those normally used by the <tt class="monofont">re</tt> module.</p>
+
+					
+						<h5><tT clAss="monofont">fnmatch.fnmatch()</tT></h5>
+						<p>This function returns <tt ClasS="monofont">1</TT> (<Tt claSS="monofont">true</TT>) if the provided filename matches the pattern defined.</p>
+
+						<p><a nAME="idx1073742917"></A>basic syntax: <tt clASS="monofont">fnmatch.fnmatch(</Tt>)<i><tt class="monofont">filename, pattern</tt></i><tt class="monofont">)</tT></p>
+
+						<pRe>
+							
+&gt;&gt;&gt; import fnmatch
+&gt;&gt;&gt; fnmatch.fnmatch("foo.gif", "*.gif")
+1
+
+						</prE>
+
+					
+					<h5><tt cLass="monofont">fnmatch.translate()</TT></H5>
+						<P>This function converts a <tt clASS="monofont">fnmatch-style</Tt> pattern into a regular expression.</p>
+
+						<p><a NAME="idx1073742918"></a>basic syntax: <tt cLASS="monofont">variable == fnmatch.translate(</tt><i><tt class="monofont">pattern</tt></i><tt class="monofont">)</Tt></p>
+
+						<Pre>
+							
+&gt;&gt;&gt; import fnmatch
+&gt;&gt;&gt; regexpr = fnmatch.translate("*.txt")
+&gt;&gt;&gt; print regexpr
+.*\ .txt$
+
+						</pRe>
+
+					
+				
+				<h4><tt ClasS="monofont"><A NAme="idx1073742919"></a><a NAME="idx1073742920"></a>shutil</tt></h4>
+					<P>The <TT Class="monofont">shutil</TT> module provides high-level file operations. Essentially, it offers many file-copying functions and one directory removal function.<A Name="idx1073742921"></a><a name="idx1073742922"></a></p>
+
+					<h5><tt class="monofont">shutil.copyfile()</tT></h5>
+						<p>It makes a straight binary copy of the source file, calling it <Tt clAss="monofont">newcopy.</tt></P>
+
+						<p><a nAME="idx1073742923"></A>basic syntax: <tt clASS="monofont">shutil.copyfile(</Tt><i><tt CLASs="monofont">source, newcopy</tt></i><TT CLass="monofont">)</tt></p>
+
+					
+					<h5><tt class="monofont">shutil.rmtree()</tt></h5>
+						<p>It deletes the <tt ClaSs="monofont">path</tt> directory, including all of its subdirectories, recursively. If <Tt claSs="monofont">ignore_errors</tt> is set to <TT CLass="monofont">0,</tT> errors are ignored. Otherwise, the <TT Class="monofont">onerror</TT> function argument is called to handle the error. If the clause <TT clasS="monofont">onerror</TT> is set to <Tt class="monofont">None,</tt> an exception is raised when an error occurs.</p>
+
+						<p><a name="idx1073742924"></a>basic syntax: <tt clAss="monofont">shutil.rmtree(path, ignore_errors=0, onerror=None)</Tt><a nAme="idx1073742925"></a><a Name="idx1073742926"></A></P>
+
+					
+				
+				<H4><Tt claSS="monofont">locale</TT></h4>
+					<p>The <tt CLASs="monofont">locale</tt> module provides access to the <tT CLAss="monofont">POSIX</tt> locale mechanism, enabling internationalization services. This module defines a set of parameters that describe the representation of strings, time, numbers, and currency.</p>
+
+					<p>The good thing about using this module is that programmers don't have to worry about the specifics of each country where their applications are executed.</p>
+
+				
+				<h4><tt class="monofont">mutex</tt></h4>
+					<p>The <tT clAss="monofont">mutex</tT> module defines a <tt clAss="monofont">mutex</tT> class that allows mutual-exclusion support via acquiring and releasing locks.<A NAme="idx1073742927"></a><a NAME="idx1073742928"></a><a naME="idx1073742929"></A><A name="idx1073742930"></A></P>
+
+				
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="74.html" title="Miscellaneous"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=75" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="75.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="76.html" title="Optional Operational System"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742883">cmp module</a><BR>
+ <a href="#idx1073742900">curses module</a><BR>
+finding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742847">variables</a><BR>
+ <a href="#idx1073742915">fnmatch module</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742905">getopt.getopt()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742895">getpass.getpass()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742898">getpass.getuser()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742913">glob.glob()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742882">os.statvfs()</a><BR>
+ <a href="#idx1073742851">Generic Operational System library</a> <a href="#idx1073742861">2nd</a> <a href="#idx1073742876">3rd</a> <a href="#idx1073742886">4th</a> <a href="#idx1073742893">5th</a> <a href="#idx1073742903">6th</a> <a href="#idx1073742911">7th</a> <a href="#idx1073742922">8th</a> <a href="#idx1073742928">9th</a><BR>
+ <a href="#idx1073742904">getopt.getopt() function</a><BR>
+ <a href="#idx1073742894">getpass.getpass() function</a><BR>
+ <a href="#idx1073742897">getpass.getuser() function</a><BR>
+ <a href="#idx1073742912">glob.glob() function</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742850">Generic Operational System</a> <a href="#idx1073742860">2nd</a> <a href="#idx1073742875">3rd</a> <a href="#idx1073742885">4th</a> <a href="#idx1073742892">5th</a> <a href="#idx1073742902">6th</a> <a href="#idx1073742910">7th</a> <a href="#idx1073742921">8th</a> <a href="#idx1073742927">9th</a><BR>
+listing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742848">variables</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742884">cmp</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742901">curses</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742916">fnmatch</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742930">mutex</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742853">os</a> <a href="#idx1073742863">2nd</a> <a href="#idx1073742868">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742870">os.path</a> <a href="#idx1073742878">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742891">sched</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742920">shutil</a> <a href="#idx1073742926">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742880">stat</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742909">tempfile</a><BR>
+ <a href="#idx1073742929">mutex module</a><BR>
+ <a href="#idx1073742852">os module</a> <a href="#idx1073742862">2nd</a> <a href="#idx1073742867">3rd</a><BR>
+ <a href="#idx1073742869">os.path module</a> <a href="#idx1073742877">2nd</a><BR>
+ <a href="#idx1073742881">os.statvfs() function</a><BR>
+ <a href="#idx1073742890">sched module</a><BR>
+searching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742845">variables</a><BR>
+ <a href="#idx1073742919">shutil module</a> <a href="#idx1073742925">2nd</a><BR>
+ <a href="#idx1073742879">stat module</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742917">fnmatch.fnmatch()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742918">fnmatch.translate()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742896">getpass.getpass()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742899">getpass.getuser()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742914">glob.glob()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742856">os.chmod()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742854">os.listdir()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742864">os.mkdir()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742871">os.path.exists()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742873">os.path.isdir()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742872">os.path.isfile()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742874">os.path.split()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742858">os.popen()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742859">os.remove()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742866">os.removedirs()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742855">os.rename()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742865">os.rmdir()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742857">os.system()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742923">shutil.copyfile()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742924">shutil.rmtree()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742906">tempfile.mktemp()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742907">tempfile.Temporary File()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742888">time.asctime()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742889">time.sleep()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742887">time.time()</a><BR>
+ <a href="#idx1073742908">tempfile module</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742846">finding</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742849">listing</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

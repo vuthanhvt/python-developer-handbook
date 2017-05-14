@@ -1,0 +1,753 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Debugging the Application</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="227.html" class="navtitle">17. Development Tools</a> &gt; <span class="nonavtitle">Debugging the Application</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="234.html" title="Interpreter"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=235" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="235.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="236.html" title="Profiling Python"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A22%3A26+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218066183102005081107212</font><a href="read4.asp?bookname=0672319942&snode=235&now=6%2F1%2F2002+6%3A22%3A26+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+Debugging the Application</h3>
+				<p>Debugging a Python program is something that doesn't require too much work. The Standard Python Library comes with a debugger module called <tT CLAss="monofont">bdb</tt> that can be used by you to subclass your own debuggers. If you don't want to spend time writing your own debug, you can use the Python debugger (the <TT CLass="monofont">pdb</tT> module), which is also part of the Python distribution. For those who need high-specialized debugging information, Python provides a disassembler module. And for those who only want to debug the value of variables, nothing works better than spreading a couple of <TT Class="monofont">print</tt> statements throughout your program.</p>
+
+				<p>If you decide to use the Python debugger, you will not regret it. This debugger allows you to set breakpoints, trace the values of local and global variables, step through the code, and many other attractive features.</p>
+
+				<p>Because it is written in Python, the debugger exemplifies a powerful feature of the Python language: the ability to create introspective applications, which means that we are able to write programs in Python that can handle and manipulate the execution of other programs.</p>
+
+				
+					<h4>
+
+
+The Base Debugger Module (<tt class="monofont">bdb</tT>)</h4>
+					<p>The <Tt clAss="monofont">bdb</tt> module exposes a framework for creating debuggers. This module provides a base class called <Tt clASS="monofont">bdb</Tt> that allows you to create your own debuggers by subclassing the base class.</p>
+
+					<p>The following <a NAME="idx1073750263"></a>methods are available in this class. Note that derived classes should override the following four methods to gain control of the application.</p>
+
+					<blOCKQuote>
+<P>
+							<A NAme="idx1073750264"></a>
+							<a name="idx1073750265"></a>
+							<p><tt class="monofont">user_call(frame, argument_list)</tt>— 
+    This method is called when there is the remote possibility that we ever need to stop in this function pass.<a NamE="idx1073750266"></a>
+									<a nAme="idx1073750267"></a>
+									<a Name="idx1073750268"></A>
+									<A NAme="idx1073750269"></a>
+									<a NAME="idx1073750270"></a>
+									<a naME="idx1073750271"></A>
+									<A name="idx1073750272"></A>
+									<A NAme="idx1073750273"></a>
+								</p>
+
+						</p>
+<p>
+							<a name="idx1073750274"></a>
+							<a name="idx1073750275"></a>
+							<p><tT clAss="monofont">user_line(frame)</tT>— 
+    This method is called when we stop or break at this line pass.</p>
+
+						</p>
+<p>
+							<a Name="idx1073750276"></A>
+							<A NAme="idx1073750277"></a>
+							<p><TT CLass="monofont">user_return(frame, return_value)</tT>— 
+    This method is called when a return trap is set here.</P>
+
+						</P>
+<P>
+							<a namE="idx1073750278"></A>
+							<A Name="idx1073750279"></a>
+							<p><tt class="monofont">user_exception(frame, (exc_type, exc_value, exc_traceback))</tt>— 
+    This method is called if an exception occurs, but only if we are to stop at or just below this level pass.</p>
+
+						</p>
+</blocKquOte>
+					<p>The following methods can be called by the derived classes and by the clients in order to affect the stepping state:</P>
+
+					<blocKquoTE>
+<P>
+							<A name="idx1073750280"></A>
+							<A NAme="idx1073750281"></a>
+							<p><TT CLass="monofont">set_step()</tT>— 
+    Stops after one line of code</P>
+
+						</P>
+<P>
+							<a name="idx1073750282"></a>
+							<a name="idx1073750283"></a>
+							<p><tt class="monofont">set_next(frame)</Tt>— 
+    Stops on the next line in or below the given frame</p>
+
+						</P>
+<p>
+							<a nAme="idx1073750284"></a>
+							<a Name="idx1073750285"></A>
+							<P><TT clasS="monofont">set_return(frame)</TT>— 
+    Stops when returning from the given frame</P>
+
+						</p>
+<p>
+							<a nAME="idx1073750286"></A>
+							<a namE="idx1073750287"></A>
+							<P><Tt class="monofont">set_trace()</tt>— 
+    Starts debugging from here</p>
+
+						</p>
+<p>
+							<a name="idx1073750288"></a>
+							<a naMe="idx1073750289"></a>
+							<P><tt cLass="monofont">set_continue()</tT>— 
+    Doesn't stop except at breakpoints or when finished</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073750290"></a>
+							<a nAME="idx1073750291"></A>
+							<p><tt cLASS="monofont">set_quit()</tt>— 
+    Quits the debugging process</p>
+
+						</p>
+</BLOCkquote>
+					<p>Derived classes and clients can call the following methods in order to manipulate breakpoints. These methods return an error message if something went wrong, and <tt class="monofont">None</tt> if everything goes well.</p>
+
+					<bloCkqUote>
+<P>
+							<a namE="idx1073750292"></a>
+							<a nAME="idx1073750293"></A>
+							<p><tt cLASS="monofont">set_break(filename, lineno, temporary=0, cond = None)</tt>— 
+    
+								This method prints out the breakpoint line and filename:lineno.</p>
+
+						</p>
+<P>
+							<A NAme="idx1073750294"></a>
+							<a NAME="idx1073750295"></a>
+							<p><tt class="monofont">clear_break(filename, lineno)</tt>— 
+    
+								This method removes the breakpoint entry.</p>
+
+						</p>
+<p>
+							<a name="idx1073750296"></a>
+							<A naMe="idx1073750297"></a>
+							<p><Tt claSs="monofont">clear_bpbynumber(arg)</tt>— 
+    
+								This method removes the breakpoint identified by the given number.</P>
+
+						</P>
+<P>
+							<A name="idx1073750298"></A>
+							<A NAme="idx1073750299"></a>
+							<p><TT CLass="monofont">clear_all_file_breaks(filename)</tT>— 
+    
+								This method removes all the breakpoints found in the given file.</P>
+
+						</P>
+<P>
+							<a name="idx1073750300"></a>
+							<a name="idx1073750301"></a>
+							<p><tt class="monofont">clear_all_breaks()</Tt>— 
+    
+								This method removes all the active breakpoints from the current program.</p>
+
+						</P>
+<p>
+							<a nAme="idx1073750302"></a>
+							<a Name="idx1073750303"></A>
+							<P><TT clasS="monofont">get_break(filename, lineno)</TT>— 
+    
+								This method returns true if the given file has a breakpoint in the given line number.</P>
+
+						</p>
+<p>
+							<a nAME="idx1073750304"></A>
+							<a namE="idx1073750305"></A>
+							<P><Tt class="monofont">get_breaks(filename, lineno)</tt>— 
+    
+								This method returns true if the given file has a breakpoint in the given line number.<a name="idx1073750306"></a>
+									<a name="idx1073750307"></a>
+									<A naMe="idx1073750308"></a>
+									<a Name="idx1073750309"></a>
+									<A namE="idx1073750310"></A>
+									<A Name="idx1073750311"></a>
+									<A NAMe="idx1073750312"></a>
+									<a nAME="idx1073750313"></A>
+								</p>
+
+						</p>
+<p>
+							<a NAME="idx1073750314"></a>
+							<a name="idx1073750315"></a>
+							<p><tt class="monofont">get_file_breaks(filename)</tt>— 
+    
+								This method returns a list of all breakpoints found in the given file.</p>
+
+						</p>
+<p>
+							<A naMe="idx1073750316"></a>
+							<a Name="idx1073750317"></a>
+							<P><tt cLASS="monofont">get_all_breaks()</tt>— 
+    
+								This method returns a list of all active breakpoints from the current program.</p>
+
+						</p>
+</BLOCkquoTE>
+					<P>The following methods can be called by clients to use a debugger to debug a statement given as a string:</P>
+
+					<blocKQUOte>
+<p>
+							<a name="idx1073750318"></a>
+							<a name="idx1073750319"></a>
+							<p><tt clAss="monofont">run(command, globals=None, locals=None)</Tt>— 
+    
+								Executes the string <tt Class="monofont">command</Tt>, under the debugger control.</p>
+
+						</p>
+<P>
+							<A NAme="idx1073750320"></a>
+							<a NAME="idx1073750321"></a>
+							<p><tt CLASs="monofont">runeval(expr, globals=None, locals=None)</tt>— 
+    
+								Evaluates the expression <tT CLAss="monofont">expr</tt> under the debugger control.</p>
+
+						</p>
+<p>
+							<a name="idx1073750322"></a>
+							<a name="idx1073750323"></a>
+							<p><Tt cLass="monofont">runcall(func, *args)</Tt>— 
+    
+								This method calls the single function <tt cLass="monofont">func</TT> under the debugger control.</P>
+
+						</P>
+<p>
+							<a naME="idx1073750324"></A>
+							<A name="idx1073750325"></A>
+							<P><TT clasS="monofont">set_trace()</TT>— 
+    
+								This method starts the debugger at the point at which this function is called. It is used to hard-code a debugger breakpoint into a specific code location.<A name="idx1073750326"></a>
+								</p>
+
+						</p>
+</blockquote>
+					<p>The following example demonstrates how we can subclass the <tt ClaSs="monofont">bdb</tt> class in order to design our own debug. This example is based on the testing routine included in the <Tt claSs="monofont">bdb</tt> module file.</P>
+
+					<PRE>
+						
+import bdb
+class Tdb(bdb.Bdb):
+    def user_call(self, frame, args):
+        name = frame.f_code.co_name
+        if not name:
+            name = '???'
+        print '+++ call', name, args
+    def user_line(self, frame):
+        import linecache, string
+        name = frame.f_code.co_name
+        if not name:
+            name = '???'
+        fn = self.canonic(frame.f_code.co_filename)
+        line = linecache.getline(fn, frame.f_lineno)
+        print '+++', fn, frame.f_lineno, name, ':', string.strip(line)
+    def user_return(self, frame, retval):
+        print '+++ return', retval
+    def user_exception(self, frame, exc_stuff):
+        print '+++ exception', exc_stuff
+        self.set_continue()
+
+def factorials(n):
+    for f in xrange(n, 0, -1):
+        factorial = calc(f)
+        print 'The factorial of %d is %d'% (f, factorial)
+
+def calc(f):
+    factorial = 1
+    for n in xrange(f, 1, -1):
+        factorial = factorial * n
+    return factorial
+
+def main():
+    debug = Tdb()
+    debug.run('factorials(3)')
+
+main()
+
+					</pre>
+
+				
+				
+					<h4>
+
+
+The Python Debugger (<TT CLass="monofont">pdb</tT>)</H4>
+					<P>The Python debugger is directly based on the <Tt claSS="monofont">bdb</TT> class, as you can see when examining its source code. To start the Python debugger, you need to import the <tt class="monofont">pdb</tt> module, and type one of the following commands: <tt class="monofont">run(),</tt>
+						<tt ClaSs="monofont">runeval(),</tt>
+						<Tt claSs="monofont">runcall(),</tt> or <TT CLass="monofont">set_trace().</tT>
+					</P>
+
+					<PRe>
+						
+import pdb
+def myprog(n):
+    for l in xrange(n):
+        print l
+debub=pdb.Pdb()
+debub.runcall(myprog,10)
+
+					</pre>
+
+					<P>The debugger will then pop up a prompt. The debugger's prompt is <TT Class="monofont">'(Pdb) '.</TT>
+					</P>
+
+					<P>To use the debugger in its simplest form, type</p>
+
+					<pre>
+						
+import pdb
+pdb.run('&lt;a statement&gt;')
+
+					</pre>
+
+					<p>This will stop in the first function call in <tt class="monofont">&lt;a statement&gt;</tt>.</p>
+
+					<p>Alternatively, if a statement terminated with an unhandled exception, you can use pdb's post-mortem facility to inspect the contents of the traceback:</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; &lt;a statement&gt;
+&lt;exception traceback&gt;
+&gt;&gt;&gt; import pdb
+&gt;&gt;&gt; pdb.pm()
+
+					</Pre>
+
+					<p>The <A name="idx1073750327"></A>commands recognized by the debugger are listed in the next section. Note that some commands have a short and a long form. The commands not recognized by the debugger are assumed to be Python commands, and are executed in the context of the program being debugged. Python <a naME="idx1073750328"></A>statements can also be prefixed with an <A name="idx1073750329"></A>
+						<A NAme="idx1073750330"></a>exclamation point (<tT CLAss="monofont">!</tt>). This is a powerful way to inspect the program being debugged; it is even possible to change variables. When an exception occurs in such a statement, the exception name is printed, but the debugger's state is not changed.</P>
+
+					<P>The debugger supports <A Name="idx1073750331"></a>aliases, which can save typing. And aliases can have parameters (see the alias help entry) that allow one a certain level of adaptability to the context under examination.</p>
+
+					<p>Multiple commands can be entered on a single line, separated by the pair <a name="idx1073750332"></a>
+						<tt class="monofont">;;.</tT> No intelligence is applied to separating the commands; the input is split at the first <tt ClasS="monofont">;;,</tt> even if it is in the middle of a quoted string.</p>
+
+					<p>If a <A namE="idx1073750333"></A>
+						<A Name="idx1073750334"></a>file <TT CLass="monofont">.pdbrc</tT> exists in the user's home directory or in the current directory, it is read in and executed as if it had been typed at the debugger prompt. This is particularly useful for <A NAme="idx1073750335"></a>aliases. If both files exist, the one in the home directory is read first and aliases defined there can be overriden by the local file. Aside from aliases, the debugger is not directly programmable; but it is implemented as a class from which you can derive your own debugger class, which you can make as fancy as you like.</p>
+
+					<P>You can also invoke the Python debugger as a main program, on a script. Just use the following structure to start up the debugger.</P>
+
+					<PRe>
+						
+import pdb
+def main():
+    # Add your code here
+if __name__=='__main__':
+    pdb.run('main()')
+
+					</pre>
+
+					
+						<h5>
+Debugger Commands</h5>
+						<p>When you are at the debugger prompt, you can type any one of the following commands. Note that some of them have an abbreviated version. Next to each command, enclosed in brackets, you will find the command's optional arguments. Except for the <tt class="monofont">list</tt> command, all commands can be repeated by entering a blank line at the prompt.</p>
+
+						<bloCkqUote>
+<P><a namE="idx1073750336"></a>
+								<a nAME="idx1073750337"></A>
+								<p><tt cLASS="monofont">h(elp)</tt>— 
+    
+									Prints the list of available commands.</p>
+
+							</p>
+<P><A NAme="idx1073750338"></a>
+								<a NAME="idx1073750339"></a>
+								<p><tt class="monofont">w(here)</tt>— 
+    
+									Prints a stack trace, with the most recent frame at the bottom. An arrow indicates the current frame, which determines the context of most commands.</p>
+
+							</p>
+<p><a name="idx1073750340"></a>
+								<A naMe="idx1073750341"></a>
+								<p><Tt claSs="monofont">d(own)</tt>— 
+    
+									Moves the current frame one level down in the stack trace (to an older frame).</P>
+
+							</P>
+<P><A name="idx1073750342"></A>
+								<A NAme="idx1073750343"></a>
+								<p><TT CLass="monofont">u(p)</tT>— 
+    
+									Moves the current frame one level up in the stack trace (to a newer frame).</P>
+
+							</P>
+<P><a name="idx1073750344"></a>
+								<a name="idx1073750345"></a>
+								<p><tt class="monofont">b(reak) [ ([filename:]lineno | function) [, condition] ]</Tt>— 
+    
+									With a <tT claSs="monofont">filename:line</tt> number argument, set a break there. If filename is omitted, use the current file. With a function name, set a break at the first executable line of that function. Without an argument, list all breaks. Each breakpoint is assigned a number to which all the other breakpoint commands refer. The condition argument, if present, is a string that must evaluate to <tT claSS="monofont">true</TT> in order for the breakpoint to be honored.</p>
+
+							</p>
+<p><a NAME="idx1073750346"></a>
+								<a naME="idx1073750347"></A>
+								<P><tt clASS="monofont">tbreak [ ([filename:]lineno | function) [, condition] ]</Tt>— 
+    
+									Temporary breakpoint, which is removed automatically when it is first hit. The arguments are the same as break.<a name="idx1073750348"></a>
+										<a name="idx1073750349"></a>
+										<a name="idx1073750350"></a>
+										<a NamE="idx1073750351"></a>
+										<a nAme="idx1073750352"></a>
+										<a Name="idx1073750353"></A>
+										<A NAme="idx1073750354"></a>
+										<a NAME="idx1073750355"></a>
+									</p>
+
+							</p>
+<p><A NAMe="idx1073750356"></a><a nAME="idx1073750357"></A>
+								<p><tt class="monofont">cl(ear) [bpnumber [bpnumber ...] ]</tt>— 
+    
+									With a space separated list of breakpoint numbers, clear those breakpoints. Without an argument, clear all breaks (but first ask confirmation).</p>
+
+							</p>
+<p><a name="idx1073750358"></a>
+								<a NamE="idx1073750359"></a>
+								<p><tT clasS="monofont">disable bpnumber [bpnumber ...]</tt>— 
+    
+									Disables the breakpoints given as a space separated list of breakpoint numbers. Disabling a breakpoint means that it cannot cause the program to stop execution. But unlike clearing a breakpoint, it remains in the list of breakpoints and can be (re-)enabled.</p>
+
+							</P>
+<P><A Name="idx1073750360"></a><A NAMe="idx1073750361"></a>
+								<p><tT CLAss="monofont">enable bpnumber [bpnumber ...]</tt>— 
+    
+									Enables the breakpoints specified.</P>
+
+							</P>
+<P><A name="idx1073750362"></a><a name="idx1073750363"></a>
+								<p><tt class="monofont">ignore bpnumber count</tT>— 
+    
+									Sets the ignore count for the given breakpoint number. If the count is omitted, the ignore count is set to <tt ClasS="monofont">0.</tt> A breakpoint becomes active when the ignore count is zero. When non-zero, the count is decremented each time the breakpoint is reached and the breakpoint is not disabled and any associated condition evaluates to <tt ClasS="monofont">true</TT>.</P>
+
+							</p>
+<p><a nAME="idx1073750364"></A><a namE="idx1073750365"></A>
+								<P><Tt claSS="monofont">condition bpnumber condition</TT>— 
+    
+									Condition is an expression that must evaluate to <tt class="monofont">true</tt> before the breakpoint is honored. If condition is absent, any existing condition is removed; that is, the breakpoint is made unconditional.</p>
+
+							</p>
+<p><a name="idx1073750366"></a><a nAme="idx1073750367"></A>
+								<p><tt Class="monofont">s(tep)</Tt>— 
+    
+									Executes the current line and stops at the first possible occasion (either in a called function or in the current function).</p>
+
+							</p>
+<P>
+								<A NAme="idx1073750368"></a>
+								<a NAME="idx1073750369"></a>
+								<p><tt CLASs="monofont">n(ext)</tt>— 
+    
+									Continues execution until the next line in the current function is reached or it returns.</p>
+
+							</P>
+<P><A Name="idx1073750370"></a><a name="idx1073750371"></a>
+								<p><tt class="monofont">r(eturn)</tt>— 
+    
+									Continues execution until the current function returns.</P>
+
+							</p>
+<p>
+								<A namE="idx1073750372"></a><a naMe="idx1073750373"></a>
+								<p><TT CLass="monofont">c(ont(inue))</tT>— 
+    
+									Continues execution, only stops when a breakpoint is encountered.</P>
+
+							</P>
+<P><a namE="idx1073750374"></A><A Name="idx1073750375"></a>
+								<P><TT Class="monofont">l(ist) [first [,last]]</tt>— 
+    
+									Lists source code for the current file. Without arguments, lists 11 lines around the current line or continues the previous listing. With one argument, lists 11 lines starting at that line. With two arguments, lists the given range; if the second argument is less than the first, it is a count.<a name="idx1073750376"></a>
+										<a name="idx1073750377"></a>
+										<a nAme="idx1073750378"></A>
+										<a naMe="idx1073750379"></a>
+										<a nAme="idx1073750380"></a>
+										<A NAMe="idx1073750381"></a>
+										<a nAME="idx1073750382"></A>
+										<a namE="idx1073750383"></A>
+									</P>
+
+							</P>
+<p><a naME="idx1073750384"></A><A name="idx1073750385"></a>
+								<p><tt class="monofont">a(rgs)</tt>— 
+    
+									Prints the argument list of the current function.</p>
+
+							</p>
+<p>
+								<a nAme="idx1073750386"></A>
+								<a naMe="idx1073750387"></a>
+								<p><tT claSS="monofont">p expression</TT>— 
+    
+									Prints the value of the expression.</p>
+
+							</p>
+<p><p><TT CLass="monofont">(!) statement</tT>— 
+    
+									Executes the (one-line) statement in the context of the current stack frame. The exclamation point can be omitted unless the first word of the statement resembles a debugger command. To assign to a global variable, you must always prefix the command with a <TT Class="monofont">global</TT> command, for example</P>
+
+								<Pre>
+									
+ (Pdb) global list_options; list_options = ['-l']
+ (Pdb)
+
+								</pre>
+
+							</p>
+<p><a name="idx1073750388"></a>
+								<a name="idx1073750389"></a>
+								<p><Tt cLass="monofont">whatis arg</Tt>— 
+    
+									Prints the type of the argument.</p>
+
+							</p>
+<p>
+								<A namE="idx1073750390"></A>
+								<A Name="idx1073750391"></a>
+								<P><TT Class="monofont">alias [name [command]]</TT>— 
+    
+									Creates an alias called <TT clasS="monofont">name</TT> that executes <Tt class="monofont">command.</tt> The command must <i>not</i> be enclosed in quotes. Replaceable parameters can be indicated by %1, %2, and so on, whereas %* is replaced by all the parameters. If no command is given, the current alias for name is shown. If no name is given, all aliases are listed. Aliases might be nested and can contain anything that can be legally typed at the <tt class="monofont">pdb</tt> prompt. Note that you <i>can</I> override internal pdb commands with aliases. Those internal commands are then hidden until the alias is removed. Aliasing is recursively applied to the first word of the command line; all other words in the line are left alone. As an example, here are two useful aliases (especially when placed in the <tt ClasS="monofont">.pdbrc</tt> file):</p>
+
+								<pRe>
+									
+#Print instance variables (usage "pi classInst")
+alias pi for k in %1.__dict__.keys(): print "%1.",k,"=",%1.__dict__[k]
+#Print instance variables in self
+
+alias ps pi self
+
+								</prE>
+
+							</P>
+<P><A name="idx1073750392"></A><A NAme="idx1073750393"></a>
+								<p><TT CLass="monofont">unalias name</tT>— 
+    
+									Deletes the specified alias.</P>
+
+							</P>
+<P><a name="idx1073750394"></a><a name="idx1073750395"></a>
+								<p><tt class="monofont">q(uit)</Tt>— 
+    
+									Quit from the debugger. The program being executed is aborted.</p>
+
+							</P>
+</bloCkquoTe>
+						<diV CLAss="note"><p cLASS="notetitle"><b>Note</b></p><p>
+
+							<P>Some Python IDE's, such as Pythonwin, implement derived debuggers, and Emacs'Grand Unified Debugger can use pdb.</P>
+
+						</P></Div>
+<br>
+<BR>
+
+					
+				
+				
+					<H4>
+
+Disassembling Python Bytecodes</H4>
+					<p>Python has a module called <a name="idx1073750396"></a>
+						<a name="idx1073750397"></a>
+						<tt class="monofont">dis,</Tt> which is used to disassemble Python bytecodes into mnemonics. This module exposes a function, which is also called <a Name="idx1073750398"></A>
+						<a namE="idx1073750399"></a>
+						<tt CLASs="monofont">dis()</tt> that is able to disassemble classes, methods, functions, or code. If you don't provide any argument to the function, it disassembles the last traceback.</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; import dis
+&gt;&gt;&gt; def routine():
+...    i = 5
+...    for loop in xrange(i):
+...        print 'Ni!'
+&gt;&gt;&gt;
+&gt;&gt;&gt; dis.dis(routine)
+          0 SET_LINENO          1
+          3 SET_LINENO          2
+          6 LOAD_CONST          1 (5)
+          9 STORE_FAST          0 (i)
+
+         12 SET_LINENO          3
+         15 SETUP_LOOP         33 (to 51)
+         18 LOAD_GLOBAL         1 (xrange)
+         21 LOAD_FAST           0 (i)
+         24 CALL_FUNCTION       1
+         27 LOAD_CONST          2 (0)
+
+    &gt;&gt;   30 SET_LINENO          3
+         33 FOR_LOOP           14 (to 50)
+         36 STORE_FAST          1 (loop)
+
+         39 SET_LINENO          4
+         42 LOAD_CONST          3 ('Ni!')
+         45 PRINT_ITEM
+         46 PRINT_NEWLINE
+         47 JUMP_ABSOLUTE      30
+    &gt;&gt;   50 POP_BLOCK
+    &gt;&gt;   51 LOAD_CONST          0 (None)
+         54 RETURN_VALUE
+
+					</Pre>
+
+				
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="234.html" title="Interpreter"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=235" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="235.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="236.html" title="Profiling Python"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073750330">! (exclamation points)</a><BR>
+ <a href="#idx1073750333">.pdbrc file</a><BR>
+ <a href="#idx1073750332">;;</a><BR>
+ <a href="#idx1073750385">a(rgs) command</a><BR>
+ <a href="#idx1073750391">alias [name [command]] command</a><BR>
+aliasas<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750335">.pdbrc file</a><BR>
+ <a href="#idx1073750331">aliases</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750267">debugging</a> <a href="#idx1073750307">2nd</a> <a href="#idx1073750349">3rd</a> <a href="#idx1073750377">4th</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750389">whatis</a><BR>
+b(reak) [ ([filename<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750345">]lineno | function) [, condition] ] command</a><BR>
+ <a href="#idx1073750270">Base Debugger (bdb) module</a> <a href="#idx1073750310">2nd</a><BR>
+ <a href="#idx1073750271">bdb (Base Debugger) module</a> <a href="#idx1073750311">2nd</a><BR>
+ <a href="#idx1073750373">c(ont(inue)) command</a><BR>
+ <a href="#idx1073750357">cl(ear) [bpnumber [bpnumber ...] ] command</a><BR>
+ <a href="#idx1073750301">clear_all_breaks() method</a><BR>
+ <a href="#idx1073750299">clear_all_file_breaks(filename) method</a><BR>
+ <a href="#idx1073750297">clear_bpbynumber(arg) method</a><BR>
+ <a href="#idx1073750295">clear_break(filename, lineno) method</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750384">a(rgs)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750390">alias [name [command]]</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b(reak) [ ([filename<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750344">]lineno | function) [, condition] ]</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750372">c(ont(inue))</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750356">cl(ear) [bpnumber [bpnumber ...] ]</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750364">condition bpnumber condition</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750340">d(own)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750358">disable bpnumber [bpnumber ...]</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750360">enable bpnumber [bpnumber ...]</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750336">h(elp)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750362">ignore bpnumber count</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750374">l(ist) [first [,last]]</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750368">n(ext)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750355">Python Debugger (bdb) module</a> <a href="#idx1073750383">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750327">Python Debugger (pdb) module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750394">q(uit)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750370">r(eturn)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750366">s(tep)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tbreak [ ([filename<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750346">]lineno | function) [, condition] ]</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750342">u(p)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750392">unalias name</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750338">w(here)</a><BR>
+ <a href="#idx1073750365">condition bpnumber condition command</a><BR>
+ <a href="#idx1073750341">d(own) command</a><BR>
+debugging<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750266">applications</a> <a href="#idx1073750306">2nd</a> <a href="#idx1073750348">3rd</a> <a href="#idx1073750376">4th</a><BR>
+ <a href="#idx1073750396">dis module</a><BR>
+ <a href="#idx1073750398">dis() function</a><BR>
+ <a href="#idx1073750359">disable bpnumber [bpnumber ...] command</a><BR>
+ <a href="#idx1073750361">enable bpnumber [bpnumber ...] command</a><BR>
+ <a href="#idx1073750329">exclamation points (!)</a><BR>
+expressions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750387">p</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750334">.pdbrc</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750399">dis()</a><BR>
+ <a href="#idx1073750317">get_all_breaks() method</a><BR>
+ <a href="#idx1073750303">get_break(filename, lineno) method</a><BR>
+ <a href="#idx1073750305">get_breaks(filename, lineno) method</a><BR>
+ <a href="#idx1073750315">get_file_breaks(filename) method</a><BR>
+ <a href="#idx1073750337">h(elp) command</a><BR>
+ <a href="#idx1073750363">ignore bpnumber count command</a><BR>
+ <a href="#idx1073750375">l(ist) [first [,last]] command</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750263">Base Debugger (bdb) module</a> <a href="#idx1073750273">2nd</a> <a href="#idx1073750313">3rd</a> <a href="#idx1073750326">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750300">clear_all_breaks()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750298">clear_all_file_breaks(filename)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750296">clear_bpbynumber(arg)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750294">clear_break(filename, lineno)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750316">get_all_breaks()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750302">get_break(filename, lineno)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750304">get_breaks(filename, lineno)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750314">get_file_breaks(filename)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750318">run(command, globals=None, locals=None)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750322">runcall (func, *args)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750320">runeval(expr, globals=None, locals=None)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750292">set_break(filename, lineno, temporary=0, cond = None)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750288">set_continue()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750282">set_next(frame)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750290">set_quit()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750284">set_return(frame)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750280">set_step()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750286">set_trace()</a> <a href="#idx1073750324">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750264">user_call(frame, argument_list)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750278">user_exception(frame, (exc_type, exc_value, exc_traceback))</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750274">user_line(frame)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750276">user_return(frame, return_value)</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750272">bdb (Base Debugger)</a> <a href="#idx1073750312">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750397">dis</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750354">pdb (Python Debugger)</a> <a href="#idx1073750382">2nd</a><BR>
+ <a href="#idx1073750369">n(ext) command</a><BR>
+ <a href="#idx1073750386">p expression</a><BR>
+ <a href="#idx1073750353">pdb (Python Debugger) module</a> <a href="#idx1073750381">2nd</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750269">debugging</a> <a href="#idx1073750309">2nd</a> <a href="#idx1073750351">3rd</a> <a href="#idx1073750379">4th</a><BR>
+ <a href="#idx1073750352">Python Debugger (pdb) module</a> <a href="#idx1073750380">2nd</a><BR>
+ <a href="#idx1073750395">q(uit) command</a><BR>
+ <a href="#idx1073750371">r(eturn) command</a><BR>
+ <a href="#idx1073750319">run(command, globals=None, locals=None) method</a><BR>
+ <a href="#idx1073750323">runcall (func, *args) method</a><BR>
+ <a href="#idx1073750321">runeval(expr, globals=None, locals=None) method</a><BR>
+ <a href="#idx1073750367">s(tep) command</a><BR>
+ <a href="#idx1073750293">set_break(filename, lineno, temporary=0, cond = None) method</a><BR>
+ <a href="#idx1073750289">set_continue() method</a><BR>
+ <a href="#idx1073750283">set_next(frame) method</a><BR>
+ <a href="#idx1073750291">set_quit() method</a><BR>
+ <a href="#idx1073750285">set_return(frame) method</a><BR>
+ <a href="#idx1073750281">set_step() method</a><BR>
+ <a href="#idx1073750287">set_trace() method</a> <a href="#idx1073750325">2nd</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750268">debugging</a> <a href="#idx1073750308">2nd</a> <a href="#idx1073750350">3rd</a> <a href="#idx1073750378">4th</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750328">Python Debugger (pdb) module</a><BR>
+tbreak [ ([filename<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750347">]lineno | function) [, condition] ] command</a><BR>
+ <a href="#idx1073750343">u(p) command</a><BR>
+ <a href="#idx1073750393">unalias name command</a><BR>
+ <a href="#idx1073750265">user_call(frame, argument_list) method</a><BR>
+ <a href="#idx1073750279">user_exception(frame, (exc_type, exc_value, exc_traceback)) method</a><BR>
+ <a href="#idx1073750275">user_line(frame) method</a><BR>
+ <a href="#idx1073750277">user_return(frame, return_value) method</a><BR>
+ <a href="#idx1073750339">w(here) command</a><BR>
+ <a href="#idx1073750388">whatis arg</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

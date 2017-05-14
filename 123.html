@@ -1,0 +1,177 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; SWIG—The Simple Wrapper Interface Generator</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="117.html" class="navtitle">6. Extending and Embedding Python</a> &gt; <span class="nonavtitle">SWIG—The Simple Wrapper Interface Generator</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="122.html" title="Compiling and Linking Extension Modules"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=123" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="123.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="124.html" title="Other Wrappers"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A35%3A51+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147033230210041176116136</font><a href="read3.asp?bookname=0672319942&snode=123&now=5%2F31%2F2002+4%3A35%3A51+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>SWIG—The Simple Wrapper Interface Generator</h3>
+				<p><i>SWIG (Simple Wrapper and Interface Generator)</I> is an automated tool create by <A NAme="idx1073744042"></a>David Beazley used to write interfaces between Python and existing C libraries. These interfaces can contain several single functions.</p>
+
+				<P>The programmer doesn't have to write any special wrapping functions to provide the glue between the Python scripting language and the C functions.</P>
+
+				<P>SWIG works by reading an interface file that contains function and method prototypes. It automatically does the necessary type conversion, checks the code for error, produces a C file, compiles the file, and builds it into a shared object file.</P>
+
+				<p>It works by taking the declarations commonly found in C/C++ header files and using them to generate the <a naME="idx1073744043"></A><A name="idx1073744044"></a>glue code (wrappers) that scripting languages need to access the underlying C/C++ code.<a name="idx1073744045"></a><a name="idx1073744046"></a><a naMe="idx1073744047"></a><A namE="idx1073744048"></a><a naMe="idx1073744049"></a><a NAME="idx1073744050"></a><a naME="idx1073744051"></A><A name="idx1073744052"></A><A NAme="idx1073744053"></a><a NAME="idx1073744054"></a><a name="idx1073744055"></a><a name="idx1073744056"></a><a name="idx1073744057"></a></p>
+
+				<P>SWIG is better suited as a mechanism for controlling a variety of C programs because it enables someone to combine bits and pieces of completely different software packages without waiting for someone else to write a special purpose module.</p>
+
+				<p>The handling of datatypes when using SWIG for prototyping and control application is very easy because whenever SWIG finds an unknown datatype, it simply assumes that it is some kind of complex datatype. Consequently, wrapping a complex C program doesn't imply too much work.</P>
+
+				<p>SWIG provides a convenient way of building Python interfaces to libraries.</p>
+
+				<p>You just need to write simple interface definitions, which SWIG uses to generate the C program that conforms to the Python/C extension guidelines.</P>
+
+				<p>SWIG makes it even easier to use scripting languages by automating the process of connecting scripting languages to C/C++ code.</p>
+
+				<p>Many reasons you should try SWIG are as follows:</p>
+
+				<BlocKQUOte>
+<p><p>You can easily replace the <TT CLass="monofont">main()</tT> function of a C program with Python's interpreter.</P>
+</P>
+<P><p>C/C++ code is easily tested because you can call C functions and libraries directly from your scripting environment.</p>
+</p>
+<p><P>Debugging your C code also becomes easier once you use Python's interpreter. Remember that you don't need to change your C code in order to use SWIG.</P>
+</P>
+<P><p>SWIG can integrate different C/C++ programs together by turning them into extension modules. After the extensions are created, Python can combine and use them to generate new applications.</p>
+</p>
+<p><p>SWIG understands and parses ANSI C/C++ syntax.</p>
+</p>
+<p><p>The output of SWIG is a fully functional scripting language module.<a name="idx1073744058"></a><a name="idx1073744059"></A><a nAme="idx1073744060"></a><A name="idx1073744061"></A><a naME="idx1073744062"></A><A name="idx1073744063"></A><A NAme="idx1073744064"></a><a NAME="idx1073744065"></a><a naME="idx1073744066"></A><A name="idx1073744067"></a><a name="idx1073744068"></a><a name="idx1073744069"></a><a naMe="idx1073744070"></a></P>
+</p>
+<p><p>As SWIG is designed to work with existing C/C++ code, it will be rarely necessary to change your existing programs.</P>
+</p>
+<p><p>Your C/C++ code remains separate from your Python code.</p>
+</P>
+<p><p>SWIG output can be freely extended and customized.</p>
+</P>
+<P><P>Now, the most interesting thing is that you don't need to master all the details about the Python/C API in order to use the basics of SWIG to create your Python extension modules. SWIG automates the process of generating a Python extension based on the header of the functions that you want to export.</P>
+</p>
+</bloCKQUote>
+				<p>Take a look at the following example and see how simple it is to generate a wrapper file. We will first create an input file, and call it <TT CLass="monofont">helloworld.i.</tT></P>
+
+				<PRe>
+					
+// file: helloworld.i
+
+%module helloworld
+%{
+#include "helloworld.h"
+%}
+
+char *say();
+
+				</pre>
+
+				<p>Now, we will use SWIG to <a name="idx1073744071"></a><a name="idx1073744072"></a><a naMe="idx1073744073"></a>generate the wrapper file. We need to pass an argument to SWIG informing that the wrapper must be created for the Python language. That's because SWIG works with many different languages.<A namE="idx1073744074"></a><a naMe="idx1073744075"></a><a NAME="idx1073744076"></a><a naME="idx1073744077"></A><A name="idx1073744078"></A><A NAme="idx1073744079"></a><a NAME="idx1073744080"></a><a name="idx1073744081"></a><a name="idx1073744082"></a><a name="idx1073744083"></a><a NamE="idx1073744084"></a><a nAme="idx1073744085"></a><a Name="idx1073744086"></A></P>
+
+				<PRe>
+					
+% swig -python helloworld.i
+<i>Generating wrappers for Python…</i>
+%
+
+				</pRE>
+
+				<P>As you can see, a wrapper file called <Tt claSS="monofont">helloworld_wrap.c</TT> was created for you.<a namE="idx1073744087"></A><A Name="idx1073744088"></a><a name="idx1073744089"></a></p>
+
+				<p>More information about SWIG can be found at the following Web pages:</p>
+
+				<blockquOte>
+<P><p>SWIG official Web site:</p>
+</p>
+<P><p><a taRget="_blank" HREF="http://www.swig.org">http://www.swig.org</a></p>
+</p>
+<p><P>SWIG Users Guide—<A HRef="148.html">Chapter 9, "SWIG and Python"</a> :</p>
+</P>
+<P><P><A targET="_blank" HRef="http://www.swig.org/Doc1.1/PDF/Python.pdf">http://www.swig.org/Doc1.1/PDF/Python.pdf</a></p>
+</p>
+<p><p>"Using SWIG to Control, Prototype, and Debug C Programs with Python":</p>
+</p>
+<p><p><a target="_blank" hrEf="http://www.swig.org/papers/Py96/python96.html">http://www.swig.org/papers/Py96/python96.html</a></P>
+</p>
+<p><p>"Feeding a Large-scale Physics Application to Python":</P>
+</p>
+<p><p><a TargET="_blank" HRef="http://www.swig.org/papers/Py97/beazley.html">http://www.swig.org/papers/Py97/beazley.html</a></p>
+</P>
+<P><P>"Interfacing C/C++ and Python with SWIG":</P>
+</p>
+<p><p><a TARGet="_blank" hrEF="http://www.swig.org/papers/PyTutorial97/PyTutorial97.pdf">http://www.swig.org/papers/PyTutorial97/PyTutorial97.pdf</A></P>
+</p>
+<p><p>"The Benefits of Scripting Languages," by John Ousterhout:</p>
+</p>
+<p><p><a target="_blank" href="http://www.scriptics.com/people/john.ousterhout/scripting.html">http://www.scriptics.com/people/john.ousterhout/scripting.html</a><a NamE="idx1073744090"></a><a nAme="idx1073744091"></a><a Name="idx1073744092"></A><A NAme="idx1073744093"></a><a NAME="idx1073744094"></a><a naME="idx1073744095"></A><A name="idx1073744096"></A><A NAme="idx1073744097"></a><a name="idx1073744098"></a><a name="idx1073744099"></a><a name="idx1073744100"></A><a nAme="idx1073744101"></a><A name="idx1073744102"></A></p>
+</p>
+</bLOCKquotE>
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="122.html" title="Compiling and Linking Extension Modules"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=123" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="123.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="124.html" title="Other Wrappers"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744049">embedding Python objects in;Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744062">2nd</a> <a href="#idx1073744078">3rd</a> <a href="#idx1073744094">4th</a><BR>
+ <a href="#idx1073744042">Beazley, David</a><BR>
+C programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744052">extending and embedding Python</a> <a href="#idx1073744065">2nd</a> <a href="#idx1073744081">3rd</a> <a href="#idx1073744097">4th</a><BR>
+C++ programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744054">extending and embedding Python</a> <a href="#idx1073744067">2nd</a> <a href="#idx1073744083">3rd</a> <a href="#idx1073744099">4th</a><BR>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glueÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744044">Ò</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python extension modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744045">Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744058">2nd</a> <a href="#idx1073744074">3rd</a> <a href="#idx1073744090">4th</a><BR>
+embedding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744046">Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744059">2nd</a> <a href="#idx1073744075">3rd</a> <a href="#idx1073744091">4th</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wrapper<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744073">generating</a> <a href="#idx1073744089">2nd</a><BR>
+generating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744071">wrapper files</a> <a href="#idx1073744087">2nd</a><BR>
+glue codeÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744043">Ò</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744048">embedding in non-Python applications;Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744061">2nd</a> <a href="#idx1073744077">3rd</a> <a href="#idx1073744093">4th</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744053">extending and embedding Python</a> <a href="#idx1073744066">2nd</a> <a href="#idx1073744082">3rd</a> <a href="#idx1073744098">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744055">extending and embedding Python</a> <a href="#idx1073744068">2nd</a> <a href="#idx1073744084">3rd</a> <a href="#idx1073744100">4th</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744050">embedding Python objects in;Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744063">2nd</a> <a href="#idx1073744079">3rd</a> <a href="#idx1073744095">4th</a><BR>
+ <a href="#idx1073744047">Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744060">2nd</a> <a href="#idx1073744076">3rd</a> <a href="#idx1073744092">4th</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744051">embedding Python objects in;Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744064">2nd</a> <a href="#idx1073744080">3rd</a> <a href="#idx1073744096">4th</a><BR>
+tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744056">Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744069">2nd</a> <a href="#idx1073744085">3rd</a> <a href="#idx1073744101">4th</a><BR>
+utilities<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744057">Simplified Wrapper and Interface Generator (SWIG)</a> <a href="#idx1073744070">2nd</a> <a href="#idx1073744086">3rd</a> <a href="#idx1073744102">4th</a><BR>
+wrapper files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744072">generating</a> <a href="#idx1073744088">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

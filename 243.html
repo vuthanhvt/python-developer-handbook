@@ -1,0 +1,287 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Welcome to JPython</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">Welcome to JPython</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="242.html" title="18. JPython"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=243" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="243.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="244.html" title="Java Integration"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A24%3A10+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218068074148024146197222</font><a href="read4.asp?bookname=0672319942&snode=243&now=6%2F1%2F2002+6%3A24%3A10+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Welcome to JPython</h3>
+				<p>JPython is a Java implementation of the object-oriented scripting language called Python that has been certified as 100% pure Java. In other words, JPython does not use any of the C code of the original Python implementation. It is a version of Python that runs on top of the Java Virtual Machine. Thus, it allows you to run Python on any Java platform and enables your JPython applications to have access to any Java library that you might need.<a NAME="idx1073750599"></a>
+					<a naME="idx1073750600"></A></P>
+
+				<p>JPython offers the same language as Python, but it has a different implementation. Python is a scripting language whose interpreter is written in C, which means that this implementation is called CPython. On the other hand, JPython re-implements the Python parser and interpreter in Java. Actually, the interpreter is available as a Java application, which allows Python programs to be created and seamlessly integrated with the Java platform. Note however that both types of implementation (Python and JPython) have their own pace. Efforts are made to keep them in sync, but it is not guaranteed that this will always happen.</p>
+
+				<p>JPython carries a license that complies with the Open Source definition. It is freely available for both commercial and non-commercial use and is distributed with source code.</p>
+
+				<P>JPython was designed by <A NAme="idx1073750601"></a>Jim Hugunin, who is also the main author of the Numeric Python extensions. He has joined Guido at CNRI in 1998, leaving in mid-1999 to join the Xerox PARC team in California. When he left, <a name="idx1073750602"></a>Barry Warsaw took care of the JPython project, and he is the main person responsible for the project since then. Currently, JPython is maintained by Warsaw at <a name="idx1073750603"></a>BeOpen Python Labs.</p>
+
+				<p>At the Web site, you can always obtain the latest information about this implementation and download info. In case you are interested in downloading the source code, it is available via CVS. The latest version of JPython was released in January of 2000. Check out the JPython Official Web site at</p>
+
+				<p><a TarGet="_blank" hRef="http://www.jpython.org/">http://www.jpython.org/</a></p>
+
+				<P>If you want to be in touch with other users, JPythoners have their own mailing list that you can use to discuss JPython, ask questions, and help other users as well. Check out the jpython-interest mailing list at</p>
+
+				<p><a TARGet="_blank" hrEF="http://www.python.org/mailman/listinfo/jpython-interest">http://www.python.org/mailman/listinfo/jpython-interest</A>
+					<A name="idx1073750604"></A>
+					<A NAme="idx1073750605"></a></p>
+
+				
+					<H4>JPython Features</H4>
+					<P>JPython's core is an interpreter engine, similar to CPython's, that provides support to the greater part of the Standard Python Library. JPython has a set of features that includes</P>
+
+					<ul>
+<li>
+							<p>High-level built-in data types</p>
+
+						</li>
+<li>
+							<p>Dynamic typing</p>
+
+						</li>
+<li>
+							<p>Optional static compilation (which allows the creation of beans, applets, servlets, and so forth)</p>
+
+						</li>
+<Li>
+							<p>Java classes and packages support</P>
+
+						</li>
+<lI>
+							<p>A set of support libraries</p>
+
+						</li>
+<Li>
+							<p>Interactive compilation direct to Java bytecodes (which enables JPython programs to run directly on a JVM, including running as applets in Web browser windows).</p>
+
+						</LI>
+</UL>
+					<p>JPython uses the Java's <a naME="idx1073750606"></A>introspection mechanism to understand the contents of the package, which means that when you want to import a Java library, say something  such as</P>
+
+					<pre>
+						
+import java.awt
+
+					</pRE>
+
+					<P>JPython first tries to find a Python package named <Tt claSS="monofont">java.</TT> And in case it doesn't find one, it uses the <a name="idx1073750607"></a>Java mechanism to search in the <tt class="monofont">CLASSPATH</tt> system variable for a <tt claSs="monofont">.class</tT> or <tt cLass="monofont">.jar</tT> file that meets the requirement.</p>
+
+					<p>Another important aspect of JPython is that you can create JPython classes that subclass Java classes, extending JPython functionality without the need for using wrapper generators (such as SWIG—<i>Simplified Wrapper and Interface Generator</I>), provided the functionality is already implemented in Java code. Otherwise, you probably need to use the JNI interface to make the code available to JPython. This allows you to easily use the same set of classes that a regular Java application has access to. The opposite is also true. Java has total integration with JPython, and because JPython is 100% pure Java certified, you might embed JPython in your Java applications without any worries of compromising the portability of your application. If necessary, you can even pass JPython object instances back to Java (executing callbacks), and manipulate these instances in the Java application because any Java code that processes Java objects is also able to process JPython objects.<A NAme="idx1073750608"></a>
+						<a NAME="idx1073750609"></a>
+					</p>
+
+					<p>Sometimes, you might find JPython useful for testing your Java components. As JPython has total integration to the Java implementation, you can use it to call, test, and debug the functionality of Java functions through the interpreter. JPython is the perfect choice for controlling Java through an interactive language.</p>
+
+					<P>JPython also handles memory management with care in order to remove from you the responsibility of being worried about object circular references. To do so, it uses the power of the Java memory management mechanism, a mechanism that implements a garbage collector, which is executed at runtime.</P>
+
+					<P>JPython's performance is still not as good as the performance of CPython, but there is a lot of effort going on in order to make JVMs run faster.<A name="idx1073750610"></A>
+						<A NAme="idx1073750611"></a>
+					</p>
+
+				
+				
+					<h4>
+
+
+
+CPython Versus Jpython</h4>
+					<p>Both CPython and JPython are implementations of the same language: Python. Even though the development team tries to make both codes as compatible as possible, differences are inevitable. Each one of these languages is written using a different programming language: C and Java, respectively. This primary difference is more than enough to cause both codes to have many distinctive characteristics that are unlikely to disappear soon. The following is a short list of differences between both implementations:</p>
+
+					<ul>
+<li>
+							<p>JPython uses a slightly modified interface to handle scientific notation. For example, if you type at the CPython interpreter the command <b>
+									<tt clasS="monofont">print 9E+54,</tt>
+								</B> CPython will echo the number <tt cLass="monofont">9e+054,</tT> whereas JPython will pop up <tt cLASS="monofont">9.0E54.</tt>
+							</p>
+
+						</lI>
+<LI>
+							<P>JPython has everything implemented to be an instance of a class, which is opposite of CPython.</p>
+
+						</li>
+<lI>
+							<P>JPython doesn't provide access to the <TT clasS="monofont">co_code</TT> attribute of code objects because JPython code objects don't have access to any Python bytecodes as CPython code objects do. That's because the JVM hides their existence.</P>
+
+						</li>
+<li>
+							<p>JPython doesn't allow the use of Python extension modules written in C. If you want to use them, you need to rewrite them in Java, or use JNI to make the C code available to Java.<a name="idx1073750612"></a>
+								<a name="idx1073750613"></a>
+								<a naMe="idx1073750614"></a>
+								<A namE="idx1073750615"></a>
+							</p>
+
+						</li>
+<Li>
+							<p>JPython offers a Standard Python Library of modules slightly different than CPython does because the built-in modules, which are written in C, need to be ported to Java in order to be used by JPython. Some modules, such as <tT CLAss="monofont">cPickle,</tt>
+								<TT CLass="monofont">cStringIO,</tT> and <TT Class="monofont">binascii,</TT> have already been ported. Another possible option to access the built-in modules is by implementing a JNI bridge.</P>
+
+							<P>By typing <b>
+									<tt class="monofont">import &lt;modulename&gt;,</tt>
+								</b> and later <b>
+									<tt class="monofont">dir(&lt;modulename&gt;),</tT>
+								</b> you can check whether a module is available, and if so, what its interface looks like.</p>
+
+						</Li>
+<li>
+							<P>JPython is able to catch the CTRL+C command when you want to leave the interpreter. However, CPython doesn't accept this shortcut to perform that same functionality.</p>
+
+						</li>
+<lI>
+							<p>JPython implements the garbage collection mechanism native to Java, instead of the reference counting mechanism implemented by CPython.</p>
+
+						</lI>
+<LI>
+							<P>JPython doesn't provide any guarantees of telling you exactly when an object is about to be destroyed, as CPython does. Opposite to CPython, the <tt clASS="monofont">__del__()</Tt> method of the object is never called.</p>
+
+						</li>
+<LI>
+							<P>JPython's interpreter has a set of command line options completely different from the ones recognized by the CPython interpreter.</P>
+
+						</li>
+</ul>
+					<P>The following Web page shows all known differences between the two implementations of the Python language, including the ones listed in this topic:</P>
+
+					<P><A target="_blank" href="http://www.jpython.org/docs/differences.html">http://www.jpython.org/docs/differences.html</a>
+						<a name="idx1073750616"></a>
+						<a naMe="idx1073750617"></a>
+						<A namE="idx1073750618"></a>
+						<a naMe="idx1073750619"></a></p>
+
+				
+				
+					<H4>
+
+JPython Resource Links</H4>
+					<P>A collection of Web links that provide useful information about JPython are as follows:</P>
+
+					<blocKQUOte>
+<p>
+							<p>
+								"Python and Java: The Best of Both Worlds," by Jim Hugunin</P>
+
+						</P>
+<P>
+							<P>
+								<a tarGET="_blank" Href="http://www.python.org/workshops/1997-10/proceedings/hugunin.html">http://www.python.org/workshops/1997-10/proceedings/hugunin.html</a>
+							</p>
+
+						</p>
+<p>
+							<p>
+								"Python Programming in the JVM"
+							</p>
+
+						</p>
+<p>
+							<p>This is a very good and complete article about JPython, written by Rick Hightower.</p>
+
+						</p>
+<p>
+							<p>
+								<a tarGet="_blank" Href="http://www.sys-con.com/java/archives/0503/hightower/index.html">http://www.sys-con.com/java/archives/0503/hightower/index.html</A>
+							</p>
+
+						</p>
+<p>
+							<p>See also his other article in the Java Developer's Journal at</P>
+
+						</p>
+<p>
+							<p>
+								<A TARget="_blank" hREF="http://www.sys-con.com/java/archives/0502/hightower/index.html">http://www.sys-con.com/java/archives/0502/hightower/index.html</A>
+							</p>
+
+						</p>
+<p>
+							<p>Kirby Angell's article in Dr. Dobb's Journal</P>
+
+						</P>
+<P>
+							<P>
+								<a tarGET="_blank" Href="http://www.ddj.com/articles/1999/9904/9904toc.htm">http://www.ddj.com/articles/1999/9904/9904toc.htm</a>
+							</p>
+
+						</p>
+<p>
+							<p>Luke Andrew Cassady-Dorian's article in JavaPro magazine</p>
+
+						</p>
+<p>
+							<p>
+								<a target="_blank" hRef="http://www.devx.com/upload/free/features/javapro/1998/12dec98/ld1298/ld1298.asp">http://www.devx.com/upload/free/features/javapro/1998/12dec98/ld1298/ld1298.asp</A>
+							</p>
+
+						</p>
+<p>
+							<P>
+								"Java and Python: a Perfect Couple." This is an article at Developer.com by Guido van Rossum.</p>
+
+						</p>
+<p>
+							<p>
+								<A tarGET="_blank" Href="http://www.earthweb.com/dlink.resource-jhtml.72.1396.|repository||common| content|article|19980817|gm_jpython|jpython~xml.0.jhtml?cda=true">http://www.earthweb.com/dlink.resource-jhtml.72.1396.|repository||common|
+content|article|19980817|gm_jpython|jpython~xml.0.jhtml?cda=true</a>
+							</P>
+
+						</P>
+<P>
+							<P>Python Server Pages</p>
+
+						</p>
+<p>
+							<p>PSP is a freely available server-side scripting engine. It is 100% written in Java, thus, it is portable to several platforms. PSP is mentioned here because it uses JPython as its scripting language. In order to use PSP, you need to have a Web Server that supports Java Servlets, or uses JRun from Live Software, which is a Java Servlet engine recommended for use with PSP.</P>
+
+						</P>
+<P>
+							<P>
+								<a tarGET="_blank" Href="http://www.ciobriefings.com/psp">http://www.ciobriefings.com/psp</a>
+								<a name="idx1073750620"></a>
+								<a name="idx1073750621"></a>
+							</p>
+
+						</p>
+</blOckQuotE>
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="242.html" title="18. JPython"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=243" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="243.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="244.html" title="Java Integration"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073750603">BeOpen Python Labs</a><BR>
+CPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750614">vs. JPython</a> <a href="#idx1073750618">2nd</a><BR>
+ <a href="#idx1073750601">Hugunin, Jim</a><BR>
+ <a href="#idx1073750606">introspection mechanism</a><BR>
+ <a href="#idx1073750607">Java mechanism</a><BR>
+ <a href="#idx1073750599">JPython</a> <a href="#idx1073750604">2nd</a> <a href="#idx1073750608">3rd</a> <a href="#idx1073750610">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750612">CPython vs.</a> <a href="#idx1073750616">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750620">Web resources</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750615">vs. JPython</a> <a href="#idx1073750619">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750600">JPython</a> <a href="#idx1073750605">2nd</a> <a href="#idx1073750609">3rd</a> <a href="#idx1073750611">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750613">CPython vs.</a> <a href="#idx1073750617">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750621">Web resources</a><BR>
+ <a href="#idx1073750602">Warsaw, Barry</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

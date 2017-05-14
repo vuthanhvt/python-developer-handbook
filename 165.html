@@ -1,0 +1,1061 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; HTTP</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="161.html" class="navtitle">10. Basic Network Background</a> &gt; <span class="nonavtitle">HTTP</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="164.html" title="Networking Concepts"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=165" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="165.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="166.html" title="Accessing URLs"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A41%3A57+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148045048066095090075027</font><a href="read0.asp?bookname=0672319942&snode=165&now=5%2F31%2F2002+4%3A41%3A57+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			HTTP</h3>
+				<p>
+					<i>HTTP (Hypertext Transfer Protocol)</I> is a simple text-based protocol used for World Wide Web Applications. Both Web servers and Web browsers implement this protocol.</P>
+
+				<P>The HTTP protocol works by having a client that opens a connection, and sends a request header to a Web server. This request is a simple text-based form that contains the request method (<Tt claSS="monofont">GET, POST, PUT,</TT> …), the name of the file that should be opened, and so forth.</p>
+
+				<p>The server interprets the request and returns a response to the client. This response contains the HTTP protocol version number, as well as a lot of information—such as cookies, document type and size, and so on—about the returned document.</p>
+
+				<p>For details about the HTTP specification, you'd better check:</P>
+
+				<PRE>
+					
+<a target="_blank" href="http://www.w3.org/Protocols">http://www.w3.org/Protocols</a>
+				</pre>
+
+				<p>Next, I list some Python projects that somehow use HTTP techniques.<a namE="idx1073745837"></a>
+					<a Name="idx1073745838"></A>
+					<a namE="idx1073745839"></a>
+					<a nAME="idx1073745840"></A>
+				</p>
+
+				
+					<h4>
+				
+				
+				
+				M2Crypto, by Ng Pheng Siong's</h4>
+					<p>M2Crypto makes the following features available to the Python programmer: RSA, DH, DSA, HMACs, message digests, symmetric ciphers, SSL functionality to implement clients and servers, and <TT CLass="monofont">S/MIME v2.</tT>
+					</P>
+
+					<PRe>
+						
+<a taRGET="_blank" href="http://mars.post1.com/home/ngps/m2/">http://mars.post1.com/home/ngps/m2/</a>
+					</pre>
+
+					<div class="note"><p claSs="notetitle"><b>Note</B></p><p>
+
+						<p>With Python-2.0, the <A name="idx1073745841"></A>
+							<a naME="idx1073745842"></A>
+							<Tt claSS="monofont">socket</TT> module can be compiled with support for the OpenSSL library, so it can handle SSL without trouble.<a namE="idx1073745843"></A>
+							<A Name="idx1073745844"></a>
+							<A NAMe="idx1073745845"></a>
+							<a name="idx1073745846"></a>
+						</p>
+
+					</p></div>
+<br>
+<br>
+
+				
+				
+					<h4>
+				
+				
+				
+				
+				CTC (Cut The Crap), by Constantinos Kotsokalis</h4>
+					<p>This is a http proxy software written in Python, which cuts advertisement banners from your Web browser display.</P>
+
+					<prE>
+						
+<a taRget="_blank" hRef="http://softlab.ntua.gr/~ckotso/CTC/">http://softlab.ntua.gr/~ckotso/CTC/</a>
+					</PRE>
+
+				
+				
+					<H4>
+				
+				
+				
+				Alfajor, by Andrew Cooke</h4>
+					<p>Alfajor is an <tt CLASs="monofont">HTTP</tt> cookie filter, written in Python with an optional GUI. It acts as an <tT CLAss="monofont">HTTP</tt> proxy (you must configure your browser to use it) and can either contact sites directly or work with a second proxy (for example, a cache). Note that Alfajor does not fully conform to any HTTP version. However, in practice, it works with the vast majority of sites.</P>
+
+					<PRE>
+						
+<a target="_blank" href="http://www.andrewcooke.free-online.co.uk/jara/alfajor/">http://www.andrewcooke.free-online.co.uk/jara/alfajor/</a>
+					</pre>
+
+				
+				
+					<h4>
+				
+				
+				
+				Building Web Servers</h4>
+					<p>In order to build Internet servers using Python, you can use the following modules:</p>
+
+					<bLocKquoTe>
+<p>
+							<p>
+								
+									<tT claSS="monofont">SocketServer—</TT>
+								 
+    
+								It is a generic socket-based IP server.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<TT CLass="monofont">BaseHTTPServer—</tT>
+								 
+    
+								It provides the infrastructed required by the next two modules.
+							</P>
+
+						</P>
+<P>
+							<p>
+								
+									<tt cLASS="monofont">SimpleHTTPServer—</tt>
+								 
+    
+								It allows you to have a simple Web server.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt class="monofont">CGIHTTPServer—</tt>
+								 
+    
+								It enables the implementation of a CGI-compliant HTTP server.<a name="idx1073745847"></A>
+									<a nAme="idx1073745848"></a>
+									<A name="idx1073745849"></A>
+									<a naME="idx1073745850"></A>
+									<A name="idx1073745851"></A>
+									<A NAme="idx1073745852"></a>
+									<a NAME="idx1073745853"></a>
+									<a naME="idx1073745854"></A>
+								
+							</P>
+
+						</p>
+</blockquote>
+					
+						<h5>
+					
+					The <tt class="monofont">SocketServer</tT> Module</h5>
+						<p>The <Tt clAss="monofont">SocketServer</tt> module exposes a framework that simplifies the task of writing network servers. Rather than having to implement servers using the low-level <Tt clASS="monofont">socket</Tt> module, this module provides four basic server classes that implement interfaces to the protocols used most often: <tt cLASS="monofont">TCPServer, UDPServer, StreamRequestHandler,</tt> and <tt CLASs="monofont">DatagramRequestHandler.</tt> All these classes process requests synchronously. Each request must be completed before the next request can be started.</p>
+
+						<P>This kind of behavior is not appropriate if each request takes a long time to complete because it requires a lot of computation and the client might be slow to process all data. In order to handle the requests as separate threads, you can use the following classes: <TT Class="monofont">ThreadingTCPServer, ThreadingUDPServer, ForkingUDPServer,</tt> and <tt class="monofont">ForkingTCPServer.</tt>
+						</p>
+
+						<p>Both the <a naMe="idx1073745855"></a>
+							<A namE="idx1073745856"></a>
+							<a naMe="idx1073745857"></a>
+							<a NAME="idx1073745858"></a>
+							<tt cLASS="monofont">StreamRequestHandler</tt> and <tt CLASs="monofont">DatagramRequestHandler</tt> classes provide two file <a NAME="idx1073745859"></a>
+							<a name="idx1073745860"></a>attributes that can be used to read and write data from and to the client program. These attributes are <a name="idx1073745861"></a>
+							<tt class="monofont">self.rfile</Tt> and <a Name="idx1073745862"></A>
+							<tt clAss="monofont">self.wfile.</tT>
+						</P>
+
+						<P>The following code demonstrates the usage of the <Tt claSS="monofont">StreamRequestHandler</TT> class, which is exposed by the <tt clASS="monofont">SocketServer</Tt> module.</p>
+
+						<prE>
+							
+import SocketServer
+port = 8000
+class myRequestHandler(SocketServer.StreamRequestHandler):
+    def handle(self):
+        print "connection from ", self.client_address
+        self.wfile.write("data")
+
+srvsocket = SocketServer.TCPServer(("", port), myRequestHandler)
+print "The socket is listening to port", port
+srvsocket.serve_forever()
+
+						</PRE>
+
+						<div class="note"><p class="notetitle"><b>Tip</b></p><p>
+
+							<p>Always remember that you need to use user-accessible ports numbers.<a NamE="idx1073745863"></a>
+								<a nAme="idx1073745864"></a>
+								<a Name="idx1073745865"></A>
+								<A NAme="idx1073745866"></a>
+								<a NAME="idx1073745867"></a>
+								<a naME="idx1073745868"></A>
+							</P>
+
+						</p></div>
+<BR>
+<BR>
+
+						<p>Next, you have the <a name="idx1073745869"></a>classes provided by this module:</p>
+
+						<blockquote>
+<p>
+								<p>
+									
+										<Tt cLass="monofont">TCPServer((hostname, port), request_handler)—</Tt>
+									 
+    
+									Implements a server that supports the TCP protocol.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<tt cLASS="monofont">UDPServer((hostname, port), request_handler)—</tt>
+									 
+    
+									Implements a server that supports the UDP protocol.
+								</p>
+
+							</p>
+<P>
+								<P>
+									
+										<TT clasS="monofont">UnixStreamServer((hostname, port), request_handler)—</TT>
+									 
+    
+									Implements a server that supports a stream-oriented protocol using UNIX domain sockets.
+								</P>
+
+							</p>
+<p>
+								<p>
+									
+										<tT CLAss="monofont">UnixDatagramServer((hostname, port), request_handler)—</tt>
+									 
+    
+									Implements a server that supports a datagram-oriented protocol using UNIX domain sockets.
+								</p>
+
+							</p>
+</blockquote>
+						<p>In all four classes, the <tt cLasS="monofont">request_handler</tt> must be an instance of the <tT clasS="monofont">BaseRequestHandler</tt> class, and usually, <tT CLAss="monofont">hostname</tt> is left blank.<A NAMe="idx1073745870"></a>
+						</p>
+
+						<p>Each one of these classes has its own instances of class variables.</P>
+
+						<P>
+							<A Name="idx1073745871"></a>
+							<A NAMe="idx1073745872"></a>
+							<tt class="monofont">request_queue_size</tt> stores the size of the request queue that is passed to the socket's <a name="idx1073745873"></a>
+							<a naMe="idx1073745874"></a>
+							<Tt clAss="monofont">listen()</tt> method.</P>
+
+						<p>
+							<a nAME="idx1073745875"></A>
+							<a namE="idx1073745876"></A>
+							<TT clasS="monofont">socket_type</TT> returns the socket type used by the server. The possible values are <Tt claSS="monofont">socket.SOCK_STREAM</TT> and <tt class="monofont">socket.SOCK_DGRAM.</tt>
+						</p>
+
+						<p>The class instances implement the following <a name="idx1073745877"></a>
+							<a naMe="idx1073745878"></a>methods and attributes:<A namE="idx1073745879"></a>
+							<a naMe="idx1073745880"></a>
+							<a NAME="idx1073745881"></a>
+							<a naME="idx1073745882"></A>
+							<A name="idx1073745883"></A>
+							<A NAme="idx1073745884"></a>
+						</p>
+
+						<BLOCkquote>
+<p>
+								<p>
+									
+										<tt class="monofont">fileno()—</tt>
+									 
+    
+									Returns the server socket's integer file descriptor.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<tt ClasS="monofont">handle_request()—</tt>
+									 
+    
+									Processes a single request, by creating an instance of the handler class and invoking its <tt ClasS="monofont">handle()</TT> method.
+								</P>
+
+							</p>
+<p>
+								<p>
+									
+										<tT CLAss="monofont">serve_forever()—</tt>
+									 
+    
+									Implements a loop to handle infinite requests.
+								</P>
+
+							</P>
+<P>
+								<P>
+									
+										<tt clASS="monofont">address_family—</Tt>
+									 
+    
+									Returns either <tt class="monofont">socket.AF_INET</tt> or <tt class="monofont">socket.AF_UNIX.</tt>
+									
+								</p>
+
+							</P>
+<p>
+								<p>
+									
+										<Tt clAss="monofont">RequestHandlerClass—</tt>
+									 
+    
+									Holds the request handler class, which was provided by the user.
+								</P>
+
+							</p>
+<p>
+								<p>
+									
+										<TT CLass="monofont">server_address—</tT>
+									 
+    
+									Returns the IP address and the port number being used by the server for listening.
+								</P>
+
+							</P>
+<P>
+								<p>
+									
+										<tt cLASS="monofont">socket—</tt>
+									 
+    
+									Returns the <tt CLASs="monofont">socket</tt> object used for approaching requests.<a name="idx1073745885"></a>
+										<a name="idx1073745886"></a>
+										<a name="idx1073745887"></A>
+										<a nAme="idx1073745888"></a>
+									
+								</P>
+
+							</p>
+</bloCkquOTE>
+					
+					
+						<H5>
+					
+					The <tt clASS="monofont">BaseHTTPServer</Tt> Module</h5>
+						<p>The <tT CLAss="monofont">BaseHTTPServer</tt> module defines two base classes for implementing basic HTTP servers (also known as <A NAMe="idx1073745889"></a>
+							<a name="idx1073745890"></a>
+							<i>Web servers</i>). This module is built on top of the <tt class="monofont">SocketServer</tt> module. Note that this module is rarely used directly. Instead, you should consider using the modules <tT clAss="monofont">CGIHTTPServer</tT> and <tt clAss="monofont">SimpleHTTPServer.</tT>
+						</P>
+
+						<P>The following code demonstrates the usage of the <A name="idx1073745891"></A>
+							<A NAme="idx1073745892"></a>
+							<tT CLAss="monofont">BaseHTTPRequestHandler</tt> class, which is exposed by the <TT CLass="monofont">BaseHTTPServer</tt> module, to implement a simple HTTP Server.</p>
+
+						<pre>
+							
+import BaseHTTPServer
+htmlpage = """
+&lt;html&gt;&lt;head&gt;&lt;title&gt;Web Page&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;Hello Python World&lt;/body&gt;
+&lt;/html&gt;"""
+notfound = "File not found"
+class WelcomeHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path = "/":
+            self.send_response(200)
+            self.send_header("Content-type","text/html")
+            self.end_headers()
+            self.wfile.write(htmlpage)
+        else:
+            self.send_error(404, notfound)
+httpserver = BaseHTTPServer.HTTPServer(("",80), WelcomeHandler)
+httpserver.serve_forever()
+					
+						</pre>
+
+						<p>The <a name="idx1073745893"></a>
+							<a NamE="idx1073745894"></a>
+							<tt Class="monofont">HTTPServer((hostname, port), request_handler_class)</Tt> base class is derived from the <tt CLASs="monofont">SocketServer.TCPServer,</tt> hence, it implements the same methods. This class creates a <tT CLAss="monofont">HTTPServer</tt> object that listens to the <TT CLass="monofont">hostname+port,</tT> and uses the <TT Class="monofont">request_handler_class</tt> to handle requests.</p>
+
+						<p>The second base class is called <tt class="monofont">BaseHTTPRequestHandler(request, client_address, server).</tt> You need to create a subclass of this class in order to handle HTTP requests. If you need to handle <a naMe="idx1073745895"></a>
+							<Tt clAss="monofont">GET</tt> requests, you must redefine the <A namE="idx1073745896"></A>
+							<A Name="idx1073745897"></a>
+							<TT CLass="monofont">do_GET()</tT> method. On the other hand, if you need to handle <A NAme="idx1073745898"></a>
+							<a NAME="idx1073745899"></a>
+							<a name="idx1073745900"></a>
+							<tt class="monofont">POST</tt> requests, you must redefine the <a namE="idx1073745901"></a>
+							<a Name="idx1073745902"></A>
+							<tt clAss="monofont">do_POST()</tT> method.</P>
+
+						<P>This class also implements some class variables:</P>
+
+						<ul>
+<li>
+								<P>
+									<TT Class="monofont">BaseHTTPRequestHandler.server_version</TT>
+								</P>
+
+							</Li>
+<li>
+								<p>
+									<TT CLass="monofont">BaseHTTPRequestHandler.sys_version</tt>
+								</p>
+
+							</li>
+<li>
+								<p>
+									<tt class="monofont">BaseHTTPRequestHandler.protocol_version</tt>
+								</P>
+
+							</li>
+<Li>
+								<p>
+									<tT clasS="monofont">BaseHTTPRequestHandler.error_message_format</tt>
+								</p>
+
+							</LI>
+</UL>
+						<p>This string should contain the code for a complete Web page that must be sent to the client in case an error message must be displayed. Within the string, you can reference some error attributes because this string is dynamically linked to the contents of an error dictionary.</p>
+
+						<prE>
+							
+"""&lt;head&gt;&lt;title&gt;&lt;/title&gt;&lt;/head&gt;&lt;body&gt;
+Error code = %(code)d&lt;br&gt;
+Error message = %(message)s&lt;br&gt;
+Error explanation = %(explain)s&lt;br&gt;&lt;/body&gt;"""
+
+						</PRE>
+
+						<p>Each instance of the <tt cLASS="monofont">BaseHTTPRequestHandler</tt> class implements some <a nAME="idx1073745903"></A>
+							<a name="idx1073745904"></a>methods and attributes:</p>
+
+						<blockquote>
+<p>
+								<p>
+									
+										<tT clAss="monofont">handle()—</tT>
+									 
+    
+									Implements a request dispatcher. It calls the methods that start with "do_", such as <tt clAss="monofont">do_GET()</tT> and <TT Class="monofont">do_POST().</TT>
+									
+								</P>
+
+							</P>
+<p>
+								<p>
+									
+										<tt CLASs="monofont">send_error(error_code [, error_message])—</tt>
+									 
+    
+									Sends an error signal to the client.
+								</p>
+
+							</P>
+<P>
+								<P>
+									
+										<Tt class="monofont">send_response(response_code [, response_message])—</tt>
+									 
+    
+									Sends a response header according to the <a href="165#7.html">Table 10.2</a>.<a name="idx1073745905"></a>
+										<A naMe="idx1073745906"></a>
+										<a Name="idx1073745907"></a>
+										<A namE="idx1073745908"></A>
+										<A Name="idx1073745909"></a>
+										<A NAMe="idx1073745910"></a>
+										<a nAME="idx1073745911"></A>
+										<a namE="idx1073745912"></A>
+										<A Name="idx1073745913"></a>
+										<a name="idx1073745914"></a>
+									
+								</p>
+
+							</p>
+</blockquoTe>
+						<a Name="7"></A><p><tabLe boRDER="1" cellSPACing="0" cELLPaddiNG="1" WIdth="100%">
+<caption><h5>Table 10.2. 
+						
+						  List of Response Codes and Messages Returned by the Web Server</h5></caption><cOlgRoup Align="left" Span="2">
+<TR VAlign="top">
+<TH>
+<FOnt siZE="2">Code</FOnt></th>
+<TH>
+<FOnt size="2">Code Description</font></th>
+</tr>
+<tr valiGn="top">
+<tD>
+<fonT size="2">200</Font></TD>
+<TD>
+<font SIZE="2">OK</font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<font size="2">201</font></td>
+<td>
+<foNt sIze="2">Created</fOnt></td>
+</Tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">202</FONT></td>
+<td>
+<FONT size="2">Accepted</font></td>
+</tr>
+<tr valign="top">
+<Td>
+<fOnt sIze="2">204</foNt></td>
+<TD>
+<FOnt siZE="2">No content available</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font size="2">300</font></td>
+<td>
+<font SizE="2">Multiple choices</fonT></td>
+</tr>
+<Tr vaLIGN="top">
+<td>
+<foNT SIze="2">301</foNT></TD>
+<td>
+<foNT SIze="2">Moved permanently</font></td>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2">302</font></Td>
+<td>
+<FONT size="2">Moved temporarily</FONT></td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt size="2">303</font></td>
+<td>
+<font siZe="2">Not modified</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2">400</font></TD>
+<TD>
+<font SIZE="2">Bad request</font></td>
+</tr>
+<tr valign="top">
+<td>
+<foNt sIze="2">401</fOnt></td>
+<Td>
+<foNT SIze="2">Unauthorized</foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">403</font></td>
+<td>
+<font size="2">Forbidden</FonT></td>
+</tR>
+<tr vaLign="top">
+<TD>
+<FOnt siZE="2">500</FOnt></td>
+<TD>
+<FOnt siZE="2">Internal server error</FOnt></td>
+</tr>
+<tr valign="top">
+<td>
+<font SizE="2">501</fonT></td>
+<td>
+<Font SIZE="2">Not implemented</font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<foNT SIze="2">502</font></td>
+<td>
+<font size="2">Bad gateway</foNt></tD>
+</tr>
+<tR valiGn="top">
+<td>
+<FONT size="2">503</FONT></td>
+<td>
+<FONT size="2">Service unavailable<A NAMe="idx1073745915"></a>
+											<a name="idx1073745916"></a>
+										</font></td>
+</tr>
+</colgRouP>
+</tabLe></p>
+
+						<blOckqUOTE>
+<p>
+								<p>
+									
+										<tt CLASs="monofont">send_header(keyword, value)—</tt>
+									 
+    
+									Writes a MIME header, which contains the header keyword and its value, to the output stream.
+								</p>
+
+							</P>
+<P>
+								<P>
+									
+										<Tt claSS="monofont">end_header()—</TT>
+									 
+    
+									Identifies the end of the MIME headers.
+								</p>
+
+							</p>
+</blockquote>
+						<p>The following object attributes are also exposed:</p>
+
+						<blockqUotE>
+<p>
+								<p>
+									
+										<tT clasS="monofont">client_address—</tt>
+									 
+    
+									Returns a 2-tuple (<tT CLAss="monofont">hostname, port</tt>) that compounds the client address.
+								</P>
+
+							</P>
+<P>
+								<P>
+									
+										<tt clASS="monofont">command—</Tt>
+									 
+    
+									Identifies the request type, which can be <tt cLASS="monofont">POST, GET,</tt> and so on.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt class="monofont">path—</tt>
+									 
+    
+									Returns the request path.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tT clAss="monofont">request_version—</tT>
+									 
+    
+									Returns the HTTP version string from the request.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<Tt clASS="monofont">headers—</Tt>
+									 
+    
+									Returns the HTTP headers.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<TT Class="monofont">rfile—</TT>
+									 
+    
+									Exposes the input stream.
+								</P>
+
+							</P>
+<p>
+								<p>
+									
+										<tt CLASs="monofont">wfile—</tt>
+									 
+    
+									Exposes the output stream.<a name="idx1073745917"></a>
+										<a name="idx1073745918"></a>
+										<a name="idx1073745919"></A>
+										<a nAme="idx1073745920"></a>
+										<A name="idx1073745921"></A>
+										<a naME="idx1073745922"></A>
+										<A name="idx1073745923"></A>
+										<A NAme="idx1073745924"></a>
+										<a NAME="idx1073745925"></a>
+										<a naME="idx1073745926"></A>
+									
+								</P>
+
+							</p>
+</blockquote>
+					
+					
+						<h5>
+					
+					The <tt class="monofont">SimpleHTTPServer</tT> Module</h5>
+						<p>The <Tt clAss="monofont">SimpleHTTPServer</tt> module provides a simple HTTP server request-handler class. It has an interface compatible with the <Tt clASS="monofont">BaseHTTPServer</Tt> module that enables it to serve files from a base directory. This module implements both standard <a naME="idx1073745927"></A>
+							<A name="idx1073745928"></A>
+							<A NAme="idx1073745929"></a>
+							<a NAME="idx1073745930"></a>
+							<tt class="monofont">GET</tt> and <tt class="monofont">HEAD</tt> request handlers, as shown in this example:</p>
+
+						<Pre>
+							
+import SimpleHTTPServer
+import SocketServer
+ServerHandler = SimpleHTTPServer.SimpleHTTPRequestHandler
+httpserver = BaseHTTPServer.HTTPServer(("", 80), ServerHandler)
+httpserver.serve_forever()
+
+						</Pre>
+
+						<p>The current directory used to start up the server is used as the relative reference for all files requested by the client. This module implements the <A name="idx1073745931"></A>
+							<a naME="idx1073745932"></A>
+							<Tt claSS="monofont">SimpleHTTPRequestHandler(request, (hostname, port), server)</TT> class. This class exposes the following two <a namE="idx1073745933"></A>attributes:</P>
+
+						<Ul>
+<li>
+								<p>
+									<A NAMe="idx1073745934"></a>
+									<a name="idx1073745935"></a>
+									<tt class="monofont">SimpleHTTPRequestHandler.server_version</tt>
+								</p>
+
+							</li>
+<Li>
+								<p>
+									<A namE="idx1073745936"></a>
+									<a naMe="idx1073745937"></a>
+									<tT CLAss="monofont">SimpleHTTPRequestHandler.extensions_map—</tt>A dictionary that maps file suffixes and <TT CLass="monofont">MIME</tT> types<A NAme="idx1073745938"></a>
+									<a NAME="idx1073745939"></a>
+								</p>
+
+							</li>
+</ul>
+					
+					
+						<h5>
+					
+					The <tt class="monofont">CGIHTTPServer</tt> Module</h5>
+						<p>The <tt ClaSs="monofont">CGIHTTPServer</tt> module defines another simple HTTP server request-handler class. This module has an interface compatible with <Tt claSs="monofont">BaseHTTPServer,</tt> which enables it to server files from a base directory (the current directory and its subdirectories), and also allow clients to run CGI (Common Gateway Interface) scripts.</P>
+
+						<P>
+							<A Name="idx1073745940"></a>
+							<A NAMe="idx1073745941"></a>Requests are handled using the <a nAME="idx1073745942"></A>
+							<a namE="idx1073745943"></A>
+							<TT class="monofont">do_GET</tt> and <a name="idx1073745944"></a>
+							<a name="idx1073745945"></a>
+							<tT clAss="monofont">do_POST</tT> methods. You can override them in order to meet your needs. Note that the CGI scripts are executed as the user <tt clAss="monofont">nobody.</tT> The next example demonstrates the implementation of a simple HTTP Server that accepts CGI requests.</P>
+
+						<PRe>
+							
+import CGIHTTPServer
+import BaseHTTPServer
+class ServerHandler(CGIHTTPServer.CGIHTTPRequestHandler):
+    cgi_directories = ['/cgi-bin']
+httpserver = BaseHTTPServer.HTTPServer(("", 80), Handler)
+httpserver.serve_forever()
+					
+						</pre>
+
+						<P>The <A NAme="idx1073745946"></a>
+							<a NAME="idx1073745947"></a>
+							<tt cLASS="monofont">CGIHTTPRequestHandler(request, (hostname, port), server)</tt> class is provided by this module. This handler class supports both <tt class="monofont">GET</tt> and <tt class="monofont">POST</tt> requests. It also implements the <A naMe="idx1073745948"></a>
+							<tT clasS="monofont">CGIHTTPRequestHandler.cgi_directories</tt> attribute, which contains a list of directories that can store CGI scripts.<a NAME="idx1073745949"></a>
+							<a naME="idx1073745950"></A>
+						</P>
+
+					
+				
+				
+					<h4>
+				
+				Setting Up the Client Side of the HTTP Protocol</h4>
+					<p>The <a NAME="idx1073745951"></a>
+						<a naME="idx1073745952"></A>
+						<Tt class="monofont">httplib</tt> module implements the client side of the <i>HTTP (Hypertext Transfer Protocol)</i> protocol, and is illustrated as follows:</p>
+
+					<pre>
+						
+import httplib
+url = "www.lessaworld.com"
+urlpath = "/default.html"
+host = httplib.HTTP(url)
+host.putrequest("GET", urlpath)
+host.putheader("Accept", "text/html")
+host.endheaders()
+
+errcode, errmsg, headers host.getreply()
+if errcode != 200:
+    raise RuntimeError
+htmlfile = host.getfile()
+htmlpage = htmlfile.read()
+htmlfile.close()
+return htmlpage
+
+					</pre>
+
+					<p>The previous example doesn't allow you to handle multiple requests in parallel because the <a nAme="idx1073745953"></A>
+						<a naMe="idx1073745954"></a>
+						<tt ClasS="monofont">getreply()</TT> method blocks the application while waiting for the server to respond. You should consider using the <A name="idx1073745955"></A>
+						<A NAme="idx1073745956"></a>
+						<tT CLAss="monofont">asyncore</tt> module for a more efficient and asynchronous solution.</P>
+
+					<P>This module exposes the <A Name="idx1073745957"></a>
+						<a name="idx1073745958"></a>HTTP class. The <tt class="monofont">HTTP([hostname [,port]])</tt> class creates and returns a connection object. If no <tT clAss="monofont">port</tT> is informed, <tt clAss="monofont">port 80</tT> is used; and if no arguments are informed at all, you need to use the <A NAme="idx1073745959"></a>
+						<a NAME="idx1073745960"></a>
+						<tt cLASS="monofont">connect()</tt> method to make the connection yourself. This <a nAME="idx1073745961"></A>class exposes the following methods:<a name="idx1073745962"></a>
+						<a name="idx1073745963"></a>
+						<a name="idx1073745964"></a>
+						<a nAme="idx1073745965"></A>
+						<a naMe="idx1073745966"></a>
+						<a nAme="idx1073745967"></a>
+						<A NAMe="idx1073745968"></a>
+						<a nAME="idx1073745969"></A>
+					</p>
+
+					<bloCKQUote>
+<p>
+							<P>
+								
+									<TT Class="monofont">connect(hostname [,port])—</tt>
+								 
+    
+								Establishes a connection.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt class="monofont">send(data)—</tt>
+								 
+    
+								Sends data to the server after the <tT clAss="monofont">endheaders()</tT> method is called.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<Tt clASS="monofont">putrequest(request, selector)—</Tt>
+								 
+    
+								Writes the first line in the client request header. The <tt cLASS="monofont">request</tt> option can be one of the following most common request methods: <tt CLASs="monofont">GET, POST, PUT,</tt> or <tT CLAss="monofont">HEAD.</tt>
+									<tt class="monofont">selector</tt> is the name of the document to be opened.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt cLasS="monofont">putheader(header, argument1 [, …])—</tt>
+								 
+    
+								Writes a header line in the client request header. Each line consists of the header, a colon and a space, and the list of arguments.
+							</p>
+
+						</P>
+<p>
+							<p>
+								
+									<tt ClasS="monofont">endheaders()—</TT>
+								 
+    
+								Indicates the end of the headers in the client request header by writing a blank line to the server.
+							</P>
+
+						</p>
+<p>
+							<p>
+								
+									<tT CLAss="monofont">getreply()—</tt>
+								 
+    
+								Returns a tuple (<TT CLass="monofont">requestcode, requestmsg, headers</tT>) that is read after closing the client side of the connection. This tuple comes from the server's reply to the client message. The pair <TT Class="monofont">requestcode</tt> and <tt class="monofont">requestmsg</tt> is something like <tt claSs="monofont">(500, "Internal server error").</tT>
+									<tt cLass="monofont">headers</tT> is an instance of the <tt cLASS="monofont">mimetools.Message</tt> class, which contains the HTTP headers that were received from the server.
+							</p>
+
+						</p>
+<P>
+							<P>
+								
+									<TT clasS="monofont">
+										<A NAme="idx1073745970"></a>
+										<a NAME="idx1073745971"></a>getfile()—</tt>
+								 
+    
+								Wraps the data returned by the server as a file object in order to make reading it easy.<a name="idx1073745972"></a>
+									<a name="idx1073745973"></a>
+									<a name="idx1073745974"></A>
+									<a nAme="idx1073745975"></a>
+									<A name="idx1073745976"></A>
+									<a naME="idx1073745977"></A>
+									<A name="idx1073745978"></A>
+									<A NAme="idx1073745979"></a>
+									<a NAME="idx1073745980"></a>
+									<a naME="idx1073745981"></A>
+									<A name="idx1073745982"></a>
+								
+							</p>
+
+						</p>
+</blockquote>
+					<div ClaSs="note"><p cLass="notetitle"><b>Note</B></p><p>
+
+						<p>Note that the <TT CLass="monofont">httplib</tT> module<A NAme="idx1073745983"></a>
+							<a NAME="idx1073745984"></a> packed with Python 2.0 has been rewritten by Greg<a naME="idx1073745985"></A> Stein, in order to provide new interfaces and support for <I>HTTP/1.1</i> features, such as pipelining. Backward compatibility with the 1.5 version of httplib is provided, but you should consider taking a look at the documentation strings of the module for details.</p>
+
+						<p>Also note that Python 2.0's version of the <tt class="monofont">httplib</tt> module has support to "
+								<tt class="monofont">https://</tT>
+							" URLs over SSL.</p>
+
+					</p></Div>
+<bR>
+<br>
+
+				
+			</foNt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="164.html" title="Networking Concepts"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=165" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="165.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="166.html" title="Accessing URLs"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745844">M2Crypto</a><BR>
+ <a href="#idx1073745955">asyncore module</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745904">BaseHTTPRequestHandler class</a> <a href="#idx1073745914">2nd</a> <a href="#idx1073745926">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745948">CGIHTTPRequestHandler class</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745860">DatagramRequestHandler class</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745933">SimpleHTTPRequestHandler class</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745936">SimpleHTTPRequestHandler.extensions_map</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745934">SimpleHTTPRequestHandler.server_version</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745878">SocketServer module</a> <a href="#idx1073745888">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745859">StreamRequestHandler class</a><BR>
+ <a href="#idx1073745891">BaseHTTPRequestHandler class</a> <a href="#idx1073745911">2nd</a> <a href="#idx1073745923">3rd</a><BR>
+ <a href="#idx1073745909">BaseHTTPServer module</a> <a href="#idx1073745921">2nd</a><BR>
+building<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745851">Web servers</a><BR>
+ <a href="#idx1073745946">CGIHTTPRequestHandler class</a><BR>
+ <a href="#idx1073745949">CGIHTTPServer module</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745892">BaseHTTPRequestHandler</a> <a href="#idx1073745912">2nd</a> <a href="#idx1073745924">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745947">CGIHTTPRequestHandler class</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745858">DatagramRequestHandler</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745958">HTTP</a> <a href="#idx1073745978">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745894">HTTPServer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745932">SimpleHTTPRequestHandler</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745869">SocketServer module</a> <a href="#idx1073745870">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745856">StreamRequestHandler</a><BR>
+clients<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745966">setting up, Hypertext Transfer Protocol (HTTP)</a> <a href="#idx1073745979">2nd</a><BR>
+codes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745916">response, returned by Web servers</a><BR>
+ <a href="#idx1073745960">connect() method</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745852">Web servers</a><BR>
+ <a href="#idx1073745857">DatagramRequestHandler class</a><BR>
+ <a href="#idx1073745897">do_GET() method</a> <a href="#idx1073745943">2nd</a><BR>
+ <a href="#idx1073745902">do_POST() method</a> <a href="#idx1073745945">2nd</a><BR>
+ <a href="#idx1073745927">GET request handler</a><BR>
+ <a href="#idx1073745895">GET requests</a><BR>
+ <a href="#idx1073745971">getfile() method</a><BR>
+ <a href="#idx1073745954">getreply() method</a><BR>
+handlers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745929">request, GET and HEAD</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745941">requests, CGIHTTPServer module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745900">requests, GET and POST</a><BR>
+ <a href="#idx1073745930">HEAD request handler</a><BR>
+ <a href="#idx1073745840">HTTP (Hypertext Transfer Protocol)</a> <a href="#idx1073745850">2nd</a> <a href="#idx1073745866">3rd</a> <a href="#idx1073745882">4th</a> <a href="#idx1073745908">5th</a> <a href="#idx1073745920">6th</a> <a href="#idx1073745965">7th</a> <a href="#idx1073745975">8th</a><BR>
+ <a href="#idx1073745957">HTTP class</a> <a href="#idx1073745977">2nd</a><BR>
+ <a href="#idx1073745951">httplib module</a> <a href="#idx1073745968">2nd</a> <a href="#idx1073745981">3rd</a> <a href="#idx1073745983">4th</a><BR>
+ <a href="#idx1073745893">HTTPServer class</a><BR>
+ <a href="#idx1073745838">Hypertext Transfer Protocol (HTTP)</a> <a href="#idx1073745848">2nd</a> <a href="#idx1073745864">3rd</a> <a href="#idx1073745880">4th</a> <a href="#idx1073745906">5th</a> <a href="#idx1073745918">6th</a> <a href="#idx1073745963">7th</a> <a href="#idx1073745973">8th</a><BR>
+ <a href="#idx1073745874">listen() method</a><BR>
+ <a href="#idx1073745843">M2Crypto</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745903">BaseHTTPRequestHandler class</a> <a href="#idx1073745913">2nd</a> <a href="#idx1073745925">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745959">connect()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745896">do_GET()</a> <a href="#idx1073745942">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745901">do_POST()</a> <a href="#idx1073745944">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745970">getfile()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745953">getreply()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745961">HTTP class</a> <a href="#idx1073745976">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745873">listen()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745877">SocketServer module</a> <a href="#idx1073745887">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745956">asyncore</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745910">BaseHTTPServer</a> <a href="#idx1073745922">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745950">CGIHTTPServer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745952">httplib</a> <a href="#idx1073745969">2nd</a> <a href="#idx1073745982">3rd</a> <a href="#idx1073745984">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745939">SimpleHTTPServer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745842">socket</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745868">SocketServer</a> <a href="#idx1073745884">2nd</a> <a href="#idx1073745886">3rd</a><BR>
+networking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745837">protocols</a> <a href="#idx1073745847">2nd</a> <a href="#idx1073745863">3rd</a> <a href="#idx1073745879">4th</a> <a href="#idx1073745905">5th</a> <a href="#idx1073745917">6th</a> <a href="#idx1073745962">7th</a> <a href="#idx1073745972">8th</a><BR>
+ <a href="#idx1073745898">POST requests</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745845">M2Crypto</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745839">Hypertext Transfer (HTTP)</a> <a href="#idx1073745849">2nd</a> <a href="#idx1073745865">3rd</a> <a href="#idx1073745881">4th</a> <a href="#idx1073745907">5th</a> <a href="#idx1073745919">6th</a> <a href="#idx1073745964">7th</a> <a href="#idx1073745974">8th</a><BR>
+request handlers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745928">GET and HEAD</a><BR>
+ <a href="#idx1073745872">request_queue_size variable</a><BR>
+requests<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745940">handling, CGIHTTPServer module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745899">handling, GET and POST</a><BR>
+response codes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745915">returned by Web servers</a><BR>
+ <a href="#idx1073745861">self.rfile attribute</a><BR>
+ <a href="#idx1073745862">self.wfile attribute</a><BR>
+servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745854">building</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WebÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745890">Ò</a><BR>
+setting up<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745967">clients, Hypertext Transfer Protocol (HTTP)</a> <a href="#idx1073745980">2nd</a><BR>
+ <a href="#idx1073745931">SimpleHTTPRequestHandler class</a><BR>
+ <a href="#idx1073745937">SimpleHTTPRequestHandler.extensions_map attribute</a><BR>
+ <a href="#idx1073745935">SimpleHTTPRequestHandler.server_version attribute</a><BR>
+ <a href="#idx1073745938">SimpleHTTPServer module</a><BR>
+ <a href="#idx1073745841">socket module</a><BR>
+ <a href="#idx1073745876">socket_type variable</a><BR>
+ <a href="#idx1073745867">SocketServer module</a> <a href="#idx1073745883">2nd</a> <a href="#idx1073745885">3rd</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745846">M2Crypto</a><BR>
+ <a href="#idx1073745985">Stein, Greg</a><BR>
+ <a href="#idx1073745855">StreamRequestHandler class</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745871">request_queue_size</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745875">socket type</a><BR>
+Web servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745853">building</a><BR>
+Web serversÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745889">Ò</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,329 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The String Group</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">The String Group</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="72.html" title="__main__ "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=73" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="73.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="74.html" title="Miscellaneous"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A28%3A23+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146114164074005176090117</font><a href="read7.asp?bookname=0672319942&snode=73&now=5%2F31%2F2002+4%3A28%3A23+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>The String Group</h3>
+				<p>This group is responsible for many kinds of string services available. These modules provide access to several types of string manipulation operations.</p>
+
+				<P>Note that since release 2.0, all these functions are tied directly to <I>string</I> objects, as methods. The <Tt claSS="monofont">string</TT> module is still around only for backward compatibility.</p>
+
+				<h4><tt CLASs="monofont">string</tt></h4>
+					<p>The <tt class="monofont">string</tt> module supports common string operations by providing several functions and constants that manipulate Python strings.</p>
+
+					<h5><tt clAss="monofont">string.split()</Tt></h5>
+						<p>This function splits a <Tt claSs="monofont">string</tt> into a list. If the <TT CLass="monofont">delimiter</tT> is omitted, <TT Class="monofont">white-spaces</TT> are used.</P>
+
+						<P><a namE="idx1073742752"></A>basic syntax: <TT class="monofont">string.split(</tt><i><tt class="monofont">string [,delimiter]</tt></i><tt ClaSs="monofont">)</tt></P>
+
+						<pre>
+							
+&gt;&gt;&gt; print string,split("a b c")
+["a","b","c"]
+
+						</pRe>
+
+					
+					<h5><tT CLAss="monofont">string.atof()</tt></H5>
+						<P>It converts a <TT clasS="monofont">string</TT> to a floating number.</P>
+
+						<p><a naME="idx1073742753"></A>basic syntax: <Tt class="monofont">string.atof(string)<a name="idx1073742754"></a><a name="idx1073742755"></a><a nAme="idx1073742756"></A><a naMe="idx1073742757"></a></tt></P>
+
+					
+					<h5><tt CLASs="monofont">string.atoi()</tt></h5>
+						<P>It converts a <TT Class="monofont">string</TT> to an integer. <TT clasS="monofont">atoi</TT> takes an optional second argument: <Tt class="monofont">base.</tt> If omitted, the start of the string (for instance, <tt class="monofont">0x</tt> for hexadecimal) is used to determine the base.</p>
+
+						<p><a NamE="idx1073742758"></a>basic syntax: <tt Class="monofont">string.atoi(</Tt><i><tT CLAss="monofont">string[, base]</tt></I><TT Class="monofont">)</TT></P>
+
+					
+					<H5><tt clASS="monofont">string.atol()</Tt></h5>
+						<p>It converts a <tt class="monofont">string</tt> to a long integer. <tt class="monofont">atol</tT> takes an optional second argument: <tt ClasS="monofont">base.</tt> If omitted, the start of the string (for instance, <tt ClasS="monofont">0x</TT> for hexadecimal) is used to determine the basic syntax: <Tt claSS="monofont">string.atol(string[, base])</TT></p>
+
+					
+					<h5><tt CLASs="monofont">string.upper()</tt></h5>
+						<P>It converts a <TT Class="monofont">string</tt> to uppercase.</p>
+
+						<p><a name="idx1073742759"></a>basic syntax: <tt clasS="monofont">string.upper(</tt><I><tt cLass="monofont">string</tT></i><tt CLASs="monofont">)</tt></p>
+
+					
+					<H5><TT Class="monofont">string.find()</TT></H5>
+						<P>It returns the index position of the <tt clASS="monofont">substring</Tt> within <tt class="monofont">string.</tt> Optionally, you can specify the string's range that should be used in the search.</p>
+
+						<p><a name="idx1073742760"></a>basic syntax: <tt ClaSs="monofont">string.find(</tt><I><tt clAss="monofont">string, substring[, start [,end]]</tT></I><TT clasS="monofont">)</TT></P>
+
+					
+					<h5><tt cLASS="monofont">string.join()</tt></h5>
+						<p>This function joins the <I>string</I> elements of a <I><Tt class="monofont">list</tt></i> using <tt class="monofont">separator</tt> to separate them.</p>
+
+						<p><A naMe="idx1073742761"></a>basic syntax: <tT clasS="monofont">string.join(</tt><i><TT CLass="monofont">list, separator</tT></I><TT clasS="monofont">)</TT></P>
+
+					
+					<h5><tt cLASS="monofont">string.capitalize()</tt></h5>
+						<p>It capitalizes the first character of <i><tt class="monofont">string.</tt></i></p>
+
+						<p><a naMe="idx1073742762"></a>basic syntax: <Tt clAss="monofont">string.capitalize(</tt><I><tt cLASS="monofont">string</tt></i><tT CLAss="monofont">)</tt></P>
+
+					
+					<H5><TT clasS="monofont">string.capwords()</TT></H5>
+						<p>This function capitalizes the first letter of each word in <tt class="monofont">string</tt> and removes repeated, leading, and trailing whitespace.</p>
+
+						<p><a name="idx1073742763"></a>basic syntax: <tt ClaSs="monofont">string.capwords(</tt><I><tt clAss="monofont">string</tT></I><TT clasS="monofont">)</TT></P>
+
+					
+					<h5><tt cLASS="monofont">string.lower()</tt></h5>
+						<p>It converts all characters in <TT CLass="monofont">string</tt> to lowercase.<a name="idx1073742764"></a><a name="idx1073742765"></a><a naMe="idx1073742766"></a><A namE="idx1073742767"></a></p>
+
+						<p><a Name="idx1073742768"></A>basic syntax: <TT Class="monofont">string.lower(</TT><I><Tt claSS="monofont">string</TT></i><tt cLASS="monofont">)</tt></p>
+
+					
+					<h5><tt class="monofont">string.lstrip(),<a name="idx1073742769"></a><a naMe="idx1073742770"></a>string.rstrip()</Tt> and <tt Class="monofont">string.strip()</Tt></h5>
+						<p>These functions remove leading and/or trailing whitespace from <I><TT Class="monofont">string.</TT></I></P>
+
+						<p><a naME="idx1073742771"></A><A name="idx1073742772"></A><A NAme="idx1073742773"></a>basic syntaxes:</p>
+
+						<pre>
+							
+string.lstrip(<i>string</i>)
+string.rstrip(<i>string</i>)
+string.strip(<i>string</i>)
+
+						</pre>
+
+					
+					<h5><tt cLasS="monofont">string.ljust(),<a naMe="idx1073742774"></a><a nAme="idx1073742775"></a>string.rjust()</TT> and <TT clasS="monofont">string.center()</TT></H5>
+						<p>These functions define the alignment of <i><tt CLASs="monofont">string</tt></i> within a variable of <I><TT Class="monofont">width</tt></i> characters.</p>
+
+						<p><a name="idx1073742776"></a><a name="idx1073742777"></A><a nAme="idx1073742778"></a>basic syntaxes:</P>
+
+						<pre>
+							
+string.ljust(<i>string, width</I>)
+string.rjust(<i>string, width</i>)
+string.center(<i>string, width</I>)
+
+						</PRE>
+
+					
+					<h5><tt cLASS="monofont">string.replace()</tt></h5>
+						<p>It replaces a <I><TT Class="monofont">maximum</TT></I> number of occurrences of <I><tt class="monofont">oldtext</tt></i> with <i><tt class="monofont">newtext</tt></I> in <i><tT claSs="monofont">string.</tt></i> If <I><tt cLASS="monofont">maximum</tt></i> is omitted, all occurrences are replaced.</p>
+
+						<P><A NAme="idx1073742779"></a>basic syntax: <tT CLAss="monofont">string.replace(</tt><I><TT Class="monofont">string, oldtext, newtext [,maximum]</tt></i><tt class="monofont">)</tt></p>
+
+					
+					<h5><tt ClaSs="monofont">string.zfill()</tt></H5>
+						<p>It inserts zeros on the left side of a <tt cLass="monofont">string</TT> that has <TT clasS="monofont">width</TT> characters.</P>
+
+						<p><a naME="idx1073742780"></A>basic syntax: <Tt claSS="monofont">string.zfill(</TT><i><tt class="monofont">string, width</tt></i><tt class="monofont">)</tt></P>
+
+						<p>Next, I list a few constants that can be used to test whether a certain variable is part of a specific domain:</p>
+
+						<Pre>
+							
+&gt;&gt;&gt; import string
+&gt;&gt;&gt; string.digits
+"0123456789"
+&gt;&gt;&gt; string.octdigits
+"01234567"
+&gt;&gt;&gt; string.uppercase
+"ABCDEFGHIJKLMNOPQRSTUVWXY"
+&gt;&gt;&gt; string.hexdigits
+"0123456789abcdefABCDEF"
+&gt;&gt;&gt; string.lowercase
+"abcdefghijklmnopqrstuvwxy"
+
+						</pRe>
+
+						<p>Let's write an example that uses <a nAme="idx1073742781"></a><A NAMe="idx1073742782"></a><tt CLASs="monofont">string.uppercase:</tt><a NAME="idx1073742783"></a><a naME="idx1073742784"></A><A name="idx1073742785"></a><a name="idx1073742786"></a></p>
+
+						<pre>
+							
+&gt;&gt;&gt; text = "F"
+&gt;&gt;&gt; if text in string.uppercase:
+…     print "%s is in uppercase format" % text
+…
+"F is in uppercase format"
+
+						</pre>
+
+					
+					<h5><tT clAss="monofont">string.maketrans()</tT></h5>
+						<p>Returns a translation table that maps each character in the <i><tT claSS="monofont">from</TT></i> string into the character at the same position in the <i><tt CLASs="monofont">to</tt></i> string. Then this table is passed to the translate function. Note that both <I><TT Class="monofont">from</TT></I> and <I><tt class="monofont">to</tt></i> must have the same length.</p>
+
+						<p><a name="idx1073742787"></a>basic syntax: <tt ClaSs="monofont">string.maketrans(</tt><I><tt clAss="monofont">from, to</tT></I><TT clasS="monofont">)</TT></P>
+
+					
+					<h5><tt cLASS="monofont">string.translate()</tt></h5>
+						<p>Based on the given table, it replaces all the informed characters, according to the table created by the <TT CLass="monofont">string.maketrans</tt> function. Optionally, it deletes from the given string all characters that are presented in <tt class="monofont">charstodelete.</tt></p>
+
+						<p><a namE="idx1073742788"></a>basic syntax: <tT claSs="monofont">string.translate(</tt><i><Tt clASS="monofont">string, table[, charstodelete]</Tt></i><tt CLASs="monofont">)<a naME="idx1073742789"></A><A name="idx1073742790"></A></TT></P>
+
+					
+				
+				<h4><tt class="monofont">re</tt></h4>
+					<p>The <tt class="monofont">re</tT> module performs Perl-style regular expression operations in strings, such as matching and replacement.</p>
+
+					<dIv clAss="note"><p cLass="notetitle"><B>Tip</B></P><P>
+
+						<p>As a suggestion, always use <a naME="idx1073742791"></A><A name="idx1073742792"></A><TT Class="monofont">raw string</TT> syntax when working with regular expression because it makes the work of handling special characters simpler.<A Name="idx1073742793"></a><a name="idx1073742794"></a></p>
+
+					</p></div>
+<br>
+<br>
+
+					<pRe>
+						
+&gt;&gt;&gt; import re
+&gt;&gt;&gt; data = r"Andre Lessa"
+&gt;&gt;&gt; data = re.sub("Lessa", "L.", data)
+&gt;&gt;&gt; print data
+Andre L.
+
+					</pRe>
+
+					<p>See <a Href="148.html">Chapter 9, "Other Advanced Topics,"</a>  for more details about creating regular expression patterns.</P>
+
+					<div CLASs="note"><p clASS="notetitle"><B>Note</b></p><p>
+
+						<p>It is expected that in version 1.6, the <TT CLass="monofont">re</tT> module will be changed to a front end to the new <TT Class="monofont">sre</tt> module.</p>
+
+					</p></div>
+<br>
+<br>
+<a name="idx1073742795"></A><a nAme="idx1073742796"></a>
+				
+				<H4><tt clAss="monofont">regex</tT></H4>
+					<P>The <Tt claSS="monofont">regex</TT> module is an obsolete module since Python version 1.5. This module used to support regular expression search and match operations.</p>
+
+					<p>If necessary, you can use the <tt CLASs="monofont">regex-to-re</tt> HOWTO to learn how to migrate from the <tT CLAss="monofont">regex</tt> module to the <tt class="monofont">re</tt> module. Check out the address <a target="_blank" HreF="http://www.python.org/doc/howto/regex-to-re/">http://www.python.org/doc/howto/regex-to-re/</a>.<a nAme="idx1073742797"></a><a Name="idx1073742798"></A></P>
+
+				
+				<H4><Tt claSS="monofont">regsub</TT></h4>
+					<p>The <tt CLASs="monofont">regsub</tt> module is another obsolete module. It also handles string operations (such as substitution and splitting) by using regular expressions. The functions in this module are not thread-safe, so be careful.</p>
+
+				
+				<H4><TT Class="monofont">struct</tt></h4>
+					<p>The <tt class="monofont">struct</tt> module interprets strings as packed binary data. It processes binary files using the functions <a naMe="idx1073742799"></a><A namE="idx1073742800"></a><tt cLass="monofont">pack(),</TT><A Name="idx1073742801"></a><A NAMe="idx1073742802"></a><tt CLASs="monofont">unpack(),</tt> and <a NAME="idx1073742803"></a><a name="idx1073742804"></a><tt class="monofont">calcsize().</tt> This module allows users to write platform-independent, binary-file manipulation code when using the big-endian or little-endian format characters. Using the native formats does not guarantee platform independence.<a namE="idx1073742805"></a><a Name="idx1073742806"></A></p>
+
+				
+				<h4><tt ClasS="monofont">fpformat</TT></H4>
+					<p>The <tt cLASS="monofont">fpformat</tt> module provides functions that deal with floating point numbers and conversions.</p>
+
+				
+				<h4><TT CLass="monofont">StringIO</tT></H4>
+					<P>The <Tt class="monofont">StringIO</tt> module creates a string object that behaves like a file, but actually, it reads and writes data from string buffers. The <tt class="monofont">StringIO</tt> class, which is exposed by the <tt cLasS="monofont">StringIO</tt> module supports all the standard file methods.</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; import StringIO
+&gt;&gt;&gt; str = StringIO.StringIO("Line 1\ nLine 2\ nLine 3")
+&gt;&gt;&gt; str.readlines()
+['Line1\ 012', 'Line2\ 012', 'Line3']
+
+					</prE>
+
+					<p>An additional method provided by this class is <a nAME="idx1073742807"></A><a namE="idx1073742808"></A><A Name="idx1073742809"></a><A NAMe="idx1073742810"></a><tt CLASs="monofont">StringIO.getvalue()</tt></p>
+
+					<p>It returns and closes the <tt class="monofont">string object.</tt></p>
+
+					<p><a namE="idx1073742811"></a>basic syntax: <tT claSs="monofont">variable = stringobject.getvalue()</tt></p>
+
+					<Pre>
+						
+&gt;&gt;&gt; import StringIO
+&gt;&gt;&gt; text = "Line 1\ nLine 2\ nLine 3"
+&gt;&gt;&gt; str = StringIO.StringIO()
+&gt;&gt;&gt; str.write(text)
+&gt;&gt;&gt; result = str.getvalue()
+"Line 1\ 012Line 2\ 012Line 3"
+
+					</pRE>
+
+				
+				<H4><Tt claSS="monofont"><A Name="idx1073742812"></a><A NAMe="idx1073742813"></a>cStringIO</tt></H4>
+					<P>The <TT class="monofont">cStringIO</tt> is a faster version of the <tt class="monofont">StringIO</tt> module. The difference is that you cannot subclass this module. It is necessary to use <tt clAss="monofont">StringIO</Tt> instead.<a nAme="idx1073742814"></a><a Name="idx1073742815"></A></P>
+
+				
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="72.html" title="__main__ "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=73" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="73.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="74.html" title="Miscellaneous"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742803">calcsize() function</a><BR>
+ <a href="#idx1073742812">cStringIO module</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742804">calcsize()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742800">pack()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742775">string.rjust()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742770">string.rstrip()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742782">string.uppercase()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742802">unpack()</a><BR>
+functionsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742809">Ò</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742754">String Group</a> <a href="#idx1073742764">2nd</a> <a href="#idx1073742783">3rd</a> <a href="#idx1073742793">4th</a> <a href="#idx1073742805">5th</a> <a href="#idx1073742814">6th</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742808">StringIO.getvalue()</a><BR>
+methodsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742810">Ò</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742813">cStringIO</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742796">re</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742798">regex</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742757">string</a> <a href="#idx1073742767">2nd</a> <a href="#idx1073742786">3rd</a> <a href="#idx1073742790">4th</a><BR>
+ <a href="#idx1073742799">pack() function</a><BR>
+ <a href="#idx1073742792">raw string syntax</a><BR>
+ <a href="#idx1073742795">re module</a><BR>
+ <a href="#idx1073742797">regex module</a><BR>
+ <a href="#idx1073742755">String Group library</a> <a href="#idx1073742765">2nd</a> <a href="#idx1073742784">3rd</a> <a href="#idx1073742794">4th</a> <a href="#idx1073742806">5th</a> <a href="#idx1073742815">6th</a><BR>
+ <a href="#idx1073742756">string module</a> <a href="#idx1073742766">2nd</a> <a href="#idx1073742785">3rd</a> <a href="#idx1073742789">4th</a><BR>
+ <a href="#idx1073742774">string.rjust() function</a><BR>
+ <a href="#idx1073742769">string.rstrip() function</a><BR>
+ <a href="#idx1073742781">string.uppercase() function</a><BR>
+ <a href="#idx1073742807">StringIO.getvalue() method</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742753">string.atof()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742758">string.atoi()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742762">string.capitalize()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742763">string.capwords()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742773">string.center()</a> <a href="#idx1073742778">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742760">string.find()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742761">string.join()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742776">string.ljust()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742768">string.lower()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742771">string.lstrip()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742787">string.maketrans()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742779">string.replace()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742777">string.rjust()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742772">string.rstrip()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742752">string.split()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742788">string.translate()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742759">string.upper()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742780">string.zfill()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742791">raw string</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742811">StringIO.getvalue() method</a><BR>
+ <a href="#idx1073742801">unpack() function</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

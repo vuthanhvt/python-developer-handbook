@@ -1,0 +1,223 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Miscellaneous</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">Miscellaneous</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="73.html" title="The String Group"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=74" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="74.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="75.html" title="Generic Operational System"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A28%3A37+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146114164075115182035241</font><a href="read1.asp?bookname=0672319942&snode=74&now=5%2F31%2F2002+4%3A28%3A37+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Miscellaneous</h3>
+				<p>This group handles many functions that are available for all Python versions.</p>
+
+				<H4><TT Class="monofont">math</TT></H4>
+					<P>The <tt clASS="monofont">math</Tt> module provides standard mathematical functions and constants. It doesn't accept complex numbers, only integers and floats. Check out the following example:</p>
+
+					<pre>
+						
+import math
+&gt;&gt;&gt; math.cos(180)
+-0.598460069058
+&gt;&gt;&gt; math.sin(90)
+0.893996663601
+&gt;&gt;&gt; math.sqrt(64)
+8.0
+&gt;&gt;&gt; math.log(10)
+2.30258509299
+&gt;&gt;&gt; math.pi     # The mathematical constant pi
+3.14159265359
+&gt;&gt;&gt; math.e      # The mathematical constant e
+2.71828182846
+
+					</pre>
+
+				
+				<h4><tt class="monofont"><a namE="idx1073742816"></a><a Name="idx1073742817"></A>cmath</tt></h4>
+					<p>The <Tt clASS="monofont">cmath</Tt> module also provides standard mathematical functions and constants. However, its implementation enables it to accept complex numbers as arguments. All the returned values are expressed as complex numbers.</p>
+
+				
+				<h4><tT CLAss="monofont">random</tt></H4>
+					<P>The <TT clasS="monofont">random</TT> module generates pseudo-random numbers. This module implements all the randomizing functions provided by the <Tt class="monofont">whrandom</tt> module plus several pseudo-random real number generators. These random modules aren't very secure for encryption purposes.</p>
+
+					<h5><tt class="monofont">random.choice()</tt></h5>
+						<P>It randomly picks one element from <tt ClasS="monofont">list.</tt></p>
+
+						<p><A namE="idx1073742818"></A>basic syntax: <TT clasS="monofont">random.choice(</TT><I><tt clASS="monofont">list</Tt></i><tt CLASs="monofont">)</tt></p>
+
+						<pre>
+							
+&gt;&gt;&gt; lst = ["A","l","b","a","t","r","o","s","s","!","!"]
+&gt;&gt;&gt; while lst:
+…     element = random.choice(lst)
+…     lst.remove(element)
+…     print element,              # inserts a linefeed
+…
+b l o A s r ! ! t s a
+
+						</pre>
+
+					
+					<h5><tt class="monofont">random.random()</tt></H5>
+						<p>It returns a random floating-point number between <tT claSs="monofont">0.0</tt> and <tT claSS="monofont">1.0.</TT></p>
+
+						<p><a nAME="idx1073742819"></A>basic syntax: <tt clASS="monofont">random.random()</Tt></p>
+
+					
+					<h5><tT CLAss="monofont">random.randint()</tt></h5>
+						<p>It returns a random integer <tt class="monofont">n,</tt> where <tt claSs="monofont">x &lt;= N &lt;= y.</tT></p>
+
+						<p><a Name="idx1073742820"></a>basic syntax: <Tt clASS="monofont">random.randint(</Tt><i><tt CLASs="monofont">x,y</tt></i><TT CLass="monofont">)</tT>
+							<A NAme="idx1073742821"></a><a name="idx1073742822"></a></p>
+
+					
+				
+				<h4><tt class="monofont">whrandom</tt></H4>
+					<p>The <tT claSs="monofont">whrandom</tt> module provides a Wichmann-Hill floating-point pseudo-random number generator. This module is mostly useful when you need to use multiple independent number generators.<a Name="idx1073742823"></A><A NAme="idx1073742824"></a></p>
+
+					<H5><TT Class="monofont">whrandom.whrandom()</TT></H5>
+						<P>This function initializes multiple random generators using the same seed.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; import whrandom
+&gt;&gt;&gt; rga = whrandom.whrandom(2,1,3)
+&gt;&gt;&gt; rgb = whrandom.whrandom(2,1,3)
+&gt;&gt;&gt; rga.random()
+0.0337928613026
+&gt;&gt;&gt; rgb.random()
+0.0337928613026
+
+						</PRE>
+
+					
+				
+				<H4><tt class="monofont"><a name="idx1073742825"></a><a name="idx1073742826"></a>bisect</tT></h4>
+					<p>The <Tt clAss="monofont">bisect</tt> module has an array bisection algorithm that provides support for keeping lists in sorted order without the need for sorting them out all the time.<A namE="idx1073742827"></A><A Name="idx1073742828"></a></P>
+
+				
+				<H4><TT clasS="monofont">array</TT></H4>
+					<p>The <tt cLASS="monofont">array</tt> module is a high efficiency array implementation that handles large lists of objects. The array type is defined at the time of creation.</p>
+
+					<p>By using this module, you can create an <a name="idx1073742829"></a><a name="idx1073742830"></a><tt clAss="monofont">ArrayType</Tt> object that behaves exactly like any other list, except that it isn't recommended for storing elements of different types.</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; import array
+&gt;&gt;&gt; s = "This is a string"
+&gt;&gt;&gt; a = array.array("c", s)
+&gt;&gt;&gt; a[5:7] = array.array("c", "was")
+&gt;&gt;&gt; print a.tostring()
+This was a string
+
+					</pre>
+
+					<P>Note that <tt cLASS="monofont">NumPy</tt> provides a superior array implementation, which can be used for more than just numeric algorithms.</p>
+
+					<p>Note that Python 2.0 has improved the <A NAMe="idx1073742831"></a><a nAME="idx1073742832"></A><a namE="idx1073742833"></A><TT class="monofont">array</tt> module, and new methods were added to its array objects, including: <tt class="monofont">count(),</tt>
+						<tt clAss="monofont">extend(),</Tt>
+						<tt Class="monofont">index(),</Tt>
+						<tt CLASs="monofont">pop(),</tt> and <tT CLAss="monofont">remove().</tt></P>
+
+				
+				<H4><TT clasS="monofont">ConfigParser</TT></H4>
+					<p>The <tt class="monofont">ConfigParser</tt> module is a basic configuration file parser that handles structures similar to those found in the Microsoft Windows INI file.</p>
+
+					<p><a name="idx1073742834"></a><a nAme="idx1073742835"></A></p>
+
+					<diV clasS="note"><p clASS="notetitle"><B>Note</b></p><p>
+
+						<p>Note that as of Release 2.0, the <TT CLass="monofont">ConfigParser</tT><A NAme="idx1073742836"></a><a NAME="idx1073742837"></a><a name="idx1073742838"></a> module is also able to write config files as well as read them.</p>
+
+					</p></div>
+<br>
+<br>
+
+				
+				<h4><tt cLasS="monofont">fileinput</tt></h4>
+					<P>The <tt clAss="monofont">fileinput</tT> module helps you by writing a loop that reads the contents of a file, line by line.</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; import fileinput
+&gt;&gt;&gt; for line in fileinput.input("readme.txt"):
+…        if line.isfirstline:
+…             print "&lt;&lt; This is the first line &gt;&gt;"
+…             print "filename = %s" % line.filename
+…             print " ---------------------------"
+…        else:
+…             print "&lt;&lt; This is the line number %d&gt;&gt;" % line.lineno
+…        print line
+…
+
+					</pre>
+
+				
+				<H4><TT Class="monofont"><A NAMe="idx1073742839"></a><a nAME="idx1073742840"></A>calendar</tt></h4>
+					<p>The <tt class="monofont">calendar</tt> module provides general calendar-related functions that emulate the UNIX <tt class="monofont">cal</Tt> program, allowing you to output calendars, among other things.<a Name="idx1073742841"></A><a namE="idx1073742842"></a></p>
+
+				
+				<h4><TT CLass="monofont">cmd</tT></H4>
+					<P>The <Tt claSS="monofont">cmd</TT> module is a simple interface used as a framework for building command line interpreters and shells. You just need to subclass its <tt clASS="monofont">cmd.Cmd</Tt> class in order to create your own customized environment.</p>
+
+				
+				<h4><tt class="monofont">shlex</tt></h4>
+					<p>The <tt clasS="monofont">shlex</tt> module helps you write simple lexical analyzers (tokenizers) for syntaxes that are similar to the UNIX shell.<A namE="idx1073742843"></a><a naMe="idx1073742844"></a></p>
+
+				
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="73.html" title="The String Group"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=74" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="74.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="75.html" title="Generic Operational System"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+array module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742831">methods</a><BR>
+ <a href="#idx1073742829">ArrayType object</a><BR>
+ <a href="#idx1073742825">bisect module</a> <a href="#idx1073742827">2nd</a><BR>
+ <a href="#idx1073742839">calendar module</a> <a href="#idx1073742841">2nd</a><BR>
+ <a href="#idx1073742816">cmath module</a><BR>
+ConfigParser module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742836">files</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742838">ConfigParser module</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742823">Miscellaneous</a> <a href="#idx1073742834">2nd</a> <a href="#idx1073742843">3rd</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742833">array module</a><BR>
+ <a href="#idx1073742824">Miscellaneous library</a> <a href="#idx1073742835">2nd</a> <a href="#idx1073742844">3rd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742832">methods</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742826">bisect</a> <a href="#idx1073742828">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742840">calendar</a> <a href="#idx1073742842">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742817">cmath</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ConfigParser<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742837">files</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742822">random</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742830">ArrayType</a><BR>
+ <a href="#idx1073742821">random module</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742818">random.choice()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742820">random.randint()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742819">random.random()</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

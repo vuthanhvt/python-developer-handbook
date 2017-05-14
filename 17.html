@@ -1,0 +1,204 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Installing and Configuring Python</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="11.html" class="navtitle">1. Introduction</a> &gt; <span class="nonavtitle">Installing and Configuring Python</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="16.html" title="Python Distribution"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=17" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="17.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="18.html" title="Python and Other Languages"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A16%3A17+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145095017064180212149176</font><a href="read8.asp?bookname=0672319942&snode=17&now=5%2F31%2F2002+4%3A16%3A17+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Installing and Configuring Python</h3>
+				<p>Setting up Python in your system is a very easy process because all versions are freely available and highly documented. Check the following instructions that show how to download the files from the binary repository. Each distribution includes reference manuals that demonstrate in detail how to install and configure Python for that specific environment. See <a HREF="227.html">Chapter 17</a> for details about how to build Python from source code.</p>
+
+				<p>Python's Web site—<a TARGet="_blank" hrEF="http://www.python.org/download">http://www.python.org/download</A>—has a section that gives you access to all distributions that are available for download (see <A href="17#1.html">Figure 1.1</a>).</p>
+
+				<center>
+					<h5>
+<a name="1"></a>Figure 1.1. Python's download Web page is the place where you can get the latest Python releases.</h5>
+					
+						
+							<Img BordEr="0" widTh="500" heIGHT="375" src="graphics/01fig01.gif" aLT="graphics/01fig01.gif">
+						
+					
+				</CEnter>
+
+				<P>Up-to-date versions for the most popular distributions are always available.</P>
+
+				<P>Keep this URL because we will go to the site later to download other Python items that we might need.<A name="idx1073741943"></A><A NAme="idx1073741944"></a><a name="idx1073741945"></a><a name="idx1073741946"></a><a name="idx1073741947"></A><a nAme="idx1073741948"></a><A name="idx1073741949"></A><a naME="idx1073741950"></A></P>
+
+				<h4>UNIX Environment</h4>
+					<p>The UNIX distribution is, in my opinion, the best distribution. It comes with POSIX bindings, and it supports environment variables, files, sockets, and so on. It is perfect for all flavors of UNIX.</p>
+
+					<H5>Linux Installation</H5>
+						<P>These days, all the major Linux distributions include Python, which makes your life simple because you don't have to download the files. Sometimes, Python is even automatically installed for you. Just make sure that you have the latest version.</P>
+
+						<p>If you already have Python installed in your machine, and you've got a new Python RPM package, you must execute the following command in order to update the RPM: (Note that this filename reflects the 1.5.2 version.)</p>
+
+						<prE>
+							
+rpm -Uhv python-1.5.2-2.i386.rpm
+
+						</PRE>
+
+						<p>Otherwise, run the following command in your Linux prompt to install the <a naME="idx1073741951"></A>RPM package.</P>
+
+						<pre>
+							
+rpm -ihv python-1.5.2-2.i386.rpm
+
+						</pre>
+
+						<p>When the installation process is over, check to see whether everything went fine by typing <b><tt class="monofont">python</tt></b> at the prompt. You should get access to the Python interpreter, and when you are satisfied, press Ctrl+D to leave it.</p>
+
+						<p>Perfect! Now you are ready to start coding in Python.</P>
+
+						<p>In case you are using a Linux system that doesn't offer RPM support, you need to download the source code and compile it in your machine. Or, check whether your Linux distribution included Python. Instructions for compiling Python are provided in <a Href="227.html">Chapter 17</A>.<a namE="idx1073741952"></a></p>
+
+					
+					<h5>Other UNIX Systems</H5>
+						<P>If you are running a UNIX system other than Linux, you need to download the source code and compile it in your own machine.<A Name="idx1073741953"></a><A NAMe="idx1073741954"></a><a nAME="idx1073741955"></A></p>
+
+						<p>Download the file <tt CLASs="monofont">py152.tgz</tt> from <a target="_blank" href="http://www.python.org/download/download_source.html">http://www.python.org/download/download_source.html</a>. Note that this file corresponds to version 1.5.2. You might need to change the filename for the latest version.</p>
+
+						<p>Following the instructions listed in the <tt cLasS="monofont">README</tt> file of the distribution will show you how to build and install the source code.</p>
+
+					
+				
+				<H4>Macintosh Environment</h4>
+					<p><a nAme="idx1073741956"></a>MacPython is a Python version available for the Macintosh. <A NAMe="idx1073741957"></a>Jack Jansen maintains it, and you can have full access to the entire documentation at his Web site. Currently, version 1.5.2 is available for download at <a tARGEt="_blank" hreF="http://www.cwi.nl/~jack/macpython.html">http://www.cwi.nl/~jack/macpython.html</A>. Beta versions from version 1.6 are also available.</P>
+
+					<P>You can also download this distribution at Python's official Web site at <a tarGET="_blank" Href="http://www.python.org/download/download_mac.html">http://www.python.org/download/download_mac.html</a>. The full distribution is available in one unique file that also contains Tkinter and an interactive development environment.</p>
+
+				
+				<h4>Windows Environment</h4>
+					<p>The Win32 and COM extensions by Mark Hammond are the result of an excellent work that is successfully reducing the distance between the overall performance of Python for UNIX and Python for Windows platforms. The following instructions show how to install the Python version for Windows systems. Note that to install the Win32 extensions, you need to install a separate package called <tt class="monofont">Win32all</tt><i><tt ClaSs="monofont">-xxx.</tt></I><tt clAss="monofont">exe.</tT> You should replace the <I><TT clasS="monofont">xxx</TT></I> with the number of the latest available release.</p>
+
+					<p>The installation process is very straightforward within Win32 systems (Windows 95/98/2000 and NT). Go to the Python for Windows download page at <a tARGEt="_blank" hreF="http://www.python.org/download/download_windows.html">http://www.python.org/download/download_windows.html</A> and choose a location. If the location you selected isn't available at the moment, choose a mirror site.</P>
+
+					<P>Let's download the <tt class="monofont">py152.exe</tt> file (Python's version 1.5.2). Now that you have downloaded the file, save it to a location on your local hard disk.<a name="idx1073741958"></a><a name="idx1073741959"></A><a nAme="idx1073741960"></a><A name="idx1073741961"></A><a naME="idx1073741962"></A><A name="idx1073741963"></A><A NAme="idx1073741964"></a><a NAME="idx1073741965"></a><a naME="idx1073741966"></A></P>
+
+					<p>Double-clicking the file will launch an <a name="idx1073741967"></a><a name="idx1073741968"></a>Installation Wizard as shown in <a href="17#7.html">Figure 1.2</a>.</p>
+
+					<CenTer>
+						<h5>
+<A name="7"></A>Figure 1.2. PythonWin's Installation Wizard guides you through a very simple installation process.</h5><imG BORder="0" wIDTH="468" heigHT="358" SRc="graphics/01fig02.gif" alt="graphics/01fig02.gif"></CENTer>
+
+					<p>Select everything and confirm the selections. The installation process will start and after Python is installed, you will be asked if you also want to install Tcl/Tk (see <a href="17#8.html">Figure 1.3</a>). I strongly suggest that you install it too because later you will learn how to create GUI interfaces using Tkinter. After you confirm it, the Wizard will guide you through Tcl's 8.0.5 for Windows installation. Choose the full installation, confirm it, and that's it. Your Windows system is fully configured to use both PythonWin and IDLE.</p>
+
+					<center>
+						<h5>
+<a naMe="8"></a>Figure 1.3. Installing Tcl/Tk now enables you to create GUI applications later.</H5><img BordeR="0" widTH="278" HEight="230" SRC="graphics/01fig03.gif" Alt="graphics/01fig03.gif"></ceNTER>
+
+					<p>I suggest that you spend some time going through all the documentation that was installed in your machine.</p>
+
+					<p>Right now you might have everything already set up in your environment.</p>
+
+					<P>If you decide later to download and build the source code, download the same source code that is provided for UNIX systems at <A TArget="_blank" href="http://www.python.org/download/download_source.html">http://www.python.org/download/download_source.html</a>.</p>
+
+					<p>Get the file <tt class="monofont">py152.tgz</tt> and follow the instructions listed in the <Tt cLass="monofont">README</Tt> file. It clearly explains how you could use Microsoft Visual C++ 5.0 to build the source code. See <a hrEf="227.html">Chapter 17</a> for more details.<a NAME="idx1073741969"></a><a naME="idx1073741970"></A><A name="idx1073741971"></A><A NAme="idx1073741972"></a><a NAME="idx1073741973"></a><a name="idx1073741974"></a><a name="idx1073741975"></a><a name="idx1073741976"></a><a NamE="idx1073741977"></a></p>
+
+					<p>If you are interested in downloading<A name="idx1073741978"></A><a naME="idx1073741979"></A><A name="idx1073741980"></A><A NAme="idx1073741981"></a><a NAME="idx1073741982"></a><a naME="idx1073741983"></A> Python 2.0, the following link<A name="idx1073741984"></a> takes you directly to its download page.</p>
+
+					<p><a target="_blank" href="http://www.pythonlabs.com/products/python2.0/download_python2.0.html">http://www.pythonlabs.com/products/python2.0/download_python2.0.html</a></p>
+
+					<P>At PythonLabs, you have the source tarball<a nAme="idx1073741985"></a> a<A name="idx1073741986"></A>vailable to build Python from the source in the platform of your choice. Note that if you are running Windows, you can <a naME="idx1073741987"></A><A name="idx1073741988"></A><A NAme="idx1073741989"></a><a NAME="idx1073741990"></a>download and run the Windows installer as well.</p>
+
+					<p>The following links cover the 2.0 distribution.</p>
+
+					<P><I>News about Python 2.0</I></P>
+
+					<p><a target="_blank" href="http://www.pythonlabs.com/products/python2.0/news.html">http://www.pythonlabs.com/products/python2.0/news.html</a></p>
+
+					<p><i>Python 2.0 Manuals</i></p>
+
+					<p><a TarGet="_blank" hRef="http://www.pythonlabs.com/doc/manuals/python2.0/">http://www.pythonlabs.com/doc/manuals/python2.0/</a></p>
+
+					<P><i>Python 2.0 - The new license</i></p>
+
+					<P><A TArget="_blank" HREF="http://www.pythonlabs.com/products/python2.0/license.html">http://www.pythonlabs.com/products/python2.0/license.html</a></p>
+
+					<diV CLAss="note"><p cLASS="notetitle"><b>Note</b></p><p>
+
+						<p>A special note is necessary here to let<a name="idx1073741991"></a><a name="idx1073741992"></a> you know that Python 2.0 doesn't run a separate Tcl/Tk installer <a naMe="idx1073741993"></a><A namE="idx1073741994"></a>anymore. It installs all the files it needs under the Python directory. This was made to avoid conflicting problems with other Tcl/Tk installations that you might have on your system.</p>
+
+					</p></dIv>
+<br>
+<BR>
+
+				
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="16.html" title="Python Distribution"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=17" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="17.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="18.html" title="Python and Other Languages"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741948">Python;downloading</a> <a href="#idx1073741964">2nd</a> <a href="#idx1073741975">3rd</a><BR>
+configuring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741945">Python</a> <a href="#idx1073741955">2nd</a> <a href="#idx1073741960">3rd</a> <a href="#idx1073741971">4th</a><BR>
+downloading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741946">Python</a> <a href="#idx1073741962">2nd</a> <a href="#idx1073741973">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741989">Windows installer</a><BR>
+ <a href="#idx1073741979">downloading:Python 2.0</a><BR>
+installers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741994">Tcl/Tk</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741988">Windows:downloading and running</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741944">Python</a> <a href="#idx1073741954">2nd</a> <a href="#idx1073741959">3rd</a> <a href="#idx1073741970">4th</a><BR>
+Internet<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741949">Python source code Web site</a> <a href="#idx1073741965">2nd</a> <a href="#idx1073741976">3rd</a><BR>
+ <a href="#idx1073741957">Jansen, Jack</a><BR>
+links<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741983">Python 2.0</a> <a href="#idx1073741992">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741984">downloading</a><BR>
+Linux<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741952">installing Python</a><BR>
+ <a href="#idx1073741956">MacPython</a><BR>
+Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741943">installing and configuring</a> <a href="#idx1073741953">2nd</a> <a href="#idx1073741958">3rd</a> <a href="#idx1073741969">4th</a><BR>
+Python 2.0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741978">downloading</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741982">links</a> <a href="#idx1073741991">2nd</a><BR>
+ <a href="#idx1073741980">PythonLabs Web site</a><BR>
+ <a href="#idx1073741967">PythonWin Installation Wizard</a><BR>
+RPM package<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741951">Linux</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741990">Windows insttaller</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741947">downloading</a> <a href="#idx1073741963">2nd</a> <a href="#idx1073741974">3rd</a><BR>
+ <a href="#idx1073741985">source tarball</a><BR>
+ <a href="#idx1073741986">tarball (source)</a><BR>
+ <a href="#idx1073741993">Tcl/Tk installer</a><BR>
+Web sites<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741950">Python source code</a> <a href="#idx1073741966">2nd</a> <a href="#idx1073741977">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741981">PythonLabs</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741961">installing Python</a> <a href="#idx1073741972">2nd</a><BR>
+Windows installer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741987">downloading and running</a><BR>
+wizards<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073741968">PythonWin</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

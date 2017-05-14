@@ -1,0 +1,2016 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Creating, Installing, and Running Your Script</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="179.html" class="navtitle">12. Scripting Programming</a> &gt; <span class="nonavtitle">Creating, Installing, and Running Your Script</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="183.html" title="The cgi Module"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=184" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="184.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="185.html" title="Python Active Scripting"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A44%3A56+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148040135188010160225247</font><a href="read9.asp?bookname=0672319942&snode=184&now=5%2F31%2F2002+4%3A44%3A56+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+
+
+Creating, Installing, and Running Your Script</h3>
+				<p>You are free to edit your Python scripts using your favorite text editor (such as, Notepad, IDLE, Editpad, pico,
+PythonWwin, vi, and so on). Of course, we can't forget about Emacs, which has one of the best Python editing modes
+available.</p>
+
+				<P>Remember to upload your scripts as text files to your Web server. In order to execute them, you need to make sure
+that they are in a "executable" directory, and that they have the right permissions.</P>
+
+				<P>As I said before, most often CGI scripts live in the server's special <A name="idx1073746687"></A>
+					<A NAme="idx1073746688"></a>
+					<tT CLAss="monofont">cgi-bin</tt> directory. You should consider verifying whether the files, that your script needs to read or write, are
+actually readable or writable, respectively, by other users. In UNIX, the command to <a name="idx1073746689"></a>
+					<a name="idx1073746690"></a>
+					<a namE="idx1073746691"></a>
+					<a Name="idx1073746692"></A>set the permissions is <a namE="idx1073746693"></a>
+					<a nAME="idx1073746694"></A>
+					<tt clASS="monofont">chmod.</Tt>
+				</p>
+
+				<p>For example,</p>
+
+				<PRE>
+					
+chmod 755 filename
+
+				</Pre>
+
+				<p>The mode argument <tT CLAss="monofont">755</tt> defines that the file's owner can read, write, and execute the file, whereas
+the other users can only read and execute it.</p>
+
+				<p>The common UNIX mode values and their respective symbolic arguments are</p>
+
+				<ul>
+<li>
+						<p>
+							<tt class="monofont">chmod 755</tT> for executable scripts, or <tt ClasS="monofont">chmod a+rx.</tt>
+						</p>
+
+					</lI>
+<li>
+						<p>
+							<TT CLass="monofont">chmod 666</tT> for writable files, or <TT Class="monofont">chmod a+w.</TT>
+						</P>
+
+					</Li>
+<li>
+						<p>
+							<TT CLass="monofont">chmod 644</tt> for readable files, or <tt class="monofont">chmod a+r.</tt>
+							<a name="idx1073746695"></a>
+							<A naMe="idx1073746696"></a>
+							<a Name="idx1073746697"></a>
+							<A namE="idx1073746698"></A>
+							<A Name="idx1073746699"></a>
+							<A NAMe="idx1073746700"></a>
+						</p>
+
+					</lI>
+</UL>
+				<Div clASS="note"><P class="notetitle"><b>Tip</b></p><p>
+
+					<p>Keep in mind that <a name="idx1073746701"></a>
+						<a namE="idx1073746702"></a>
+						<a Name="idx1073746703"></A>
+						<a namE="idx1073746704"></a>
+						<a nAME="idx1073746705"></A>
+						<a namE="idx1073746706"></A>commands and filenames are all case sensitive if the Web Server is on an OS with case-sensitive
+filenames.</P>
+
+				</P></div>
+<bR>
+<BR>
+
+				<P>For security reasons, the HTTP server executes your script as <a namE="idx1073746707"></A>
+					<A Name="idx1073746708"></a>user "nobody", without any special privileges. Therefore, it can only read (write, execute) files
+that everybody can read (write, execute).<a name="idx1073746709"></a>
+					<a name="idx1073746710"></a>
+					<a namE="idx1073746711"></a>
+					<a Name="idx1073746712"></A>
+					<a namE="idx1073746713"></a>
+					<a nAME="idx1073746714"></A>
+					<a namE="idx1073746715"></A>
+				</P>
+
+				<P>The current directory at execution time is usually the server's <tt clASS="monofont">/cgi-bin</Tt> directory, and the set of
+environment variables is different from what you get at login. In other words, don't count on the shell's search path variable
+for executables <a naME="idx1073746716"></A>
+					<A name="idx1073746717"></a>(<tt class="monofont">$PATH</tt>) or the Python module search path variable <a name="idx1073746718"></a>
+					<A naMe="idx1073746719"></a>(<tT clasS="monofont">$PYTHONPATH</tt>) to be set to anything useful.</p>
+
+				<P>If you need to <A NAme="idx1073746720"></a>
+					<a NAME="idx1073746721"></a>load modules from a <a naME="idx1073746722"></A>directory that is not listed as part of the Python's default module search path, you can change the path variable
+in your script before trying to import them. In the following example, we add three more directory entries in the search path.
+Note that the last directory inserted, <Tt claSS="monofont">"/usr/python/testdict",</TT> is searched first.</p>
+
+				<pre>
+					
+import sys
+sys.path.insert(0, "/usr/python/lib")
+sys.path.insert(0, "/usr/tmp")
+sys.path.insert(0, "/usr/python/testdict")
+
+				</pre>
+
+				<p>Instead of using <tt class="monofont">"from cgi import *",</tt> you should use only <tt cLasS="monofont">"import cgi"</tt> because the
+<tT clasS="monofont">cgi</tt> module defines many other names for backward compatibility that can interfere with your code.</p>
+
+				<P>It also might be useful for you to redirect the standard error (<TT Class="monofont">sys.stderr</TT>) to the standard output
+(<TT clasS="monofont">sys.stdout</TT>). This will display all the error messages in the browser.</P>
+
+				
+					<h4>
+
+
+
+Sending Information to Python Scripts</h4>
+					<p>Every time you use a URL to carry information to a CGI script, the data is transported as <a NAME="idx1073746723"></a>
+						<a name="idx1073746724"></a>
+						<i>name/value</i> pairs, separated by <a name="idx1073746725"></a>
+						<a name="idx1073746726"></A>ampersands (<tt ClasS="monofont">&amp;</tt>), and each pair is separated by an <a nAme="idx1073746727"></a>
+						<A NAMe="idx1073746728"></a>equal sign (<tt CLASs="monofont">=</tt>). Whitespaces between words are usually converted to the <a NAME="idx1073746729"></a>
+						<a naME="idx1073746730"></A>plus symbol (<Tt class="monofont">+</tt>).</p>
+
+					<p>For example,</p>
+
+					<p><a target="_blank" hRef="http://www.lessaworld.com/cgi-script/app.py?animal=parrot&amp;type=singer">http://www.lessaworld.com/cgi-script/app.py?animal=Parrot&amp;type=Singer</A>
+						<a naMe="idx1073746731"></a>
+						<a nAme="idx1073746732"></a>
+						<A NAMe="idx1073746733"></a>
+						<a nAME="idx1073746734"></A>
+						<a namE="idx1073746735"></A>
+						<A Name="idx1073746736"></a>
+						<A NAMe="idx1073746737"></a>
+						<a name="idx1073746738"></a>
+						<a name="idx1073746739"></a>
+						<a name="idx1073746740"></a>
+						<A naMe="idx1073746741"></a>
+					</p>
+
+					<P>Special characters are encoded to hexadecimal format (<tt clAss="monofont">%HH</tT>) and preceded by the percent sign.
+Therefore, the string <I>
+							<TT clasS="monofont">"Parrot sketch"</TT>
+						</I> is passed to the script as <tt clASS="monofont">"Parrot%20sketch".</Tt>
+					</p>
+
+					<p>As you can see, the previous example is implicitly using the <tT CLAss="monofont">GET</tt> method to pass the values to the
+CGI script. If you decide that the <tt class="monofont">POST</tt> method is more suitable for your needs, you will need to use the
+<tt class="monofont">urllib</Tt> module in order to send the information. The following example demonstrates its use.</p>
+
+					<Pre>
+						
+import urllib
+request = urllib.urlencode({
+    "animal": "Parrot", "type": "Singer"
+})
+page = urllib.urlopen("http://oemcomputer/cgi-script/app.py", request)
+response = page.read()
+
+					</pRe>
+
+					<p>Check the <tt ClasS="monofont">urllib</TT> documentation for details:</P>
+
+					<p><a taRGET="_blank" href="http://www.python.org/doc/current/lib/module-urllib.html">http://www.python.org/doc/current/lib/module-urllib.html</A>
+					</P>
+
+					<P>
+						<A href="184#2.html">Table 12.1</A> contains a list of special characters and their encoded strings.</P>
+
+					<A Name="2"></a><p><table border="1" cellSpaCing="0" CellpAddiNG="1" WIdth="100%">
+<cAPTIon><h5>Table 12.1. 
+
+ Encoded Strings Used to Represent Special Characters When Dealing with URLs</h5></CAPTion><cOLGRoup align="left" span="2">
+<tr valign="top">
+<Th>
+<fOnt sIze="2">Character</foNt></th>
+<TH>
+<FOnt siZE="2">Encoded String</FOnt></th>
+</TR>
+<TR valiGN="top">
+<TD>
+<font size="2">
+										<tt class="monofont">/</tt>
+									</fonT></td>
+<Td>
+<foNt sizE="2">
+										<tt cLASS="monofont">%2F</tt>
+									</foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+										<tt class="monofont">~</tt>
+									</font></td>
+<tD>
+<foNt siZe="2">
+										<tt cLass="monofont">%7E</TT>
+									</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2">
+										<tt class="monofont">:</tt>
+									</font></td>
+<td>
+<fonT siZe="2">
+										<tt Class="monofont">%3A</Tt>
+									</foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+										<TT CLass="monofont">;</tt>
+									</font></td>
+<td>
+<font sizE="2">
+										<tt ClasS="monofont">%3B</tt>
+									</foNt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2">
+										<tt clASS="monofont">@</Tt>
+									</font></td>
+<td>
+<font size="2">
+										<tt cLasS="monofont">%40</tt>
+									</fOnt></td>
+</Tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+										<TT CLass="monofont">&amp;</tT>
+									</FONt></td>
+<td>
+<font size="2">
+										<tt class="monofont">%26</Tt>
+									</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2">space</font></TD>
+<TD>
+<font SIZE="2">
+										<tt class="monofont">%20</tt>
+									</font></td>
+</tr>
+<tr vAliGn="top">
+<td>
+<Font sIze="2">return</fONT></Td>
+<td>
+<fONT Size="2">
+										<tT CLAss="monofont">%0A</tt>
+									</FONT></td>
+</tr>
+<tr valign="top">
+<td>
+<font siZe="2">tab</fOnt></tD>
+<td>
+<foNt siZE="2">
+										<TT clasS="monofont">%09</TT>
+										<A name="idx1073746742"></A>
+										<A NAme="idx1073746743"></a>
+										<a NAME="idx1073746744"></a>
+										<a name="idx1073746745"></a>
+										<a name="idx1073746746"></a>
+										<a name="idx1073746747"></a>
+									</fOnt></Td>
+</tr>
+</ColgrOup>
+</tABLE></p>
+
+				
+				
+					<h4>
+
+
+
+Working with Form Fields and Parsing the Information</h4>
+					<p>The first thing that most beginners in the Web development area want to know is how to get information out of HTML
+forms and do something with it.<A NAMe="idx1073746748"></a>
+						<a nAME="idx1073746749"></A>
+						<a namE="idx1073746750"></A>
+						<A Name="idx1073746751"></a>
+						<a name="idx1073746752"></a>
+						<a name="idx1073746753"></a>
+						<a namE="idx1073746754"></a>
+						<a Name="idx1073746755"></A>
+						<a namE="idx1073746756"></a>
+						<a nAME="idx1073746757"></A>
+						<a namE="idx1073746758"></A>
+					</P>
+
+					<P>The following HTML code results in a Web page (see <a hreF="184#4.html">Figure 12.1</A>) that queries the
+user about his login information. Note that we use the <A Name="idx1073746759"></a>
+						<A NAMe="idx1073746760"></a>
+						<tt class="monofont">POST</tt> method in the form. Thus, the field values will not be displayed as part of the URL.</p>
+
+					<center>
+						<h5>
+<a NamE="4"></a>Figure 12.1. Login Form that calls a CGI script.</h5>
+						
+							
+								<iMg borDer="0" wIDTH="500" heigHT="395" SRc="graphics/12fig01.gif" alt="graphics/12fig01.gif">
+							
+						
+					</CENTer>
+
+					<prE>
+						
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;Login Page&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+
+&lt;HR&gt;
+&lt;CENTER&gt;
+&lt;FORM method="POST" action="http://oemcomputer/cgi-bin/login.py"&gt;
+&lt;p&gt; Enter your login name: &lt;input type="text" name="login"&gt;
+&lt;p&gt; Enter your password: &lt;input type=password name="password"&gt;
+&lt;p&gt; &lt;input type="submit" value="Connect"&gt;
+&lt;/FORM&gt;
+&lt;/CENTER&gt;
+&lt;HR&gt;
+
+&lt;/form&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+					</PRE>
+
+					<p>Also, pay attention to the way data fields are referenced in HTML forms. Each input element carries a <a name="idx1073746761"></a>
+						<a name="idx1073746762"></a>
+						<tt class="monofont">name</Tt> attribute that uniquely identifies the element within a form. For instance, the tag <tT claSs="monofont">&lt;input
+type="text" name="login"&gt;</tt> defines a <a Name="idx1073746763"></A>
+						<A NAme="idx1073746764"></a>data field called <tT CLAss="monofont">"login"</tt> that implements a text box.<A NAMe="idx1073746765"></a>
+						<a nAME="idx1073746766"></A>
+						<a name="idx1073746767"></a>
+						<a name="idx1073746768"></a>
+						<a name="idx1073746769"></a>
+						<a nAme="idx1073746770"></A>
+						<a naMe="idx1073746771"></a>
+						<a nAme="idx1073746772"></a>
+						<A NAMe="idx1073746773"></a>
+						<a nAME="idx1073746774"></A>
+						<a namE="idx1073746775"></A>
+					</P>
+
+					<P>Every CGI script must send a header (the <tt clASS="monofont">Content-type</Tt> tag) describing the contents of the document.
+The common values for this tag are <tt class="monofont">text/html,</tt>
+						<tt class="monofont">text/plain,</tt>
+						<tT clAss="monofont">image/gif,</tT> and <tt clAss="monofont">image/jpeg.</tT> A blank line is used to indicate the end of this header.</P>
+
+					<DIv claSS="note"><P Class="notetitle"><B>Tip</B></P><P>
+
+						<p>The <a naME="idx1073746776"></A>
+							<A name="idx1073746777"></a>
+							<tt class="monofont">Content-type</tt> tag is used by the client browser and does not appear in the generated page.</p>
+
+					</p></div>
+<bR>
+<br>
+
+					<P>As you can see, a script is really executed, and not just displayed in the browser. Everything printed to
+<tt cLass="monofont">sys.stdout</tT> by the script is sent to the client browser, whereas error messages go to an error log
+(<tt cLASS="monofont">/usr/local/etc/httpd/logs/error_log in Apache</tt>).</p>
+
+					<p>The following script is the CGI program called by the HTML form from the previous code.</P>
+
+					<PRE>
+						
+ 1: #!/usr/local/bin/python
+ 2: import cgi
+ 3:
+ 4: def header(title):
+ 5:     print "Content-type: text/html\n"
+ 6:     print "&lt;HTML&gt;\n&lt;HEAD&gt;\n&lt;TITLE&gt;%s&lt;/TITLE&gt;\n&lt;/HEAD&gt;\n&lt;BODY&gt;\n" \
+ 7:     % (title)
+ 8:
+ 9: def footer():
+10:     print "&lt;/BODY&gt;&lt;/HTML&gt;"
+11:
+12: form = cgi.FieldStorage()
+13: password = "python"
+14:
+15: if not form:
+16:     header("Login Response")
+17: elif form.has_key("login") and form["login"].value != "" and \
+18:      form.has_key("password") and form["password"].value == password:
+19:     header("Connected …")
+20:     print "&lt;center&gt;&lt;hr&gt;&lt;H3&gt;Welcome back," , form["login"].value, \
+21:           ".&lt;/H3&gt;&lt;hr&gt;&lt;/center&gt;"
+22:     print r"""&lt;form&gt;&lt;input type="hidden" name="session" value="%s"&gt;
+23:           &lt;/form&gt;""" % (form["login"].value)
+24:     print "&lt;H3&gt;&lt;a href=browse.html&gt;Click here to start \
+25:           browsing&lt;/a&gt;&lt;/H3&gt;"
+26: else:
+27:     header("No success!")
+28:     print "&lt;H3&gt;Please go back and enter a valid login.&lt;/H3&gt;"
+29:
+30: footer()
+
+					</pre>
+
+					<p>This example first verifies if the form is a valid form (line 15). If it isn't, a blank screen is displayed. If the fields have a
+valid format, the form performs an action and processes the results (lines 17–25). The last case is when the validation
+rule is not followed, and an error message must be displayed. A full implementation should repeat the form, and point out the
+error to the user.</P>
+
+					<P>Next, we have a simple check list to use while developing CGI scripts. It shows the basic structure of CGI script
+creation.</P>
+
+					<Ol typE="1">
+<LI>
+
+							<P>Use <tt class="monofont">cgi.FieldStorage()</tt> to parse the query.</p>
+
+						</li>
+<li>
+
+							<p>Check the HTML form fields.</p>
+
+						</li>
+<li>
+
+							<P>Take care of decoding, handling both <tt ClasS="monofont">GET</tt> and <tt ClasS="monofont">POST</TT> methods.</P>
+
+						</li>
+<li>
+
+							<P>Perform the actions that are particular to your application.</P>
+
+						</LI>
+<li>
+
+							<p>Generate the proper HTTP/HTML data for output. The simplest way to write to the output is using
+<tT CLAss="monofont">print</tt> statements. Note that template solutions are also available, and for high-volume sites, it's almost a
+necessary implementation.</P>
+
+						</LI>
+</Ol>
+
+					<p>The following example is a small variation of the previous script. This one lists the values of all form fields.<a name="idx1073746778"></a>
+						<a name="idx1073746779"></a>
+						<a name="idx1073746780"></a>
+						<A naMe="idx1073746781"></a>
+						<a Name="idx1073746782"></a>
+						<A namE="idx1073746783"></A>
+						<A Name="idx1073746784"></a>
+						<A NAMe="idx1073746785"></a>
+						<a nAME="idx1073746786"></A>
+						<a namE="idx1073746787"></A>
+						<A Name="idx1073746788"></a>
+					</p>
+
+					<pre>
+						
+#!/usr/local/bin/python
+import cgi
+
+def header(title):
+    print "Content-type: text/html\n"
+    print "&lt;HTML&gt;\n&lt;HEAD&gt;\n&lt;TITLE&gt;%s&lt;/TITLE&gt;\n&lt;/HEAD&gt;\n&lt;BODY&gt;\n" % (title)
+
+def footer():
+    print "&lt;/BODY&gt;&lt;/HTML&gt;"
+
+form = cgi.FieldStorage()
+formkeys = form.keys()
+formkeys.sort()
+header("Show form fields")
+
+print '&lt;UL&gt;'
+for k in formkeys:
+    print '&lt;LI&gt;'+ k + ':'+ form[k].value + '&lt;/LI&gt;'
+print '&lt;/UL&gt;'
+
+footer()
+
+					</pre>
+
+					<p>The next example demonstrates that if you try to access a field that doesn't exist (line 15), an exception is generated.
+If you don't catch the exception with a <a name="idx1073746789"></a>
+						<a nAme="idx1073746790"></A>
+						<tt cLass="monofont">try/except</tT> statement, this will stop your script, and the user will see a message like <tt cLASS="monofont">"Internal Server
+Error".</tt> Also, note that the cgi dictionary of attribute/value pairs does not support the <a nAME="idx1073746791"></A>
+						<a namE="idx1073746792"></A>
+						<TT clasS="monofont">values()</TT> method (line 14).</P>
+
+					<pre>
+						
+ 1: #!/usr/local/bin/python
+ 2: import cgi
+ 3:
+ 4: def header(title):
+ 5:    print "Content-type: text/html\n"
+ 6:    print "&lt;HTML&gt;\n&lt;HEAD&gt;\n&lt;TITLE&gt;%s&lt;/TITLE&gt;\n&lt;/HEAD&gt;\n&lt;BODY&gt;\n" /
+ 7:    % (title)
+ 8:
+ 9: def footer():
+10:     print "&lt;/BODY&gt;&lt;/HTML&gt;"
+11:
+12: form = cgi.FieldStorage()
+13: print form.keys()                # ['password', 'login']
+14: # print form.values()            # Causes an error
+15: # print form["hostname"].value   # Causes an error
+16:
+17: footer()
+
+					</pre>
+
+				
+				
+					<h4>
+Security</h4>
+					<p>You have to watch out when <a name="idx1073746793"></a>
+						<a name="idx1073746794"></A>
+						<a nAme="idx1073746795"></a>passing fields to the shell. Never pass any string received from the client directly to a <A name="idx1073746796"></A>
+						<a naME="idx1073746797"></A>shell command. Take a look at the following statement:</P>
+
+					<pre>
+						
+os.popen("dir %s" % form["filename"].value)
+
+					</pRE>
+
+					<P>Now, imagine if the user types something like <Tt claSS="monofont">*.* | del *.exe.</TT>
+					</p>
+
+					<p>In order to solve problems like this, you have a few different kinds of approaches. We will look some of them. First,
+you can choose to quote the variable:</p>
+
+					<pRE>
+						
+filename = pipes.quote(form["filename"].value)
+
+					</PRe>
+
+					<p>A second solution is to get rid of every character that is not part of the acceptable domain of values.</p>
+
+					<pre>
+						
+filename = re.sub(r"\W", "", form["filename"].value)
+
+					</pre>
+
+					<div class="note"><p clAss="notetitle"><B>Note</b></p><p>
+
+						<P>You should <a namE="idx1073746798"></a>
+							<a nAME="idx1073746799"></A>test for <a namE="idx1073746800"></A>acceptable input, rather than for <A Name="idx1073746801"></a>unacceptable input. You don't want to get caught by surprise when someone thinks of some input string you
+didn't think of, or exploits a bug you don't know about.</P>
+
+					</P></DIv>
+<br>
+<bR>
+
+					<P>The third, and most radical, solution is to <A Name="idx1073746802"></a>
+						<a name="idx1073746803"></a>test the form, and return an error message in case a valid condition is not established. For example,</p>
+
+					<pre>
+						
+if not re.match(r"^\w+$", filename):
+    raise "Invalid file name."
+
+					</pre>
+
+					<p>If you invoke an external program (for example, via the <tt ClaSs="monofont">os.system()</tt> or <Tt claSs="monofont">os.popen()</tt>
+functions), make very sure that you don't <A NAMe="idx1073746804"></a>
+						<a nAME="idx1073746805"></A>
+						<a namE="idx1073746806"></A>
+						<A Name="idx1073746807"></a>pass arbitrary strings received from the client to the shell. It is a bad idea to use form data provided by random
+people on the Web without validating it; especially if you're going to use that data to execute a system command or for acting
+on a database. Naively written CGI scripts, in any language, are favorite targets for malicious system crackers. This is a
+well-known security hole whereby clever hackers anywhere on the Web can exploit a naive CGI script to invoke arbitrary shell
+commands. Even parts of the URL or field names cannot be trusted because the request doesn't have to come from your
+form.<A NAMe="idx1073746808"></a>
+						<a name="idx1073746809"></a>
+						<a name="idx1073746810"></a>
+						<a name="idx1073746811"></a>
+						<A naMe="idx1073746812"></a>
+						<a Name="idx1073746813"></a>
+						<A namE="idx1073746814"></A>
+					</P>
+
+					<P>To be on the safe side, if you must pass a string that you have gotten from a form to a shell command, you should
+make sure that the string contains only alphanumeric characters, dashes, underscores, and periods.<a namE="idx1073746815"></A>
+					</P>
+
+				
+				
+					<H4>
+Sessions</h4>
+					<p>If you need to correlate requests from the same user, you must generate and assign a session key on the first contact
+of the user, and incorporate this session key in the next forms, or in the URLs.</p>
+
+					<p>If you implement the first solution, you need to use a hidden input field.</P>
+
+					<PRE>
+						
+&lt;input type="hidden" name="session" value="74ght2o5"&gt;
+
+					</pre>
+
+					<p>If you decide that the second option will work better for you, you need to add the information after the script's name 
+
+(separating with a slash).</P>
+
+					<P><A Target="_blank" href="http://lessaworld.com/cgi-bin/dosomething.py/74ght2o5">http://lessaworld.com/cgi-bin/dosomething.py/74ght2o5</a></p>
+
+					<p>The information is passed to the CGI script through the environment variables, as you can see next.</p>
+
+					<pre>
+						
+os.environment["PATH_INFO"] = "74ght2o5"
+os.environment["PATH_TRANSLATED"] = "&lt;rootdir&gt;/74ght2o5"
+
+					</pre>
+
+				
+				
+					<h4>
+
+Data Storage</H4>
+					<p>The information manipulated by CGI scripts can come from any kind of data storage structure. The important thing to
+keep in mind is that your data must be capable of being managed and updated.</p>
+
+					<P>You have a number of options to use here. <a naMe="idx1073746816"></a>Plain files are the simplest way. <tt ClasS="monofont">Shelves</TT>  can be used too—they are used to store whole
+Python objects, which avoids the parsing/unparsing of values. If you decide to go through dbm (or gdbm) files, you will find
+better performance as they use strings for key/value manipulations. If you really want to think about scalability or speed, you
+should consider choosing a real database. You can use the information that is provided in <A href="137.html">Chapter 8,
+"Working with Databases,"
+						</A> to help you define which database would be the best solution for your case.</P>
+
+					<P>If you don't have a real database in hands, don't worry. A number of sites only use plain file databases, and they don't
+have anything to complain about.</P>
+
+				
+				
+					<h4>
+Locking</h4>
+					<p>Whenever you are not working with real solution database systems, locking problems can drive you nuts because you
+have to worry about every single detail. For example, <tT CLAss="monofont">shelves</tt> and dbm (or gdbm)  database files have no
+protection against concurrent updates.</P>
+
+					<P>In order to implement a good and efficient locking solution in Python, the best approach is to write a routine that locks
+only when writing to the file. Python handles multiple readers well, and when it comes to a single writer, Python can support it
+too.</P>
+
+					<P>In order to study a complex implementation of a locking algorithm, you should consider seeing the Mailman
+source-code (precisely, the <tt class="monofont">LockFile.py</tt> file). Although this routine does not run on Windows systems, it
+works well on UNIX machines, and besides, it supports <tt class="monofont">NFS.</tt>
+					</p>
+
+					<p>We all know how hard it is to implement a good locking solution. Occasionally your process dies, and you lose the
+pointer to the locked file; other times you see your program hanging because the process took longer than
+expected.<A naMe="idx1073746817"></a>
+						<a Name="idx1073746818"></a>
+						<A namE="idx1073746819"></A>
+						<A Name="idx1073746820"></a>
+						<A NAMe="idx1073746821"></a>
+						<a nAME="idx1073746822"></A>
+						<a namE="idx1073746823"></A>
+						<A Name="idx1073746824"></a>
+					</p>
+
+				
+				
+					<h4>
+Cookies</h4>
+					<p>A <i>cookie</i> is a piece of data that the Web Server asks the client to store on their system,
+which gets sent back to the server on subsequent visits. One use of cookies is to store customized information that belongs
+to the user who owns the browser.</p>
+
+					<p>Each time you visit a Web site that uses cookies, the server application is able to check for cookies in the client site
+by inspecting the HTTP header. If cookies are available, the client sends back all appropriate cookies for every request to the
+server.</p>
+
+					<p>The CGI script can update cookies at any time necessary, just before sending a Web page to the client browser. The
+format used to move cookies back and forth is the same one used for <tt clasS="monofont">GET</tt> and <Tt clAss="monofont">POST</tt>
+requests.</P>
+
+					<p>In order to correlate sessions from the same user, you can also put cookies in the user's browser. This is very
+controversial, but useful. Keep in mind that many people turn off the use of cookies in their browsers. Thus, you cannot
+count on them in your applications. You should always have a solution ready in case the user's browser doesn't accept
+cookies.</p>
+
+					<dIV CLass="note"><p CLASs="notetitle"><b>Caution</b></p><P>
+
+						<P>If you have something to hide, it becomes very important to <A Name="idx1073746825"></a>store the information in the cookies in a security format. You cannot let the user go to the
+<TT CLass="monofont">cookies.txt</tt> file, which stores all the cookies information in the client machine, and change anything. In order
+to prevent that, you should consider storing the cookies using an encryption algorithm. Another important warning is that you
+shouldn't blindly trust the value of the cookie, the same as you shouldn't trust form variables.</p>
+
+					</p></div>
+<br>
+<br>
+
+					<p>In order to handle cookies in Python, <a name="idx1073746826"></A>Tim O'Malley has created a module called <tt ClasS="monofont">Cookie.py</tt> that is able to write
+<tt ClasS="monofont">Set-Cookie</TT> headers and parse the <Tt claSS="monofont">HTTP_COOKIE</TT> environment variable.<a namE="idx1073746827"></A>
+						<A Name="idx1073746828"></a>
+						<A NAMe="idx1073746829"></a>
+						<a name="idx1073746830"></a>
+						<a name="idx1073746831"></a>
+						<a name="idx1073746832"></a>
+						<A naMe="idx1073746833"></a>
+						<a Name="idx1073746834"></a>
+					</P>
+
+					<p>The following example demonstrates the use of cookies using the Cookie module.</p>
+
+					
+						<h5>
+
+The <TT CLass="monofont">Cookie.py</tT> Module</H5>
+						<P>Python has this module called <Tt claSS="monofont">Cookie.py,</TT> which basically handles everything that you might need to
+worry about for what concerns cookies.</p>
+
+						
+							<h5>
+								<tt CLASs="monofont">Cookie.Cookie()</tt>
+							</h5>
+							<p>This class enables the creation of a cookie object.</p>
+
+							<pre>
+								
+&gt;&gt;&gt; import Cookie
+&gt;&gt;&gt; mycookie = Cookie.Cookie()  # Create a new cookie
+
+							</pre>
+
+							<p>A cookie object generated by the <tt class="monofont">Cookie.py</Tt> module has a dictionary-like behavior. It exposes the
+following properties and methods, supporting all cookie attributes defined by RFC 2109.</p>
+
+							<Pre>
+								
+mycookie['username'] = "Andre Lessa"  # Assign a value to a cookie
+mycookie["books"] = 2                 # automatically pickles non-string
+                               # objects (using cPickle or pickle)
+mycookie["username"].value            # Returns the value associated with the
+                                      # key.
+"Andre Lessa"
+print mycookie
+Set-Cookie: books="I2\012.";
+Set-Cookie: username="Andre Lessa";
+
+							</pRe>
+
+							<p>Note that the <tt ClasS="monofont">print</TT> statement must be executed before the <Tt claSS="monofont">content-type</TT>
+header.</p>
+
+						
+						
+							<h5>
+								<tt CLASs="monofont">cookie.output()</tt>
+							</h5>
+							<P>This method outputs the contents of a cookie. You can also change the printable representation if you
+want.<A NAme="idx1073746835"></a>
+								<a name="idx1073746836"></a>
+								<a name="idx1073746837"></a>
+								<a name="idx1073746838"></A>
+								<a nAme="idx1073746839"></a>
+								<A name="idx1073746840"></A>
+								<a naME="idx1073746841"></A>
+								<A name="idx1073746842"></A>
+								<A NAme="idx1073746843"></a>
+								<a NAME="idx1073746844"></a>
+							</p>
+
+							<prE>
+								
+mycookie.output()
+'Set-Cookie: books="I2\\012.";\012Set-Cookie: username="Andre Lessa";'
+mycookie.output("Cookie Attributes:")
+'Cookie Attributes: books="I2\\012.";\012Cookie Attributes: username="Andre
+ Lessa";'
+
+							</PRE>
+
+						
+						
+							<h5>
+								<tt class="monofont">cookie.load()</tt>
+							</h5>
+							<p>This method is used to extract cookies from a given string. You won't have a problem using escaped quotation marks
+and nested semicolons in the string.</p>
+
+							<pre>
+								
+mycookie.load("userid=alessa;")
+print mycookie
+Set-Cookie: books="I2\012.";
+Set-Cookie: username="Andre Lessa";
+Set-Cookie: userid=alessa;
+mycookie.load('username=\"JP Lessa\";books=4;cds=1')
+print mycookie
+Set-Cookie: cds=1;
+Set-Cookie: userid=alessa;
+Set-Cookie: books=4;
+Set-Cookie: username="JP Lessa";
+mycookie.load('dvds="I3\\012.";')       # automatically unpickles pickled
+                                        # objects.
+mycookie["dvds"].value        # returns the true value, instead of the
+                              # encoded representation.
+3
+print mycookies
+Set-Cookie: cds=1;
+Set-Cookie: userid=alessa;
+Set-Cookie: books=4;
+Set-Cookie: dvds="I3\012.";
+Set-Cookie: username="JP Lessa";
+
+							</pre>
+
+						
+						
+							<h5>
+								<Tt cLass="monofont">
+									<A name="idx1073746845"></A>
+									<a naME="idx1073746846"></A>
+									<A name="idx1073746847"></A>
+									<A NAme="idx1073746848"></a>Cookie.net_setfunc()</tT> and <TT Class="monofont">Cookie.user_setfunc()</TT>
+							</H5>
+							<P>These two functions are defined in the Cookie module to help you encode and decode the contents of your cookies.
+<tt class="monofont">Cookie.net_setfunc()</tt> takes in an encoded string and returns a value. On the other hand,
+<tt class="monofont">Cookie.user_setfunc()</tt> takes in a value and returns the original encoded string.</p>
+
+							<p>Note that you are not obliged to use their implementations. You can override them at anytime, just by subclassing the
+<Tt cLass="monofont">Cookie()</Tt> class, and redefining these methods. For more information, check out the following:<a naMe="idx1073746849"></a>
+								<a NAME="idx1073746850"></a>
+								<a naME="idx1073746851"></A>
+								<A name="idx1073746852"></A>
+								<A NAme="idx1073746853"></a>
+								<a NAME="idx1073746854"></a>
+								<a name="idx1073746855"></a>
+								<a name="idx1073746856"></a>
+								<a name="idx1073746857"></a>
+								<a NamE="idx1073746858"></a>
+								<a nAme="idx1073746859"></a>
+								<a Name="idx1073746860"></A>
+								<A NAme="idx1073746861"></a>
+								<a NAME="idx1073746862"></a>
+								<a naME="idx1073746863"></A>
+							</P>
+
+							<p>
+								<i>Cookie protocol</i>—<i>Netscape's documentation</I>
+							</P>
+
+							<P>
+								<A target="_blank" href="http://devedge.netscape.com/library/documentation/communicator/jsguide4/cookies.htm">http://devedge.netscape.com/li
+
+brary/documentation/communicator/jsguide4/cookies.htm</a>
+							</p>
+
+							<p>
+								<i>Cookie.py</i>—<i>Python Module</i> created by Tim O'Malley</p>
+
+							<p>
+								<a TarGet="_blank" hRef="ftp://ftp.bbn.com/pub/timo/python/cookie.py">ftp://ftp.bbn.com/pub/timo/python/Cookie.py</a>
+								<a Name="idx1073746864"></A>
+								<A NAme="idx1073746865"></a>
+								<a NAME="idx1073746866"></a>
+							</p>
+
+						
+					
+				
+				
+					<h4>
+
+
+Creating Output for a Browser</h4>
+					<P>You already know that straightforward print statements do a good job of sending information to the user's
+browser.</P>
+
+					<DIv claSS="note"><P Class="notetitle"><b>Tip</b></p><p>
+
+						<p>Check out <a href="161.html">Chapter 10, "Basic Network Background,"
+							</a>  for details about some third-party modules that automatically generate HTML code for you.</p>
+
+					</p></div>
+<Br>
+<bR>
+
+					<p>Now, what about redirecting people from one page to another? In the next example, as soon as a browser sees the
+<tt Class="monofont">Location:</Tt> header, it will stop and try to retrieve the new page.</p>
+
+					<pRE>
+						
+new_location = 'http://www.python.org/'
+print 'Status: 302 Redirected'
+print 'Location: %s\n'%  new_location
+
+					</PRe>
+
+					<p>Maybe you are tired of just sending text to the user. What about sending images?<a nAME="idx1073746867"></A>
+						<a namE="idx1073746868"></A>
+						<A Name="idx1073746869"></a>
+						<A NAMe="idx1073746870"></a>
+						<a name="idx1073746871"></a>
+						<a name="idx1073746872"></a>
+						<a name="idx1073746873"></a>
+						<A naMe="idx1073746874"></a>
+						<a Name="idx1073746875"></a>
+						<A namE="idx1073746876"></A>
+					</P>
+
+					<P>The next example demonstrates how you can output graphics, such as GIF files, using CGI scripts. As you can see,
+you just need to specify the correct <tt clASS="monofont">MIME-type</Tt> in order to tell the browser that you are sending an
+image.</p>
+
+					<prE>
+						
+import sys
+gifimage = open('check.gif','rb').read()
+# print HTTP headers
+sys.stdout.write('Content-type: image/gif\n')
+# print end-of-headers
+sys.stdout.write('\n')
+# print image
+sys.stdout.write(gifimage)
+
+					</PRE>
+
+					<div cLASS="note"><p class="notetitle"><b>Caution</b></p><p>
+
+						<p>Note that you cannot use <tt class="monofont">print image</tt> because it would append a newline or a blank to the data, in
+case you use <Tt cLass="monofont">print image,</Tt> (with the comma at the end), and the browser would not understand it.</p>
+
+					</p></dIv>
+<br>
+<BR>
+
+					<P>The previous simple example takes an existing GIF image file and processes it. Keep in mind that it is also possible to
+produce dynamic graphics images through Python code, using the <I>Python Imaging Library.</i>
+					</p>
+
+					<p>See <a TARGet="_blank" hrEF="http://www.python.org/sigs/image-sig/Imaging.html">http://www.python.org/sigs/image-sig/Imaging.html</A> for
+details.<A name="idx1073746877"></A>
+						<A NAme="idx1073746878"></a>
+						<a name="idx1073746879"></a>
+						<a name="idx1073746880"></a>
+						<a name="idx1073746881"></A>
+						<a nAme="idx1073746882"></a>
+						<A name="idx1073746883"></A>
+						<a naME="idx1073746884"></A>
+						<A name="idx1073746885"></A>
+						<A NAme="idx1073746886"></a>
+					</p>
+
+					
+						<H5>
+
+Using Templates</H5>
+						<P>CGI programs usually contain many blocks of HTML code embedded within the scripts. This is a problem for many
+teams of HTML designers and developers. Imagine the case in which both kinds of professionals need to make changes in
+the same file, at the same time. This kind of situation can generate many accidental errors in the code.</P>
+
+						<p>The most common solution for this kind of trouble is to separate the Python code from the HTML code by using
+template files. In a later stage, the HTML template can be mixed with Python code using either formatting substitution or
+Python's regular-expression.</p>
+
+						<p>The basic idea is after you have finished reading the template file, replace all special placeholders, such as
+<tT CLAss="monofont">&lt;!-- # INSERT HERE # --&gt;,</tt> with the correct values.</p>
+
+						<p>
+							<a href="184#17.html">Listing 12.1</a> defines a simple template that is going to be used by our Python script. Of
+course, real-production templates are more complex than this one.</p>
+
+						
+							<h5>
+<a name="17"></a>Listing 12.1 file: template1.html</H5>
+							<prE claSs="monofont">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My Application&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;H1&gt;&lt;center&gt;&lt;!-- # INSERT HERE # --&gt;&lt;/center&gt;&lt;/H1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+						
+						<P>Note the customized tag <a naME="idx1073746887"></A> tag&gt;<A name="idx1073746888"></A>&gt;<TT Class="monofont">&lt;!-- # INSERT HERE # --&gt;.</TT> If you just open this template file, nothing will show up.
+However, after you run the script, the program will search for this tag and replace it with our new content before displaying to
+the users.</P>
+
+						<P>Next, you have the CGI script that makes everything possible. This script reads the entire template file, storing it in
+memory. Then, after applying a regular expression substitution, it swaps our special tag with the new content.<a namE="idx1073746889"></A>
+							<A Name="idx1073746890"></a>
+							<a name="idx1073746891"></a>
+							<a name="idx1073746892"></a>
+							<a namE="idx1073746893"></a>
+							<a Name="idx1073746894"></A>
+							<a namE="idx1073746895"></a>
+							<a nAME="idx1073746896"></A>
+							<a namE="idx1073746897"></A>
+							<A Name="idx1073746898"></a>
+							<A NAMe="idx1073746899"></a>
+							<a nAME="idx1073746900"></A>
+							<a name="idx1073746901"></a>
+							<a name="idx1073746902"></a>
+						</p>
+
+						<pre>
+							
+ 1: import re
+ 2: filename = "template1.html"
+ 3: TemplateException = "Error while parsing HTML template"
+ 4: newContent = "Hello Python World"
+ 5: filehandle = open(filename, "r")
+ 6: data = filehandle.read()
+ 7: filehandle.close()
+ 8: matching = re.subn("&lt;!-- # INSERT HERE # --&gt;", newContent, data)
+ 9: if matching[1] == 0:
+10:     raise TemplateException
+11: print "Content-Type: text/html\n\n"
+12: print matching[0]
+
+						</pre>
+
+						<p>Line 1: Makes the regular expression module available.</P>
+
+						<p>Line 2: Specifies the filename of the template file.</p>
+
+						<P>Line 3: Defines an exception that is raised when no replacements are made.</p>
+
+						<p>Line 4: Contains the string to replace.</p>
+
+						<P>Line 6: Reads the entire file as a string.</p>
+
+						<p>As I told you before, another possibility is to use formatting substitution. In this new scenario, we have to write the
+template file as shown in <a hRef="184#18.html">Listing 12.2</a>.</P>
+
+						
+							<H5>
+<A Name="18"></a>Listing 12.2 file: template2.html</H5>
+							<PRE clasS="monofont">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;My Application&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;b&gt;Student:&lt;/b&gt; %(student)s&lt;br&gt;
+&lt;b&gt;Class:&lt;/b&gt; %(class)s&lt;br&gt;
+&lt;hr&gt;
+Sorry, your application was &lt;font color=red&gt;refused&lt;/font&gt;.&lt;br&gt;
+If you have any questions, please call:&lt;br&gt;
+&lt;center&gt;%(phone)s&lt;/center&gt;
+&lt;hr&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</PRE>
+						
+						<p>The script necessary to handle this new format is correctly listed next. The main difference is that in this new script,
+you have to declare a dictionary that will be used to map the placeholders in the template file.</p>
+
+						<prE>
+							
+filename = "template2.html"
+dictemplate = { 'student': 'Andre', 'class': 'Math', 'phone': '555-5553'}
+filehandle = open(filename, "r")
+data = filehandle.read()
+filehandle.close()
+print "Content-Type: text/html\n\n"
+print data % (dictemplate) 
+
+						</PRE>
+
+					
+				
+				
+					<h4>
+
+
+Uploading/Uploaded Files</h4>
+					<p>Sometimes, it is necessary to receive files from users through the Web. This next example shows how to send a file
+across an HTTP connection using an HTML page, and how to later interpret it.</p>
+
+					<pre>
+						
+import cgi
+form = cgi.FieldStorage()
+if not form:
+    print "Content-Type: text/html"
+    print
+    print """
+    &lt;form action = "/cgi-bin/uploadfiles.py" method="POST"
+    enctype="multipart/form-data"&gt;
+    &lt;input type="file" name="filename"&gt;
+    &lt;input type="submit"&gt;
+    &lt;/form&gt;
+    """
+elif form.has_key("filename"):
+    item = form["filename"]
+    if item.file:
+        data = item.file.read()
+        print "Content-Type: text/html"
+        print
+        print cgi.escape(data)
+
+					</pre>
+
+					<p>When a certain form field represents an uploaded file, the <tt class="monofont">value</tt> attribute of that field reads the entire
+file in memory as a string. Sometimes, this might not be what you really want. Another way to get the information is to test for
+an uploaded file by checking either the <A naMe="idx1073746903"></a>
+						<a Name="idx1073746904"></a>
+						<Tt clASS="monofont">filename</Tt> attribute or the <a naME="idx1073746905"></A>
+						<A name="idx1073746906"></A>
+						<TT Class="monofont">file</TT> attribute. You can then read the data, at your convenience, from the <TT class="monofont">file</tt>
+attribute.</p>
+
+					<div class="note"><p claSs="notetitle"><b>Note</B></p><p>
+
+						<p>The <Tt claSs="monofont">enctype="multipart/form-data"</tt> part is very important because without it, only the filename is
+transmitted.<A NAMe="idx1073746907"></a>
+							<a nAME="idx1073746908"></A>
+							<a namE="idx1073746909"></A>
+							<A Name="idx1073746910"></a>
+							<A NAMe="idx1073746911"></a>
+							<a name="idx1073746912"></a>
+							<a name="idx1073746913"></a>
+							<a name="idx1073746914"></a>
+							<A naMe="idx1073746915"></a>
+							<a Name="idx1073746916"></a>
+							<A namE="idx1073746917"></A>
+							<A Name="idx1073746918"></a>
+							<A NAMe="idx1073746919"></a>
+							<a nAME="idx1073746920"></A>
+						</p>
+
+					</p></diV>
+<BR>
+<Br>
+
+					<p>The next example is a slight variation of the previous example. This one assumes that you have a form with a field
+called <a name="idx1073746921"></a>
+						<a name="idx1073746922"></a>
+						<tt clasS="monofont">filename</tt> that will transport a user file to the CGI script, and then it reads the uploaded file, line by
+line.</P>
+
+					<pre>
+						
+import cgi
+form = cgi.FieldStorage()
+if not form:
+    print "Content-Type: text/html\n\n"
+    print """
+    &lt;form action = "/cgi-bin/uploadingfile.py" method="POST"
+    enctype="multipart/form-data"&gt;
+    &lt;input type="file" name="filename"&gt;
+    &lt;input type="submit"&gt;
+    &lt;/form&gt;
+    """
+elif form.has_key("filename"):
+    uploadedfile = form["filename"]
+    if uploadedfile.file:
+        print "Content-Type: text/html\n\n"
+        linecounter = 0
+        while 1:
+            line = uploadedfile.file.readline()
+            print line
+            if not line:
+                break
+            linecounter = linecounter + 1
+
+					</Pre>
+
+					
+						<h5>
+							<tT claSS="monofont">
+								<A Name="idx1073746923"></a>
+								<A NAMe="idx1073746924"></a>cgiupload.py</tt>
+						</H5>
+						<P>The <TT clasS="monofont">cgiupload</TT> module is a simple attempt to upload files via HTTP. Although the mechanism is not as
+efficient as other protocols (for example, FTP), there are circumstances where using the http protocol has advantages such
+as when a user login/password is not required, or when using firewalls because most firewalls allow the HTTP protocol to
+pass through. Note that HTTP file upload is about as efficient as email attachments.</P>
+
+						<p>A short description with code about how to upload files via CGI is available at</p>
+
+						<p><a target="_blank" href="http://starship.python.net/crew/jbauer/cgiupload/index.html">http://starship.python.net/crew/jbauer/cgiupload/index.html</a></p>
+
+						<p>Note that Python's module <tt cLasS="monofont">"ftplib"</tt> provides better performance to transmit files over the network.</p>
+
+						<P>Zope also provides a mechanism to perform CGI file uploads. Check out the Web  site at</p>
+
+						<p><a tArgeT="_blank" HREf="http://www.zope.org">http://www.zope.org</a>
+							<a nAME="idx1073746925"></A>
+							<a namE="idx1073746926"></A>
+							<A Name="idx1073746927"></a>
+							<A NAMe="idx1073746928"></a>
+							<a name="idx1073746929"></a>
+						</p>
+
+					
+				
+				
+					<h4>
+
+Environment Variables</h4>
+					<p>Environment variables are one of the methods that Web servers use to pass information to a CGI script. They are
+created and assigned appropriate values within the environment that the server produces for the CGI script.</p>
+
+					<p>The next code generates a list of all environment variables that you have available at the moment, in your
+browser.</p>
+
+					<pre>
+						
+import os
+print "Content-type: text/html\n"
+print "&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;List of Environment Variables&lt;/TITLE&gt;&lt;/HEAD&gt;"
+print "&lt;BODY&gt;"
+for k,v in os.environ.items():
+        print "%s =&gt; %s&lt;BR&gt;" % (k,v)
+print "&lt;/BODY&gt;&lt;/HTML&gt;"
+
+					</prE>
+
+					<p>The following list is the output collected from my environment. Of course, yours might be different.</p>
+
+					<Pre>
+						
+HTTP_ACCEPT_ENCODING =&gt; gzip, deflate
+REMOTE_HOST =&gt; 10.15.108.33
+SERVER_PORT_SECURE =&gt; 0
+COMSPEC =&gt; C:\WINDOWS\COMMAND.COM
+SERVER_PORT =&gt; 80
+PATH_TRANSLATED =&gt; C:\Inetpub\wwwroot\cgi-bin\environment.py
+REMOTE_ADDR =&gt; 10.15.108.33
+WINBOOTDIR =&gt; C:\WINDOWS
+INSTANCE_ID =&gt; 1
+HTTP_ACCEPT_LANGUAGE =&gt; en-us
+BLASTER =&gt; A220 I7 D1 T2
+GATEWAY_INTERFACE =&gt; CGI/1.1
+TEMP =&gt; C:\windows\TEMP
+SNDSCAPE =&gt; C:\WINDOWS
+HTTP_CONNECTION =&gt; Keep-Alive
+HTTP_USER_AGENT =&gt; Mozilla/4.0 (compatible; MSIE 4.01; Windows 98)
+WINDIR =&gt; C:\WINDOWS
+CONTENT_LENGTH =&gt; 0
+HTTP_HOST =&gt; www.lessaworld.com
+PATH =&gt; C:\WINDOWS; C:\WINDOWS\COMMAND; M:\PVCS\WIN95; C:\MSSQL7\BINN;
+SERVER_PROTOCOL =&gt; HTTP/1.1
+HTTPS =&gt; off
+PATH_INFO =&gt; /cgi-bin/environment.py
+SERVER_NAME =&gt; www.lessaworld.com
+REQUEST_METHOD =&gt; GET
+LOCAL_ADDR =&gt; 10.15.108.33
+SCRIPT_NAME =&gt; /cgi-bin/ environment.py
+SERVER_SOFTWARE =&gt; Microsoft-IIS/4.0
+CMDLINE =&gt; WIN
+HTTP_ACCEPT =&gt; application/x-comet, application/vnd.ms-excel,
+       application/msword, application/vnd.ms-powerpoint, */*
+PROMPT =&gt; $p$g
+TMP =&gt; c:\windows\TEMP
+
+					</pRe>
+
+					<p>As an example, when checking the user environment variables, <tt ClasS="monofont">os.environ['HTTP_USER_AGENT']</TT>
+gives you the user's browser, and <Tt claSS="monofont">os.environ['REMOTE_ADDR']</TT> gives you the remote IP address. Note that
+the user might be running a browser that doesn't send a User-Agent HTTP header, so you might not be able to count on
+<tt clASS="monofont">os.environ['HTTP_USER_AGENT'].</Tt>
+					</p>
+
+					<p>The following is a list of environment variables used by Web Servers:</p>
+
+					<BLOCkquote>
+<p>
+							<p>
+								
+									<tt class="monofont">AUTH_TYPE—</tt>
+								 
+    
+								This is the protocol-specific authentication method used to validate the user if the server supports user authentication,
+and the script is protected.
+							</p>
+
+						</p>
+<p>
+							<P>
+								
+									<tt ClasS="monofont">CONTENT_LENGTH—</tt>
+								 
+    
+								The length, in bytes, of the said content as given by the client through standard input (sys.stdin). This is needed when
+a script is processing input with the <tt ClasS="monofont">POST</TT> method, in order to read the correct number of bytes from the
+standard input. Some servers end the input string with <Tt claSS="monofont">EOF,</TT> but this is not guaranteed behavior.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<TT CLass="monofont">CONTENT_TYPE—</tT>
+								 
+    
+								For queries that have attached information, such as HTTP POST and PUT, this is the content type of the query
+data.
+							</P>
+
+						</P>
+<P>
+							<p>
+								
+									<tt class="monofont">DOCUMENT_ROOT—</tt>
+								 
+    
+								Sometimes it is useful to know the root directory over which all WWW document paths are resolved by the server, in
+order to compose absolute file paths for the files that your script handles. It is a good practice to have your script resolve
+paths in this way, both for security reasons and for portability. Another common use is to be able to figure out what the URL
+of a file will be if you only know the absolute path and the hostname.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt clasS="monofont">GATEWAY_INTERFACE—</tt>
+								 
+    
+								The revision string of the CGI specification to which this server complies. The format is CGI/revision.
+							</P>
+
+						</p>
+<p>
+							<p>
+								
+									<Tt claSs="monofont">HTTP_ACCEPT—</tt>
+								 
+    
+								
+									<TT CLass="monofont">MIME</tT> types accepted by the client.
+							</P>
+
+						</P>
+<P>
+							<p>
+								
+									<tt cLASS="monofont">HTTP_COOKIE—</tt>
+								 
+    
+								Netscape persistent cookie value.
+							</p>
+
+						</p>
+<P>
+							<P>
+								
+									<TT class="monofont">HTTP_FROM—</tt>
+								 
+    
+								Email address of client (often disabled).
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt class="monofont">HTTP_REFERER—</tt>
+								 
+    
+								The URL that referred (via a link or redirection) the Web client to the script. Typed URLs and bookmarks usually result
+in this variable being left blank. In many cases, a script might need to behave differently depending on the referrer. For
+example, you might want to restrict your counter script to operate only if it is called from one of your own pages. This will
+prevent someone from using it from another Web page without your permission. Or, the referrer might be the actual data that
+the script needs to process. By expanding on the previous example, you might also want to install your counter to many
+pages, and have the script figure out from the referrer which page generated the call and increment the appropriate count,
+keeping a separate count for each individual URL. Some proxies or Web browsers might strip off the
+<Tt cLass="monofont">HTTP_Referer</Tt> header for privacy reasons.<a naMe="idx1073746930"></a>
+									<a NAME="idx1073746931"></a>
+									<a naME="idx1073746932"></A>
+									<A name="idx1073746933"></A>
+									<A NAme="idx1073746934"></a>
+									<a NAME="idx1073746935"></a>
+									<a name="idx1073746936"></a>
+									<a name="idx1073746937"></a>
+									<a name="idx1073746938"></a>
+								
+							</p>
+
+						</P>
+<p>
+							<p>
+								
+									<Tt clAss="monofont">HTTP_USER_AGENT—</tt>
+								 
+    
+								This is the name/version pair of the client browser issuing the request to the script. As with referrers, one might need
+to implement behaviors that vary with the client software used to call the script. A redirection script could make use of this
+information to point the client to a page optimized for a specific browser. Or, you might want it to block requests from
+specific clients, such as robots or clients that will not support appropriate features used by the normal script output.
+							</P>
+
+						</p>
+<p>
+							<p>
+								
+									<TT CLass="monofont">PATH_INFO—</tT>
+								 
+    
+								The extra path information following the script's path in the URL. This is appended to the URL and marked by a leading
+slash. The server puts this information in the <TT Class="monofont">PATH_INFO</TT> variable, which can be used as a method to pass
+arguments to the script. The extra path information is given by the client. In other words, scripts can be accessed by their
+virtual pathname, followed by extra information at the end of this path. The extra information is sent as
+<TT clasS="monofont">PATH_INFO.</TT> This information should be decoded by the server if it comes from a URL before it is passed to
+the CGI script.
+							</P>
+
+						</p>
+<p>
+							<p>
+								
+									<tt class="monofont">PATH_TRANSLATED—</tt>
+								 
+    
+								Translated version of <tt class="monofont">PATH_INFO,</tT> which maps it onto <tt ClasS="monofont">DOCUMENT_ROOT.</tt> Usually
+<tt ClasS="monofont">PATH_INFO</TT> is used to pass a path argument to the script. For example, a counter might be passed the path
+to the file where counts should be stored. The server also makes a mapping of the <Tt claSS="monofont">PATH_INFO</TT> variable
+onto the document root path and stores it in <tt clASS="monofont">PATH_TRANSLATED,</Tt> which can be used directly as an
+absolute path/file. You should use <tt cLASS="monofont">PATH_TRANSLATED</tt> rather than concatenating
+<tt class="monofont">DOCUMENT_ROOT</tt> and <tt class="monofont">PATH_INFO</tt> because the documents on the Web Server might be
+spread over more than just one directory (for instance, user directories under their home directories).<A naMe="idx1073746939"></a>
+									<a Name="idx1073746940"></a>
+									<A namE="idx1073746941"></A>
+									<A Name="idx1073746942"></a>
+									<A NAMe="idx1073746943"></a>
+									<a nAME="idx1073746944"></A>
+									<a namE="idx1073746945"></A>
+									<A Name="idx1073746946"></a>
+									<a name="idx1073746947"></a>
+								
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt clasS="monofont">QUERY_STRING—</tt>
+								 
+    
+								
+									<Tt clAss="monofont">QUERY_STRING</tt> is the equivalent of content passed through <Tt clASS="monofont">STDIN</Tt> in
+<tt cLASS="monofont">POST,</tt> but for scripts called with the <tt CLASs="monofont">GET</tt> method. Query arguments are written in this
+variable in their URL-Encoded form, just as they appear on the calling URL. You can process this string to extract useful
+parameters for the script. The information following the <tT CLAss="monofont">?</tt> in the URL that references a script is exactly what
+we call <a name="idx1073746948"></a>
+									<i>query information.</i> It should not be decoded in any fashion. This variable should always be set when
+there is query information, regardless of command line decoding.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt clAss="monofont">REMOTE_ADDR—</Tt>
+								 
+    
+								This is the IP address from which the client is issuing the request. This can be useful either for logging accesses to
+the script (for example a voting script might want to log voters in a file by their IP in order to prevent them from voting more
+than once) or to block/behave differently for particular IP addresses. This might be a requirement in a script that has to be
+restricted to your local network, and maybe perform different tasks for each known host.
+							</p>
+
+						</p>
+<P>
+							<p>
+								
+									<tt cLass="monofont">REMOTE_HOST—</TT>
+								 
+    
+								This variable contains the hostname from which the client is issuing the request (if the information is available via
+reverse lookup).
+							</P>
+
+						</P>
+<p>
+							<p>
+								
+									<tt CLASs="monofont">REMOTE_IDENT—</tt>
+								 
+    
+								If the HTTP server supports RFC 931 identification, this variable will be set to the remote username retrieved from the
+server. Otherwise, this variable should be left blank.
+							</p>
+
+						</P>
+<P>
+							<P>
+								
+									<Tt claSS="monofont">REMOTE_USER—</TT>
+								 
+    
+								If the server supports user authentication, and the script is protected, this is the username they have authenticated
+as.<a name="idx1073746949"></a>
+									<a name="idx1073746950"></a>
+									<a name="idx1073746951"></a>
+									<a nAme="idx1073746952"></A>
+									<a naMe="idx1073746953"></a>
+									<a nAme="idx1073746954"></a>
+									<A NAMe="idx1073746955"></a>
+									<a nAME="idx1073746956"></A>
+									<a namE="idx1073746957"></A>
+								
+							</P>
+
+						</P>
+<p>
+							<p>
+								
+									<tt CLASs="monofont">REQUEST_METHOD—</tt>
+								 
+    
+								This is the method with which the request was made (usually <tt class="monofont">GET,</tt>
+									<tt class="monofont">POST,</tT> or <tt ClasS="monofont">HEAD</tt>). It is wise to have your script check this variable before doing anything.
+You can determine where the input will be (<tt ClasS="monofont">STDIN</TT> for <Tt claSS="monofont">POST,</TT>
+									<tt clASS="monofont">QUERY_STRING</Tt> for <tt cLASS="monofont">GET</tt>) or choose to permit operation only under one of the two
+methods. It is also useful to identify when the script is called from the command-line because, in that case, this variable will
+remain undefined. When using the <tt class="monofont">cgi</tt> module, all this is taken care of for you.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt claSs="monofont">SCRIPT_NAME—</tT>
+								 
+    
+								A virtual path to the script being executed, used for self-referencing URLs. This is very useful if your script will output
+HTML code that contains calls to itself. Having the script determine its virtual path, (and hence, along with
+<tt cLass="monofont">DOCUMENT_ROOT,</tT> its full URL) is more portable than hard coding it in a configuration variable. Also, if
+you prefer to keep a log of all script accesses in some file and want to have each script report its name along with the calling
+parameters or time, it is very portable to use <tt cLASS="monofont">SCRIPT_NAME</tt> to print the path of the script.
+							</p>
+
+						</p>
+<P>
+							<P>
+								
+									<TT clasS="monofont">SERVER_NAME—</TT>
+								 
+    
+								The Web server's hostname, <Tt claSS="monofont">DNS</TT> alias, or IP address. This information can provide the capability to
+have different behaviors depending on the server that's calling the script.
+							</p>
+
+						</p>
+<p>
+							<p>
+								
+									<tt class="monofont">SERVER_PORT—</tt>
+								 
+    
+								The Web server's listening port number to which the request was sent. This information complements
+<tt class="monofont">SERVER_NAME,</Tt> making your script portable. Keep in mind that not all servers run on the default port and
+thus need an explicit port reference in the server address part of the URL.
+							</p>
+
+						</P>
+<p>
+							<p>
+								
+									<tT clasS="monofont">SERVER_PROTOCOL—</tt>
+								 
+    
+								The name and revision of the Server information protocol that the request came in with. It comes in the format:
+<tT CLAss="monofont">protocol/revision.</tt>
+								
+							</P>
+
+						</P>
+<P>
+							<P>
+								
+									<tt clASS="monofont">SERVER_SOFTWARE—</Tt>
+								 
+    
+								This variable contains the name and version of the information server software answering the request. The format
+used by this variable is <tt cLASS="monofont">name/version.</tt>
+									<a name="idx1073746958"></a>
+									<a name="idx1073746959"></a>
+									<a name="idx1073746960"></a>
+									<A naMe="idx1073746961"></a>
+									<a Name="idx1073746962"></a>
+									<A namE="idx1073746963"></A>
+									<A Name="idx1073746964"></a>
+									<A NAMe="idx1073746965"></a>
+									<a nAME="idx1073746966"></A>
+								
+							</p>
+
+						</p>
+</blOCKQuote>
+				
+				
+					<h4>
+
+Debugging and Testing Your Script</h4>
+					<p>Before putting your CGI scripts online, you need to be sure that they are working fine. You have to test them carefully,
+especially in near bounds and out of bounds conditions. A script that crashes in the middle of its job can cause large
+problems, such as data inconsistency in a database application. This is why you would use a transaction when updating a
+database from a <tt class="monofont">cgi</tt> script (if it was deemed important enough).</p>
+
+					<p>You should eliminate most of the problems by running your script from the command line. Only after performing this
+check should you test it from your <tt ClaSs="monofont">http daemon.</tt>
+					</P>
+
+					<p>You have to remember that Python is an interpreted language, which means that several syntax errors will only be
+discovered at runtime. You must be sure that your script has been tested in every segment of the control flow.</p>
+
+					<p>Python is good for debugging processes because if things go wrong, you get a <a Name="idx1073746967"></A>
+						<A NAme="idx1073746968"></a>traceback message that is beneficial. By default, tracebacks usually go to the server's
+<tT CLAss="monofont">error_log</tt> file.</P>
+
+					<P>
+						<A Name="idx1073746969"></a>Printing a traceback message to the standard output is complicated because the error could occur before the
+<TT CLass="monofont">Content-type</tt> header is printed, in the middle of a HTML markup tag, or even worse: the error message could
+contain markup elements itself.</p>
+
+					<p>You also need to be sure that incorrect input does not lead to an incorrect behavior of your script. Don't expect that all
+parameters received by your script will be meaningful. They can be corrupted during communication, or some hacker could
+try to obtain more data than normally allowed.</p>
+
+					<p>The following code suggests a simple way to debug Python CGI scripts.</p>
+
+					<pre>
+						
+1: import cgi
+2: print "Content-type: text/plain\n"
+3: try:
+4:     your_applicationcode()
+5: except:
+6:     print "&lt;h1&gt;You've got an error.&lt;/h1&gt;
+7:     cgi.print_exception()
+
+					</pre>
+
+					<p>Line 4: Calls the function that implements your application.</p>
+
+					<p>Line 2: We are using a content type of <tT clAss="monofont">text/plain</tT> so that you can see all the output of the
+script.</p>
+
+					<p>Line 7: Calls a CGI function that safely prints a traceback message.</p>
+
+					<p>Note that cookies handling affects this routine. Because cookies must be printed as part of HTTP headers, they need
+to be handled before the first newline (line 2). Therefore, the easiest solution is to move the <Tt clASS="monofont">\n</Tt> into your
+application function, and into the exception handler clause.</p>
+
+					<prE>
+						
+import cgi
+print "Content-type: text/html"
+try:
+    handle_cookies()
+    print"\n"
+    your_applicationcode()
+except:
+    print"\n"
+    print "&lt;h1&gt;You've got an error.&lt;/h1&gt;
+    cgi.print_exception()
+
+					</PRE>
+
+					<p>When creating a debugging framework, it is desirable that the user should never see a server error. Instead, you must provide a fancy page that tells him what has happened, along with helper information.</p>
+
+					<p>As a suggestion, your framework could interpret every traceback message and email it to the support team. This is a very useful solution for warning about problems in a live Web site, and besides, logging errors can help the tracking of application problems.<a NAME="idx1073746970"></a>
+						<a naME="idx1073746971"></A>
+						<A name="idx1073746972"></a>
+						<a name="idx1073746973"></a>
+						<a name="idx1073746974"></a>
+						<a naMe="idx1073746975"></a>
+						<A namE="idx1073746976"></a>
+						<a naMe="idx1073746977"></a>
+						<a NAME="idx1073746978"></a>
+					</p>
+
+					<p>If you are in the stage of doing quality-assurance testing procedures on your Web application, you should try to test it
+outside the live site first. Let's see how you can  do it.</p>
+
+					<P>Check the script for syntax errors by doing something similar to <TT Class="monofont">python script.py.</TT> If you execute your
+script in this way, you are able to test the integrity and syntax of your code.</P>
+
+					<P>If you have your script written as a module, adding the following two lines to its end enables you to execute your
+library module from the command prompt.</p>
+
+					<pre>
+						
+if __name__ == "__main__":
+   main()
+
+					</PRE>
+
+					<P>A CGI script usually does not work from the command line. However, you should at least call it from the command
+line because if the Python interpreter finds a syntax error, a message will pop up on your screen. That's cool! At least you
+know if the syntax is all right. Otherwise, if you wait until you call your code through the Web, the HTTP server could send a
+very problematic error message to you.</p>
+
+					<p>Assuming that your script has no syntax errors, yet it does not work, you have no choice but to fake a form call to
+it.</p>
+
+					<p>If you are using UNIX <tt class="monofont">csh</tt> or <tt class="monofont">tcsh</Tt> shells, and your script uses the
+<tT claSs="monofont">cgi.FieldStorage</tt> class for form input, you can set the environment variables
+<tT claSS="monofont">REQUEST_METHOD</TT> and <tt clASS="monofont">QUERY_STRING.</Tt>
+					</p>
+
+					<prE>
+						
+setenv REQUEST_METHOD "GET"
+setenv QUERY_STRING "animal=parrot"
+
+					</PRE>
+
+					<p>For other shells, you use</p>
+
+					<prE>
+						
+REQUEST_METHOD="GET"
+QUERY_STRING="animal=parrot"
+export REQUEST_METHOD QUERY_STRING
+
+					</PRE>
+
+					<p>Check if your script is located at an executable directory, and if so, try sending an URL request directly through the
+browser to the script. In other words, open your browser and call your script, without forgetting to send the attribute/value
+pairs. For instance,</p>
+
+					<p>
+						<a target="_blank" href="http://yourhostname/cgi-bin/myapp.py?animal=parrot">http://yourhostname/cgi-bin/myapp.py?animal=parrot</a>
+					</p>
+
+					<p>If, for example, you receive an error number 404, it means that your server could not find the script in that directory.
+As you can see, this might help you test and debug your script through the Web.</p>
+
+					<p>Next, I list some considerations that you need to have in mind while debugging a Python CGI application. They are as
+follows:</p>
+
+					<Ul>
+<lI>
+							<p>Import the traceback module as soon as possible. (It needs to be imported before the try/except statement.)</p>
+
+						</lI>
+<li>
+							<p>Don't forget that you need to put a blank line <tT claSS="monofont">\n</TT> just after the header's end.</p>
+
+						</li>
+<lI>
+							<P>If you assign <TT clasS="monofont">sys.stderr</TT> to <Tt claSS="monofont">sys.stdout,</TT> all error messages are sent to the standard
+output.</p>
+
+						</li>
+<li>
+							<p>Create a try/except statement, put all your application code inside it, and don't forget to call
+<tt class="monofont">traceback.print_exc()</tt> in the <tt claSs="monofont">except</tT> clause.</p>
+
+						</li>
+</Ul>
+					<p>The following example exposes all the previous considerations:</p>
+
+					<pRe>
+						
+import sys
+import cgi
+import traceback
+print "Content-type: text/html"
+print
+sys.stderr = sys.stdout
+try:
+    n = 10
+    while n&gt;0:
+        print "&lt;hr&gt;"
+        print 10/(n-1) # This will cause an error when n=1
+        n = n - 1
+except:
+    print "\n\n&lt;PRE&gt;"
+    traceback.print_exc()
+
+					</prE>
+
+					<P>Note that the assignment to <TT clasS="monofont">sys.stdout</TT> is necessary because the traceback object prints to the
+standard error output (stderr). The print <Tt claSS="monofont">"\n\n&lt;PRE&gt;"</TT> statement is being used to disable the word wrapping
+in HTML.</p>
+
+					<p>If your script calls external programs, make sure that Python's <tt CLASs="monofont">$PATH</tt> variable is set to the right
+directories because when it is inside a CGI environment, this variable does not carry useful values.<a name="idx1073746979"></a>
+						<a name="idx1073746980"></a>
+						<a name="idx1073746981"></A>
+						<a nAme="idx1073746982"></a>
+						<A name="idx1073746983"></A>
+						<a naME="idx1073746984"></A>
+						<A name="idx1073746985"></A>
+						<A NAme="idx1073746986"></a>
+						<a NAME="idx1073746987"></a>
+					</p>
+
+				
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="183.html" title="The cgi Module"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=184" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="184.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="185.html" title="Python Active Scripting"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746725">(ampersands)</a><BR>
+&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746887">!-- # INSERT HERE # --</a><BR>
+ <a href="#idx1073746716">($PATH) variable</a><BR>
+ <a href="#idx1073746718">($PYTHONPATH) variable</a><BR>
+ <a href="#idx1073746730">+ (plus symbols)</a><BR>
+ <a href="#idx1073746728">= (equal signs)</a><BR>
+acceptable input<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746800">testing for</a><BR>
+ampersands (&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746726">)</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746906">file</a> <a href="#idx1073746920">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746904">filename</a> <a href="#idx1073746918">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746761">name</a><BR>
+browsers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746875">creating output, CGI scripts</a> <a href="#idx1073746885">2nd</a> <a href="#idx1073746897">3rd</a><BR>
+case sensitivity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746703">commands and file names</a><BR>
+CGI (Common Gateway Interface) scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746711">creating, installing, and running</a> <a href="#idx1073746733">2nd</a> <a href="#idx1073746750">3rd</a> <a href="#idx1073746767">4th</a> <a href="#idx1073746780">5th</a> <a href="#idx1073746810">6th</a> <a href="#idx1073746819">7th</a> <a href="#idx1073746829">8th</a> <a href="#idx1073746837">9th</a> <a href="#idx1073746851">10th</a> <a href="#idx1073746869">11th</a> <a href="#idx1073746879">12th</a> <a href="#idx1073746891">13th</a> <a href="#idx1073746909">14th</a> <a href="#idx1073746932">15th</a> <a href="#idx1073746941">16th</a> <a href="#idx1073746951">17th</a> <a href="#idx1073746960">18th</a> <a href="#idx1073746972">19th</a> <a href="#idx1073746981">20th</a><BR>
+ <a href="#idx1073746688">cgi-bin directory</a><BR>
+ <a href="#idx1073746923">cgiupload.py module</a> <a href="#idx1073746928">2nd</a><BR>
+ <a href="#idx1073746693">chmod command</a> <a href="#idx1073746699">2nd</a><BR>
+clients<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746806">passing strings to shells from</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746701">case sensitivity of</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746694">chmod</a> <a href="#idx1073746700">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746797">shell</a><BR>
+Common Gateway Interface (CGI) scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746710">creating, installing, and running</a> <a href="#idx1073746732">2nd</a> <a href="#idx1073746749">3rd</a> <a href="#idx1073746766">4th</a> <a href="#idx1073746779">5th</a> <a href="#idx1073746809">6th</a> <a href="#idx1073746818">7th</a> <a href="#idx1073746828">8th</a> <a href="#idx1073746836">9th</a> <a href="#idx1073746850">10th</a> <a href="#idx1073746868">11th</a> <a href="#idx1073746878">12th</a> <a href="#idx1073746890">13th</a> <a href="#idx1073746908">14th</a> <a href="#idx1073746931">15th</a> <a href="#idx1073746940">16th</a> <a href="#idx1073746950">17th</a> <a href="#idx1073746959">18th</a> <a href="#idx1073746971">19th</a> <a href="#idx1073746980">20th</a><BR>
+configuring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746692">permissions</a> <a href="#idx1073746698">2nd</a><BR>
+ <a href="#idx1073746777">Content-type tag</a><BR>
+ <a href="#idx1073746845">Cookie.net_setfunc() method</a> <a href="#idx1073746860">2nd</a><BR>
+ <a href="#idx1073746842">Cookie.py module</a> <a href="#idx1073746856">2nd</a> <a href="#idx1073746864">3rd</a><BR>
+ <a href="#idx1073746847">Cookie.user_setfunc() method</a> <a href="#idx1073746862">2nd</a><BR>
+cookies<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746834">CGI scripts</a> <a href="#idx1073746844">2nd</a> <a href="#idx1073746858">3rd</a> <a href="#idx1073746866">4th</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746874">browser output, CGI scripts</a> <a href="#idx1073746884">2nd</a> <a href="#idx1073746896">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746712">Common Gateway Interface (CGI) scripts</a> <a href="#idx1073746734">2nd</a> <a href="#idx1073746751">3rd</a> <a href="#idx1073746768">4th</a> <a href="#idx1073746781">5th</a> <a href="#idx1073746811">6th</a> <a href="#idx1073746820">7th</a> <a href="#idx1073746830">8th</a> <a href="#idx1073746838">9th</a> <a href="#idx1073746852">10th</a> <a href="#idx1073746870">11th</a> <a href="#idx1073746880">12th</a> <a href="#idx1073746892">13th</a> <a href="#idx1073746910">14th</a> <a href="#idx1073746933">15th</a> <a href="#idx1073746942">16th</a> <a href="#idx1073746952">17th</a> <a href="#idx1073746961">18th</a> <a href="#idx1073746973">19th</a> <a href="#idx1073746982">20th</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746755">form fields</a> <a href="#idx1073746772">2nd</a> <a href="#idx1073746785">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746738">sending to Python scripts</a> <a href="#idx1073746742">2nd</a><BR>
+debugging<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746977">CGI scripts</a> <a href="#idx1073746986">2nd</a><BR>
+directories<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746687">cgi-bin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746722">loading modules from</a><BR>
+ <a href="#idx1073746746">encoded strings</a><BR>
+environment variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746937">CGI scripts</a> <a href="#idx1073746946">2nd</a> <a href="#idx1073746956">3rd</a> <a href="#idx1073746965">4th</a><BR>
+ <a href="#idx1073746727">equal signs (=)</a><BR>
+fields<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746922">filename</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;form<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746758">parsing data</a> <a href="#idx1073746775">2nd</a> <a href="#idx1073746788">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746764">login data</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746794">passing to shells</a><BR>
+ <a href="#idx1073746905">file attribute</a> <a href="#idx1073746919">2nd</a><BR>
+file names<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746702">case sensitivity of</a><BR>
+ <a href="#idx1073746903">filename attribute</a> <a href="#idx1073746917">2nd</a><BR>
+ <a href="#idx1073746921">filename field</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746816">storing data, CGI scripts</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;templates<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746900">creating browser output, CGI scripts</a> <a href="#idx1073746902">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746915">uploading from Internet</a> <a href="#idx1073746926">2nd</a><BR>
+form fields<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746757">parsing data</a> <a href="#idx1073746774">2nd</a> <a href="#idx1073746787">3rd</a><BR>
+forms<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746803">testing</a><BR>
+HTTP servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746705">case sensitivity, commands and file names</a><BR>
+input<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746799">testing</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746713">Common Gateway Interface (CGI) scripts</a> <a href="#idx1073746735">2nd</a> <a href="#idx1073746752">3rd</a> <a href="#idx1073746769">4th</a> <a href="#idx1073746782">5th</a> <a href="#idx1073746812">6th</a> <a href="#idx1073746821">7th</a> <a href="#idx1073746831">8th</a> <a href="#idx1073746839">9th</a> <a href="#idx1073746853">10th</a> <a href="#idx1073746871">11th</a> <a href="#idx1073746881">12th</a> <a href="#idx1073746893">13th</a> <a href="#idx1073746911">14th</a> <a href="#idx1073746934">15th</a> <a href="#idx1073746943">16th</a> <a href="#idx1073746953">17th</a> <a href="#idx1073746962">18th</a> <a href="#idx1073746974">19th</a> <a href="#idx1073746983">20th</a><BR>
+Internet<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746916">uploading files</a> <a href="#idx1073746927">2nd</a><BR>
+loading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746720">modules</a><BR>
+locking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746824">CGI scripts</a><BR>
+ <a href="#idx1073746763">login data field</a><BR>
+messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746968">traceback</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746846">Cookie.net_setfunc()</a> <a href="#idx1073746861">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746859">Cookie.py module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746848">Cookie.user_setfunc()</a> <a href="#idx1073746863">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746760">POST</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746791">values()</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746924">cgiupload.py</a> <a href="#idx1073746929">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746843">Cookie.py</a> <a href="#idx1073746857">2nd</a> <a href="#idx1073746865">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746721">loading</a><BR>
+ <a href="#idx1073746762">name attribute</a><BR>
+ <a href="#idx1073746723">name/value pairs</a><BR>
+names<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746704">case sensitivity of</a><BR>
+ <a href="#idx1073746707">nobody user</a><BR>
+OÕ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746826">Malley, Tim</a><BR>
+output<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browsers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746876">creating, CGI scripts</a> <a href="#idx1073746886">2nd</a> <a href="#idx1073746898">3rd</a><BR>
+ <a href="#idx1073746724">pairs, name/value</a><BR>
+parsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746756">form fields</a> <a href="#idx1073746773">2nd</a> <a href="#idx1073746786">3rd</a><BR>
+passing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746741">data to Python scripts</a> <a href="#idx1073746745">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746793">fields to shells</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746804">strings from clients to shells</a><BR>
+permissions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746690">setting</a> <a href="#idx1073746696">2nd</a><BR>
+ <a href="#idx1073746729">plus symbols (+)</a><BR>
+ <a href="#idx1073746759">POST method</a><BR>
+printing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746969">traceback messages</a><BR>
+ <a href="#idx1073746948">query information</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746715">Common Gateway Interface (CGI) scripts</a> <a href="#idx1073746737">2nd</a> <a href="#idx1073746754">3rd</a> <a href="#idx1073746771">4th</a> <a href="#idx1073746784">5th</a> <a href="#idx1073746814">6th</a> <a href="#idx1073746823">7th</a> <a href="#idx1073746833">8th</a> <a href="#idx1073746841">9th</a> <a href="#idx1073746855">10th</a> <a href="#idx1073746873">11th</a> <a href="#idx1073746883">12th</a> <a href="#idx1073746895">13th</a> <a href="#idx1073746913">14th</a> <a href="#idx1073746936">15th</a> <a href="#idx1073746945">16th</a> <a href="#idx1073746955">17th</a> <a href="#idx1073746964">18th</a> <a href="#idx1073746976">19th</a> <a href="#idx1073746985">20th</a><BR>
+scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Gateway Interface (CGI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746709">creating, installing, and running</a> <a href="#idx1073746731">2nd</a> <a href="#idx1073746748">3rd</a> <a href="#idx1073746765">4th</a> <a href="#idx1073746778">5th</a> <a href="#idx1073746808">6th</a> <a href="#idx1073746817">7th</a> <a href="#idx1073746827">8th</a> <a href="#idx1073746835">9th</a> <a href="#idx1073746849">10th</a> <a href="#idx1073746867">11th</a> <a href="#idx1073746877">12th</a> <a href="#idx1073746889">13th</a> <a href="#idx1073746907">14th</a> <a href="#idx1073746930">15th</a> <a href="#idx1073746939">16th</a> <a href="#idx1073746949">17th</a> <a href="#idx1073746958">18th</a> <a href="#idx1073746970">19th</a> <a href="#idx1073746979">20th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746739">sending data to</a> <a href="#idx1073746743">2nd</a><BR>
+security<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746815">CGI scripts</a><BR>
+sending<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746740">data to Python scripts</a> <a href="#idx1073746744">2nd</a><BR>
+servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTTP<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746706">case sensitivity, commands and file names</a><BR>
+setting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746689">permissions</a> <a href="#idx1073746695">2nd</a><BR>
+ <a href="#idx1073746796">shell command</a><BR>
+shells<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746795">passing fields to</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746807">passing strings from clients to</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746789">try/except</a><BR>
+storing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746825">cookies</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746747">encoded</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746805">passing from clients to shells</a><BR>
+tags<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746888">!-- # INSERT HERE # --</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746776">Content-type</a><BR>
+templates<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746899">creating browser output, CGI scripts</a> <a href="#idx1073746901">2nd</a><BR>
+testing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746978">CGI scripts</a> <a href="#idx1073746987">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746802">forms</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746798">input</a><BR>
+ <a href="#idx1073746967">traceback message</a><BR>
+ <a href="#idx1073746790">try/except statement</a><BR>
+ <a href="#idx1073746801">unacceptable input, testing for</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746691">setting permissions</a> <a href="#idx1073746697">2nd</a><BR>
+uploading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746914">files from Internet</a> <a href="#idx1073746925">2nd</a><BR>
+users<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746708">nobody</a><BR>
+ <a href="#idx1073746792">values() method</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746717">($PATH)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746719">($PYTHONPATH)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;environment<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746938">CGI scripts</a> <a href="#idx1073746947">2nd</a> <a href="#idx1073746957">3rd</a> <a href="#idx1073746966">4th</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746714">Common Gateway Interface (CGI) scripts</a> <a href="#idx1073746736">2nd</a> <a href="#idx1073746753">3rd</a> <a href="#idx1073746770">4th</a> <a href="#idx1073746783">5th</a> <a href="#idx1073746813">6th</a> <a href="#idx1073746822">7th</a> <a href="#idx1073746832">8th</a> <a href="#idx1073746840">9th</a> <a href="#idx1073746854">10th</a> <a href="#idx1073746872">11th</a> <a href="#idx1073746882">12th</a> <a href="#idx1073746894">13th</a> <a href="#idx1073746912">14th</a> <a href="#idx1073746935">15th</a> <a href="#idx1073746944">16th</a> <a href="#idx1073746954">17th</a> <a href="#idx1073746963">18th</a> <a href="#idx1073746975">19th</a> <a href="#idx1073746984">20th</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

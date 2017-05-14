@@ -1,0 +1,502 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Programs</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Programs</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="25.html" title="The Shell Environment"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=26" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="26.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="27.html" title="Built-In Data Types"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A18%3A34+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145081058111154037148089</font><a href="read1.asp?bookname=0672319942&snode=26&now=5%2F31%2F2002+4%3A18%3A34+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			Programs</h3>
+				<p>Until now, all the examples were written directly in the interpreter environment. However, most Python programs are executed as external scripts, being loaded from files.</p>
+
+				<P>You can write your own Python scripts by using any text editor of your choice. Remember to always save your files using the <TT Class="monofont">.py</TT> extension.</P>
+
+				<P>As with any other UNIX scripting language, Python scripts (for UNIX) need a special handling.</p>
+
+				<p>First, you need to put a "shebang" in the first line of the script. This line declares the location of Python's interpreter in your system. For example</p>
+
+				<pRE>
+					
+#!/usr/local/bin/python
+
+				</PRe>
+
+				<p>Note that this example works only if Python was installed under the given mounting point. Most Linux systems have Python installed under <tt class="monofont">/usr</tt> by default, so the preceding example will not work. Today, the following line of code seems to be more common, and does not depend on where Python is installed:</p>
+
+				<pre>
+					
+#!/usr/bin/env python
+
+				</pre>
+
+				<p>If you are running your scripts on an MS Windows environment, you can keep this line of code for portability purposes because the literal <tT clAss="monofont">#</tT> is only used to identify comment lines that are ignored by the interpreter, so it will cause no harm to your programs.<a namE="idx1073742054"></a>
+					<a nAME="idx1073742055"></A>
+					<a namE="idx1073742056"></A>
+				</P>
+
+				<Div clASS="note"><P clasS="notetitle"><B>Tip</B></P><p>
+
+					<p>The "shebang" line is only meaningful when you work on a UNIX system.<a name="idx1073742057"></a>
+						<a name="idx1073742058"></a>
+						<a name="idx1073742059"></a>
+					</P>
+
+				</p></dIv>
+<br>
+<Br>
+
+				<p>If you don't know where <a nAme="idx1073742060"></a>
+					<A NAMe="idx1073742061"></a>
+					<a nAME="idx1073742062"></A>Python is located on your UNIX system, use the following <a namE="idx1073742063"></A>
+					<A Name="idx1073742064"></a>command:</P>
+
+				<PRE>
+					
+$ whereis python
+
+				</pre>
+
+				<p>Also, remember to <a name="idx1073742065"></a>
+					<a name="idx1073742066"></a>
+					<a namE="idx1073742067"></a>set the permissions on your script to <tT claSs="monofont">755</tt> in order to let every user be able to execute it.</p>
+
+				<Pre>
+					
+$ chmod +x scriptname.py
+
+				</pRE>
+
+				<P>or</P>
+
+				<pre>
+					
+$ chmod 755 scriptname.py
+
+				</pRE>
+
+				<P>As you cannot directly <A name="idx1073742068"></A>
+					<A NAme="idx1073742069"></a>
+					<a NAME="idx1073742070"></a>
+					<a name="idx1073742071"></a>
+					<a name="idx1073742072"></a>
+					<a name="idx1073742073"></a>execute Python scripts in the MS Windows systems through the command line, you have two options: Either double-click the file using Windows Explorer or call the interpreter, passing the filename as an argument. For example,</p>
+
+				<Pre>
+					
+c:\&gt;python scriptname.py
+
+				</Pre>
+
+				<p>Another way to call the interpreter on Windows systems is by typing <A name="idx1073742074"></A>
+					<a naME="idx1073742075"></A>
+					<Tt claSS="monofont">start scriptname.py</TT> at the shell prompt. This command will find and execute the program associated with the extension <tt clASS="monofont">.py.</Tt>
+				</p>
+
+				<p>If you want to <a NAME="idx1073742076"></a>
+					<a name="idx1073742077"></a>
+					<a name="idx1073742078"></a>
+					<a name="idx1073742079"></a>
+					<a NamE="idx1073742080"></a>
+					<a nAme="idx1073742081"></a>
+					<a Name="idx1073742082"></A>open the interpreter after executing a program, use the <A NAme="idx1073742083"></a>
+					<a NAME="idx1073742084"></a>
+					<tt cLASS="monofont">-i</tt> argument when calling the script. The interpreter will run your script, and after it executes all the commands, it will open its command-line interface for you. Here's how to call the script with a command-line option:</p>
+
+				<pRE>
+					
+c:\python -i scriptname.py
+
+				</PRe>
+
+				<p>Otherwise, after the script finishes its execution, it will automatically close the interpreter.</p>
+
+				<p>After spending some time creating Python programs, you might find some <tt class="monofont">.pyc</tt> files in the same directory in which you are saving your <tt class="monofont">.py</Tt> scripts. See <a Href="227.html">Chapter 17, "Development Tools,"
+					</A>  to know more about this other file extension.<a namE="idx1073742085"></a>
+					<a nAME="idx1073742086"></A>
+					<a namE="idx1073742087"></A>
+				</P>
+
+				
+					<H4>
+				
+				
+				
+				Indentation</h4>
+					<p>Python delimits code blocks by using indentation. There is no concept of <tt CLASs="monofont">{}</tt>s or <tT CLAss="monofont">Begin/End</tt>s as in other languages. When you indent a block of code, you define the way the statements are grouped. It also reduces errors due to bad indentation. For instance, the following C or Perl code looks like a single <tt class="monofont">if</tt> statement, but the second statement is always executed:</p>
+
+					<pre>
+						
+if (expression)
+    statement1;
+    statement2;
+
+					</pre>
+
+					<P>Python doesn't suffer from this problem because indentation defines block structure.</p>
+
+					<p>Another great aspect of this implementation is that you can reduce the size of your code while using indentation instead of conventional block delimiters.</P>
+
+					<div Class="note"><P claSS="notetitle"><B>Tip</B></p><p>
+
+						<p>Keep in mind that <a NAME="idx1073742088"></a>
+							<a naME="idx1073742089"></A>tabs are internally converted to spaces (<Tt claSS="monofont">1 tab = 8 spaces</TT>), and <a name="idx1073742090"></a>
+							<a name="idx1073742091"></a>
+							<a name="idx1073742092"></a>blank lines are ignored when part of scripts.</p>
+
+					</p></Div>
+<Br>
+<br>
+
+					<P>I suggest you write one statement per line, using a <tt clAss="monofont">newline</tT> (<TT Class="monofont">ENTER</TT>) to terminate each line. If you decide to have more than one <A Name="idx1073742093"></a>
+						<A NAMe="idx1073742094"></a>
+						<a nAME="idx1073742095"></A>statement in the same line, you need to separate them by using <a name="idx1073742096"></a>
+						<a name="idx1073742097"></a>semicolons, as shown in the following:<a name="idx1073742098"></a>
+						<a nAme="idx1073742099"></A>
+						<a naMe="idx1073742100"></a>
+					</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; print "When AH "; print "were young…"
+
+					</prE>
+
+					<P>Remember that you must put a <A Name="idx1073742101"></a>
+						<A NAMe="idx1073742102"></a>
+						<a nAME="idx1073742103"></A>
+						<a namE="idx1073742104"></A>
+						<A Name="idx1073742105"></a>
+						<a name="idx1073742106"></a>
+						<a name="idx1073742107"></a>backslash <tt clAss="monofont">\</Tt> at the end of lines that need to be broken into two lines:</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; t = "Nobody expects " + \
+… "the Spanish inquisition"
+				
+					</pre>
+
+				
+				
+					<H4>Lexical Analysis</h4>
+					<p>It is unnecessary to <a NAME="idx1073742108"></a>
+						<a naME="idx1073742109"></A>declare the type of a variable in Python programs. The same variable name might have different types at different occasions because it is re-initialized every time a value gets assigned to it, as illustrated in the following:</P>
+
+					<pre>
+						
+&gt;&gt;&gt; x = "Albatross!!"
+&gt;&gt;&gt; print x
+Albatross!!
+&gt;&gt;&gt; x = 123
+&gt;&gt;&gt; print x
+123
+
+					</pRE>
+
+					<P>You can assign any <A name="idx1073742110"></A>
+						<A NAme="idx1073742111"></a>
+						<a name="idx1073742112"></a>object type to a variable (for example, functions, classes, and modules). The following example shows how you can create a variable that references the <a name="idx1073742113"></a>
+						<a name="idx1073742114"></A>
+						<tt ClasS="monofont">round()</tt> function object:</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; x = round
+&gt;&gt;&gt; print x(27.234523, 2)
+27.23
+
+					</prE>
+
+					<P>You don't have to worry about <A Name="idx1073742115"></a>
+						<A NAMe="idx1073742116"></a>deallocating variables in Python. Python objects are collected whenever they become unreachable because Python does reference counting. This means that as long as there is a reference to an object, the object isn't collected. When you delete a reference to an object, its reference counting goes down by one, and when the count has dropped to 0, it is eligible for garbage collection. Note that under CPython, objects are deallocated as soon as the reference count reaches 0.</p>
+
+					<p>The problem with <A NAMe="idx1073742117"></a>
+						<a nAME="idx1073742118"></A>
+						<a name="idx1073742119"></a>
+						<a name="idx1073742120"></a>reference counting is that you can create circular references, such as the following:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; a = [1, 2, 3]
+&gt;&gt;&gt; b = [4, 5, 6]
+&gt;&gt;&gt; a.append(b)
+&gt;&gt;&gt; a
+[1, 2, 3, [4, 5, 6]]
+&gt;&gt;&gt; b.append(a)
+&gt;&gt;&gt; a
+[1, 2, 3, [4, 5, 6, […]]]
+&gt;&gt;&gt; b
+[4, 5, 6, [1, 2, 3, […]]]
+&gt;&gt;&gt; del a
+&gt;&gt;&gt; del b
+				
+					</pre>
+
+					<p>Now, you can never refer to variables <Tt cLass="monofont">a</Tt> and <tt cLass="monofont">b,</TT> nor to their contents again, and because each one of them is still referenced by the other list, they cannot be collected, either. Note that <A Name="idx1073742121"></a>recursion is indicated by the <A NAMe="idx1073742122"></a>
+						<a nAME="idx1073742123"></A>
+						<tt clASS="monofont"> […]</Tt> element. I know that it is fairly easy to fall into this trap, and although some work is being done to cure this problem, I strongly suggest that you avoid recursive constructs. As you might notice, <a name="idx1073742124"></a>
+						<a name="idx1073742125"></a>
+						<tt class="monofont">del</Tt> removes the reference to the object, which could cause it to be deallocated if its reference count reaches 0.<a Name="idx1073742126"></A>
+						<a namE="idx1073742127"></a>
+						<a nAME="idx1073742128"></A>
+					</p>
+
+					<p>You can <a nAME="idx1073742129"></A>
+						<a namE="idx1073742130"></A>monitor the reference counting of an object by using the <A Name="idx1073742131"></a>
+						<A NAMe="idx1073742132"></a>
+						<tt class="monofont">sys.getrefcount()</tt> function:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.getrefcount(b)
+3
+				
+					</pre>
+
+					<p>Note that you can <a NamE="idx1073742133"></a>break the circular reference if you insert the following lines between the <tt Class="monofont">append</Tt>s and <tt CLASs="monofont">del</tt>s:</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; del a[-1]
+&gt;&gt;&gt; del b[-1]
+
+					</Pre>
+
+					<p>Actually, we are just breaking the references by<a NAME="idx1073742134"></a>
+						<a naME="idx1073742135"></A> removing the […] entries from the lists. Note that the release 2.0 of Python makes sure that deleting objects is safe even for deeply nested data structures. The Python interpreter is now using a new mechanism to collect<A name="idx1073742136"></a>
+						<a name="idx1073742137"></a>
+						<a name="idx1073742138"></a> unused objects. From time to time, this mechanism performs a cycle detection algorithm that searches for inaccessible cycles and deletes the participating objects. This process has been<a naMe="idx1073742139"></a> named <I>Garbage Collection of Cycles.</i>
+					</p>
+
+					<p>There are a couple of parameters of the <A name="idx1073742140"></A>
+						<a naME="idx1073742141"></A>garbage collection that you can manipulate. The module <Tt claSS="monofont">gc</TT> provides functions that helps you out with that. Of course, you always have the option to disable this feature. To do so, simply specify the argument  "
+							<i>-without-cycle-gc</i>
+						" when running the Python configure script.</p>
+
+				
+				
+					<h4>
+				
+				Reserved Words</H4>
+					<P>Python has reserved a group of words for its own use. Those words have specific meanings that cannot be changed. You cannot use these words as identifiers in your code.</P>
+
+					<Pre>
+						
+"and, assert, break, class, continue, def, del, elif, else, except,
+ exec, finally, for, from, global, if, import, in, is, lambda, not,
+ or, pass, print, raise, return, try, while"
+
+					</prE>
+
+				
+				
+					<H4>
+				Identifiers</H4>
+					<P>Python identifiers are any <a name="idx1073742142"></a>
+						<a name="idx1073742143"></a>objects created by programmers (such as <a name="idx1073742144"></a>variables, <a nAme="idx1073742145"></A>classes, and so on). Identifiers can be <a naMe="idx1073742146"></a>named using any of the following <a nAme="idx1073742147"></a>characters: <TT CLass="monofont">A-Z, a-z, 0-9,</tT> and <TT Class="monofont">_.</TT> However, they can't start with a <A Name="idx1073742148"></a>digit.</P>
+
+					<P>You must write your code carefully because Python identifiers are <A Name="idx1073742149"></a>
+						<a name="idx1073742150"></a>case sensitive.</p>
+
+					<p>The special characters: <a name="idx1073742151"></a>
+						<a nAme="idx1073742152"></A>
+						<tt cLass="monofont">$,</tT>
+						<a naME="idx1073742153"></A>
+						<A name="idx1073742154"></A>
+						<TT Class="monofont">%,</TT> and <A Name="idx1073742155"></a>
+						<A NAMe="idx1073742156"></a>
+						<tt class="monofont">@,</tt> aren't allowed to be part of an identifier's name. Besides that, <tt class="monofont">$</tt> and <Tt cLass="monofont">@</Tt> can be used only in a program, inside quoted strings. The <tt cLass="monofont">%</TT> character may be used in a program because it is the <TT clasS="monofont">mod</TT> operator.<A name="idx1073742157"></A>
+						<A NAme="idx1073742158"></a>
+						<a NAME="idx1073742159"></a>
+					</p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="25.html" title="The Shell Environment"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=26" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="26.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="27.html" title="Built-In Data Types"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+$ (dollar sign)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742151">identifier names</a><BR>
+% (percent sign)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742153">identifier names</a><BR>
+; (semicolon)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742097">separating statements on same line</a><BR>
+@ (at sign)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742155">identifier names</a><BR>
+ <a href="#idx1073742122">[ ] element</a><BR>
+[É<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742134">] entries</a><BR>
+ <a href="#idx1073742083">[nd]i argument</a><BR>
+\ (backslash)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742105">adding line breaks</a><BR>
+adding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742106">line breaks</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742080">opening interpreters after executing</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742084">[nd]i</a><BR>
+assigning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742110">objects to variables</a><BR>
+at sign (@)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742156">identifier names</a><BR>
+backslash (\)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742104">adding line breaks</a><BR>
+ <a href="#idx1073742090">blank lines in scripts</a><BR>
+breaking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742133">circular references</a><BR>
+breaks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742103">lines</a><BR>
+case sensitivity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742149">identifiers</a><BR>
+characters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742147">identifier names</a><BR>
+ <a href="#idx1073742119">circular references</a><BR>
+classesÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742145">Ò</a><BR>
+collecting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742141">garbage</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742138">unused objects</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742125">del</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742075">start scriptname.py</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742064">whereis python</a><BR>
+counting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742118">reference</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742107">line breaks</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742056">scripts</a> <a href="#idx1073742087">2nd</a> <a href="#idx1073742100">3rd</a> <a href="#idx1073742128">4th</a> <a href="#idx1073742159">5th</a><BR>
+deallocating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742115">variables</a><BR>
+declaring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742108">variables</a><BR>
+ <a href="#idx1073742124">del command</a><BR>
+dollar sign ($)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742152">identifier names</a><BR>
+elements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742123">[ ]</a><BR>
+entries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[É<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742135">]</a><BR>
+executing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742068">scripts from Windows</a><BR>
+finding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742060">Python in UNIX</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742114">round()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742132">sys getrefcount()</a><BR>
+ <a href="#idx1073742140">garbage collection</a><BR>
+ <a href="#idx1073742139">Garbage Collection of Cycles</a><BR>
+identifiersÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742142">Ò</a><BR>
+interpreters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742076">opening after executing programs</a><BR>
+launching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742079">interpreters after executing programs</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742072">scripts from Windows</a><BR>
+line breaks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742102">adding</a><BR>
+lines<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742091">blank, in scripts</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742095">separating statements on</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742059">shebang</a><BR>
+monitoring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742129">reference counting, objects</a><BR>
+naming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742146">identifiers</a><BR>
+numbers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742148">starting identifiers with</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742112">assigning to variables</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742130">monitoring reference counting</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unused<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742137">collecting</a><BR>
+objectsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742143">Ò</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742078">interpreters after executing programs</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742071">scripts from Windows</a><BR>
+percent sign (%)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742154">identifier names</a><BR>
+permissions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742067">setting on scripts</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742081">opening interpreters after executing</a><BR>
+recursion<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742121">[ ] element</a><BR>
+ <a href="#idx1073742117">reference counting</a><BR>
+references<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742120">circular</a><BR>
+ <a href="#idx1073742113">round() function</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742077">interpreters after executing programs</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742070">scripts from Windows</a><BR>
+scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742069">executing from Windows</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742092">lines in</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742066">setting permissions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742089">tabs in</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742055">writing</a> <a href="#idx1073742086">2nd</a> <a href="#idx1073742099">3rd</a> <a href="#idx1073742127">4th</a> <a href="#idx1073742158">5th</a><BR>
+searching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742061">Python in UNIX</a><BR>
+semicolons (<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742096">separating statements on same line</a><BR>
+sensitivity<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742150">identifiers</a><BR>
+separating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742101">lines</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742093">statements on same line</a><BR>
+setting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742065">permissions on scripts</a><BR>
+ <a href="#idx1073742057">shebang line</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742082">opening interpreters after executing</a><BR>
+ <a href="#idx1073742074">start scriptname.py command</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742094">separating on same line</a><BR>
+ <a href="#idx1073742131">sys getrefcount() function</a><BR>
+ <a href="#idx1073742088">tabs in scripts</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742062">finding Python</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742058">shebang line</a><BR>
+unused objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742136">collecting</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742111">assigning objects to</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742116">deallocating</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742109">declaring</a><BR>
+variablesÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742144">Ò</a><BR>
+ <a href="#idx1073742063">whereis python command</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742073">executing scripts from</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742054">scripts</a> <a href="#idx1073742085">2nd</a> <a href="#idx1073742098">3rd</a> <a href="#idx1073742126">4th</a> <a href="#idx1073742157">5th</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

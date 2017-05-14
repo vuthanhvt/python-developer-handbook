@@ -1,0 +1,589 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Scientific Computing</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="148.html" class="navtitle">9. Other Advanced Topics</a> &gt; <span class="nonavtitle">Scientific Computing</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="153.html" title="Restricted Execution Mode"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=154" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="154.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="155.html" title="Regular Expressions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A40%3A31+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148044238007122032091154</font><a href="read2.asp?bookname=0672319942&snode=154&now=5%2F31%2F2002+4%3A40%3A31+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Scientific Computing</h3>
+				<p>Python is extensively used for scientific computing because it enables a rapid prototyping and execution of a number of functions. Scientists and engineers often have needs for high-performance computation tools that are also easy to use and modify. Many also want to be able to use a general-purpose language instead of a specialized tool, allowing them to integrate networking, GUI's, and so on in their high-performance work. Several modules have been developed to address these needs around the Python language.</p>
+
+				<P>In this section, I cover the Numeric Python extensions (<TT Class="monofont">NumPy</TT>), which provide efficient operations on large multidimensional arrays, and it has proven to be the right choice when talking about scientific computing with Python.<A Name="idx1073745413"></a>
+					<A NAMe="idx1073745414"></a>
+				</p>
+
+				<p>Besides <tt class="monofont">NumPy,</tt> many other scientific tools are available. The Python community has created several extensions for manipulating data and functions, interfaces to data plotting libraries, storage solutions for scientific data, and much more. If you want to deeply discuss scientific computing with Python, you can look for the plot-sig (the <a name="idx1073745415"></a>Plotting Special Interest Group).</p>
+
+				<P>If you spend some time browsing around scientific Web pages, you will be surprised about the number of people who are really using Python for their projects.</p>
+
+				<p>For more information, visit the following Web sites:</P>
+
+				<bloCkquoTe>
+<p>
+						<p>Scientific computing topic at Python's Web site:</P>
+
+					</P>
+<P>
+						<P>
+							<pre>
+								
+							<a TARGet="_blank" hrEF="http://www.python.org/topics/scicomp/">http://www.python.org/topics/scicomp/</A>
+						
+							</Pre>
+
+						</p>
+
+					</p>
+<P>
+						<P>
+							<I>Simple Numerical Recipes in Python</I> was written by William Park to describe few elementary numerical routines in Python:</p>
+
+					</p>
+<p>
+						<p>
+							<pre>
+								
+							<a target="_blank" href="http://www.python.org/topics/scicomp/recipes_in_python.html">http://www.python.org/topics/scicomp/recipes_in_python.html</a>
+						
+							</pRe>
+
+						</p>
+
+					</P>
+<p>
+						<p>
+							<i>Python for Science—An Introduction to Python for Scientists:</I>
+						</p>
+
+					</p>
+<p>
+						<p>
+							<Pre>
+								
+							<a TARGet="_blank" hrEF="http://starship.python.net/crew/hinsen/">http://starship.python.net/crew/hinsen/</A>
+						
+							</Pre>
+
+						</p>
+
+					</p>
+</BLOCkquoTE>
+				
+					<H4>
+				
+				
+				Numerical Extensions</H4>
+					<p>The most powerful way to face scientific computing in Python systems is to use Python Numerical Extensions (commonly known as <i>NumPy</i>). The Numerical Python extensions were originally written by <a name="idx1073745416"></a>Jim Hugunin (JPython's author), but the responsibility to continue the project now belongs to a group of python users from the <a name="idx1073745417"></a>Lawrence Livermore National Laboratory. The languages that were used to guide the development of NumPy include Basis, MATLAB, FORTRAN, S and S+, and others.</p>
+
+					<p>The NumPy package adds a fast, compact multidimensional array language facility to Python. <a naMe="idx1073745418"></a>
+						<A namE="idx1073745419"></a>
+						<i>One-dimensional arrays</i> are similar to standard Python sequences and <a Name="idx1073745420"></A>
+						<A NAme="idx1073745421"></a>
+						<i>two-dimensional arrays</I> are similar to matrices from linear algebra. This package also includes tools for working with linear algebra, <I>Fast Fourier Transforms (FFTs),</I> random numbers, and so forth.</P>
+
+					<p>In addition, NumPy adds two new types to Python: A sequence type (to implement multidimensional arrays), and a new type of function called a universal function (<tt cLASS="monofont">ufunc</tt>). Numeric Python consists of a set of modules:<a nAME="idx1073745422"></A>
+						<a name="idx1073745423"></a>
+						<a name="idx1073745424"></a>
+						<a name="idx1073745425"></a>
+						<a nAme="idx1073745426"></A>
+					</p>
+
+					
+						<h5>
+							<tT clasS="monofont">Numeric.py</tt> (and Its Helper Modules <tT CLAss="monofont">multiarray, umath,</tt> and <TT CLass="monofont">fast_umath</tT>)</H5>
+						<P>This module defines two new object types and a set of functions that manipulate these objects, as well as converting them and other Python types. The objects are the new <Tt claSS="monofont">array</TT> object (technically called <tt class="monofont">multiarray</tt> objects), and universal functions (technically <tt class="monofont">ufunc</tt> objects). The <a nAme="idx1073745427"></A>
+							<a naMe="idx1073745428"></a>array objects are generally homogeneous collections of potentially large numbers of numbers. <a nAme="idx1073745429"></a>
+							<A NAMe="idx1073745430"></a>Universal functions (<tt CLASs="monofont">ufuncs</tt>) are functions that operate on arrays and other sequences.</p>
+
+						<P>The Numeric module provides, in addition to the functions needed to create the previous objects, a set of powerful functions to manipulate arrays, select subsets of arrays based on the contents of other arrays, and other array-processing operations. Note that only Numeric need be imported.<A NAme="idx1073745431"></a>
+							<a NAME="idx1073745432"></a>
+							<a name="idx1073745433"></a>
+							<a name="idx1073745434"></a>
+							<a name="idx1073745435"></a>
+							<a NamE="idx1073745436"></a>
+							<a nAme="idx1073745437"></a>
+							<a Name="idx1073745438"></A>
+						</P>
+
+					
+					
+						<H5>
+							<Tt claSS="monofont">RandomArray.py</TT> (and Its Helper Module <tt clASS="monofont">ranlib</Tt>)</h5>
+						<p>This module provides a high-level interface to a random-number generator (<tT CLAss="monofont">ranlib</tt>), which supplies a uniform distribution generator of pseudo-random numbers, as well as some convenience functions:</p>
+
+						<blockquote>
+<p>
+								<p>For more information, check out <i>Additions to RandomArray Module,</i> by Lee A. Barford:</p>
+
+							</P>
+<p>
+								<p>
+									<Pre>
+										
+									<a TargeT="_blank" hreF="http://numpy.sourceforge.net/randomarray-additions.html">http://numpy.sourceforge.net/RandomArray-additions.html</A>
+								
+									</PRe>
+
+								</p>
+
+							</p>
+</bLOCKquotE>
+					
+					
+						<H5>
+							<TT clasS="monofont">
+								<A NAme="idx1073745439"></a>
+								<a name="idx1073745440"></a>
+								<a name="idx1073745441"></a>
+								<a name="idx1073745442"></A>FFT.py</tt> (and Its Helper Module <Tt clAss="monofont">fftpack</tt>)</H5>
+						<p>This module provides a high-level interface to the fast Fourier transform routines implemented in the FFT-PACK library if it is available, or to the compatible but less optimized <tt CLASs="monofont">fftpack</tt> library that ships with Numeric Python.</p>
+
+						<P>The FFT module provides a high-level interface to the fast Fourier transform routines, which are implemented in the FFTPACK library. It performs one- and two-dimensional FFT's, forward and backwards (inverse FFTs), and includes efficient routines for FFTs of real-valued arrays. It is most efficient for arrays whose size is a power of two.</P>
+
+					
+					
+						<H5>
+							<Tt claSS="monofont">LinearAlgebra.py</TT> (and Its Helper Module <tt clASS="monofont">lapack_litemodule</Tt>)</h5>
+						<p>This module provides a high-level interface to the linear algebra routines implemented in the <tt class="monofont">LAPACK</tt> library if it is available, or to the compatible but less optimized <tt class="monofont">lapack_lite</tT> library that ships with Numeric Python. It includes functions to solve systems of linear equations and linear least squares problems, invert matrices, compute eigenvalues and eigenvectors, generalized inverses, determinants, as well as perform singular value decomposition.<a nAme="idx1073745443"></a>
+							<A name="idx1073745444"></A>
+							<a naME="idx1073745445"></A>
+							<A name="idx1073745446"></A>
+							<A NAme="idx1073745447"></a>
+							<a NAME="idx1073745448"></a>
+							<a naME="idx1073745449"></A>
+							<A name="idx1073745450"></a>
+							<a name="idx1073745451"></a>
+						</p>
+
+						<p>People such as scientists and engineers—who need to manipulate large arrays of numbers quickly, efficiently, and stylishly—find in these extensions a great tool, whose power is compared against other numeric languages such as MATLAB and IDL.</p>
+
+						<p>A good point is that everything you can do using Numerical Python is also possible to be written using core Python data structures, such as lists and tuples. The problem is that the program will run much too slow. However, if you have a couple of huge Numerical Python arrays, the speed of adding them up is close to the speed of doing it in C. Therefore, processing sophisticated numeric operations using NumPy provides similar results as running the same process using a compiled language, but without the compile time overhead or having to worry about bugs in the low-level array operations.</p>
+
+						<p>The following links are great sources of information about the Numeric Python extensions:</p>
+
+						<blOckQuotE>
+<p>
+								<p>Numerical Python</p>
+
+							</p>
+<P>
+								<p>
+									<prE>
+										
+									<A TArget="_blank" HREF="http://numpy.sourceforge.net">http://numpy.sourceforge.net</a>
+								
+									</pre>
+
+								</P>
+
+							</P>
+<P>
+								<P>Numerical Python—Documentation</p>
+
+							</p>
+<p>
+								<p>You should consider taking a look at the official documentation for NumPy. The tutorial walks you through a set of numeric manipulations.</P>
+
+							</P>
+<P>
+								<P>
+									<pre>
+										
+									<a target="_blank" href="http://numpy.sourceforge.net/numpy.pdf">http://numpy.sourceforge.net/numpy.pdf</a>
+								
+									</pre>
+
+								</p>
+
+							</p>
+<P>
+								<p>Numerical Python Project</p>
+
+							</P>
+<p>
+								<p>The Numerical Python Project Page has releases, links to the FTP site, a bug tracking system, and a browser for the source repository plus instructions on how to use CVS anonymously.<a Name="idx1073745452"></a>
+									<A namE="idx1073745453"></A>
+									<A Name="idx1073745454"></a>
+									<A NAMe="idx1073745455"></a>
+									<a nAME="idx1073745456"></A>
+								</p>
+
+							</p>
+<p>
+								<p>
+									<PRE>
+										
+									<A target="_blank" href="http://numpy.sourceforge.net">http://numpy.sourceforge.net</a>
+								
+									</pre>
+
+								</p>
+
+							</p>
+<p>
+								<p>and</p>
+
+							</p>
+<P>
+								<p>
+									<pRe>
+										
+									<a tArget="_blank" Href="http://sourceforge.net/project/?group_id=1369">http://sourceforge.net/project/?group_id=1369</A>
+								
+									</PRE>
+
+								</p>
+
+							</p>
+<p>
+								<p>Numerical Python arrays in C extension modules</P>
+
+							</P>
+<P>
+								<P>
+									<pre>
+										
+									<a TARGet="_blank" hrEF="http://starship.python.net/crew/hinsen/NumPyExtensions.html">http://starship.python.net/crew/hinsen/NumPyExtensions.html</A>
+								
+									</Pre>
+
+								</p>
+
+							</p>
+<p>
+								<p>Writing C Extensions using Numerical Python</p>
+
+							</p>
+<p>
+								<p>
+									<pre>
+										
+									<a target="_blank" HreF="http://oliphant.netpedia.net/packages/numerical_extensions.pdf.gz">http://oliphant.netpedia.net/packages/Numerical_Extensions.pdf.gz</a>
+								
+									</prE>
+
+								</p>
+
+							</p>
+</blOckqUOTE>
+					
+					
+						<h5>
+					Installing <tt cLASS="monofont">NumPy</tt>
+						</h5>
+						<p>Note that before building Numerical Python, you need to obtain and install the <A NAMe="idx1073745457"></a>
+							<a nAME="idx1073745458"></A>
+							<a name="idx1073745459"></a>
+							<a name="idx1073745460"></a>
+							<tt class="monofont">Distutils</tT> package.</p>
+
+						<dIv clAss="note"><p cLass="notetitle"><B>Tip</B></P><P>
+
+							<p>The <tt cLASS="monofont">Distutils</tt> package will be distributed with Python beginning with the 1.6 release. Its purpose is to define a standard for installing Python modules. For details, check out <a tARGEt="_blank" hreF="http://www.python.org/sigs/distutils-sig/">http://www.python.org/sigs/distutils-sig/</A>
+							</P>
+
+						</P></div>
+<br>
+<br>
+
+						<p>Currently, NumPy has two distribution options available.<a name="idx1073745461"></a>
+							<a name="idx1073745462"></a>
+							<A naMe="idx1073745463"></a>
+							<a Name="idx1073745464"></a>
+							<A namE="idx1073745465"></A>
+							<A Name="idx1073745466"></a>
+						</P>
+
+						<P>On Win32 platforms, such as Microsoft Windows 95, 98, and NT, a binary installer is available at</P>
+
+						<P>
+							<pre>
+								
+							<a TARGet="_blank" hrEF="ftp://ftp-icf.llnl.gov/pub/python/numpy.exe">ftp://ftp-icf.llnl.gov/pub/python/NumPy.exe</A>
+						
+							</Pre>
+
+						</p>
+
+						<p>This installer is simple to use (simply double-click on the <tt class="monofont">NumPy.exe</tt> file and answer questions on each screen in turn). Running this installer will perform all the needed modifications to your Python installation so that NumPy works.</p>
+
+						<p>For both UNIX and other platforms, NumPy must be compiled from the source. The source distribution for NumPy is part of the <tt claSs="monofont">LLNLPython</tT> distribution, which is available at</p>
+
+						<prE>
+							
+						<a tarGet="_blank" hREF="ftp://ftp-icf.llnl.gov/pub/python/numeric-xx.y.tgz">ftp://ftp-icf.llnl.gov/pub/python/Numeric-xx.y.tgz</A>
+					
+						</pre>
+
+						<p>There is also RPMs for Linux available from the <TT CLass="monofont">numpy</tT> Web site at <A TArget="_blank" HREF="http://sourceforge.net/project/filelist.php?group_id=1369">http://sourceforge.net/project/filelist.php?group_id=1369.</a>
+						</p>
+
+						<p>The file is a gzipped tarfile that should be uncompressed using the <tt class="monofont">gunzip</tt> program and un-tarred with the <tt class="monofont">tar</tT> program:</p>
+
+						<pRe>
+							
+csh&gt; gunzip Numeric-xx.y.tgz
+csh&gt; tar xf Numeric-xx.y.tar
+
+						</prE>
+
+						<p>Follow the instructions found in the top-level directory for compilation and installation procedures.</p>
+
+						<p>The standard Python installer for the Macintosh (available at <a TargET="_blank" HRef="http://www.python.org/download/download_mac.html">http://www.python.org/download/download_mac.html)</a> optionally installs the NumPy extensions, although these are typically not the most up-to-date files.<a NAME="idx1073745467"></a>
+							<a naME="idx1073745468"></A>
+							<A name="idx1073745469"></A>
+							<A NAme="idx1073745470"></a>
+						</p>
+
+					
+				
+				
+					<h4>Other Scientific Extensions</h4>
+					<p>Next, you have access to some extra Python extension modules that deal with scientific computation.</p>
+
+					
+						<h5>
+							<tt class="monofont">ScientificPython</tt>
+						</h5>
+						<p>
+							<Tt cLass="monofont">ScientificPython</Tt> is a collection of Python modules that are useful for scientific computing. In this collection, you will find modules that cover basic geometry (vectors, tensors, transformations, vector, and tensor fields), quaternions, automatic derivatives, (linear) interpolation, polynomials, elementary statistics, nonlinear least-squares fits, unit calculations, Fortran-compatible text formatting, 3D visualization via VRML, and two Tk widgets for simple line plots and 3D wireframe models. For more information, check out the following site:</p>
+
+						<prE>
+							
+						<a taRGET="_blank" href="http://starship.python.net/crew/hinsen/scientific.html">http://starship.python.net/crew/hinsen/scientific.html</A>
+					
+						</PRE>
+
+					
+					
+						<h5>
+							<tt cLASS="monofont">
+								<a namE="idx1073745471"></A>
+								<A Name="idx1073745472"></a>Pyfort</tt> (The Python/Fortran Connection Tool)</h5>
+						<p>
+							<tt class="monofont">Pyfort</tt> allows you to wrap your own Fortran routines in Python. For more information, check out</p>
+
+						<prE>
+							
+						<a tArgeT="_blank" href="http://pyfortran.sourceforge.net">http://pyfortran.sourceforge.net</A>
+					
+						</pre>
+
+					
+					
+						<H5>
+							<TT Class="monofont">RNG</TT>
+						</H5>
+						<P>
+							<tt clASS="monofont">RNG</Tt> is a random number package from LLNL. For more information, check out</p>
+
+						<prE>
+							
+						<A TArget="_blank" href="ftp://numpy.sourceforge.net/pub/numpy/rng-2.0.tgz">ftp://numpy.sourceforge.net/pub/numpy/RNG-2.0.tgz</a>
+					
+						</pre>
+
+					
+					
+						<h5>
+							<tt class="monofont">
+								<A naMe="idx1073745473"></a>
+								<a Name="idx1073745474"></a>pyclimate</Tt>
+						</h5>
+						<p>This package contains some tools used for climate variability analysis. It makes extensive use of Numerical Python. For more information, check out</P>
+
+						<PRE>
+							
+						<a tarGET="_blank" Href="http://lcdx00.wm.lc.ehu.es/~jsaenz/pyclimate/index.html">http://lcdx00.wm.lc.ehu.es/~jsaenz/pyclimate/index.html</a>
+					
+						</PRE>
+
+					
+					
+						<H5>
+							<tt clASS="monofont">
+								<A name="idx1073745475"></a>
+								<a name="idx1073745476"></a>GmatH</tt>
+						</h5>
+						<p>
+							<tt claSs="monofont">GmatH</tT> is a Gnome interface to the Numerical Python extensions. For more information, check out</p>
+
+						<prE>
+							
+						<a tarGet="_blank" hREF="http://gmath.sourceforge.net/index.html">http://gmath.sourceforge.net/index.html</A>
+					
+						</pre>
+
+					
+					
+						<h5>
+							<TT CLass="monofont">
+								<a NAME="idx1073745477"></a>
+								<a naME="idx1073745478"></A>Real</Tt>
+						</h5>
+						<p>
+							<tt class="monofont">real.py</tt> is a library that introduces a new class, called <a name="idx1073745479"></a>
+							<a nAme="idx1073745480"></A>
+							<tt cLass="monofont">Real,</tT> of arbitrarily precise numbers, allowing computations with "infinite" precision. This package handles a floating point number with a large number of decimal places (more than double by far). For more information, check out</p>
+
+						<prE>
+							
+ftp://ftp.python.org/pub/python/contrib-09-Dec-1999/DataStructures/
+real-accurate.pyar
+					
+						</PRE>
+
+					
+				
+				<a namE="14"></A>
+					<H4>
+				Computer Programming for Everybody</H4>
+					<p>Some great efforts are being made in bringing Python to classrooms in order to prepare young people for our new computer reality.<a naME="idx1073745481"></A>
+						<A name="idx1073745482"></A>
+						<A NAme="idx1073745483"></a>
+					</p>
+
+					<p>Bringing a computer language to the class is not a new idea. Many schools already teach some kind of programming language. However, Python is a very high-level language, a human-readable language, not just computer-readable, it has a more up-to-date design, and what you learn from Python can be adapted to other languages.</p>
+
+					<p>Everyone needs to know a little about computers these days, no matter what profession is chosen. It is said that some day in the near future, everyone will have to know how to code a computer program. Python is a great language that possesses all the features required for teaching computer logic to tomorrow's scientists.</p>
+
+					<p>For more information, see the following:</p>
+
+					<blockquote>
+<P>
+							<p>Computer Programming for Everybody, by Guido van Rossum</p>
+
+						</P>
+<p>
+							<p>
+								<pRe>
+									
+								<a taRget="_blank" HREF="http://www.python.org/doc/essays/cp4e.html">http://www.python.org/doc/essays/cp4e.html</a>
+							
+								</pre>
+
+							</P>
+
+						</P>
+<P>
+							<P>EDU-SIG: Python in Education</p>
+
+						</p>
+<p>
+							<p>
+								<PRE>
+									
+								<A targET="_blank" HRef="http://www.python.org/sigs/edu-sig/">http://www.python.org/sigs/edu-sig/</a>
+							
+								</pre>
+
+							</p>
+
+						</p>
+</blockquote>
+					<p>Check out the following four-part essay entitled <a NamE="idx1073745484"></a>
+						<i>Numeracy + Computer Literacy</i> series by <A name="idx1073745485"></A>Kirby Urner, who uses Python to teach various math concepts in the <a naME="idx1073745486"></A>
+						<I>Oregon Curriculum Network.</i> This material will give you a clear idea of how Python can be approached for education.</p>
+
+					<prE>
+						
+					<A TArget="_blank" HREF="http://www.inetarena.com/~pdx4d/ocn/cp4e.html">http://www.inetarena.com/~pdx4d/ocn/cp4e.html</a>
+				
+					</pre>
+
+				
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="153.html" title="Restricted Execution Mode"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=154" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="154.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="155.html" title="Regular Expressions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745458">Distutils</a><BR>
+ <a href="#idx1073745427">array objects</a><BR>
+arrays<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745419">one-dimensional</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745421">two-dimensional</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745480">Real</a><BR>
+classrooms<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745483">bringing Python to</a><BR>
+computing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scientific<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745414">use of Python in</a> <a href="#idx1073745423">2nd</a> <a href="#idx1073745444">3rd</a> <a href="#idx1073745453">4th</a> <a href="#idx1073745462">5th</a> <a href="#idx1073745482">6th</a><BR>
+ <a href="#idx1073745457">Distutils package</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745425">Numerical Python (NumPy)</a> <a href="#idx1073745446">2nd</a> <a href="#idx1073745455">3rd</a> <a href="#idx1073745464">4th</a> <a href="#idx1073745468">5th</a><BR>
+ <a href="#idx1073745437">fast_umath module</a><BR>
+ <a href="#idx1073745439">FFT.py module</a><BR>
+ <a href="#idx1073745441">fftpack module</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745430">universal</a><BR>
+ <a href="#idx1073745476">GmatH module</a><BR>
+ <a href="#idx1073745416">Hugunin, Jim</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745466">NumPy</a> <a href="#idx1073745470">2nd</a><BR>
+ <a href="#idx1073745450">lapack_litemodule module</a><BR>
+ <a href="#idx1073745417">Lawrence Livermore National Library</a><BR>
+ <a href="#idx1073745448">LinearAlgebra.py module</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745438">fast_umath</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745440">FFT.py</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745442">fftpack</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745475">GmatH</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745451">lapack_litemodule</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745449">LinearAlgebra.py</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745434">multiarray</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745432">Numeric.py</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745473">pyclimate</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745471">Pyfort</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745477">real.py</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745436">umath</a><BR>
+ <a href="#idx1073745433">multiarray module</a><BR>
+ <a href="#idx1073745484">Numeracy + Computer Literacy</a><BR>
+ <a href="#idx1073745431">Numeric.py module</a><BR>
+ <a href="#idx1073745424">Numerical Python (NumPy) extensions</a> <a href="#idx1073745445">2nd</a> <a href="#idx1073745454">3rd</a> <a href="#idx1073745463">4th</a> <a href="#idx1073745467">5th</a><BR>
+ <a href="#idx1073745426">NumPy (Numerical Python)</a> <a href="#idx1073745447">2nd</a> <a href="#idx1073745456">3rd</a> <a href="#idx1073745465">4th</a> <a href="#idx1073745469">5th</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745428">array</a><BR>
+ <a href="#idx1073745418">one-dimensional arrays</a><BR>
+ <a href="#idx1073745486">Oregon Curriculum Network</a><BR>
+ <a href="#idx1073745415">Plotting Special Interest Group</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745459">Distutils</a><BR>
+ <a href="#idx1073745474">pyclimate module</a><BR>
+ <a href="#idx1073745472">Pyfort module</a><BR>
+ <a href="#idx1073745479">Real class</a><BR>
+ <a href="#idx1073745478">real.py module</a><BR>
+scientific computing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745413">use of Python in</a> <a href="#idx1073745422">2nd</a> <a href="#idx1073745443">3rd</a> <a href="#idx1073745452">4th</a> <a href="#idx1073745461">5th</a> <a href="#idx1073745481">6th</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745460">Distutils</a><BR>
+ <a href="#idx1073745420">two-dimensional arrays</a><BR>
+ <a href="#idx1073745435">umath module</a><BR>
+ <a href="#idx1073745429">universal functions</a><BR>
+ <a href="#idx1073745485">Urner, Kirby</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

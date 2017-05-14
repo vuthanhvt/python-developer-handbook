@@ -1,0 +1,141 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Enhancements</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="282.html" class="navtitle">D. Migrating to Python 2.0</a> &gt; <span class="nonavtitle">Enhancements</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="285.html" title="New Development Process"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=286" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="286.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="287.html" title="Expected Code Breaking"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A34%3A06+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222219251169049227218189132</font><a href="read5.asp?bookname=0672319942&snode=286&now=6%2F1%2F2002+6%3A34%3A06+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Enhancements</h3>
+				<p>Python 2.0 comes bundled with <a NAME="idx1073751507"></a>many new features, bug fixes, and optimizations. The next list provides an appetizer for the main changes that were made, and that are about to be shown.</p>
+
+				<ul>
+<LI><P>Python 2.0's source code was <A name="idx1073751508"></A>converted to ANSI C. That means that you need an ANSI C compiler in order to compile Python. Compilers that only support K&amp;R C will not be able to compile version 2.0. Note that this isn't a big problem, as just about every C compiler these days is ANSI C compliant.</P>
+</LI>
+<li><p>For those of you who had problems with the size of your source code, Python 2.0 has increased the limit of expressions and files in Python source code. That limit is now <i>2**32.</i> If compared to the <i>2**16</i> that we previously had, it can be considered a good limit.</p>
+</li>
+<li><p>This new release also starts the porting of Python to 64-bit platforms. Currently, both Linux and Win64 are able to take care of that. Some extra effort was made especially for Intel's Itanium processor.</p>
+</li>
+<li><p>The support to XML was fully <a NamE="idx1073751509"></a>extended. The <tt Class="monofont">xml</Tt> package includes a renewed DOM interface and a SAX2 interface.</p>
+</lI>
+<LI><P>All the internals of the <tt clASS="monofont">re</Tt>
+							<a naME="idx1073751510"></A><A name="idx1073751511"></A><A NAme="idx1073751512"></a>module were changed. Now, the regular expression engine is located in a new module called <tt class="monofont">SRE</tt> written by Fredrik Lundh of Secret Labs AB. This was to allow Unicode strings to be used in regular expressions too. Pay attention to the <tt class="monofont">re</tT> module as it continues to be the front-end module, which internally calls the <tt ClasS="monofont">SRE</tt> module.</p>
+</lI>
+<li><p>Many new modules were added. (Check them out throughout the book!)</P>
+</LI>
+<Li><p>Many enhancements were <a nAME="idx1073751513"></A>made to IDLE. Python 2.0 is distributed with  IDLE 0.6, which also contains a number of new features.</p>
+</li>
+<lI><P>Some methods had their syntax <A Name="idx1073751514"></a>changed for enhancement purposes, including <TT CLass="monofont">listobj.insert()</tt>, <tt class="monofont">listobj.append()</tt>, and the methods from the <tt clasS="monofont">socket</tt> module.</P>
+</li>
+<lI><p>Python 2.0 introduces the possibility to rename a module when importing it, for example, <tt cLass="monofont">import Module as OtherName</TT>. Note that this syntax can also be used when importing symbols from a module, for instance:</P>
+
+						<Pre>
+							
+from module import sym1 as sym2
+
+						</prE>
+
+					</LI>
+<Li><p>Now, you can also redirect your print statements to a file-like object, for  example, <tt CLASs="monofont">print &gt;&gt; fileobj, "Hello Python World"</tt>.</p>
+
+					</LI>
+</UL>
+				<p>The following are considered to be the most important changes in this new release.</p>
+
+				
+					<h4>Unicode Support</h4>
+					<p>This is a long <a name="idx1073751515"></a><a name="idx1073751516"></a>awaited feature that was finally added to the language. Unicode strings are a new sort of data type, which can handle up to 65,536 distinct characters, instead of being limited to the 256 used by the ASCII format. Python now comes with a library of <i>codecs</i> for converting between Unicode and the various character <i>encodings</I> in use. This library can be extended very easily.</p>
+
+				
+				
+					<h4>List Comprehension</H4>
+					<p>Whenever you need to <a nAme="idx1073751517"></a>compute a list (or lists) of elements in order to generate a new list, you can use this new and more efficient mechanism. It is offered for lists in order to replace the not-that-efficient method of using a <tT claSS="monofont">for</TT> loop with an <tt clASS="monofont">if</Tt> statement and a <tt cLASS="monofont">list.append()</tt> call, for example, <tt CLASs="monofont">newlist = [y+3 for y in range(15)]</tt></p>
+
+				
+				
+					<h4>Strings Manipulation</h4>
+					<p>Prior to version 2.0, you <a name="idx1073751518"></a>had to rely on the <tt class="monofont">string</Tt> module to manipulate your string objects. With this new release, the methods were pushed to the string type. Besides the methods that were inherited from the <tT claSs="monofont">string</tt> module, two new methods were also added. Note that old <tT claSS="monofont">string</TT> module was not removed from the distribution because it is still necessary for backward compatibility.</p>
+
+				
+				
+					<h4>Augmented Assignment</h4>
+					<p>Python 2.0 implements a full set of <A NAMe="idx1073751519"></a><a nAME="idx1073751520"></A>augmented assignment operators. This includes: <tt clASS="monofont">+=</Tt>, <tt class="monofont">-=</tt>, <tt class="monofont">*=</tt>, <tT clAss="monofont">/=</tT>, <tt clAss="monofont">%=</tT>, <TT Class="monofont">**=</TT>, <TT clasS="monofont">&amp;=</TT>, <Tt claSS="monofont">|=</TT>, <tt class="monofont">^=</tt>, <tt class="monofont">»=</tt>, and <tt ClaSs="monofont">«=</tt></P>
+
+					<p>For example, instead of saying <tt cLass="monofont">x = x+1</TT>, you can choose to say <TT clasS="monofont">x += 1</TT></P>
+
+					<p>Note that you can also specify methods for classes (such as <tt cLASS="monofont">__iadd__)</tt> in order to handle these new operators.</p>
+
+				
+				
+					<h4>Garbage Collection</H4>
+					<P>The Python interpreter is now <A Name="idx1073751521"></a><a name="idx1073751522"></a>using a new mechanism to collect unused objects. From time to time, this mechanism performs a cycle detection algorithm that searches for inaccessible cycles and deletes the participating objects. This process has been named <i>Garbage Collection of Cycles.</i></p>
+
+					<p>There are a couple of parameters of the garbage collection that you can manipulate. The module <tt clasS="monofont">gc</tt> provides functions that help you out with that. Of course, you always have the option to disable this feature. To do so, simply specify the argument  "<Tt clAss="monofont">--without-cycle-gc</tt>" when running the Python configure script.</P>
+
+				
+				
+					<h4>Maximum Recursion</h4>
+					<p>Prior to version 2.0, Python's <A NAMe="idx1073751523"></a><a nAME="idx1073751524"></A>maximum recursion depth used to be decided when you compiled Python. Now, the maximum number of recursive calls that can be made by Python code is easily interpreted and modified by Python programs just by using the functions <tt clASS="monofont">sys.getrecursionlimit</Tt> and <tt cLASS="monofont">sys.setrecursionlimit</tt>, respectively. Note that the default number of recursive calls is set to 1000, and you can use the script <tt class="monofont">Misc/find_recursionlimit.py</tt> that comes as part of the 2.0 distribution to help you figure out what is the best number to use on your system. After running this program, you can add a <tt class="monofont">setrecursionlimit()</tt> call to the end of <Tt cLass="monofont">site.py</Tt> so that this limit is used by all Python programs on the system.</p>
+
+					<p>Taking good care of this limit can help you trap infinite recursions of filling the C stack and causing a core dump or GPF on your system.</p>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="285.html" title="New Development Process"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=286" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="286.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="287.html" title="Expected Code Breaking"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+assignment operators<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751520">Python 2.0</a><BR>
+ <a href="#idx1073751521">Garbage Collection of Cycles (Python 2.0)</a><BR>
+IDLE<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751513">Python 2.0</a><BR>
+lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751517">Python 2.0</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751514">Python 2.0</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;re<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751511">Python 2.0</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unused objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751522">Python 2.0</a><BR>
+operators<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assignment operators<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751519">Python 2.0</a><BR>
+Python 2.0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751507">new features</a> <a href="#idx1073751512">2nd</a> <a href="#idx1073751516">3rd</a> <a href="#idx1073751524">4th</a><BR>
+re module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751510">Python 2.0</a><BR>
+recursion<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751523">Python 2.0</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751508">Python 2.0</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751518">Python 2.0</a><BR>
+Unicode support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751515">Python 2.0</a><BR>
+XML<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751509">support in Python 2.0</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

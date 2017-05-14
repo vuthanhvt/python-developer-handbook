@@ -1,0 +1,65 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Expected Code Breaking</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="282.html" class="navtitle">D. Migrating to Python 2.0</a> &gt; <span class="nonavtitle">Expected Code Breaking</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="286.html" title="Enhancements"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=287" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="287.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><font size="1">&nbsp;</font></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A34%3A18+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222219251169048213060106065</font><a href="read0.asp?bookname=0672319942&snode=287&now=6%2F1%2F2002+6%3A34%3A18+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Expected Code Breaking</h3>
+				<p>There are a couple of <a NAME="idx1073751525"></a>changes in Python 2.0 that you should be aware of because they could cause your current Python code to break.</p>
+
+				<ul>
+<LI><P>It's not possible to have string exceptions anymore. All standard exceptions can only be classes from now on. The <Tt claSS="monofont">-X</TT> command line option has been removed.</p>
+</li>
+<li><p>The <tt class="monofont">\x</tt> escape that you normally use for string literals now accepts only 2 hexadecimal digits, instead of reading everything that you inform and taking only the lowest 8-bit of the given value. Note that not many people knew about or used this fact, so it should not cause any significant breakage.</p>
+</li>
+<li><P>Prior to 2.0, there were some methods that accepted multiple arguments, and internally converted them to a tuple, such as the <tt ClasS="monofont">.append()</tt> method of a list object. Consequently, you could type <tt ClasS="monofont">lstobj.append(3,4,5)</TT>. After release 2.0, you need to inform an additional pair of parenthesis in order to avoid raising a <Tt claSS="monofont">TypeError</TT> exception. Thus, the right syntax has become <tt clASS="monofont">lstobj.append((3,4,5))</Tt>. Note that there are a couple of methods that still work in both ways, such as the <tt cLASS="monofont">socket.connect()</tt>. Also note that the script <tt class="monofont">Tools/scripts/checkappend.py</tt> can be used to catch most occurrences of this mistake.</p>
+</li>
+<li><p>When dealing with long <a naMe="idx1073751526"></a><A namE="idx1073751527"></a><a naMe="idx1073751528"></a><a NAME="idx1073751529"></a>integers, the <tt cLASS="monofont">str()</tt> function doesn't include the 'L'character anymore at the end of the string. Although, the <tt CLASs="monofont">repr()</tt> function still does. Therefore, if you cut the last position of our string in order to get rid of the 'L', you will now get rid of the last digit. So, be careful!</p>
+</LI>
+<LI><p>Talking about <tt class="monofont">str()</tt> and <tt class="monofont">repr()</tt>, they now use different formatting precision string. The former uses <tT clAss="monofont">%.12g</tT>, and the latter uses <tt clAss="monofont">%.17g</tT>. Consequently, <TT Class="monofont">repr()</TT> might sometimes return more <A Name="idx1073751530"></a>decimal places.</P>
+</LI>
+</Ul>
+				<p>And always remember that you can depend on the support of the Python community to help you out with problems that you can't easily solve. If you think your problem is a common or simple problem, try reading the list archives or asking questions in the mailing lists. If it seems to be a bug, look at the CVS tree to see whether it has been fixed. If not, you can report it.</p>
+
+				<p>Good luck in your Python Adventure!</P>
+
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="286.html" title="Enhancements"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=287" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="287.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><font size="1">&nbsp;</font></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repr()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751528">Python 2.0</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751527">Python 2.0</a><BR>
+Python 2.0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751525">preventing code breaks</a> <a href="#idx1073751530">2nd</a><BR>
+repr() function<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751529">Python 2.0</a><BR>
+str() function<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751526">Python 2.0</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

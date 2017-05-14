@@ -1,0 +1,319 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Manipulating Images</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="148.html" class="navtitle">9. Other Advanced Topics</a> &gt; <span class="nonavtitle">Manipulating Images</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="150.html" title="Other Advanced Topics"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=151" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="151.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="152.html" title="Working with Sounds"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A40%3A08+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148044238004005252068155</font><a href="read6.asp?bookname=0672319942&snode=151&now=5%2F31%2F2002+4%3A40%3A08+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			Manipulating Images</h3>
+				<p>Python has comprehensive support for handling image files. The foundation of this structure is based on the <a NAME="idx1073745243"></a>
+					<a naME="idx1073745244"></A>
+					<A name="idx1073745245"></A>Python Imaging Library (commonly known as PIL).</P>
+
+				<P>PIL is a set of Python modules that compound an extensive framework written by Fredrik Lundh, from Secret Labs AB. PIL is able to convert and manipulate image files of several different formats (such as <Tt class="monofont">GIF, JPEG,</tt> and <tt class="monofont">PNG</tt>), and provides powerful graphics capabilities. Its framework is cross-platform, which allows it to perform image manipulation and processing in different systems using the same code. PIL also supports some Windows-specific extensions that enable it to display images using the Windows API.</p>
+
+				<p>Some of the main features of PIL are summarized in the following:</p>
+
+				<Ul>
+<lI>
+						<p>PIL can load image objects from a variety of formats.</p>
+
+					</lI>
+<li>
+						<p>It enables the Python interpreter to handle image objects.</p>
+
+					</Li>
+<li>
+						<P>PIL enables a rich set of image operations to be applied to those objects.</P>
+
+					</LI>
+<li>
+						<p>It saves images files to disk.<a NAME="idx1073745246"></a>
+							<a naME="idx1073745247"></A>
+							<A name="idx1073745248"></A>
+						</P>
+
+					</LI>
+<li>
+						<p>It uses graphical interfaces, such as <tt class="monofont">Tkinter</tt> and <tt class="monofont">PythonWin</tT> in order to show the resulting images.</p>
+
+					</lI>
+<li>
+						<p>It allows you to create thumbnails automatically from a collection of images.</P>
+
+					</li>
+<li>
+						<P>You can create, read, and write different images formats, including <tt cLASS="monofont">JPEG, GIF,</tt> and <tt CLASs="monofont">TIFF.</tt>
+						</p>
+
+					</LI>
+<LI>
+						<p>It provides supports to some animation formats, such as <tt cLASS="monofont">FLI</tt> and <tt class="monofont">MPEG.</tt>
+						</p>
+
+					</li>
+<li>
+						<p>It automatically identifies file formats.</p>
+
+					</li>
+<Li>
+						<p>PIL can be used to make file conversions between graphic files of different formats.</P>
+
+					</li>
+<lI>
+						<p>PIL also handles changes in the image file's color table (for example, it can change the color table of a file from RGB to grayscale).</p>
+
+					</li>
+</Ul>
+				<p>These are just some of things you can do with PIL. You are invited to create an image object in the interpreter using PIL, and play around for a while.</p>
+
+				<P>PIL's home page and download center is located at the following site:</P>
+
+				<P>
+					<A targET="_blank" HRef="http://www.pythonware.com/products/pil/index.htm">http://www.pythonware.com/products/pil/index.htm</a>
+				</p>
+
+				<P>Similar to Python itself, PIL is copyrighted but can be used without fee.</P>
+
+				
+					<H4>
+				
+				Python Imaging Library</H4>
+					<p>The <a naME="idx1073745249"></A>
+						<A name="idx1073745250"></a>
+						<tt class="monofont">Image</tt> class is the most important class of PIL. To use it, you need to import the <a name="idx1073745251"></a>
+						<A naMe="idx1073745252"></a>
+						<tT clasS="monofont">Image</tt> module, and launch the <a NAME="idx1073745253"></a>
+						<a naME="idx1073745254"></A>
+						<Tt claSS="monofont">open</TT> method. This method is very fast because it doesn't decode the whole image. It just reads the image header in order to start working with the file.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import Image
+&gt;&gt;&gt; im = Image.open("c:\\logo.gif")
+
+					</PRE>
+
+					<P>As you can see in the next example, you can also <a name="idx1073745255"></a>load an image (<tt class="monofont">GIF</tt> or <tt claSs="monofont">JPEG</tT>) straight from a URL without saving it to a file first. Note that <tt cLass="monofont">filelocation</tT> is any file handle like python object.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; filename = "http://www.lessaworld.com/images/brazil.gif "
+&gt;&gt;&gt; filelocation = urllib.urlopen(filename)
+&gt;&gt;&gt; im = Image.open(filelocation)
+				
+					</PRE>
+
+					<p>Every image object that is created by the <tt cLASS="monofont">open</tt> function exposes three attributes: <tt CLASs="monofont">format, size,</tt> and <tT CLAss="monofont">mode.</tt>
+					</p>
+
+					<blockquote>
+<p>
+							<p>
+								
+									<tt cLasS="monofont">im.format—</tt>
+								 
+    
+								Identifies the source format of the image.
+							</p>
+
+						</P>
+<p>
+							<p>
+								
+									<tt ClasS="monofont">im.size—</TT>
+								 
+    
+								It is a 2-tuple variable that contains the image's width and height.
+							</P>
+
+						</p>
+<p>
+							<p>
+								<a NAME="idx1073745256"></a>
+								<a naME="idx1073745257"></A>
+								<Tt claSS="monofont">im.mode—</TT>Provides the image mode, such as grayscale (<tt class="monofont">L</tt>), <tt class="monofont">CMYK,</tt> or <tt ClaSs="monofont">RGB</tt> mode. The attribute called <Tt claSs="monofont">Image.MODES</tt> lists all the modes supported by the library.</P>
+
+							<PRE>
+								
+&gt;&gt;&gt; print im.format, im.size, im.mode
+GIF (200, 130) L
+
+							</pre>
+
+						</p>
+</BLOCkquoTE>
+					<P>If you want to generate a <A name="idx1073745258"></A>
+						<A NAme="idx1073745259"></a>thumbnail image, you need to call the <tt class="monofont">thumbnail</tt> method and provide the size of the new image. Note that a new object isn't created because the change is applied to the old object. Therefore, the image must be copied if you need both the original and thumbnail images.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; im.thumbnail((50, 32))
+
+					</pre>
+
+					<p>After you have done everything that you need, you can think about <A naMe="idx1073745260"></a>
+						<a Name="idx1073745261"></a>saving the new file. Notice that the first argument in the <Tt clASS="monofont">save</Tt> method is the name of the output file, and the second argument is the format to be saved. If the format argument is omitted, the format is deduced from the file extension.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; outfile = "a:\\out.jpg"
+&gt;&gt;&gt; im.save(outfile, "JPEG")
+
+					</PRE>
+
+					<p>Many other methods can be applied on the image. For cutting, pasting, and merging images, you can use <tt cLASS="monofont">im.crop(), im.paste(),</tt> and <tt CLASs="monofont">im.transpose().</tt> For resizing and rotating an image, <tt class="monofont">im.resize()</tt> and <tt class="monofont">im.rotate()</tT> are available.</p>
+
+					<p>For a complete tutorial about using PIL, check out the <I>Python Imaging Library Handbook</i> at the following site:</p>
+
+					<pRe>
+						
+					<a taRget="_blank" HREF="http://www.pythonware.com/library/pil/handbook/index.htm">http://www.pythonware.com/library/pil/handbook/index.htm</a>
+				
+					</pre>
+
+				
+				
+					<H4>Other Modules</H4>
+					<P>Besides PIL, some other modules can help you manipulate graphic and image files.<A name="idx1073745262"></A>
+						<A NAme="idx1073745263"></a>
+						<a NAME="idx1073745264"></a>
+					</p>
+
+					
+						<h5>
+							<tt class="monofont">imghdr</tt> Module</h5>
+						<p>This module recognizes image files based on their headers'first few bytes. The <tt clasS="monofont">imghdr</tt> module is part of the standard distribution. This module implements the <A namE="idx1073745265"></a>
+							<a naMe="idx1073745266"></a>
+							<tT CLAss="monofont">what()</tt> function, which returns the file type.</P>
+
+						<PRE>
+							
+&gt;&gt;&gt; import imghdr
+&gt;&gt;&gt; imgfile = imghdr.what("d:\\logo.gif")
+&gt;&gt;&gt; print imgfile
+gif
+
+						</pre>
+
+						<p>The file types currently supported are: SGI image library, GIF ('87 and '89 variants), PBM (portable bitmap), PGM (portable graymap), PPM (portable pixmap), TIFF (can be in Motorola or Intel byte order), Sun raster file, X bitmap (X10 or X11), JPEG data in JFIF format, BMP, and PNG.<A NAMe="idx1073745267"></a>
+							<a nAME="idx1073745268"></A>
+						</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">GD</tt> Module</h5>
+						<p>The <tt class="monofont">GD</Tt> module is an interface to the GD GIF library that allows your code to quickly draw images complete with lines, arcs, text, multiple colors, cut and paste from other images, and flood fills, and to write out the result as a <tT claSs="monofont">.GIF</tt> file. This module is currently no longer maintained. Newer <tT claSS="monofont">gd</TT> libraries generate <tt clASS="monofont">png</Tt> images rather than <tt cLASS="monofont">gif</tt>s. Also, <tt CLASs="monofont">GD</tt> is not Free Software as it has commercial use restrictions. For more information, check out the following site:</p>
+
+						<pre>
+							
+						<a target="_blank" href="http://starship.beopen.com/crew/richard/gdmodule/">http://starship.beopen.com/crew/richard/gdmodule/</a>
+					
+						</pRe>
+
+					
+					
+						<h5>
+							<Tt clAss="monofont">WBMP</tt> Module</H5>
+						<p>
+							<tt CLASs="monofont">WBMP</tt> is a wireless bitmap format, the graphic format used by WAP mobile phones. A <tT CLAss="monofont">WBMP</tt> module for PIL is available for download at <A TARget="_blank" hREF="http://www.rcp.co.uk/">http://www.rcp.co.uk/</A> distributed/Downloads</p>
+
+						<p>The filename is <tt class="monofont">wbmpconvsrc.zip.</tt> The download includes a script for converting between WBMP and any other PIL supported bitmap format.</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">PyOpenGL</Tt> Module</h5>
+						<P>
+							<tt cLass="monofont">OpenGL,</tT> created by <a naME="idx1073745269"></A>
+							<A name="idx1073745270"></A>
+							<A NAme="idx1073745271"></a>Silicon Graphics, is a portable library for rendering. It is a complex API with superior performance that became an industry standard for 2D and 3D graphics.</p>
+
+						<P>The Open GL home page is located at <A TArget="_blank" HREF="http://www.opengl.org">http://www.opengl.org.</a>
+						</p>
+
+						<p>
+							<tt class="monofont">PyOpenGL</tt> is a wrapper class for the <tt class="monofont">OpenGL</tT> library that is maintained by <a nAme="idx1073745272"></a>David Ascher. It can be found at <A targEt="_blank" hrEF="http://starship.python.net/crew/da/pyopengl">http://starship.python.net/crew/da/PyOpenGL.</A>
+							<A name="idx1073745273"></A>
+							<A NAme="idx1073745274"></a>
+							<a NAME="idx1073745275"></a>
+						</p>
+
+					
+				
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="150.html" title="Other Advanced Topics"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=151" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="151.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="152.html" title="Working with Sounds"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073745272">Ascher, David</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745256">im.mode</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745250">Image</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;image<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745261">saving</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745266">what()</a><BR>
+generating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745258">thumbnail images</a><BR>
+graphics<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745248">manipulating</a> <a href="#idx1073745264">2nd</a> <a href="#idx1073745275">3rd</a><BR>
+ <a href="#idx1073745257">im.mode attribute</a><BR>
+ <a href="#idx1073745249">Image class</a><BR>
+ <a href="#idx1073745252">Image module</a><BR>
+images<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745247">manipulating</a> <a href="#idx1073745263">2nd</a> <a href="#idx1073745274">3rd</a><BR>
+ <a href="#idx1073745268">imghdr module</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745244">Python Imaging</a><BR>
+loading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745255">images</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745246">images</a> <a href="#idx1073745262">2nd</a> <a href="#idx1073745273">3rd</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745254">open</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745251">Image</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745267">imghdr</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745271">OpenGL</a><BR>
+ <a href="#idx1073745253">open method</a><BR>
+ <a href="#idx1073745270">OpenGL module</a><BR>
+PILÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745245">Ò</a><BR>
+ <a href="#idx1073745243">Python Imaging Library</a><BR>
+saving<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745260">images</a><BR>
+Silicon Graphics<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745269">OpenGL module</a><BR>
+thumbnail images<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745259">generating</a><BR>
+ <a href="#idx1073745265">what() function</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

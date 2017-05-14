@@ -1,0 +1,460 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Threads</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="148.html" class="navtitle">9. Other Advanced Topics</a> &gt; <span class="nonavtitle">Threads</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="155.html" title="Regular Expressions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=156" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="156.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="157.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A40%3A55+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148044238001160165056249</font><a href="read6.asp?bookname=0672319942&snode=156&now=5%2F31%2F2002+4%3A40%3A55+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			Threads</h3>
+				<p>Let's start by quickly defining a thread. Many people still have some kind of confusion when it comes to clarifying the difference between threads and processes.</p>
+
+				<P>When you run any program in your computer, the CPU creates a process for that program. This process is defined as a group of elements that compound a single program. These elements are the memory area reserved for the program, a program counter, a list of files opened by the program, and a call stack where all the variables are stored. A program with a single call stack and program counter is a single threaded program.</P>
+
+				<P>Now, suppose you have different tasks inside your program that you need to execute several times simultaneously. What do you do? Maybe you are thinking about calling the whole program several times. Wrong answer! Think about all the resources that you are consuming without actually using them!<A name="idx1073745601"></A>
+				</P>
+
+				<P>The solution to implement this multithreaded program is to create a function that implements the code which needs to be executed several times concurrently, and then, create a thread that uses only this function.</P>
+
+				<p>A <i>thread</i> is a program unit that processes multiple time-consuming actions as parallel tasks in the background of your main application process. Sometimes threads are difficult to debug because the circumstances in which they occur are hard to simulate.</p>
+
+				
+					<H4>Python Threads</H4>
+					<P>Python threads can be implemented on every operational system that supports the POSIX threads library. But actually, the Python threading support doesn't always use POSIX threads. In the python-2.0 source tree, there are beos, cthread, lwp, nt, os2, pth, pthread, sgi, solaris, and wince thread implementations. In certain environments that support multithreading, Python allows the interpreter to run many threads at once.</P>
+
+					<p>Python has two threading interfaces: The <tt class="monofont">thread</tt> module and the <tt class="monofont">threading</tt> module. The use of these Python's native threading built-in modules enables the code to be portable across all platforms that support Python.</p>
+
+					<P>The <tt ClasS="monofont">thread</tt> module supports lightweight process threads. It offers a low-level interface for working with multiple threads.</p>
+
+					<p>On the other hand, the <Tt clASS="monofont">threading</Tt> module provides high-level threading interfaces on top of the <tt cLASS="monofont">thread</tt> module.</p>
+
+					<p>Besides these two modules, Python also implements the <TT CLass="monofont">Queue</tT> module. This is a synchronized <A NAme="idx1073745602"></a>
+						<a name="idx1073745603"></a>
+						<i>queue class</i> used in thread programming to move Python objects between multiple threads in a safe way.</p>
+
+					<p>Threads have limitations on some platforms. For instance, Linux thread switching is quite fast, sometimes faster than NT thread switching.</p>
+
+					<p>Programs—such as Tkinter, CORBA, and ILU—that rely on a main loop to dispatch events can complicate the design of threads. Definitively, they do not have a good relationship with threaded programs. Main loops are usually used by Graphical User Interfaces not to allow the main thread to exit.</p>
+
+					<p>
+						<a naMe="idx1073745604"></a>
+						<A namE="idx1073745605"></a>
+						<a naMe="idx1073745606"></a>
+						<a NAME="idx1073745607"></a>MacPython is currently not built with thread support. That is because no posix-compatible thread implementation was available, making Python integration hard. However, this has changed with GUSI2 (a <i>posix</i> I/O emulation library), and the upcoming MacPython 1.6a1 is planned to have threads.</p>
+
+					<P>The <A NAme="idx1073745608"></a>Windows Operation System adds many additional features to Python's implementation of threads. The win32 package provides as additional features for Python's thread support:<a NAME="idx1073745609"></a>
+					</p>
+
+					<ul>
+<LI>
+							<P>The <Tt class="monofont">win32process</tt> module—An interface to the win32 Process and Thread API's.</p>
+
+						</li>
+<li>
+							<p>The <tt clasS="monofont">win32event</tt> module—A module that provides an interface to the win32 event/wait API.</P>
+
+						</li>
+</uL>
+					<p>The threading model provided by the COM technology allows objects not designed to work as threads to be used by other objects that are thread-aware.</p>
+
+					<p>Python's <a Name="idx1073745610"></A>
+						<A NAme="idx1073745611"></a>interpreter cannot handle more than one thread at the same time. The global interpreter lock is the internal mechanism which guarantees that the Python interpreter executes only one thread simultaneously. Although this is not a problem for single-threaded programs, or programs on single-processor machines, it can become trouble on performance-critical applications that run on multiprocessor computers. If your threads are doing IO work, other threads can execute during reads and writes.</p>
+
+					<P>Check out <A HRef="255.html">Appendix A, "Python/C API,"
+						</a>  for information about handling threads using the Python/C API. You can also see the latest documentation about it at</p>
+
+					<PRE>
+						
+					<A targET="_blank" HRef="http://www.python.org/doc/current/api/threads.html">http://www.python.org/doc/current/api/threads.html</a>
+				
+					</pre>
+
+					<p>You might also want to look at the <tt class="monofont">thread</tt> and <tt clAss="monofont">threading</Tt> modules in the library reference, which are documented at</p>
+
+					<pRe>
+						
+					<a taRget="_blank" HREF="http://www.python.org/doc/current/lib/module-thread.html">http://www.python.org/doc/current/lib/module-thread.html</a>
+				
+					</pre>
+
+					<P>and</P>
+
+					<PRe>
+						
+					<a taRGET="_blank" href="http://www.python.org/doc/current/lib/module-threading.html">http://www.python.org/doc/current/lib/module-threading.html</A>
+				
+					</PRE>
+
+					<p>Anton Ertl has a Web page that exposes very interesting material about the differences between the various threading techniques:</p>
+
+					<pre>
+						
+					<a target="_blank" href="http://www.complang.tuwien.ac.at/forth/threaded-code.html">http://www.complang.tuwien.ac.at/forth/threaded-code.html</a>
+				
+					</pre>
+
+				
+				
+					<H4>
+				
+				Python Thread Modules</h4>
+					<p>Python includes two threading modules, assuming that your Python was configured for threads when it was built. One provides the primitives, and the other provides higher-level access. In general, Python relies on operating system threads unless you specifically compile it by activating the thread directive. This should offer adequate performance for all but the most demanding applications.</P>
+
+					
+						<h5>Thread Module</h5>
+						<p>The following four functions are available in this module:</P>
+
+						<ul>
+<li>
+								<P>
+									
+										<tt cLASS="monofont">thread.allocate_lock()—</tt>
+									 
+    
+									Creates and returns a lock object. This object has the following three methods:
+								</p>
+
+								<bLOCKquotE>
+<P>
+										<P>
+											
+												<Tt claSS="monofont">lckobj.acquire([flag])—</TT>
+											 
+    
+											It is used to acquire a lock. If the flag is omitted, the function returns <tt class="monofont">None</tt> when it acquires the lock. If flag is set to <tt class="monofont">0,</tt> the lock is only acquired when it can be immediately acquired. Anything different from <tt ClaSs="monofont">0</tt> blocks the methods until the lock is released. This process cannot be interrupted. This function returns <Tt claSs="monofont">1</tt> if the lock is acquired, and <TT CLass="monofont">0</tT> if not.
+										</P>
+
+									</P>
+<P>
+										<p>
+											
+												<tt cLASS="monofont">lckobj.release()—</tt>
+											 
+    
+											Releases the lock.
+										</p>
+
+									</p>
+<P>
+										<P>
+											
+												<TT class="monofont">lckobj.locked()—</tt>
+											 
+    
+											Returns <tt class="monofont">1</tt> if the object has a successful lock. Otherwise, it returns <tt clAss="monofont">0.</Tt>
+											
+										</p>
+
+									</p>
+</BlockQuotE>
+							</LI>
+<Li>
+								<p>
+									
+										<tt CLASs="monofont">thread.exit()—</tt>
+									 
+    
+									Raises a <tT CLAss="monofont">SystemExit</tt> exception that ends the thread. It is equivalent to <TT CLass="monofont">sys.exit()</tt> function.
+								</p>
+
+							</li>
+<li>
+								<p>
+									
+										<tt class="monofont">thread.get_ident()—</tt>
+									 
+    
+									Gets the identifier of the current thread.
+								</P>
+
+							</li>
+<Li>
+								<p>
+									
+										<tT clasS="monofont">thread.start_new_thread(func, args [,kwargs])—</tt>
+									 
+    
+									Starts a new thread. Internally, it uses the <tT CLAss="monofont">apply</tt> function to call <TT CLass="monofont">func</tT> using the provided arguments. This method requires the second argument (<TT Class="monofont">args</TT>) to be a tuple.<A Name="idx1073745612"></a>
+										<a name="idx1073745613"></a>
+										<a name="idx1073745614"></a>
+									
+								</p>
+
+							</li>
+</uL>
+						<p>As there isn't any main loop in the next program, the <a Name="idx1073745615"></A>
+							<a namE="idx1073745616"></a>
+							<tt CLASs="monofont">time.sleep</tt> function (line 30) doesn't allow the child threads be killed because it doesn't allow the main thread exit. If this function weren't there, the other threads would be killed immediately when the main thread exited. You can test this by commenting the last line.</p>
+
+						<PRE>
+							
+ 1: import thread, time
+ 2: class VCR:
+ 3:     def __init__(self):
+ 4:         self._channel = { }
+ 5:         self._channel['1'] = self.channel_KDSF
+ 6:         self._channel['2'] = self.channel_FOKS
+ 7:         self._channel['3'] = self.channel_CBA
+ 8:         self._channel['4'] = self.channel_ESTN
+ 9:     def channel(self, selection, seconds):
+10:         self._channel[selection] (seconds)
+11:     def channel_KDSF(self, seconds_arg):
+12:         thread.start_new_thread(self.record, (seconds_arg,'1. KDSF'))
+13:     def channel_FOKS(self, seconds_arg):
+14:         thread.start_new_thread(self.record, (seconds_arg,'2. FOKS'))
+15:     def channel_CBA(self, seconds_arg):
+16:         thread.start_new_thread(self.record, (seconds_arg,'3. CBA'))
+17:     def channel_ESTN(self, seconds_arg):
+18:         thread.start_new_thread(self.record, (seconds_arg,'4. ESTN'))
+19:     def record(self, seconds, channel):
+20:         for i in range(seconds):
+21:             time.sleep(0.0001)
+22:         print "%s is recorded" % (channel)
+23:
+24: myVCR = VCR()
+25:
+26: myVCR.channel('1', 700)
+27: myVCR.channel('2', 700)
+28: myVCR.channel('3', 500)
+29: myVCR.channel('4', 300)
+30: time.sleep(5.0)
+
+						</Pre>
+
+						<p>The <tT CLAss="monofont">time.sleep()</tt> function in line 21 is necessary to allow other threads to run. If you don't use this function, there will be no timing gap between commands to be used by the other threads.</P>
+
+					
+					
+						<H5>Threading Module</H5>
+						<P>Besides exposing all the functions from the <tt class="monofont">thread</tt> module, this module also provides the following additional functions:</p>
+
+						<blockquote>
+<P>
+								<p>
+									
+										<tT claSs="monofont">Threading.activeCount()—</tt>
+									 
+    
+									This function returns the number of active thread objects.
+								</p>
+
+							</P>
+<p>
+								<p>
+									
+										<tT CLAss="monofont">Threading.currentThread()—</tt>
+									 
+    
+									This function returns the thread object in current control.
+								</P>
+
+							</P>
+<P>
+								<P>
+									
+										<tt clASS="monofont">Threading.enumerate()—</Tt>
+									 
+    
+									This function returns a list of all active thread objects.<a naME="idx1073745617"></A>
+										<A name="idx1073745618"></a>
+										<a name="idx1073745619"></a>
+									
+								</p>
+
+							</p>
+</blockquOte>
+						<P>Each <tt cLass="monofont">Threading.Thread</tT> class object implements many methods, including</p>
+
+						<blOCKQuote>
+<P>
+								<P>
+									
+										<TT clasS="monofont">threadobj.start()—</TT>
+									 
+    
+									This method invokes the run method.
+								</P>
+
+							</p>
+<p>
+								<p>
+									
+										<tT CLAss="monofont">threadobj.run()—</tt>
+									 
+    
+									This method is called by the start method. You can redefine  this one.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt class="monofont">threadobj.join([timeout])—</tt>
+									 
+    
+									This one waits for the threads to complete. The optional timeout argument must be provided in seconds.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<tt ClasS="monofont">threadobj.isAlive()—</tt>
+									 
+    
+									Returns <tt ClasS="monofont">1</TT> if the run method of the thread object has concluded. If not, it returns <Tt claSS="monofont">0.</TT>
+									
+								</p>
+
+							</p>
+</blOCKQuote>
+						<P>In the next example, you want to subclass the <TT Class="monofont">Thread</tt> class, and define a new <tt class="monofont">run</tt> method for the subclass. In order to activate the thread, you need to call the <tt claSs="monofont">start()</tT> method, not the <tt cLass="monofont">run()</tT> method. The <tt cLASS="monofont">start</tt> method creates the new thread that executes the <tt CLASs="monofont">run</tt> method.</p>
+
+						<PRE>
+							
+import Threading
+import time, random
+class NewThread(Threading.Thread):
+    def run(self):
+        init = 0
+        max = random.randint(1,10)
+        while init &lt; max:
+            init = init + 1
+            time.sleep(0.0001)
+        print max
+
+threads = []
+for i in range(20):
+    threadobj = NewThread()
+    threadobj.start()
+    threads.append(threadobj)
+
+for thread in threads:
+    thread.join()
+
+print "---- THE END ----"
+
+						</Pre>
+
+						<p>Just as a suggestion, try commenting the <tT CLAss="monofont">for</tt> loop near the end of the program. The reason for using it is to guarantee that all the threads are executed.</p>
+
+						<p>As final notes about this topic, I would like to highlight that</p>
+
+						<ul>
+<li>
+								<p>The processing time of a thread in a multithreaded program is equal to the CPU time of the program, divided by the number of threads that have been created. Well, that is an estimate because some threads might take a lot more CPU time than others.<a name="idx1073745620"></a>
+									<a nAme="idx1073745621"></A>
+									<a naMe="idx1073745622"></a>
+								</p>
+
+							</lI>
+<li>
+								<p>Multithreaded programs have their data shared among all the threads, so it might cause <A NAMe="idx1073745623"></a>
+									<a nAME="idx1073745624"></A>
+									<i>race conditions (</i>a state of inconsistent in a program). You have to be very careful when updating data used by multiple threads. Usually, the solution for this kind of problem is to lock the code before changing the data in order to keep all the threads synchronized.</p>
+
+							</lI>
+</UL>
+						<P>For more information about threading, check out <i>Python and Indirect Threading,</i> by Vladimir Marangozov:</p>
+
+						<pRE>
+							
+						<A Target="_blank" href="http://starship.python.net/crew/vlad/archive/threaded_code/">http://starship.python.net/crew/vlad/archive/threaded_code/</a>
+					
+						</pre>
+
+					
+				
+				
+					<h4>
+				Microthreads</h4>
+					<p>If you are really thinking about diving into multitasking applications, another option that you should consider is called <i>microthreads.</i> It implements threading by tweaking the execution order of Python's virtual machine, rather than by interrupting the processor. The microthread approach is much newer and much less deeply tested, but it might be more straightforward for your application.</p>
+
+					<p>Simulations and high-volume mission critical applications typically prefer large numbers of lightweight threads. There is a Stackless Python implementation that implements lightweight microthreads (see <A taRget="_blank" Href="http://www.stackless.com">http://www.stackless.com</a> for more information).</P>
+
+					<p>With microthreads, all your simulation threads run within a single operating system thread. They are useful when you want to program many behaviors happening simultaneously. Simulations and games often want to model the simultaneous and independent behavior of many people, many businesses, many monsters, many physical objects, many spaceships, and so forth. With microthreads, you can code these behaviors as Python functions. Additionally, the microthread library includes a rich set of objects for interthread communication, synchronization, and execution control.<a nAME="idx1073745625"></A>
+						<a namE="idx1073745626"></A>
+					</P>
+
+					<Div clASS="note"><P clasS="notetitle"><B>Tip</B></P><p>
+
+						<p>Keep in mind that you need to have the <a name="idx1073745627"></a>Stackless Python in order to use the microthread library.</p>
+
+					</p></div>
+<br>
+<br>
+
+					<p>Microthreads switch faster and use much less memory than OS threads. The restrictions on microthreads (not shared by OS threads) are that they will only provide context-switching within Python code, not within C or Fortran extensions, and they won't help you take advantage of multiple processors. Also, microthreads will not take advantage of multiple CPUs in a box.</p>
+
+					<p>You can run thousands of microthreads at the same time. However, microthreads can hang on some blocking I/O operations; they are so new that there isn't yet a lot of practical experience with which operations (input or output) are troublesome.</P>
+
+					<p>For details, check out <i>Python Microthreads,</I> by Christian Tismer and Will Ware:</p>
+
+					<prE>
+						
+					<a tarGet="_blank" hREF="http://world.std.com/~wware/uthread.html">http://world.std.com/~wware/uthread.html</A>
+				
+					</pre>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="155.html" title="Regular Expressions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=156" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="156.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="157.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MacPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745606">thread support</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745603">queue</a><BR>
+conditions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745624">race</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745615">time.sleep</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745611">interpreters</a><BR>
+interpreters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745610">handling threads</a><BR>
+MacPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745604">thread support</a><BR>
+ <a href="#idx1073745626">microthreads</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745614">thread</a> <a href="#idx1073745619">2nd</a> <a href="#idx1073745622">3rd</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MacPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745605">thread support</a><BR>
+ <a href="#idx1073745602">queue class</a><BR>
+ <a href="#idx1073745623">race conditions</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MacPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745607">thread support</a><BR>
+ <a href="#idx1073745627">Stackless Python</a><BR>
+ <a href="#idx1073745613">thread modules</a> <a href="#idx1073745618">2nd</a> <a href="#idx1073745621">3rd</a><BR>
+ <a href="#idx1073745601">threads</a> <a href="#idx1073745609">2nd</a> <a href="#idx1073745612">3rd</a> <a href="#idx1073745617">4th</a> <a href="#idx1073745620">5th</a> <a href="#idx1073745625">6th</a><BR>
+ <a href="#idx1073745616">time.sleep function</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745608">thread support</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

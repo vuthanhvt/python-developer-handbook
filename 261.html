@@ -1,0 +1,284 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Standard Exceptions</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="255.html" class="navtitle">A. Python/C API</a> &gt; <span class="nonavtitle">Standard Exceptions</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="260.html" title="Exception Handling"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=261" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="261.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="262.html" title="Utilities"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A28%3A56+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218072221080086060241090</font><a href="read4.asp?bookname=0672319942&snode=261&now=6%2F1%2F2002+6%3A28%3A56+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Standard Exceptions</h3>
+				<p>All standard Python exceptions are available as global variables whose names are <tT CLAss="monofont">PyExc_</tt> followed by the Python exception name. These have the type <TT CLass="monofont">PyObject*</tT>; they are all either class objects or string objects, depending on the use of the <TT Class="monofont">-X</tt> option to the interpreter. For completeness, all the variables are in Table A.1.</p>
+
+				<p><table border="1" cEllSpacIng="0" ceLlpaDDINg="1" widTH="100%">
+<CAptioN><H5>Table A.1. C Variables for the Standard Python Exceptions</H5></CaptiON><COlgroup align="left" span="3">
+<tr>
+<th vAliGn="top">
+<foNt sizE="2">C Name</fonT></TH>
+<Th valIGN="top">
+<Font sIZE="2">Python Name</Font></tH>
+<TH Valign="top">
+<font size="2">See Note below</font></th>
+</tR>
+<tr>
+<Td vaLign="top">
+<fOnt sIZE="2">PyExc_Exception</Font></tD>
+<TD ValigN="top">
+<FONt sizE="2">Exception</FONt></td>
+<td valign="top">
+<font size="2">*</fOnt></Td>
+</tr>
+<Tr>
+<td vAligN="top">
+<FONt sizE="2">PyExc_StandardError</FONt></td>
+<tD VALign="top">
+<fONT Size="2">StandardError</font></td>
+<td valign="top">
+<fonT siZe="2">*</foNt></td>
+</tR>
+<tr>
+<tD VALign="top">
+<fONT Size="2">PyExc_ArithmeticError</fONT></Td>
+<td vALIGn="top">
+<font size="2">ArithmeticError</font></td>
+<td valIgn="top">
+<Font Size="2">*</fOnt></tD>
+</TR>
+<Tr>
+<td vALIGn="top">
+<fonT SIZe="2">PyExc_LookupError</fonT></TD>
+<Td valign="top">
+<font size="2">LookupError</font></tD>
+<td ValiGn="top">
+<fonT sizE="2">*</FONt></td>
+</tR>
+<TR>
+<Td valIGN="top">
+<Font sIZE="2">PyExc_AssertionError</Font></td>
+<td valign="top">
+<font sizE="2">AssertionError</foNt></td>
+<Td valIgn="top">
+<fONT Size="2"> </fONT></Td>
+</tr>
+<tR>
+<TD ValigN="top">
+<FONt size="2">PyExc_AttributeError</font></td>
+<td valign="top">
+<fOnt Size="2">AttributeError</Font></tD>
+<td vALIGn="top">
+<fonT SIZe="2"> </fonT></TD>
+</Tr>
+<tr>
+<tD VALign="top">
+<font size="2">PyExc_EOFError</font></td>
+<td vAliGn="top">
+<foNt sizE="2">EOFError</fonT></TD>
+<Td valIGN="top">
+<Font sIZE="2"> </Font></tD>
+</TR>
+<Tr>
+<td valign="top">
+<font size="2">PyExc_EnvironmentError</fonT></td>
+<Td vaLign="top">
+<fOnt sIZE="2">EnvironmentError</Font></tD>
+<TD ValigN="top">
+<FONt sizE="2">*</FONt></td>
+</tr>
+<tr>
+<td valign="top">
+<font sIze="2">PyExc_FloatingPointError</Font></Td>
+<td vAligN="top">
+<FONt sizE="2">FloatingPointError</FONt></td>
+<tD VALign="top">
+<fONT Size="2"> </font></td>
+</tr>
+<tr>
+<td valigN="top">
+<foNt siZe="2">PyExc_IOError</fonT></td>
+<tD VALign="top">
+<fONT Size="2">IOError</fONT></Td>
+<td vALIGn="top">
+<font size="2"> </font></td>
+</tr>
+<tr>
+<tD vaLign="top">
+<Font sIze="2">PyExc_ImportError</fONT></Td>
+<td vALIGn="top">
+<fonT SIZe="2">ImportError</fonT></TD>
+<Td valign="top">
+<font size="2"> </font></tD>
+</tr>
+<Tr>
+<td ValigN="top">
+<fonT SIZe="2">PyExc_IndexError</fonT></TD>
+<Td valIGN="top">
+<Font sIZE="2">IndexError</Font></td>
+<td valign="top">
+<font sizE="2"> </foNt></td>
+</Tr>
+<tr>
+<tD valIGN="top">
+<Font sIZE="2">PyExc_KeyError</Font></tD>
+<TD ValigN="top">
+<FONt size="2">KeyError</font></td>
+<td valign="top">
+<fOnt Size="2"> </Font></tD>
+</tr>
+<tR>
+<TD ValigN="top">
+<FONt sizE="2">PyExc_KeyboardInterrupt</FONt></td>
+<tD VALign="top">
+<font size="2">KeyboardInterrupt</font></td>
+<td vAliGn="top">
+<foNt sizE="2"> </fonT></TD>
+</Tr>
+<tr>
+<tD VALign="top">
+<fONT Size="2">PyExc_MemoryError</fONT></Td>
+<td valign="top">
+<font size="2">MemoryError</fonT></td>
+<Td vaLign="top">
+<fOnt sIZE="2"> </Font></tD>
+</TR>
+<Tr>
+<td vALIGn="top">
+<fonT SIZe="2">PyExc_NameError</font></td>
+<td valign="top">
+<font sIze="2">NameError</Font></Td>
+<td vAligN="top">
+<FONt sizE="2"> </FONt></td>
+</tR>
+<TR>
+<Td valIGN="top">
+<Font size="2">PyExc_NotImplementedError</font></td>
+<td valigN="top">
+<foNt siZe="2">NotImplementedError</fonT></td>
+<tD VALign="top">
+<fONT Size="2"> </fONT></Td>
+</tr>
+<tR>
+<TD Valign="top">
+<font size="2">PyExc_OSError</font></td>
+<tD vaLign="top">
+<Font sIze="2">OSError</fONT></Td>
+<td vALIGn="top">
+<fonT SIZe="2"> </fonT></TD>
+</Tr>
+<tr>
+<td valign="top">
+<font size="2">PyExc_OverflowError</fOnt></Td>
+<td ValigN="top">
+<fonT SIZe="2">OverflowError</fonT></TD>
+<Td valIGN="top">
+<Font sIZE="2"> </Font></td>
+</tr>
+<tr>
+<td valign="top">
+<fonT siZe="2">PyExc_RuntimeError</foNt></td>
+<tD valIGN="top">
+<Font sIZE="2">RuntimeError</Font></tD>
+<TD ValigN="top">
+<FONt size="2"> </font></td>
+</tr>
+<tr>
+<td valIgn="top">
+<Font Size="2">PyExc_SyntaxError</fOnt></tD>
+<TD ValigN="top">
+<FONt sizE="2">SyntaxError</FONt></td>
+<tD VALign="top">
+<font size="2"> </font></td>
+</tr>
+<tR>
+<td ValiGn="top">
+<fonT sizE="2">PyExc_SystemError</FONt></td>
+<tD VALign="top">
+<fONT Size="2">SystemError</fONT></Td>
+<td valign="top">
+<font size="2"> </fonT></td>
+</Tr>
+<tr>
+<Td valIgn="top">
+<fONT Size="2">PyExc_SystemExit</fONT></Td>
+<td vALIGn="top">
+<fonT SIZe="2">SystemExit</font></td>
+<td valign="top">
+<font sIze="2"> </Font></Td>
+</tr>
+<tR>
+<td vALIGn="top">
+<fonT SIZe="2">PyExc_TypeError</fonT></TD>
+<Td valIGN="top">
+<Font size="2">TypeError</font></td>
+<td valigN="top">
+<foNt siZe="2"> </fonT></td>
+</tR>
+<TR>
+<Td valIGN="top">
+<Font sIZE="2">PyExc_ValueError</Font></tD>
+<TD Valign="top">
+<font size="2">ValueError</font></td>
+<tD vaLign="top">
+<Font sIze="2"> </fONT></Td>
+</tr>
+<tR>
+<TD ValigN="top">
+<FONt sizE="2">PyExc_ZeroDivisionError</FONt></td>
+<td valign="top">
+<font size="2">ZeroDivisionError</fOnt></Td>
+<td ValigN="top">
+<fonT SIZe="2"> </fonT></TD>
+</Tr>
+<tr>
+<tD VALign="top" cOLSPan="3">
+<font size="2">* <i>This is a base class for other standard exceptions. If the</i>
+									<tt class="monofont">-X</tT>
+									<i>interpreter command option is used, these will be tuples containing the string exceptions that would have otherwise been subclasses.</i>
+								</Font></Td>
+</tr>
+</cOlgrOUP>
+</Table></P>
+
+				<H4>Deprecation of String Exceptions</H4>
+					<P>The <tt clASS="monofont">-X</Tt> command-line option will be removed in Python 1.6/2.0. All exceptions built into Python or provided in the standard library will be classes derived from Exception.</p>
+
+					<p>String exceptions will still be supported in the interpreter to allow existing code to run unmodified, but this will also change in a future release.<a NAME="idx1073750969"></a><a name="idx1073750970"></a><a name="idx1073750971"></a><a name="idx1073750972"></a><a NamE="idx1073750973"></a><a nAme="idx1073750974"></a></p>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="260.html" title="Exception Handling"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=261" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="261.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="262.html" title="Utilities"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750970">variables, exceptions</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750973">variables, Python/C Applications Programmers Interface (API)</a><BR>
+ <a href="#idx1073750974">global variables, Python/C Application Programmers Interface (API)</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750971">variables, exceptions</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750969">variables, exceptions</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750972">exceptions, Python/C Application Programmers Interface (API)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,3814 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Tkinter Widgets</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="206.html" class="navtitle">15. Tkinter</a> &gt; <span class="nonavtitle">Tkinter Widgets</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="211.html" title="Handling Tkinter Events"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=212" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="212.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="213.html" title="Designing Applications"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A49%3A09+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148037071157167172241241</font><a href="read7.asp?bookname=0672319942&snode=212&now=5%2F31%2F2002+4%3A49%3A09+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+Tkinter Widgets</h3>
+				<p>The typical Tkinter distribution contains a basic set of 15 widgets, and some extra classes.</p>
+
+				<P>The Tkinter reference that I present in this chapter only shows a small set of methods and attributes for each one of the available widgets. This list is provided just to give you some idea of what you can do with each one of the widgets, and it is doesn't have the intention to be a complete guide. If you need to go further in this topic, I suggest you look at the Tkinter resources pages that I list at the end of this chapter.</P>
+
+				
+					<H4>Widget Standard Options</H4>
+					<p>Almost all widgets have access to a set of standard attributes that define special characteristics for each one of them, including color definitions and font types. The value for each one of these attributes can be determined at the creation time as</p>
+
+					<prE>
+						
+mylabel = Label(win, width=40)
+
+					</PRE>
+
+					<p>Or, if you prefer, you can also <a naME="idx1073748619"></A>
+						<A name="idx1073748620"></a>
+						<a name="idx1073748621"></a>
+						<a name="idx1073748622"></a>
+						<a naMe="idx1073748623"></a>define (or change) the values at the execution time using the <Tt clAss="monofont">configure</tt> method.</P>
+
+					<pre>
+						
+mylabel.configure(width=40)
+
+					</PRE>
+
+					<P>The previous examples use <i>key/value</i> pairs to define the attribute values, but you can also use <a nAME="idx1073748624"></A>dictionaries to easily inform multiple attributes at once.</p>
+
+					<pre>
+						
+mysize = { "height"=2, "width"=40}
+mylabel.configure(mysize)
+
+					</PRE>
+
+					<P>Support for using dictionaries here is really for backward compatibility for programs written before Python 1.4 (which didn't support keyword arguments). It is not a good idea to use it with the latest versions of Python. The third way of changing properties is with</p>
+
+					<pre>
+						
+mylabel['height'] = 2
+
+					</PRE>
+
+					<P>Next, I list common properties that are defined for all Tkinter widgets.</p>
+
+					
+						<h5>
+
+
+height</h5>
+						<p>In buttons, labels, and text widgets, this attribute defines the height in number of characters. In all other widgets, it defines the height in pixels.</p>
+
+					
+					
+						<h5>
+
+width</h5>
+						<p>In buttons, labels, and text widgets, this attribute defines the width in number of characters. In all other widgets, it defines the width in pixels.</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">background(bg)</tt> and <tT clAss="monofont">foreground(fg)</tT>
+						</h5>
+						<p>These attributes define the background and foreground (text) colors for a specific widget. It can be either a color name or a explicit hexadecimal notation RGB starting with <tt ClasS="monofont">#.</TT> It is usually used in one of the following formats: <Tt claSS="monofont">"#RRGGBB",</TT>
+							<tt clASS="monofont">"#RGB",</Tt> and <tt cLASS="monofont">"#RRRRGGGGBBBB",</tt> depending on the number of colors allowed by your system.</p>
+
+						<p>If you are using either a Windows or a Macintosh system, the table that contains the available color names is already built into your system.</p>
+
+						<p>The following constants define the system colors that you can use within your Windows system.</p>
+
+						<pre>
+							
+SystemActiveBorder, SystemActiveCaption, SystemAppWorkspace,
+SystemBackground, SystemButtonFace, SystemButtonHighlight,
+SystemButtonShadow, SystemButtonText, SystemCaptionText, SystemDisabledText,
+SystemHighlight, SystemHighlightText, SystemInactiveBorder,
+SystemInactiveCaption, SystemInactiveCaptionText, SystemMenu, SystemMenuText,
+SystemScrollbar, SystemWindow, SystemWindowFrame, SystemWindowText.
+
+						</pre>
+
+						<p>Note that you can change the colors at any time by editing the control panel settings.</p>
+
+						<p>The same concept goes for Mac systems. The available list of <a namE="idx1073748625"></a>
+							<a Name="idx1073748626"></A>
+							<a namE="idx1073748627"></a>color names for the Macintosh platform is as follows:</p>
+
+						<p><TABLe borDER="1" CellsPACIng="0" ceLLPAdding="1" width="100%">
+<colgroup alIgn="left" Span="2">
+<Tr valIgn="top">
+<tD>
+<FONt sizE="2">SystemButtonFace</FONt></td>
+<tD>
+<FONt sizE="2">SystemMenuActive</FONt></td>
+</tr>
+<tr valign="top">
+<td>
+<font sIze="2">SystemButtonFrame</Font></Td>
+<td>
+<fOnt sIZE="2">SystemMenuActiveText</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">SystemButtonText</font></td>
+<td>
+<font size="2">SystemMenuDisabled</fonT></td>
+</Tr>
+<tr ValigN="top">
+<td>
+<fONT Size="2">SystemHighlight</fONT></Td>
+<td>
+<fONT Size="2">SystemMenuText</fONT></Td>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2">SystemHighlightText</foNt></td>
+<Td>
+<fonT sizE="2">SystemWindowBody</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2">SystemMenu<A name="idx1073748628"></a>
+											<a name="idx1073748629"></a>
+											<a name="idx1073748630"></a>
+										</fonT></td>
+<Td>
+<foNt sizE="2"> </fonT></TD>
+</Tr>
+</colGROUp>
+</tabLE></P>
+
+						<P>On the other hand, if you are using a UNIX X windowing system, the table of color names is located in a file called <tt clASS="monofont">xrgb.txt,</Tt> which contains a list of color names and their corresponding RGB values, defined by the X Server.<a name="idx1073748631"></a>
+							<a name="idx1073748632"></a>
+							<a name="idx1073748633"></a>
+							<a NamE="idx1073748634"></a>
+						</p>
+
+					
+					
+						<h5>
+
+relief</H5>
+						<p>This attribute defines the style of a widget's border. All Tkinter widgets have a border, which might not be visible by default for some widgets. This attribute accepts the following values: <tt cLass="monofont">SUNKEN,</TT>
+							<TT clasS="monofont">RIDGE,</TT>
+							<Tt claSS="monofont">RAISED,</TT> or <tt clASS="monofont">GROOVE</Tt> for 3D appearance; and <tt class="monofont">FLAT</tt> or <tt class="monofont">SOLID</tt> for 2D appearance.</p>
+
+						<Div ClasS="note"><p claSs="notetitle"><b>Tip</b></P><P>
+
+							<P>The border of a widget consists of a 3D relief and a focus highlight region (in most cases, this is a border outside the relief).</P>
+
+						</p></div>
+<BR>
+<BR>
+
+					
+					
+						<h5>Highlight Settings</h5>
+						<p>These attributes control the process of indicating whether a widget has the keyboard focus.</p>
+
+						<P>
+							<A NAme="idx1073748635"></a>
+							<a NAME="idx1073748636"></a>
+							<tt class="monofont">highlightcolor</tt> defines the color used to draw the highlight region when the widget has the keyboard focus.</p>
+
+						<p>
+							<a name="idx1073748637"></a>
+							<a nAme="idx1073748638"></A>
+							<tt cLass="monofont">highlightbackground</tT> defines the color used to draw the highlight region when the widget doesn't have the keyboard focus.</p>
+
+						<p>
+							<a NAME="idx1073748639"></a>
+							<a naME="idx1073748640"></A>
+							<Tt claSS="monofont">highlightthickness</TT> defines the width of the highlight region, in pixels.<a namE="idx1073748641"></A>
+							<A Name="idx1073748642"></a>
+							<a name="idx1073748643"></a>
+							<a name="idx1073748644"></a>
+							<a namE="idx1073748645"></a>
+							<a Name="idx1073748646"></A>
+						</p>
+
+					
+					
+						<h5>
+							<tt ClasS="monofont">borderwidth (bd)</TT>
+						</H5>
+						<p>This attribute defines the width of a widget relief border in number of pixels.</p>
+
+					
+					
+						<h5>
+							<tT CLAss="monofont">text</tt>
+						</H5>
+						<P>This attribute contains the widget caption text, using the <TT clasS="monofont">foreground</TT> and <Tt class="monofont">font</tt> values to format it.</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">justify</tt>
+						</h5>
+						<P>This attribute defines how multiple lines of a text caption must line up. It can assume one of the following values: <tt ClasS="monofont">LEFT,</tt>
+							<tt ClasS="monofont">CENTER,</TT> or <Tt claSS="monofont">RIGHT.</TT>
+						</p>
+
+					
+					
+						<h5>
+							<tt CLASs="monofont">font</tt>
+						</h5>
+						<P>In certain widgets that support caption text, you can specify the font that you want to format the text with. The font specification must be in a valid tuple format that must contain the font family name, the font size, and a string listing the font styles that you want to apply (bold, italic, underline, and overstrike), as you can see in the following code example:</P>
+
+						<PRe>
+							
+w1 = Tkinter.Label(root, text="Hello Python World", font=("Symbol", 8,
+ "italic"))
+w2 = Tkinter.Label(root, text="Hello Python World", font=("Times", 14,
+ "bold italic"))
+w3 = Tkinter.Label(root, text="Hello Python World", font=("Symbol", 8))
+
+						</pre>
+
+						<p>The next example shows how you can use the <tt class="monofont">Font</tt> class provided by the <tt clasS="monofont">tkFont</tt> module in order to create font instances. The great advantage of this style of programming is that in case you need to make changes to a given font format, the changes are replicated to every widget in which the font is mentioned.</P>
+
+						<pre>
+							
+import Tkinter, tkFont
+root = Tkinter.Tk()
+myfont = tkFont.Font(family="times", size=18, weight=tkFont.BOLD)
+widget = Tkinter.Label(root, text="Hello Python World", font=myfont)
+widget.pack()
+Tkinter.mainloop()
+
+						</Pre>
+
+						<p>We basically have three elements that we need to provide: The font family (name), the font size, and a list of the required style options. The font name follows the format used in Windows and X Systems, and we have at least the Times, Courier, and Helvetica families predefined. The font style options follow the specification detailed in <a Href="212#11.html">Table 15.1</A>.</P>
+
+						<A Name="11"></a><P><TABle boRDER="1" cellSPACing="0" cellpadding="1" width="100%">
+<cAptIon><h5>Table 15.1. 
+
+
+Available Options for Font Styles</H5></captIon><cOLGRoup aLIGN="left" span="2">
+<TR VAlign="top">
+<TH>
+<FOnt size="2">
+											<b>Font Style Option</b>
+										</font></th>
+<th>
+<font SizE="2">
+											<b>Description</b>
+										</fOnt></th>
+</Tr>
+<tr>
+<TD>
+<FOnt siZE="2">
+											<A Name="idx1073748647"></a>
+											<A NAMe="idx1073748648"></a>family
+</foNT></TD>
+<td>
+<font size="2">Font family</font></td>
+</tr>
+<tr>
+<Td>
+<fOnt sIze="2">
+											<a nAme="idx1073748649"></a>
+											<A NAMe="idx1073748650"></a>size
+</foNT></TD>
+<td>
+<foNT SIze="2">Font size in points</foNT></TD>
+</tr>
+<tr>
+<td>
+<font size="2">
+											<a name="idx1073748651"></a>
+											<A naMe="idx1073748652"></a>weight
+</fOnt></td>
+<Td>
+<foNT SIze="2">Font thickness (NORMAL or BOLD)</foNT></TD>
+</tr>
+<tr>
+<TD>
+<FOnt siZE="2">
+											<A Name="idx1073748653"></a>
+											<a name="idx1073748654"></a>slant
+</font></td>
+<td>
+<foNt sIze="2">Font slant (NORMAL or ITALIC)</fOnt></td>
+</Tr>
+<tr>
+<TD>
+<FOnt siZE="2">
+											<A Name="idx1073748655"></a>
+											<A NAMe="idx1073748656"></a>underline
+</foNT></TD>
+<td>
+<font size="2">Font underlining: (0) False, (1) True</font></td>
+</tr>
+<tr>
+<Td>
+<fOnt sIze="2">
+											<a nAme="idx1073748657"></a>
+											<A NAMe="idx1073748658"></a>overstrike
+</foNT></TD>
+<td>
+<foNT SIze="2">Font strikeout: (0) False, (1) True</foNT></TD>
+</tr>
+</colgroup>
+</table></p>
+
+						<p>The <tt cLasS="monofont">tkFont</tt> module also exposes the functions and methods listed in <a Href="212#12.html">Tables 15.2</a> and <A hreF="212#13.html">15.3</A>, respectively.</P>
+
+						<A name="12"></A><P><TAble bORDEr="1" celLSPAcing="0" cellpadding="1" width="100%">
+<CapTion><H5>Table 15.2. 
+
+
+Functions Provided by the <tt clAss="monofont">tkFont</tT> Module</H5></CAptioN><COLgrouP ALIgn="left" spAN="2">
+<TR valign="top">
+<th>
+<font size="2">
+											<b>Function</b>
+										</foNt></tH>
+<th>
+<fOnt siZe="2">
+											<b>Description</b>
+										</FONT></th>
+</tr>
+<TR>
+<TD>
+<font SIZE="2">
+											<a namE="idx1073748659"></A>
+											<A Name="idx1073748660"></a>
+											<tt class="monofont">families()</tt>
+										</font></td>
+<tD>
+<foNt siZe="2">List available font families</fonT></td>
+</tR>
+<TR>
+<Td>
+<fonT SIZe="2">
+											<a naME="idx1073748661"></A>
+											<A name="idx1073748662"></A>
+											<TT Class="monofont">names()</tt>
+										</font></td>
+<td>
+<font siZe="2">List names of user-defined fonts</fOnt></tD>
+</tr>
+</coLgroUP>
+</TAble></p>
+
+						<A NAMe="13"></a><p><tABLE bordER="1" CEllspacing="0" cellpadding="1" WidTh="100%">
+<caPtion><H5>Table 15.3. 
+
+
+Available Methods for a Font Class Instance</h5></caPTIOn><colGROUp aliGN="left" SPan="2">
+<tr VALIgn="top">
+<th>
+<font size="2">
+											<b>Font Method</b>
+										</font></th>
+<Th>
+<fOnt sIze="2">
+											<b>Description</b>
+										</Font></TH>
+</TR>
+<tr>
+<td>
+<FONT size="2">
+											<A NAMe="idx1073748663"></a>
+											<a nAME="idx1073748664"></A>
+											<tt class="monofont">actual(options)</tt>
+										</font></td>
+<td>
+<fonT siZe="2">Returns actual font attributes.</foNt></td>
+</tR>
+<tr>
+<tD>
+<FONt sizE="2">
+											<A NAme="idx1073748665"></a>
+											<a NAME="idx1073748666"></a>
+											<tt cLASS="monofont">cget(option)</tt>
+										</font></td>
+<td>
+<font size="2">Gets configured font attribute.</foNt></tD>
+</tr>
+<tR>
+<td>
+<foNt siZE="2">
+											<A Name="idx1073748667"></a>
+											<A NAMe="idx1073748668"></a>
+											<a nAME="idx1073748669"></A>
+											<a namE="idx1073748670"></A>
+											<TT class="monofont">config(),</tt>
+											<tt class="monofont">configure()</tt>
+										</font></Td>
+<tD>
+<fonT size="2">Gets a full set of configured fonts.</Font></TD>
+</TR>
+<tr>
+<td>
+<FONT size="2">
+											<A NAMe="idx1073748671"></a>
+											<a nAME="idx1073748672"></A>
+											<a name="idx1073748673"></a>
+											<a name="idx1073748674"></a>
+											<tt class="monofont">config(options)</tT>
+										</foNt></td>
+<Td>
+<fonT sizE="2">Modifies one or more font attributes. <TT Class="monofont">configure(options...)</TT>
+										</FOnt></td>
+</TR>
+<TR>
+<td>
+<foNT SIze="2">
+											<a name="idx1073748675"></a>
+											<a name="idx1073748676"></a>
+											<tt clasS="monofont">copy(font object)</tt>
+										</Font></Td>
+<td>
+<fOnt sIZE="2">Returns a copy of the font object.</Font></tD>
+</TR>
+<Tr>
+<td>
+<fONT Size="2">
+											<a NAME="idx1073748677"></a>
+											<a name="idx1073748678"></a>
+											<tt class="monofont">measure(text)</tt>
+										</font></Td>
+<tD>
+<fonT size="2">Returns the width in integer format.</Font></TD>
+</TR>
+<tr>
+<td>
+<FONT size="2">
+											<A NAMe="idx1073748679"></a>
+											<a nAME="idx1073748680"></A>
+											<tt class="monofont">metrics(options)</tt>
+										</font></td>
+<td>
+<fonT siZe="2">Returns the font metrics.<a nAme="idx1073748681"></a>
+											<a Name="idx1073748682"></A>
+											<A NAme="idx1073748683"></a>
+											<a NAME="idx1073748684"></a>
+											<a naME="idx1073748685"></A>
+											<A name="idx1073748686"></A>
+											<A NAme="idx1073748687"></a>
+											<a name="idx1073748688"></a>
+											<a name="idx1073748689"></a>
+											<a name="idx1073748690"></A>
+											<a nAme="idx1073748691"></a>
+										</Font></tD>
+</tr>
+</cOLGRoup>
+</tABLE></p>
+
+						<p>You can customize your application to use platform dependent fonts, which are available on your system. For example, if you are running MS Windows, you can use Arial, Courier New, Fixedsys, MS Sans Serif, MS Serif, Symbol, System, Times New Roman, and others.</p>
+
+						<p>Some system fonts are also available for your usage (see <A HREf="212#14.html">Table 15.4</a>), however, they don't allow you to change their style and size specifications. Be careful when porting applications that use system fonts because those fonts are tied to specific systems.</p>
+
+						<a NAME="14"></a><p><table border="1" cellspaCinG="0" celLpaddIng="1" wIDTH="100%">
+<captION><H5>Table 15.4. Examples of System Fonts</h5></capTION><colgROUP align="left" span="2">
+<tr>
+<th>
+<font sizE="2">
+											<b>Platform</b>
+										</Font></Th>
+<th>
+<fOnt sIZE="2">
+											<B>System Font Examples</b>
+										</fonT></TH>
+</Tr>
+<tr>
+<tD>
+<FONt sizE="2">
+											<A NAme="idx1073748692"></a>Windows
+</font></td>
+<td>
+<font size="2">ansi, ansifixed, device, system, and systemfixed</fOnt></Td>
+</tr>
+<Tr>
+<td>
+<fOnt sIZE="2">
+											<A name="idx1073748693"></A>Macintosh
+</FONt></td>
+<tD>
+<FONt sizE="2">application and system</FONt></td>
+</tr>
+<tr>
+<td>
+<font size="2">
+											<a naMe="idx1073748694"></a>UNIX
+</Font></Td>
+<td>
+<fOnt sIZE="2">6x10 and fixed<A name="idx1073748695"></A>
+											<A NAme="idx1073748696"></a>
+										</fONT></Td>
+</tr>
+</cOLGRoup>
+</table></p>
+
+					
+					
+						<h5>
+							<tt class="monofont">command</tt>
+						</h5>
+						<P>This attribute associates a widget's activation with a Python function. Therefore, the function defined by this attribute is called when a specific action happens at the widget (like the click of a button).</p>
+
+					
+					
+						<h5>
+							<Tt clAss="monofont">variable</tt>
+						</H5>
+						<p>This attribute maps the widget value to a variable in such a way that all changes made to the widget are reflected to this variable, and vice versa. This variable is an instance of one of the following classes: <tt CLASs="monofont">StringVar,</tt>
+							<tT CLAss="monofont">IntVar,</tt>
+							<TT CLass="monofont">DoubleVar,</tT> or <TT Class="monofont">BooleanVar.</tt> These classes wrap a Tcl variable, which is required to use some of the Tk interfaces. All these instances implement at least two methods: <tt class="monofont">get()</tt> and <tt claSs="monofont">set(),</tT> which can be used to obtain and define a variable's value, respectively.</p>
+
+					
+					
+						<h5>
+							<tT clasS="monofont">image</tt>
+							<tT CLAss="monofont">bitmap</tt>
+						</H5>
+						<P>These attributes define the image file or the bitmap file to be displayed within the widget.</P>
+
+					
+					
+						<H5>
+							<tt clASS="monofont">anchor</Tt>
+						</h5>
+						<p>This attribute defines either the location of a widget within a window, or the location of a text message within a widget. The possible values for this attribute are <tT CLAss="monofont">N,</tt>
+							<tt class="monofont">NE,</tt>
+							<tt class="monofont">E,</Tt>
+							<tT claSs="monofont">SE,</tt>
+							<tT claSS="monofont">S,</TT>
+							<tt clASS="monofont">SW,</Tt>
+							<tt cLASS="monofont">W,</tt>
+							<tt CLASs="monofont">NW,</tt> and <tt class="monofont">CENTER.</tt>
+							<a name="idx1073748697"></a>
+							<a nAme="idx1073748698"></A>
+							<a naMe="idx1073748699"></a>
+							<a nAme="idx1073748700"></a>
+							<A NAMe="idx1073748701"></a>
+							<a nAME="idx1073748702"></A>
+						</p>
+
+					
+					
+						<h5>
+							<tt CLASs="monofont">padx</tt>
+							<tT CLAss="monofont">pady</tt>
+						</h5>
+						<p>Defines the padding between the widget's text or the widget's image and the widget border.</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">cursor</tt>
+						</h5>
+						<p>This attribute defines which mouse pointer (cursor) must be used when the mouse is moved over the widget. Some widgets (such as the Text widget) define this value by default. If you don't set this option, the parent widget's cursor is used by default. Some possible cursor values are <tT clAss="monofont">crosshair,</tT>
+							<tt clAss="monofont">watch,</tT>
+							<TT Class="monofont">xterm,</TT>
+							<TT clasS="monofont">fleur,</TT> and <Tt claSS="monofont">arrow.</TT> There are plenty of them for you to choose:</p>
+
+						<pre>
+							
+root.config(cursor="wait")    # Changes to the wait cursor
+root.config(cursor="")        # Changes back to the normal cursor
+
+						</pre>
+
+					
+				
+				
+					<h4>Widgets Reference</h4>
+					<p>Tkinter offers the following basic set of widgets. Note that these widgets are not defined or organized in any hierarchical way. Along with the set of methods that is defined by each widget, all widgets also support many general specific methods, such as the <i>geometry management methods.</i> This creates a wide coverage interface for each one of them.</p>
+
+					<blockquOte>
+<P>
+							<p>
+								<a nAme="idx1073748703"></a>
+								<a Name="idx1073748704"></A>Button—This widget defines a clickable button that can execute a specific operation when clicked.</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073748705"></A>
+								<A name="idx1073748706"></A>Canvas—This widget is used to draw graphs, lines, polygons, and all other types of graphic elements. The main reason people use the canvas is because it takes care of all the items you add to it, and can take events on individual items in the canvas.</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073748707"></A>
+								<A name="idx1073748708"></a>Checkbutton—This widget exposes a button that controls a variable that can have two distinct values. After clicking the button, the variable value toggles between the two possible values.</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073748709"></a>
+								<a name="idx1073748710"></A>Entry—This widget implements a simple text entry field.</p>
+
+						</p>
+<P>
+							<p>
+								<a nAme="idx1073748711"></a>
+								<a Name="idx1073748712"></A>Frame—This widget works like a container for other widgets when creating a complex layout within a window. It helps you to organize the layout of the other widgets.</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073748713"></A>
+								<A name="idx1073748714"></A>Label—This widget handles the exhibition of a text or an image.</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073748715"></A>
+								<A name="idx1073748716"></a>Listbox—This widget displays a list of possible selections.</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073748717"></a>
+								<a name="idx1073748718"></A>Menu—This widget is used to implement pull-down and pop-up menus.</p>
+
+						</p>
+<P>
+							<p>
+								<a nAme="idx1073748719"></a>
+								<a Name="idx1073748720"></A>Menubutton—This widget is used to implement pull-down menus and the toplevel menu bar.</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073748721"></A>
+								<A name="idx1073748722"></A>Message—This widget displays a text message in a way similar to the label widget, but using powerful formatting capabilities.</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073748723"></A>
+								<A name="idx1073748724"></a>Radiobutton—This widget is associated to a variable, and when clicked, the variable assumes its value. Usually many radiobuttons (each one carrying a different value) are associated to the same variable, and when one is clicked, it sets its value to the variable.</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073748725"></a>
+								<a name="idx1073748726"></A>Scale—This widget provides a slider that helps you set the value of a numerical variable.</p>
+
+						</p>
+<P>
+							<p>
+								<a nAme="idx1073748727"></a>
+								<a Name="idx1073748728"></A>Scrollbar—This widget implements standard scrollbars that you can use along with other widgets, such as <I>listbox,</I>
+								<I>canvas,</i>
+								<i>entry,</i> and <i>text.</I>
+							</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073748729"></A>
+								<A name="idx1073748730"></A>Text—This widget display text that you can edit and format.</P>
+
+						</P>
+<P>
+							<p>
+								<a name="idx1073748731"></a>
+								<a name="idx1073748732"></a>Toplevel—This widget is another container widget, just like the <i>frame</i> widget. However, it has its own toplevel window, which provides a window manager interface.<a name="idx1073748733"></A>
+								<a nAme="idx1073748734"></a>
+								<A name="idx1073748735"></A>
+								<a naME="idx1073748736"></A>
+								<A name="idx1073748737"></A>
+							</P>
+
+						</P>
+</BlockQUOTe>
+					
+						<h5>
+
+Button</h5>
+						<p>The Button widget can implement a number of button types, which can display either text messages or images. See the previous <TT CLass="monofont">Hello World</tt> code for an example of how to use the Button widget.</p>
+
+						<p>Some special <a name="idx1073748738"></a>methods implemented by the button widget are as follows:</p>
+
+						<blockqUotE>
+<p>
+								<a nAme="idx1073748739"></a>
+								<a Name="idx1073748740"></A>
+								<P><TT clasS="monofont">flash()</TT>— 
+    Reverses and resets the foreground and background colors in order to cause a flashing effect.</P>
+
+							</p>
+<p>
+								<a nAME="idx1073748741"></A>
+								<a namE="idx1073748742"></A>
+								<P><Tt class="monofont">invoke()</tt>— 
+    Executes the function defined in the <tt class="monofont">command</tt> property.</p>
+
+							</p>
+</bLocKquoTe>
+						<p>The next <a nAme="idx1073748743"></a>properties are available for button widgets:</P>
+
+						<BLOckquOTE>
+<P>
+								<a namE="idx1073748744"></A>
+								<A Name="idx1073748745"></a>
+								<P><TT Class="monofont">activebackground</tt>— 
+    
+									The background color to use when the button is activated.</p>
+
+							</p>
+<p>
+								<a name="idx1073748746"></a>
+								<a name="idx1073748747"></A>
+								<p><tT claSs="monofont">activeforeground</tt>— 
+    The foreground color to use when the button is activated.</p>
+
+							</P>
+<p>
+								<a nAME="idx1073748748"></A>
+								<a namE="idx1073748749"></A>
+								<P><Tt claSS="monofont">bitmap</TT>— 
+    The bitmap to display in the button. This option is only used when the image option is omitted. The general available values for this option are gray12, gray25, gray50, gray75, hourglass, error, questhead, info, warning, and question. If you prefer, you can load the bitmap directly from an <i>XBM (X Bitmap)</i> file, just by prefixing the filename with an <tt CLASs="monofont">@</tt> sign; for example, <tt class="monofont">bitmap=@hello.xbm.</tt>
+									</p>
+
+							</p>
+<p>
+								<a name="idx1073748750"></A>
+								<a nAme="idx1073748751"></a>
+								<P><tt clAss="monofont">default</tT>— 
+    If set, identifies the default button.</P>
+
+							</P>
+<P>
+								<a namE="idx1073748752"></A>
+								<A Name="idx1073748753"></a>
+								<P><TT Class="monofont">disabledforeground</TT>— 
+    The foreground color that must be used when the button is disabled.<A Name="idx1073748754"></a>
+										<a name="idx1073748755"></a>
+										<a name="idx1073748756"></a>
+										<a namE="idx1073748757"></a>
+										<a Name="idx1073748758"></A>
+										<a namE="idx1073748759"></a>
+									</p>
+
+							</p>
+<P>
+								<A NAme="idx1073748760"></a>
+								<a NAME="idx1073748761"></a>
+								<p><tt CLASs="monofont">image</tt>— 
+    An image to display in the widget. If indicated, this option precedes both the <tT CLAss="monofont">text</tt> and <tt class="monofont">bitmap</tt> options. Usually, before using this attribute, you need to create an image instance first, using the <tt class="monofont">image</Tt> subclasses, and then assign the instance to this attribute.</p>
+
+							</P>
+<p>
+								<a nAme="idx1073748762"></a>
+								<a Name="idx1073748763"></A>
+								<P><TT clasS="monofont">state</TT>— 
+    Defines the button state, which can be either <Tt claSS="monofont">NORMAL,</TT>
+										<tt clASS="monofont">ACTIVE,</Tt> or <tt class="monofont">DISABLED.</tt>
+									</p>
+
+							</p>
+<p>
+								<a name="idx1073748764"></a>
+								<a NamE="idx1073748765"></a>
+								<p><tT clasS="monofont">takefocus</tt>— 
+    Indicates whether the user can use the <tT CLAss="monofont">TAB</tt> key to change the focus to this button.</P>
+
+							</P>
+<P>
+								<A name="idx1073748766"></A>
+								<A NAme="idx1073748767"></a>
+								<p><TT CLass="monofont">text</tt>— 
+    The text to display in the button. If the bitmap or image options are used, the text isn't displayed.</p>
+
+							</p>
+<p>
+								<a name="idx1073748768"></a>
+								<a name="idx1073748769"></a>
+								<P><tt ClasS="monofont">underline</tt>— 
+    Integer offset applied on the <tt ClasS="monofont">text</TT> value to identify which character must be underlined.</P>
+
+							</p>
+<p>
+								<a nAME="idx1073748770"></A>
+								<a namE="idx1073748771"></A>
+								<P><Tt claSS="monofont">wraplength</TT>— 
+    Distance, in screen units, that determines when a button's text must be wrapped into multiple lines. The default configuration is to not accept wrapping.<a name="idx1073748772"></a>
+										<a name="idx1073748773"></a>
+										<a name="idx1073748774"></a>
+									</p>
+
+							</p>
+</BloCkquOte>
+					
+					
+						<h5>
+
+Canvas</h5>
+						<P>This widget is responsible for creating and displaying graphical items, such as arcs, bitmaps, images, lines, ovals, polygons, and rectangles, in a customized way. It works by providing a canvas into which you add the graphical items. The default behavior of this widget is to draw the graphic items on top of the other items added to the canvas first. When you have your canvas widget filled with the graphical items, you can manipulate them using a lot of methods provided by Tkinter. Note that you can create customized widgets this way by adding several layers of objects, and binding event callbacks to each one of these layers.</p>
+
+						<p>The <a NAME="idx1073748775"></a>Canvas widget supports the following standard items:</p>
+
+						<blOCKQuote>
+<P>
+								<A NAme="idx1073748776"></a>
+								<a NAME="idx1073748777"></a>
+								<p><tt class="monofont">arc</tt>— 
+    Creates an arc item, which can be a chord, a pieslice, or a simple arc.</p>
+
+								<pre>
+									
+coord = 10, 50, 240, 210
+widgetitem = canvas.create_arc(coord, start=0, extent=150, fill="blue")
+
+								</pre>
+
+							</p>
+<p>
+								<A naMe="idx1073748778"></a>
+								<a Name="idx1073748779"></a>
+								<P><b>bitmap— </b>
+Creates a bitmap item, which can be a built-in bitmap, such as <tT CLAss="monofont">"question",</tt>
+										<TT CLass="monofont">"info",</tT>
+										<TT Class="monofont">"hourglass",</TT>
+										<TT class="monofont">"warning",</tt> or one read from an XBM file.</p>
+
+								<pre>
+									
+widgetitem = canvas.create_bitmap(60, 30, bitmap="warning")
+
+								</pre>
+
+							</p>
+<p>
+								<a namE="idx1073748780"></a>
+								<a Name="idx1073748781"></A>
+								<p><b>image— </b>
+Creates an image item, which can be an instance of either the <tT claSS="monofont">BitmapImage</TT> or the <tt clASS="monofont">PhotoImage</Tt> classes.</p>
+
+								<prE>
+									
+filename = PhotoImage(file="sunshine.gif")
+widget = canvas.create_image(50, 50, anchor=NE, image=filename) 
+
+								</PRE>
+
+							</p>
+<p>
+								<a nAME="idx1073748782"></A>
+								<a name="idx1073748783"></a>
+								<p><b>line— </b>
+Creates a line item.</p>
+
+								<pre>
+									
+widgetitem = create_line(x0, y0, x1, y1, ..., xn, yn, options)
+
+								</pre>
+
+							</p>
+<p>
+								<p>Some options are</p>
+
+							</P>
+<p>
+								<a Name="idx1073748784"></A>
+								<a namE="idx1073748785"></a>
+								<p><b>width— </B>
+Line's width. The default value is 1 pixel.</P>
+
+							</P>
+<P>
+								<a namE="idx1073748786"></A>
+								<A Name="idx1073748787"></a>
+								<P><B>fill— </B>
+Line's color. The default value is <Tt claSS="monofont">black.</TT>
+									</p>
+
+							</p>
+<p>
+								<a name="idx1073748788"></a>
+								<a name="idx1073748789"></a>
+								<p><b>oval— </b>
+Creates a circle or an ellipse at the given coordinates. It takes two pairs of coordinates—the top left and bottom right corners of the bounding rectangle for the oval.</p>
+
+								<pRe>
+									
+widgetitem = create_oval(x0, y0, x1, y1, options)
+
+								</pRe>
+
+							</p>
+<p>
+								<P>Some options are</p>
+
+							</p>
+<p>
+								<a Name="idx1073748790"></A>
+								<A NAme="idx1073748791"></a>
+								<p><B>fill— </B>
+The color to use for the interior. If an empty string is given, the interior is not drawn. Default is empty (transparent).</P>
+
+							</P>
+<p>
+								<a naME="idx1073748792"></A>
+								<A name="idx1073748793"></A>
+								<P><B>outline— </B>
+The color to use for the outline.</p>
+
+							</p>
+<p>
+								<a name="idx1073748794"></a>
+								<a name="idx1073748795"></a>
+								<p><b>polygon— </b>
+Creates a polygon item that must have at least three vertices.</p>
+
+								<pRe>
+									
+widgetitem = create_polygon(x0, y0, x1, y1, x2, y2, ..., xn, yn, options)
+
+								</pRe>
+
+							</p>
+<p>
+								<P>Some options are</p>
+
+							</p>
+<p>
+								<a Name="idx1073748796"></A>
+								<A NAme="idx1073748797"></a>
+								<p><B>outline— </B>
+Polygon outline's color. The default value is <TT clasS="monofont">black.</TT>
+									</P>
+
+							</p>
+<p>
+								<a nAME="idx1073748798"></A>
+								<a name="idx1073748799"></a>
+								<p><b>splinesteps— </b>
+Integer that defines the smoothness of the curves.</p>
+
+							</p>
+<p>
+								<a name="idx1073748800"></a>
+								<a nAme="idx1073748801"></A>
+								<p><b>rectangle— </b>
+Creates a rectangle item using the given coordinates.</P>
+
+								<pre>
+									
+widgetitem = create_rectangle(x0, y0, x1, y1, options)
+
+								</pRe>
+
+							</p>
+<p>
+								<P>Some options are</P>
+
+							</P>
+<P>
+								<a namE="idx1073748802"></A>
+								<A Name="idx1073748803"></a>
+								<P><B>fill— </B>
+The color to use for the rectangle interior. If an empty string is given, the interior is not drawn. The default is empty (transparent).<A name="idx1073748804"></A>
+										<A NAme="idx1073748805"></a>
+										<a name="idx1073748806"></a>
+										<a name="idx1073748807"></a>
+										<a name="idx1073748808"></A>
+										<a nAme="idx1073748809"></a>
+										<A name="idx1073748810"></A>
+										<a naME="idx1073748811"></A>
+									</P>
+
+							</p>
+<p>
+								<a nAME="idx1073748812"></A>
+								<a namE="idx1073748813"></A>
+								<P><B>outline— </b>
+The color to use for the outline. If an empty string is given, the outline is not drawn. The default is <tt cLASS="monofont">black.</tt>
+									</p>
+
+							</p>
+<p>
+								<a name="idx1073748814"></a>
+								<a name="idx1073748815"></a>
+								<p><b>text— </b>
+Creates a text item at the given position, using the given options. Note that the text string itself is given by the text option.</P>
+
+								<prE>
+									
+widgetitem = create_text(x0, y0, options)
+
+								</pre>
+
+							</P>
+<p>
+								<p>Some options are</p>
+
+							</p>
+<P>
+								<a naME="idx1073748816"></A>
+								<A name="idx1073748817"></A>
+								<P><B>anchor— </B>
+Specifies the text position. The default value is <tt clASS="monofont">CENTER.</Tt>
+									</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073748818"></a>
+								<a name="idx1073748819"></a>
+								<p><b>fill— </b>
+The color to use for the text. If an empty string is given, the text is not drawn. Default is empty (transparent).</p>
+
+							</p>
+<p>
+								<a name="idx1073748820"></a>
+								<A naMe="idx1073748821"></a>
+								<p><B>window— </b>
+Embeds a window at the given position based on the provided options.</p>
+
+								<prE>
+									
+widgetitem = create_window(x0, y0, options)
+
+								</pre>
+
+							</P>
+<P>
+								<P>Some options are</P>
+
+							</p>
+<p>
+								<a nAME="idx1073748822"></A>
+								<a namE="idx1073748823"></A>
+								<P><B>window— </b>
+The window widget to embed in the canvas.</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073748824"></a>
+								<a name="idx1073748825"></a>
+								<p><b>anchor— </b>
+Specifies the window position. The default value is <tt class="monofont">CENTER.</tt>
+										<A naMe="idx1073748826"></a>
+										<a Name="idx1073748827"></a>
+										<A namE="idx1073748828"></A>
+									</P>
+
+							</P>
+</blocKQUOte>
+					
+					
+						<h5>
+
+Checkbutton</h5>
+						<P>This widget implements a check box with two states: checked and unchecked; in other words, on and off or true and false.</P>
+
+						<P>The following <A name="idx1073748829"></A>attributes are available:</P>
+
+						<BLockquote>
+<p>
+								<a name="idx1073748830"></a>
+								<a name="idx1073748831"></A>
+								<a nAme="idx1073748832"></a>
+								<A name="idx1073748833"></A>
+								<p><tt CLASs="monofont">onvalue,</tt>
+										<tT CLAss="monofont">offvalue</tt>— 
+    These attributes specify the values to store within the variable indicated by the <TT CLass="monofont">variable</tT> property. If the button is not selected, the variable receives the <TT Class="monofont">offvalue</tt>value, receiving the <tt class="monofont">onvalue</tt> value when the button is checked.<a name="idx1073748834"></A>
+										<a nAme="idx1073748835"></a>
+										<A name="idx1073748836"></A>
+										<a naME="idx1073748837"></A>
+										<A name="idx1073748838"></A>
+										<A NAme="idx1073748839"></a>
+										<a NAME="idx1073748840"></a>
+									</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073748841"></a>
+								<a name="idx1073748842"></a>
+								<p><tt class="monofont">indicatoron</tt>— 
+    By setting this attribute to zero, you can make the whole widget to be the check box.</p>
+
+							</p>
+</BloCkquOte>
+						<p>This widget exposes the following <a Name="idx1073748843"></A>methods:</P>
+
+						<BLockqUOTE>
+<p>
+								<a naME="idx1073748844"></A>
+								<A name="idx1073748845"></A>
+								<P><TT class="monofont">select()</tt>— 
+    Selects the check button and sets the value of the variable to <tt class="monofont">onvalue.</tt>
+									</p>
+
+							</p>
+<p>
+								<a NamE="idx1073748846"></a>
+								<a nAme="idx1073748847"></a>
+								<p><Tt clASS="monofont">flash()</Tt>— 
+    Reverses and resets the foreground and background colors in order to cause a flashing effect.</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073748848"></a>
+								<a nAME="idx1073748849"></A>
+								<p><tt cLASS="monofont">invoke()</tt>— 
+    Executes the function defined in the <tt class="monofont">command</tt> property.</p>
+
+							</p>
+<p>
+								<a name="idx1073748850"></a>
+								<A naMe="idx1073748851"></a>
+								<p><Tt claSs="monofont">toggle()</tt>— 
+    Reverses the state of the button. If it is on, it becomes off, and vice versa.</P>
+
+							</P>
+</BLockqUOTE>
+						<p>The following code demonstrates a <a naME="idx1073748852"></A>call to the Checkbutton widget:</P>
+
+						<pre>
+							
+from Tkinter import *
+win = Frame()
+win.pack()
+Checkbutton(win, text="Click here").pack(side=LEFT)
+win.mainloop()
+
+						</pRE>
+
+						<P>
+							<A href="212#25.html">Figure 15.4</a> shows the output of this code.</p>
+
+						<center>
+							<h5>
+<a name="25"></a>Figure 15.4. The Checkbutton widget as it is displayed.</h5>
+							
+								
+									<Img BordEr="0" widTh="95" heIGHT="48" src="graphics/15fig04.gif" aLT="graphics/15fig04.gif">
+								
+							
+						</CEnter>
+
+						<P>In case you are wondering how to use the variables listed previously, take a look at the following line, and check out how we would have to write the code to use them. <TT Class="monofont">var</TT> is the name of a variable of your program. When you say <TT class="monofont">variable=&lt;your variable&gt;,</tt> you are asking the widget to assign to your variables the values of <tt class="monofont">onvalue</tt> and <tt clAss="monofont">offvalue</Tt> whenever your button is checked or unchecked, respectively.</p>
+
+						<pRe>
+							
+Checkbutton(master, variable=var, indicatoron=0).pack()
+
+						</pre>
+
+					
+					
+						<H5>
+
+Entry</h5>
+						<p>The Entry widget is implemented by users to enter a single line of text in a frame or in a window widget.<a NAME="idx1073748853"></a>
+							<a naME="idx1073748854"></A>
+							<A name="idx1073748855"></A>
+							<A NAme="idx1073748856"></a>
+							<a NAME="idx1073748857"></a>
+						</p>
+
+						<p>The following code exemplifies the use of this widget by creating a <a name="idx1073748858"></a>
+							<a name="idx1073748859"></a>
+							<a name="idx1073748860"></A>
+							<a nAme="idx1073748861"></a>
+							<A name="idx1073748862"></A>single line interface in which you can type expressions:</p>
+
+						<prE>
+							
+from Tkinter import *
+from math import *
+def calc():
+    result = "= " + str(eval(expression.get()))
+    label.config(text = result)
+
+root = Tk()
+frame = Frame(root)
+label = Label(frame)
+entry = Entry(frame)
+expression = StringVar()
+entry["textvariable"] = expression
+button = Button(frame, text = "=", command = calc)
+frame.pack()
+entry.pack()
+label.pack(side=LEFT)
+button.pack(side=RIGHT)
+frame.mainloop()
+
+						</PRE>
+
+						<p>
+							<a hrEF="212#27.html">Figure 15.5</A> shows how the output of this code looks.</P>
+
+						<centER>
+							<H5>
+<A name="27"></A>Figure 15.5. The Entry widget being used to implement an expression evaluator.</H5>
+							
+								
+									<IMg border="0" width="115" height="65" srC="graphics/15fig05.gif" alT="graphics/15fig05.gif">
+								
+							
+						</cenTer>
+
+						<p>This widget provides the <a Name="idx1073748863"></A>
+							<A NAme="idx1073748864"></a>
+							<tT CLAss="monofont">textvariable</tt> attribute, which contains the value either entered by the user or to be displayed. The <A NAMe="idx1073748865"></a>
+							<a nAME="idx1073748866"></A>
+							<tt class="monofont">get()</tt> method can be used to access this value, as well.<a name="idx1073748867"></a>
+							<a name="idx1073748868"></A>
+						</p>
+
+					
+					
+						<h5>
+
+Frame</H5>
+						<p>The Frame widget is very important for the process of grouping and organizing other widgets in a somehow friendly way. It works like a container, which is responsible for arranging the position of other widgets. It uses rectangular areas in the screen to organize the layout and to provide padding of these widgets. A frame can also be used as a foundation class to implement complex widgets.</p>
+
+						<p>In the next example, we <A name="idx1073748869"></A>
+							<a naME="idx1073748870"></A>
+							<A name="idx1073748871"></A>
+							<A NAme="idx1073748872"></a>
+							<a NAME="idx1073748873"></a>
+							<a naME="idx1073748874"></A>create two frames responsible for aligning the colored buttons in two distinct rows:</P>
+
+						<pre>
+							
+from Tkinter import *
+root = Tk()
+frame = Frame(root)
+frame.pack()
+bottomframe = Frame(root)
+bottomframe.pack(side=BOTTOM)
+
+redbutton = Button(frame, text="Red", fg="red")
+redbutton.pack(side=LEFT)
+greenbutton = Button(frame, text="Brown", fg="brown")
+greenbutton.pack(side=LEFT)
+bluebutton = Button(frame, text="Blue", fg="blue")
+bluebutton.pack(side=LEFT)
+blackbutton = Button(bottomframe, text="Black", fg="black")
+blackbutton.pack(side=BOTTOM)
+root.mainloop()
+
+						</pre>
+
+						<p>You can check the output of this function by looking at <a href="212#29.html">Figure 15.6</a>.<a name="idx1073748875"></a>
+							<a NamE="idx1073748876"></a>
+						</p>
+
+						<cEnter>
+							<H5>
+<a naME="29"></A>Figure 15.6. This window uses two frames to organize the buttons.</H5>
+							
+								
+									<img bORDEr="0" widTH="107" HEight="73" SRC="graphics/15fig06.gif" Alt="graphics/15fig06.gif">
+								
+							
+						</center>
+
+					
+					
+						<h5>
+
+Label</h5>
+						<p>This widget implements a display box where you can place text or images. The text displayed by this widget can be updated at any time you want. It is also possible to underline part of the text (like to identify a keyboard shortcut), and span the text across multiple lines.</p>
+
+						<pre>
+							
+label = Label(root, bg="white", relief =RAISED, borderwidth=3)
+label.config(text="Whassup!")
+
+						</pre>
+
+						<p>If you want to easily manipulate the contents of a label widget when changing a single variable, use the <a NamE="idx1073748877"></a>
+							<a nAme="idx1073748878"></a>
+							<tT claSS="monofont">textvariable</TT> option as demonstrated in the next example:</p>
+
+						<pre>
+							
+var = StringVar()
+Label(root, textvariable=var).pack()
+var.set("Hey!? How are you doing?") 
+
+						</PRE>
+
+					
+					
+						<H5>
+
+Listbox</h5>
+						<p>Using this widget, you create a list of text items that can be selected by the user. This list might contain several lines of information, and all lines must have the same properties. Depending on how the widget is configured (see the <tt CLASs="monofont">selectmode</tt> property in following list), the user is allowed to select multiple lines at the same time, which is very useful in many cases.<a NAME="idx1073748879"></a>
+							<a name="idx1073748880"></a>
+							<a name="idx1073748881"></a>
+							<a name="idx1073748882"></a>
+							<a NamE="idx1073748883"></a>
+							<a nAme="idx1073748884"></a>
+							<a Name="idx1073748885"></A>
+						</P>
+
+						<P>The <A name="idx1073748886"></A>Listbox widget implements the following properties:</P>
+
+						<BLockqUOTE>
+<p>
+								<a naME="idx1073748887"></A>
+								<A name="idx1073748888"></a>
+								<p><tt class="monofont">height</tt>— 
+    Number of rows in the list. A value of <tt claSs="monofont">0</tT> automatically resizes the widget to fit the largest option found. Setting the height to zero makes the listbox long enough to show all options at once.</p>
+
+							</p>
+<p>
+								<A name="idx1073748889"></A>
+								<a naME="idx1073748890"></A>
+								<P><tt clASS="monofont">selectmode</Tt>— 
+    This option defines the type of list that you are creating. It can be either <tt cLASS="monofont">SINGLE,</tt>
+										<tt CLASs="monofont">EXTENDED,</tt>
+										<tt class="monofont">MULTIPLE,</tt> or <tt class="monofont">BROWSE.</tT>
+									</p>
+
+							</p>
+<P>
+								<a naMe="idx1073748891"></a>
+								<a nAme="idx1073748892"></a>
+								<P><TT Class="monofont">width</TT>— 
+    Number of characters in each row. A value of <TT clasS="monofont">0</TT> automatically resizes the widget to fit the largest option found.<A name="idx1073748893"></A>
+									</P>
+
+							</P>
+</Blockquote>
+						<p>The following <a name="idx1073748894"></a>methods are also provided:</p>
+
+						<bloCkqUote>
+<P>
+								<a namE="idx1073748895"></a>
+								<a nAME="idx1073748896"></A>
+								<p><tt cLASS="monofont">delete(row [,lastrow])</tt>— 
+    Deletes the given <tt CLASs="monofont">row,</tt> or the rows between the given <tT CLAss="monofont">row</tt> and <tt class="monofont">lastrow.</tt>
+									</p>
+
+							</p>
+<p>
+								<a namE="idx1073748897"></a>
+								<a Name="idx1073748898"></A>
+								<p><tt cLass="monofont">get(row)</TT>— 
+    Gets the string that starts at the given <TT clasS="monofont">row.</TT>
+									</P>
+
+							</p>
+<p>
+								<a nAME="idx1073748899"></A>
+								<a namE="idx1073748900"></A>
+								<P><Tt class="monofont">insert(row, string)</tt>— 
+    Inserts the given <tt class="monofont">string</tt> at the given <tt cLasS="monofont">row.</tt>
+									</p>
+
+							</P>
+<p>
+								<a naMe="idx1073748901"></a>
+								<a NAME="idx1073748902"></a>
+								<p><tt CLASs="monofont">see(row)</tt>— 
+    Makes the given <tT CLAss="monofont">row</tt> visible for the user.</P>
+
+							</P>
+<P>
+								<A name="idx1073748903"></a>
+								<a name="idx1073748904"></a>
+								<p><tt class="monofont">select_clear()</tT>— 
+    
+									Clears the selection.</p>
+
+							</p>
+<P>
+								<a naMe="idx1073748905"></a>
+								<a nAme="idx1073748906"></a>
+								<P><TT Class="monofont">select_set(startrow, endrow)</TT>— 
+    Selects the <TT clasS="monofont">row</TT>s starting at the <Tt claSS="monofont">startrow</TT> position and ending at the <tt class="monofont">endrow</tt> position.<a name="idx1073748907"></a>
+									</p>
+
+							</p>
+</bloCkqUote>
+						<P>The following example demonstrates the use of a list box:</p>
+
+						<pre>
+							
+from Tkinter import *
+root = Tk()
+mylistbox = Listbox(root)
+mylistbox.pack()
+mylistbox.delete(0, END)
+mylistbox.insert(END, "This is the row number 1")
+for number in range(2,41):
+    mylistbox.insert(END, "This is the row number " + str(number))
+root.mainloop()
+
+						</Pre>
+
+						<p>In order to <A NAMe="idx1073748908"></a>
+							<a nAME="idx1073748909"></A>
+							<a namE="idx1073748910"></A>see all the lines from the previous list, you are required to hold down the mouse button while dragging down the selection. This process can be largely simplified by using a Scrollbox widget along with the Listbox widget. Also check out the example found at the Scrollbox widget section.<A Name="idx1073748911"></a>
+							<A NAMe="idx1073748912"></a>
+						</p>
+
+					
+					
+						<h5>
+
+Menu</h5>
+						<p>The goal of this widget is to allow us to create all kinds of menus that can be used by our applications. The core functionality provides ways to create three menu types: pop-up, toplevel, and pull-down. It is also possible to use other extended widgets to implement new types of menus, such as the <i>OptionMenu</i> widget, which implements a special type that generates a pop-up list of items within a selection. You can't put arbitrary widgets in a menu. However, there are special menu item types such as radio menu items and check menu items that provide similar behavior to the widgets by the same name.<a name="idx1073748913"></a>
+							<a name="idx1073748914"></a>
+							<A naMe="idx1073748915"></a>
+							<a Name="idx1073748916"></a>
+							<A namE="idx1073748917"></A>
+							<A Name="idx1073748918"></a>
+							<A NAMe="idx1073748919"></a>
+						</p>
+
+						<p>The menu widget exposes the following <A NAMe="idx1073748920"></a>methods:</p>
+
+						<bLOCKquote>
+<p>
+								<a name="idx1073748921"></a>
+								<a name="idx1073748922"></a>
+								<p><tT clAss="monofont">add_command</tT>
+										<i>(options)</i>— 
+    Adds a menu item to the menu.</p>
+
+							</p>
+<P>
+								<a naME="idx1073748923"></A>
+								<A name="idx1073748924"></A>
+								<P><TT clasS="monofont">add_radiobutton(</TT>
+										<I>
+											<tt clASS="monofont">options</Tt>
+										</i>
+										<tt class="monofont">)</tt>— 
+    
+									Creates a radio button menu item.</p>
+
+							</p>
+<p>
+								<a name="idx1073748925"></a>
+								<A naMe="idx1073748926"></a>
+								<p><Tt claSs="monofont">add_checkbutton(</tt>
+										<I>
+											<TT Class="monofont">options</TT>
+										</I>
+										<Tt claSS="monofont">)</TT>— 
+    Creates a check button menu item.</p>
+
+							</p>
+<p>
+								<a NAME="idx1073748927"></a>
+								<a name="idx1073748928"></a>
+								<p><tt class="monofont">add_cascade(options)</tt>— 
+    Creates a new hierarchical menu by associating a given menu to a parent menu.</p>
+
+							</p>
+<p>
+								<A naMe="idx1073748929"></a>
+								<a Name="idx1073748930"></a>
+								<P><tt cLASS="monofont">add_separator()</tt>— 
+    Adds a separator line to the menu.</p>
+
+							</p>
+<P>
+								<A NAme="idx1073748931"></a>
+								<a NAME="idx1073748932"></a>
+								<p><tt CLASs="monofont">add(</tt>
+										<i>
+											<tt class="monofont">type, options</tt>
+										</i>
+										<tt clasS="monofont">)</tt>— 
+    Adds a specific type of menu item to the menu.</P>
+
+							</p>
+<p>
+								<a Name="idx1073748933"></a>
+								<A namE="idx1073748934"></A>
+								<P><Tt claSS="monofont">delete(</TT>
+										<b>
+											<tt cLASS="monofont">startindex</tt>
+										</b>
+										<tT CLAss="monofont">[,</tt>
+										<i>
+											<tt class="monofont">endindex</tt>
+										</i>
+										<tt claSs="monofont">])</tT>— 
+    Deletes the menu items ranging from <tt cLass="monofont">startindex</tT> to <tt cLASS="monofont">endindex.</tt>
+									</p>
+
+							</p>
+<P>
+								<A NAme="idx1073748935"></a>
+								<a NAME="idx1073748936"></a>
+								<p><tt CLASs="monofont">entryconfig(</tt>
+										<i>
+											<tt class="monofont">index, options</tt>
+										</i>
+										<tt clasS="monofont">)</tt>— 
+    Allows you to modify a menu item, which is identified by the <Tt clAss="monofont">index,</tt> and change its options.</P>
+
+							</p>
+<p>
+								<a NAME="idx1073748937"></a>
+								<a naME="idx1073748938"></A>
+								<P><tt clASS="monofont">index(item)</Tt>— 
+    Returns the index number of the given menu item label.<a naME="idx1073748939"></A>
+										<A name="idx1073748940"></a>
+										<a name="idx1073748941"></a>
+										<a name="idx1073748942"></a>
+										<a naMe="idx1073748943"></a>
+										<A namE="idx1073748944"></a>
+										<a naMe="idx1073748945"></a>
+										<a NAME="idx1073748946"></a>
+									</p>
+
+							</p>
+</bLOCKquotE>
+						<P>The menu widget methods expose the following <A Name="idx1073748947"></a>options:</P>
+
+						<BLOckquote>
+<p>
+								<a name="idx1073748948"></a>
+								<a name="idx1073748949"></a>
+								<P><tt ClasS="monofont">accelerator</tt>— 
+    This is a keyboard alternative to the menu option that must be displayed as right justified next to the menu option. It's important to say here that this option doesn't automatically bind the given key to the option. You have to do it by yourself.</p>
+
+							</p>
+<P>
+								<a naME="idx1073748950"></A>
+								<A name="idx1073748951"></A>
+								<P><TT clasS="monofont">command</TT>— 
+    Name of the callback function that is called when the menu item is selected.</P>
+
+							</p>
+<p>
+								<a nAME="idx1073748952"></A>
+								<a name="idx1073748953"></a>
+								<p><tt class="monofont">indicatorOn</tt>— 
+    Setting this option to <tt clAss="monofont">true</Tt> adds a switch next to the menu options. This small button allows an option to be toggled on and off.</p>
+
+							</p>
+<P>
+								<a namE="idx1073748954"></a>
+								<a nAME="idx1073748955"></A>
+								<p><tt cLASS="monofont">label</tt>— 
+    This option defines the text of a menu item.</p>
+
+							</p>
+<P>
+								<A NAme="idx1073748956"></a>
+								<a NAME="idx1073748957"></a>
+								<p><tt class="monofont">menu</tt>— 
+    This option is used by the <tt class="monofont">add_cascade</tt> method to add a submenu (another Menu instance) to a menu.</P>
+
+							</p>
+<p>
+								<A namE="idx1073748958"></a>
+								<a naMe="idx1073748959"></a>
+								<p><TT CLass="monofont">selectColor</tT>— 
+    Switch's color. See the <TT Class="monofont">indicatorOn</TT> property.</P>
+
+							</P>
+<p>
+								<a naME="idx1073748960"></A>
+								<A name="idx1073748961"></a>
+								<p><tt class="monofont">state</tt>— 
+    Defines the menu item status. The possible values are <tt claSs="monofont">normal,</tT>
+										<tt cLass="monofont">active,</tT> and <tt cLASS="monofont">disabled.</tt>
+									</p>
+
+							</p>
+<P>
+								<A NAme="idx1073748962"></a>
+								<a NAME="idx1073748963"></a>
+								<a naME="idx1073748964"></A>
+								<A name="idx1073748965"></a>
+								<p><tt class="monofont">onvalue, offvalue</tt>— 
+    Values to be stored in the <tt claSs="monofont">variable</tT> property. When the menu item is selected, the <tt cLass="monofont">onvalue</tT>'s value is copied to that property.</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073748966"></a>
+								<a nAME="idx1073748967"></A>
+								<p><tt cLASS="monofont">tearOff</tt>— 
+    By setting this option to <tt CLASs="monofont">true,</tt> a clickable separator is created in the top of the menu. Clicking on this separator, the menu item separates from the main menu, becoming part of a new window.</p>
+
+							</p>
+<p>
+								<a name="idx1073748968"></a>
+								<a name="idx1073748969"></a>
+								<p><tT clAss="monofont">underline</tT>— 
+    Defines the index position of the character to be underlined.</p>
+
+							</p>
+<p>
+								<a Name="idx1073748970"></A>
+								<A NAme="idx1073748971"></a>
+								<p><TT CLass="monofont">value</tT>— 
+    The value of the attached radio button.</P>
+
+							</P>
+<P>
+								<a namE="idx1073748972"></A>
+								<A Name="idx1073748973"></a>
+								<p><tt class="monofont">variable</tt>— 
+    The variable used to store a value.<a name="idx1073748974"></a>
+									</P>
+
+							</p>
+</bLockQuote>
+						<P>Now, let's get back to practice and learn how to design menus. The basic rules are simple. First, you need to instantiate the menu class and anchor it to its parent widget. Then, you just need to use one of the add methods to include items to it.</p>
+
+						<p>The next example shows how to <a NAME="idx1073748975"></a>
+							<a naME="idx1073748976"></A>
+							<A name="idx1073748977"></A>
+							<A NAme="idx1073748978"></a>create a pop-up menu. Note that we have to bind a mouse action to a callback function that launches the menu (see <a HREF="212#33.html">Figure 15.7</a>).</p>
+
+						<center>
+							<h5>
+<a name="33"></a>Figure 15.7. This pop-up menu is activated by right-clicking.</h5>
+							
+								
+									<img bOrdEr="0" wiDth="112" heIght="112" SRC="graphics/15fig07.gif" Alt="graphics/15fig07.gif">
+								
+							
+						</ceNTER>
+
+						<pre>
+							
+from Tkinter import *
+def donothing():
+    filewin = Toplevel(root)
+    button = Button(filewin, text="Do nothing button")
+    button.pack()
+
+root = Tk()
+menu = Menu(root, tearoff=0)
+menu.add_command(label="Cut", command=donothing)
+menu.add_command(label="Copy", command=donothing)
+menu.add_command(label="Paste", command=donothing)
+menu.add_command(label="Delete", command=donothing)
+frame = Frame(root, width=100, height=100)
+frame.pack()
+def popupmenu(event):
+    menu.post(event.x_root, event.y_root)
+frame.bind("&lt;Button-3&gt;", popupmenu)
+root.mainloop()
+
+						</pRE>
+
+						<P>The next example demonstrates the <A name="idx1073748979"></A>
+							<A NAme="idx1073748980"></a>
+							<a name="idx1073748981"></a>
+							<a name="idx1073748982"></a>creation and usage of a menu bar. This type of menu is placed on the top of toplevel windows (see <a href="212#34.html">Figure 15.8</A>).</p>
+
+						<cEnteR>
+							<h5>
+<a naMe="34"></a>Figure 15.8. The menu bar is placed on top of a toplevel window.</h5>
+							
+								
+									<IMG BordeR="0" WIDth="92" heIGHT="41" src="graphics/15fig08.gif" aLT="graphics/15fig08.gif">
+								
+							
+						</CEnter>
+
+						<pre>
+							
+from Tkinter import *
+def filemenu():
+    filewin = Toplevel(root)
+    fileclose = Button(filewin, text="Close Application")
+    fileclose.config(command=root.quit)
+    fileclose.pack()
+
+root = Tk()
+menubar = Menu(root)
+menubar.add_command(label="File", command=filemenu)
+menubar.add_command(label="Help")
+root.config(menu=menubar)
+root.mainloop()
+
+						</pre>
+
+						<p>This last example demonstrates how to create <a name="idx1073748983"></a>
+							<a naMe="idx1073748984"></a>
+							<A namE="idx1073748985"></a>
+							<a naMe="idx1073748986"></a>pull-down menus, which is a type of menu that is bound to a parent menu (see <a HREF="212#35.html">Figure 15.9</a>).<a naME="idx1073748987"></A>
+							<A name="idx1073748988"></A>
+							<A NAme="idx1073748989"></a>
+							<a NAME="idx1073748990"></a>
+							<a name="idx1073748991"></a>
+							<a name="idx1073748992"></a>
+							<a name="idx1073748993"></a>
+						</p>
+
+						<CenTer>
+							<h5>
+<A name="35"></A>Figure 15.9. This pull-down menu is bound to a parent menu.</h5>
+							
+								
+									<imG BORder="0" wIDTH="115" heigHT="132" SRc="graphics/15fig09.gif" alt="graphics/15fig09.gif">
+								
+							
+						</CENTer>
+
+						<pre>
+							
+from Tkinter import *
+def donothing():
+    filewin = Toplevel(root)
+    button = Button(filewin, text="Do nothing button")
+    button.pack()
+
+root = Tk()
+menubar = Menu(root)
+filemenu = Menu(menubar, tearoff=0)
+filemenu.add_command(label="New", command=donothing)
+filemenu.add_command(label="Open", command=donothing)
+filemenu.add_command(label="Save", command=donothing)
+filemenu.add_command(label="Save as...", command=donothing)
+filemenu.add_command(label="Close", command=donothing)
+filemenu.add_separator()
+filemenu.add_command(label="Exit", command=root.quit)
+menubar.add_cascade(label="File", menu=filemenu)
+editmenu = Menu(menubar, tearoff=0)
+editmenu.add_command(label="Undo", command=donothing)
+editmenu.add_separator()
+editmenu.add_command(label="Cut", command=donothing)
+editmenu.add_command(label="Copy", command=donothing)
+editmenu.add_command(label="Paste", command=donothing)
+editmenu.add_command(label="Delete", command=donothing)
+editmenu.add_command(label="Select All", command=donothing)
+menubar.add_cascade(label="Edit", menu=editmenu)
+helpmenu = Menu(menubar, tearoff=0)
+helpmenu.add_command(label="Help Index", command=donothing)
+helpmenu.add_command(label="About...", command=donothing)
+menubar.add_cascade(label="Help", menu=helpmenu)
+root.config(menu=menubar)
+root.mainloop()
+
+						</pre>
+
+					
+					
+						<h5>
+
+Menubutton</h5>
+						<p>This widget was primarily used to display toplevel, pop-up, and pull-down menus. However, you can now use the menu widget to obtain the same functionality.</p>
+
+					
+					
+						<h5>
+
+Message</h5>
+						<p>This widget provides a multiline and noneditable object that displays texts, automatically breaking lines and justifying their contents. Its functionality is very similar to the one provided by the Label widget, except that it can also automatically wrap the text, maintaining a given width or aspect ratio. The following example <a name="idx1073748994"></A>
+							<a nAme="idx1073748995"></a>
+							<A name="idx1073748996"></A>creates a simple Message widget instance:</p>
+
+						<prE>
+							
+from Tkinter import *
+txt = "This message demonstrates the usage of the Message Widget"
+
+root = Tk()
+msg = Message(root, text = txt)
+msg.pack()
+root.mainloop()
+
+						</PRE>
+
+						<p>
+							<a hrEF="212#38.html">Figure 15.10</A> shows the output of this code.<A name="idx1073748997"></A>
+							<A NAme="idx1073748998"></a>
+						</p>
+
+						<CENTer>
+							<h5>
+<a name="38"></a>Figure 15.10. A message displayed by the Message widget.</h5>
+							
+								
+									<img border="0" wIdtH="97" heiGht="76" srC="graphics/15fig10.gif" alt="graphics/15fig10.gif">
+								
+							
+						</CENTer>
+
+					
+					
+						<h5>
+
+Radiobutton</h5>
+						<P>This widget implements a multiple-choice button, which is a way to offer many possible selections to the user, and let her choose only one of them.</P>
+
+						<P>In order to implement this functionality, each group of radiobuttons must be associated to the same variable, and each one of the buttons must symbolize a single value. You can use the Tab key to switch from one radionbutton to another.</P>
+
+						<p>The following <a naME="idx1073748999"></A>properties are made available by this widget:</P>
+
+						<blocKQUOte>
+<p>
+								<a name="idx1073749000"></a>
+								<a name="idx1073749001"></a>
+								<p><tt clAss="monofont">command</Tt>— 
+    Function to be called when the button is clicked.</p>
+
+							</p>
+<P>
+								<a namE="idx1073749002"></a>
+								<a nAME="idx1073749003"></A>
+								<p><tt cLASS="monofont">variable</tt>— 
+    Variable to be updated when the button is clicked.</p>
+
+							</p>
+<P>
+								<A NAme="idx1073749004"></a>
+								<a NAME="idx1073749005"></a>
+								<p><tt class="monofont">value</tt>— 
+    This attribute defines the value that must be stored in the variable when the button is clicked.<a name="idx1073749006"></a>
+										<a naMe="idx1073749007"></a>
+										<A namE="idx1073749008"></a>
+										<a naMe="idx1073749009"></a>
+										<a NAME="idx1073749010"></a>
+										<a naME="idx1073749011"></A>
+										<A name="idx1073749012"></A>
+										<A NAme="idx1073749013"></a>
+									</p>
+
+							</P>
+</BLOckquote>
+						<p>The following <a name="idx1073749014"></a>methods are also provided by this widget:</p>
+
+						<blockQuoTe>
+<p>
+								<a Name="idx1073749015"></a>
+								<A namE="idx1073749016"></A>
+								<P><Tt claSS="monofont">flash()</TT>— 
+    Reverses and resets the foreground and background colors in order to cause a flashing effect.</p>
+
+							</p>
+<p>
+								<a NAME="idx1073749017"></a>
+								<a naME="idx1073749018"></A>
+								<P><tt class="monofont">invoke()</tt>— 
+    Executes the function defined in the <tt class="monofont">command</tt> property.</p>
+
+							</p>
+<P>
+								<a nAme="idx1073749019"></a>
+								<A name="idx1073749020"></A>
+								<p><tt CLASs="monofont">select()</tt>— 
+    Selects the radio button, setting the variable to value.<a NAME="idx1073749021"></a>
+									</p>
+
+							</p>
+</bLOCKquotE>
+						<P>The following example <A Name="idx1073749022"></a>
+							<a name="idx1073749023"></a>creates three radiobuttons and displays the selected option on the label widget (see <a href="212#40.html">Figure 15.11</a>):</p>
+
+						<cenTer>
+							<H5>
+<a naMe="40"></a>Figure 15.11. This window exemplifies the use of radiobuttons.</h5>
+							
+								
+									<iMg boRDER="0" widtH="115" HEIght="108" sRC="graphics/15fig11.gif" ALt="graphics/15fig11.gif">
+								
+							
+						</cenTER>
+
+						<Pre>
+							
+from Tkinter import *
+def sel():
+    selection = "You selected the option " + str(var.get())
+    label.config(text = selection)
+
+root = Tk()
+var = IntVar()
+Radiobutton(root, text="Option 1", variable=var, value=1,
+ command=sel).pack(anchor=W)
+Radiobutton(root, text="Option 2", variable=var, value=2,
+ command=sel).pack(anchor=W)
+Radiobutton(root, text="Option 3", variable=var, value=3,
+command=sel).pack(anchor=W)
+label = Label(root)
+label.pack()
+root.mainloop()
+
+						</pre>
+
+						<p>Check out the next example. Just by setting the <tt class="monofont">indicatoron</tt> attribute to <tt claSs="monofont">0,</tT> we can change the visual design of our radio buttons (see <a hrEf="212#41.html">Figure 15.12</a>):<a nAme="idx1073749024"></a>
+							<A NAMe="idx1073749025"></a>
+							<a nAME="idx1073749026"></A>
+							<a namE="idx1073749027"></A>
+							<A Name="idx1073749028"></a>
+							<A NAMe="idx1073749029"></a>
+							<a name="idx1073749030"></a>
+						</p>
+
+						<center>
+							<h5>
+<a namE="41"></a>Figure 15.12. An alternative way to use radiobuttons.</h5>
+							
+								
+									<Img bOrder="0" WidtH="115" HEIght="111" sRC="graphics/15fig12.gif" ALt="graphics/15fig12.gif">
+								
+							
+						</cenTER>
+
+						<Pre>
+							
+from Tkinter import *
+def sel():
+    selection = "You selected the option " + str(var.get())
+    label.config(text = selection)
+
+root = Tk()
+var = IntVar()
+r1 = Radiobutton(root, text="Option 1", variable=var, value=1, command=sel)
+r2 = Radiobutton(root, text="Option 2", variable=var, value=2, command=sel)
+r3 = Radiobutton(root, text="Option 3", variable=var, value=3, command=sel)
+
+r1.config(indicatoron=0)
+r2.config(indicatoron=0)
+r3.config(indicatoron=0)
+
+r1.pack(anchor=W)
+r2.pack(anchor=W)
+r3.pack(anchor=W)
+label = Label(root)
+label.pack()
+root.mainloop()
+
+						</prE>
+
+					
+					
+						<H5>
+
+Scale</H5>
+						<P>The Scale widget provides a graphical slider object that allows you to select values from a specific scale. In order to get and set values to or from the object, you need to use the following <a name="idx1073749031"></a>methods:</p>
+
+						<blockquote>
+<p>
+								<a nAme="idx1073749032"></A>
+								<a naMe="idx1073749033"></a>
+								<p><tT claSS="monofont">get()</TT>— 
+    This method gets the current scale value.</p>
+
+							</p>
+<p>
+								<a NAME="idx1073749034"></a>
+								<a naME="idx1073749035"></A>
+								<P><tt clASS="monofont">set(value)</Tt>— 
+    This method sets the scale to a specific value.</p>
+
+							</p>
+</blockquote>
+						<p>The following example demonstrates the use of this widget (see <a href="212#43.html">Figure 15.13</a>).</P>
+
+						<ceNter>
+							<H5>
+<a namE="43"></a>Figure 15.13. Using a Scale widget to select values from a specific scale.</h5>
+							
+								
+									<iMG BOrder="0" WIDTh="94" heiGHT="153" Src="graphics/15fig13.gif" alT="graphics/15fig13.gif">
+								
+							
+						</CENter>
+
+						<pre>
+							
+from Tkinter import *
+def sel():
+    selection = "Value = " + str(var.get())
+    label.config(text = selection)
+
+root = Tk()
+var = DoubleVar()
+scale = Scale(root, variable=var)
+button = Button(root, text="Get Scale Value", command=sel)
+label = Label(root)
+
+scale.pack(anchor=CENTER)
+button.pack(anchor=CENTER)
+label.pack()
+root.mainloop()
+
+						</pre>
+
+						<p>You could also implement the previous example using the <tt class="monofont">Scale.get(),</tt> as demonstrated next.</p>
+
+						<Pre>
+							
+from Tkinter import *
+def sel():
+    label.config(text = scale.get())
+root = Tk()
+var = DoubleVar()
+scale = Scale(root)
+button = Button(root, text="Get Scale Value", command=sel)
+label = Label(root)
+
+scale.pack(anchor=CENTER)
+button.pack(anchor=CENTER)
+label.pack()
+root.mainloop()
+
+						</Pre>
+
+					
+					
+						<h5>
+
+Scrollbar</H5>
+						<p>This widget provides a slide controller that is used to implement vertical scrolled widgets, such as Listbox, Text, and Canvas. Note that you can also create horizontal scrollbars on Entry widgets.</p>
+
+						<p>This widget uses the <tT claSS="monofont">command</TT> property to define the callback function that must be used to change the view in the widget.<a namE="idx1073749036"></A>
+							<A Name="idx1073749037"></a>
+							<A NAMe="idx1073749038"></a>
+							<a nAME="idx1073749039"></A>
+							<a name="idx1073749040"></a>
+							<a name="idx1073749041"></a>
+							<a name="idx1073749042"></a>
+						</p>
+
+						<p>Also, it implements the following two <A naMe="idx1073749043"></a>methods:</p>
+
+						<BlockQuotE>
+<P>
+								<A Name="idx1073749044"></a>
+								<A NAMe="idx1073749045"></a>
+								<p><tT CLAss="monofont">set(first, last)</tt>— 
+    Defines the fractions between 0 and 1 (representing the range 0%-100%) that delimits the current view.</P>
+
+							</P>
+<P>
+								<A name="idx1073749046"></a>
+								<a name="idx1073749047"></a>
+								<p><tt class="monofont">get()</tT>— 
+    Returns the current scrollbar configuration settings.</p>
+
+							</p>
+</BlocKquotE>
+						<p>The next example demonstrates how to link a vertical scrollbar to a Listbox widget. The steps are very simple. You first need to set the Listbox widget's <tt CLASs="monofont">yscrollcommand</tt> callback method to the <tT CLAss="monofont">set</tt> method of the scrollbar widget. Second, you need to set the scrollbar's command to the <TT CLass="monofont">yview</tT> method of the Listbox widget. Every time the Listbox view is modified, the scrollbar's <TT Class="monofont">set</tt> method is called, and every time the scrollbar is changed, the Listbox's <tt class="monofont">yview</tt> method is called, as well(see <a href="212#45.html">Figure 15.14</A>).</p>
+
+						<cEnteR>
+							<h5>
+<a naMe="45"></a>Figure 15.14. Here, the Scrollbar widget implements a vertical scrollbar for a Listbox widget.</h5>
+							
+								
+									<IMG BordeR="0" WIDth="129" heIGHT="162" src="graphics/15fig14.gif" aLT="graphics/15fig14.gif">
+								
+							
+						</CEnter>
+
+						<pre>
+							
+from Tkinter import *
+root = Tk()
+
+scrollbar = Scrollbar(root)
+scrollbar.pack(side=RIGHT, fill=Y)
+mylist = Listbox(root, yscrollcommand=scrollbar.set)
+for line in range(100):
+    mylist.insert(END, "This is line number " + str(line))
+mylist.pack(side=LEFT, fill=BOTH)
+
+scrollbar.config(command=mylist.yview)
+mainloop()
+
+						</pre>
+
+						<p>If you need to use a horizontal scrollbar instead of a vertical scrollbar, the process is very simple. All you have to do is change the <tt class="monofont">orient</tt> option in the Scrollbar initialization call, and replace the <Tt cLass="monofont">yscrollcommand</Tt> and <tt cLass="monofont">yview</TT> with <TT clasS="monofont">xscrollcommand</TT> and <Tt claSS="monofont">xview.</TT> The following example implements these changes, as you can see in <a hreF="212#46.html">Figure 15.15</A>.</P>
+
+						<Center>
+							<h5>
+<a name="46"></a>Figure 15.15. Here, the Scrollbar widget is used to implement a horizontal scrollbar for another Listbox widget.</h5>
+							
+								
+									<img bordEr="0" wIdth="114" HeighT="175" src="graphics/15fig15.gif" ALT="graphics/15fig15.gif">
+								
+							
+						</CenteR>
+
+						<PRE>
+							
+from Tkinter import *
+root = Tk()
+
+scrollbar = Scrollbar(root, orient=HORIZONTAL)
+scrollbar.pack(side=BOTTOM, fill=X)
+
+mylist = Listbox(root, xscrollcommand=scrollbar.set)
+for line in range(100):
+    msg = "This is a very big line whose number is " + str(line)
+    mylist.insert(END, msg)
+mylist.pack(side=LEFT, fill=BOTH)
+scrollbar.config(command=mylist.xview)
+mainloop()
+
+						</pre>
+
+					
+					
+						<h5>
+
+Text</H5>
+						<P>Text widgets provide advanced capabilities that allow you to edit a multiline text and format the way it has to be displayed, such as changing its color and font. You can also use elegant structures like tabs and marks to locate specific sections of the text, and apply changes to those areas. Moreover, you can embed windows and images in the text because this widget was designed to handle both plain and formatted text. if you need to split your text across multiple lines, you just have to insert  (newline characters) at the position where you want to break the line.</P>
+
+						<Div clASS="note"><P class="notetitle"><b>Note</b></p><p>
+
+							<p>The main display area of the Grail Web browser used the Tk text widget.</p>
+
+						</p></div>
+<br>
+<br>
+
+						<p>The following <A naMe="idx1073749048"></a>attributes are exposed by Text widgets:<a Name="idx1073749049"></a>
+							<A namE="idx1073749050"></A>
+							<A Name="idx1073749051"></a>
+							<A NAMe="idx1073749052"></a>
+							<a nAME="idx1073749053"></A>
+							<a namE="idx1073749054"></A>
+							<A Name="idx1073749055"></a>
+						</p>
+
+						<blockquote>
+<p>
+								<a namE="idx1073749056"></a>
+								<a Name="idx1073749057"></A>
+								<p><tt cLass="monofont">state</TT>— 
+    This attribute has two possible values: <TT clasS="monofont">normal</TT> and <Tt claSS="monofont">disabled.</TT> The former is used to define standard editable text boxes that accept inserts and deletes, and the latter is used for noneditable text boxes.</p>
+
+							</p>
+<p>
+								<a NAME="idx1073749058"></a>
+								<a name="idx1073749059"></a>
+								<p><tt class="monofont">tabs</tt>— 
+    This attribute provides a list of strings that identifies all the tab stops on the Text widget. Each list item is a concatenation of the index position of the tab stop and a justification sign (l, r, or c) that defines the justification of the tab (left, right, or center, respectively).</p>
+
+							</p>
+</bLocKquoTe>
+						<p>The following <a nAme="idx1073749060"></a>methods are exposed as well:</P>
+
+						<BLOckquOTE>
+<P>
+								<a namE="idx1073749061"></A>
+								<A Name="idx1073749062"></a>
+								<P><TT Class="monofont">delete(startindex [,endindex])</tt>— 
+    This method deletes a specific character or a range of text.</p>
+
+							</p>
+<p>
+								<a name="idx1073749063"></a>
+								<a name="idx1073749064"></A>
+								<p><tT claSs="monofont">get(startindex [,endindex])</tt>— 
+    This method returns a specific character or a range of text.</p>
+
+							</P>
+<p>
+								<a nAME="idx1073749065"></A>
+								<a namE="idx1073749066"></A>
+								<P><Tt claSS="monofont">index(index)</TT>— 
+    Returns the absolute value of an index based on the given <tt clASS="monofont">index.</Tt>
+									</p>
+
+							</p>
+<p>
+								<a name="idx1073749067"></a>
+								<a name="idx1073749068"></a>
+								<p><tt cLasS="monofont">insert(index [,string]...)</tt>— 
+    This method inserts strings at the specified index location. If you need to insert elements other than strings, such as windows or images, use the <tT clasS="monofont">window_create</tt> and <tT CLAss="monofont">image_create</tt> methods, respectively.</P>
+
+							</P>
+<P>
+								<A name="idx1073749069"></A>
+								<A NAme="idx1073749070"></a>
+								<p><TT CLass="monofont">see(index)</tt>— 
+    This method returns <tt class="monofont">true</tt> if the text located at the index position is visible.</p>
+
+							</p>
+</blocKquOte>
+						<p>Text widgets support three distinct helper structures: Marks, Tabs, and Indexes.</P>
+
+						<p>
+							<i>Marks
+<a nAme="idx1073749071"></a>
+							</I> are used to bookmark positions between two characters within a given text. Note that you cannot recognize the marked positions visually: You need to use the variables. The fact of being able to store positions without compromising the visual design allows you to use as many marks as you need without causing problems to the users. Tkinter offers two preconfigured marks for you: <TT Class="monofont">INSERT</TT> and <TT clasS="monofont">CURRENT.</TT> The first one defines the cursor's insertion position, and the other one defines the closest position to the mouse pointer. We have the following <A name="idx1073749072"></A>methods available when handling marks:<A NAme="idx1073749073"></a>
+							<a name="idx1073749074"></a>
+							<a name="idx1073749075"></a>
+							<a name="idx1073749076"></A>
+							<a nAme="idx1073749077"></a>
+							<A name="idx1073749078"></A>
+							<a naME="idx1073749079"></A>
+						</P>
+
+						<blocKQUOte>
+<p>
+								<a NAME="idx1073749080"></a>
+								<a naME="idx1073749081"></A>
+								<P><tt class="monofont">index(mark)</tt>— 
+    Returns the line and column location of a specific mark.</p>
+
+							</p>
+<p>
+								<a name="idx1073749082"></a>
+								<a nAme="idx1073749083"></A>
+								<p><tt Class="monofont">mark_gravity(mark [,gravity])</Tt>— 
+    Returns the gravity of the given <tt CLASs="monofont">mark.</tt> If the second argument is provided, the <tT CLAss="monofont">gravity</tt> is set for the given <TT CLass="monofont">mark.</tT> This defines where new text must be inserted if someone tries to insert the text exactly on the <TT Class="monofont">mark</tt> position.</p>
+
+							</p>
+<p>
+								<a name="idx1073749084"></a>
+								<a name="idx1073749085"></A>
+								<p><tT claSs="monofont">mark_names()</tt>— 
+    Returns all marks from the Text widget.</p>
+
+							</P>
+<p>
+								<a nAME="idx1073749086"></A>
+								<a namE="idx1073749087"></A>
+								<P><Tt claSS="monofont">mark_set(mark, index)</TT>— 
+    Informs a new position to the given <tt clASS="monofont">mark.</Tt>
+									</p>
+
+							</p>
+<p>
+								<a name="idx1073749088"></a>
+								<a name="idx1073749089"></a>
+								<p><tt cLasS="monofont">mark_unset(mark)</tt>— 
+    Removes the given <tT clasS="monofont">mark</tt> from the Text widget.</p>
+
+							</P>
+</BLOckquOTE>
+						<P>
+							<i>
+								<a naME="idx1073749090"></A>Tags</I> are used to associate names to regions of text, which makes easy the task of modifying the display settings of specific text areas. Tags are also used to bind event callbacks to specific ranges of text. Tkinter provides a preconfigured tag called <tt clASS="monofont">SEL</Tt> that matches the current selection. Next, are the available <a name="idx1073749091"></a>methods for handling tabs:</p>
+
+						<blockquote>
+<p>
+								<a NamE="idx1073749092"></a>
+								<a nAme="idx1073749093"></a>
+								<p><Tt clASS="monofont">tag_add(tagname, startindex[,endindex] ...)</Tt>— 
+    This method tags either the position defined by <tt cLASS="monofont">startindex,</tt> or a range delimited by the positions <tt CLASs="monofont">startindex</tt> and <tT CLAss="monofont">endindex.</tt>
+									</p>
+
+							</p>
+<p>
+								<a name="idx1073749094"></a>
+								<a name="idx1073749095"></a>
+								<p><Tt cLass="monofont">tag_config</Tt>— 
+    You can use this method to configure the tag properties, which include, <tt cLass="monofont">justify</TT>(center, left, or right), <TT clasS="monofont">tabs</TT>(this property has the same functionality of the Text widget tabs's property), and <Tt claSS="monofont">underline</TT>(used to underline the tagged text).</p>
+
+							</p>
+<p>
+								<a NAME="idx1073749096"></a>
+								<a name="idx1073749097"></a>
+								<p><tt class="monofont">tag_delete(tagname)</tt>— 
+    This method is used to delete and remove a given tag.</p>
+
+							</p>
+<p>
+								<A naMe="idx1073749098"></a>
+								<a Name="idx1073749099"></a>
+								<P><tt cLASS="monofont">tag_remove(tagname [,startindex[.endindex]] ...)</tt>— 
+    After applying this method, the given tag is removed from the provided area without deleting the actual tag definition.</p>
+
+							</p>
+</BLOCkquoTE>
+						<P>The following example uses tags to format specific regions on the Text widget. Note that we use row/column pairs to define the ranges that we want to manipulate.</P>
+
+						<pre>
+							
+from Tkinter import *
+def onclick():
+    pass
+
+root = Tk()
+text = Text(root)
+text.insert(INSERT, "Here, I start the text ...")
+text.insert(END, "... and here, I finish it.")
+text.pack()
+text.tag_add("here", "1.0", "1.4")
+text.tag_add("start", "1.8", "1.13")
+text.tag_config("here", background="yellow", foreground="blue")
+text.tag_config("start", background="black", foreground="green")
+root.mainloop()
+
+						</pRE>
+
+						<P>
+							<A name="idx1073749100"></a>Indexes are used to point out the actual positions of characters, delimiting areas within a text.</p>
+
+						<p>The following index types are available: <tt class="monofont">INSERT,</tt>
+							<tt clAss="monofont">CURRENT,</Tt>
+							<tt Class="monofont">END,</Tt> line/column (<tt CLASs="monofont">"line.column"</tt>), line end (<tT CLAss="monofont">"line.end"</tt>), user-defined marks, user-defined tags (<TT CLass="monofont">"tag.first",</tT>
+							<TT Class="monofont">"tag.last"</tt>), selection (<tt class="monofont">SEL_FIRST,</tt>
+							<tt claSs="monofont">SEL_LAST</tT>), window coordinate (<tt cLass="monofont">"@x,y"</tT>), embedded object name (window, images), and expressions.</p>
+
+						<p>In order to demonstrate more uses of this widget, the next example <a NAME="idx1073749101"></a>
+							<a naME="idx1073749102"></A>
+							<A name="idx1073749103"></A>
+							<A NAme="idx1073749104"></a>
+							<a NAME="idx1073749105"></a>inserts a Button widget right inside the text.</p>
+
+						<pre>
+							
+from Tkinter import *
+def onclick():
+    pass
+
+root = Tk()
+text = Text(root)
+text.insert(INSERT, "Here, I start the text ...")
+button = Button(text, text="I am a button", command=onclick)
+text.window_create(INSERT, window=button)
+text.insert(END, "... and here, I finish it.")
+text.pack()
+root.mainloop()
+
+						</pre>
+
+					
+					
+						<h5>
+
+Toplevel</h5>
+						<p>Toplevel widgets work as windows that are directly managed by the window manager. They do not necessarily have a parent widget on top of them. Toplevels do support geometry management, as you can control where children of a toplevel are placed, but you don't need to pack the toplevel itself. Their behavior is similar to Frame's. The difference is that Toplevel widgets are displayed in a top-level, separated window.</p>
+
+						<p>This widget supports all the <a name="idx1073749106"></a>methods mentioned next. Also note that these methods are also supported by the root window, which is originated by the <tT clAss="monofont">Tk()</tT> call. Not necessarily all functions will work on your window manager because each one of the available window managers in the market has its own type of support definitions.</p>
+
+						<bloCkquOTE>
+<P>
+								<a namE="idx1073749107"></A>
+								<A Name="idx1073749108"></a>
+								<P><TT Class="monofont">deiconify()</TT>— 
+    Displays the window, after using either the iconify or the withdraw methods.</P>
+
+							</P>
+<p>
+								<a name="idx1073749109"></a>
+								<a name="idx1073749110"></a>
+								<p><tt clasS="monofont">frame()</tt>— 
+    Returns a system-specific window identifier.</P>
+
+							</p>
+<p>
+								<a Name="idx1073749111"></a>
+								<A namE="idx1073749112"></A>
+								<P><Tt claSS="monofont">group(window)</TT>— 
+    Adds the window to the window group administered by the given window.</p>
+
+							</p>
+<p>
+								<a NAME="idx1073749113"></a>
+								<a naME="idx1073749114"></A>
+								<P><tt class="monofont">iconify()</tt>— 
+    Turns the window into an icon, without destroying it.</p>
+
+							</p>
+<p>
+								<a name="idx1073749115"></a>
+								<a nAme="idx1073749116"></A>
+								<p><tt Class="monofont">protocol(name, function)</Tt>— 
+    Registers a function as a callback which will be called for the given protocol. See the <i>Protocols</i> topic, which is located some pages ahead.</P>
+
+							</P>
+<P>
+								<A name="idx1073749117"></A>
+								<A NAme="idx1073749118"></a>
+								<p><TT CLass="monofont">state()</tT>— 
+    Returns the current state of the window. Possible values are <TT Class="monofont">normal,</tt>
+										<tt class="monofont">iconic,</tt>
+										<tt claSs="monofont">withdrawn,</tT> and <tt cLass="monofont">icon.</tT>
+									</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073749119"></a>
+								<a nAME="idx1073749120"></A>
+								<p><tt cLASS="monofont">transient([master])</tt>— 
+    Turns the window into a temporary(transient) window for the given master, or to the window's parent, when no argument is given. These windows are automatically hidden when the master window is iconified or withdrawn.</p>
+
+							</p>
+<P>
+								<A NAme="idx1073749121"></a>
+								<a name="idx1073749122"></a>
+								<p><tt class="monofont">withdraw()</tt>— 
+    Removes the window from the screen, without destroying it.<a NamE="idx1073749123"></a>
+										<a nAme="idx1073749124"></a>
+										<a Name="idx1073749125"></A>
+										<A NAme="idx1073749126"></a>
+										<a NAME="idx1073749127"></a>
+										<a naME="idx1073749128"></A>
+										<A name="idx1073749129"></A>
+									</P>
+
+							</P>
+</Blockquote>
+						<p>The following methods can be used either to set or to retrieve a specific information to or from the method call. If you call them without passing any arguments, they simply return their current value or state. On the other hand, if you inform the arguments, the expected action is executed.</p>
+
+						<blockquotE>
+<p>
+								<a Name="idx1073749130"></A>
+								<a namE="idx1073749131"></a>
+								<p><tT CLAss="monofont">aspect(minNumer, minDenom, maxNumer, maxDenom)</tt>— 
+    Controls the relation between window's width and height (aspect ratio). The aspect ratio is limited to lay between <TT CLass="monofont">minNumer/minDenom</tT> and <TT Class="monofont">maxNumer/maxDenom.</TT> If you omit the arguments, this method returns the current constraints as a 4-tuple.</P>
+
+							</P>
+<p>
+								<a name="idx1073749132"></a>
+								<a name="idx1073749133"></a>
+								<p><tt clasS="monofont">client(name)</tt>— 
+    Used under the X window system to define the <Tt clAss="monofont">WM_CLIENT_MACHINE</tt> property. It is the application that sets the <Tt clASS="monofont">WM_*</Tt> properties. The window manager can make use of these properties when managing the windows.</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073749134"></a>
+								<a nAME="idx1073749135"></A>
+								<p><tt cLASS="monofont">colormapwindows(wlist...)</tt>— 
+    Used under the X window system to define the <tt class="monofont">WM_COLORMAP_WINDOWS</tt> property.</p>
+
+							</p>
+<p>
+								<a name="idx1073749136"></a>
+								<A naMe="idx1073749137"></a>
+								<p><Tt claSs="monofont">command(value)</tt>— 
+    Used under the X window system to define the <TT CLass="monofont">WM_COMMAND</tT> property.</P>
+
+							</P>
+<P>
+								<a namE="idx1073749138"></A>
+								<A Name="idx1073749139"></a>
+								<P><TT Class="monofont">focusmodel(model)</tt>— 
+    Sets the focus model.</p>
+
+							</p>
+<p>
+								<a name="idx1073749140"></a>
+								<a name="idx1073749141"></A>
+								<p><tT claSs="monofont">geometry(geometry)</tt>— 
+    Changes the windows geometry by using the following argument format: <tT claSS="monofont">"widthxheight+xoffset+yoffset",</TT> showing the widget coordinates in pixels.</p>
+
+							</p>
+<p>
+								<a NAME="idx1073749142"></a>
+								<a naME="idx1073749143"></A>
+								<P><tt clASS="monofont">iconbitmap(bitmap)</Tt>— 
+    Defines a monochrome icon bitmap to be used when the window gets iconified.</p>
+
+							</p>
+<p>
+								<a name="idx1073749144"></a>
+								<a name="idx1073749145"></a>
+								<p><tt cLasS="monofont">iconmask(bitmap)</tt>— 
+    Defines the icon bitmap mask to use when this window gets iconified.</p>
+
+							</P>
+<p>
+								<a naMe="idx1073749146"></a>
+								<a NAME="idx1073749147"></a>
+								<p><tt CLASs="monofont">iconname(newName=None)</tt>— 
+    Defines the icon name to be used when this window gets iconified.<a NAME="idx1073749148"></a>
+										<a naME="idx1073749149"></A>
+										<A name="idx1073749150"></a>
+										<a name="idx1073749151"></a>
+										<a name="idx1073749152"></a>
+									</p>
+
+							</p>
+<p>
+								<A naMe="idx1073749153"></a>
+								<a Name="idx1073749154"></a>
+								<P><tt cLASS="monofont">iconposition(x, y)</tt>— 
+    Defines a suggestion for the icon position to be used when this window gets iconified.</p>
+
+							</p>
+<P>
+								<A NAme="idx1073749155"></a>
+								<a NAME="idx1073749156"></a>
+								<p><tt CLASs="monofont">iconwindow(window)</tt>— 
+    Defines the icon window that should be used as an icon when this window gets iconified.</p>
+
+							</p>
+<p>
+								<a name="idx1073749157"></a>
+								<a name="idx1073749158"></a>
+								<p><tT clAss="monofont">maxsize(width, height)</tT>— 
+    Defines the maximum size for this window.</p>
+
+							</p>
+<p>
+								<a Name="idx1073749159"></A>
+								<A NAme="idx1073749160"></a>
+								<p><TT CLass="monofont">minsize(width, height)</tT>— 
+    Defines the minimum size for this window.</P>
+
+							</P>
+<P>
+								<a namE="idx1073749161"></A>
+								<A Name="idx1073749162"></a>
+								<p><tt class="monofont">overrideredirect(flag)</tt>— 
+    Defines a flag different from 0 and tells the window manager to not add a title or borders to the window.</p>
+
+							</p>
+<p>
+								<a naMe="idx1073749163"></a>
+								<A namE="idx1073749164"></a>
+								<p><tt ClasS="monofont">positionfrom(who)</TT>— 
+    Defines the position controller.</P>
+
+							</p>
+<p>
+								<a nAME="idx1073749165"></A>
+								<a namE="idx1073749166"></A>
+								<P><Tt claSS="monofont">resizable(width, height)</TT>— 
+    Defines the resize flags, which control whether the window can be resized.</p>
+
+							</p>
+<p>
+								<a name="idx1073749167"></a>
+								<a name="idx1073749168"></a>
+								<p><tt clAss="monofont">sizefrom(who)</Tt>— 
+    Defines the size controller.</p>
+
+							</p>
+<P>
+								<a namE="idx1073749169"></a>
+								<a nAME="idx1073749170"></A>
+								<p><tt cLASS="monofont">title(string)</tt>— 
+    Defines the window title.<a nAME="idx1073749171"></A>
+										<a namE="idx1073749172"></A>
+									</P>
+
+							</P>
+</blockquote>
+					
+					
+						<h5>
+
+Image</h5>
+						<p>This class is used as a foundation to display graphic objects, including bitmaps and GIF images. Two subclasses are inherited from this class: <tt class="monofont">BitmapImage</Tt> and <tT claSs="monofont">PhotoImage.</tt>
+						</p>
+
+						<P>In order to <a naME="idx1073749173"></A>
+							<A name="idx1073749174"></A>
+							<A NAme="idx1073749175"></a>
+							<a NAME="idx1073749176"></a>using the following syntax:</p>
+
+						<prE>
+							
+image = BitmapImage(options) or image = PhotoImage(options)
+
+						</PRE>
+
+						<p>The following <a name="idx1073749177"></a>functions can be used for image handling:</p>
+
+						<blockquote>
+<p>
+								<a NamE="idx1073749178"></a>
+								<a nAme="idx1073749179"></a>
+								<p><Tt clASS="monofont">image_names()</Tt>— 
+    Returns a list containing the names of all existing images.</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073749180"></a>
+								<a nAME="idx1073749181"></A>
+								<p><tt cLASS="monofont">image_types()</tt>— 
+    Returns a list containing all the existing types that were created.</p>
+
+							</p>
+</blockquote>
+						<p>After a image object is created, it provides the following methods: <tt claSs="monofont">image.type(),</tT>
+							<tt cLass="monofont">image.width(),</tT> and <tt cLASS="monofont">image.height(),</tt> which return the type, actual width, and actual height of the image, respectively.<a nAME="idx1073749182"></A>
+							<a namE="idx1073749183"></A>
+						</P>
+
+					
+					
+						<H5>
+
+BitmapImage</h5>
+						<p>This subclass is used to display bitmap images on widgets, including buttons, canvas, labels, and text. They really mean bitmap for <i>BitmapImage</i> (not a multicolor image, which most Windows users think of because of the <TT CLass="monofont">.BMP</tt> format). A bitmap image represents a two color image (or 2 colors + transparency if a mask is used).</p>
+
+						<p>The following methods are exposed by this subclass. <a href="212#51.html">Table 15.5</a> shows the available options for these <a name="idx1073749184"></a>methods.</p>
+
+						<BloCkquOte>
+<p>
+								<a Name="idx1073749185"></A>
+								<A NAme="idx1073749186"></a>
+								<p><TT CLass="monofont">cget(option)</tT>— 
+    Returns the value of the given option.</P>
+
+							</P>
+<P>
+								<a namE="idx1073749187"></A>
+								<A Name="idx1073749188"></a>
+								<p><tt class="monofont">config(options),</tt>
+										<tt clasS="monofont">configure(options)</tt>— 
+    Changes the image options.</P>
+
+							</p>
+<p>
+								<a Name="idx1073749189"></a>
+								<A namE="idx1073749190"></A>
+								<A Name="idx1073749191"></a>
+								<A NAMe="idx1073749192"></a>
+								<p><tT CLAss="monofont">height(),</tt>
+										<TT CLass="monofont"> width()</tt>— 
+    Returns the image dimension, in pixels.</p>
+
+							</p>
+<p>
+								<a name="idx1073749193"></a>
+								<a name="idx1073749194"></a>
+								<P><tt ClasS="monofont">type()</tt>— 
+    Returns the <tt ClasS="monofont">"bitmap"</TT> string.<A name="idx1073749195"></A>
+										<A NAme="idx1073749196"></a>
+										<a NAME="idx1073749197"></a>
+										<a naME="idx1073749198"></A>
+										<A name="idx1073749199"></a>
+										<a name="idx1073749200"></a>
+										<a name="idx1073749201"></a>
+									</p>
+
+							</p>
+</bLocKquoTe>
+						<a naMe="51"></a><p><TABLe borDER="1" CellsPACIng="0" ceLLPAdding="1" width="100%">
+<caption><h5>Table 15.5. Available Options for the BitmapImage Subclass</h5></cAptIon><cOlgroUp alIGN="left" Span="2">
+<tR VALign="top">
+<tH>
+<FONt sizE="2">
+											<B>BitmapImage Options</B>
+										</Font></th>
+<th>
+<font size="2">
+											<b>Description</b>
+										</fonT></th>
+</Tr>
+<tr ValigN="top">
+<td>
+<fONT Size="2">
+											<a NAME="idx1073749202"></a>
+											<a naME="idx1073749203"></A>
+											<Tt claSS="monofont">background</TT>
+										</font></td>
+<td>
+<font size="2">Background color to be used.</font></Td>
+</tR>
+<tr vAlign="top">
+<Td>
+<foNT SIze="2">
+											<a nAME="idx1073749204"></A>
+											<a namE="idx1073749205"></A>
+											<TT clasS="monofont">data</TT>
+										</Font></td>
+<td>
+<font size="2">String to be used instead of a file.</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2">
+											<a naME="idx1073749206"></A>
+											<A name="idx1073749207"></A>
+											<TT Class="monofont">file</TT>
+										</FOnt></td>
+<td>
+<font size="2">File to be read.</font></td>
+</Tr>
+<tR valIgn="top">
+<td>
+<Font SIZE="2">
+											<a namE="idx1073749208"></A>
+											<A Name="idx1073749209"></a>
+											<TT CLass="monofont">foreground</tT>
+										</FONt></td>
+<td>
+<font size="2">Foreground color to be used.</font></td>
+</tR>
+<tr ValiGn="top">
+<td>
+<fOnt sIZE="2">
+											<A name="idx1073749210"></A>
+											<A NAme="idx1073749211"></a>
+											<tT CLAss="monofont">format</tt>
+										</FONT></td>
+<td>
+<font size="2">Specifies the file handler to be used.</font></td>
+</tr>
+<Tr vAligN="top">
+<td>
+<foNt siZE="2">
+											<A Name="idx1073749212"></a>
+											<A NAMe="idx1073749213"></a>
+											<tt CLASs="monofont">maskdata</tt>
+										</fONT></Td>
+<td>
+<font size="2">String that defines the contents of the mask in order to produce a 'shaped' bitmap.</font></td>
+</tr>
+<tR vaLign="top">
+<Td>
+<fonT sizE="2">
+											<A NAme="idx1073749214"></a>
+											<a NAME="idx1073749215"></a>
+											<tt cLASS="monofont">maskfile</tt>
+										</foNT></TD>
+<td>
+<font size="2">File that specifies the mask. If you specify both maskdata and maskfile, the former becomes used.</font></td>
+</tr>
+<tr ValIgn="top">
+<tD>
+<font Size="2">
+											<A NAMe="idx1073749216"></a>
+											<a nAME="idx1073749217"></A>
+											<a namE="idx1073749218"></A>
+											<A Name="idx1073749219"></a>
+											<TT CLass="monofont">height,</tt>
+											<tt class="monofont">width</tt>
+										</font></td>
+<Td>
+<fOnt sIze="2">Requested dimensions for the image.<a nAme="idx1073749220"></a>
+											<A NAMe="idx1073749221"></a>
+											<a nAME="idx1073749222"></A>
+											<a namE="idx1073749223"></A>
+											<A Name="idx1073749224"></a>
+											<A NAMe="idx1073749225"></a>
+											<a name="idx1073749226"></a>
+										</font></td>
+</tr>
+</colgRouP>
+</tabLe></p>
+
+					
+					
+						<h5>
+
+PhotoImage</h5>
+						<P>This subclass is used to display full-color images on widgets, including buttons, canvas, labels, and text.</p>
+
+						<p>The following <a NAME="idx1073749227"></a>attributes are exposed by this subclass:</p>
+
+						<blOCKQuote>
+<P>
+								<A NAme="idx1073749228"></a>
+								<a NAME="idx1073749229"></a>
+								<p><tt class="monofont">data</tt>— 
+    String to be used instead of a file.</p>
+
+							</p>
+<p>
+								<a name="idx1073749230"></a>
+								<A naMe="idx1073749231"></a>
+								<p><Tt claSs="monofont">file</tt>— 
+    File to be read.</P>
+
+							</P>
+<P>
+								<A name="idx1073749232"></A>
+								<A NAme="idx1073749233"></a>
+								<a NAME="idx1073749234"></a>
+								<a naME="idx1073749235"></A>
+								<P><tt class="monofont">height,</tt>
+										<tt class="monofont">width</tt>— 
+    Requested dimensions for the image.</p>
+
+							</p>
+</BloCkquOte>
+						<p>This subclass offers native support to GIF and PPM files. In order to add an image to a widget, just implement the principle established by the following code:</p>
+
+						<Pre>
+							
+from Tkinter import *
+root = Tk()
+frame = Frame(root)
+myimage = PhotoImage(file="new.gif")
+b = Button(root)
+b.config(image= myimage)   # or  b.image = myimage
+frame.pack()
+b.pack()
+root.mainloop()
+
+						</pRE>
+
+					
+				
+				
+					<H4>
+General Widget Methods</H4>
+					<p>Next, I list some of the methods inherited from the base <tt cLASS="monofont">Tk</tt> classes that are provided for all Tkinter widgets, which also includes the toplevel object that is generated by the <tt CLASs="monofont">Tk()</tt> method.</p>
+
+					<P>The following methods always apply to the widget object that makes the method call. To demonstrate it, the next code lines create a label widget, and use the <TT Class="monofont">config</tt> method to set the value of the <tt class="monofont">text</tt> attribute for the label widget that we have just created.</p>
+
+					<pre>
+						
+lb = Label(root)
+lb.config(text= "Hello Python World")
+
+					</pRe>
+
+					<p>Now, let's see the available methods:</P>
+
+					<bloCkquoTe>
+<p>
+							<a NAME="idx1073749236"></a>
+							<a naME="idx1073749237"></A>
+							<P><tt clASS="monofont">cget(option)</Tt>— 
+    Returns a string that contains the current configuration value for the given option.</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073749238"></a>
+							<a name="idx1073749239"></a>
+							<a name="idx1073749240"></a>
+							<a name="idx1073749241"></a>
+							<P><tt ClasS="monofont">config(options),</tt>
+									<tt ClasS="monofont">configure(options)</TT>— 
+    Sets the values for one or more options. When used without arguments, it returns a dictionary containing the current settings for all widget options.</P>
+
+						</p>
+<p>
+							<a nAME="idx1073749242"></A>
+							<a namE="idx1073749243"></A>
+							<P><Tt claSS="monofont">destroy()</TT>— 
+    Destroys the widget, removing it from its namespace.</p>
+
+						</p>
+<p>
+							<a name="idx1073749244"></a>
+							<a name="idx1073749245"></a>
+							<a name="idx1073749246"></A>
+							<a nAme="idx1073749247"></a>
+							<P><tt clAss="monofont">focus(), focus_set()</tT>— 
+    Sets the keyboard focus to the widget.<A NAme="idx1073749248"></a>
+									<a NAME="idx1073749249"></a>
+									<a naME="idx1073749250"></A>
+									<A name="idx1073749251"></A>
+									<A NAme="idx1073749252"></a>
+									<a name="idx1073749253"></a>
+								</p>
+
+						</p>
+<p>
+							<a name="idx1073749254"></a>
+							<a nAme="idx1073749255"></A>
+							<p><tt Class="monofont">focus_displayof()</Tt>— 
+    Returns the name of the window that contains the widget and has the focus.</p>
+
+						</p>
+<P>
+							<A NAme="idx1073749256"></a>
+							<a NAME="idx1073749257"></a>
+							<p><tt CLASs="monofont">focus_force()</tt>— 
+    Enforces the keyboard focus to the widget.</p>
+
+						</P>
+<P>
+							<A Name="idx1073749258"></a>
+							<a name="idx1073749259"></a>
+							<p><tt class="monofont">focus_get()</tt>— 
+    Returns the identity of the window with focus.</P>
+
+						</p>
+<p>
+							<A namE="idx1073749260"></a>
+							<a naMe="idx1073749261"></a>
+							<p><TT CLass="monofont">focus_lastfor()</tT>— 
+    Returns the identity of the most recent window to receive the input focus.</P>
+
+						</P>
+<P>
+							<a namE="idx1073749262"></A>
+							<A Name="idx1073749263"></a>
+							<P><TT Class="monofont">getvar(variable)</tt>— 
+    Returns the value of the provided <tt class="monofont">Tkinter</tt> variable name.</p>
+
+						</p>
+<p>
+							<a nAme="idx1073749264"></A>
+							<a naMe="idx1073749265"></a>
+							<p><tT claSS="monofont">grab_set()</TT>— 
+    Grabs all events for the current application to the widget.</p>
+
+						</p>
+<p>
+							<a NAME="idx1073749266"></a>
+							<a naME="idx1073749267"></A>
+							<P><tt clASS="monofont">grab_current()</Tt>— 
+    Returns the identity of the widget that has set the grab functionality in the current application.</p>
+
+						</p>
+<p>
+							<a name="idx1073749268"></a>
+							<a name="idx1073749269"></a>
+							<p><tt cLasS="monofont">grab_release()</tt>— 
+    Releases the grab on the widget.</p>
+
+						</P>
+<p>
+							<a naMe="idx1073749270"></a>
+							<a NAME="idx1073749271"></a>
+							<p><tt CLASs="monofont">grab_set_global()</tt>— 
+    Grabs all events for the entire screen to the widget.</p>
+
+						</P>
+<P>
+							<A Name="idx1073749272"></a>
+							<A NAMe="idx1073749273"></a>
+							<p><tt class="monofont">grab_status()</tt>— 
+    Returns <tt class="monofont">None,</tT>
+									<tt ClasS="monofont">local,</tt> or <tt ClasS="monofont">global,</TT> depending whether there is no grab set on window, a <Tt claSS="monofont">local</TT> grab is set, or a <tt clASS="monofont">global</Tt> grab is set, respectively.</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073749274"></a>
+							<a name="idx1073749275"></a>
+							<p><tt class="monofont">keys()</tt>— 
+    Returns all the options available for this widget in a tuple format. In order to obtain the value of each one of these options, you can use the <tt ClaSs="monofont">cget</tt> method.</P>
+
+						</p>
+<p>
+							<a nAme="idx1073749276"></a>
+							<A NAMe="idx1073749277"></a>
+							<a nAME="idx1073749278"></A>
+							<a namE="idx1073749279"></A>
+							<P><Tt claSS="monofont">lift([object]), tkraise([object])</TT>— 
+    Moves the widget to the top of the window stack, or if an object (a widget or a window) is provided, the widget is placed right above the informed object.</p>
+
+						</p>
+<p>
+							<a name="idx1073749280"></a>
+							<a name="idx1073749281"></a>
+							<p><tt clAss="monofont">lower([object])</Tt>— 
+    Moves the widget to the bottom of the window stack, or if an object (a widget or a window) is provided, the widget is placed right below the informed object.<a nAme="idx1073749282"></a>
+									<a Name="idx1073749283"></A>
+									<A NAme="idx1073749284"></a>
+									<a NAME="idx1073749285"></a>
+									<a naME="idx1073749286"></A>
+									<A name="idx1073749287"></A>
+								</P>
+
+						</P>
+<P>
+							<a name="idx1073749288"></a>
+							<a name="idx1073749289"></a>
+							<p><tt class="monofont">mainloop()</Tt>— 
+    Activates the main event loop.</p>
+
+						</P>
+<p>
+							<a nAme="idx1073749290"></a>
+							<a Name="idx1073749291"></A>
+							<P><TT clasS="monofont">quit()</TT>— 
+    Quits the main event loop.</P>
+
+						</p>
+<p>
+							<a nAME="idx1073749292"></A>
+							<a namE="idx1073749293"></A>
+							<P><Tt class="monofont">setvar(variablename, value)</tt>— 
+    Sets a <tt class="monofont">value</tt> to the given <tt cLasS="monofont">Tkinter</tt> variable name.</p>
+
+						</P>
+<p>
+							<a naMe="idx1073749294"></a>
+							<a NAME="idx1073749295"></a>
+							<p><tt CLASs="monofont">update()</tt>— 
+    Processes all pending tasks, such as geometry management and widgets redrawing. Be careful when using this method.</p>
+
+						</P>
+<P>
+							<A Name="idx1073749296"></a>
+							<A NAMe="idx1073749297"></a>
+							<p><tt class="monofont">update_idletasks()</tt>— 
+    Processes all pending idle tasks.</p>
+
+						</p>
+<p>
+							<a name="idx1073749298"></A>
+							<a nAme="idx1073749299"></a>
+							<P><tt clAss="monofont">tk_focusNext()</tT>— 
+    Returns the next widget that should have the keyboard focus.</P>
+
+						</P>
+<P>
+							<a namE="idx1073749300"></A>
+							<A Name="idx1073749301"></a>
+							<P><TT Class="monofont">tk_focusPrev()</TT>— 
+    Returns the previous widget that should have the keyboard focus.</P>
+
+						</P>
+<p>
+							<a name="idx1073749302"></a>
+							<a name="idx1073749303"></a>
+							<p><tt clasS="monofont">wait_variable(variable)</tt>— 
+    Creates a local event that waits for the given <Tt clAss="monofont">Tkinter</tt> variable to change. This loop doesn't affect the application's mainloop.</P>
+
+						</p>
+<p>
+							<a NAME="idx1073749304"></a>
+							<a naME="idx1073749305"></A>
+							<P><tt clASS="monofont">wait_visibility(widget)</Tt>— 
+    Creates a local event that waits for the given widget to become visible. This loop doesn't affect the application's mainloop.</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073749306"></a>
+							<a name="idx1073749307"></a>
+							<p><tt class="monofont">wait_window(widget)</tt>— 
+    Creates a local event that waits for the given widget to be destroyed. This loop doesn't affect the application's mainloop.<a nAme="idx1073749308"></A>
+									<a naMe="idx1073749309"></a>
+									<a nAme="idx1073749310"></a>
+									<A NAMe="idx1073749311"></a>
+									<a nAME="idx1073749312"></A>
+									<a namE="idx1073749313"></A>
+								</P>
+
+						</P>
+</blocKQUOte>
+					
+						<h5>
+							<tt class="monofont">winfo</tt> (Widget Information) Methods</h5>
+						<p>This set of methods provides specific functionality for the windowing widgets.</p>
+
+						<blockQuoTe>
+<p>
+								<p>
+									<Tt claSs="monofont">winfo_cells()</tt>— 
+    Returns the number of cells in the widget's color map.</P>
+
+							</P>
+<P>
+								<P>
+									<tt clASS="monofont">winfo_children()</Tt>— 
+    Returns a list of widget instances for all the widget's children.</p>
+
+							</p>
+<p>
+								<P>
+									<TT Class="monofont">winfo_class()</TT>— 
+    Returns the Tkinter widget class name for the widget.</P>
+
+							</P>
+<p>
+								<p>
+									<tt class="monofont">winfo_colormapfull()</tt>— 
+    Returns <tt class="monofont">true</tt> if the widget's color map is full.</P>
+
+							</p>
+<p>
+								<P>
+									<tt cLass="monofont">winfo_containing(xcoord, ycoord)</tT>— 
+    Returns the identity of the widget located at the given coordinate (relative to the upper left corner of the root window).</p>
+
+							</p>
+<p>
+								<P>
+									<TT Class="monofont">winfo_depth()</TT>— 
+    Returns the bit depth (8, 16, 24, or 32 bits per pixel) used to display the widget.</P>
+
+							</P>
+<p>
+								<p>
+									<tt CLASs="monofont">winfo_exists()</tt>— 
+    Returns <tT CLAss="monofont">true</tt> if a Tk window corresponds to the given widget.</p>
+
+							</p>
+<p>
+								<p>
+									<tt class="monofont">winfo_fpixels(number)</tt>— 
+    Returns a floating point value, which is the result of the conversion of the given distance to the corresponding number of pixels.</p>
+
+							</p>
+<p>
+								<P>
+									<tt ClasS="monofont">winfo_geometry()</tt>— 
+    Returns a string in the format <tt ClasS="monofont">"widthxheight+xoffset+yoffset",</TT> showing the widget coordinates in pixels.</P>
+
+							</p>
+<p>
+								<p>
+									<tT CLAss="monofont">winfo_height(), winfo_width()</tt>— 
+    Return the widget's height and width, in pixels.</P>
+
+							</P>
+<P>
+								<P>
+									<tt clASS="monofont">winfo_id()</Tt>— 
+    Returns an integer that contains a platform-specific window identity corresponding to the given widget. On UNIX systems, this is the X window identifier; on Windows systems, this is the Window HWND; and on Macs, it is a non-useful value.<a name="idx1073749314"></a>
+										<a name="idx1073749315"></a>
+										<a name="idx1073749316"></a>
+										<a NamE="idx1073749317"></a>
+										<a nAme="idx1073749318"></a>
+										<a Name="idx1073749319"></A>
+										<A NAme="idx1073749320"></a>
+										<a NAME="idx1073749321"></a>
+									</p>
+
+							</p>
+<p>
+								<P>
+									<TT Class="monofont">winfo_ismapped()</TT>— 
+    Returns <TT class="monofont">true</tt> if the widget is currently mapped by the underlying window system.</p>
+
+							</p>
+<p>
+								<p>
+									<tt class="monofont">winfo_manager()</tt>— 
+    Returns the name of the geometry manager that has been used to organize the widget.</P>
+
+							</p>
+<p>
+								<P>
+									<tt cLass="monofont">winfo_name()</tT>— 
+    Returns the widget's name.</p>
+
+							</p>
+<p>
+								<P>
+									<TT Class="monofont">winfo_parent()</TT>— 
+    Returns the name of the widget's parent, or an empty string in case the widget doesn't have a parent widget/window.</P>
+
+							</P>
+<p>
+								<p>
+									<tt CLASs="monofont">winfo_pathname(widget_id)</tt>— 
+    Returns the pathname of the widget whose identity is given as the argument.</p>
+
+							</P>
+<P>
+								<P>
+									<Tt class="monofont">winfo_pixels(number)</tt>— 
+    Returns an integer value, which is the result of the conversion of the given distance to the corresponding number of pixels.</p>
+
+							</p>
+<p>
+								<p>
+									<tt class="monofont">winfo_pointerx()</tT>— 
+    Returns the x coordinate of the mouse pointer (in pixels) when it is on the same screen of the widget.</p>
+
+							</p>
+<P>
+								<p>
+									<tt Class="monofont">winfo_pointerxy()</Tt>— 
+    Returns a tuple of the x and y coordinates of the mouse pointer (in pixels) when it is on the same screen of the widget.</p>
+
+							</p>
+<P>
+								<P>
+									<TT clasS="monofont">winfo_pointery()</TT>— 
+    Returns the y coordinate of the mouse pointer (in pixels) when it is on the same screen of the widget.</P>
+
+							</p>
+<p>
+								<p>
+									<tT CLAss="monofont">winfo_reqheight(),</tt>
+										<TT CLass="monofont">winfo_reqwidth()</tt>— 
+    Return the minimal height and width required by the widget in order to be entirely displayed.</p>
+
+							</p>
+<p>
+								<p>
+									<tt class="monofont">winfo_rootx(),</tt>
+										<tt ClaSs="monofont">winfo_rooty()</tt>— 
+    Return the pixel coordinates (integer values) corresponding to the widget's upper left corner, relative to the upper left corner of root's window border.</P>
+
+							</p>
+<p>
+								<p>
+									<tT claSS="monofont">winfo_screen()</TT>— 
+    Returns the screen name for the current window in the format <tt clASS="monofont">display.screen.</Tt> Note that it doesn't provide any useful information on non-X versions of Tk.</p>
+
+							</p>
+<p>
+								<P>
+									<TT Class="monofont">winfo_screencells()</TT>— 
+    Returns the number of cells in the default color map for widget's screen.</P>
+
+							</P>
+<p>
+								<p>
+									<tt class="monofont">winfo_screendepth()</tt>— 
+    Returns the bit depth of the window widget.</p>
+
+							</p>
+<p>
+								<p>
+									<tt claSs="monofont">winfo_screenheight(),</tT>
+										<tt cLass="monofont">winfo_screenwidth()</tT>— 
+    Returns the height and the width of the widget's screen, in pixels.</p>
+
+							</p>
+<p>
+								<P>
+									<TT Class="monofont">winfo_screenmmheight(),</TT>
+										<TT clasS="monofont">winfo_screenmmwidth()</TT>— 
+    Returns the height and the width of the widget's screen, in millimeters.</P>
+
+							</p>
+<p>
+								<p>
+									<tT CLAss="monofont">winfo_screenvisual()</tt>— 
+    Returns the default <tt class="monofont">visual</tt> class used for widget's screen. Possible values include <tt class="monofont">pseudocolor,</Tt>
+										<tT claSs="monofont">directcolor,</tt>
+										<tT claSS="monofont">staticcolor,</TT>
+										<tt clASS="monofont">truecolor,</Tt>
+										<tt cLASS="monofont">grayscale,</tt> and <tt CLASs="monofont">staticgray.</tt>
+									</p>
+
+							</p>
+<p>
+								<p>
+									<tt class="monofont">winfo_toplevel()</tt>— 
+    Returns a widget instance of the top-level window containing the widget.</p>
+
+							</p>
+<p>
+								<p>
+									<Tt cLass="monofont">winfo_visual()</Tt>— 
+    Returns the visual class used for the widget. Possible values include <tt cLass="monofont">pseudocolor,</TT>
+										<TT clasS="monofont">directcolor,</TT>
+										<Tt claSS="monofont">staticcolor,</TT>
+										<tt clASS="monofont">truecolor,</Tt>
+										<tt class="monofont">grayscale,</tt> and <tt class="monofont">staticgray.</tt>
+									</p>
+
+							</P>
+<p>
+								<p>
+									<Tt clAss="monofont">winfo_x(),</tt>
+										<Tt clASS="monofont">winfo_y()</Tt>— 
+    Return the pixel coordinates (integer values) corresponding to the widget's upper left corner, relative to the upper left corner of its parent's window border.<a naME="idx1073749322"></A>
+										<A name="idx1073749323"></A>
+										<A NAme="idx1073749324"></a>
+										<a NAME="idx1073749325"></a>
+										<a name="idx1073749326"></a>
+										<a name="idx1073749327"></a>
+										<a name="idx1073749328"></a>
+										<a NamE="idx1073749329"></a>
+									</p>
+
+							</p>
+</BlockQuotE>
+					
+				
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="211.html" title="Handling Tkinter Events"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=212" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="212.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="213.html" title="Designing Applications"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073749069">2nd</a> <a href="#idx1073748901">3rd</a> <a href="#idx1073748948">accelerator option</a><BR>
+ <a href="#idx1073748744">activebackground property</a><BR>
+ <a href="#idx1073748746">activeforeground property</a><BR>
+ <a href="#idx1073748663">actual(options) method</a><BR>
+ <a href="#idx1073748931">add(type, options) method</a><BR>
+ <a href="#idx1073748927">add_cascade(options) method</a><BR>
+ <a href="#idx1073748925">add_checkbutton(options) method</a><BR>
+ <a href="#idx1073748921">add_command(options) method</a><BR>
+ <a href="#idx1073748923">add_radiobutton(options) method</a><BR>
+ <a href="#idx1073748929">add_separator(options) method</a><BR>
+adding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749102">Button widgets inside text</a><BR>
+aligning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748874">colored buttons, frames</a><BR>
+ <a href="#idx1073748816">anchor option</a> <a href="#idx1073748824">2nd</a><BR>
+ <a href="#idx1073748776">arc() method</a><BR>
+ <a href="#idx1073749130">aspect(minNumer, minDenom, maxNumer, maxDenom) method</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748829">Checkbutton widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749229">data</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749231">file</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749233">height</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748842">indicatoron</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748833">offvalue</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748831">onvalue</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749227">PhotoImage subclass</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749057">state</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749059">tabs</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749048">Text widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748864">textvariable</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749235">width</a><BR>
+ <a href="#idx1073749202">background option</a><BR>
+ <a href="#idx1073748631">background(bg) property</a> <a href="#idx1073748635">2nd</a> <a href="#idx1073748637">3rd</a><BR>
+bars<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menu<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748981">creating</a><BR>
+ <a href="#idx1073748748">bitmap property</a><BR>
+ <a href="#idx1073748778">bitmap() method</a><BR>
+ <a href="#idx1073749200">BitmapImage subclass</a> <a href="#idx1073749225">2nd</a><BR>
+ <a href="#idx1073748703">Button widget</a> <a href="#idx1073748772">2nd</a> <a href="#idx1073749104">3rd</a><BR>
+buttons<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748872">colored, creating frames to align</a><BR>
+calls<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748852">Checkbutton widget</a><BR>
+ <a href="#idx1073748705">Canvas widget</a> <a href="#idx1073748809">2nd</a> <a href="#idx1073748826">3rd</a><BR>
+ <a href="#idx1073748665">cget(option) method</a> <a href="#idx1073749185">2nd</a> <a href="#idx1073749236">3rd</a><BR>
+changing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748620">values at execution time</a><BR>
+ <a href="#idx1073748707">Checkbutton widget</a> <a href="#idx1073748839">2nd</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749183">Image</a><BR>
+ <a href="#idx1073749132">client(name) method</a><BR>
+color names<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748625">Macintosh</a> <a href="#idx1073748628">2nd</a><BR>
+colored buttons<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748873">creating frames to align</a><BR>
+ <a href="#idx1073749134">colormapwindows(wlist...) method</a><BR>
+ <a href="#idx1073748950">command option</a><BR>
+ <a href="#idx1073749136">command(value) method</a><BR>
+ <a href="#idx1073748667">config() method</a><BR>
+ <a href="#idx1073748671">config(options) method</a> <a href="#idx1073749187">2nd</a> <a href="#idx1073749238">3rd</a><BR>
+ <a href="#idx1073748669">configure() method</a><BR>
+ <a href="#idx1073748673">configure(options) method</a> <a href="#idx1073749240">2nd</a><BR>
+ <a href="#idx1073748675">copy(font object) method</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748869">frames to align colored buttons</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749173">image objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748979">menu bars</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748994">messages</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748975">pop-up menus</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748983">pull-down menus</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749022">radiobuttons</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748860">single line interfaces</a><BR>
+ <a href="#idx1073749228">data attribute</a><BR>
+ <a href="#idx1073749204">data option</a><BR>
+ <a href="#idx1073748750">default property</a><BR>
+defining<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748619">values at execution time</a><BR>
+ <a href="#idx1073749107">deiconify() method</a><BR>
+ <a href="#idx1073748895">delete(row [,lastrow]) method</a><BR>
+ <a href="#idx1073748933">delete(startindex [,endindex]) method</a> <a href="#idx1073749061">2nd</a><BR>
+ <a href="#idx1073749242">destroy() method</a><BR>
+dictionaries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748624">defining =values</a><BR>
+ <a href="#idx1073748752">disabledforeground property</a><BR>
+displaying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748910">lines, lists</a><BR>
+editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748623">values at execution time</a><BR>
+ <a href="#idx1073748709">Entry widget</a> <a href="#idx1073748867">2nd</a><BR>
+ <a href="#idx1073748935">entryconfig(index, options) method</a><BR>
+expressions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748862">creating single line interfaces for entering</a><BR>
+ <a href="#idx1073748659">families() function</a><BR>
+ <a href="#idx1073748647">family option</a><BR>
+ <a href="#idx1073749230">file attribute</a><BR>
+ <a href="#idx1073749206">file option</a><BR>
+ <a href="#idx1073748786">fill option</a> <a href="#idx1073748790">2nd</a> <a href="#idx1073748802">3rd</a> <a href="#idx1073748818">4th</a><BR>
+ <a href="#idx1073748739">flash() method</a> <a href="#idx1073748846">2nd</a> <a href="#idx1073749015">3rd</a><BR>
+ <a href="#idx1073749244">focus() method</a><BR>
+ <a href="#idx1073749254">focus_displayof() method</a><BR>
+ <a href="#idx1073749256">focus_force() method</a><BR>
+ <a href="#idx1073749258">focus_get() method</a><BR>
+ <a href="#idx1073749260">focus_lastfor() method</a><BR>
+ <a href="#idx1073749246">focus_set() method</a><BR>
+ <a href="#idx1073749138">focusmodel(model) method</a><BR>
+font class instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748691">methods</a><BR>
+ <a href="#idx1073748687">font property</a> <a href="#idx1073748695">2nd</a><BR>
+ <a href="#idx1073749208">foreground option</a><BR>
+ <a href="#idx1073748633">foreground(fg) property</a><BR>
+ <a href="#idx1073749210">format option</a><BR>
+ <a href="#idx1073748711">Frame widget</a> <a href="#idx1073748875">2nd</a><BR>
+ <a href="#idx1073749109">frame() method</a><BR>
+frames<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748871">creating to align colored buttons</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748660">families()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749177">Image class</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749179">image_names()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749181">image_types()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748662">names()</a><BR>
+ <a href="#idx1073749140">geometry(geometry) method</a><BR>
+ <a href="#idx1073748865">get() method</a> <a href="#idx1073749032">2nd</a> <a href="#idx1073749046">3rd</a><BR>
+ <a href="#idx1073748897">get(row) method</a><BR>
+ <a href="#idx1073749063">get(startindex [,endindex]) method</a><BR>
+ <a href="#idx1073749262">getvar(variable) method</a><BR>
+ <a href="#idx1073749266">grab_current() method</a><BR>
+ <a href="#idx1073749268">grab_release() method</a><BR>
+ <a href="#idx1073749264">grab_set() method</a><BR>
+ <a href="#idx1073749270">grab_set_global() method</a><BR>
+ <a href="#idx1073749272">grab_status() method</a><BR>
+graphical user interfaces (GUIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tkinter<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748642">widgets</a> <a href="#idx1073748682">2nd</a> <a href="#idx1073748698">3rd</a> <a href="#idx1073748734">4th</a> <a href="#idx1073748755">5th</a> <a href="#idx1073748805">6th</a> <a href="#idx1073748835">7th</a> <a href="#idx1073748854">8th</a> <a href="#idx1073748880">9th</a> <a href="#idx1073748914">10th</a> <a href="#idx1073748940">11th</a> <a href="#idx1073748988">12th</a> <a href="#idx1073749007">13th</a> <a href="#idx1073749025">14th</a> <a href="#idx1073749037">15th</a> <a href="#idx1073749050">16th</a> <a href="#idx1073749074">17th</a> <a href="#idx1073749124">18th</a> <a href="#idx1073749149">19th</a> <a href="#idx1073749196">20th</a> <a href="#idx1073749221">21st</a> <a href="#idx1073749249">22nd</a> <a href="#idx1073749283">23rd</a> <a href="#idx1073749309">24th</a> <a href="#idx1073749315">25th</a> <a href="#idx1073749323">26th</a><BR>
+ <a href="#idx1073749111">group(window) method</a><BR>
+ <a href="#idx1073749232">height attribute</a><BR>
+ <a href="#idx1073749216">height option</a><BR>
+ <a href="#idx1073748887">height property</a> <a href="#idx1073749000">2nd</a><BR>
+ <a href="#idx1073749189">height() method</a><BR>
+ <a href="#idx1073748639">highlightthickness property</a><BR>
+ <a href="#idx1073749142">iconbitmap(bitmap) method</a><BR>
+ <a href="#idx1073749113">iconify() method</a><BR>
+ <a href="#idx1073749146">iconmame(newName=None) method</a><BR>
+ <a href="#idx1073749144">iconmask(bitmap) method</a><BR>
+ <a href="#idx1073749153">iconposition(x, y) method</a><BR>
+ <a href="#idx1073749155">iconwindow(window) method</a><BR>
+ <a href="#idx1073749182">Image class</a><BR>
+image objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749174">creating</a><BR>
+ <a href="#idx1073748760">image property</a><BR>
+ <a href="#idx1073748780">image() method</a><BR>
+ <a href="#idx1073749178">image_names() function</a><BR>
+ <a href="#idx1073749180">image_types() function</a><BR>
+ <a href="#idx1073749065">index(index) method</a><BR>
+ <a href="#idx1073748937">index(item) method</a><BR>
+ <a href="#idx1073749080">index(mark) method</a><BR>
+ <a href="#idx1073749100">indexes</a><BR>
+ <a href="#idx1073748952">indicator option</a><BR>
+ <a href="#idx1073748841">indicatoron attribute</a><BR>
+ <a href="#idx1073749067">insert(index [,string]...) method</a><BR>
+ <a href="#idx1073748899">insert(row, string) method</a><BR>
+inserting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749101">Button widgets inside text</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphical user (GUI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748643">Tkinter</a> <a href="#idx1073748683">2nd</a> <a href="#idx1073748699">3rd</a> <a href="#idx1073748735">4th</a> <a href="#idx1073748756">5th</a> <a href="#idx1073748806">6th</a> <a href="#idx1073748836">7th</a> <a href="#idx1073748855">8th</a> <a href="#idx1073748881">9th</a> <a href="#idx1073748915">10th</a> <a href="#idx1073748941">11th</a> <a href="#idx1073748989">12th</a> <a href="#idx1073749008">13th</a> <a href="#idx1073749026">14th</a> <a href="#idx1073749038">15th</a> <a href="#idx1073749051">16th</a> <a href="#idx1073749075">17th</a> <a href="#idx1073749125">18th</a> <a href="#idx1073749150">19th</a> <a href="#idx1073749197">20th</a> <a href="#idx1073749222">21st</a> <a href="#idx1073749250">22nd</a> <a href="#idx1073749284">23rd</a> <a href="#idx1073749310">24th</a> <a href="#idx1073749316">25th</a> <a href="#idx1073749324">26th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;single line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748859">creating</a><BR>
+ <a href="#idx1073748741">invoke() method</a> <a href="#idx1073748848">2nd</a> <a href="#idx1073749017">3rd</a><BR>
+ <a href="#idx1073749274">keys() method</a><BR>
+ <a href="#idx1073748954">label option</a><BR>
+ <a href="#idx1073748713">Label widget</a><BR>
+ <a href="#idx1073749276">lift([object]) method</a><BR>
+ <a href="#idx1073748782">line() method</a><BR>
+lines<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748909">lists, viewing</a><BR>
+ <a href="#idx1073748715">Listbox widget</a> <a href="#idx1073748884">2nd</a> <a href="#idx1073748911">3rd</a><BR>
+ <a href="#idx1073749280">lower([object]) method</a><BR>
+Macintosh<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748627">color names</a> <a href="#idx1073748630">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748693">fonts</a><BR>
+ <a href="#idx1073749288">mainloop() method</a><BR>
+ <a href="#idx1073749082">mark_gravity(mark [,gravity]) method</a><BR>
+ <a href="#idx1073749084">mark_names() method</a><BR>
+ <a href="#idx1073749086">mark_set(mark, index) method</a><BR>
+ <a href="#idx1073749088">mark_unset(mark) method</a><BR>
+ <a href="#idx1073749071">marks</a><BR>
+ <a href="#idx1073749212">maskdata option</a><BR>
+ <a href="#idx1073749214">maskfile option</a><BR>
+ <a href="#idx1073749157">maxsize(width, height) method</a><BR>
+ <a href="#idx1073748677">measure(text) method</a><BR>
+menu bars<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748980">creating</a><BR>
+ <a href="#idx1073748956">menu option</a><BR>
+ <a href="#idx1073748717">Menu widget</a> <a href="#idx1073748918">2nd</a> <a href="#idx1073748944">3rd</a> <a href="#idx1073748992">4th</a><BR>
+ <a href="#idx1073748719">Menubutton widget</a><BR>
+menus<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pop-up<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748977">creating</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pull-down<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748985">creating</a><BR>
+ <a href="#idx1073748721">Message widget</a> <a href="#idx1073748997">2nd</a><BR>
+messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748995">creating</a><BR>
+ <a href="#idx1073749070">methods</a> <a href="#idx1073748902">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748664">actual(options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748932">add(type, options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748928">add_cascade(options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748926">add_checkbutton(options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748922">add_command(options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748924">add_radiobutton(options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748930">add_separator(options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748777">arc()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749131">aspect(minNumer, minDenom, maxNumer, maxDenom)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748779">bitmap()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749184">BitmapImage subclass</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748738">Button widget</a> <a href="#idx1073748759">2nd</a> <a href="#idx1073748774">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748775">Canvas widget</a> <a href="#idx1073748811">2nd</a> <a href="#idx1073748828">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748666">cget(option)</a> <a href="#idx1073749186">2nd</a> <a href="#idx1073749237">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748843">Checkbutton widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749133">client(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749135">colormapwindows(wlist...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749137">command(value)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748668">config()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748672">config(options)</a> <a href="#idx1073749188">2nd</a> <a href="#idx1073749239">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748670">configure()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748674">configure(options)</a> <a href="#idx1073749241">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748676">copy(font object)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749108">deiconify()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748896">delete(row [,lastrow])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749062">delete(startindex [,endindex])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748934">delete(startindex[,endindex])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749243">destroy()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748936">entryconfig(index, options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748740">flash()</a> <a href="#idx1073748847">2nd</a> <a href="#idx1073749016">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749245">focus()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749255">focus_displayof()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749257">focus_force()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749259">focus_get()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749261">focus_lastfor()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749247">focus_set()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749139">focusmodel(model)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748689">font class instances</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749110">frame()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749141">geometry(geometry)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748866">get()</a> <a href="#idx1073749033">2nd</a> <a href="#idx1073749047">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748898">get(row)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749064">get(startindex [,endindex])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749263">getvar(variable)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749267">grab_current()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749269">grab_release()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749265">grab_set()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749271">grab_set_global()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749273">grab_status()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749112">group(window)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749190">height()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749143">iconbitmap(bitmap)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749114">iconify()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749147">iconmame(newName=None)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749145">iconmask(bitmap)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749154">iconposition(x, y)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749156">iconwindow(window)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748781">image()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749066">index(index)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748938">index(item)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749081">index(mark)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749068">insert(index [,string]...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748900">insert(row, string)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748742">invoke()</a> <a href="#idx1073748849">2nd</a> <a href="#idx1073749018">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749275">keys()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749277">lift([object])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748783">line()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748894">Listbox widget</a> <a href="#idx1073748907">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749281">lower([object])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749289">mainloop()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749072">mark handling</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749083">mark_gravity(mark [,gravity])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749085">mark_names()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749087">mark_set(mark, index)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749089">mark_unset(mark)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749158">maxsize(width, height)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748678">measure(text)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748920">Menu widget</a> <a href="#idx1073748946">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748680">metrics(options)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749160">minsize(width, height)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748789">oval()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749162">overrideredirect(flag)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748795">polygon()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749164">positionfrom(who)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749116">protocol(name, function)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749291">quit()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749014">Radiobutton widget</a> <a href="#idx1073749021">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748801">rectangle()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749166">resizable(width, height)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749031">Scale widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749043">Scrollbar widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748845">select()</a> <a href="#idx1073749020">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748904">select_clear()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748906">select_set(startrow, endrow)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749045">set(first, last)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749035">set(value)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749293">setvar(variablename, value)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749168">sizefrom(who)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749118">state()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749091">tab handling</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749093">tag_add(tagname,startindex[,endindex] ...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749095">tag_config</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749097">tag_delete(tagname)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749099">tag_remove(tagname [,startindex[.endindex]] ...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749060">Text widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748815">text()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749170">title(string)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749299">tk_focusNext()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749301">tk_focusPrev()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749279">tkraise([object])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748851">toggle()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749106">Toplevel widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749120">transient([master])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749194">type()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749295">update()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749297">update_idletasks()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749303">wait_variable(variable)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749305">wait_visibility(widget)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749307">wait_window(widget)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749253">widget</a> <a href="#idx1073749287">2nd</a> <a href="#idx1073749313">3rd</a> <a href="#idx1073749319">4th</a> <a href="#idx1073749327">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749192">width()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748821">window()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749320">wininfo</a> <a href="#idx1073749328">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749122">withdraw()</a><BR>
+ <a href="#idx1073748679">metrics(options) method</a><BR>
+ <a href="#idx1073749159">minsize(width, height) method</a><BR>
+modifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748622">values at execution time</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tkinter<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748644">widgets</a> <a href="#idx1073748684">2nd</a> <a href="#idx1073748700">3rd</a> <a href="#idx1073748736">4th</a> <a href="#idx1073748757">5th</a> <a href="#idx1073748807">6th</a> <a href="#idx1073748837">7th</a> <a href="#idx1073748856">8th</a> <a href="#idx1073748882">9th</a> <a href="#idx1073748916">10th</a> <a href="#idx1073748942">11th</a> <a href="#idx1073748990">12th</a> <a href="#idx1073749009">13th</a> <a href="#idx1073749027">14th</a> <a href="#idx1073749039">15th</a> <a href="#idx1073749052">16th</a> <a href="#idx1073749076">17th</a> <a href="#idx1073749126">18th</a> <a href="#idx1073749151">19th</a> <a href="#idx1073749198">20th</a> <a href="#idx1073749223">21st</a> <a href="#idx1073749251">22nd</a> <a href="#idx1073749285">23rd</a> <a href="#idx1073749311">24th</a> <a href="#idx1073749317">25th</a> <a href="#idx1073749325">26th</a><BR>
+names<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748626">Macintosh</a> <a href="#idx1073748629">2nd</a><BR>
+ <a href="#idx1073748661">names() function</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;image<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749175">creating</a><BR>
+ <a href="#idx1073748832">offvalue attribute</a><BR>
+ <a href="#idx1073748964">offvalue option</a><BR>
+ <a href="#idx1073748830">onvalue attribute</a><BR>
+ <a href="#idx1073748962">onvalue option</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748949">accelerator</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748817">anchor</a> <a href="#idx1073748825">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749203">background</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748951">command</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749205">data</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748648">family</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749207">file</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748787">fill</a> <a href="#idx1073748791">2nd</a> <a href="#idx1073748803">3rd</a> <a href="#idx1073748819">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749209">foreground</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749211">format</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749217">height</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748953">indicator</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748955">label</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749213">maskdata</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749215">maskfile</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748957">menu</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748947">Menu widget</a> <a href="#idx1073748974">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748965">offvalue</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748963">onvalue</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748793">outline</a> <a href="#idx1073748797">2nd</a> <a href="#idx1073748813">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748658">overstrike</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748959">selectColor</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748650">size</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748654">slant</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748799">splinesteps</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748961">state</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748967">tearOff</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748878">textvariable</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748656">underline</a> <a href="#idx1073748969">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748971">value</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748973">variable</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748652">weight</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748785">width</a> <a href="#idx1073749219">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748823">window</a><BR>
+ <a href="#idx1073748792">outline option</a> <a href="#idx1073748796">2nd</a> <a href="#idx1073748812">3rd</a><BR>
+ <a href="#idx1073748788">oval() method</a><BR>
+ <a href="#idx1073749161">overrideredirect(flag) method</a><BR>
+ <a href="#idx1073748657">overstrike option</a><BR>
+ <a href="#idx1073748794">polygon() method</a><BR>
+pop-up menus<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748976">creating</a><BR>
+ <a href="#idx1073749163">positionfrom(who) method</a><BR>
+properties<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748745">activebackground</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748747">activeforeground</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748632">background(bg)</a> <a href="#idx1073748636">2nd</a> <a href="#idx1073748638">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748749">bitmap</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748743">Button widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748751">default</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748753">disabledforeground</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748688">font</a> <a href="#idx1073748696">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748634">foreground(fg)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748888">height</a> <a href="#idx1073749001">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748640">highlightthickness</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748761">image</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748886">Listbox widget</a> <a href="#idx1073748893">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748999">Radiobutton widget</a> <a href="#idx1073749013">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748890">selectmode</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748763">state</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748765">takefocus</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748767">text</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748769">underline</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749005">value</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749003">variable</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748646">widgets, Tkinter module</a> <a href="#idx1073748686">2nd</a> <a href="#idx1073748702">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748892">width</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748771">wraplength</a><BR>
+ <a href="#idx1073749115">protocol(name, function) method</a><BR>
+pull-down menus<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748984">creating</a><BR>
+ <a href="#idx1073749290">quit() method</a><BR>
+ <a href="#idx1073748723">Radiobutton widget</a> <a href="#idx1073749011">2nd</a> <a href="#idx1073749029">3rd</a><BR>
+ <a href="#idx1073748800">rectangle() method</a><BR>
+ <a href="#idx1073749165">resizable(width, height) method</a><BR>
+ <a href="#idx1073748725">Scale widget</a><BR>
+ <a href="#idx1073748727">Scrollbar widget</a> <a href="#idx1073749041">2nd</a><BR>
+ <a href="#idx1073748844">select() method</a> <a href="#idx1073749019">2nd</a><BR>
+ <a href="#idx1073748903">select_clear() method</a><BR>
+ <a href="#idx1073748905">select_set(startrow, endrow) method</a><BR>
+ <a href="#idx1073748958">selectColor option</a><BR>
+ <a href="#idx1073748889">selectmode property</a><BR>
+ <a href="#idx1073749044">set(first, last) method</a><BR>
+ <a href="#idx1073749034">set(value) method</a><BR>
+ <a href="#idx1073749292">setvar(variablename, value) method</a><BR>
+single line interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748858">creating</a><BR>
+ <a href="#idx1073748649">size option</a><BR>
+ <a href="#idx1073749167">sizefrom(who) method</a><BR>
+ <a href="#idx1073748653">slant option</a><BR>
+ <a href="#idx1073748798">splinesteps option</a><BR>
+ <a href="#idx1073749056">state attribute</a><BR>
+ <a href="#idx1073748960">state option</a><BR>
+ <a href="#idx1073748762">state property</a><BR>
+ <a href="#idx1073749117">state() method</a><BR>
+subclasses<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749201">BitmapImage</a> <a href="#idx1073749226">2nd</a><BR>
+ <a href="#idx1073749058">tabs attribute</a><BR>
+ <a href="#idx1073749092">tag_add(tagname,startindex[,endindex] ...) method</a><BR>
+ <a href="#idx1073749094">tag_config method</a><BR>
+ <a href="#idx1073749096">tag_delete(tagname) method</a><BR>
+ <a href="#idx1073749098">tag_remove(tagname [,startindex[.endindex]] ...) method</a><BR>
+ <a href="#idx1073749090">tags</a><BR>
+ <a href="#idx1073748764">takefocus property</a><BR>
+ <a href="#idx1073748966">tearOff option</a><BR>
+text<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749103">inserting Button widgets inside</a><BR>
+ <a href="#idx1073748766">text property</a><BR>
+ <a href="#idx1073748729">Text widget</a> <a href="#idx1073749054">2nd</a> <a href="#idx1073749078">3rd</a><BR>
+ <a href="#idx1073748814">text() method</a><BR>
+ <a href="#idx1073748863">textvariable attribute</a><BR>
+ <a href="#idx1073748877">textvariable option</a><BR>
+ <a href="#idx1073749169">title(string) method</a><BR>
+ <a href="#idx1073749298">tk_focusNext() method</a><BR>
+ <a href="#idx1073749300">tk_focusPrev() method</a><BR>
+tkFont instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font class<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748690">methods</a><BR>
+Tkinter module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748641">widgets</a> <a href="#idx1073748681">2nd</a> <a href="#idx1073748697">3rd</a> <a href="#idx1073748733">4th</a> <a href="#idx1073748754">5th</a> <a href="#idx1073748804">6th</a> <a href="#idx1073748834">7th</a> <a href="#idx1073748853">8th</a> <a href="#idx1073748879">9th</a> <a href="#idx1073748913">10th</a> <a href="#idx1073748939">11th</a> <a href="#idx1073748987">12th</a> <a href="#idx1073749006">13th</a> <a href="#idx1073749024">14th</a> <a href="#idx1073749036">15th</a> <a href="#idx1073749049">16th</a> <a href="#idx1073749073">17th</a> <a href="#idx1073749123">18th</a> <a href="#idx1073749148">19th</a> <a href="#idx1073749195">20th</a> <a href="#idx1073749220">21st</a> <a href="#idx1073749248">22nd</a> <a href="#idx1073749282">23rd</a> <a href="#idx1073749308">24th</a> <a href="#idx1073749314">25th</a> <a href="#idx1073749322">26th</a><BR>
+ <a href="#idx1073749278">tkraise([object]) method</a><BR>
+ <a href="#idx1073748850">toggle() method</a><BR>
+ <a href="#idx1073748731">Toplevel widget</a> <a href="#idx1073749128">2nd</a> <a href="#idx1073749171">3rd</a><BR>
+ <a href="#idx1073749119">transient([master]) method</a><BR>
+ <a href="#idx1073749193">type() method</a><BR>
+ <a href="#idx1073748655">underline option</a> <a href="#idx1073748968">2nd</a><BR>
+ <a href="#idx1073748768">underline property</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748694">fonts</a><BR>
+ <a href="#idx1073749294">update() method</a><BR>
+ <a href="#idx1073749296">update_idletasks() method</a><BR>
+ <a href="#idx1073748970">value option</a><BR>
+ <a href="#idx1073749004">value property</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748621">changing at execution time</a><BR>
+ <a href="#idx1073748972">variable option</a><BR>
+ <a href="#idx1073749002">variable property</a><BR>
+viewing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748908">lines, lists</a><BR>
+ <a href="#idx1073749302">wait_variable(variable) method</a><BR>
+ <a href="#idx1073749304">wait_visibility(widget) method</a><BR>
+ <a href="#idx1073749306">wait_window(widget) method</a><BR>
+ <a href="#idx1073748651">weight option</a><BR>
+widgets<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748704">Button</a> <a href="#idx1073748773">2nd</a> <a href="#idx1073749105">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748706">Canvas</a> <a href="#idx1073748810">2nd</a> <a href="#idx1073748827">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748708">Checkbutton</a> <a href="#idx1073748840">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748710">Entry</a> <a href="#idx1073748868">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748712">Frame</a> <a href="#idx1073748876">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748714">Label</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748716">Listbox</a> <a href="#idx1073748885">2nd</a> <a href="#idx1073748912">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748718">Menu</a> <a href="#idx1073748919">2nd</a> <a href="#idx1073748945">3rd</a> <a href="#idx1073748993">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748720">Menubutton</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748722">Message</a> <a href="#idx1073748998">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748724">Radiobutton</a> <a href="#idx1073749012">2nd</a> <a href="#idx1073749030">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748726">Scale</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748728">Scrollbar</a> <a href="#idx1073749042">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748730">Text</a> <a href="#idx1073749055">2nd</a> <a href="#idx1073749079">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748645">Tkinter module</a> <a href="#idx1073748685">2nd</a> <a href="#idx1073748701">3rd</a> <a href="#idx1073748737">4th</a> <a href="#idx1073748758">5th</a> <a href="#idx1073748808">6th</a> <a href="#idx1073748838">7th</a> <a href="#idx1073748857">8th</a> <a href="#idx1073748883">9th</a> <a href="#idx1073748917">10th</a> <a href="#idx1073748943">11th</a> <a href="#idx1073748991">12th</a> <a href="#idx1073749010">13th</a> <a href="#idx1073749028">14th</a> <a href="#idx1073749040">15th</a> <a href="#idx1073749053">16th</a> <a href="#idx1073749077">17th</a> <a href="#idx1073749127">18th</a> <a href="#idx1073749152">19th</a> <a href="#idx1073749199">20th</a> <a href="#idx1073749224">21st</a> <a href="#idx1073749252">22nd</a> <a href="#idx1073749286">23rd</a> <a href="#idx1073749312">24th</a> <a href="#idx1073749318">25th</a> <a href="#idx1073749326">26th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748732">Toplevel</a> <a href="#idx1073749129">2nd</a> <a href="#idx1073749172">3rd</a><BR>
+ <a href="#idx1073749234">width attribute</a><BR>
+ <a href="#idx1073748784">width option</a> <a href="#idx1073749218">2nd</a><BR>
+ <a href="#idx1073748891">width property</a><BR>
+ <a href="#idx1073749191">width() method</a><BR>
+ <a href="#idx1073748822">window option</a><BR>
+ <a href="#idx1073748820">window() method</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748692">fonts</a><BR>
+ <a href="#idx1073749321">wininfo methods</a> <a href="#idx1073749329">2nd</a><BR>
+ <a href="#idx1073749121">withdraw() method</a><BR>
+ <a href="#idx1073748770">wraplength property</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748870">frames to align colored buttons</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749176">image objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748982">menu bars</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748996">messages</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748978">pop-up menus</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748986">pull-down menus</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749023">radiobuttons</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748861">single line interfaces</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

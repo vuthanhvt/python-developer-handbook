@@ -1,0 +1,852 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Pythonwin</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="219.html" class="navtitle">16. Development Environment</a> &gt; <span class="nonavtitle">Pythonwin</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="224.html" title="IDLE"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=225" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="225.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="226.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A18%3A58+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222217068205077109211252109</font><a href="read3.asp?bookname=0672319942&snode=225&now=6%2F1%2F2002+6%3A18%3A58+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+Pythonwin</h3>
+				<p>Pythonwin is implemented as a wrapper for the <a NAME="idx1073749814"></a>
+					<a naME="idx1073749815"></A>Microsoft Foundation Class library. The interactive and interpreted environment is in fact just a fully functional program created by <A name="idx1073749816"></A>Mark Hammond to demonstrate the full power of the interface between MFC and Python. Besides the development environment, you can use Pythonwin to write your own application, based on a given set of MFC objects. As of now, Pythonwin supports more than 30 MFC objects that are exposed by the Windows environment, which includes Common Controls, Property Pages/Sheets, Toolbars, and so forth.</P>
+
+				<P>Pythonwin's latest version (at this moment) is the beta 3 of version 2. This beta comes as part of the most recent 1.5.2 build for Windows (<Tt class="monofont">win32all-132.exe</tt>). Note that this version might be different at the time of your reading.</p>
+
+				<p>This version provides a stabilization of many features, including the debugger and the general IDE interface, which had a great advance compared to the prior Pythonwin version. This version also includes a number of other enhancements and bug fixes, such as a number of changes/enhancements to <i>Scintilla,</i> COM fixes (mainly in obscure situations), and the new full support for COM User Defined Types (Records/Structs). Preliminary <tt class="monofont">ADSI</tT> support has been added, as well.</p>
+
+				<dIv clAss="note"><p cLass="notetitle"><B>Note</B></P><P>
+
+					<p>
+						<a naME="idx1073749817"></A>
+						<A name="idx1073749818"></A>
+						<A NAme="idx1073749819"></a>
+						<a NAME="idx1073749820"></a>
+						<tt class="monofont">Scintilla</tt> is a free source code editing component, whose development started as an effort to improve Pythonwin.<a name="idx1073749821"></a>
+						<a namE="idx1073749822"></a>
+						<a Name="idx1073749823"></A>
+						<a namE="idx1073749824"></a>
+					</p>
+
+				</p></DIV>
+<Br>
+<br>
+
+				<p>In order to <A NAMe="idx1073749825"></a>install Pythonwin, you can download the file from the following address:</p>
+
+				<p>
+					<A TARget="_blank" hREF="http://starship.python.net/crew/mhammond/win32/Downloads.html">http://starship.python.net/crew/mhammond/win32/Downloads.html</A>
+				</p>
+
+				<p>If you also want to have access to the top-level functions in both the PythonPath and Module browsers, you need to download the latest version of the module <tt class="monofont">pyclbr.py.</tt> This module is a standard Python module that has been updated since Python 1.5.2. To download the module and for more information, check out the following:</p>
+
+				<blockquoTe>
+<p>
+						<P>
+							<a taRget="_blank" hRef="http://starship.python.net/crew/mhammond/downloads/pyclbr.py">http://starship.python.net/crew/mhammond/downloads/pyclbr.py</a>
+						</P>
+
+					</P>
+<P>
+						<P>Mark Hammond's Python Extensions</p>
+
+					</p>
+<p>
+						<p>
+							<A TARget="_blank" hREF="http://starship.python.net/crew/mhammond/">http://starship.python.net/crew/mhammond/</A>
+						</p>
+
+					</p>
+<p>
+						<p>Pythonwin Documentation Index</P>
+
+					</P>
+<P>
+						<P>
+							<a target="_blank" href="http://www.python.org/windows/pythonwin/">http://www.python.org/windows/pythonwin/</a>
+						</p>
+
+					</p>
+<p>
+						<p>Python for Windows Repository</p>
+
+					</p>
+<p>
+						<p>
+							<A taRget="_blank" Href="http://www.python.org/windows/">http://www.python.org/windows/</a>
+						</P>
+
+					</p>
+</blOCKQuote>
+				
+					<H4>The Pythonwin Environment</H4>
+					<P>Pythonwin simulates the built-in Python interpreter by using the Microsoft Foundation Classes to implement an Interactive Development Framework.<A name="idx1073749826"></A>
+						<A NAme="idx1073749827"></a>
+						<a NAME="idx1073749828"></a>
+						<a name="idx1073749829"></a>
+					</p>
+
+					<div class="note"><p claSs="notetitle"><b>Tip</B></p><p>
+
+						<p>You can study Pythonwin's code by examining the files located in the directory <Tt claSs="monofont">\Pythonwin\pywin\framework</tt> of your local Pythonwin installation.</P>
+
+					</P></DIv>
+<br>
+<bR>
+
+					<P>The shell provided by the Interactive Window implements many known features inherited from IDLE, such as the history mechanism. Depending on where you place the cursor when pressing ENTER, you can either execute a command located at the end of your screen buffer, or copy a block of code from somewhere else to the end of your buffer. Note that the end of the screen buffer is the place where you have an active primary prompt.</P>
+
+					<P>When the line that you are typing has to be continued in another line, the code doesn't get executed. At this time, Python starts a new line using the secondary prompt <tt clASS="monofont">...</Tt>. After you enter a complete Python statement, Pythonwin tries to execute it. If your execution generates an exception in a file, the file is displayed to you in a separate window, pointing to the line that has caused the exception. If a COM object generates the exception, and the exception contains a reference to a WinHelp file, the help topic is opened to you.</p>
+
+					<p>Pythonwin has available all the standard file operations that follow the MFC framework. If necessary, you can create Python programs to implement plug-in support for other file types that are not currently supported by Pythowin.</p>
+
+					<P>The <A NAme="idx1073749830"></a>
+						<a name="idx1073749831"></a>
+						<a name="idx1073749832"></a>Locate option defined in the menu is used to quickly locate a specific Python script. It searches for the file throughout all the directories listed in the <tt claSs="monofont">sys.path</tT> variable. If you need to locate a module in a package, replace the dot between the package name and the module name with a backslash.<a naMe="idx1073749833"></a>
+						<a nAme="idx1073749834"></a>
+						<A NAMe="idx1073749835"></a>
+						<a nAME="idx1073749836"></A>
+					</p>
+
+					<p>The <a nAME="idx1073749837"></A>Import option tries to import or reload a given script. Pythonwin is the one that decides if the script needs to be imported or reloaded. Pythonwin also handles modules that use the old and historic <tt clASS="monofont">ni</Tt> module. If you have a <tt class="monofont">.py</tt> file opened, you can use this option to save and import the file. If a file cannot be located, a File dialog pops up asking you to locate the file.</p>
+
+					<p>The <a name="idx1073749838"></a>Run option runs a script, as if the file was passed on the command line. A dialog is opened, asking the script name and arguments. If you already have a script file open and just want to execute it, press CTRL+SHIFT+R.</p>
+
+					<p>This version of Pythfonwin is heavily similar to the latest version of IDLE (in new functionality). As Mark says, "Many of the new Pythonwin features below have come about simply by stealing code from IDLE." Pythonwin demonstrates its high integration with IDLE extensions by incorporating the <Tt cLass="monofont">ExpandWord</Tt> extension module and IDLE's history capability.</p>
+
+					<p>Among other new features, the latest version of Pythonwin brings the following main changes:</p>
+
+					<Ul>
+<li>
+							<P>Support for simple toggling and definition of fixed and propertional fonts.</P>
+
+						</LI>
+<li>
+							<p>Improved call tips and attribute expansion.</p>
+
+						</LI>
+<LI>
+							<p>Key binding for toggling between the interactive window and the most recently used editor window.</p>
+
+						</li>
+<LI>
+							<P>Far improved find facility, including the ability to search across all open files.</P>
+
+						</li>
+</ul>
+					<P>Pythonwin provides an easily configurable color scheme because you can see the standard <TT Class="monofont">"Hello World"</tt> example shown in <a href="225#2.html">Figure 16.7</a>. Note that example was written directly in the Interactive Window.<a name="idx1073749839"></a>
+						<a nAme="idx1073749840"></A>
+						<a naMe="idx1073749841"></a>
+						<a nAme="idx1073749842"></a>
+					</P>
+
+					<CENter>
+						<h5>
+<A NAMe="2"></a>Figure 16.7. Interactive Window displaying Hello World.</h5>
+						
+							
+								<iMG BOrder="0" WIDTh="500" height="256" src="graphics/16fig07.gif" alt="graphics/16fig07.gif">
+							
+						
+					</center>
+
+					<p>The <A naMe="idx1073749843"></a>
+						<tT clasS="monofont">View/Options</tt> item in the Menu is useful to configure a lot of small details, such as the color scheme, and Tabs and Whitespace configuration (see <a HREF="225#3.html">Figure 16.8</a>).</p>
+
+					<ceNTER>
+						<h5>
+<a naME="3"></A>Figure 16.8. The Tabs and Whitespace configuration tab on the Pythonwin Option dialog box.</H5>
+						
+							
+								<img bORDEr="0" width="410" height="315" src="graphics/16fig08.gif" alt="graphics/16fig08.gif">
+							
+						
+					</ceNteR>
+
+					<p>Under the <a nAme="idx1073749844"></a>
+						<a Name="idx1073749845"></A>
+						<A NAme="idx1073749846"></a>Tools menu, you have several routines that provide some special functionality. The first one called <tT CLAss="monofont">Browser,</tt> displays information about an object whose name you have to type in a dialog box.</P>
+
+					<P>The <A Name="idx1073749847"></a>
+						<TT CLass="monofont">Browse PythonPath</tt> option splits the screen into two parts: the Python Path browser and the Interactive Window file editor. When you click on a program or program item (class, function, and so on) in the Path Browser, the right panel opens the given file and places you on the part of the code that defines the object you have just clicked (see <a href="225#4.html">Figure 16.9</a>). Note that the interface looks much nicer when you use the latest version of the <tt class="monofont">pyclbr.py</tt> module.</P>
+
+					<ceNter>
+						<H5>
+<a namE="4"></a>Figure 16.9. Python Projects: tree widget that displays Python directories and files.</h5>
+						
+							
+								<iMG BOrder="0" WIDTh="500" heiGHT="352" Src="graphics/16fig09.gif" alT="graphics/16fig09.gif">
+							
+						
+					</CENter>
+
+					<p>Another option provided is the ability to make changes on the Pythonwin Registry settings, as you can see in <a href="225#5.html">Figure 16.10</a>. In order to open this window, you need to call the menu item named <a name="idx1073749848"></a>
+						<tt clAss="monofont">Edit PythonPath.</Tt>
+					</p>
+
+					<cEnter>
+						<H5>
+<a naME="5"></A>Figure 16.10. The Registry Editor allows you to make changes on the registry settings of Pythonwin.</H5>
+						
+							
+								<img bORDEr="0" widTH="467" HEight="285" SRC="graphics/16fig10.gif" Alt="graphics/16fig10.gif">
+							
+						
+					</center>
+
+					<p>The next two options are used when you have to write COM interfaces using Python. The first option <a name="idx1073749849"></a>
+						<tt claSs="monofont">COM Makepy utility</tT> is mentioned in <a hrEf="128.html">Chapter 7, "Objects Interfacing and Distribution."
+						</a>  It lists all the available COM objects registered in the system and allows you to create a Python interface for them (see <a hRef="225#6.html">Figure 16.11</a>). In this example, we are highlighting the Excel 8.0 Object Library in order to create a Python interface that will allow us to use Excel COM interface.<A NAMe="idx1073749850"></a>
+						<a nAME="idx1073749851"></A>
+						<a namE="idx1073749852"></A>
+						<A Name="idx1073749853"></a>
+						<A NAMe="idx1073749854"></a>
+						<a name="idx1073749855"></a>
+						<a name="idx1073749856"></a>
+					</p>
+
+					<centeR>
+						<h5>
+<a Name="6"></A>Figure 16.11. A list of available COM libraries.</h5>
+						
+							
+								<img BordER="0" WIdth="305" hEIGHt="331" src="graphics/16fig11.gif" ALT="graphics/16fig11.gif">
+							
+						
+					</CenteR>
+
+					<P>This next option <A Name="idx1073749857"></a>
+						<tt class="monofont">COM Browser</tt> allows you to visualize all the properties of registered COM objects (see <a href="225#7.html">Figure 16.12</a>). <a NamE="idx1073749858"></a>
+						<a nAme="idx1073749859"></a>
+						<a Name="idx1073749860"></A>
+					</P>
+
+					<CEnter>
+						<H5>
+<A NAme="7"></a>Figure 16.12. The Python Object Browser.</h5>
+						
+							
+								<IMG BordeR="0" WIDth="338" height="352" src="graphics/16fig12.gif" alt="graphics/16fig12.gif">
+							
+						
+					</center>
+
+					<P>Pythonwin supports <a nAme="idx1073749861"></a>
+						<A name="idx1073749862"></A>
+						<a naME="idx1073749863"></A>source code folding, which means that it has the capability to collapse sections of source code into single lines, and later expand them back to the original structure (see <A href="225#8.html">Figure 16.13</A>). This folding featured was added to Pythonwin thanks to Scintilla. You can <A NAme="idx1073749864"></a>
+						<a NAME="idx1073749865"></a>fold and unfold any Python statement that introduces a new block either by clicking on the indicator in the folding margin, by selecting one of the folding keystrokes, or by using View, Folding menu. Note that the folding feature must be enabled via the menu option <tt cLASS="monofont">View/Options/Editor dialog.</tt> You can also change the configuration so that all files have only their top-levels folded when opened. All editing functions work properly when code is folded. If necessary, functions like <tt class="monofont">find,</tt>
+						<tt class="monofont">replace,</tt> and <Tt cLass="monofont">goto</Tt> are able to unfold the code before they start performing their tasks. For more information, check out</p>
+
+					<ceNter>
+						<H5>
+<A NAme="8"></a>Figure 16.13. Opening a file and toggling the breakpoint.</h5>
+						
+							
+								<IMG BordeR="0" WIDth="500" heIGHT="348" src="graphics/16fig13.gif" alt="graphics/16fig13.gif">
+							
+						
+					</center>
+
+					<blockquoTe>
+<p>
+							<P>Scintilla</p>
+
+						</p>
+<p>
+							<P>
+								<a tarGet="_blank" hREF="http://www.scintilla.org">http://www.scintilla.org</A>
+								<a namE="idx1073749866"></A>
+								<A Name="idx1073749867"></a>
+								<A NAMe="idx1073749868"></a>
+							</p>
+
+						</p>
+</BLOCkquote>
+					<p>Pythonwin's <a name="idx1073749869"></a>debugger had a great improvement since the last version. To use the Debug mechanism, you need to open a program and set the breakpoints on the code. You can toggle the breakpoints by clicking on a specific line and using the F9 key binding, as shown in <a href="225#8.html">Figure 16.13</a>. You don't need to run the debugger just to set the breakpoints; you can do that while the debugger is not running. While the debugger is inactive, the breakpoints are shown without any coloring.<a NamE="idx1073749870"></a>
+						<a nAme="idx1073749871"></a>
+						<a Name="idx1073749872"></A>
+						<A NAme="idx1073749873"></a>
+					</p>
+
+					<P>You just can't let the breakpoints remain there and pray for something to happen. You need to <A NAme="idx1073749874"></a>activate the debugger by either using the <tT CLAss="monofont">Step in</tt> (F11) option, the <TT CLass="monofont">Go</tt> (F5) option, or one of the shortcuts in the toolbar and in the menu. When you start the debugging process, all breakpoints become red (see <a href="225#9.html">Figure 16.14</a>—note that as the figure isn't in color, it might feel that some colors are not easily identified in the book).</p>
+
+					<center>
+						<h5>
+<a NamE="9"></a>Figure 16.14. The Debug Framework.</h5>
+						
+							
+								<iMg borDer="0" wIDTH="500" heigHT="375" SRc="graphics/16fig14.gif" alt="graphics/16fig14.gif">
+							
+						
+					</CENTer>
+
+					<p>In order to <a NAME="idx1073749875"></a>
+						<a name="idx1073749876"></a>
+						<a name="idx1073749877"></a>
+						<a name="idx1073749878"></a>add watch variables and <a NamE="idx1073749879"></a>
+						<a nAme="idx1073749880"></a>
+						<a Name="idx1073749881"></A>
+						<A NAme="idx1073749882"></a>break-point conditions, you need to click on a specific part of the Debugging window. To add variables, you need to click on the Expression/Value text box and click on the &lt;New item&gt; text. The prompt will let you type the name of the variables that you want to watch. In case you want to delete something from there, you just need to press the Delete key.</p>
+
+					<P>If you close the Debugging toolbar, you can <A NAme="idx1073749883"></a>
+						<a NAME="idx1073749884"></a>
+						<a naME="idx1073749885"></A>open it using the menu option View, Toolbars, Debugging. Note that this toolbar follows the standard found in other languages, as we can see in the <A href="225#9.html">Figure 16.14</a> (from left to right):<a name="idx1073749886"></a>
+						<a name="idx1073749887"></a>
+						<a naMe="idx1073749888"></a>
+						<A namE="idx1073749889"></a>
+					</p>
+
+					<ul>
+<Li>
+							<p>Watch Window toggle option</p>
+
+						</LI>
+<LI>
+							<p>Stack Viewer Window toggle option</p>
+
+						</li>
+<LI>
+							<P>Breakpoint List Window toggle option</P>
+
+						</li>
+<li>
+							<P>Option to toggle a breakpoint</P>
+
+						</LI>
+<li>
+							<p>Option to clear all breakpoints</p>
+
+						</LI>
+<LI>
+							<p>Step into a statement</p>
+
+						</li>
+<li>
+							<p>Step over a function</p>
+
+						</li>
+<li>
+							<p>Step out of a structure</p>
+
+						</li>
+<li>
+							<p>Go</p>
+
+						</Li>
+<lI>
+							<p>Close the debugger</p>
+
+						</lI>
+</ul>
+					<p>As you can see in <a Href="225#9.html">Figure 16.14</A>, when you select all debug windows to be open, you get a Debug Framework containing five windows. Let's go clockwise, starting from the top-left corner: We have the variable watch window, the stack viewer, the Python path browser, the interactive window that displays the source code, and a list of breakpoint conditions (on the bottom).</P>
+
+				
+				
+					<H4>
+
+Keyboard Bindings</H4>
+					<p>Pythonwin has a customizable keyboard binding mechanism that allows you to define your own custom events and keyboard bindings. All this information gets stored in a file called <tt cLASS="monofont">default.cfg,</tt> which is located in the <tt CLASs="monofont">pywin</tt> directory. You can freely edit this file if you want. All the documentation necessary to create the new bindings is kept in this file, including how to create your own configuration based on the default file. This last feature is a handful to incorporate into your system <tT CLAss="monofont">default</tt> file from new versions of Pythonwin without changing your code. This directory also contains a configuration file called <tt class="monofont">IDLE.cfg</tt> that simulates the keyboard bindings of <tt class="monofont">IDLE,</Tt> providing a good customization example.</p>
+
+					<P>The bindings in <a hrEf="225#11.html">Table 16.3</a> are part of Pythonwin's default configuration.<a nAme="idx1073749890"></a>
+						<A NAMe="idx1073749891"></a>
+						<a nAME="idx1073749892"></A>
+						<a namE="idx1073749893"></A>
+						<A Name="idx1073749894"></a>
+						<A NAMe="idx1073749895"></a>
+					</p>
+
+					<a name="11"></a><p><table bordeR="1" ceLlspAcing="0" CellPADDing="1" wIDTH="100%">
+<captION><H5>Table 16.3. Pythonwin's Default Set of Bindings</h5></capTION><colgroup align="left" span="2">
+<tr vAliGn="top">
+<th>
+<Font sIze="2">
+										<b>Keyboard Binding</B>
+									</FONt></th>
+<tH>
+<FONt sizE="2">
+										<B>Description</B>
+									</Font></tH>
+</TR>
+<Tr valign="top">
+<td>
+<font size="2">Alt+Q</fonT></td>
+<Td>
+<foNt sizE="2">Format the current paragraph</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">Alt+/</fONT></Td>
+<td>
+<font size="2">Apply the functionality that expands the word under the cursor</font></td>
+</tr>
+<tR vaLign="top">
+<Td>
+<fonT sizE="2">Alt+I</FONt></td>
+<tD>
+<FONt sizE="2">Show/hide the interactive window</FONt></td>
+</tR>
+<TR Valign="top">
+<td>
+<font size="2">Ctrl+W</font></tD>
+<td>
+<Font Size="2">&gt;View/hide whitespace</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+										<b>Built-in Binding</b>
+									</fONT></Td>
+<td>
+<font size="2">
+										<b>Description</b>
+									</font></td>
+</tR>
+<tr ValiGn="top">
+<td>
+<fOnt sIZE="2">Ctrl+Z</Font></tD>
+<TD>
+<Font sIZE="2">Undo</Font></tD>
+</TR>
+<Tr valign="top">
+<td>
+<font size="2">Ctrl+Y</fonT></td>
+<Td>
+<foNt sizE="2">Redo</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">Ctrl+X</fONT></Td>
+<td>
+<font size="2">Cut</font></td>
+</tr>
+<tR vaLign="top">
+<Td>
+<fonT sizE="2">Ctrl+C</FONt></td>
+<tD>
+<FONt sizE="2">Copy</FONt></td>
+</tR>
+<TR Valign="top">
+<td>
+<font size="2">Ctrl+V</font></tD>
+<td>
+<Font Size="2">Paste</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">Ctrl+A</fonT></TD>
+<Td>
+<font size="2">Select All</font></td>
+</tr>
+<tr vAliGn="top">
+<td>
+<Font sIze="2">Ctrl+L</fONT></Td>
+<td>
+<fONT Size="2">Cut the current line</fONT></Td>
+</tr>
+<tR VALign="top">
+<td>
+<font size="2">Ctrl+Shift+L</font></td>
+<tD>
+<foNt siZe="2">Delete the current line</fonT></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2">Ctrl+T</Font></tD>
+<TD>
+<Font size="2">Swap the current line with the line above</font></td>
+</tr>
+<tr valIgn="top">
+<Td>
+<foNt sizE="2">Ctrl+U</fonT></TD>
+<Td>
+<fonT SIZe="2">Convert the selection to lowercase</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<font size="2">Ctrl+Shift+U</font></td>
+<td>
+<fOnt Size="2">Convert the selection to uppercase</Font></tD>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2">Ctrl+Backspace</FONt></td>
+<tD>
+<FONt size="2">Delete the word to the left side of the cursor</font></td>
+</tr>
+<tr valigN="top">
+<td>
+<Font Size="2">BackSpace</fOnt></tD>
+<TD>
+<Font sIZE="2">Remove one indent to the left</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<font size="2">Enter</font></td>
+<td>
+<fonT siZe="2">Insert a newline and indent</foNt></td>
+</tR>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">Tab</fONT></Td>
+<td>
+<fONT Size="2">Insert an indent, or perform a block indent in a given selection</font></td>
+</tr>
+<tr valign="top">
+<tD>
+<foNt siZe="2">Shift+Tab</fonT></td>
+<tD>
+<FONt sizE="2">Dedent the selected block</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font size="2">F2</font></td>
+<td>
+<font sIze="2">Go to the next bookmark<A namE="idx1073749896"></a>
+										<a naMe="idx1073749897"></a>
+										<a NAME="idx1073749898"></a>
+										<a naME="idx1073749899"></A>
+										<A name="idx1073749900"></A>
+										<A NAme="idx1073749901"></a>
+									</fONT></Td>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2">Ctrl+F2</foNt></td>
+<Td>
+<fonT sizE="2">Add or remove a bookmark on the current line</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2">Ctrl+G</Font></td>
+<td>
+<font size="2">Go to a specific line number</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2">Alt+B</fonT></TD>
+<Td>
+<fonT SIZe="2">Add a simple comment banner at the current location</fonT></TD>
+</Tr>
+<tr valign="top">
+<td>
+<font size="2">Alt+3</fOnt></Td>
+<td>
+<Font sIze="2">Block comment the selected region</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2">Shift+Alt+3</FONt></td>
+<td>
+<font size="2">Uncomment the selected region</font></td>
+</tR>
+<tr ValiGn="top">
+<td>
+<fOnt sIZE="2">Alt+4</Font></tD>
+<TD>
+<Font sIZE="2">Uncomment the selected region (IDLE's default binding)</Font></tD>
+</TR>
+<Tr valign="top">
+<td>
+<font size="2">Alt+5</fonT></td>
+<Td>
+<foNt sizE="2">Tabify the selected region</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">Alt+6</fONT></Td>
+<td>
+<font size="2">Untabify the selected region</font></td>
+</tr>
+<tR vaLign="top">
+<Td>
+<fonT sizE="2">Ctrl+T</FONt></td>
+<tD>
+<FONt sizE="2">Toggle the use of tabs for the current file</FONt></td>
+</tR>
+<TR Valign="top">
+<td>
+<font size="2">Alt+U</font></tD>
+<td>
+<Font Size="2">Change the indent width for the current file</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+										<i>Keypad</i> Plus</fONT></Td>
+<td>
+<font size="2">Expand a folded line, if it is located under the cursor</font></td>
+</tr>
+<tR vaLign="top">
+<Td>
+<fonT sizE="2">Alt+ <I>Keypad</I> Plus</Font></tD>
+<TD>
+<Font sIZE="2">Expand all folds in the current file</Font></tD>
+</TR>
+<Tr valign="top">
+<td>
+<font size="2">
+										<i>Keypad</i> Minus</fOnt></Td>
+<td>
+<Font sIze="2">Collapse a folded line, if it is located under the cursor</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2">Alt+<I>Keypad</I> Minus</Font></td>
+<td>
+<font size="2">Collapse all folds in the current file</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2">
+										<i>Keypad</i> Multiply</fONT></Td>
+<td>
+<fONT Size="2">Toggle between expanding and collapsing all top-level folds in the current file</fONT></Td>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2">Ctrl+ <i>Keypad</i> Plus</Font></Td>
+<td>
+<fOnt sIZE="2">Zoom-in for the current window</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">Ctrl+ <i>Keypad</i> Minus</font></td>
+<td>
+<font size="2">Zoom-out for the current window</fOnt></Td>
+</tr>
+<Tr valIgn="top">
+<tD>
+<FONt sizE="2">
+										<B>Debugger Bindings</B>
+									</Font></tD>
+<TD>
+<Font sIZE="2">
+										<B>Description</b>
+									</font></td>
+</tr>
+<tr valign="top">
+<td>
+<fOnt Size="2">F9</Font></tD>
+<td>
+<fONT Size="2">Toggle breakpoint on and off</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt size="2">F5</font></td>
+<td>
+<font sizE="2">Activate the debugging process</foNt></td>
+</Tr>
+<tr vAligN="top">
+<TD>
+<Font sIZE="2">Shift+F5</Font></tD>
+<TD>
+<Font sIZE="2">Stop the debugging process</Font></td>
+</tr>
+<tr valign="top">
+<td>
+<fonT siZe="2">F11</foNt></td>
+<tD>
+<fonT SIZe="2">Single step into functions</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">F10</font></td>
+<td>
+<font size="2">Step over functions</fOnt></Td>
+</tr>
+<Tr valIgn="top">
+<tD>
+<FONt sizE="2">Shift+F11</FONt></td>
+<tD>
+<FONt sizE="2">Step out of the current function</FONt></td>
+</tr>
+<tr valign="top">
+<td>
+<font sIze="2">
+										<B>Interactive Bindings</b>
+									</foNt></td>
+<tD>
+<fonT SIZe="2">
+										<b>Description</b>
+									</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt size="2">Ctrl+Up</font></td>
+<td>
+<font sizE="2">Show the previous command in the history list</foNt></td>
+</Tr>
+<tr vAligN="top">
+<TD>
+<Font sIZE="2">Ctrl+Down</Font></tD>
+<TD>
+<Font sIZE="2">Show the next command in the history list<A name="idx1073749902"></a>
+										<a name="idx1073749903"></a>
+									</font></td>
+</tr>
+</cOlgRoup>
+</Table></P>
+
+				
+				
+					<h4>
+
+Command Line Arguments</h4>
+					<p>Pythonwin accepts the following command line arguments. In case you need to make changes in any one of these commands, you just need to modify the <TT CLass="monofont">intpyapp.py</tT> file.</P>
+
+					<PRe>
+						
+/run scriptname arguments
+
+					</pre>
+
+					<P>This command runs the given script in the GUI environment and sends the output directly to Pythonwin's interactive window.</P>
+
+					<PRe>
+						
+/runargs scriptname arguments
+
+					</pre>
+
+					<P>This command also runs the given script in the GUI enviroment. The difference between this and the previous command is that this one shows Pythonwin's "Run Script" dialog.</P>
+
+					<PRe>
+						
+/edit filename
+
+					</pre>
+
+					<p>This command allows you to edit the given file. Currently, you can omit the <tt class="monofont">/edit</tt> command because it is not strictly enforced.</p>
+
+					<pre>
+						
+/app scriptname arguments
+
+					</prE>
+
+					<p>This command runs an application script that is able to change the appearance of a Pythonwin program. For details, check the examples located in the Pythonwin application folder (<tT claSs="monofont">/Pythonwin/pywin/Demos/app</tt>) of your Python installation.<a Name="idx1073749904"></A>
+						<A NAme="idx1073749905"></a>
+						<a NAME="idx1073749906"></a>
+						<a naME="idx1073749907"></A>
+						<A name="idx1073749908"></A>
+						<A NAme="idx1073749909"></a>
+					</p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="224.html" title="IDLE"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=225" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="225.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="226.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+activating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749874">debuggers, Pythonwin</a><BR>
+adding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749879">break-point connections, Pythonwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749875">watch variables, Pythonwin</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command-line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749909">Pythonwin</a><BR>
+bindings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyboard<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749895">Pythonwin</a> <a href="#idx1073749901">2nd</a> <a href="#idx1073749903">3rd</a><BR>
+break-point connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749880">adding, Pythonwin</a><BR>
+ <a href="#idx1073749847">Browse PythonPath option, Pythonwin</a><BR>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749862">folding, Pythonwin</a> <a href="#idx1073749867">2nd</a><BR>
+ <a href="#idx1073749857">COM_Browser option, Pythonwin</a><BR>
+ <a href="#idx1073749849">COM_Makepy_utility option, Pythonwin</a><BR>
+command-line arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749908">Pythonwin</a><BR>
+components<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749819">source code editing, Scintilla</a><BR>
+connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break-point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749881">adding, Pythonwin</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749882">break-point connections, Pythonwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749878">watch variables, Pythonwin</a><BR>
+debuggers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749869">Pythonwin</a><BR>
+Debugging toolbar<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749884">opening, Pythonwin</a><BR>
+development environments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749821">Pythonwin</a> <a href="#idx1073749826">2nd</a> <a href="#idx1073749833">3rd</a> <a href="#idx1073749839">4th</a> <a href="#idx1073749850">5th</a> <a href="#idx1073749870">6th</a> <a href="#idx1073749886">7th</a> <a href="#idx1073749890">8th</a> <a href="#idx1073749896">9th</a> <a href="#idx1073749904">10th</a><BR>
+ <a href="#idx1073749848">Edit_PythonPath option, Pythonwin</a><BR>
+editing components<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749820">source code, Scintilla</a><BR>
+environments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749822">Pythonwin</a> <a href="#idx1073749827">2nd</a> <a href="#idx1073749834">3rd</a> <a href="#idx1073749840">4th</a> <a href="#idx1073749851">5th</a> <a href="#idx1073749871">6th</a> <a href="#idx1073749887">7th</a> <a href="#idx1073749891">8th</a> <a href="#idx1073749897">9th</a> <a href="#idx1073749905">10th</a><BR>
+folding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749863">source code, Pythonwin</a> <a href="#idx1073749868">2nd</a><BR>
+ <a href="#idx1073749816">Hammond, Mark</a><BR>
+ <a href="#idx1073749837">Import option, Pythonwin</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749825">Pythonwin</a><BR>
+keyboard bindings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749894">Pythonwin</a> <a href="#idx1073749900">2nd</a> <a href="#idx1073749902">3rd</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749815">Microsoft Foundation Class library</a><BR>
+ <a href="#idx1073749832">Locate option, Pythonwin</a><BR>
+menus<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749830">Pythonwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749846">options, Pythonwin</a> <a href="#idx1073749856">2nd</a> <a href="#idx1073749860">3rd</a><BR>
+Microsoft Foundation Class library<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749814">Pythonwin</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749883">Debugging toolbar, Pythonwin</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;menu<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749831">Pythonwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749844">Tools menu, Pythonwin</a> <a href="#idx1073749854">2nd</a> <a href="#idx1073749858">3rd</a><BR>
+ <a href="#idx1073749823">Pythonwin</a> <a href="#idx1073749828">2nd</a> <a href="#idx1073749835">3rd</a> <a href="#idx1073749841">4th</a> <a href="#idx1073749852">5th</a> <a href="#idx1073749872">6th</a> <a href="#idx1073749888">7th</a> <a href="#idx1073749892">8th</a> <a href="#idx1073749898">9th</a> <a href="#idx1073749906">10th</a><BR>
+ <a href="#idx1073749838">Run option, Pythonwin</a><BR>
+ <a href="#idx1073749817">Scintilla</a><BR>
+ <a href="#idx1073749818">source code editing components, Scintilla</a><BR>
+ <a href="#idx1073749861">source code folding, Pythonwin</a> <a href="#idx1073749866">2nd</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749864">folding and unfolding</a><BR>
+toolbars<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debugging<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749885">opening, Pythonwin</a><BR>
+Tools menu<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749845">options, Pythonwin</a> <a href="#idx1073749855">2nd</a> <a href="#idx1073749859">3rd</a><BR>
+unfolding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749865">statements</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;watch<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749877">adding, Pythonwin</a><BR>
+ <a href="#idx1073749843">View/Options option, Pythonwin</a><BR>
+watch variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749876">adding, Pythonwin</a><BR>
+wrappers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749824">Pythonwin</a> <a href="#idx1073749829">2nd</a> <a href="#idx1073749836">3rd</a> <a href="#idx1073749842">4th</a> <a href="#idx1073749853">5th</a> <a href="#idx1073749873">6th</a> <a href="#idx1073749889">7th</a> <a href="#idx1073749893">8th</a> <a href="#idx1073749899">9th</a> <a href="#idx1073749907">10th</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

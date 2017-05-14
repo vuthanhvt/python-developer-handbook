@@ -1,0 +1,392 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Distributing Objects with Python</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="128.html" class="navtitle">7. Objects Interfacing and Distribution</a> &gt; <span class="nonavtitle">Distributing Objects with Python</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="133.html" title="Implementing COM Objects in Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=134" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="134.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="135.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A37%3A48+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147035189200148107205159</font><a href="read5.asp?bookname=0672319942&snode=134&now=5%2F31%2F2002+4%3A37%3A48+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Distributing Objects with Python</h3>
+				<p>There are some other packages that enable you to talk to other programs on platforms without <tT CLAss="monofont">COM</tt> support. As for the object distribution models, Python has many projects currently being developed.</P>
+
+				<P>The <A Name="idx1073744663"></a><A NAMe="idx1073744664"></a><a name="idx1073744665"></a><a name="idx1073744666"></a><a name="idx1073744667"></a>Inter-Language Unification system (ILU) is a free and stable multi-language object interface system.</P>
+
+				<p>The <a Name="idx1073744668"></A><a namE="idx1073744669"></a><a nAME="idx1073744670"></A><a namE="idx1073744671"></A><A Name="idx1073744672"></a>Object Request Broker is the mechanism that lets objects transparently make requests to—and receive from—other objects located locally or remotely. The ORB component is also commonly referred to as <A NAMe="idx1073744673"></a><a nAME="idx1073744674"></A><a name="idx1073744675"></a><a name="idx1073744676"></a><a name="idx1073744677"></a><i>CORBA,</i> which stands for <I>Common Object Request Broker Architecture.</i>
+					<a Name="idx1073744678"></A><a namE="idx1073744679"></a><a nAME="idx1073744680"></A><a namE="idx1073744681"></A>omniORBpy is an almost complete implementation of the current Python CORBA mapping.</P>
+
+				<P><a namE="idx1073744682"></A><A Name="idx1073744683"></a><A NAMe="idx1073744684"></a><a name="idx1073744685"></a>Fnorb is an Object Request Broker (ORB) that is compliant with the CORBA 2.0 specification from the Object Management Group (OMG). Fnorb implements a single language mapping from OMG IDL to Python. This implementation is excellent for those who want to learn CORBA. Another project worth mentioning is the <a name="idx1073744686"></a><a name="idx1073744687"></a><A naMe="idx1073744688"></a><a Name="idx1073744689"></a>ORBit-python project, which a binding for ORBit, the CORBA orb used by GNOME and some other projects.</P>
+
+				<p><a nAME="idx1073744690"></A><a namE="idx1073744691"></A><A Name="idx1073744692"></a><A NAMe="idx1073744693"></a><a nAME="idx1073744694"></A>DCOM is the COM technology that distributes objects between different machines on the network. It defines a protocol that enables software components to communicate directly over a network in a reliable, secure, and efficient manner.<a name="idx1073744695"></a><a name="idx1073744696"></a><a name="idx1073744697"></a></p>
+
+				<p>The <A naMe="idx1073744698"></a><a Name="idx1073744699"></a><A namE="idx1073744700"></A><A Name="idx1073744701"></a><A NAMe="idx1073744702"></a>Object Management Facility (OMF) is an object-oriented middleware environment for the process automation area. Even though it doesn't contain any Python code, it is heavily tested using Python scripts. The object model used by OMF is similar to other distributed object systems, such as OMG's CORBA and Xerox's ILU. OMF is implemented in C++, with APIs for other languages, including Python. It is said that the Python API was primarily created for writing test programs, but it has since been used to write various tools for application development and runtime management.</p>
+
+				<p><A NAMe="idx1073744703"></a><a nAME="idx1073744704"></A><a name="idx1073744705"></a><a name="idx1073744706"></a>Hector is a distributed object system developed at the University of Queensland, Australia. It is written almost entirely in Python. Hector attempts to provide application objects with a consistent environment, regardless of their physical location, through a series of transparencies.</p>
+
+				<h4>Inter-Language Unification (ILU)</h4>
+					<p>The Inter-Language Unification system (ILU) is a free and stable multi-language object interface system, whose interfaces hide implementation distinctions between different languages, address spaces, and operating system types. ILU can be used to build multilingual, object-oriented class libraries with well-specified, language-independent interfaces. It can also be used to implement distributed systems and to define and document interfaces between the modules of nondistributed programs. ILU interfaces can be specified in either the OMG's CORBA Interface Definition Language (OMG IDL) or ILU's Interface Specification Language (ISL).</p>
+
+					<p>ILU is primarily about interfaces between modules of program structure. Each module encapsulates the part of a program that has high adhesion internally and low connection to other parts of the program. The main goal of ILU is to create object-oriented interfaces that can communicate with those modules. ILU does all the translating and communicating necessary to use all kinds of modules in a single program. Its mechanism optimizes calls across module interfaces to involve only what it is necessary for the calling and called modules to interact. The notion of a module should not be confused with the independent concept of a program instance, which is translated as a combination of code and data running in one memory image, such as the UNIX processes.</p>
+
+					<p>ILU standardizes many of the issues involved in providing proper inter-module independence, such as memory management and error detection and recovery strategies. ILU also includes an implementation of the Object Management Group's CORBA Internet Inter-Orb Protocol (IIOP), and can be used to write CORBA services or clients, as well. ILU provides a standard notation to write its interfaces—ISL, which stands for Interface Specification Language. ISL is a declarative language, which can be processed by computer programs that enables you to define exceptions, constants, object and non-object types. Next, you have a sample of what ISL looks like:<A naMe="idx1073744707"></a><a Name="idx1073744708"></a><A namE="idx1073744709"></A><A Name="idx1073744710"></a><A NAMe="idx1073744711"></a><a nAME="idx1073744712"></A><a namE="idx1073744713"></A></P>
+
+					<Pre>
+						
+INTERFACE CalcMachine;
+EXCEPTION DivideByZero;
+TYPE Calculator = OBJECT
+  METHODS
+    SetValue (v : REAL),
+    GetValue () : REAL,
+    Divide (v : REAL) RAISES DivideByZero END
+  END;
+
+					</pre>
+
+					<p>ILU provides a program, <a name="idx1073744714"></a><a name="idx1073744715"></a><a nAme="idx1073744716"></A><a naMe="idx1073744717"></a><tt ClasS="monofont">islscan,</TT> which can be used to check the syntax of an ISL specification, parse the specification, and summarize it to standard output.</P>
+
+					<p>After you've defined an interface, you then need to supply an implementation of your module, which can be done in any language supported by ILU.</p>
+
+					<p>The program <a NAME="idx1073744718"></a><a naME="idx1073744719"></A><A name="idx1073744720"></A><A NAme="idx1073744721"></a><tt class="monofont">python-stubber</tt> is used to read an ISL file, and generate all the Python code that is required to support the ISL interface. One of the files generated is <tt class="monofont">'Interface.py',</tT> which contains the definitions of all the Python types for that interface:</p>
+
+					<pRe>
+						
+% python-stubber CalcMachine.isl
+client stubs for interface "CalcMachine" to CalcMachine.py …
+server stubs for interface " CalcMachine " to CalcMachine__skel.py …
+%
+
+					</prE>
+
+					<p>To provide an implementation of your interface, subclass the generated Python class for the Calculator class:</p>
+
+					<prE>
+						
+# CalculatorImpl.py
+import CalcMachine, CalcMachine__skel
+class Calculator (CalcMachine__skel.Calculator):
+    def __init__ (self):
+        self.value = 0.0
+    def SetValue (self, value):
+        self.value = value
+    def GetValue (self):
+        return self.value
+    def Divide (self, value):
+        try:
+            self.value = self.value / value
+        except ZeroDivisionError:
+            raise CalcMachine.DivideByZero
+
+					</pre>
+
+					<P>Each instance of a <TT Class="monofont">CalculatorImpl.Calculator</TT> object inherits from <TT clasS="monofont">CalcMachine__skel.Calculator,</TT> which in turn inherits from <Tt claSS="monofont">CalcMachine.Calculator.</TT> Each has an instance variable called value, which maintains a running total of the accumulator for that instance. We can create an instance of a <tt class="monofont">CalcMachine.Calculator</tt> object by simply calling <tt class="monofont">CalculatorImpl.Calculator().</tt></p>
+
+					<p>A very simple program to demonstrate the use of the <Tt cLass="monofont">CalcMachine</Tt> module is listed next. To run this program, you have to type the command <tt cLass="monofont">python divide.py &lt;NUMBER_TO_DIVIDE&gt;.</TT></P>
+
+					<Pre>
+						
+# File: divide.py
+import CalcMachine, CalculatorImpl, sys, string
+
+def main (argv):
+    calc = CalculatorImpl.Calculator()
+    if not calc:
+        error("Error creating the calculator")
+    calc.SetValue (10.0)
+    divisor = string.atof(argv[1])
+    calc.Divide(divisor)
+    print "the division result is", calc.GetValue()
+    sys.exit(0)
+main(sys.argv)
+
+					</prE>
+
+					<P>This program would be compiled and run as follows:</P>
+
+					<Pre>
+						
+% python divide.py 5.0
+the division result is 2.0
+%
+
+					</prE>
+
+					<P>ILU also supports the use of the interface definition language OMG IDL, defined by the Object Management Group (OMG) for its Common Object Request Broker Architecture (CORBA). That kind of support allows more programmers to easily use ILU because OMG's IDL uses a syntax similar to C++. However, because CORBA doesn't implement some of the concepts found in ILU, programmers can't implement all types of ILU interface using OMG IDL.<A Name="idx1073744722"></a><A NAMe="idx1073744723"></a><a name="idx1073744724"></a><a name="idx1073744725"></a><a name="idx1073744726"></a><A naMe="idx1073744727"></a><a Name="idx1073744728"></a></P>
+
+					<p>ILU is available for free at</p>
+
+					<p><A TARget="_blank" hREF="ftp://ftp.parc.xerox.com/pub/ilu/ilu.html">ftp://ftp.parc.xerox.com/pub/ilu/ilu.html</A></p>
+
+					<p><i>Using ILU with Python: A Tutorial</i></P>
+
+					<P><A TargeT="_blank" HREf="ftp://parcftp.parc.xerox.com/pub/ilu/misc/tutpython.html">ftp://parcftp.parc.xerox.com/pub/ilu/misc/tutpython.html</a><a name="idx1073744729"></a><a name="idx1073744730"></a><a name="idx1073744731"></a><A naMe="idx1073744732"></a></p>
+
+				
+				<H4>CORBA Binding and Implementation</h4>
+					<p>The Object Request Broker (ORB) is the mechanism that lets objects transparently make requests to—and receive from—other objects located locally or remotely. The ORB is the middleware that establishes the client/server relationship between objects.</p>
+
+					<p>Using an ORB, a client object can transparently invoke a method on a server object, which can be on the same machine or across a network. The ORB intercepts the call and is responsible for finding an object that can implement the request, pass it the parameters, invoke its method, and return the results. The client does not have to be aware of where the object is located, its programming language, its operating system, or any other system aspects that are not part of an object's interface. The client is not aware of the mechanisms used to communicate with, activate, or store the server objects. The ORB serves as the foundation for building distributed object applications. Note that CORBA can short circuit requests to objects in the same address space, as ILU and COM can, if the implementation supports this.</P>
+
+					<p>The ORB component, or CORBA, is a set of specifications defining the ways software objects should work together in a distributed environment. The organization that drives the specifications, the Object Management Group (OMG), has hundreds of members representing a major portion of the software industry. The members work together to propose, review, and finally adopt a set of specifications to enable software objects to be developed independently and yet work together in a harmonic fashion.</p>
+
+					<p>The fundamental piece of CORBA is the ORB, or Object Request Broker. The ORB can be viewed like a channel carrying objects between the clients (those that consume the objects) and the servers (those that produce the objects). The consumers are provided with object interfaces, which are defined using a language called the Interface Definition Language. The detailed implementation of the objects by the producers is totally shielded from the consumers. The ORB is usually just a library that the program links to that marshals object requests. The promised benefits of making the software objects from different vendors publicly known made those vendors highly endorse OMG's specifications.<A NAMe="idx1073744733"></a><a nAME="idx1073744734"></A><a namE="idx1073744735"></A><A Name="idx1073744736"></a><A NAMe="idx1073744737"></a><a name="idx1073744738"></a><a name="idx1073744739"></a><a name="idx1073744740"></a><A naMe="idx1073744741"></a><a Name="idx1073744742"></a><A namE="idx1073744743"></A></P>
+
+					<P>At the most basic level, CORBA is a standard for distributed objects. CORBA enables an application to request that an operation be performed by a distributed object and that the results of the operation be returned to the application making the request. The application communicates with the distributed object performing the operation. This is basic client/server functionality, in which a client issues a request to a server, and the server responds to the client. Data can pass from the client to the server and is associated with a particular operation on a particular object. Data is then returned to the client in the form of a response. Note that just like COM/DCOM, CORBA can be used to access objects that are local to the process, machine, or non-local.</p>
+
+					<p><a nAME="idx1073744744"></A><a namE="idx1073744745"></A><A Name="idx1073744746"></a><A NAMe="idx1073744747"></a>DCOM is a Microsoft-specific distribution solution, whereas CORBA products are available from more than 20 different vendors, and they support Microsoft and non-Microsoft operating systems. CORBA is an excellent mechanism to bridge between Microsoft desktops and UNIX servers.</p>
+
+					<p>There is no explicit need to choose between DCOM and CORBA. Distributed applications can be developed using both CORBA and DCOM. For example, a client application might be developed to access a set of OLE automation objects, and OLE automation objects might in turn access CORBA Objects running on a non-Microsoft platform such a UNIX. The OMG has defined a COM/CORBA interworking specification that standardizes this sort of bridging.</p>
+
+					<div class="note"><p class="notetitle"><b>Note</B></p><p>
+
+						<P>Python can be used to create wrappers between COM and CORBA systems.</p>
+
+					</p></dIv>
+<br>
+<bR>
+
+					<p>CORBA is more mature than DCOM; it has existed since 1990, and commercial implementations have been available since 1992. DCOM wasn't available in beta form until 1996. Also, a large number of different companies have developed CORBA ORBs. This level of competition increases the robustness of CORBA solutions on the whole. It also ensures compatibility—a vendor's CORBA ORB is of much greater value if it can talk to a competitor's ORBs.<a nAME="idx1073744748"></A><a namE="idx1073744749"></A><A Name="idx1073744750"></a><A NAMe="idx1073744751"></a><a nAME="idx1073744752"></A><a name="idx1073744753"></a><a name="idx1073744754"></a><a name="idx1073744755"></a><a nAme="idx1073744756"></A><a naMe="idx1073744757"></a><a nAme="idx1073744758"></a><A NAMe="idx1073744759"></a><a nAME="idx1073744760"></A><a namE="idx1073744761"></A><A Name="idx1073744762"></a></P>
+
+					<P>One of the advantages of DCOM over CORBA is the fact that DCOM is well suited to front-end application development. If entire distributed application runs under Microsoft platforms, DCOM might be a good choice. DCOM can also be used with CORBA. Of course, using DCOM will lock you into Win32 in the future, which might not be a good thing even if you are using Win32 at the moment.</P>
+
+					<P>The CORBA distributed object system is becoming an important standard in developing industrial-strength client/server and Web applications. It is also used as an IPC layer between a number of components in both the Gnome and KDE desktop environments for UNIX.</p>
+
+					<p>In the current development phase of the CORBA binding for Python, the OMG board of directors has adopted the specification, and the finalization task force has completed its report. After approval, this report will become an available specification. <a name="idx1073744763"></a><a name="idx1073744764"></a><a name="idx1073744765"></a><A naMe="idx1073744766"></a><tT clasS="monofont">omniORBpy</tt> is an almost complete implementation of the current Python/CORBA mapping. It is currently in beta, but is very stable.</p>
+
+					<P>More information about the <TT Class="monofont">omniOrbpy</TT> interface, which is provided by omniORB, can be found at</P>
+
+					<P>
+						<a tarGET="_blank" Href="http://www.uk.research.att.com/omniORB/omniORB.html">http://www.uk.research.att.com/omniORB/omniORB.html</a></P>
+
+					<P>Other interesting links for you include</P>
+
+					<Blockquote>
+<p><p><i>CORBA IDL Parser—</i>by Sam Rushing</p>
+</p>
+<p><p><a taRgeT="_blank" hreF="http://www.nightmare.com/software.html">http://www.nightmare.com/software.html</a></p>
+</p>
+<p><P>This parser uses Aaron Watters' <tt cLASS="monofont">kwParsing</tt> parser-generator package to construct a CORBA IDL parser in Python.</p>
+</p>
+<P><P>Object Management Group</P>
+</P>
+<p><p>Common Object Request Broker Architecture 2.0</p>
+</p>
+<P><P>OMG TC Document 96.03.04, July 1995</P>
+</P>
+<p><p><a tARGEt="_blank" href="http://www.omg.org/docs/ptc/96-03-04.ps">http://www.omg.org/docs/ptc/96-03-04.ps</a></p>
+</p>
+<p><p>Python Distributed Objects Special Interest Group</p>
+</p>
+<p><p><a targeT="_blank" hrEf="http://www.python.org/sigs/do-sig/">http://www.python.org/sigs/do-sig/</a><a Name="idx1073744767"></a><A namE="idx1073744768"></A><A Name="idx1073744769"></a><A NAMe="idx1073744770"></a><a nAME="idx1073744771"></A><a namE="idx1073744772"></A><A Name="idx1073744773"></a><a name="idx1073744774"></a><a name="idx1073744775"></a><a namE="idx1073744776"></a><a Name="idx1073744777"></A></p>
+
+						</p>
+</blOckqUOTE>
+				
+				<h4>Fnorb</h4>
+					<p>Fnorb is written in Python and its framework supports only Python. The implementation provided by this object-model helps you to learn more about CORBA systems.</p>
+
+					<P>Fnorb is an object request broker (ORB) compliant with the CORBA 2.0 specification from the Object Management Group (OMG). Fnorb implements a single language mapping from OMG IDL to Python. Because of the interpreted and interactive nature of Python, and the simplicity of the mapping (as compared to mappings with C++ and Java), Fnorb is ideally suited as a tool for the rapid prototyping, testing, and scripting of CORBA systems and architectures.</P>
+
+					<P>The pair Python/Fnorb is ideal for prototyping complex CORBA architectures, for using as a scripting tool, and for building test harnesses for all your CORBA development projects.</P>
+
+					<p>The combination of Python and Fnorb provides the existing CORBA community with a much needed tool for rapid prototyping and scripting, and gives those new to CORBA a great way to learn the fundamental concepts without being swamped by the intricacies of a "heavyweight" language mapping.</p>
+
+					<p>Like ILU from Xerox PARC, Fnorb gives the Python programmer access to the wonderful world of CORBA. It supports all CORBA 2.0 data types (including Any's) and provides a full implementation of IIOP. Unlike ILU, Fnorb is Python and CORBA/IDL-specific, which makes it simple, lightweight, and easy to install and use.<a NAME="idx1073744778"></a><a naME="idx1073744779"></A><A name="idx1073744780"></a><a name="idx1073744781"></a><a name="idx1073744782"></a><a naMe="idx1073744783"></a><A namE="idx1073744784"></a></p>
+
+					<p>Using Fnorb, you no longer have to use other languages to write CORBA clients and servers—you can use Python now. This makes Fnorb ideal for prototyping complex CORBA architectures, for use as a scripting tool, and for building test harnesses for all your CORBA development projects.</p>
+
+					<P>The Python language mapping used by Fnorb is based on a specification document being prepared by members of the DO-SIG (Distributed Objects - Special Interest Group). One goal of Fnorb is to enable the Python community to experiment with the mapping before attempting to set it in stone via the OMG standardization process.</p>
+
+					<p>Fnorb is being developed at the CRC for Distributed Systems Technology based at the University of Queensland in Brisbane, Australia. Fnorb is released under a free for non-commercial use license. Another license must be acquired to use it commercially.</p>
+
+					<BLOCkquoTE>
+<P><P><i>Official Fnorb home page</i></p>
+</p>
+<P><P><A TargeT="_blank" HREf="http://www.fnorb.org/">http://www.fnorb.org/</a></p>
+</p>
+<p><p>Jeff Rush's Fnorb Web page</p>
+</p>
+<p><p><a target="_blank" hreF="http://starship.python.net/crew/jrush/Fnorb/">http://starship.python.net/crew/jrush/Fnorb/</a></p>
+</P>
+<p><p>Provides Fnorb tips, techniques, and Linux RPMs for Fnorb. <a Name="idx1073744785"></a><A namE="idx1073744786"></A><A Name="idx1073744787"></a><A NAMe="idx1073744788"></a></p>
+
+						</p>
+</BLOCkquoTE>
+				
+				<H4>DCOM</H4>
+					<p>DCOM is Microsoft's way of distributing objects between different machines on the network. DCOM, or Distributed Common Object Model, defines the specifications that an object must obey to interoperate with other objects using Microsoft distributing architecture.</p>
+
+					<p>The core of DCOM is the Common Object Model, defined and refined from the earlier Object Link and Embedding implementation. Started naively as a way to enable documents to be embedded or linked into another document, OLE has completely reinvented itself.</p>
+
+					<p>The <a name="idx1073744789"></a><a name="idx1073744790"></a><i>Common Object Model</i>
+						<i>(COM)</I> lays the foundation for objects to gain knowledge about, and to make use of, each other; thus they can engage in so-called component-based computing. DCOM extends the capability to include the constituent objects on other machines connected through the network.<a nAme="idx1073744791"></a><A name="idx1073744792"></A><a naME="idx1073744793"></A></P>
+
+					<p>The Distributed Common Object Model (DCOM) is a protocol that enables software components to communicate directly over a network in a reliable, secure, and efficient manner. Previously called Network OLE, DCOM is designed for use across multiple network transports, including Internet protocols such as HTTP. DCOM is based on the Open Software Foundation's DCE-RPC spec and will work with both Java applets and ActiveX components through its use of the (COM).</p>
+
+					<p>DCOM enables objects to be remote from their caller, and it handles all marshalling across machines and necessary security. Configuration tools enable an administrator to configure objects so that neither the object nor the caller needs any changes.</p>
+
+					<P>The following Microsoft article takes you to the download page of the DCOM  configuration tool (<TT Class="monofont">dcomcnfg.exe</TT>), which was not included on the Windows 98 2nd Edition CD:</P>
+
+					<P><a tarGET="_blank" Href="http://support.microsoft.com/support/kb/articles/Q253/3/11.ASP">http://support.microsoft.com/support/kb/articles/Q253/3/11.ASP</a></p>
+
+					<p>Sometimes, code changes can be used to explicitly control the source of objects.<a name="idx1073744794"></a><a name="idx1073744795"></a><a nAme="idx1073744796"></A><a naMe="idx1073744797"></a></p>
+
+				
+				<h4>OMF</H4>
+					<p><i>Object Management Facility</i>
+						<I>(OMF)</I> is an object-oriented middleware environment for the process automation area. It is used as the middleware foundation for several ABB [the ABB Industrial Systems AB (Sweden)] control system applications. Although it doesn't contain any Python code, it is heavily tested using Python scripts.</P>
+
+					<P>OMF includes the all-important features of an object request broker. A type definition language defines the interface and provides mappings to multiple programming languages. Objects can be distributed transparently on heterogeneous platforms. Furthermore, services for naming, type management, messaging, and persistence are available. OMF contains features particularly for real-time distributed control, such as high-speed communication, asynchronous messaging, message prioritization, and support for different bus protocols.</p>
+
+					<p>OMF is a distributed object system specifically designed for the process control industry. The object model is similar to other distributed object systems, such as OMG's CORBA and Xerox's ILU. What makes OMF different from these is its interaction model. The OMF interaction model specifies that, after finding a set of objects, OMF has to select what methods to call (for each object) and what attributes to get or set. It also has to choose when to perform the operation (at request, at event, periodically). After all this is done, OMF sends a single request for all objects.<a nAME="idx1073744798"></A><a namE="idx1073744799"></A><A Name="idx1073744800"></a></P>
+
+					<P>OMF is implemented in C++, with APIs for other languages, including Python. Created for writing test programs, Python API has since then been used to write various tools (testing tools, development tools, and maintenance tools) to aid in application development and runtime management.</P>
+
+					<P>The OMF API for Python is implemented in two layers: The lower layer is written using a slightly modified version of Jack Jensen's modulator tool, whereas the higher layer is completely written in Python. On top of this API there are a few utility classes, such as the OMF agent, in which the agent lets the user treat OMF objects as local Python objects with attributes and methods, as follows:</p>
+
+					<pre>
+						
+from OMFagent import Agent
+# Connect to an object in the network
+ai = Agent('AI1.1')
+# Get the Analog Input's value
+# This will actually result in an RPC
+value = ai.VALUE
+
+					</pre>
+
+					<p>The <tt class="monofont">Agent</tt> code is surprisingly small, but results in a drastically higher abstraction layer than the bare OMF API. This is a rather simple class because of Python's dynamic typing.</p>
+
+					<blOckQuotE>
+<p><p>Using Python in a Distributed Object System—by Daniel Larsson</p>
+</p>
+<P><p><a tARGEt="_blank" hreF="http://www.python.org/workshops/1996-06/papers/d.larsson-dist-objs.html">http://www.python.org/workshops/1996-06/papers/d.larsson-dist-objs.html</A><A Name="idx1073744801"></a><A NAMe="idx1073744802"></a><a nAME="idx1073744803"></A><a name="idx1073744804"></a></p>
+
+						</p>
+</blockquote>
+				
+				<h4>Hector</h4>
+					<P><i>Hector</i> is a distributed object system written almost entirely in Python, taking advantage of the language's many features.</P>
+
+					<p>This specification provides a communication transparency layer enabling negotiation of communication protocol qualities, comprehensive support services for application objects, and novel interaction architecture. Its framework sits above other distributed environments, providing open negotiation and interoperability of communication protocols, high level description of component services and their requirements, a rich set of support services for objects and an interaction framework which enables the description of workflow-like interactions between autonomous objects.<a nAme="idx1073744805"></a><a Name="idx1073744806"></A><A NAme="idx1073744807"></a><a NAME="idx1073744808"></a><a naME="idx1073744809"></A><A name="idx1073744810"></A><A NAme="idx1073744811"></a></p>
+
+					<p><i>Hector</i> attempts to provide application objects with a consistent environment, regardless of their physical location, through a series of transparencies. Designed with the goal of supporting a dynamic, global system of distributed objects, it embraces diversity through extensibility. Specifically, it supports the following features while maintaining transparent usage of object services:</p>
+
+					<ul>
+<li><p>Multiple parties in high-level interaction bindings</p>
+</li>
+<li><p>Multiple object implementation languages</p>
+</Li>
+<lI><p>Multiple interaction models</p>
+</lI>
+<li><p>Multiple transport protocols</p>
+
+						</Li>
+</ul>
+					<P>Hector is structured as four layered components representing decreasing levels of abstraction. These layers are the Object, Language, Encapsulation (or Kernel), and Communication layers.</P>
+
+					<P>The initial language layer supports Python. Python Language Binding is available by default because the visible kernel classes are actually written in Python, making the wrapper classes very simple.</P>
+
+					<blocKQUOte>
+<p><p><I>Hector: Distributed Objects in Python</I>—by David Arnold, Andy Bond, Martin Chilvers, and <I>Richard Taylor</I></p>
+</p>
+<p><p><A TARget="_blank" href="http://www.python.org/workshops/1996-06/papers/d.arnold/paper.html">http://www.python.org/workshops/1996-06/papers/d.arnold/paper.html</a></p>
+</p>
+<p><p>Elvin Has Left the Building: A Publish/Subscribe Notification Service with Quenching</p>
+</p>
+<p><p><a tarGet="_blank" Href="http://www.dstc.edu.au/Research/Research/Projects/Elvin/mirror/www.dstc.edu.au/Elvin/papers/AUUG97/AUUG97.html"><A name="idx1073744812"></A><a naME="idx1073744813"></A><A name="idx1073744814"></A><A NAme="idx1073744815"></a></a></P>
+</P>
+</BLockqUOTE>
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="133.html" title="Implementing COM Objects in Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=134" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="134.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="135.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744674">Common Object Request Broker Architecture (COBRA)</a> <a href="#idx1073744741">2nd</a> <a href="#idx1073744756">3rd</a> <a href="#idx1073744775">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744691">Distributed Common Object Model (DCOM)</a> <a href="#idx1073744745">2nd</a> <a href="#idx1073744760">3rd</a> <a href="#idx1073744795">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744683">Fnorb</a> <a href="#idx1073744782">2nd</a> <a href="#idx1073744786">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744704">Hector</a> <a href="#idx1073744809">2nd</a> <a href="#idx1073744813">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744664">Inter-Language Unification (ILU) system</a> <a href="#idx1073744711">2nd</a> <a href="#idx1073744726">3rd</a> <a href="#idx1073744730">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744715">islscan</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744699">Object Management Facility (OMF)</a> <a href="#idx1073744802">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744669">Object Request Broker (ORB)</a> <a href="#idx1073744737">2nd</a> <a href="#idx1073744752">3rd</a> <a href="#idx1073744771">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744679">OmniORBpy</a> <a href="#idx1073744764">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744687">ORBit-python project</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744719">python-stubber</a><BR>
+COBRAÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744677">Ò</a><BR>
+ <a href="#idx1073744789">Common Object Model (COM)</a><BR>
+ <a href="#idx1073744673">Common Object Request Broker Architecture (COBRA)</a> <a href="#idx1073744740">2nd</a> <a href="#idx1073744755">3rd</a> <a href="#idx1073744774">4th</a><BR>
+DCOMÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744694">Ò</a><BR>
+ <a href="#idx1073744690">Distributed Common Object Model (DCOM)</a> <a href="#idx1073744744">2nd</a> <a href="#idx1073744759">3rd</a> <a href="#idx1073744794">4th</a><BR>
+distributing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744696">objects</a> <a href="#idx1073744708">2nd</a> <a href="#idx1073744723">3rd</a> <a href="#idx1073744734">4th</a> <a href="#idx1073744749">5th</a> <a href="#idx1073744768">6th</a> <a href="#idx1073744779">7th</a> <a href="#idx1073744792">8th</a> <a href="#idx1073744799">9th</a> <a href="#idx1073744806">10th</a><BR>
+ <a href="#idx1073744682">Fnorb</a> <a href="#idx1073744781">2nd</a> <a href="#idx1073744785">3rd</a><BR>
+ <a href="#idx1073744703">Hector</a> <a href="#idx1073744808">2nd</a> <a href="#idx1073744812">3rd</a><BR>
+ILU systemÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744667">Ò</a><BR>
+ <a href="#idx1073744663">Inter-Language Unification (ILU) system</a> <a href="#idx1073744710">2nd</a> <a href="#idx1073744725">3rd</a> <a href="#idx1073744729">4th</a><BR>
+interfacing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744695">objects</a> <a href="#idx1073744707">2nd</a> <a href="#idx1073744722">3rd</a> <a href="#idx1073744733">4th</a> <a href="#idx1073744748">5th</a> <a href="#idx1073744767">6th</a> <a href="#idx1073744778">7th</a> <a href="#idx1073744791">8th</a> <a href="#idx1073744798">9th</a> <a href="#idx1073744805">10th</a><BR>
+ <a href="#idx1073744714">islscan</a><BR>
+models<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744790">Common Object (COM)</a><BR>
+ <a href="#idx1073744698">Object Management Facility (OMF)</a> <a href="#idx1073744801">2nd</a><BR>
+ <a href="#idx1073744668">Object Request Broker (ORB)</a> <a href="#idx1073744736">2nd</a> <a href="#idx1073744751">3rd</a> <a href="#idx1073744770">4th</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744697">interfacing and distributing</a> <a href="#idx1073744709">2nd</a> <a href="#idx1073744724">3rd</a> <a href="#idx1073744735">4th</a> <a href="#idx1073744750">5th</a> <a href="#idx1073744769">6th</a> <a href="#idx1073744780">7th</a> <a href="#idx1073744793">8th</a> <a href="#idx1073744800">9th</a> <a href="#idx1073744807">10th</a><BR>
+OMFÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744702">Ò</a><BR>
+ <a href="#idx1073744678">OmniORBpy</a> <a href="#idx1073744763">2nd</a><BR>
+ <a href="#idx1073744686">ORBit-python project</a><BR>
+ORBÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744672">Ò</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744675">Common Object Request Broker Architecture (COBRA)</a> <a href="#idx1073744742">2nd</a> <a href="#idx1073744757">3rd</a> <a href="#idx1073744776">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744692">Distributed Common Object Model (DCOM)</a> <a href="#idx1073744746">2nd</a> <a href="#idx1073744761">3rd</a> <a href="#idx1073744796">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744684">Fnorb</a> <a href="#idx1073744783">2nd</a> <a href="#idx1073744787">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744705">Hector</a> <a href="#idx1073744810">2nd</a> <a href="#idx1073744814">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744665">Inter-Language Unification (ILU) system</a> <a href="#idx1073744712">2nd</a> <a href="#idx1073744727">3rd</a> <a href="#idx1073744731">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744716">islscan</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744700">Object Management Facility (OMF)</a> <a href="#idx1073744803">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744670">Object Request Broker (ORB)</a> <a href="#idx1073744738">2nd</a> <a href="#idx1073744753">3rd</a> <a href="#idx1073744772">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744680">OmniORBpy</a> <a href="#idx1073744765">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744688">ORBit-python project</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744720">python-stubber</a><BR>
+ <a href="#idx1073744718">python-stubber</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744676">Common Object Request Broker Architecture (COBRA)</a> <a href="#idx1073744743">2nd</a> <a href="#idx1073744758">3rd</a> <a href="#idx1073744777">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744693">Distributed Common Object Model (DCOM)</a> <a href="#idx1073744747">2nd</a> <a href="#idx1073744762">3rd</a> <a href="#idx1073744797">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744685">Fnorb</a> <a href="#idx1073744784">2nd</a> <a href="#idx1073744788">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744706">Hector</a> <a href="#idx1073744811">2nd</a> <a href="#idx1073744815">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744666">Inter-Language Unification (ILU) system</a> <a href="#idx1073744713">2nd</a> <a href="#idx1073744728">3rd</a> <a href="#idx1073744732">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744717">islscan</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744701">Object Management Facility (OMF)</a> <a href="#idx1073744804">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744671">Object Request Broker (ORB)</a> <a href="#idx1073744739">2nd</a> <a href="#idx1073744754">3rd</a> <a href="#idx1073744773">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744681">OmniORBpy</a> <a href="#idx1073744766">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744689">ORBit-python project</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744721">python-stubber</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

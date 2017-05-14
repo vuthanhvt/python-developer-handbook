@@ -1,0 +1,226 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python Services</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">Python Services</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="40.html" title="Python Libraries"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=41" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="41.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="42.html" title="types "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A21%3A33+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146123188002200092133207</font><a href="read2.asp?bookname=0672319942&snode=41&now=5%2F31%2F2002+4%3A21%3A33+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Python Services</h3>
+				<p>This first group of modules is known as Python Services. These modules provide access to services related to the interpreter and to Python's environment.</p>
+
+				<H4><TT Class="monofont">sys</TT></H4>
+					<P>The <tt clASS="monofont">sys</Tt> module handles system-specific parameters, variables, and functions related to the interpreter.</p>
+
+				
+				<h4><tt class="monofont">sys.argv</tt></h4>
+					<p>This object contains the list of arguments that were passed to a program.</p>
+
+					<p>If you pass arguments to your program, for example, by saying,</p>
+
+					<pre>
+						
+c:\ python program.py -a -h -c
+
+					</Pre>
+
+					<P>you are able to access those arguments by retrieving the value of <tt cLass="monofont">sys.argv:</tT></p>
+
+					<prE>
+						
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.argv
+["program.py", "-a", "-h", "-c"]
+
+					</PRE>
+
+					<p>You can use this list to check whether certain parameters are transported to the interpreter.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; If "-h" in sys.argv:
+&gt;&gt;&gt;     print "Sorry. There is no help available."
+
+					</PRE>
+
+				
+				<h4><tt cLASS="monofont">sys.exit()</tt></h4>
+					<p>This is a <I>function</I> used to exit a program. Optionally, it can have a <TT class="monofont">return code.</tt> It works by raising the <tt class="monofont">SystemExit</tt> exception. If the exception remains uncaught while going up the call stack, the interpreter shuts down.</p>
+
+					<p><a nAme="idx1073742666"></A>basic syntax: <tt cLass="monofont">sys.exit(</tT><i><tt CLASs="monofont">[return_code]</tt></i><TT CLass="monofont">)</tT></P>
+
+					<PRe>
+						
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.exit(0)
+
+					</pre>
+
+					<P>The <A NAme="idx1073742667"></a><a name="idx1073742668"></a><tt class="monofont">return_code</tt> argument indicates the return code that should be passed back to the caller application.</p>
+
+					<p>The <Tt cLass="monofont">sys</Tt> module also contains three <a naMe="idx1073742669"></a><a NAME="idx1073742670"></a>file objects that take care of the standard input and output devices (see <a hrEF="11.html">Chapter 1, "Introduction,"</A>  for more details about these objects).</P>
+
+					<blocKQUOte>
+<p><p><TT CLass="monofont">sys.stdin</tt>— 
+    File object that is used to read data from the standard input device. Usually it is mapped to the user keyboard.</p>
+</p>
+<p><p><tt class="monofont">sys.stdout</tt>— 
+    File object that is used by every <tt ClaSs="monofont">print</tt> statement. The default behavior is to output to the screen.</P>
+</p>
+<p><p><tT claSS="monofont">sys.stderr</TT>— 
+    It stands for standard error output. Usually, it is also mapped to the same object of <tt clASS="monofont">sys.stdout.</Tt><a naME="idx1073742671"></A><A name="idx1073742672"></A><A NAme="idx1073742673"></a><a name="idx1073742674"></a></p>
+</p>
+</blockquotE>
+					<p><b>Example:</B></p>
+
+					<prE>
+						
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; data = sys.stdin.readlines()
+&gt;&gt;&gt; str = "Counted %d lines." % len(data)
+&gt;&gt;&gt; sys.stdout.write (str)
+
+					</pre>
+
+					<p>Now, save the previous example in a file named <Tt clASS="monofont">countlines.py,</Tt> and test it by typing the following instructions on your prompt:</p>
+
+					<prE>
+						
+On Unix: cat coutlines.py | python countlines.py
+On DOS and Windows: type countlines.py | python countlines.py
+
+					</PRE>
+
+				
+				<h4><tt cLASS="monofont">sys.modules</tt></h4>
+					<p>It is a <I>dictionary</I> that contains the modules that were loaded by the current session.</P>
+
+				
+				<H4><tt class="monofont">sys.platforms</tt></h4>
+					<p>This is a <i>string</i> that shows the current platform (for example, <tt class="monofont">"win32",</Tt>
+						<tT claSs="monofont">"mac",</tt>
+						<tT claSS="monofont">"linux-i386"</TT>).</p>
+
+					<p>You can test which platform is running a program by doing something like this:</p>
+
+					<pRE>
+						
+if sys.platforms == "win32"
+    <I>&lt;do something&gt;</I>
+elif sys.platform == "mac"
+    <i>&lt;do something else&gt;</i>
+
+					</prE>
+
+				
+				<H4><TT clasS="monofont">sys.path</TT></H4>
+					<p>This is the <i>list</i> of directories that are searched to find the location of a module at the time of importing it.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import.sys
+&gt;&gt;&gt; sys.path
+['', 'C:\\Program Files\\Python\\Lib\\plat-win',
+'C:\\Program Files\\Python\\Lib', 'C:\\Program Files\\Python\\DLLs',
+'C:\\Program Files\\Python\\Lib\\lib-tk','C:\\PROGRAM FILES\\PYTHON\\DLLs',
+'C:\\PROGRAM FILES\\PYTHON\\lib',
+'C:\\PROGRAM FILES\\PYTHON\\lib\\plat-win',
+'C:\\PROGRAM FILES\\PYTHON\\lib\\lib-tk',
+'C:\\PROGRAM FILES\\PYTHON']
+
+					</pre>
+
+					<p>You can easily update this list to include your own directories.<a name="idx1073742675"></a><a naMe="idx1073742676"></a><A namE="idx1073742677"></a><a naMe="idx1073742678"></a></p>
+
+				
+				<H4><TT Class="monofont">sys.builtin_module_names</TT></H4>
+					<P>This is the list of modules that are not imported as files.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.builtin_module_names
+('__builtin__', '__main__', '_locale', '_socket', 'array', 'audioop',
+ 'binascii', 'cPickle', 'cStringIO', 'cmath', 'errno', 'imageop', 'imp',
+ 'marshal', 'math', 'md5', 'msvcrt', 'new', 'nt', 'operator', 'pcre',
+'regex', 'rgbimg', 'rotor', 'select', 'sha', 'signal', 'soundex', 'strop',
+'struct', 'sys', 'thread', 'time', 'winsound')
+
+					</PRE>
+
+					<P>For all the next <tt clASS="monofont">sys</Tt> objects, see <a href="91.html">Chapter 4, "Exception Handling,"</a>  for details.</p>
+
+				
+				<h4><tt class="monofont">sys.exc_info()</tt></h4>
+					<p>Provides information about the current exception being handled.</P>
+
+				
+				<h4><tT claSs="monofont">sys.exc_type, <a naMe="idx1073742679"></a><a NAME="idx1073742680"></a>sys.exc_value, <a naME="idx1073742681"></A><A name="idx1073742682"></A>sys.exc_traceback</TT></H4>
+					<p>It is another way to get the information about the current exception being handled.</p>
+
+				
+				<h4><tT CLAss="monofont">sys.last_type, <a name="idx1073742683"></a><a name="idx1073742684"></a>sys.last_value</tt> and <tt clAss="monofont">sys.last_traceback</Tt></h4>
+					<p>Provides information about the last uncaught exception.<A name="idx1073742685"></A><a naME="idx1073742686"></A></P>
+
+					<p>Python 2.0 contains a mode detailed <a naME="idx1073742687"></A>version information function called <Tt claSS="monofont">sys.version_info.</TT> This function returns a tuple in the format <i>(major, minor, micro, level, serial).</i> For example, suppose the version number of your Python system is <tt CLASs="monofont">3.0.4alpha1,</tt> the function<a name="idx1073742688"></a><a name="idx1073742689"></a>
+						<tt claSs="monofont">sys.version_info()</tT> returns <tt cLass="monofont">(3, 0, 4, 'alpha', 1).</tT> Note that the level can be one of the following values: <i>alpha,</i>
+						<i>beta,</I> or <I>final.</I></P>
+
+					<p>Another set of functions added to Python 2.0 are: <tt cLASS="monofont">sys.getrecursionlimit()</tt> and <tt CLASs="monofont">sys.setrecursionlimit().</tt> These<a NAME="idx1073742690"></a><a name="idx1073742691"></a> functions<a name="idx1073742692"></a><a name="idx1073742693"></a> are responsible for reading and modifing the maximum recursion depth for the routines in the system. The default value is 1000, and you can run the new script <tT clAss="monofont">Misc/find_recursionlimit.py</tT> in order to know the maximum value suggested for your platform.</p>
+
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="40.html" title="Python Libraries"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=41" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="41.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="42.html" title="types "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742668">return code</a><BR>
+file objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742669">sys module</a><BR>
+ <a href="#idx1073742687">functions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742682">sys.exec.traceback()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742680">sys.exec.value()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742691">sys.getrecursionlimit()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742684">sys.last.value()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742693">sys.recursionlimit()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742689">sys.version_info()</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742671">Python Services</a> <a href="#idx1073742675">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742674">sys</a> <a href="#idx1073742678">2nd</a> <a href="#idx1073742686">3rd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742670">sys module</a><BR>
+ <a href="#idx1073742672">Python Services</a> <a href="#idx1073742676">2nd</a><BR>
+ <a href="#idx1073742667">return code argument</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742666">sys.exit() function</a><BR>
+ <a href="#idx1073742673">sys module</a> <a href="#idx1073742677">2nd</a> <a href="#idx1073742685">3rd</a><BR>
+ <a href="#idx1073742681">sys.exec.traceback() function</a><BR>
+ <a href="#idx1073742679">sys.exec.value() function</a><BR>
+ <a href="#idx1073742690">sys.getrecursionlimit() function</a><BR>
+ <a href="#idx1073742683">sys.last.value() function</a><BR>
+ <a href="#idx1073742692">sys.recursionlimit() function</a><BR>
+ <a href="#idx1073742688">sys.version_info() function</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

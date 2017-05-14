@@ -1,0 +1,488 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python Active Scripting</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="179.html" class="navtitle">12. Scripting Programming</a> &gt; <span class="nonavtitle">Python Active Scripting</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="184.html" title="Creating, Installing, and Running Your Script"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=185" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="185.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="186.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A45%3A14+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148041040021164115000057</font><a href="read7.asp?bookname=0672319942&snode=185&now=5%2F31%2F2002+4%3A45%3A14+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+Python Active Scripting</h3>
+				<p>Active Scripting is a technology developed by Microsoft that allows scripting languages to be embedded inside Web
+browsers. Currently, Microsoft Internet Explorer 4 and above supports client-side scripting, whereas <a NAME="idx1073746988"></a>
+					<a naME="idx1073746989"></A>Internet Information Server (IIS) supports server-side scripting, using a component called <A name="idx1073746990"></A>
+					<A NAme="idx1073746991"></a>
+					<i>Active Server Pages (ASP).</i> In both cases, the scripting code is embedded inside the HTML code.
+There is a limitation to using Python as a client-side solution for your Web applications: Each client machine must have
+Python installed. That's probably the greatest disadvantage that Python has among the other Active Scripting languages
+because Internet Explorer provides core support for <tt class="monofont">VBScript</tt> and <tt clasS="monofont">JScript.</tt> Other problems
+with using Python as a client-side scripting language include the fact that it is only supported in Internet Explorer, it only
+works on Windows, and it requires that the Python Active Scripting component be installed. It is probably okay in controlled
+environments, but on the Internet, hardly anyone meets this criteria, so you can't rely on it.</P>
+
+				<p>In order to implement <a nAme="idx1073746992"></a>security procedures, not all Python commands are available. Commands that execute some critical
+operations—such as open files, create sockets, and so on—are hidden behind a "sandbox", in a
+concept similar to the one used by Java. For more information, check out<a Name="idx1073746993"></A>
+					<A NAme="idx1073746994"></a>
+				</p>
+
+				<P>Python and Microsoft ActiveX Scripting</P>
+
+				<P>
+					<A targET="_blank" HRef="http://www.python.org/windows/win32com/ActiveXScripting.html">http://www.python.org/windows/win32com/ActiveXScri
+
+pting.html</a>
+				</p>
+
+				<P>Active Scripting</P>
+
+				<P><A target="_blank" href="http://msdn.microsoft.com/scripting">http://msdn.microsoft.com/scripting</a>
+				</p>
+
+				<p>The Python for Windows extensions come with more details about the use of Active Scripting along with Internet
+Explorer. For now, let's take a look at the following code:</p>
+
+				<pre>
+					
+&lt;script language=python&gt;
+msg = "Hello Python World! I am counting down!&lt;br&gt;"
+document.write(msg)
+counter = 10
+while counter &gt; 0:
+    document.write(counter)
+    document.write("&lt;br&gt;")
+    counter = counter - 1
+document.write("Booooom!")
+&lt;/script&gt;
+
+				</pre>
+
+				<P>This code must be inserted in a HTML file in order to be executed. Next, you have a slightly modified code. This one
+uses the <a nAme="idx1073746995"></a>
+					<A name="idx1073746996"></A>
+					<tt cLASS="monofont">alert()</tt> function to put a message box in the user's screen. As you already know, each application exposes
+its own object model, and for example, the <tt CLASs="monofont">alert()</tt> function is part of the object model exposed by the Internet
+Explorer, which is similar to the Dynamic HTML object model. Actually, everything here happens as COM
+transactions.</p>
+
+				<PRE>
+					
+&lt;script language=python&gt;
+msg = "Hello Python World! I am counting down!&lt;br&gt;"
+document.write(msg)
+counter = 10
+while counter &gt; 0:
+    document.write(counter)
+    document.write("&lt;br&gt;")
+    counter = counter - 1
+alert("Booooom!")
+&lt;/script&gt;
+
+				</Pre>
+
+				<p>A <a NAME="idx1073746997"></a>
+					<a name="idx1073746998"></a>
+					<tt class="monofont">script</tt> tag can be executed in two places: in the client machine (default behavior) or in the server. The next
+structure shows how to let the application know where it needs to <a namE="idx1073746999"></a>execute the script.<a Name="idx1073747000"></A>
+					<a namE="idx1073747001"></a>
+				</p>
+
+				<pRE>
+					
+&lt;SCRIPT RunAt=Server Language=Python &gt;
+   #This code runs at the server
+&lt;/SCRIPT&gt;
+&lt;SCRIPT Language=Python &gt;
+   #This code runs at the client
+&lt;/SCRIPT&gt;
+
+				</PRe>
+
+				<p>The next example demonstrates how you can cause your Python code to <a nAME="idx1073747002"></A>
+					<a namE="idx1073747003"></A>
+					<A Name="idx1073747004"></a>interact with standard HTML code. Note that you cannot use leading <A NAMe="idx1073747005"></a>whitespaces in the Python block. In order to handle events such as the ones shown here, you need to have the
+notation <a name="idx1073747006"></a>
+					<tt class="monofont">object_event</tt> in mind. Also note that in Python, you have to inform the complete namespace of the object,
+including the <a naMe="idx1073747007"></a>
+					<A namE="idx1073747008"></a>
+					<i>form name.</i> This is something that VBScript handles better by allowing you to use just the object
+name.</p>
+
+				<Pre>
+					
+&lt;FORM NAME = "myform"&gt;
+  &lt;INPUT TYPE="Text" NAME="txt1" SIZE=40&gt;&lt;br&gt;
+  &lt;INPUT TYPE="Text" NAME="txt2" SIZE=40&gt;&lt;br&gt;
+  &lt;INPUT NAME="B1" TYPE="BUTTON" VALUE="Click me"&gt;
+  &lt;SCRIPT LANGUAGE=Python&gt;
+def myform_onClick():
+    myform.txt1.value = document.location
+def txt1_onChange():
+    myform.txt1.value = ""
+    myform.txt2.value = ""
+def txt2_onFocus():
+    myform.txt2.value = myform.txt1.value
+  &lt;/SCRIPT&gt;
+&lt;/FORM&gt;
+
+				</pRE>
+
+				<P>In order to have full exposition with the Active Scripting technology, you also need to take a look at <A name="idx1073747009"></A>
+					<A NAme="idx1073747010"></a>
+					<i>Windows Scripting Host (WSH).</I> WSH is part of Windows 98 and 2000, but it can also be
+downloaded from <A TArget="_blank" HREF="http://msdn.microsoft.com/scripting">http://msdn.microsoft.com/scripting</a> for the other
+Windows environments (95 and NT). WSH runs Python files that have the extension <tt class="monofont">.pys.</tt> These files are
+regular text files that can freely use the object model exposed by WSH. Note that <tt class="monofont">.pys</tt> files are not correctly
+registered—you need to explicitly specify either <tT clAss="monofont">cscript.exe</tT> or <tt clAss="monofont">wscript.exe</tT> on the
+command line.</P>
+
+				<P>Now, that you are ready to write your programs, you might also need to <A name="idx1073747011"></A>debug your Active Scripts. You have two tools for the job, both provided by Microsoft:</P>
+
+				<UL>
+<li>
+						<p>The first one is a free product called <i>The Windows Script Debugger.</I> This version can be
+downloaded from <A TArget="_blank" HREF="http://msdn.microsoft.com/scripting/">http://msdn.microsoft.com/scripting/</a>.</p>
+
+					</li>
+<li>
+						<p>The other option is to use <i>Microsoft Visual Interdev</i> that comes as part of
+<i>Microsoft Visual C++.</i> This option is not free because it's attached to the commercial
+product.</p>
+
+					</li>
+</ul>
+				
+					<h4>
+
+
+Using COM Objects</h4>
+					<p>Active Scripting is a COM-based technology that works by providing a specific language's object model to the user. In
+<a HreF="128.html">Chapter 7, "Objects Interfacing and Distribution,"
+						</a>  you learned that each application exposes a <tt Class="monofont">progID</Tt>  in order to interface with other systems.
+Therefore, when you say <tt CLASs="monofont">Language = Python</tt>  inside a <a NAME="idx1073747012"></a>
+						<a naME="idx1073747013"></A>
+						<Tt claSS="monofont">script</TT>  tag, you are actually opening an interface to a <tt class="monofont">progID</tt>  called Python. As you might be
+wondering, VBScript, JScript, and Python are COM <tt class="monofont">progID</tt> s used to handle each one of these
+languages.<a nAme="idx1073747014"></A>
+						<a naMe="idx1073747015"></a>
+					</p>
+
+					<p>In our case, after you specify that the scripting language is Python, you acquire access to the interface exposed by the
+Python object model. As you can see in the next ASP example, within the COM scripting connection, you are still able to use
+other COM interfaces.</P>
+
+					<p>This example opens an ODBC connection to the database identified in the connection string. In order to test this
+example, make sure that your system has the informed DSN, and that the database has the necessary table. This code must be saved in a file using the <tt CLASs="monofont">.asp</tt> extension in order to let it run under Microsoft IIS.</p>
+
+					<P>After you execute it, it reads the selected columns from a database table and displays the columns and contents in a HTML table structure. Obviously you'll need this particular table in your database for it to work, but you should be able to adapt it. Note that this code is a straight conversion from VBScript, except for the fact that the Execute statement returns atuple.</P>
+
+					<PRe>
+						
+&lt;%@ LANGUAGE = Python %&gt; &lt;% import win32com.client 
+<img BORDer="0" alIGN="left" Width="14" height="9" src="graphics/ccc.gif" alt="graphics/ccc.gif">oconn=win32com.client.Dispatch("ADODB.connection")
+oconn.Open ("DSN=db_sql_server")
+objRecords, thing = oconn.Execute (
+  "SELECT currency_desc, symbol FROM tb_currency")
+
+Response.Write("&lt;TABLE border=1&gt;&lt;TR&gt;")
+
+for objField in objRecords.Fields:
+  Response.Write("&lt;TH&gt;"+objField.Name+"&lt;/TH&gt;")
+
+Response.Write("&lt;/TR&gt;")
+
+while not objRecords.EOF :
+  Response.Write("&lt;TR&gt;")
+  for objField in objRecords.Fields:
+    Response.Write("&lt;TD&gt;"+objField.Value+"&lt;/TD&gt;")
+  objRecords.MoveNext()
+  Response.Write("&lt;/TR&gt;")
+
+Response.Write("&lt;/TABLE&gt;")
+
+oconn.close
+oconn=None
+%&gt;
+
+					</pre>
+
+				
+				
+					<h4>
+
+
+ASP and Microsoft ActiveX Scripting</H4>
+					<p>Active Server Pages, commonly referred to as ASP, is Microsoft's solution to server-side scripting applications. The
+difference between Active Server Pages and <a Name="idx1073747016"></A>
+						<a namE="idx1073747017"></a>HTML pages is that with simple HTML pages, the client browser requests a Web page from a Web server. The
+server sends the file to the client, and the page is shown on the client's browser. On the other hand, with Active Server
+Pages, the server gets a chance to alter the file before sending it to the user. So, for every request for a file with an
+<tt CLASs="monofont">.asp</tt> extension, the server runs the file through a interpreter that parses the ASP commands. You can have
+your ASP code connect to any ODBC-compliant database, and dynamically insert the data into your HTML pages.</p>
+
+					<P>To use Active Server Pages, you must be running a Microsoft Web Server, specifically <A NAme="idx1073747018"></a>
+						<a NAME="idx1073747019"></a>Internet Information Server (IIS) 3.0 or up—Microsoft's Internet Information Server is a Web Server that
+supports both CGI and ASP. If your Web site runs on a UNIX system, you can still use Active Server Pages, but you need to
+use third-party tools to translate the ASP before it is sent to the client. Of course, there are other (possibly better) options
+when not using IIS. ASP is not necessarily the best choice.</p>
+
+					<diV CLAss="note"><p class="notetitle"><b>Tip</b></p><p>
+
+						<p>Note that for everything you can do with ASP, you can also do using straight CGI scripting.<a name="idx1073747020"></a>
+							<a NamE="idx1073747021"></a>
+							<a nAme="idx1073747022"></a>
+							<a Name="idx1073747023"></A>
+							<A NAme="idx1073747024"></a>
+						</p>
+
+					</P></DIV>
+<br>
+<br>
+
+					<P>ASP is not language dependent, and though most of the things you will find in the market are written in VBScript or
+JScript, you can actually configure ASP to use any other scripting language that supports the Microsoft ActiveX Scripting
+interface. This includes VBScript, JScript, PERLScript, PScript, and of course, Python.</P>
+
+					<P>The object model defined by ASP is different from the object model defined by Internet Explorer. The first thing you will
+notice is that ASP code has some special tags:</P>
+
+					<ul>
+<li>
+							<P>The <TT Class="monofont">&lt;%@ language=Python %&gt;</tt> tag defines that all scripting tags after that will, by default, belong to
+Python.</p>
+
+						</li>
+<li>
+							<p>The <tt class="monofont">&lt;% %&gt;</tT> tag is equivalent to <tt ClasS="monofont">&lt;script&gt; &lt;/script&gt;.</tt>
+							</p>
+
+						</lI>
+<li>
+							<p>
+								<TT CLass="monofont">&lt;%= %&gt;</tT> allows you to replace part of the contents to be displayed with the value of a variable. For
+instance,</P>
+
+							<PRe>
+								
+&lt;%
+name = "Andre" %&gt;
+Whassup &lt;%= name %&gt; !
+
+							</pre>
+
+						</LI>
+</UL>
+					<p>There is no restriction on the commands that you can execute on a ASP page because all the execution takes place at
+the Server. Thus, in theory there would be no need for high security procedures. However, there is just as much need for
+security in ASP files as in CGI script when you are making use of untrusted input. The fact that there is no sandbox means
+you have to be especially careful not to compromise your system.</p>
+
+					<diV CLAss="note"><p class="notetitle"><b>Note</b></p><p>
+
+						<p>ASP files are stored in files with the <tt class="monofont">.asp</Tt> extension.<a Name="idx1073747025"></A>
+							<a namE="idx1073747026"></a>
+							<a nAME="idx1073747027"></A>
+							<a namE="idx1073747028"></A>
+							<A Name="idx1073747029"></a>
+						</P>
+
+					</P></DIv>
+<br>
+<bR>
+
+					<P>One last detail about Python/ASP programs is that the <A Name="idx1073747030"></a>
+						<a name="idx1073747031"></a>
+						<a name="idx1073747032"></a>
+						<a namE="idx1073747033"></a>
+						<a Name="idx1073747034"></A>print statement does not send the information to the screen. You need to use ASP's object model <a namE="idx1073747035"></a>
+						<a nAME="idx1073747036"></A>
+						<tt clASS="monofont">Response.Write()</Tt> function to do it, as you can check in the following example.</p>
+
+					<prE>
+						
+&lt;%@ language=Python %&gt;
+&lt;%
+text = "this text here does not use the print command" %&gt;
+A curious fact is that &lt;%= text %&gt;.
+&lt;br&gt;
+Note that we still need to pay attention to the indentation in this code.
+&lt;br&gt;
+The next code block lists all the server variables.
+&lt;br&gt;&lt;br&gt;
+&lt;%
+for k in Request.ServerVariables:
+    v = Request.ServerVariables(k)
+    Response.Write("&lt;b&gt;%s&lt;/b&gt;=" % (k))
+    Response.Write("%s&lt;br&gt;&lt;br&gt;" % (v))
+%&gt;
+
+					</PRE>
+
+					<p>Of course, you could fix the <tt cLASS="monofont">print</tt> statement problem with the following code to make print work
+again.</p>
+
+					<pre>
+						
+class ASPStdout:
+    def write(self, bytes):
+        Request.Write(bytes)
+    def writelines(self, lines):
+        for line in lines: self.write(line)
+sys.stdout = ASPStdout()
+
+					</pre>
+
+					<p>In case you want to try something different, <a name="idx1073747037"></a>
+						<a namE="idx1073747038"></a>
+						<a Name="idx1073747039"></A>
+						<a namE="idx1073747040"></a>Microsoft Visual Interdev, which is a very popular tool for ASP development, can be integrated with Python for
+Windows. Although it doesn't have any specific knowledge about <tt CLASs="monofont">.py</tt> files, it doesn't expose any problems
+when using them.</p>
+
+					<P>Using its working environment, you can test and debug Python's active scripts. Another possible option that you have
+is to use a free debugger that can be found at <A TArget="_blank" HREF="http://msdn.microsoft.com/scripting">http://msdn.microsoft.com/scripting</a>.
+</p>
+
+					<p>See <a TARGet="_blank" href="http://starship.python.net/crew/pirx/asp/py_asp.html">http://starship.python.net/crew/pirx/asp/py_asp.html</a> for
+more details about using Python with ASP.<a name="idx1073747041"></a>
+						<a name="idx1073747042"></a>
+						<a NamE="idx1073747043"></a>
+						<a nAme="idx1073747044"></a>
+						<a Name="idx1073747045"></A>
+					</P>
+
+				
+				
+					<H4>
+Python Server Pages</H4>
+					<p>
+						<i>Python Server Pages</i> is a server-side scripting engine designed along the lines of Microsoft's Active
+Server Pages and Sun's Java Server Pages specification. The major difference between ASP and PSP is that PSP is written
+in 100% Java and portable to a wide variety of platforms, whereas Web applications written in ASP can be run only on
+Microsoft platforms. Python Server Pages uses <a NAME="idx1073747046"></a>
+						<a naME="idx1073747047"></A>JPython as its scripting language, which seems to be more appropriate for scripting Web sites than the Java
+language itself in Java Server Pages.</P>
+
+					<p>A major benefit to using PSP is the huge number of add-on modules available for both Python and JPython. You can
+access any module that is compatible with JPython from within your PSP application's pages. Because JPython is itself
+written in Java, you can access Java packages from your Python Server Pages application as well. For more information,
+check out the following:</p>
+
+					<p>Python Server Pages</p>
+
+					<P>
+						<A TArget="_blank" href="http://www.ciobriefings.com/psp">http://www.ciobriefings.com/psp</a>
+					</p>
+
+					<p>JRun</p>
+
+					<p>JRun is the Java Servlet engine recommended for use with PSP.</p>
+
+					<p>
+						<a targEt="_blank" hRef="http://www.allaire.com/products/jrun/index.cfm">http://www.allaire.com/products/jrun/index.cfm</a>
+					</P>
+
+					<p>JPython</p>
+
+					<p>JPython is the scripting language used by PSP.</p>
+
+					<P>
+						<a taRGET="_blank" href="http://www.jpython.org">http://www.jpython.org</A>
+						<A NAme="idx1073747048"></a>
+						<a NAME="idx1073747049"></a>
+					</p>
+
+				
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="184.html" title="Creating, Installing, and Running Your Script"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=185" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="185.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="186.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073746993">Active Scripting</a> <a href="#idx1073747000">2nd</a> <a href="#idx1073747014">3rd</a> <a href="#idx1073747020">4th</a> <a href="#idx1073747025">5th</a> <a href="#idx1073747041">6th</a> <a href="#idx1073747048">7th</a><BR>
+ <a href="#idx1073746990">Active Server Pages (ASP)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747022">ActiveX scripting</a> <a href="#idx1073747027">2nd</a> <a href="#idx1073747043">3rd</a><BR>
+ActiveX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747024">scripting</a> <a href="#idx1073747029">2nd</a> <a href="#idx1073747045">3rd</a><BR>
+ <a href="#idx1073746995">alert() function</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747038">Visual Interdev</a><BR>
+ <a href="#idx1073746991">ASP (Active Server Pages)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747023">ActiveX scripting</a> <a href="#idx1073747028">2nd</a> <a href="#idx1073747044">3rd</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747032">sending to screen</a><BR>
+debugging<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747011">Active Scripts</a><BR>
+executing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746999">script tags</a><BR>
+ <a href="#idx1073747007">form name</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746996">alert()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747036">Response_Write()</a><BR>
+HTML (Hypertext Markup Language)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747004">interacting with Python code</a><BR>
+HTML pages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747016">vs. Active Server Pages (ASP)</a><BR>
+Hypertext Markup Language (HTML)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747002">interacting with Python code</a><BR>
+ <a href="#idx1073746989">IIS (Internet Information Server)</a> <a href="#idx1073747019">2nd</a><BR>
+ <a href="#idx1073746988">Internet Information Server (IIS)</a> <a href="#idx1073747018">2nd</a><BR>
+ <a href="#idx1073747046">JPython</a><BR>
+names<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747008">form</a><BR>
+ <a href="#idx1073747006">object_event notation</a><BR>
+pages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747017">vs. Active Server Pages (ASPs)</a><BR>
+print statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747030">sending data to the screen</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hypertext Markup Language (HTML)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747003">interacting with Python code</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747047">JPython</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747039">Visual Interdev</a><BR>
+ <a href="#idx1073747035">Response_Write() function</a><BR>
+screens<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747034">sending data to</a><BR>
+ <a href="#idx1073747012">script tag</a><BR>
+ <a href="#idx1073746997">script tags</a><BR>
+scripting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746994">Active</a> <a href="#idx1073747001">2nd</a> <a href="#idx1073747015">3rd</a> <a href="#idx1073747021">4th</a> <a href="#idx1073747026">5th</a> <a href="#idx1073747042">6th</a> <a href="#idx1073747049">7th</a><BR>
+security<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746992">Active Scripting</a><BR>
+sending<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747033">data to screens</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747040">Visual Interdev</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747031">sending data to the screen</a><BR>
+tags<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746998">script</a> <a href="#idx1073747013">2nd</a><BR>
+ <a href="#idx1073747037">Visual Interdev</a><BR>
+ <a href="#idx1073747005">whitespaces</a><BR>
+ <a href="#idx1073747009">Windows Scripting Host (WSH)</a><BR>
+ <a href="#idx1073747010">WSH (Windows Scripting Host)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

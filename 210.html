@@ -1,0 +1,491 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Geometry Management</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="206.html" class="navtitle">15. Tkinter</a> &gt; <span class="nonavtitle">Geometry Management</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="209.html" title="Tkinter"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=210" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="210.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="211.html" title="Handling Tkinter Events"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A48%3A45+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148036103063008216041062</font><a href="read7.asp?bookname=0672319942&snode=210&now=5%2F31%2F2002+4%3A48%3A45+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+
+
+
+Geometry Management</h3>
+				<p>All Tkinter widgets have access to specific <i>geometry management</I> methods, which have the purpose of organizing widgets throughout the parent widget area. These methods are grouped in three distinct classes that provide a nice way to lay out child widgets in their parent widget. Tkinter exposes the following geometry manager classes: <TT Class="monofont">pack,</TT>
+					<TT clasS="monofont">grid,</TT> and <Tt class="monofont">place.</tt>
+				</p>
+
+				<ul>
+<li>
+						<a name="idx1073748398"></a>
+						<a NamE="idx1073748399"></a>
+						<p><tT clasS="monofont">pack</tt>— 
+    
+							This geometry manager organizes widgets in blocks before placing them in the parent widget.
+						</p>
+</LI>
+<LI>
+						<a namE="idx1073748400"></A>
+						<A Name="idx1073748401"></a>
+						<P><TT Class="monofont">grid</TT>— 
+    
+							This geometry manager organizes widgets in a table-like structure in the parent widget.
+						</P>
+</Li>
+<li>
+						<a name="idx1073748402"></a>
+						<a name="idx1073748403"></a>
+						<p><tt clAss="monofont">place</Tt>— 
+    
+							This geometry manager organizes widgets by placing them in a specific position in the parent widget.
+						</p>
+</lI>
+</ul>
+				<p>Each one of these geometry managers has a specific purpose. The <tT claSS="monofont">pack</TT> manager, for example, is convenient for application windows'design. On the other hand, the <tt clASS="monofont">grid</Tt> manager is perfect for designing dialogs because you can easily arrange the position of several widgets using an easy-to-figure-out table structure, behind the scenes. And last, but not least, we have the <tt cLASS="monofont">place</tt> manager. This manager is perfect for placing a widget in a specific position in a frame or window. However, it is not that useful to design complex structures because it requires a lot of specific information about the coordinates of the widget.</p>
+
+				<p>The usage of these methods is very simple. When you create a widget, such as</P>
+
+				<PRE>
+					
+b = Button(root, text="Quit", padx=5, justify=CENTER)
+
+				</pre>
+
+				<p>You can apply the geometry method directly on the created object.</p>
+
+				<pre>
+					
+b.pack(side=RIGHT)
+
+				</pre>
+
+				<p>Or, if you do not want to create one more object instance, you can simply call the geometry method directly from the creation line:</p>
+
+				<pre>
+					
+Button(root, text="Quit", padx=5, justify=CENTER).pack(side=RIGHT)
+
+				</pre>
+
+				
+					<h4>
+						<Tt cLass="monofont">
+							<A name="idx1073748404"></A>
+							<a naME="idx1073748405"></A>pack()</Tt>
+					</h4>
+					<p>The <tT CLAss="monofont">pack</tt> manager adds the widgets to the frame or the window based in the order that the widgets are packed. After creating a Frame widget, you can start adding widgets to it (the area where the Frame stores a widget is called a <A NAMe="idx1073748406"></a>
+						<i>parcel</i>). If you want to place a group of widgets next to each other, you can use the same <A NAMe="idx1073748407"></a>
+						<a name="idx1073748408"></a>
+						<i>anchor</i> option for all of them. Therefore, they will be stored in the same parcel of the parent frame. If you don't specify any option, the widgets are added from top to bottom in the available spaces. Additionally, you can specify the frame <i>side</i> where you want to place the widget. The final widget position is based on the size of the parent frame as well as on the position of the other widgets already placed. Note that if you use Frames, you will spend much less time designing your interface.</p>
+
+					<p>The <tt clasS="monofont">pack</tt> method provides the following options, which can be informed as direct assignments or as a dictionary variable:<A namE="idx1073748409"></a>
+						<a naMe="idx1073748410"></a>
+						<a NAME="idx1073748411"></a>
+						<a naME="idx1073748412"></A>
+						<A name="idx1073748413"></A>
+						<A NAme="idx1073748414"></a>
+						<a NAME="idx1073748415"></a>
+						<a name="idx1073748416"></a>
+						<a name="idx1073748417"></a>
+						<a name="idx1073748418"></a>
+						<a NamE="idx1073748419"></a>
+					</p>
+
+					<bLockqUote>
+<P>
+							<A NAme="idx1073748420"></a>
+							<a NAME="idx1073748421"></a>
+							<p><tt CLASs="monofont">expand</tt>— 
+    
+								This option expands the widget to use all the remaining space after the other widgets have been informed. This is an important attribute to set so that the correct widgets use the extra space when the window is resized.
+							</p>
+</P>
+<P>
+							<A Name="idx1073748422"></a>
+							<a name="idx1073748423"></a>
+							<p><tt class="monofont">fill</tt>— 
+    
+								This option defines how the widget should fill up the space provided by its parcel. Possible values: <Tt cLass="monofont">x,</Tt>
+									<tt cLass="monofont">y,</TT>
+									<TT clasS="monofont">both,</TT> and <Tt claSS="monofont">none.</TT>
+								</p>
+
+						</p>
+<p>
+							<a NAME="idx1073748424"></a>
+							<a name="idx1073748425"></a>
+							<p><tt class="monofont">ipadx,</tt>
+									<tt cLasS="monofont">ipady</tt>— 
+    
+								These options are used along with the <tT clasS="monofont">fill</tt> option to define the space, in pixels, around the widget.
+							</p>
+</P>
+<P>
+							<A Name="idx1073748426"></a>
+							<A NAMe="idx1073748427"></a>
+							<p><tT CLAss="monofont">padx,</tt>
+									<TT CLass="monofont">pady</tt>— 
+    
+								These options define the space, in pixels, between widgets.
+							</p>
+</p>
+<p>
+							<a name="idx1073748428"></a>
+							<a name="idx1073748429"></a>
+							<P><tt ClasS="monofont">side</tt>— 
+    
+								This option defines the side where we want to place the widget. Possible values: <tt ClasS="monofont">top,</TT>
+									<Tt claSS="monofont">bottom,</TT>
+									<tt clASS="monofont">left,</Tt> and <tt cLASS="monofont">right.</tt>
+									<a name="idx1073748430"></a>
+								</p>
+
+						</p>
+</blockquote>
+					<P>The following lines demonstrate how you can use these options when packing a widget:</p>
+
+					<pRe>
+						
+topframe = Frame(root, relief=RAISED, borderwidth=2)
+topframe.pack(side=TOP, fill=BOTH)
+rightframe = Frame(root, relief=RAISED, borderwidth=2)
+rightframe.pack(side=RIGHT, fill=BOTH, expand=1, padx=2, pady=2)
+
+					</prE>
+
+					<p>The default behavior is to measure the sizes in pixels, but if you prefer to use other measurement units, you just need to add a special suffix to each specific measured value. The possible values are <tt cLass="monofont">c</TT> (for onscreen centimeters), <TT clasS="monofont">m</TT> (for onscreen millimeters), <Tt claSS="monofont">i</TT> (for onscreen inches), and <tt clASS="monofont">p</Tt> (for printer's points—note that 1 printer point is equivalent to 1/72 inches). Check out the next line of code to understand how to use this feature. Note that the measurements are in centimeters.</p>
+
+					<pre>
+						
+rightframe.pack(side=RIGHT, fill=BOTH, expand=1, padx=4c, pady=3c) 
+
+					</pre>
+
+				
+				
+					<h4>
+						<tt class="monofont">
+							<a namE="idx1073748431"></a>
+							<a Name="idx1073748432"></A>grid()</tt>
+					</h4>
+					<p>The grid geometry manager is very flexible, which makes the task of designing dialogs very simple. It creates a grid pattern in the frame and allocates a space in each cell to hold a widget. To use it, you just need to inform the row and the column where you want to insert the widget. In order to use the <Tt clASS="monofont">pack</Tt> method to collect results similar to the ones provided by this grid functionality, you would have to use a lot of frame widgets. Actually, it is quite often impossible to get the same configuration with <tt cLASS="monofont">pack()</tt> as you do with <tt CLASs="monofont">grid().</tt> You won't necessarily get all the column/row boundaries to match with <tT CLAss="monofont">pack().</tt>
+					</p>
+
+					<p>As an example of the <tt class="monofont">grid</tt> method, consider the dialog at <a href="210#3.html">Figure 15.3</A>.</p>
+
+					<cEnteR>
+						<h5>
+<a naMe="3"></a>Figure 15.3. Window organized with the grid method.</h5>
+						
+							
+								<IMG BordeR="0" WIDth="117" heIGHT="175" src="graphics/15fig03.gif" aLT="graphics/15fig03.gif">
+							
+						
+					</CEnter>
+
+					<p>Now, check out the code that works behind the scenes to organize the widgets:</p>
+
+					<pre>
+						
+from Tkinter import *
+root = Tk()
+
+Label(root, text="Last Name:").grid(row=0, sticky=W)
+Label(root, text="First Name:").grid(row=1, sticky=W)
+Label(root, text="Phone #:").grid(row=2, sticky=W)
+Label(root, text="email:").grid(row=3, sticky=W)
+entry_ln = Entry(root)
+entry_fn = Entry(root)
+entry_ph = Entry(root)
+entry_em = Entry(root)
+
+entry_ln.grid(row=0, column=1)
+entry_fn.grid(row=1, column=1)
+entry_ph.grid(row=2, column=1)
+entry_em.grid(row=3, column=1)
+Label(root).grid(row=4, sticky=W)
+Label(root, text="Skill set summary:").grid(row=5, sticky=W)
+cb_gender = Checkbutton(root, text="Python")
+cb_gender.grid(row=6, sticky=W)
+cb_gender = Checkbutton(root, text="Perl")
+cb_gender.grid(row=7, sticky=W)
+b_apply = Button(root, text="Apply")
+b_apply.grid(row=7, column = 1)
+root.mainloop()
+
+					</pre>
+
+					<p>Note that we have to call the <tt class="monofont">grid</Tt> method for every single widget, always mentioning the row and the column where we want to place it. If for some reason, we don't use the <tT claSs="monofont">grid</tt> method for a widget, which is placed just after a group of gridded widgets, this new widget is placed in the next available position beneath the gridded widgets.</p>
+
+					<P>For your information, the coordinate numbered (<tt cLASS="monofont">0,0</tt>) is given to the intersection of the first row on the top with the first column on the left side.</p>
+
+					<p>This method implements the following <A NAMe="idx1073748433"></a>options:</p>
+
+					<bLOCKquotE>
+<P>
+							<A Name="idx1073748434"></a>
+							<a name="idx1073748435"></a>
+							<p><tt class="monofont">row</tt>— 
+    
+								The number of the row where we want to place the widget.
+							</P>
+</p>
+<p>
+							<A namE="idx1073748436"></a>
+							<a naMe="idx1073748437"></a>
+							<p><TT CLass="monofont">column</tT>— 
+    
+								The number of the column where we want to place the widget.
+							</P>
+</P>
+<P>
+							<a namE="idx1073748438"></A>
+							<A Name="idx1073748439"></a>
+							<P><TT Class="monofont">columnspan</tt>— 
+    
+								This option defines the number of columns that must be occupied by the widget.
+							</p>
+</p>
+<p>
+							<a name="idx1073748440"></a>
+							<a name="idx1073748441"></A>
+							<p><tT claSs="monofont">rowspan</tt>— 
+    
+								This option defines the number of rows that must be occupied by the widget.<a Name="idx1073748442"></A>
+									<A NAme="idx1073748443"></a>
+									<a NAME="idx1073748444"></a>
+									<a naME="idx1073748445"></A>
+									<A name="idx1073748446"></A>
+									<A NAme="idx1073748447"></a>
+									<a name="idx1073748448"></a>
+									<a name="idx1073748449"></a>
+									<a name="idx1073748450"></A>
+									<a nAme="idx1073748451"></a>
+								</P>
+
+						</p>
+</bloCkquOTE>
+				
+				
+					<H4>
+						<tt clASS="monofont">place()</Tt>
+					</h4>
+					<p>Similar to all the other managers, this one is available for all Tkinter standard widgets as well. The place geometry manager enables you to explicitly set the position and size of each widget, which can be either in terms of absolute or relative coordinates. You should only consider using this manager when you are in need of placing a widget in a specific position that is not possible to set automatically. The next code exemplifies the use of place:</p>
+
+					<PRE>
+						
+lbl = Label(root, text="Name:")
+lbl.place(relx=0.5, rely=2, anchor=LEFT)
+
+					</Pre>
+
+					<p>The place geometry manager implements two methods: <tT CLAss="monofont">place</tt> and <tt class="monofont">place_configure.</tt> Both of them can use the following as <a name="idx1073748452"></a>
+						<a NamE="idx1073748453"></a>
+						<a nAme="idx1073748454"></a>arguments:</p>
+
+					<BlocKQUOte>
+<p>
+							<a NAME="idx1073748455"></a>
+							<a naME="idx1073748456"></A>
+							<P><tt clASS="monofont">anchor</Tt>— 
+    
+								Defines the part of widget that must be placed on the given coordinates. Possible values are <tt class="monofont">N,</tt>
+									<tt class="monofont">NE,</tt>
+									<tT clAss="monofont">E,</tT>
+									<tt clAss="monofont">SE,</tT>
+									<TT Class="monofont">SW,</TT>
+									<TT clasS="monofont">W,</TT>
+									<Tt claSS="monofont">NW,</TT> and <tt class="monofont">CENTER.</tt> The default value is <tt class="monofont">NW,</tt> which is the top-left corner.
+							</p>
+</p>
+<P>
+							<a nAme="idx1073748457"></a>
+							<A name="idx1073748458"></A>
+							<p><tt CLASs="monofont">bordermode</tt>— 
+    
+								Defines whether the given coordinates must consider the border size or not. The possible values are respectively <tT CLAss="monofont">OUTSIDE</tt> and <TT CLass="monofont">INSIDE,</tT> which is the default value.
+							</P>
+</P>
+<P>
+							<a name="idx1073748459"></a>
+							<a name="idx1073748460"></a>
+							<a name="idx1073748461"></a>
+							<a nAme="idx1073748462"></A>
+							<p><tt Class="monofont">height,</Tt>
+									<tt CLASs="monofont">width</tt>— 
+    
+								Define the widget's size in <i>pixels.</I>
+								
+							</P>
+</P>
+<P>
+							<a namE="idx1073748463"></A>
+							<A Name="idx1073748464"></a>
+							<P><TT Class="monofont">in (in_)</tt>— 
+    
+								Places the widget in a position relative to the given <i>widget</i> Note that to use this option as a keyword option, you need to append an underscore to the option name.
+							</p>
+</p>
+<p>
+							<a name="idx1073748465"></a>
+							<a naMe="idx1073748466"></a>
+							<A namE="idx1073748467"></a>
+							<a naMe="idx1073748468"></a>
+							<p><TT CLass="monofont">relheight, relwidth</tT>— 
+    
+								Define the relative size of the widget to the reference widget defined by the <TT Class="monofont">in_</TT> option.
+							</P>
+</P>
+<p>
+							<a naME="idx1073748469"></A>
+							<A name="idx1073748470"></a>
+							<a name="idx1073748471"></a>
+							<a name="idx1073748472"></a>
+							<p><tt ClaSs="monofont">relx,</tt>
+									<Tt claSs="monofont">rely</tt>— 
+    
+								Define the relative position of the widget to the reference widget defined by the <TT CLass="monofont">in_</tT> option, or to the parent widget when the <TT Class="monofont">in_</TT> option is not defined.
+							</P>
+</P>
+<p>
+							<a naME="idx1073748473"></A>
+							<A name="idx1073748474"></a>
+							<a name="idx1073748475"></a>
+							<a name="idx1073748476"></a>
+							<p><tt ClaSs="monofont">x,</tt>
+									<Tt claSs="monofont">y</tt>— 
+    
+								Define the absolute position of the widget, and the default value is <TT CLass="monofont">0</tT> for each one of them.<A NAme="idx1073748477"></a>
+									<a NAME="idx1073748478"></a>
+									<a naME="idx1073748479"></A>
+									<A name="idx1073748480"></a>
+									<a name="idx1073748481"></a>
+									<a name="idx1073748482"></a>
+									<a naMe="idx1073748483"></a>
+									<A namE="idx1073748484"></a>
+									<a naMe="idx1073748485"></a>
+									<a NAME="idx1073748486"></a>
+									<a naME="idx1073748487"></A>
+									<A name="idx1073748488"></A>
+									<A NAme="idx1073748489"></a>
+								
+							</p>
+</P>
+</BLOckquote>
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="209.html" title="Tkinter"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=210" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="210.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="211.html" title="Handling Tkinter Events"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073748455">anchor argument</a><BR>
+ <a href="#idx1073748407">anchor option</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748456">anchor</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748458">bordermode</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748460">height</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748464">in (in )</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748452">place() and place_configure() methods</a> <a href="#idx1073748487">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748466">relheight</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748468">relwidth</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748470">relx</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748472">rely</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748462">width</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748474">x</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748476">y</a><BR>
+ <a href="#idx1073748457">bordermode argument</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748401">grid</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748399">pack</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748403">place</a><BR>
+ <a href="#idx1073748436">column option</a><BR>
+ <a href="#idx1073748438">columnspan option</a><BR>
+ <a href="#idx1073748420">expand option</a><BR>
+ <a href="#idx1073748422">fill option</a><BR>
+geometry management<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748413">methods, Tkinter module</a> <a href="#idx1073748446">2nd</a> <a href="#idx1073748481">3rd</a><BR>
+graphical user interfaces (GUIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tkinter<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748410">geometry management methods</a> <a href="#idx1073748443">2nd</a> <a href="#idx1073748478">3rd</a><BR>
+ <a href="#idx1073748400">grid class</a><BR>
+ <a href="#idx1073748431">grid() method</a> <a href="#idx1073748450">2nd</a><BR>
+ <a href="#idx1073748459">height argument</a><BR>
+ <a href="#idx1073748463">in (in ) argument</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphical user (GUI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748411">Tkinter</a> <a href="#idx1073748444">2nd</a> <a href="#idx1073748479">3rd</a><BR>
+ <a href="#idx1073748424">ipadx option</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;geometry management<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748414">Tkinter module</a> <a href="#idx1073748447">2nd</a> <a href="#idx1073748482">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748432">grid()</a> <a href="#idx1073748451">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748405">pack()</a> <a href="#idx1073748418">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;place configure()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748454">arguments</a> <a href="#idx1073748489">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748486">place()</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tkinter<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748412">geometry management methods</a> <a href="#idx1073748445">2nd</a> <a href="#idx1073748480">3rd</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748408">anchor</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748437">column</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748439">columnspan</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748421">expand</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748423">fill</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748433">grid() method</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748425">ipadx</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748419">pack() method</a> <a href="#idx1073748430">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748427">padx</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748435">row</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748441">rowspan</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748429">side</a><BR>
+ <a href="#idx1073748398">pack class</a><BR>
+ <a href="#idx1073748404">pack() method</a> <a href="#idx1073748417">2nd</a><BR>
+packing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748415">widgets</a> <a href="#idx1073748448">2nd</a> <a href="#idx1073748483">3rd</a><BR>
+ <a href="#idx1073748426">padx option</a><BR>
+ <a href="#idx1073748406">parcels</a><BR>
+ <a href="#idx1073748402">place class</a><BR>
+place configure method()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748453">arguments</a> <a href="#idx1073748488">2nd</a><BR>
+ <a href="#idx1073748485">place() method</a><BR>
+ <a href="#idx1073748465">relheight argument</a><BR>
+ <a href="#idx1073748467">relwidth argument</a><BR>
+ <a href="#idx1073748469">relx argument</a><BR>
+ <a href="#idx1073748471">rely argument</a><BR>
+ <a href="#idx1073748434">row option</a><BR>
+ <a href="#idx1073748440">rowspan option</a><BR>
+ <a href="#idx1073748428">side option</a><BR>
+Tkinter module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748409">geometry management methods</a> <a href="#idx1073748442">2nd</a> <a href="#idx1073748477">3rd</a><BR>
+widgets<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748416">packing</a> <a href="#idx1073748449">2nd</a> <a href="#idx1073748484">3rd</a><BR>
+ <a href="#idx1073748461">width argument</a><BR>
+ <a href="#idx1073748473">x argument</a><BR>
+ <a href="#idx1073748475">y argument</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

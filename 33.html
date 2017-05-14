@@ -1,0 +1,410 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Modules and Packages</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Modules and Packages</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="32.html" title="Functions and Procedures"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=33" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="33.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="34.html" title="Input and Output"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A20%3A05+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146122163095031239122038</font><a href="read1.asp?bookname=0672319942&snode=33&now=5%2F31%2F2002+4%3A20%3A05+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Modules and Packages</h3>
+				<p>A <i>module</I> is a collection of classes, functions, and variables saved in a text file.</P>
+
+				<P>When referencing a module within your Python application, you don't need to specify the file suffix—your program text files must carry a <A name="idx1073742519"></A>
+					<A NAme="idx1073742520"></a>
+					<tT CLAss="monofont">.py</tt> extension. Modules can be written in Python or in C. No matter what option you use, you call both types of modules using the same syntax. The following <a name="idx1073742521"></a>
+					<a name="idx1073742522"></a>
+					<a namE="idx1073742523"></a>
+					<a Name="idx1073742524"></A>
+					<a namE="idx1073742525"></a>syntax imports and creates the global namespace for a module:</p>
+
+				<pRE>
+					
+import &lt;module&gt;
+
+				</PRe>
+
+				<p>A module filename called <tt CLASs="monofont">yourmodule.py</tt> should be mentioned in your import clause as follows:</p>
+
+				<PRE>
+					
+&gt;&gt;&gt; import yourmodule
+
+				</Pre>
+
+				<p>It is also possible to have multiple modules imported at the same time, using just one import statement as follows:</p>
+
+				<PRE>
+					
+&gt;&gt;&gt; import m1, m2, m3
+
+				</Pre>
+
+				<div class="note"><p class="notetitle"><b>Tip</b></p><p>
+
+					<P>An interesting fact you should know is that all the code is executed when it is imported for the first time.</p>
+
+				</p></Div>
+<bR>
+<br>
+
+				<p>Some modules are always available in Python. Others (including yours) are files and need to be imported (in most cases, those files have <tT claSS="monofont">.py</TT> or <tt clASS="monofont">.pyc</Tt> suffixes). To be imported, a file must have been saved in one of the directories listed in the <tt cLASS="monofont">sys.path</tt> variable.</p>
+
+				<p>If you need your module to be runnable and importable at the same time, you need to put something like the following line of code at the end of the file:<A NAMe="idx1073742526"></a>
+					<a name="idx1073742527"></a>
+				</p>
+
+				<pre>
+					
+If __name__ == "__main__": your_function()
+
+				</pre>
+
+				<div clAss="note"><P claSs="notetitle"><b>Tip</b></p><P>
+
+					<p>Remember that in UNIX, you need to change the permission of a file to make it executable.</p>
+
+				</p></DIV>
+<Br>
+<br>
+
+				<p>You can <A NAMe="idx1073742528"></a>
+					<a nAME="idx1073742529"></A>find out the contents of a module by typing:</p>
+
+				<pre>
+					
+dir(&lt;<I>module</I>&gt;)
+
+				</PRe>
+
+				<p>For example,</p>
+
+				<pre>
+					
+&gt;&gt;&gt; dir(math)
+
+				</pre>
+
+				<p>Now we will talk about packages.</p>
+
+				<p>A <i>package</i> is a collection of modules in the same directory. Package names must be subdirectories of one of the directories listed in the <tt clasS="monofont">sys.path</tt> variable.</P>
+
+				<p>A <a nAme="idx1073742530"></a>
+					<a Name="idx1073742531"></A>package directory must have, at least, an empty <TT Class="monofont">__init__.py</TT> file, and it might contain subpackages (subdirectories). Each subdirectory also needs, at least, an empty <TT clasS="monofont">__init__.py</TT> file.</P>
+
+				<p>In the statement</p>
+
+				<prE>
+					
+&gt;&gt;&gt; import a.b
+
+				</PRE>
+
+				<p>the module named <tt class="monofont">a.b</tt> designates a submodule named <tt class="monofont">b</tt> inside a package called <tT clAss="monofont">a.</tT>
+				</p>
+
+				<p>When you import a package, its subpackages aren't imported all together. You need to explicitly say that in the <tt ClasS="monofont">__init__.py</TT> file.<A name="idx1073742532"></A>
+					<A NAme="idx1073742533"></a>
+				</p>
+
+				<P>It would be similar to saving the following line in the <TT Class="monofont">__init__.py</TT> file of your package:</P>
+
+				<Pre>
+					
+import <i>subpackage1, subpackage2, subpackage3</i>
+			
+				</pre>
+
+				<p>Remember that to locate modules and packages, Python uses the paths that are stored at <tt class="monofont">sys.path.</tt> This variable is a simple list, like any other, and you can add any directory to this list that you want. Type <b>
+						<tt ClaSs="monofont">sys.path</tt>
+					</B> at the <tt clAss="monofont">prompt</tT> of your interpreter to know the current contents of this variable.</P>
+
+				<P>A new feature<A name="idx1073742534"></A>
+					<A NAme="idx1073742535"></a>
+					<a NAME="idx1073742536"></a> incorporated <a naME="idx1073742537"></A>to release 2.0 is the possibility to rename modules when importing them. The syntax for that can be either</P>
+
+				<pre>
+					
+import <i>module</i> as <i>newname</i>
+			
+				</pre>
+
+				<p>or</p>
+
+				<pre>
+					
+from <i>module</i> import <i>name</i> as <i>newname</I>
+			
+				</prE>
+
+				<p>This feature is equivalent to the code</p>
+
+				<pRe>
+					
+import <i>module</i>
+newmodule = <i>module</I>
+del <i>module</i>
+			
+				</pRE>
+
+				
+					<H4>
+				
+				Built-In Methods</H4>
+					<p>All these built-in functions are part of the <tt cLASS="monofont">__builtin__</tt> module, and you can use them after you have a module or package named <tt CLASs="monofont">m.</tt>
+					</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; m.__dict__            # lists the module dictionary
+&gt;&gt;&gt; m.x = m.__dict__["x"]   # provides access to a specific attribute
+&gt;&gt;&gt; m.__doc__            # returns the documentation string
+&gt;&gt;&gt; m.__name__            # returns the name of the module
+&gt;&gt;&gt; m.__file__            # returns the file name
+&gt;&gt;&gt; m.__path__            # returns the fully qualified package name
+
+					</Pre>
+
+				
+				
+					<h4>
+						<tt class="monofont">from</tt> in Contrast to <tt class="monofont">import</tT>
+					</h4>
+					<p>The <Tt clAss="monofont">import</tt> and <Tt clASS="monofont">from</Tt> statements allow one module to refer to objects from another module's namespace. They help eliminate problems with different modules that have some internal names equal. The next examples discuss the possible ways to use these statements.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; import string
+&gt;&gt;&gt; print string.join(list)
+
+					</PRE>
+
+					<p>The previous example imports the <a naME="idx1073742538"></A>
+						<A name="idx1073742539"></A>
+						<TT Class="monofont">string</tt> module as a local reference to an external module, allowing fully qualified references to any other objects in the <a name="idx1073742540"></a>
+						<a name="idx1073742541"></a>
+						<tt ClaSs="monofont">string</tt> namespace.</P>
+
+					<p>The next example adds the <a naMe="idx1073742542"></a>
+						<a NAME="idx1073742543"></a>
+						<tt cLASS="monofont">join()</tt> function to the namespace of the current module. This method allows you to control exactly which names you import into your local namespace from a module.</p>
+
+					<pRE>
+						
+&gt;&gt;&gt; from string import join
+&gt;&gt;&gt; print join(list)
+
+					</PRe>
+
+					<p>Now, take a look at the next line:</p>
+
+					<pRE>
+						
+&gt;&gt;&gt; from string import *
+
+					</PRe>
+
+					<p>The problem with this syntax is that if the <tt class="monofont">string</tt> module defines its own <a name="idx1073742544"></a>
+						<a naMe="idx1073742545"></a>
+						<Tt clAss="monofont">dosomething()</tt> function, you lose the <Tt clASS="monofont">dosomething()</Tt> that might exist in your current namespace.<a naME="idx1073742546"></A>
+						<A name="idx1073742547"></A>
+						<A NAme="idx1073742548"></a>
+						<a NAME="idx1073742549"></a>
+						<a name="idx1073742550"></a>
+						<a name="idx1073742551"></a>
+					</p>
+
+					<p>If you instead do a simple <tt claSs="monofont">import string,</tT> you will keep your current <tt cLass="monofont">dosomething()</tT> function. However, the <tt cLASS="monofont">dosomething()</tt> function from the <tt CLASs="monofont">string</tt> module will now be accessed by <tT CLAss="monofont">string.dosomething().</tt>
+					</P>
+
+					<DIV class="note"><p class="notetitle"><b>Tip</b></p><p>
+
+						<p>The main reason that you don't want to do <tt clAss="monofont">from &lt;module&gt; import *</Tt> is to avoid namespace clashing.<a nAme="idx1073742552"></a>
+							<a Name="idx1073742553"></A>
+						</P>
+
+					</P></Div>
+<br>
+<BR>
+
+					<P>Also, let me tell you that identifiers beginning with <Tt claSS="monofont">_</TT> (one underscore), such as <tt clASS="monofont">_salary,</Tt> aren't imported by a <tt class="monofont">from &lt;module&gt; import *</tt> clause.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import package1.string
+&gt;&gt;&gt; print package1.string.join(list)
+
+					</pre>
+
+					<p>The previous example loads the module <tt ClaSs="monofont">string</tt> from the package <Tt claSs="monofont">package1.</tt>
+					</P>
+
+					<PRE>
+						
+&gt;&gt;&gt; from package1 import string
+&gt;&gt;&gt; print string.join(list)
+
+					</pre>
+
+					<p>In order to access the <TT CLass="monofont">string</tT> module, you need to reference its objects by typing <TT Class="monofont">string.&lt;object&gt;.</TT> This is the recommended notation to <A Name="idx1073742554"></a>import a module from a package.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; from package1.string import join
+&gt;&gt;&gt; print join(list)
+				
+					</pre>
+
+					<p>In the syntax form <tt class="monofont">&lt;package.module&gt; import &lt;object&gt;,</tT> the <tt ClasS="monofont">&lt;object&gt;</tt> can be a subpackage of the package, a function, a class, a variable, and so on.<a nAme="idx1073742555"></a>
+						<A NAMe="idx1073742556"></a>
+						<a nAME="idx1073742557"></A>
+						<a namE="idx1073742558"></A>
+						<A Name="idx1073742559"></a>
+						<A NAMe="idx1073742560"></a>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; from package1 import *
+
+					</pre>
+
+					<p>If you just say <tt class="monofont">from package import *,</tt> it isn't guaranteed that all modules will be <tT clAss="monofont">import</tT> unless you insert the following piece of code in the <tt clAss="monofont">__init__.py</tT> file of the package.</P>
+
+					<PRe>
+						
+__all__ = ["module1","module2","module3"]  
+
+					</pre>
+
+					<P>This is a list containing the names of the package modules that should be imported:</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; from package.subpackage.module import *
+
+					</pre>
+
+					<P>Whenever you use a structure like <TT Class="monofont">package.subpackage.module,</TT> Python ensures that the package's <TT class="monofont">__init__.py</tt> is loaded first. Afterwards, the subpackage's <tt class="monofont">__init__.py</tt> is loaded, and only after they have been imported will the module finally be imported. After a package is loaded, there is no difference between a package and a module. Module objects represent both of them.<a namE="idx1073742561"></a>
+						<a Name="idx1073742562"></A>
+						<a namE="idx1073742563"></a>
+						<a nAME="idx1073742564"></A>
+						<a namE="idx1073742565"></A>
+					</P>
+
+				
+				
+					<H4>
+				
+				
+				
+				
+				Releasing and Reloading Modules</h4>
+					<p>After you have imported a module, you can release it from the system memory at anytime you want. The following example is to give you an idea of what I am talking about:</p>
+
+					<pRE>
+						
+import string, sys
+    lst = ["a","b","c","d"]
+    print string.join(lst,"-")
+del string
+del sys.modules["string"]
+
+					</PRe>
+
+					<p>Note that you also need to delete the module's reference, which exists in the <tt CLASs="monofont">sys.module</tt> variable.</p>
+
+					<p>The <a name="idx1073742566"></a>
+						<a name="idx1073742567"></a>command <tt cLasS="monofont">reload &lt;module&gt;</tt> reloads and re-executes a module. Note that objects created before the reloading will use the previous version until they are re-created. Try to avoid using this command.</p>
+
+					<P>You can easily find out what the imported modules are by typing</p>
+
+					<pre>
+						
+&gt;&gt;&gt; sys.modules.key()
+['os.path', 'operator', 'os', 'exceptions', '__main__', 'ntpath',
+'strop', 'nt', 'sys', '__builtin__', 'site', 'signal', UserDict',
+'string', 'stat', 'cmath']
+				
+					</Pre>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="32.html" title="Functions and Procedures"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=33" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="33.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="34.html" title="Input and Output"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742519">.py extension</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742567">reload module</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742525">global namespaces, modules</a><BR>
+directories<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742530">packages</a><BR>
+ <a href="#idx1073742544">dosomething() function</a> <a href="#idx1073742552">2nd</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742520">.py</a><BR>
+finding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742528">contents of modules</a><BR>
+foldersÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742531">Ò</a><BR>
+ <a href="#idx1073742548">from statement</a> <a href="#idx1073742557">2nd</a> <a href="#idx1073742561">3rd</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742545">dosomething()</a> <a href="#idx1073742553">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742543">join()</a><BR>
+global namespaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742523">importing and creating, modules</a><BR>
+ <a href="#idx1073742550">import statement</a> <a href="#idx1073742559">2nd</a> <a href="#idx1073742563">3rd</a><BR>
+importing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742522">global namespaces, modules</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742537">syntax to rename</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742554">modules from packages</a> <a href="#idx1073742565">2nd</a><BR>
+ <a href="#idx1073742542">join() function</a><BR>
+ <a href="#idx1073742526">modules</a> <a href="#idx1073742532">2nd</a> <a href="#idx1073742546">3rd</a> <a href="#idx1073742555">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;renaming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742534">syntax</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742539">string</a><BR>
+namespaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;global<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742524">importing and creating, modules</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742541">string</a><BR>
+ <a href="#idx1073742527">packages</a> <a href="#idx1073742533">2nd</a> <a href="#idx1073742547">3rd</a> <a href="#idx1073742556">4th</a><BR>
+ <a href="#idx1073742566">reload module command</a><BR>
+renaming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742535">syntax</a><BR>
+searching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742529">contents of modules</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742549">from</a> <a href="#idx1073742558">2nd</a> <a href="#idx1073742562">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742551">import</a> <a href="#idx1073742560">2nd</a> <a href="#idx1073742564">3rd</a><BR>
+ <a href="#idx1073742538">string module</a><BR>
+ <a href="#idx1073742540">string namespace</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742521">importing and creating global namespaces, modules</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modulles<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742536">renaming</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

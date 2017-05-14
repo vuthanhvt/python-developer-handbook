@@ -1,0 +1,252 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The Shell Environment</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">The Shell Environment</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="24.html" title="Language Review"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=25" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="25.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="26.html" title="Programs"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A18%3A07+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145081058108134082099064</font><a href="read6.asp?bookname=0672319942&snode=25&now=5%2F31%2F2002+4%3A18%3A07+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			The Shell Environment</h3>
+				<p>The Python language is wrapped within a shell development environment. The main component of this shell is a <i>command line interpreter,</I> which is perfect for practicing, learning, and testing your programs.</P>
+
+				
+					<H4>
+				
+				Command Line Interpreter</H4>
+					<p>The command line interpreter is the heart of Python's shell environment. To <a naME="idx1073742028"></A>
+						<A name="idx1073742029"></A>
+						<A NAme="idx1073742030"></a>
+						<a name="idx1073742031"></a>access the command line interpreter, you need to switch to the prompt of your operating system. The following examples presume that the python directory is in your system's <tt class="monofont">path</tt> environment variable.</p>
+
+					<p>On a UNIX system, you must type</P>
+
+					<prE>
+						
+$ python
+
+					</pre>
+
+					<P>If you are running MS Windows, just say</p>
+
+					<pre>
+						
+c:\&gt; python
+
+					</Pre>
+
+					<p>Note that in both cases, you just need to type the word <TT CLass="monofont">python;</tT> the rest is part of the shell prompt.</P>
+
+					<P>The Python for Windows installation also provides access to the command line interpreter by clicking its icon on the Start menu (see <A href="25#2.html">Figure 2.1</A>).<A NAme="idx1073742032"></a>
+						<a NAME="idx1073742033"></a>
+						<a name="idx1073742034"></a>
+						<a name="idx1073742035"></a>
+					</p>
+
+					<center>
+						<H5>
+<a nAme="2"></a>Figure 2.1. By clicking on the Python (command line) icon, you gain access to the shell environment.</H5>
+						
+							
+								<img bOrdeR="0" WIDth="500" heIGHT="375" src="graphics/02fig01.gif" aLT="graphics/02fig01.gif">
+							
+						
+					</CEnter>
+
+					<P>After the command line interpreter is loaded (see <A HRef="25#3.html">Figure 2.2</a>), you can start coding your own programs.<a name="idx1073742036"></a>
+						<a name="idx1073742037"></a>
+						<a name="idx1073742038"></A>
+					</p>
+
+					<cEnteR>
+						<h5>
+<a naMe="3"></a>Figure 2.2. Python's command line interface is now ready to use.</h5>
+						
+							
+								<IMG BordeR="0" WIDth="500" heIGHT="314" src="graphics/02fig02.gif" aLT="graphics/02fig02.gif">
+							
+						
+					</CEnter>
+
+					<p>Instead of using the command line interpreter, you can also use a graphical user interface called <tt class="monofont">IDLE</tt> (see <a href="25#4.html">Figure 2.3</a>).</P>
+
+					<ceNter>
+						<H5>
+<a namE="4"></a>Figure 2.3. 
+					<tt CLASs="monofont">IDLE</tt> is Python's GUI interpreter.</h5>
+						
+							
+								<IMG BordeR="0" WIDth="500" heIGHT="292" src="graphics/02fig03.gif" alt="graphics/02fig03.gif">
+							
+						
+					</center>
+
+					<div class="note"><P clAss="notetitle"><b>Note</B></p><p>
+
+						<p>See <a Href="219.html">Chapter 16, "Development Environment,"
+							</A>  for details about using <TT Class="monofont">IDLE.</TT>
+						</P>
+
+					</P></div>
+<bR>
+<BR>
+
+					<P>As you can see by looking at the coding area in both <a hreF="25#3.html">Figures 2.2</A> and <A Href="25#4.html">2.3</a>, the interpreter's primary prompt is a <tt class="monofont">&gt;&gt;&gt;.</tt>
+					</p>
+
+					<p>Let's start interacting with Python by running a variation of the standard <a name="idx1073742039"></A>
+						<a nAme="idx1073742040"></a>
+						<A name="idx1073742041"></A>
+						<a naME="idx1073742042"></A>
+						<Tt claSS="monofont">"hello world"</TT> program.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; print "Hello Python World"
+Hello Python World
+
+					</PRE>
+
+					<P>The previous example demonstrates that the screen is the standard output device for commands that are typed in the interpreter's prompt. Next, another example is demonstrated. Note that the first command doesn't print anything because it is just an assignment operation. The result of the operation is passed to and stored at the informed variable. On the other hand, the second command has its output redirected to the standard output, which enables you to see the result of the operation.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; alfa = 3 + 2
+&gt;&gt;&gt; alfa * 4
+20
+
+					</PRE>
+
+					<P>Python's <a name="idx1073742043"></a>
+						<a name="idx1073742044"></a>
+						<a name="idx1073742045"></a>syntax automatically indicates when a statement requires a subblock. The interpreter's secondary prompt <tt ClaSs="monofont">…</tt> means that the next line is a continuation from the current line and not a new line. In some cases, when you finish entering a multiline statement, you need to type <Tt claSs="monofont">ENTER</tt> at the beginning of the first line located after the end of the code block. By doing so, you will return to the primary prompt.<A NAMe="idx1073742046"></a>
+						<a nAME="idx1073742047"></A>
+						<a namE="idx1073742048"></A>
+					</P>
+
+					<P>Four basic situations that use a <a namE="idx1073742049"></A>
+						<A Name="idx1073742050"></a>secondary prompt are as follows:</p>
+
+					<ul>
+<li>
+							<p>When you explicitly add a line continuation with a backslash <tt class="monofont">\</tt> literal:</p>
+
+							<Pre>
+								
+&gt;&gt;&gt; print "I am a lumberjack " + \
+… "and I am OK."
+I am a lumberjack and I am OK.
+
+							</Pre>
+
+						</lI>
+<li>
+							<p>When parenthetical expressions are incomplete:</p>
+
+							<Pre>
+								
+&gt;&gt;&gt; print ("I am a lumberjack " + \
+… "and I am OK.")
+I am a lumberjack and I am OK.
+
+&gt;&gt;&gt; a = {
+… 'song': 'lumberjack'
+… }
+
+							</pRE>
+
+						</LI>
+<li>
+							<p>Multiline statements ending with a <tT CLAss="monofont">:</tt>
+							</P>
+
+							<PRE>
+								
+&gt;&gt;&gt; if 1==2:
+…      print "This line will never be printed"
+…
+&gt;&gt;&gt;
+
+							</pre>
+
+						</lI>
+<LI>
+							<P>When you comment a line:</p>
+
+							<pre>
+								
+&gt;&gt;&gt; # The next function statement returns 2 plus 2.
+… 2+2
+4
+						
+							</pre>
+
+						</li>
+</ul>
+					<div class="note"><p ClaSs="notetitle"><b>Tip</b></P><p>
+
+						<p>If you need to quit the interpreter while working on UNIX or MS Windows systems, press CTRL+D or CTRL+Z, respectively.<a nAme="idx1073742051"></a>
+							<A NAMe="idx1073742052"></a>
+							<a nAME="idx1073742053"></A>
+						</p>
+
+					</p></diV>
+<BR>
+<Br>
+
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="24.html" title="Language Review"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=25" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="25.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="26.html" title="Programs"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742031">command line interpreter</a> <a href="#idx1073742035">2nd</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742041">hello world</a><BR>
+ <a href="#idx1073742037">command line interpreter</a> <a href="#idx1073742047">2nd</a> <a href="#idx1073742052">3rd</a><BR>
+ <a href="#idx1073742039">hello world program</a><BR>
+interpreters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742038">command line</a> <a href="#idx1073742048">2nd</a> <a href="#idx1073742053">3rd</a><BR>
+launching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742030">command line interpreter</a> <a href="#idx1073742034">2nd</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742028">command line interpreter</a> <a href="#idx1073742032">2nd</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742040">hello world</a><BR>
+prompts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742050">secondary</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742029">command line interpreter</a> <a href="#idx1073742033">2nd</a><BR>
+ <a href="#idx1073742049">secondary prompts</a><BR>
+ <a href="#idx1073742036">shell environment</a> <a href="#idx1073742046">2nd</a> <a href="#idx1073742051">3rd</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742042">hello world</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742044">requirements for subblock</a><BR>
+subblocks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742045">requirements in statements</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742043">statements requiring subblocks</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

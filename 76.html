@@ -1,0 +1,214 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Optional Operational System</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">Optional Operational System</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="75.html" title="Generic Operational System"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=76" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="76.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="77.html" title="Debugger"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A29%3A13+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146115096221049202205219</font><a href="read6.asp?bookname=0672319942&snode=76&now=5%2F31%2F2002+4%3A29%3A13+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Optional Operational System</h3>
+				<p>The next set of modules implements interfaces to optional operational system features. Keep in mind that these features are not available for all platforms.</p>
+
+				<H4><TT Class="monofont">signal</TT></H4>
+					<P>The <tt clASS="monofont">signal</Tt> module provides mechanisms to access <tt class="monofont">POSIX</tt> signals in order to let the programmer set her own signal handlers for asynchronous events.</p>
+
+					<p>A good example is the case when it is necessary to monitor the users, checking whether they press CTRL+C to stop the execution of a program. Although Python provides default handlers, you can overwrite them by creating your own.</p>
+
+					<pre>
+						
+import signal, sys
+def signal_handler(signal, frame):
+    print "You have pressed CTRL+C"
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+    print "Now, you can\ 't stop the script with CTRL+C " }
+    "for the next 10 seconds!"
+    signal.signal(signal.SIGALRM, alarm_handler)
+    signal.alarm(10)
+    while 1:
+        print "I am looping"
+
+def alarm_handler(signal, frame):
+    print "Now you can leave the program"
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+print "Press CTRL+C"
+while 1:
+    continue
+
+					</pre>
+
+					<p>Some of the available signals you can use are as follows:</P>
+
+					<p><tAble BordeR="1" celLSPAcing="0" CELLpaddING="1" Width="100%">
+<COLGroup align="left" span="2">
+<tr valigN="top">
+<td>
+<Font Size="2">SIGALRM</fOnt></tD>
+<TD>
+<Font sIZE="2">Alarm</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<font size="2">SIGCONT</font></td>
+<td>
+<fonT siZe="2">Continue</foNt></td>
+</tR>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">SIGING</fONT></Td>
+<td>
+<fONT Size="2">Terminal interrupt character</font></td>
+</tr>
+<tr valign="top">
+<tD>
+<foNt siZe="2">SIGQUIT</fonT></td>
+<tD>
+<FONt sizE="2">Terminal Quit character</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font size="2">SIGTERM</font></td>
+<td>
+<font sIze="2">Termination</Font></Td>
+</tr>
+<tR valIGN="top">
+<Td>
+<fonT SIZe="2">SIG_IGN</fonT></TD>
+<Td>
+<fonT SIZe="2">Signal handler that ignores a signal<a name="idx1073742931"></a><a name="idx1073742932"></a>
+									</font></td>
+</tR>
+</coLgroUp>
+</tabLe></p>
+
+				
+				<h4><TT CLass="monofont">socket</tT></H4>
+					<P>The <Tt claSS="monofont">socket</TT> module provides access to a low-level BSD socket-style network interface.</p>
+
+					<p>See <a hREF="161.html">Chapter 10, "Basic Network Background,"</A>  for details.</p>
+
+				
+				<h4><tt class="monofont">select</tt></h4>
+					<p>The <tt class="monofont">select</Tt> module is used to implement polling and to multiplex processing across multiple I/O streams without using threads or subprocesses. It provides access to the BSD <tT claSs="monofont">select()</tt> function interface, available in most operating systems.<a Name="idx1073742933"></A><A NAme="idx1073742934"></a></p>
+
+					<P>On windows it only works for <TT Class="monofont">sockets.</TT> On UNIX, it is used for <TT clasS="monofont">pipes,</TT>
+						<Tt class="monofont">sockets,</tt>
+						<tt class="monofont">files,</tt> and so on.</p>
+
+					<p>See <a HreF="161.html">Chapter 10</a> for details.</p>
+
+				
+				<h4><Tt claSs="monofont">thread</tt></H4>
+					<P>The <TT clasS="monofont">thread</TT> module supports lightweight process threads. It offers a low-level interface for working with multiple threads.</P>
+
+					<p>See <a hrEF="148.html">Chapter 9</A> for details.</P>
+
+				
+				<h4><tt cLASS="monofont">threading</tt></h4>
+					<p>The <tt class="monofont">threading</tt> module provides high-level threading interfaces on top of the <tt class="monofont">thread</Tt> module.</p>
+
+					<P>See <a hrEf="148.html">Chapter 9</a> for details.</p>
+
+				
+				<h4><Tt clASS="monofont">Queue</Tt></h4>
+					<p>The <tT CLAss="monofont">Queue</tt> module is a synchronized <I>queue class</I> that is used in thread programming to move Python objects between multiple threads.</P>
+
+					<P>See <a hreF="148.html">Chapter 9</A> for details. <A Name="idx1073742935"></a><a name="idx1073742936"></a></p>
+
+				
+				<h4><tt class="monofont">anydbm</tT></h4>
+					<p>The <Tt clAss="monofont">anydbm</tt> module is a generic <Tt clASS="monofont">dbm-style</Tt> interface to access variants of the <tt cLASS="monofont">dbm</tt> database.</p>
+
+					<p>See <A HREf="139.html">Chapter 8</a> for details.</p>
+
+				
+				<h4><TT CLass="monofont">dumbdbm</tt></h4>
+					<p>The <tt class="monofont">dumbdbm</tt> module is a simple, portable, and slow database implemented entirely in Python.</p>
+
+					<p>See <a hRef="139.html">Chapter 8</A> for details.</p>
+
+				
+				<h4><tT clasS="monofont">dbhash</tt></h4>
+					<P>The <TT Class="monofont">dbhash</TT> module provides a function that offers a <TT clasS="monofont">dbm-style</TT> interface to access the BSD database library.</P>
+
+					<p>See <a hrEF="139.html">Chapter 8</A> for details.<A name="idx1073742937"></a><a name="idx1073742938"></a></p>
+
+				
+				<h4><tt class="monofont">whichdb</Tt></h4>
+					<P>The <tt cLass="monofont">whichdb</tT> module provides a function that guesses which <tt cLASS="monofont">dbm module</tt> (<tt CLASs="monofont">dbm,</tt>
+						<tT CLAss="monofont">gdbm,</tt> or <TT CLass="monofont">dbhash</tt>) should be used to open a specific database.</p>
+
+					<p>See <a href="139.html">Chapter 8</a> for details.</p>
+
+				
+				<h4><tt claSs="monofont">bsddb</tT></h4>
+					<p>The <tT clasS="monofont">bsddb</tt> module provides an interface to access routines from the Berkeley <tT CLAss="monofont">db</tt> library.</P>
+
+					<P>See <A Href="139.html">Chapter 8</a> for details.</P>
+
+				
+				<H4><TT clasS="monofont">zlib</TT></H4>
+					<p>The <tt class="monofont">zlib</tt> module provides functions that allow compression and decompression using the <tt class="monofont">zlib</tt> library. The compression that is provided by this module is compatible with <tT clAss="monofont">gzip.</tT></p>
+
+					<p>For more details check out the <tt ClasS="monofont">zlib</TT> library home page at <A targET="_blank" HRef="http://www.cdrom.com/pub/infozip/lib">http://www.cdrom.com/pub/infozip/lib</a>.</p>
+
+				
+				<H4><TT Class="monofont">gzip</TT></H4>
+					<P>The <tt class="monofont">gzip</tt> module offers support for <tt class="monofont">gzip</tt> files. This module provides functions that allow compression and decompression using the GNU compression program <tt ClaSs="monofont">gzip.</tt></P>
+
+					<p>This module has a class named <tt cLass="monofont">GzipFile</TT> that can be used to read and write files compatible with the GNU <TT clasS="monofont">gzip</TT> program. The objects that are generated by this class behave just like file objects. The only exception is that the <Tt claSS="monofont">seek</TT> and <tt clASS="monofont">tell</Tt> methods aren't part of the standard implementation.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import gzip
+&gt;&gt;&gt; gzipfile = gzip.GzipFile("backup.gz")
+&gt;&gt;&gt; contents = gzipfile.read()
+&gt;&gt;&gt; print contents
+
+					</pre>
+
+				
+				<h4><tt class="monofont"><a namE="idx1073742939"></a><a Name="idx1073742940"></A>rlcompleter</tt></h4>
+					<p>The <Tt clASS="monofont">rlcompleter</Tt> module provides a <a naME="idx1073742941"></A><A name="idx1073742942"></A><I>completion function</I> for the <Tt claSS="monofont">readline</TT> module.</p>
+
+					<p>The <tt class="monofont">readline</tt> module is a UNIX module that is automatically imported by <tt class="monofont">rlcompleter.</tt> It uses a compatible GNU readline library to activate input editing on UNIX.<A naMe="idx1073742943"></a><a Name="idx1073742944"></a></P>
+
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="75.html" title="Generic Operational System"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=76" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="76.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="77.html" title="Debugger"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742941">completion function</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742942">completion</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742933">Optional Operational System</a> <a href="#idx1073742937">2nd</a> <a href="#idx1073742943">3rd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742940">rlcompleter</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742932">signal</a> <a href="#idx1073742936">2nd</a><BR>
+ <a href="#idx1073742934">Optional Operational System library</a> <a href="#idx1073742938">2nd</a> <a href="#idx1073742944">3rd</a><BR>
+ <a href="#idx1073742939">rlcompleter module</a><BR>
+ <a href="#idx1073742931">signal module</a> <a href="#idx1073742935">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

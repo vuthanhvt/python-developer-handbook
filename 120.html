@@ -1,0 +1,96 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The Python/C API</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="117.html" class="navtitle">6. Extending and Embedding Python</a> &gt; <span class="nonavtitle">The Python/C API</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="119.html" title="Extending and Embedding Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=120" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="120.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="121.html" title="Extending"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A34%3A58+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147032037050251011120109</font><a href="read8.asp?bookname=0672319942&snode=120&now=5%2F31%2F2002+4%3A34%3A58+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>The Python/C API</h3>
+				<p>Python provides an intuitive and clean C Application Programmers Interface (API) that exposes the interface to the Python runtime system. This API provides a great number of functions to manipulate Python objects and built-in types from C and C++. Most of the functions work in much the same way as they would when called from the interpreter.</p>
+
+				<P>To <A NAme="idx1073743541"></a><a NAME="idx1073743542"></a>include this API in your C/C++ program, you just need to add the header <a naME="idx1073743543"></A><A name="idx1073743544"></a><a name="idx1073743545"></a><tt class="monofont">"&lt;Python.h&gt;"</tt> to your source code.</P>
+
+				<p>Internally, this header file includes both Python and <i>C</I> header files, including: <tt cLass="monofont">&lt;stdio.h&gt;, &lt;string.h&gt;, &lt;errno.h&gt;,</tT> and <tt cLASS="monofont">&lt;stdlib.h&gt;.</tt> Therefore, you don't need to include these again once you include <tt CLASs="monofont">"&lt;Python.h&gt;".</tt></p>
+
+				<BLOCkquoTE>
+<P><P>Python/C API Reference Manual (This link takes you to the official and latest documentation about the Python/C API.):</p>
+</p>
+<p><p><a target="_blank" href="http://www.python.org/doc/current/api/api.html">http://www.python.org/doc/current/api/api.html</a></p>
+</p>
+</blOckQuotE>
+				<p>Check <a hrEf="255.html">Appendix A, "Python/C API"</a>  of this book for more details and for a complete list of the interface functions provided by the Python/C API.<a NAME="idx1073743546"></a><a naME="idx1073743547"></A><A name="idx1073743548"></A><A NAme="idx1073743549"></a><a NAME="idx1073743550"></a><a name="idx1073743551"></a><a name="idx1073743552"></a><a name="idx1073743553"></a><a NamE="idx1073743554"></a><a nAme="idx1073743555"></a><a Name="idx1073743556"></A><A NAme="idx1073743557"></a><a NAME="idx1073743558"></a><a naME="idx1073743559"></A></P>
+
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="119.html" title="Extending and Embedding Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=120" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="120.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="121.html" title="Extending"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743543">Python.h header file</a><BR>
+adding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743542">Python/C Application Programmers Interface (API)</a><BR>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743549">extending and embedding</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743553">embedding Python objects in;Python/C Application Programmers Interface (API)</a><BR>
+C programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743556">extending and embedding Python</a><BR>
+C++ programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743558">extending and embedding Python</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python extension modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743546">Python/C Application Programmers Interface (API)</a><BR>
+embedding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743551">Python objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743547">Python/C Application Programmers Interface (API)</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;header<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743545">&lt;Python.h</a><BR>
+header files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743544">Python.h</a><BR>
+inserting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743541">Python/C Application Programmers Interface (API)</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743550">extending and embedding</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743552">embedding in non-Python applications;Python/C Application Programmers Interface (API)</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743557">extending and embedding Python</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743559">extending and embedding Python</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743554">embedding Python objects in;Python/C Application Programmers Interface (API)</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743548">extending and embedding</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743555">embedding Python objects in;Python/C Application Programmers Interface (API)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

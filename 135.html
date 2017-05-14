@@ -1,0 +1,77 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="128.html" class="navtitle">7. Objects Interfacing and Distribution</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="134.html" title="Distributing Objects with Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=135" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="135.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="136.html" title="Code Examples"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A38%3A01+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147044209059161205178171</font><a href="read0.asp?bookname=0672319942&snode=135&now=5%2F31%2F2002+4%3A38%3A01+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Summary</h3>
+				<p>This chapter explains how to use Python to interface objects from different applications on a single machine, and across networks through distributed systems. Python has very comprehensive support for object interfacing and distributing technologies.<a NAME="idx1073744816"></a><a naME="idx1073744817"></A><A name="idx1073744818"></A></P>
+
+				<P>COM is the most widely used component software model in the world when it comes to object interfacing. COM provides a rich set of integrated services, a wide choice of easy-to-use tools, and a large set of available applications.</P>
+
+				<p>The COM genealogy can be traced back to DDE (Dynamic Data Exchange). DDE was the first device for transferring data between various applications in Windows. After some time, DDE was expanded to Object Linking and Embedding (OLE). The creation of the Visual Basic Extensions (VBXs) enhanced the OLE technology for visual components, originating a new standard called OLE2. Soon, the OLE2 technology became COM, which is a general-purpose mechanism.</p>
+
+				<p>Many technologies, currently in the market, are COM-based. For example, we have ActiveX, OLE, OLEDB, ADO, and DirectX.</p>
+
+				<p>The entire set of information that belongs to a COM object is stored in the Windows Registry.</p>
+
+				<p>In order to implement COM interfaces with Python, you need to install the <tt class="monofont">win32com</tt> Python extensions developed by Mark Hammond. These extensions are part of the PythonWin installation.</p>
+
+				<p>The COM support for Python is made of the <tt ClaSs="monofont">PythonCOM</tt> module, which supports the C++ code, and other modules that implement helper code in Python. Known as <Tt claSs="monofont">win32com",</tt> this package provides support for COM client and COM server interfaces. The access to objects'methods and properties can be either by late or early binding.</P>
+
+				<P>PythonWin also comes with a COM browser (Python Object browser). This program helps you identify the objects currently running on your system that offer COM interfaces.<A Name="idx1073744819"></a><A NAMe="idx1073744820"></a><a nAME="idx1073744821"></A></p>
+
+				<p>Many kinds of software and languages, such as, Microsoft Word, Excel, Visual Basic, and Delphi provide ways to interoperate with COM objects. Therefore, as you can see in the examples of this chapter, it is very easy to "talk" to these objects.</p>
+
+				<p>In order to implement COM object using Python, you must design a Python class that exposes the functionality to be exported. This class must carry some special attributes that will uniquely identify the COM interface in your system. After elaborating the class, you need to register it. The operation is simple: It simply saves the class information in your Windows Registry. The option to unregister classes is also available.</P>
+
+				<P>Python can handle its many different types of objects across COM interfacing transactions perfectly well. Numbers, strings, core objects, lists, and tuples have implementations that handle their exposure to the interfaces.</P>
+
+				<P>Python has many projects currently being developed for object distribution models.</p>
+
+				<p>The Inter-Language Unification system (ILU) is a free and stable multi-language object interface system.</p>
+
+				<p>The Object Request Broker lets objects transparently make requests to—and receive from—other objects located locally or remotely. The ORB component is also commonly referred to as CORBA (Common Object Request Broker Architecture). omniORBpy is an almost complete implementation of the current Python/CORBA mapping.</p>
+
+				<p>Fnorb is an Object Request Broker (ORB) compliant with the CORBA 2.0 specification from the Object Management Group (OMG). Fnorb implements a single language mapping from OMG IDL to Python. This implementation is excellent for those who want to learn CORBA.</p>
+
+				<p>DCOM is the COM technology that distributes objects between different machines on the network. It defines a protocol that enables software components to communicate directly over a network in a reliable, secure, and efficient manner.</p>
+
+				<p>The Object Management Facility (OMF) is an object-oriented middleware environment for the process automation area. Even though it doesn't contain any Python code, it is heavily tested using Python scripts. The object model used by OMF is similar to other distributed object systems, such as OMG's CORBA and Xerox's ILU. OMF is implemented in C++, with APIs for other languages, including Python. Python API was originally designed for writing test programs, but has since been used to write various tools to aid in application development and runtime management.</p>
+
+				<p>Hector is a distributed object system developed at the University of Queensland, Australia. It is written almost entirely in Python. Hector attempts to provide application objects with a consistent environment, regardless of their physical location, through a series of transparencies.<a name="idx1073744822"></a><a nAme="idx1073744823"></A><a naMe="idx1073744824"></a></p>
+
+			</fOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="134.html" title="Distributing Objects with Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=135" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="135.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="136.html" title="Code Examples"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+distributing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744817">objects</a> <a href="#idx1073744820">2nd</a> <a href="#idx1073744823">3rd</a><BR>
+interfacing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744816">objects</a> <a href="#idx1073744819">2nd</a> <a href="#idx1073744822">3rd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744818">interfacing and distributing</a> <a href="#idx1073744821">2nd</a> <a href="#idx1073744824">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

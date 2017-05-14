@@ -1,0 +1,185 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Generating an Executable Python Bytecode</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="227.html" class="navtitle">17. Development Tools</a> &gt; <span class="nonavtitle">Generating an Executable Python Bytecode</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="232.html" title="Python Scripts"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=233" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="233.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="234.html" title="Interpreter"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A22%3A03+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218066183100094184026121</font><a href="read5.asp?bookname=0672319942&snode=233&now=6%2F1%2F2002+6%3A22%3A03+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+Generating an Executable Python Bytecode</h3>
+				<p>When loading a module, the Python interpreter first tries to load a byte-compiled version of the module (a <tT CLAss="monofont">.pyc</tt> or <TT CLass="monofont">.pyo</tT> bytecode file) from the system. If it doesn't find one, it automatically byte-compiles the module, and in case the permissions given to the user who is executing the command allow, a byte-compiled version of the module is saved in the disk for a later user. Note that it is a good idea to bytecompile all files before giving Python access to users who cannot save in that source directory. Otherwise, the interpreter has to byte-compile the module every time the module is loaded, which can slow down program startup considerably.</P>
+
+				<P>Even though a Python bytecode file can automatically be created when importing a module, you can manually create them whenever you need, as well. In order to explicitly byte-compile a source file (<Tt class="monofont">.py</tt>) to a <tt class="monofont">.pyc</tt> (or <tt cLasS="monofont">.pyo</tt>) bytecode file, you just need to execute the following code:</p>
+
+				<Pre>
+					
+import py_compile
+pycompile.compile("anyfilename.py")
+
+				</prE>
+
+				<p>As you can see, the <a nAME="idx1073750157"></A>
+					<a namE="idx1073750158"></A>
+					<TT clasS="monofont">py_compile</TT> module provides a function called <A name="idx1073750159"></A>
+					<A NAme="idx1073750160"></a>
+					<tt class="monofont">compile()</tt> that does all the jobs. The general <a name="idx1073750161"></a>syntax for this function is</p>
+
+				<pRe>
+					
+compile(file [, cfile] [, dfile])
+
+				</pRe>
+
+				<p>where,</p>
+
+				<P><tablE borDER="1" CellsPACIng="0" ceLLPAddinG="1" WIDth="100%">
+<colgroup align="left" span="2">
+<tR vaLign="top">
+<Td>
+<fonT sizE="2">
+									<TT Class="monofont">file</TT>
+								</FOnt></td>
+<TD>
+<FOnt siZE="2">source filename</FOnt></td>
+</tr>
+<tr valign="top">
+<td>
+<font SizE="2">
+									<tt cLass="monofont">cfile</tT>
+								</fonT></TD>
+<Td>
+<fonT SIZe="2">target filename; defaults to source with <tt cLASS="monofont">c</tt> or <tt CLASs="monofont">o</tt> appended (<tt class="monofont">c</tt> normally and <tt class="monofont">o</tT> in optimizing mode, giving <tt ClasS="monofont">.pyc</tt> or <tt ClasS="monofont">.pyo</TT>)</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+									<tt class="monofont">dfile</tt>
+								</font></td>
+<td>
+<foNt sIze="2">filename to store error messages (defaults to source) <a Name="idx1073750162"></a>
+									<A namE="idx1073750163"></A>
+									<A Name="idx1073750164"></a>
+									<A NAMe="idx1073750165"></a>
+									<a nAME="idx1073750166"></A>
+								</font></TD>
+</TR>
+</colgroup>
+</table></p>
+
+				<p>The <a name="idx1073750167"></A>
+					<a nAme="idx1073750168"></a>
+					<Tt claSs="monofont">compileall</tt> module can be used either as a script or as a module. It uses the <TT CLass="monofont">py_compile</tT> module to byte-compile all installed files (or all files in selected directories).</P>
+
+				<P>The following example compiles all files from the current directory:</P>
+
+				<pre>
+					
+import compileall.py
+compileall.compile_dir(".", force=1)
+
+				</pRE>
+
+				<P>You can also use this module as a script, passing arguments to it. The <A name="idx1073750169"></A>
+					<A NAme="idx1073750170"></a>
+					<a name="idx1073750171"></a>syntax for usage as a script is as follows:</p>
+
+				<pre>
+					
+python compileall [-l] [-f] [-d destdir] [directory ...]
+
+				</pre>
+
+				<p>where,</p>
+
+				<p><tAblE borDer="1" ceLlspACINg="0" celLPADding="1" WIDTh="100%">
+<colGROUp align="left" span="2">
+<tr valign="top">
+<td>
+<FonT sizE="2">
+									<tt clAss="monofont">-l</tT>
+								</FONt></td>
+<tD>
+<FONt sizE="2">avoids recursing into directories</FONt></td>
+</tR>
+<TR Valign="top">
+<td>
+<font size="2">
+									<tt claSs="monofont">-f</tT>
+								</fonT></td>
+<td>
+<Font SIZE="2">forces rebuild even if timestamps are up-to-date</font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<foNT SIze="2">
+									<tt class="monofont">-d destdir</tt>
+								</font></td>
+<td>
+<fOnt Size="2">directory to store the error messages</Font></tD>
+</tr>
+</cOLGRoup>
+</tABLE></p>
+
+				<p>The script reads the directories that are informed as arguments and compiles all the files that it finds there. If no directory arguments are given, the routine uses the <a nAME="idx1073750172"></A>
+					<a namE="idx1073750173"></A>
+					<TT class="monofont">sys.path</tt> variable.</p>
+
+				<p>Note that the current version doesn't recur down into subdirectories of a package. Another implementation detail is that it only recurs into the maximum number of 10 levels. (This number is hard coded in the module's code.) Also note that to generate both <tt class="monofont">.pyc</tt> and <tt ClaSs="monofont">.pyo</tt> files, you will need to run Python twice—once without the <Tt claSs="monofont">-O</tt> flag and once with it.<A NAMe="idx1073750174"></a>
+					<a nAME="idx1073750175"></A>
+					<a namE="idx1073750176"></A>
+				</P>
+
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="232.html" title="Python Scripts"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=233" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="233.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="234.html" title="Interpreter"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+byetcode<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executable<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750176">generating</a><BR>
+ <a href="#idx1073750159">compile() function</a> <a href="#idx1073750164">2nd</a><BR>
+ <a href="#idx1073750167">compileall module</a><BR>
+executable bytecode<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750175">generating</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750160">compile()</a> <a href="#idx1073750165">2nd</a><BR>
+generating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750174">executable bytecode</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750168">compileall</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750158">py_compile</a> <a href="#idx1073750163">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750170">scripts as</a><BR>
+ <a href="#idx1073750157">py_compile module</a> <a href="#idx1073750162">2nd</a><BR>
+scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750171">modules as</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750161">compile() function</a> <a href="#idx1073750166">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750169">modules as scripts</a><BR>
+ <a href="#idx1073750172">sys.path variable</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750173">sys.path</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

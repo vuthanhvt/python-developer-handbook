@@ -1,0 +1,287 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Tkinter</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="206.html" class="navtitle">15. Tkinter</a> &gt; <span class="nonavtitle">Tkinter</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="208.html" title="Introduction to Tcl/Tk"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=209" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="209.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="210.html" title="Geometry Management"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A48%3A28+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148036103057115031227152</font><a href="read9.asp?bookname=0672319942&snode=209&now=5%2F31%2F2002+4%3A48%3A28+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Tkinter</h3>
+				<p>As you saw in the previous chapter, other options exist for GUI projects using Python. However, at this moment, Python has chosen to support Tkinter as its official GUI implementation.</p>
+
+				<P>Tkinter is a standard object-oriented interface to the Tk GUI API, which was originally written by <A NAme="idx1073748332"></a>Steen Lumholdt when he was in need for improving his GUI work with Python. In this chapter, you will see how easy it is to subclass Tk widgets using Python's facilities. Some say that it is even easier than when using Tcl's <i>capabilities.</I>
+				</P>
+
+				<P>Don't worry. You don't need to know a thing about Tcl before start learning Tkinter—the only possible case is if you need to go through the Tcl/Tk documentation.</P>
+
+				<p>Tkinter is a mature cross-platform interface that provides a small set of basic widgets for your GUI applications. But this doesn't mean that you need to get stuck on that set. Tkinter is extensible, which means that you can use third-party widget packages as well. A <i>Widget</i> is a user interface element, such as a <i>list box</I> or a <I>radio button.</I>
+				</P>
+
+				<p>The only possible disadvantage of using Tkinter is the fact that it uses Tcl to make the calls to Tk. This middle step can slow down some programs.</p>
+
+				<p>The Tkinter toolkit is a powerful GUI framework that allows Python programs to work on Windows, UNIX, and Macintosh platforms. The main difference between Tkinter and other toolkits is the portability issue. Almost all other toolkits are good in some specific systems only. For example, KDE bindings (Linux), Pythonwin/MFC (Windows), and Mac toolbox bindings (Macs) are GUI implementations that provide support only for a specific platform. On the other hand, Tkinter allows you to write code that can run in many platforms without a single change.</p>
+
+				<p>Tkinter proves that the interface design of an application can be created separate from the application's business routines. When you choose Tkinter to be your GUI environment, you basically have to worry about where to put the right widgets and how to perfectly design your application. Another feature that it provides is a set of geometry management functions available to help you arrange the widgets all around the interface. After you finish with the visual design, you just need to bind the widget actions to the specific functions that you need to call, and <i>voil´a!</i> Your graphical interface is ready.<a name="idx1073748333"></a>
+					<a name="idx1073748334"></a>
+					<a NamE="idx1073748335"></a>
+					<a nAme="idx1073748336"></a>
+				</p>
+
+				<P>Tkinter enables you to handle buttons and windows and define their properties in a glance. After designing and implementing your interface, it is possible to change the business functions of your application without changing one line of your GUI code. Isn't it great?</p>
+
+				<p>Some time ago, there wasn't almost any documentation available for Tkinter. However, since it became the standard Python GUI, a lot of material has been released about this toolkit. See the resources section at the end of this chapter for details.</p>
+
+				
+					<H4>
+Checking the Installation</H4>
+					<P>Beginning with version 1.5.2, Tkinter has become part of the Windows binary distribution. Tkinter has been included with most UNIX distribution for a long time. The Tkinter package contains all necessary classes, constants, and functions that are required to wrap and use the Tk toolkit.</P>
+
+					<p>If you are running Microsoft <a naME="idx1073748337"></A>Windows, the Python installer for Windows (version 1.5.2) comes with the version 8.0.5 of the Tcl/Tk installer. The same thing goes to <I>Mac users.</i>
+					</p>
+
+					<p>If you are running any <a NAME="idx1073748338"></a>UNIX system, you must download, build, and install both Tcl and Tk from the source. You can download the files from <a taRGET="_blank" href="http://dev.scriptics.com/software/tcltk/8.0.html">http://dev.scriptics.com/software/tcltk/8.0.html</a>. Follow the instructions contained in the README files, and the process should be very simple; that is, if you don't already have it installed (which most free UNIX-like systems do these days).</p>
+
+					<p>If for some reason, your need to download the latest version of Tcl/Tk, the files are available at <a target="_blank" href="http://dev.scriptics.com/">http://dev.scriptics.com/</a>. As I said before, depending on your platform, you can get binaries instead of downloading and compiling the source code.</p>
+
+					<P>Once you have Tkinter running in your system, you will find a low-level interface module called <a nAme="idx1073748339"></a>
+						<A name="idx1073748340"></A>
+						<tt cLASS="monofont">_tkinter</tt> that can be a DLL, a shared library, or statically linked to your interpreter; it all depends on your system. Note that <tt CLASs="monofont">_tkinter</tt> is mainly just a Python interface to the Tcl interpreter. On top of this low-level module, you have the <tT CLAss="monofont">Tkinter</tt> module, which is more readable, and is written in 100% pure Python. This module is the main module of the Tkinter package, and it imports a lot of other helper modules when it is imported, including <TT CLass="monofont">Tkconstants.</tt>
+						<a name="idx1073748341"></a>
+						<a name="idx1073748342"></a>
+						<a naMe="idx1073748343"></a>
+						<A namE="idx1073748344"></a>
+					</p>
+
+					<p>Sometime ago, Windows users who had problems involving multiple copies of the Tcl/Tk DLLs floating around the system needed to have special attention when installing Tcl/Tk. Now, they can rest on <a Name="idx1073748345"></A>
+						<A NAme="idx1073748346"></a>
+						<a NAME="idx1073748347"></a>
+						<i>fixtk,</i> which is a utility that tries to locate the Tcl/Tk 8.0 DLLs on Windows systems.<a NAME="idx1073748348"></a>
+					</p>
+
+				
+				
+					<h4>
+
+
+
+Hello Python World</h4>
+					<P>Now that you have your Tkinter installation ready to go, you just need to import the Tkinter module to start playing around with your system.</P>
+
+					<P>If you are using Windows, I suggest that you <A name="idx1073748349"></a>
+						<a name="idx1073748350"></a>
+						<a name="idx1073748351"></a>save files with the <a naMe="idx1073748352"></a>
+						<A namE="idx1073748353"></a>
+						<tt cLass="monofont">.pyw</TT> extension in order to have it executed by <TT clasS="monofont">pythonw.exe,</TT> which doesn't open the interpreter console. On the other hand, if you decide to keep the <Tt claSS="monofont">.py</TT> extension, your GUI scripts will be executed by the command line interpreter (<tt clASS="monofont">python.exe</Tt>), which opens a DOS console.</p>
+
+					<p>The next program implements a simple Hello Python World example.</p>
+
+					<pre>
+						
+import Tkinter
+import sys
+win = Tkinter.Tk()
+b = Tkinter.Button(win, text="Hello Python World!",command=sys.exit)
+b.pack()
+win.mainloop()
+
+					</pre>
+
+					<p>Note that we only use the <a name="idx1073748354"></a>
+						<a naMe="idx1073748355"></a>
+						<Tt clAss="monofont">Tk()</tt> method to create the main window for the application. To run this program, just call the script as you usually do with any other script. To quit the program, you just need to close the window. <A hreF="209#3.html">Figure 15.1</A> shows how this program looks in a Window system. Remember that other windows can be created as Toplevels.<A Name="idx1073748356"></a>
+						<A NAMe="idx1073748357"></a>
+						<a nAME="idx1073748358"></A>
+						<a namE="idx1073748359"></A>
+					</P>
+
+					<Center>
+						<h5>
+<a name="3"></a>Figure 15.1. This figure shows a Tkinter implementation of the standard Hello World example.</h5>
+						
+							
+								<img bordEr="0" wIdth="100" HeighT="48" src="graphics/15fig01.gif" ALT="graphics/15fig01.gif">
+							
+						
+					</CenteR>
+
+					<P>The next example uses a convenient way to load the Tkinter module <A Name="idx1073748360"></a>
+						<A NAMe="idx1073748361"></a>
+						<a nAME="idx1073748362"></A>(<tt class="monofont">from Tkinter import *</tt>). Because this module only exposes names that are associated to GUI objects (such as button and Frame), you don't need to worry that much about namespace conflicts with your applications, and it becomes easier to read the code. Another feature shown in this example is that we can use a <tt class="monofont">Toplevel</tt> instance instead of a <tt ClaSs="monofont">Tk</tt> instance to store other widgets.</P>
+
+					<pre>
+						
+from Tkinter import *
+root = Tk()
+win = Toplevel(root)
+win.pack()
+Label(win, text= "Hello Python World" ).pack(side=TOP)
+Button(win, text="Close", command=win.quit).pack(side=RIGHT)
+win.mainloop()
+
+					</pRe>
+
+					<p>You could have used <tT CLAss="monofont">win = Frame()</tt> instead of <TT CLass="monofont">win.Toplevel(root).</tT> However, given that a frame acts differently depending on whether it has a parent or not (either a toplevel or just a widget to help with packing), this wouldn't be such a good idea.</P>
+
+					<P>
+						<A href="209#4.html">Figure 15.2</A> shows how this code looks when it is executed.</P>
+
+					<CEnter>
+						<h5>
+<a name="4"></a>Figure 15.2. This figure shows a small variation of the previous Hello World example.</h5>
+						
+							
+								<img bordeR="0" wiDth="94" hEight="64" Src="graphics/15fig02.gif" aLT="graphics/15fig02.gif">
+							
+						
+					</CEnter>
+
+					<P>OK, now let's see what is really happening in both examples. First, we have to import the <TT Class="monofont">Tkinter</TT> module. Then, we have to create a widget to hold the other objects. (In the first example we used a top-level window by calling the <A Name="idx1073748363"></a>
+						<A NAMe="idx1073748364"></a>
+						<tt class="monofont">Tk()</tt> method and in the second one we used an instance of the <tt class="monofont">Toplevel</tt> widget). Creating another <Tt cLass="monofont">Tk()</Tt> instance is really starting up another instance of Tk—it is less expensive to create a <tt cLass="monofont">Toplevel.</TT>
+					</P>
+
+					<P>When we have a background, we can start adding widgets to it. In the first example, we added a single button, and in the second one, we added two widgets: a label and a button.</p>
+
+					<p>You don't necessarily <a nAME="idx1073748365"></A>
+						<a namE="idx1073748366"></A>
+						<A Name="idx1073748367"></a>associate a widget with its toplevel—you associate it with its parent widget (if you are adding a Button to a Frame that is a child of a Toplevel, you would pass the frame as the first argument). It is also necessary to <A NAMe="idx1073748368"></a>
+						<a name="idx1073748369"></a>pack the widgets in order to display them in the window. This last process is part of a concept called <a name="idx1073748370"></a>geometry management, which is used to manage the position and layout of widgets.<a name="idx1073748371"></a>
+						<A naMe="idx1073748372"></a>
+						<a Name="idx1073748373"></a>
+						<A namE="idx1073748374"></A>
+						<A Name="idx1073748375"></a>
+						<A NAMe="idx1073748376"></a>
+						<a nAME="idx1073748377"></A>
+						<a namE="idx1073748378"></A>
+					</P>
+
+					<P>Both examples demonstrate how you can bind actions to the events that can occur in your widget. Here, we are using a specific <a name="idx1073748379"></a>
+						<a name="idx1073748380"></a>attribute called <i>command</i> for this purpose. You can use keyword arguments to transport several attributes and their values to a widget, which is a simple way to handle multiple attributes.</p>
+
+					<p>The last thing that we need to do is to start an <a namE="idx1073748381"></a>
+						<a Name="idx1073748382"></A>
+						<a namE="idx1073748383"></a>event loop. Note that the application only appears when you start the loop engine. Regular Python scripts are executed top to bottom, and when the last line of code is executed, the program quits. We don't want this kind of behavior in a GUI application. Therefore, we need to call the <a nAME="idx1073748384"></A>
+						<a namE="idx1073748385"></A>
+						<TT clasS="monofont">mainloop()</TT> method of the top-level window of our application. This method keeps the GUI indefinitely running until the window is closed. This loop is responsible for redrawing the window widgets whenever it becomes necessary, for handling events (such as key presses and mouse clicks), and for managing Tkinter operations, such as all the geometry management functions.<A name="idx1073748386"></A>
+						<A NAme="idx1073748387"></a>
+						<a name="idx1073748388"></a>
+						<a name="idx1073748389"></a>
+						<a name="idx1073748390"></A>
+						<a nAme="idx1073748391"></a>
+						<A name="idx1073748392"></A>
+						<a naME="idx1073748393"></A>
+					</P>
+
+					<p>Note that the version of Tkinter<a naME="idx1073748394"></A>
+						<A name="idx1073748395"></A>
+						<A NAme="idx1073748396"></a>
+						<a NAME="idx1073748397"></a> shipped along with Python 2.0 also provides support for Unicode characters because Tkinter is now able to display Unicode string in Tk widgets. Talking about Python 2.0, Tkinter had some optimizations done in order to make some operations much faster. It is also good to mention that the support for Tcl/Tk 7.X versions has been dropped in this latest release.</p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="208.html" title="Introduction to Tcl/Tk"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=209" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="209.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="210.html" title="Geometry Management"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+(from Tkinter import *) module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748362">loading</a><BR>
+ <a href="#idx1073748352">.pyw extension</a><BR>
+ <a href="#idx1073748339">_tkinter module</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello World<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748376">Tkinter</a> <a href="#idx1073748391">2nd</a><BR>
+associating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748365">widgets with toplevels</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748380">command</a><BR>
+characters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unicode<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748397">Tkinter module</a><BR>
+ <a href="#idx1073748379">command attribute</a><BR>
+event loops<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748382">starting</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748353">.pyw</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;saving<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748350">Tkinter</a><BR>
+ <a href="#idx1073748345">fixtk utility</a><BR>
+ <a href="#idx1073748370">geometry management</a><BR>
+graphical user interfaces (GUIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748334">Tkinter</a> <a href="#idx1073748342">2nd</a> <a href="#idx1073748357">3rd</a> <a href="#idx1073748372">4th</a> <a href="#idx1073748387">5th</a><BR>
+Hello World program<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748375">Tkinter</a> <a href="#idx1073748390">2nd</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748348">Tkinter</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphical user (GUI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748335">Tkinter</a> <a href="#idx1073748343">2nd</a> <a href="#idx1073748358">3rd</a> <a href="#idx1073748373">4th</a> <a href="#idx1073748388">5th</a><BR>
+loading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748360">(from Tkinter import *) module</a><BR>
+loops<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;event<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748383">starting</a><BR>
+ <a href="#idx1073748332">Lumholdt, Steen</a><BR>
+ <a href="#idx1073748384">mainloop() method</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748385">mainloop()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748355">Tk()</a> <a href="#idx1073748364">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(from Tkinter import *)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748361">loading</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748340">_tkinter</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748336">Tkinter</a> <a href="#idx1073748344">2nd</a> <a href="#idx1073748359">3rd</a> <a href="#idx1073748374">4th</a> <a href="#idx1073748389">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748395">Unicode characters</a><BR>
+packing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748368">widgets</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello World<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748377">Tkinter</a> <a href="#idx1073748392">2nd</a><BR>
+saving files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748349">Tkinter</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hello World<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748378">Tkinter</a> <a href="#idx1073748393">2nd</a><BR>
+starting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748381">event loops</a><BR>
+ <a href="#idx1073748354">Tk() method</a> <a href="#idx1073748363">2nd</a><BR>
+ <a href="#idx1073748333">Tkinter module</a> <a href="#idx1073748341">2nd</a> <a href="#idx1073748356">3rd</a> <a href="#idx1073748371">4th</a> <a href="#idx1073748386">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748394">Unicode characters</a><BR>
+tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748347">fixtk</a><BR>
+toplevels<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748367">associating widgets with</a><BR>
+Unicode characters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748396">Tkinter module</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748338">installing Tkinter</a><BR>
+utilities<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748346">fixtk</a><BR>
+widgets<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748366">associating with toplevels</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748369">packing</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748337">installing Tkinter</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748351">saving files, Tkinter</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

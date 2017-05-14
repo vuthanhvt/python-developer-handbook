@@ -1,0 +1,622 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Data Structures</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Data Structures</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="30.html" title="Control Statements"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=31" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="31.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="32.html" title="Functions and Procedures"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A19%3A40+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145080038235019135135235</font><a href="read1.asp?bookname=0672319942&snode=31&now=5%2F31%2F2002+4%3A19%3A40+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Data Structures</h3>
+				<p>Python implements a variety of data structures, such as lists, tuples, ranges, and dictionaries (also known as <tT CLAss="monofont">hash tables</tt>).</P>
+
+				
+					<H4>
+				Lists</H4>
+					<P>Lists are mutable sequences of objects indexed by natural numbers that can be changed after they are created.</p>
+
+					<p>Lists are very flexible and easy to create. They are always enclosed in brackets:</p>
+
+					<pRE>
+						
+&gt;&gt;&gt; lst = [1,2,3,4]  # this is simple list
+
+					</PRe>
+
+					<p>A list can have elements of different data types:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; lst = [1, "ni!", 2]
+
+					</pre>
+
+					<p>Lists can also include other lists:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; lst = [1, "ni!", [1,2,"Albatross!!"]]
+
+					</pre>
+
+					<p>A list uses the same <a nAme="idx1073742414"></A>operators that <tt cLass="monofont">strings</tT> use. For example, you need to use slice notation to grab a range of elements from a list.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; lst = [1, "ni!", [1, 2, 3, 4, "Albatross!!", 3]]
+&gt;&gt;&gt; lst[1]
+"ni!"
+
+					</PRE>
+
+					<p>To grab elements from lists that are located inside other lists, you need to use a pair of brackets to represent each list. Check out the next couple of examples.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; lst = [1, "ni!", [1, 2, 3, 4, "Albatross!!", 3]]
+&gt;&gt;&gt; lst[2][4]
+"Albatross!!"
+&gt;&gt;&gt; lst[2][4][5]
+"r"
+
+					</PRE>
+
+					<p>Let's see some examples of operations that can be applied to a list.<a naME="idx1073742415"></A>
+						<A name="idx1073742416"></A>
+						<A NAme="idx1073742417"></a>
+					</p>
+
+					
+						<h5>Identifying an Entry</h5>
+						<pre>
+							
+&gt;&gt;&gt; lst = ["p", "a", "r", "r", "o", "t"]
+&gt;&gt;&gt; lst.index("o")
+4
+
+						</pre>
+
+					
+					
+						<h5>Assigning Values to a List</h5>
+						<pre>
+							
+&gt;&gt;&gt; lst = ["p", "a", "r", "r", "o", "t"]
+&gt;&gt;&gt; lst[1] = "aaaaaaaaaaaaa"
+&gt;&gt;&gt; lst
+["p", "aaaaaaaaaaaaa", "r", "r", "o", "t"]
+
+						</pre>
+
+					
+					
+						<H5>Assigning Values to a Slice</h5>
+						<pRe>
+							
+&gt;&gt;&gt; lst = ["p", "a", "r", "r", "o", "t"]
+&gt;&gt;&gt; lst[1:4] = ["aaaaaaaaaaaaa", "rrr", "rrrr"]
+&gt;&gt;&gt; lst
+["p", "aaaaaaaaaaaaa", "rrr", "rrrr", "o", "t"]
+
+						</prE>
+
+					
+					
+						<h5>Inserting Values</h5>
+						<p>The following example starts inserting values at index number <tT claSS="monofont">6.</TT>
+						</p>
+
+						<pre>
+							
+&gt;&gt;&gt; lst = ["p", "a", "r", "r", "o", "t"]
+&gt;&gt;&gt; lst[6:] = [" ", "s", "k", "e", "t", "c", "h"]
+['p', 'a', 'r', 'r', 'o', 't', '', 's', 'k', 'e', 't', 'c', 'h']
+
+						</PRE>
+
+						<P>If the list was longer than 6 elements, the statement would overwrite a portion of the list. Note that you can also insert a value in this list with</p>
+
+						<pre>
+							
+&gt;&gt;&gt; lst.insert(6, val)
+
+						</PRE>
+
+					
+					
+						<H5>Deleting a Value</h5>
+						<pre>
+							
+&gt;&gt;&gt; lst = ["p", "a", "r", "r", "o", "t"]
+&gt;&gt;&gt; del lst[-1]
+&gt;&gt;&gt; lst
+["p", "a", "r", "r", "o"]
+&gt;&gt;&gt; del lst[0:2]
+["r", "r", "o"]
+
+						</PRE>
+
+						<P>The following example converts objects to their string representation:<a name="idx1073742418"></a>
+							<a name="idx1073742419"></a>
+							<a name="idx1073742420"></a>
+						</p>
+
+						<pRe>
+							
+&gt;&gt;&gt; lst = [10,20,30,"inquisition","lumberjack"]
+&gt;&gt;&gt; text = ""
+&gt;&gt;&gt; for element in lst:
+…     text = text + `element`
+…     # enables the concatenation of any object
+…     print text
+…
+10
+1020
+102030
+102030'inquisition'
+102030'inquisition''lumberjack'
+					
+						</pRe>
+
+					
+					
+						<h5>List Comprehension</h5>
+						<P>Starting with release 2.0, there<a namE="idx1073742421"></a> is a new notation to create lists whose elements are computed from another list (or lists). The method is called List Comprehension, and it adopts the following format:</p>
+
+						<pRE>
+							
+[ <I>expression</I> for <i>expression1</i> in <i>sequence1</i>
+              [for <I>expression2</I> in <I>sequence2</I>]
+              [<i>…</i> for <i>expressionN</i> in <I>sequenceN</I>]
+              [if <I>condition</I>] ]
+
+						</pre>
+
+						<p>All <TT CLass="monofont">for…in</tt> clauses are evaluated and iterated from left to right. That means that the resulting list is a cartesian product of the given sequences. For example, if you have three lists of length 5, the output list has 125 elements. The <tt class="monofont">if</tt> clause is optional, but when present, it can limit the number of pairs that will become part of the resulting list by adding pairs to the resulting list only when the result condition of the <tt clasS="monofont">if</tt> statement evaluates to true. Check the following example:</P>
+
+						<pre>
+							
+letters = 'py'
+numbers = (1.52, 1.6, 2.0)
+&gt;&gt;&gt; [ (l,n) for l in letters for n in numbers]
+[('p', 1.52), ('p', 1.6), ('p', 2.0), ('y', 1.52), ('y', 1.6),
+('y', 2.0)]
+
+						</Pre>
+
+						<p>This new concept is more efficient than a <tT claSS="monofont">for</TT> loop with an <tt clASS="monofont">if</Tt> statement along with a <tt cLASS="monofont">list.append()</tt> function<a nAME="idx1073742422"></A> call.</p>
+
+					
+				
+				
+					<h4>
+				
+				Built-In Methods</h4>
+					<p>To list all the <tt class="monofont">built-in</tt> methods of a list, go to the interpreter and type <b>
+							<tt clasS="monofont">dir([]).</tt>
+						</B>
+					</p>
+
+					<p>Let's practice the methods that you have found, and see what happens to our list <tT clasS="monofont">lst.</tt>
+					</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; lst = [0, 1, 2]
+&gt;&gt;&gt; lst.append(5)         # appends the element 5 to the list
+&gt;&gt;&gt; lst
+[0, 1, 2, 5]
+&gt;&gt;&gt; lst.append((5, 6))    # appends the tuple (5, 6)
+&gt;&gt;&gt; lst
+[0, 1, 2, 5, (5, 6)]
+&gt;&gt;&gt; lst.pop()             # removes the last element of the list
+(5, 6)
+&gt;&gt;&gt; lst
+[0, 1, 2, 5]
+&gt;&gt;&gt; lst.insert(2,7)       # inserts the element 7 at index number 2
+&gt;&gt;&gt; lst
+[0, 1, 7, 2, 5]
+&gt;&gt;&gt; lst.pop(2)            # removes the element at index number 2
+7
+&gt;&gt;&gt; lst
+[0, 1, 2, 5]
+&gt;&gt;&gt; lst.reverse()         # reverse the list order
+&gt;&gt;&gt; lst
+[5, 2, 1, 0]
+&gt;&gt;&gt; lst.sort()            # sorts the list elements
+&gt;&gt;&gt; lst
+[0, 1, 2, 5]
+&gt;&gt;&gt; lst.extend([3, 4, 5]) # adds this list to our original list
+&gt;&gt;&gt; lst
+[0, 1, 2, 5, 3, 4, 5]
+&gt;&gt;&gt; lst.count(5) # counts the number of elements number 5 that exist.
+2
+&gt;&gt;&gt; lst.index(3) # returns the associated index of element 3.
+4
+&gt;&gt;&gt; lst.remove(2) # removes the element number 2 (not the index!!!)
+&gt;&gt;&gt; lst
+[0, 1, 5, 3, 4, 5] 
+				
+					</Pre>
+
+					<p>Note that up to release 1.5.2, whenever <a NAME="idx1073742423"></a>
+						<a naME="idx1073742424"></A>
+						<A name="idx1073742425"></A>you used <TT Class="monofont">lst.append (1,2),</tt> a tuple <tt class="monofont">(1,2)</tt> would be appended to the list <tt claSs="monofont">lst.</tT> Now, with release 2.0, when you do that, you get an <tt cLass="monofont">TypeError</tT> exception followed by a  message like "
+							<tt cLASS="monofont">append requires exactly 1 argument; 2 given</tt>
+						". Don't panic! To fix that, you just need to add an extra pair of parenthesis, like this: <tt CLASs="monofont">lst.append ((1,2)).</tt>
+					</p>
+
+				
+				
+					<H4>
+				
+				
+				
+				Ranges</H4>
+					<P>A range is an actual list of integers. The <Tt claSS="monofont">built-in</TT> function <tt class="monofont">range()</tt> provides this data structure.<a name="idx1073742426"></a>
+						<a name="idx1073742427"></A>
+					</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; r = range(2,5)
+&gt;&gt;&gt; print r
+[2,3,4]
+
+					</prE>
+
+					<p>When the first <a naMe="idx1073742428"></a>argument is left out, it is assumed to be zero.</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; r = range(3)
+&gt;&gt;&gt; print r
+[0,1,2]
+
+					</Pre>
+
+					<p>When you provide a third argument to the <tT CLAss="monofont">range()</tt> function, you specify the interval that you want to exist between the list elements.</P>
+
+					<PRE>
+						
+&gt;&gt;&gt; r = range(2,10,2)
+&gt;&gt;&gt; print r
+[2, 4, 6, 8]
+
+					</pre>
+
+					<p>Let's see an example of <A NAMe="idx1073742429"></a>
+						<a name="idx1073742430"></a>stepping backward:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; r = range(5,1,-1)
+&gt;&gt;&gt; print r
+[5, 4, 3, 2]
+
+					</pre>
+
+					<p>The <a namE="idx1073742431"></a>
+						<a Name="idx1073742432"></A>
+						<tt clAss="monofont">xrange()</tT> function computes the values only when they are accessed. This function returns an <TT Class="monofont">XrangeType object,</TT> instead of storing a large list of numbers in a variable.</P>
+
+					<Pre>
+						
+&gt;&gt;&gt; for n in xrange(10):
+…          print n,
+…
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+					</prE>
+
+					<P>The previous example also works with the <TT clasS="monofont">range()</TT> function, although it will store the whole list in memory.</P>
+
+					<p>It is possible to assign a reference to the return value of the <tt class="monofont">xrange()</tt> function to a variable, as you will see next. Note that we are <i>not</i> storing the values, only a reference to the function.<a name="idx1073742433"></a>
+						<a nAme="idx1073742434"></A>
+					</p>
+
+					<prE>
+						
+&gt;&gt;&gt; lst = xrange(10)
+&gt;&gt;&gt; lst
+(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+					</pre>
+
+					<p>However, you can <A namE="idx1073742435"></A>
+						<A Name="idx1073742436"></a>
+						<A NAMe="idx1073742437"></a>convert this reference later into a real list by using the <a nAME="idx1073742438"></A>
+						<a namE="idx1073742439"></A>
+						<TT class="monofont">tolist()</tt> method.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; lst.tolist()
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9] 
+				
+					</pre>
+
+				
+				
+					<h4>
+				Tuples</h4>
+					<p>A tuple is a sequence of immutable Python objects.</p>
+
+					<p>The general <a NamE="idx1073742440"></a>syntax of a tuple is as follows:</p>
+
+					<pRe>
+						
+variable = (element1, element2, …)
+
+					</pre>
+
+					<P>It looks like a list without the brackets. Note in the following examples that parentheses are optional.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; t = (1,)
+&gt;&gt;&gt; print t
+(1,)
+&gt;&gt;&gt; t = 1,
+&gt;&gt;&gt; print t
+(1,)
+&gt;&gt;&gt; t = ()        # this is an empty tuple.
+&gt;&gt;&gt; print t
+()
+&gt;&gt;&gt; t = (1,2,3)
+&gt;&gt;&gt; print t
+(1,2,3)
+&gt;&gt;&gt; t = 1,2,3
+&gt;&gt;&gt; print t
+(1,2,3)
+				
+					</PRE>
+
+					<p>Note that in the previous example, it is necessary to use the comma when defining a length-1 tuple. Otherwise, the variable being created wouldn't be defined as of type tuple. Instead, the interpreter would think that you wanted to assign a numeric value to the variable.</p>
+
+					<p>A tuple really looks like a list. The difference between <a NAME="idx1073742441"></a>tuples and lists is that tuples are immutable.</p>
+
+					<p>You can bypass this rule if you bind a new structure to the old tuple variable.<a NAME="idx1073742442"></a>
+						<a naME="idx1073742443"></A>
+						<A name="idx1073742444"></a>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; t = 10,15,20
+&gt;&gt;&gt; t = t[0],t[2]
+&gt;&gt;&gt; t
+(10,20)
+
+					</pre>
+
+					
+						<h5>Other Interesting Facts About Tuples</h5>
+						<ul>
+<li>
+								<p>
+									<a NamE="idx1073742445"></a>
+									<a nAme="idx1073742446"></a>They support indexing.</p>
+
+								<Pre>
+									
+&gt;&gt;&gt; t = 10,20,30,40
+&gt;&gt;&gt; print t[1]
+20
+
+								</pRE>
+
+							</LI>
+<li>
+								<p>You will see, later in this chapter, that you need to use tuples whenever you need to <a NAME="idx1073742447"></a>
+									<a naME="idx1073742448"></A>
+									<A name="idx1073742449"></A>return more than one value from a function.</P>
+
+								<PRe>
+									
+&gt;&gt;&gt; Def tuplefunction():
+…            return 10, 20, 30
+…
+&gt;&gt;&gt; x, y, z = tuplefunction()
+&gt;&gt;&gt; print x, y, z
+10 20 30
+							
+								</pre>
+
+							</li>
+</ul>
+					
+				
+				
+					<h4>
+				
+				
+				Dictionaries (<tt class="monofont">hash tables</tt>)</h4>
+					<p>Dictionaries illustrate the only mapping type of Python. They represent finite sets of objects indexed by nearly arbitrary values. I say <I>nearly</i> because dictionary keys cannot be variables of mutable type, which are compared by value rather than by object identity.</p>
+
+					<P>Python dictionaries are also known as <tt cLass="monofont">associative arrays</tT> or <tt cLASS="monofont">hash tables.</tt> The general syntax of a dictionary is as follows:</p>
+
+					<pRE>
+						
+variable = {"<I>key1</I>":"<i>value1</i>", "<i>key2</i>":"<I>value2</I>", …}
+
+					</PRe>
+
+					<p>Dictionaries are always enclosed in braces. They associate <tt CLASs="monofont">key</tt> elements with <tt class="monofont">value</tt> elements—keys and values are displayed separated by a colon.</p>
+
+					<p>The values of a dictionary can be of any type, but the keys must be of an immutable data type (such as strings, numbers, or tuples). Dictionary keys have no natural order and are always listed in arbitrary order because it uses a <tt clasS="monofont">hash</tt> technique to implement a fast lookup.</P>
+
+					<p>Let's focus now on the operations that we can implement with dictionaries. First, let's <a nAme="idx1073742450"></a>create a simple dictionary.<a Name="idx1073742451"></A>
+						<A NAme="idx1073742452"></a>
+						<a NAME="idx1073742453"></a>
+					</p>
+
+					<prE>
+						
+&gt;&gt;&gt; dic = {"bird":"parrot", "fish":"tuna", "dino":"t-rex"}
+
+					</PRE>
+
+					<p>Now, let's <a naME="idx1073742454"></A>
+						<A name="idx1073742455"></a>apply some operations to it:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; dic["fish"]      # value lookup
+"tuna"
+&gt;&gt;&gt; dic["animal"]    # raises a KeyError exception
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+KeyError: animal
+&gt;&gt;&gt; del dic["fish"]  # deletes the key fish
+&gt;&gt;&gt; print dic
+{'bird': 'parrot', 'dino': 't-rex'}
+&gt;&gt;&gt; dic["dino"] = "brontosaur"  # updates an entry
+&gt;&gt;&gt; dic["parrot age"] = 58	        # adds an entry
+&gt;&gt;&gt; dic
+{"bird": "parrot", "dino": "brontosaur", "parrot age": 58}
+&gt;&gt;&gt; len(dic)          # provides the number of keys
+3
+
+					</pre>
+
+					
+						<h5>
+					
+					Built-In Methods</h5>
+						<p>The following sequence of commands shows the <tt claSs="monofont">built-in</tT> methods that are implemented for dictionaries.</p>
+
+						<prE>
+							
+&gt;&gt;&gt; dic = {"a":1, "b":2, "c":3}
+&gt;&gt;&gt; dic.keys()   # creates a list of keys. Very used in for statements.
+["a","b","c"]
+&gt;&gt;&gt; dic.values()     # creates a list of values
+["1","2","3"]
+&gt;&gt;&gt; dic.items()      # creates a tuple with the dictionary elements
+[("a","1"),("b","2"),("c","3")]
+&gt;&gt;&gt; dic.has_key("a") # returns 1 if key exists. Otherwise it returns 0.
+<i>1</i>
+
+# dic.get(value, default)
+# If key exists, returns its value. Otherwise it returns the second arg.
+&gt;&gt;&gt; dic.get("b", None)
+2
+
+# dic.update(dictionary)
+# adds the dictionary in the argument to the original dictionary.
+&gt;&gt;&gt; dic.update({"d":4})
+
+&gt;&gt;&gt; newdic = dic.copy()        # creates a copy of the dictionary
+&gt;&gt;&gt; keys = dic.keys()
+&gt;&gt;&gt; keys.sort()                 # sorts the dictionary keys
+&gt;&gt;&gt; dic.clear()          # removes all the items from the dictionary.
+					
+						</prE>
+
+						<p>Python 2.0 contains a brand-new method<a nAME="idx1073742456"></A>
+							<a namE="idx1073742457"></A> for dictionaries, which is called <A Name="idx1073742458"></a>
+							<A NAMe="idx1073742459"></a>
+							<tt CLASs="monofont">setdefault().</tt> This method returns the value for the given key (exactly as the <tt class="monofont">get()</tt> method would do). However, if the given key is not found, it returns the given default value, and at the same time, it initializes the given key with the default value, as demonstrated in the following code.</p>
+
+						<pre>
+							
+if dict.has_key( key ):
+    return dict[key]
+else:
+    dict[key] = ["default value"]
+    return dict[key]
+
+						</pre>
+
+						<p>is the same of saying</P>
+
+						<prE>
+							
+return dict.setdefault(key, "default value")
+
+						</pre>
+
+					
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="30.html" title="Control Statements"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=31" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="31.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="32.html" title="Functions and Procedures"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+()_(parenthesis)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742424">1st append</a><BR>
+1st.append<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742423">() (parenthesis)</a><BR>
+applying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742454">operations to dictionaries</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742428">range() function</a><BR>
+ <a href="#idx1073742430">backward stepping</a><BR>
+converting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742435">references into lists</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742450">dictionaries</a><BR>
+ <a href="#idx1073742415">data structures</a> <a href="#idx1073742418">2nd</a> <a href="#idx1073742426">3rd</a> <a href="#idx1073742433">4th</a> <a href="#idx1073742442">5th</a> <a href="#idx1073742451">6th</a><BR>
+ <a href="#idx1073742453">dictionaries</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742457">methods</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742449">returning values from, tuples</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742432">xrange()</a><BR>
+indexing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742445">support, tuples</a><BR>
+ <a href="#idx1073742421">List Comprehension</a> <a href="#idx1073742422">2nd</a><BR>
+ <a href="#idx1073742417">lists</a> <a href="#idx1073742420">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742437">converting references into</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742441">vs. tuples</a><BR>
+medhots<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742439">tolist()</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742456">for dictionaries</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742459">setdefault</a><BR>
+operations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742455">applying to dictionaries</a><BR>
+operators<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742414">lists</a><BR>
+parenthesis (_)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742425">1st append</a><BR>
+references<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742436">converting into lists</a><BR>
+returning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742447">values from functions, tuples</a><BR>
+ <a href="#idx1073742458">setdefault() method</a><BR>
+ <a href="#idx1073742429">stepping backward</a><BR>
+structures<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742416">data</a> <a href="#idx1073742419">2nd</a> <a href="#idx1073742427">3rd</a> <a href="#idx1073742434">4th</a> <a href="#idx1073742443">5th</a> <a href="#idx1073742452">6th</a><BR>
+support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742446">indexing, tuples</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742440">tuples</a><BR>
+ <a href="#idx1073742438">tolist() method</a><BR>
+ <a href="#idx1073742444">tuples</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742448">returning from functions, tuples</a><BR>
+ <a href="#idx1073742431">xrange() function</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

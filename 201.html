@@ -1,0 +1,152 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python GUI Toolkits</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="199.html" class="navtitle">14. Python and GUIs</a> &gt; <span class="nonavtitle">Python GUI Toolkits</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="200.html" title="14. Python and GUIs"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=201" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="201.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="202.html" title="The Tkinter Module"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A47%3A31+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148043124057186250079251</font><a href="read6.asp?bookname=0672319942&snode=201&now=5%2F31%2F2002+4%3A47%3A31+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+Python GUI Toolkits</h3>
+				<p>Choosing a toolkit for your <i>graphical user interface
+(GUI)</I> projects is not a simple thing. You need to research and
+compare what the features are that each option has to offer. When you decide to
+stick to one toolkit, you'd better be prepared to use it for some time. Toolkit
+implementations are so different that it becomes hard to change your code and
+your way of thinking from one toolkit to another whenever it comes time to move
+to a different implementation. Most of all, if you always jump from one OS to
+another, make sure that your GUI of choice is cross-platform, even though it is
+known how hard it is to implement a cross platform GUI these days (not just in
+Python). On the other hand, if you know that you will stay in a certain
+platform, such as Windows or Linux, for some time be sure that—depending
+on what platform you choose—there are a lot of options for you. Of
+course, by choosing a cross platform toolkit, you leave your options open
+(which is a good thing because you might change your mind in a few years).
+<A NAme="idx1073748168"></a>
+					<a NAME="idx1073748169"></a>
+					<a naME="idx1073748170"></A>
+				</P>
+
+				<p>Although you might decide to choose something different, the Python
+community has already chosen the standard choice for GUI development with
+Python—it is called Tkinter, and it's part of the standard Python
+distribution. For more information, see 
+<a href="206.html">Chapter 15, "Tkinter."
+					</a>
+				</p>
+
+				<p>Besides Tkinter, many other GUI solutions are supported by Python.
+This chapter exposes many of them.</p>
+
+				<p>STDWIN, which used to be the first word in GUI for Python, is now
+just an unsupported and obsolete platform-independent, low-level windowing
+interface.</p>
+
+				<p>Support for the wxWindows portable GUI class library is also
+available through the wxPython interface, which runs on multiple systems, such
+as GTK, Motif, MS Windows, and Mac. wxPython is a Python extension module that
+is quickly becoming acclaimed among Python developers by wrapping many of the
+wxWindows C++ classes.</p>
+
+				<p>
+					<a name="idx1073748171"></A>
+					<a nAme="idx1073748172"></a>
+					<A name="idx1073748173"></A>
+					<a naME="idx1073748174"></A>
+					<A name="idx1073748175"></A>Pythonwin is a Python GUI for Windows that includes an
+interface to the Microsoft Foundation Classes and a Python programming
+environment that uses this interface. By the way, this programming environment
+is also written in Python.</P>
+
+				<P>Other not-so-famous GUI options are also available:</P>
+
+				<ul>
+<li>
+						<P>An object-oriented, cross-platform GUI based on the Microsoft
+Foundation Classes model called Wpy.</P>
+
+					</LI>
+<li>
+						<p>Interfaces to WAFE, FOX, Motif, PLTK, and so forth.</p>
+
+					</LI>
+<LI>
+						<p>Bindings to Gnome, KDE, OPENGL, QT, and so on.</p>
+
+					</li>
+<li>
+						<p>For Mac systems, you can use its large set of modules that
+support the native Mac toolbox calls. Check out the documentation that comes
+with the Mac Python port for more information.</p>
+
+					</li>
+<li>
+						<p>As well as many others, as shown in this chapter.</p>
+
+					</li>
+</ul>
+				<p>As you can see, the number of options is large. The conclusion is
+that you need to think about today's reality and tomorrow's possibilities. Even
+though we know that Tkinter is doing a great job today, and it seems that it
+will for a long time, you should open your mind to other possibilities as well.
+Be sure that other nice tools out there exist. Tk is slower than most other
+toolkits (the one reason people find it acceptable is that it double buffers
+its widgets).</p>
+
+				<P>At this time, a couple of other bindings are becoming quite
+capable, such as the bindings for Gnome/GTK, QT, and KDE. These bindings fit
+nicer into their respective desktop environments.</p>
+
+				<p>The question that I left for you is, "What toolkit will be
+part of the next generation of standard GUIs for Python?" I see many
+alternatives: What about you? Most people will stick to Tkinter. That is for
+sure. And that's also the reason why the next chapter covers this fantastic
+toolkit implementation.
+<A namE="idx1073748176"></a>
+					<a naMe="idx1073748177"></a>
+					<a NAME="idx1073748178"></a>
+				</p>
+
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="200.html" title="14. Python and GUIs"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=201" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="201.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="202.html" title="The Tkinter Module"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+graphical user interfaces (GUIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748168">toolkits</a> <a href="#idx1073748176">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748171">Pythonwin</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphical user (GUI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748169">toolkits</a> <a href="#idx1073748177">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748172">toolkits;Pythonwin</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748175">Pythonwin</a><BR>
+ <a href="#idx1073748174">Pythonwin module</a><BR>
+toolkits<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748170">graphical user interfaces (GUIs)</a> <a href="#idx1073748178">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748173">Pythonwin</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

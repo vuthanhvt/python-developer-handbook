@@ -1,0 +1,126 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python on UNIX Systems</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="268.html" class="navtitle">B. Running Python on Specific Platforms</a> &gt; <span class="nonavtitle">Python on UNIX Systems</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="271.html" title="Python on MacOS Systems"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=272" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="272.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="273.html" title="Other Platforms"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A31%3A43+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222219254161018166212011006</font><a href="read0.asp?bookname=0672319942&snode=272&now=6%2F1%2F2002+6%3A31%3A43+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Python on UNIX Systems</h3>
+				<p>Probably, UNIX users are the largest slice of the Python community pie graph, which consequently turns this system into the one that has the most tested distribution. The only thing that can be considered a negative aspect is the fact that you have to compile and build the distribution yourself. But that's understandable because there are several different types of UNIX out there. However, to make things simple, nowadays most Linux distributions already come with Python installed for you. You just need to check whether it is the latest version available.</p>
+
+				<P>Sometimes, people build Python with some modules disabled (for instance, optional modules and modules that belong to specific Operating Systems). If that's your case, and you feel that you are missing something such as the <TT Class="monofont">Tkinter</TT> module, you can rebuild Python yourself.</P>
+
+				<Div clASS="note"><P class="notetitle"><b>Note</b></p><p>
+
+					<p>The <a name="idx1073751378"></a><a namE="idx1073751379"></a>Tk toolkit is portable to many UNIX platforms, which makes Tkinter a portable GUI option across different UNIX systems.</p>
+
+				</P></div>
+<Br>
+<br>
+
+				<p>In order to <A namE="idx1073751380"></A><A Name="idx1073751381"></a><A NAMe="idx1073751382"></a>enable the modules that are disabled on your system, you need to copy the file <tt CLASs="monofont">/Modules/Setup.in</tt> (located at the source distribution) to <tT CLAss="monofont">Setup,</tt> and edit that file. Note that each line in the file lists the module name, the source file, compiler options, and linked libraries. Take a look in the following line:</p>
+
+				<pre>
+					
+#readline readline.c -lreadline -ltermcap
+
+				</pre>
+
+				<p>In order to add the GNU readline program to your Python executable, you need to uncomment the line, and rebuild the interpreter by typing the following commands in the top-level directory of the source tree. See <a href="227.html">Chapter 17, "Development Tools,"</a>  for more details.</p>
+
+				<pRe>
+					
+make
+make install
+
+				</pRe>
+
+				<p>The standard Python distribution contains some extensions that are specifically for UNIX systems, such as <tT clasS="monofont">crypt,</tt>
+					<tT CLAss="monofont">dbm,</tt>
+					<TT CLass="monofont">gdbm,</tT>
+					<TT Class="monofont">grp,</TT>
+					<TT class="monofont">pwd,</tt>
+					<tt class="monofont">stat,</tt> and <tt clAss="monofont">termios.</Tt> These modules aren't available for Windows or for Mac platforms.</p>
+
+				<p>SGI systems, on the other hand, also have their specific modules, which are</P>
+
+				<ul>
+<li><P><a naME="idx1073751383"></A><A name="idx1073751384"></A><TT Class="monofont">al</TT> and <A Name="idx1073751385"></a><A NAMe="idx1073751386"></a><tt class="monofont">AL</tt> for handling the <tt class="monofont">audio</tt> library</P>
+</li>
+<Li><p><a Name="idx1073751387"></a><A namE="idx1073751388"></A><TT clasS="monofont">cd</TT> for operating the <Tt claSS="monofont">CD</TT> library</p>
+</li>
+<lI><P><A Name="idx1073751389"></a><a name="idx1073751390"></a><tt class="monofont">fl,</tt>
+							<a NamE="idx1073751391"></a><a nAme="idx1073751392"></a><tT claSS="monofont">flp,</TT> and <a namE="idx1073751393"></A><A Name="idx1073751394"></a><TT CLass="monofont">FL</tT> for accessing the <A NAme="idx1073751395"></a><a name="idx1073751396"></a><tt class="monofont">FORMS</tt> library</p>
+</lI>
+<li><P><a naMe="idx1073751397"></a><a nAme="idx1073751398"></a><TT CLass="monofont">fm,</tT> the font manager</P>
+
+					</LI>
+</ul>
+				<p>SunOS/Solaris systems have their specific module as well: <a NAME="idx1073751399"></a><a naME="idx1073751400"></A><Tt class="monofont">sunaudiodev,</tt> which is used to access the audio device.</p>
+
+				<p>There are also some Linux specific modules, such as <tt class="monofont">linuxaudiodev,</tt> included with Python.<a NamE="idx1073751401"></a><a nAme="idx1073751402"></a></p>
+
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="271.html" title="Python on MacOS Systems"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=272" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="272.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="273.html" title="Other Platforms"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073751383">al module</a><BR>
+ <a href="#idx1073751385">AL module</a><BR>
+ <a href="#idx1073751387">cd module</a><BR>
+enabling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751380">UNIX operating systems</a><BR>
+ <a href="#idx1073751389">fl module</a><BR>
+ <a href="#idx1073751393">FL module</a><BR>
+ <a href="#idx1073751391">flp module</a><BR>
+ <a href="#idx1073751397">fm module</a><BR>
+ <a href="#idx1073751395">FORMS library</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751396">FORMS</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751384">al</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751386">AL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751388">cd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751382">UNIX operating systems</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751390">fl</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751394">FL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751392">flp</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751398">fm</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751400">sunaudiodev</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751402">UNIX</a><BR>
+ <a href="#idx1073751399">sunaudiodev module</a><BR>
+ <a href="#idx1073751378">Tk toolkit</a><BR>
+toolkits<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751379">Tk</a><BR>
+turning on<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751381">UNIX operating systems</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751401">running Python</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

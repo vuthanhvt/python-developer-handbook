@@ -1,0 +1,777 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; XDR Data Exchange Format</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="187.html" class="navtitle">13. Data Manipulation</a> &gt; <span class="nonavtitle">XDR Data Exchange Format</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="191.html" title="XML-RPC"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=192" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="192.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="193.html" title="Handling Other Markup Languages"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A46%3A15+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148042031165113061128045</font><a href="read3.asp?bookname=0672319942&snode=192&now=5%2F31%2F2002+4%3A46%3A15+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+XDR Data Exchange Format</h3>
+				<p>XDR is best described as a standard for data description and
+encoding. It uses a implicit typing language to describe intricate data formats
+in a concise manner—note that this language is not a programming
+language. Protocols such as Sun RPC (Remote Procedure Call) and the NFS
+(Network File System, which was initially built on top of RPC) use XDR to
+describe the format of their data because XDR is useful for transferring data
+between different computer architectures. XDR has been used to communicate with
+data between such diverse machines as the SUN WORKSTATION, VAX, IBM-PC, and
+Cray. It is a very portable implementation. For more information, check
+out</p>
+
+				<BLOCkquoTE>
+<P>
+						<P>Internet standards—RFC 1014, External Data
+ Representation</p>
+
+					</p>
+<p>
+						<p>
+							<A TARget="_blank" href="http://info.internet.isi.edu/in-notes/rfc/files/rfc1014.txt">http://info.internet.isi.edu/in-notes/rfc/files/rfc1014.txt</a></p>
+
+					</p>
+</blockquote>
+				
+					<H4><tt ClasS="monofont">
+							<a namE="idx1073747312"></a>
+							<a nAME="idx1073747313"></A>xdrlib</tt></h4>
+					<p>The <TT CLass="monofont">xdrlib</tT> module almost entirely supports the 
+  <A NAme="idx1073747314"></a>
+						<a NAME="idx1073747315"></a><i>External Data Representation Standard
+  (XDR)</i> as described in RFC 1014, written by Sun Microsystems, Inc. on
+  June 1987. Therefore, it is used extensively in networked applications, mainly
+  the ones that need to handle RPC.</p>
+
+					<p>This module defines two exceptions, and two 
+  <a name="idx1073747316"></a>classes—one for packing variables into XDR
+  representation, and another for unpacking from XDR representation:</p>
+
+					<blockquoTe>
+<p>
+							<A namE="idx1073747317"></a>
+							<a naMe="idx1073747318"></a>
+							<p>
+								<TT CLass="monofont">Packer()</tT>— 
+    
+								<TT Class="monofont">Packer</TT> is the class for packing data into
+  XDR representation. The <TT clasS="monofont">Packer</TT> class is instantiated with no
+  arguments.
+							</P>
+
+						</p>
+<p>
+							<a name="idx1073747319"></a>
+							<a name="idx1073747320"></a>
+							<p>
+								<tt claSs="monofont">Unpacker(data)</tT>— 
+    
+								<tt cLass="monofont">Unpacker</tT> is the complementary class, which
+  unpacks XDR data values from a string buffer. The input buffer is given as
+  data.
+							</p>
+
+						</p>
+</bLOCKquotE>
+				
+				
+					<H4>
+  
+  
+  Packer Objects</H4>
+					<P>Packer instances have the following 
+  <a namE="idx1073747321"></A>methods:</P>
+
+					<BlockQUOTe>
+<p>
+							<a name="idx1073747322"></a>
+							<a name="idx1073747323"></a>
+							<p>
+								<tt claSs="monofont">get_buffer()</tT>— 
+    
+								Returns the current pack buffer as a string.
+							</p>
+
+						</p>
+<p>
+							<A name="idx1073747324"></A>
+							<a naME="idx1073747325"></A>
+							<P>
+								<tt clASS="monofont">reset()</Tt>— 
+    
+								Resets the pack buffer to the empty string.
+							</p>
+
+						</p>
+</bLOCKquotE>
+					<P>In general, you can pack any of the most common XDR data types by
+  calling the appropriate <TT class="monofont">pack_type()</tt> method. Each method
+  takes a single argument, the value to pack. The following simple data type
+  packing methods are supported:
+  <tt class="monofont">pack_uint(),</tt><tt clAss="monofont">pack_int(),</Tt><tt Class="monofont">pack_enum(),</Tt><tt CLASs="monofont">pack_bool(),</tt><tT CLAss="monofont">pack_uhyper(),</tt>
+  and <TT CLass="monofont">pack_hyper().</tT> The following methods support 
+  <A NAme="idx1073747326"></a>
+						<a name="idx1073747327"></a>
+						<a name="idx1073747328"></a>floating point number packing.
+  <a name="idx1073747329"></A>
+						<a nAme="idx1073747330"></a>
+						<A name="idx1073747331"></A>
+						<a naME="idx1073747332"></A>
+						<A name="idx1073747333"></A>
+						<A NAme="idx1073747334"></a>
+						<a NAME="idx1073747335"></a>
+						<a naME="idx1073747336"></A>
+						<A name="idx1073747337"></a>
+						<a name="idx1073747338"></a>
+						<a name="idx1073747339"></a></p>
+
+					<blOckQuotE>
+<p>
+							<a naMe="idx1073747340"></a>
+							<a NAME="idx1073747341"></a>
+							<p>
+								<tt CLASs="monofont">pack_float(value)</tt>— 
+    
+								Packs the single-precision floating point number
+  value.
+							</p>
+
+						</P>
+<P>
+							<A Name="idx1073747342"></a>
+							<A NAMe="idx1073747343"></a>
+							<p>
+								<tt class="monofont">pack_double(value)</tt>— 
+    
+								Packs the double-precision floating point number
+  value.
+							</p>
+
+						</p>
+</blockqUotE>
+					<p>The following methods support packing 
+  <a nAme="idx1073747344"></a>
+						<a Name="idx1073747345"></A>strings, 
+  <A NAme="idx1073747346"></a>
+						<a NAME="idx1073747347"></a>bytes, and 
+  <a naME="idx1073747348"></A>
+						<A name="idx1073747349"></A>
+						<A NAme="idx1073747350"></a>opaque data:</p>
+
+					<blockquote>
+<p>
+							<a name="idx1073747351"></A>
+							<a nAme="idx1073747352"></a>
+							<P>
+								<tt clAss="monofont">pack_fstring(n, s)</tT>— 
+    
+								Packs a fixed length string,
+  <TT Class="monofont">s.</TT><TT clasS="monofont">n</TT> is the length of the string, but it
+  is not packed into the data buffer. The string is padded with null bytes if
+  necessary to guarantee 4 byte alignment.
+							</P>
+
+						</p>
+<p>
+							<a nAME="idx1073747353"></A>
+							<a name="idx1073747354"></a>
+							<p>
+								<tt class="monofont">pack_fopaque(n, data)</tt>— 
+    
+								Packs a fixed length opaque data stream, similar to
+  <tt clAss="monofont">pack_fstring().</Tt>
+							</p>
+
+						</p>
+<P>
+							<a namE="idx1073747355"></a>
+							<a nAME="idx1073747356"></A>
+							<p>
+								<tt cLASS="monofont">pack_string(s)</tt>— 
+    
+								Packs a variable length string, <tt CLASs="monofont">s.</tt> The
+  length of the string is first packed as an unsigned integer, and then the
+  string data is packed with <tT CLAss="monofont">pack_fstring().</tt>
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747357"></a>
+							<a name="idx1073747358"></a>
+							<p>
+								<Tt cLass="monofont">pack_opaque(data)</Tt>— 
+    
+								Packs a variable length opaque data string, similar to
+  <tt cLass="monofont">pack_string().</TT>
+							</P>
+
+						</P>
+<p>
+							<a naME="idx1073747359"></A>
+							<A name="idx1073747360"></A>
+							<P>
+								<TT clasS="monofont">pack_bytes(bytes)</TT>— 
+    
+								Packs a variable length byte stream, similar to
+  <Tt class="monofont">pack_string().</tt>
+									<a name="idx1073747361"></a>
+									<a name="idx1073747362"></a>
+									<A naMe="idx1073747363"></a>
+									<a Name="idx1073747364"></a>
+									<A namE="idx1073747365"></A>
+									<A Name="idx1073747366"></a>
+									<A NAMe="idx1073747367"></a>
+							</p>
+
+						</p>
+</BLOCkquoTE>
+					<P>The following methods support packing 
+  <A name="idx1073747368"></a>
+						<a name="idx1073747369"></a>arrays and 
+  <a name="idx1073747370"></a>
+						<a naMe="idx1073747371"></a>lists:</P>
+
+					<bloCkquoTe>
+<p>
+							<a NAME="idx1073747372"></a>
+							<a naME="idx1073747373"></A>
+							<P>
+								<tt clASS="monofont">pack_list(list, pack_item)</Tt>— 
+    
+								Packs a list of homogeneous items. This method is useful for
+  lists with an indeterminate size; that is, the size is not available until the
+  entire list has been walked. For each item in the list, an unsigned integer 1
+  is packed first, followed by the data value from the list.
+  <tt cLASS="monofont">pack_item</tt> is the function called to pack the individual
+  item. At the end of the list, an unsigned integer 0 is packed.
+  <a name="idx1073747374"></a>
+									<a name="idx1073747375"></a>
+									<a name="idx1073747376"></a>
+									<A naMe="idx1073747377"></a>
+									<a Name="idx1073747378"></a>
+									<A namE="idx1073747379"></A>
+									<A Name="idx1073747380"></a>
+									<A NAMe="idx1073747381"></a>
+									<a nAME="idx1073747382"></A>
+									<a namE="idx1073747383"></A>
+									<A Name="idx1073747384"></a>
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747385"></a>
+							<a name="idx1073747386"></a>
+							<p>
+								<Tt cLass="monofont">pack_farray(n, array,
+  pack_item)</Tt>— 
+    
+								Packs a fixed length list (array) of homogeneous items.
+  <tt cLass="monofont">n</TT> is the length of the list; it is not packed into the
+  buffer, but a <TT clasS="monofont">ValueError</TT> exception is raised if len(array)
+  is not equal to <Tt claSS="monofont">n.</TT> As stated previously,
+  <tt clASS="monofont">pack_item</Tt> is the function used to pack each element.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747387"></a>
+							<a name="idx1073747388"></a>
+							<p>
+								<tt cLasS="monofont">pack_array(list,
+  pack_item)</tt>— 
+    
+								Packs a variable length list of homogeneous items. First, the
+  length of the list is packed as an unsigned integer, and then each element is
+  packed as in <tT clasS="monofont">pack_farray()</tt> stated previously. 
+  <a NAME="idx1073747389"></a>
+									<a naME="idx1073747390"></A>
+									<A name="idx1073747391"></A>
+									<A NAme="idx1073747392"></a>
+									<a NAME="idx1073747393"></a>
+									<a name="idx1073747394"></a>
+									<a name="idx1073747395"></a>
+									<a name="idx1073747396"></a>
+							</p>
+
+						</P>
+</blOckqUote>
+				
+				
+					<h4>
+  
+  
+  Unpacker Objects</H4>
+					<p>The Unpacker class offers the following 
+  <a nAME="idx1073747397"></A>methods:</p>
+
+					<bloCKQUote>
+<p>
+							<A NAMe="idx1073747398"></a>
+							<a nAME="idx1073747399"></A>
+							<p>
+								<tt class="monofont">reset(data)</tt>— 
+    
+								Resets the string buffer with the given data.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747400"></a>
+							<a NamE="idx1073747401"></a>
+							<p>
+								<tT clasS="monofont">get_position()</tt>— 
+    
+								Returns the current unpack position in the data
+  buffer.
+							</p>
+
+						</P>
+<P>
+							<A Name="idx1073747402"></a>
+							<A NAMe="idx1073747403"></a>
+							<p>
+								<tT CLAss="monofont">set_position(position)</tt>— 
+    
+								Sets the data buffer unpack position to position. You should
+  be careful about using <TT CLass="monofont">get_position()</tt> and
+  <tt class="monofont">set_position().</tt>
+							</p>
+
+						</p>
+<p>
+							<a naMe="idx1073747404"></a>
+							<A namE="idx1073747405"></a>
+							<p>
+								<tt ClasS="monofont">get_buffer()</TT>— 
+    
+								Returns the current unpack data buffer as a string.
+							</P>
+
+						</p>
+<p>
+							<a nAME="idx1073747406"></A>
+							<a namE="idx1073747407"></A>
+							<P>
+								<Tt claSS="monofont">done()</TT>— 
+    
+								Indicates unpack completion. Raises an error exception if all
+  the data has not been unpacked.
+							</p>
+
+						</p>
+</blockquote>
+					<p>In addition, every data type that can be packed with a Packer, can
+  be unpacked with an Unpacker. Unpacking methods are of the form
+  <tt class="monofont">unpack_type(),</Tt> and take no arguments. They return the
+  unpacked object.</p>
+
+					<BlocKquotE>
+<p>
+							<a nAME="idx1073747408"></A>
+							<a namE="idx1073747409"></A>
+							<P>
+								<Tt claSS="monofont">unpack_float()</TT>— 
+    
+								Unpacks a single-precision floating point number.
+							</p>
+
+						</p>
+<p>
+							<a NAME="idx1073747410"></a>
+							<a name="idx1073747411"></a>
+							<p>
+								<tt class="monofont">unpack_double()</tt>— 
+    
+								Unpacks a double-precision floating point number, similar to
+  <tt cLasS="monofont">unpack_float().</tt>
+							</p>
+
+						</P>
+</blocKquoTE>
+					<P>In addition, the following methods unpack strings, bytes, and
+  opaque data:</P>
+
+					<blocKQUOte>
+<p>
+							<a NAME="idx1073747412"></a>
+							<a naME="idx1073747413"></A>
+							<P>
+								<tt class="monofont">unpack_fstring(n)</tt>— 
+    
+								Unpacks and returns a fixed length string.
+  <tt class="monofont">n</tt> is the number of characters expected. Padding with null
+  bytes to guaranteed 4 byte alignment is assumed.
+							</p>
+
+						</p>
+<P>
+							<a nAme="idx1073747414"></a>
+							<A name="idx1073747415"></A>
+							<p>
+								<tt CLASs="monofont">unpack_fopaque(n)</tt>— 
+    
+								Unpacks and returns a fixed length opaque data stream,
+  similar to <tT CLAss="monofont">unpack_fstring().</tt>
+									<A NAMe="idx1073747416"></a>
+									<a nAME="idx1073747417"></A>
+									<a name="idx1073747418"></a>
+									<a name="idx1073747419"></a>
+									<a name="idx1073747420"></a>
+									<a nAme="idx1073747421"></A>
+									<a naMe="idx1073747422"></a>
+									<a nAme="idx1073747423"></a>
+									<A NAMe="idx1073747424"></a>
+									<a nAME="idx1073747425"></A>
+									<a namE="idx1073747426"></A>
+							</P>
+
+						</P>
+<p>
+							<a naME="idx1073747427"></A>
+							<A name="idx1073747428"></a>
+							<p>
+								<tt class="monofont">unpack_string()</tt>— 
+    
+								Unpacks and returns a variable length string. The length of
+  the string is first unpacked as an unsigned integer, and then the string data
+  is unpacked with <tt claSs="monofont">unpack_fstring().</tT>
+							</p>
+
+						</p>
+<p>
+							<A name="idx1073747429"></A>
+							<a naME="idx1073747430"></A>
+							<P>
+								<tt clASS="monofont">unpack_opaque()</Tt>— 
+    
+								Unpacks and returns a variable length opaque data string,
+  similar to <tt cLASS="monofont">unpack_string().</tt>
+							</p>
+
+						</p>
+<P>
+							<A NAme="idx1073747431"></a>
+							<a name="idx1073747432"></a>
+							<p>
+								<tt class="monofont">unpack_bytes()</tt>— 
+    
+								Unpacks and returns a variable length byte stream, similar to
+  <tT clAss="monofont">unpack_string().</tT>
+							</p>
+
+						</p>
+</blOckqUOTE>
+					<p>The following methods support unpacking arrays and lists:</p>
+
+					<blOCKQuote>
+<P>
+							<A NAme="idx1073747433"></a>
+							<a NAME="idx1073747434"></a>
+							<p>
+								<tt class="monofont">unpack_list</tt>(<i>unpack_item</i>)— 
+    
+								Unpacks and returns a list of homogeneous items. The list is
+  unpacked one element at a time by first unpacking an unsigned integer flag. If
+  the flag is <tt class="monofont">1,</Tt> the item is unpacked and appended to the
+  list. A flag of <tT claSs="monofont">0</tt> indicates the end of the list.
+  <tT claSS="monofont">unpack_item</TT> is the function called to unpack the items.
+  <a namE="idx1073747435"></A>
+									<A Name="idx1073747436"></a>
+									<A NAMe="idx1073747437"></a>
+									<a nAME="idx1073747438"></A>
+									<a name="idx1073747439"></a>
+									<a name="idx1073747440"></a>
+									<a name="idx1073747441"></a>
+									<a nAme="idx1073747442"></A>
+									<a naMe="idx1073747443"></a>
+									<a nAme="idx1073747444"></a>
+							</P>
+
+						</P>
+<P>
+							<A name="idx1073747445"></A>
+							<A NAme="idx1073747446"></a>
+							<p>
+								<TT CLass="monofont">unpack_farray</tT>(<I>n,
+  unpack_item</I>)— 
+    
+								Unpacks and returns (as a list) a fixed length array of
+  homogeneous items. <Tt class="monofont">n</tt> is the number of list elements to
+  expect in the buffer. As stated previously, <tt class="monofont">unpack_item</tt> is
+  the function used to unpack each element.
+							</p>
+
+						</p>
+<p>
+							<A naMe="idx1073747447"></a>
+							<a Name="idx1073747448"></a>
+							<P>
+								<tt cLASS="monofont">unpack_array</tt>(<i>unpack_item</i>)— 
+    
+								Unpacks and returns a variable length list of homogeneous
+  items. First, the length of the list is unpacked as an unsigned integer, and
+  then each element is unpacked as in <TT CLass="monofont">unpack_farray()</tT>
+  previously.
+  <A NAme="idx1073747449"></a>
+							</p>
+
+						</P>
+</BLOckquote>
+					<p>In the following example, we 
+  <a name="idx1073747450"></a>
+						<a name="idx1073747451"></a>
+						<A naMe="idx1073747452"></a>pack a group of variables, unpacking them later.</p>
+
+					<Pre>
+						
+import xdrlib
+
+def f_packer(name, author, month, year):
+    data = xdrlib.Packer()
+    data.pack_string(name)
+    data.pack_string(author)
+    data.pack_uint(month)
+    data.pack_uint(year)
+    packed = data.get_buffer()
+    return packed 
+
+def f_unpacker(packer):
+    data = xdrlib.Unpacker(packer)
+    return data
+
+print "The original values are: 'Andre', 'Author', 10, 2000"
+print
+
+packed = f_packer('Andre', 'Author', 10, 2000)
+print "The packed data is now defined by:", repr(packed)
+print
+print "And now, the original data again. (After unpacking it!)"
+unpacked = f_unpacker(packed)
+print repr(unpacked.unpack_string()), ", ", \
+      repr(unpacked.unpack_string()), ", ",  \
+      unpacked.unpack_uint(), ", ",           \
+      unpacked.unpack_uint()
+unpacked.done()
+
+The original values are: 'Andre', 'Author', 10, 2000
+
+The packed data is now defined by:
+'\000\000\000\005Andre\000\000\000\000\000\000\006Author\000\000\000\000\
+000\012\000\000\007\320'
+
+And now, the original data again. (After unpacking it!)
+'Andre', 'Author', 10 , 2000
+
+					</prE>
+
+					<div CLASs="note"><p clASS="notetitle"><B>Note</b></p><p>
+
+						<p>If you are only handling simple data types and only with Python,
+ it is probably easier to just use the marshal module.
+ <A NAMe="idx1073747453"></a>
+							<a nAME="idx1073747454"></A>
+							<a name="idx1073747455"></a>
+							<a name="idx1073747456"></a>
+							<a name="idx1073747457"></a>
+							<a nAme="idx1073747458"></A>
+							<a naMe="idx1073747459"></a>
+							<a nAme="idx1073747460"></a>
+							<A NAMe="idx1073747461"></a>
+							<a nAME="idx1073747462"></A></p>
+
+					</p></diV>
+<BR>
+<Br>
+
+				
+				
+					<h4>
+  Exceptions</h4>
+					<p>Exceptions in this module are coded as class instances:</P>
+
+					<BLOckquote>
+<p>
+							<a name="idx1073747463"></a>
+							<a name="idx1073747464"></a>
+							<P>
+								<tt ClasS="monofont">Error</tt>— 
+    
+								This is the base exception class. Error has a single public
+  data member <tt ClasS="monofont">msg</TT> containing the description of the
+  error.
+							</P>
+
+						</p>
+<p>
+							<a nAME="idx1073747465"></A>
+							<a namE="idx1073747466"></A>
+							<P>
+								<Tt claSS="monofont">ConversionError</TT>— 
+    
+								This class is derived from Error. Contains no additional
+  instance variables.
+							</p>
+
+						</p>
+</blockquote>
+					<p>Here is a simple example of how you would catch one of these
+  exceptions:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import xdrlib
+&gt;&gt;&gt; data = xdrlib.Packer()
+&gt;&gt;&gt; try:
+…       data.pack_double("8.01")
+… except xdrlib.ConversionError, ErrorObj:
+…     print 'Error while packing the data:', ErrorObj.msg
+…
+Error while packing the data: required argument is not a float
+&gt;&gt;&gt;
+
+					</pre>
+
+				
+			</FonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="191.html" title="XML-RPC"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=192" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="192.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="193.html" title="Handling Other Markup Languages"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+arrays<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747369">packing methods</a> <a href="#idx1073747394">2nd</a><BR>
+bytes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747347">packing methods</a> <a href="#idx1073747364">2nd</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747318">Packer()</a> <a href="#idx1073747337">2nd</a> <a href="#idx1073747382">3rd</a> <a href="#idx1073747390">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747320">Unpacker(data)</a> <a href="#idx1073747424">2nd</a> <a href="#idx1073747443">3rd</a> <a href="#idx1073747461">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747316">xdrlib module</a> <a href="#idx1073747333">2nd</a> <a href="#idx1073747378">3rd</a> <a href="#idx1073747420">4th</a> <a href="#idx1073747439">5th</a> <a href="#idx1073747457">6th</a><BR>
+ <a href="#idx1073747466">ConversionError exception</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747329">XDR Data Exchange Format</a> <a href="#idx1073747374">2nd</a> <a href="#idx1073747416">3rd</a> <a href="#idx1073747435">4th</a> <a href="#idx1073747453">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opaque<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747350">packing methods</a> <a href="#idx1073747367">2nd</a><BR>
+ <a href="#idx1073747407">done() method</a><BR>
+ <a href="#idx1073747464">Error exception</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747465">ConversionError</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747463">Error</a><BR>
+ <a href="#idx1073747314">External Data Representation Standard (XDR)</a><BR>
+floating points<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747327">packing methods</a><BR>
+formats<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747332">XDR Data Exchange</a> <a href="#idx1073747377">2nd</a> <a href="#idx1073747419">3rd</a> <a href="#idx1073747438">4th</a> <a href="#idx1073747456">5th</a><BR>
+ <a href="#idx1073747323">get_buffer() method</a> <a href="#idx1073747405">2nd</a><BR>
+ <a href="#idx1073747401">get_position() method</a><BR>
+lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747371">packing methods</a> <a href="#idx1073747396">2nd</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747330">XDR Data Exchange Format</a> <a href="#idx1073747375">2nd</a> <a href="#idx1073747417">3rd</a> <a href="#idx1073747436">4th</a> <a href="#idx1073747454">5th</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747406">done()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747322">get_buffer()</a> <a href="#idx1073747404">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747400">get_position()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747387">pack_array(list, pack_item)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747359">pack_bytes(bytes)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747342">pack_double(value)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747385">pack_farray(n, array, pack_item)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747340">pack_float(value)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747353">pack_fopaque(n, data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747351">pack_fstring(n, s)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747372">pack_list(list, pack_item)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747357">pack_opaque(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747355">pack_string(s)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747321">Packer() class</a> <a href="#idx1073747339">2nd</a> <a href="#idx1073747384">3rd</a> <a href="#idx1073747392">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747368">arrays</a> <a href="#idx1073747393">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747346">bytes</a> <a href="#idx1073747363">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747326">floating point number</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747370">lists</a> <a href="#idx1073747395">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747348">opaque data</a> <a href="#idx1073747365">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747344">strings</a> <a href="#idx1073747361">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747324">reset()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747398">reset(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747402">set_position(position)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747447">unpack_array(unpack_item)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747431">unpack_bytes()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747410">unpack_double()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747445">unpack_farray(n, unpack item)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747408">unpack_float()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747414">unpack_fopaque(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747412">unpack_fstring(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747433">unpack_list(unpack_item)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747429">unpack_opaque()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747427">unpack_string()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747397">Unpacker(data) class</a> <a href="#idx1073747426">2nd</a> <a href="#idx1073747449">3rd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747313">xdrlib</a> <a href="#idx1073747335">2nd</a> <a href="#idx1073747380">3rd</a> <a href="#idx1073747422">4th</a> <a href="#idx1073747441">5th</a> <a href="#idx1073747459">6th</a><BR>
+numbers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;floating points<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747328">packing methods</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747338">Packer()</a> <a href="#idx1073747383">2nd</a> <a href="#idx1073747391">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747425">Unacker()</a> <a href="#idx1073747444">2nd</a> <a href="#idx1073747462">3rd</a><BR>
+opaque data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747349">packing methods</a> <a href="#idx1073747366">2nd</a><BR>
+ <a href="#idx1073747388">pack_array(list, pack_item) method</a><BR>
+ <a href="#idx1073747360">pack_bytes(bytes) method</a><BR>
+ <a href="#idx1073747343">pack_double(value) method</a><BR>
+ <a href="#idx1073747386">pack_farray(n, array, pack_item) method</a><BR>
+ <a href="#idx1073747341">pack_float(value) method</a><BR>
+ <a href="#idx1073747354">pack_fopaque(n, data) method</a><BR>
+ <a href="#idx1073747352">pack_fstring(n, s) method</a><BR>
+ <a href="#idx1073747373">pack_list(list, pack_item) method</a><BR>
+ <a href="#idx1073747358">pack_opaque(data) method</a><BR>
+ <a href="#idx1073747356">pack_string(s) method</a><BR>
+ <a href="#idx1073747317">Packer() class</a> <a href="#idx1073747336">2nd</a> <a href="#idx1073747381">3rd</a> <a href="#idx1073747389">4th</a><BR>
+packing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747450">variables</a><BR>
+ <a href="#idx1073747325">reset() method</a><BR>
+ <a href="#idx1073747399">reset(data) method</a><BR>
+ <a href="#idx1073747403">set_position(position) method</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747345">packing methods</a> <a href="#idx1073747362">2nd</a><BR>
+ <a href="#idx1073747448">unpack_array(unpack_item) method</a><BR>
+ <a href="#idx1073747432">unpack_bytes() method</a><BR>
+ <a href="#idx1073747411">unpack_double() method</a><BR>
+ <a href="#idx1073747446">unpack_farray(n, unpack item) method</a><BR>
+ <a href="#idx1073747409">unpack_float() method</a><BR>
+ <a href="#idx1073747415">unpack_fopaque(n) method</a><BR>
+ <a href="#idx1073747413">unpack_fstring(n) method</a><BR>
+ <a href="#idx1073747434">unpack_list(unpack_item) method</a><BR>
+ <a href="#idx1073747430">unpack_opaque() method</a><BR>
+ <a href="#idx1073747428">unpack_string() method</a><BR>
+ <a href="#idx1073747319">Unpacker(data) class</a> <a href="#idx1073747423">2nd</a> <a href="#idx1073747442">3rd</a> <a href="#idx1073747460">4th</a><BR>
+unpacking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747452">variables</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747451">packing</a><BR>
+ <a href="#idx1073747315">XDR (External Data Representation Standard)</a><BR>
+XDR Data Exchange Format<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747331">manipulating data</a> <a href="#idx1073747376">2nd</a> <a href="#idx1073747418">3rd</a> <a href="#idx1073747437">4th</a> <a href="#idx1073747455">5th</a><BR>
+ <a href="#idx1073747312">xdrlib module</a> <a href="#idx1073747334">2nd</a> <a href="#idx1073747379">3rd</a> <a href="#idx1073747421">4th</a> <a href="#idx1073747440">5th</a> <a href="#idx1073747458">6th</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

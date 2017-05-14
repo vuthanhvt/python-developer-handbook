@@ -1,0 +1,380 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The Standard Exception Hierarchy</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="91.html" class="navtitle">4. Exception Handling</a> &gt; <span class="nonavtitle">The Standard Exception Hierarchy</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="98.html" title="Creating User-defined Exceptions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=99" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="99.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="100.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A32%3A30+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147038000015002063037178</font><a href="read7.asp?bookname=0672319942&snode=99&now=5%2F31%2F2002+4%3A32%3A30+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>The Standard Exception Hierarchy</h3>
+				<p>Python comes filled with many built-in exceptions. All these exceptions are part of the <tT CLAss="monofont">exceptions</tt> module, which is always loaded prior to any program execution.</P>
+
+				<P>The following structure identifies the standard exception hierarchy, and, immediately afterwards, it is given the description of each exception type.</P>
+
+				<P>This structure, which resembles a tree, shows you that all exceptions are derived from a base class named <tt clASS="monofont">Exception.</Tt> If we highlight, for example, the <tt class="monofont">ImportError</tt> exception, we note that it is a subclass of the <tt class="monofont">StandardError</tt> class. In addition to that, the <tT clAss="monofont">StandardError</tT> class is a subclass of the <tt clAss="monofont">Exception</tT> class. <A HRef="99#1.html">Table 4.1</a> shows the structure.</p>
+
+				<A NAMe="1"></a><p><tABLE bordER="1" CEllspacing="0" cellpadding="1" WidTh="100%">
+<caPtion><H5>Table 4.1. The Exception Class Hierarchy</h5></caPTIOn><colGROUp aliGN="left" SPan="1">
+<tr VALIgn="top">
+<th>
+<font size="2"><tt class="monofont">Exception</tT>
+								</foNt></th>
+</Tr>
+<tr vAligN="top">
+<TD>
+<Font sIZE="2"><Tt claSS="monofont">SystemExit</TT>
+								</font></TD>
+</TR>
+<tr valign="top">
+<td>
+<font size="2"><tt ClaSs="monofont">StandardError</tt>
+								</Font></tD>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2"><BLOckquOTE>
+<P><p><tt class="monofont">KeyboardInterrupt</tt></p>
+</p>
+</blockquoTe>
+								</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2"><blocKQUOte>
+<p><p><TT CLass="monofont">ImportError</tt></p>
+</p>
+</blockquote>
+								</fonT></td>
+</Tr>
+<tr ValigN="top">
+<td>
+<fONT Size="2"><bLOCKquotE>
+<P><P><Tt claSS="monofont">EnvironmentError</TT></p>
+
+											<blockquote>
+<p><p><tt class="monofont">IOError</Tt></p>
+</P>
+<p><p><tT clasS="monofont">OSError</tt></p>
+</P>
+</BLOckquOTE></P>
+</blocKQUOte>
+								</foNT></TD>
+</tr>
+<tr valign="top">
+<td>
+<font size="2"><BloCkquOte>
+<p><p><Tt clASS="monofont">EOFError</Tt></p>
+</p>
+</bLOCKquotE>
+								</FONt></td>
+</tR>
+<TR Valign="top">
+<td>
+<font size="2"><blockQuoTe>
+<p><p><Tt claSs="monofont">RuntimeError</tt></P>
+
+											<BLOckquOTE>
+<P><p><tt cLASS="monofont">NotImplementedError</tt></p>
+</p>
+</BLOCkquote></p>
+</blockquote>
+								</fonT></td>
+</Tr>
+<tr ValigN="top">
+<td>
+<fONT Size="2"><bLOCKquotE>
+<P><P><Tt claSS="monofont">NameError</TT></p>
+
+											<blockquote>
+<p><p><tt class="monofont">UnboundLocalError</Tt></p>
+</P>
+</bloCkquoTe></p>
+</bLOCKquotE>
+								</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font size="2"><blockquote>
+<p><p><tT clAss="monofont">AttributeError</tT></p>
+</p>
+</blOckqUOTE>
+								</font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<foNT SIze="2"><blockquote>
+<p><p><tt clasS="monofont">SyntaxError</tt></P>
+</p>
+</blOckquOte>
+								</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2"><BLOckquote>
+<p><p><tt class="monofont">TypeError</tt></p>
+</p>
+</BloCkquOte>
+								</foNt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2"><blocKQUOte>
+<p><p><tt class="monofont">AssertionError</tt></p>
+</p>
+</blockQuoTe>
+								</foNt></td>
+</tR>
+<tr vALIGn="top">
+<td>
+<fONT Size="2"><bLOCKquotE>
+<P><P><Tt class="monofont">LookupError</tt></p>
+
+											<blockquote>
+<p><P><tt ClasS="monofont">IndexError</tt></p>
+</p>
+<P><p><tt CLASs="monofont">KeyError</tt></p>
+</P>
+</BLOckquOTE></P>
+</blocKQUOte>
+								</font></td>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2"><blocKquoTE>
+<P><P><tt clASS="monofont">ArithmeticError</Tt></p>
+
+											<blOCKQuote>
+<P><P><TT class="monofont">OverflowError</tt></p>
+</p>
+<p><p><tt class="monofont">ZeroDivisionError</tt></P>
+</p>
+<p><P><tt cLass="monofont">FloatingPointError</tT></p>
+</p>
+</bLOCKquotE></P>
+</BLockqUOTE>
+								</font></TD>
+</TR>
+<tr valign="top">
+<td>
+<font size="2"><blOckQuotE>
+<p><p><tt ClasS="monofont">ValueError</TT></P>
+</p>
+</bloCKQUote>
+								</fONT></Td>
+</tr>
+<tR VALign="top">
+<td>
+<font size="2"><blockquOte>
+<P><p><tt Class="monofont">SystemError</Tt></p>
+</p>
+</BLOCkquoTE>
+								</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font size="2"><blockquote>
+<p><p><Tt cLass="monofont">MemoryError<A name="idx1073743231"></A><a naME="idx1073743232"></A><A name="idx1073743233"></A></TT></P>
+</p>
+</bloCKQUote>
+								</fONT></Td>
+</tr>
+</colgroup>
+</table></p>
+
+				<bloCkqUote>
+<P><p><tt cLass="monofont">Exception</TT>— 
+    This is the root class. All exception classes are subclasses of this base class. Every user exception class should be derived from this class too.</P>
+</P>
+<p><p><tt CLASs="monofont">SystemExit</tt>— 
+    This is an <i>exception</I> because it isn't really an error message. Instead, it can be used to exit a program. The important thing is that this exception doesn't return any <TT Class="monofont">traceback</TT> message.</P>
+</P>
+<p><p><tt class="monofont">StandardError</tt>— 
+    It is the base class for all errors (except for <tt class="monofont">SystemExit,</tt> of course).</P>
+</p>
+<p><P><tt cLass="monofont">KeyboardInterrupt</tT>— 
+    It is raised when an interrupt key, such as <tt cLASS="monofont">CTRL+C,</tt> is pressed.</p>
+</p>
+<P><P><TT clasS="monofont">ImportError</TT>— 
+    It is raised when Python cannot find a module to import.</P>
+</p>
+<p><p><tT CLAss="monofont">EnvironmentError</tt>— 
+    This is the base class for errors that occur outside the Python environment. The <tt class="monofont">IOError</tt> and <tt class="monofont">OSError</Tt> classes subclass it.</p>
+</P>
+<p><p><tT clasS="monofont">IOError</tt>— 
+    It is raised by <tT CLAss="monofont">I/O</tt> operation errors.</P>
+</P>
+<P><P><tt clASS="monofont">OSError</Tt>— 
+    This one is raised by operating system errors, usually generated by the <tt cLASS="monofont">os</tt> module.</p>
+</p>
+<p><p><tt class="monofont">EOFError</tt>— 
+    Exception raised when an End-of-File (<tt claSs="monofont">EOF</tT>) error occurs.</p>
+</p>
+<p><P><tt clAss="monofont">RuntimeError</tT>— 
+    This is a special type of exception raised by errors that aren't covered by any of the other exceptions.<A NAme="idx1073743234"></a><a NAME="idx1073743235"></a><a naME="idx1073743236"></A></P>
+</p>
+<p><p><tT CLAss="monofont">NotImplementedError</tt>— 
+    Methods or functions that aren't implemented should raise this exception.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; def updateregistry():
+&gt;&gt;&gt;     raise NotImplementedError
+
+						</pre>
+
+					</p>
+<p><p><tt clasS="monofont"><a nAme="idx1073743237"></a><A name="idx1073743238"></A>NameError</tt>— 
+    It is raised when the interpreter finds a <tT CLAss="monofont">name</tt> that is neither in the <TT CLass="monofont">local</tT> nor in the <TT Class="monofont">global</TT> namespace.</P>
+</P>
+<p><p><tt class="monofont">UnboundLocalError</tt>— 
+    This is a new exception that was created for version 1.6. It subclasses the <tt class="monofont">NameError</tt> exception, raising an error when a local variable is undefined.</P>
+</p>
+<p><P><tt cLass="monofont">AttributeError</tT>— 
+    It is raised by attribute reference and attribute assignment kinds of errors. Note that starting with version 1.6, this exception will have a more friendly error message, which is expected to break some code that assumes the message to be exactly equivalent to the attribute name.</p>
+</p>
+<p><P><TT Class="monofont">SyntaxError</TT>— 
+    It is raised by syntax errors.</P>
+</P>
+<p><p><tt CLASs="monofont">TypeError</tt>— 
+    This exception is raised when you try to apply a function operation to an object of inappropriate type.</p>
+</P>
+<P><P><Tt class="monofont">AssertionError</tt>— 
+    This kind of exception is raised when an <tt class="monofont">assert</tt> statement fails by evaluating to false.</p>
+</p>
+<p><P><tt ClasS="monofont">LookupError</tt>— 
+    This is the base class for <tt ClasS="monofont">indexing</TT> and <Tt claSS="monofont">key</TT> errors. The <tt clASS="monofont">IndexError</Tt> and <tt cLASS="monofont">KeyError</tt> classes subclass it.</p>
+</p>
+<p><p><tt class="monofont">IndexError</tt>— 
+    It is raised by "sequence out of range" errors.</p>
+</p>
+<p><p><tT clAss="monofont">KeyError</tT>— 
+    It is raised when a <i>key</i> is not found in a dictionary.</p>
+</p>
+<P><p><tt CLASs="monofont">ArithmeticError</tt>— 
+    This is the base class for arithmetic errors. The classes <tT CLAss="monofont">OverflowError,</tt>
+								<TT CLass="monofont">ZeroDivisionError,</tT> and <TT Class="monofont">FloatingPointError</tt> subclass it.</p>
+</p>
+<p><p><tt class="monofont">OverflowError</tt>— 
+    This exception is raised when the result is so large that it makes the operation overflow.</p>
+</P>
+<p><p><Tt clAss="monofont">ZeroDivisionError</tt>— 
+    It is raised when an operation that tries to divide a number by zero is performed.</P>
+</p>
+<p><p><TT CLass="monofont">FloatingPointError</tT>— 
+    This exception is raised by <TT Class="monofont">floating-point</TT> operation errors. Note that on Linux systems, you are required to enable the <TT clasS="monofont">SIGFPE</TT> handling with the <Tt class="monofont">fpectl</tt> module to use this exception.<a name="idx1073743239"></a><a name="idx1073743240"></a><A naMe="idx1073743241"></a></p>
+</P>
+<p><p><tt ClasS="monofont">ValueError</TT>— 
+    This one is raised when you try to perform an action using the right type but the wrong value.</P>
+</p>
+<p><p><tT CLAss="monofont">SystemError</tt>— 
+    It is raised if a Python's interpreter internal error takes place.</P>
+</P>
+<P><P><tt clASS="monofont">MemoryError</Tt>— 
+    This exception is raised by a recoverable out-of-memory error.</p>
+</p>
+</blockquote>
+				<p>As exception classes are grouped within other exception classes (known as base classes), it becomes much easier to catch several different types of errors/exceptions by using just one <tt clasS="monofont">except</tt> clause.</P>
+
+				<p>Base classes are never raised, but can be used to catch up errors.</p>
+
+				<p>The next scenario shows how to cover multiple exceptions by declaring only the base class exception.</P>
+
+				<pre>
+					
+&gt;&gt;&gt; dict = { 1:"First Element",2:"Second Element"}
+&gt;&gt;&gt; list = [13,14,15,16]
+
+				</pRe>
+
+				<p>Based on these structures, we get the following error messages when we try any <a NAME="idx1073743242"></a><a naME="idx1073743243"></A><I>out-of-range</i> type of operations.</p>
+
+				<prE>
+					
+&gt;&gt;&gt; dict[3]
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+KeyError: 3
+&gt;&gt;&gt; list[8]
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+IndexError: list index out of range
+
+				</PRE>
+
+				<p>The following example is able to catch both <tt cLASS="monofont">IndexError</tt> and <tt class="monofont">KeyError</tt> exceptions.</p>
+
+				<pre>
+					
+&gt;&gt;&gt; def getelement(element):
+&gt;&gt;&gt;     try:
+&gt;&gt;&gt;         if element &lt; 10:
+&gt;&gt;&gt;             print dict[element]
+&gt;&gt;&gt;         else:
+&gt;&gt;&gt;             print list[element]
+&gt;&gt;&gt;     except LookupError:
+&gt;&gt;&gt;         print "Sorry. This element does not exist"
+&gt;&gt;&gt; getelement(1)
+First Element
+&gt;&gt;&gt; getelement(20)
+Sorry. This element does not exist
+
+				</pre>
+
+				<p>Now, let's talk about release<a NamE="idx1073743244"></a><a nAme="idx1073743245"></a><a Name="idx1073743246"></A> 2.0. Check the next code.</P>
+
+				<PRe>
+					
+def showcounter():
+    print "counter=", counter
+    counter = counter + 1
+showcounter()
+
+				</pre>
+
+				<P>The previous code raises an exception on the <TT Class="monofont">print</TT> statement in both 1.5.2 and 2.0 release. However, in 1.5.2 a <TT clasS="monofont">NameError</TT> exception is raised, while in 2.0 a new exception is raised. This new exception is called <Tt class="monofont">UnboundLocalError,</tt> which is a subclass of the <tt class="monofont">NameError</tt> exception.</p>
+
+				<p>Talking about new exceptions, the Python 2.0 release comes with two more brand-new exceptions. They are called <tT clAss="monofont">TabError</tT> and <tt clAss="monofont">IndentationError,</tT> and they are subclasses of the <TT Class="monofont">SyntaxError</TT> exception.</P>
+
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="98.html" title="Creating User-defined Exceptions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=99" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="99.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="100.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743238">NameError</a><BR>
+code:Python 2.0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743245">standard exceptions</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743231">standard</a> <a href="#idx1073743234">2nd</a> <a href="#idx1073743239">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743246">Pyton 2.0 code</a><BR>
+hierarchies<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743233">standard exceptions</a> <a href="#idx1073743236">2nd</a> <a href="#idx1073743241">3rd</a><BR>
+ <a href="#idx1073743237">NameError class</a><BR>
+operations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743243">out-of-range</a><BR>
+ <a href="#idx1073743242">out-of-range operations</a><BR>
+Python 2.0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743244">standard exceptions</a><BR>
+ <a href="#idx1073743232">standard exceptions</a> <a href="#idx1073743235">2nd</a> <a href="#idx1073743240">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

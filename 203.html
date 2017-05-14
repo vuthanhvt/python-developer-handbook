@@ -1,0 +1,1155 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Overview of Other GUI Modules</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="199.html" class="navtitle">14. Python and GUIs</a> &gt; <span class="nonavtitle">Overview of Other GUI Modules</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="202.html" title="The Tkinter Module"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=203" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="203.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="204.html" title="Designing a Good Interface"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A47%3A46+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148043124062198187105063</font><a href="read3.asp?bookname=0672319942&snode=203&now=5%2F31%2F2002+4%3A47%3A46+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Overview of Other GUI Modules</h3>
+				<p>Python's powerful object implementation and portability has
+encouraged the development of many other GUI toolkits. Consequently, you have a
+number of options to try before deciding which one is the best solution for
+your project.</p>
+
+				
+					<H4>
+
+
+
+
+Pythonwin/MFC</H4>
+					<P>Pythonwin is a wrapper, written by 
+<A name="idx1073748186"></A>Mark Hammond, to the 
+<A NAme="idx1073748187"></a>
+						<a NAME="idx1073748188"></a>
+						<i>Microsoft Foundation Class Library
+(MFC).</i> It is included within the Windows Python distribution.</p>
+
+					<p>Actually, Pythonwin is distributed as two key
+components—<tt class="monofont">Pythonwin.exe</tt> and
+<tt clasS="monofont">win32ui.pyd.</tt> The latter contains all the bindings to the MFC
+(tens of MFC objects are exposed, including Common Controls, Property
+Pages/Sheets, Toolbars, and so on), and the former is a simple wrapper that
+hosts <Tt clAss="monofont">win32ui.pyd,</tt> being just a sample program for the MFC
+user interface environment.</P>
+
+					<p>Pythonwin runs only on Windows, hence, if you need to have your
+program running on both Win32 and UNIX platforms, you can use the Tk libraries
+instead.</p>
+
+					<p>Using Pythonwin, you can design applications that are bound very
+tightly to Windows, using MFC in an interactive and interpreted environment to
+provide the features of the Windows user interface. The user interface
+environment provided by Pythonwin can be embedded in almost any other
+application—such as OLE clients/servers, Netscape plugins, and so
+on.</P>
+
+					<P>Inside the Pythonwin distribution, you will find a Help File
+(<TT clasS="monofont">Pythonwin.hlp</TT>), which is a reference manual for all the
+objects exposed in Pythonwin. That is a great start for you.</P>
+
+					<p>Pythonwin's homepage provides resources documenting the Pythonwin
+GUI environment. There is also some general documentation on the MFC
+Architecture. After you install Pythonwin, you can find more details in the
+documentation that comes bundled in it. For more information, check out the
+Pythonwin home page at</p>
+
+					<p>
+						<a TARGet="_blank" hrEF="http://www.python.org/windows/pythonwin/">http://www.python.org/windows/pythonwin/</A>
+					</P>
+
+					<p>This next document describes how to imbed the
+<tt class="monofont">win32ui</tt> extension module in your own application:</p>
+
+					<p><a target="_blank" hRef="http://www.python.org/windows/pythonwin/EmbeddingWin32ui.html">http://www.python.org/windows/pythonwin/EmbeddingWin32ui.html</A>
+						<a naMe="idx1073748189"></a>
+						<a nAme="idx1073748190"></a>
+						<A NAMe="idx1073748191"></a>
+						<a nAME="idx1073748192"></A>
+						<a namE="idx1073748193"></A>
+					</P>
+
+				
+				
+					<H4>
+
+
+
+
+wxPython</h4>
+					<p>wxPython is a GUI toolkit for the Python programming language
+that works like a wrapper to the wxWindows C++ library. It is written in Python
+and uses the LPGL license.</p>
+
+					<p>wxPython is a relatively fast cross-platform toolkit, and maybe
+it hasn't become the standard Python GUI yet because Tkinter is more portable.
+As a matter of fact, wxPython is the second most common GUI, coming just after
+Tkinter.</P>
+
+					<P>Currently only Win32 and UNIX-like systems with GTK are
+supported. There are plans to support wxPython on any platform running
+wxWindows.</P>
+
+					<P>wxWindows is a free, well-established, and well-documented set of
+libraries that allows C++ applications to compile and run on several different
+types of computers, with minimal source code changes.</p>
+
+					<p>The <i>wx</i> in the name wxWindows means w for
+Windows, and x for X system. It is supposed to be a way to say that it is a
+Windows system that supports both platforms.</p>
+
+					<p>Each supported GUI (such as GTK+, Windows, Motif, and Mac) has
+its own library provided by the wxWindows, which exposes natural API for all of
+them. The API is much simpler to use than other native GUI APIs. Note that you
+cannot use wxWindows as a GUI translator.
+<a name="idx1073748194"></a>
+						<a name="idx1073748195"></a>
+						<a nAme="idx1073748196"></A>
+						<a naMe="idx1073748197"></a>
+						<a nAme="idx1073748198"></a>
+					</P>
+
+					<P>wxWindows provides a lot of extra built-in functionality for you
+as well, and you can decide whether you want to use it. Such extra features
+have the main goal of providing ways for you to develop user-friendly GUI
+applications. Included in this functionality are many useful dialogs, built-in
+HTML display and printing, support to virtual filesystems, OLE automation
+controller class, and Open GL support. It also offers access to common
+operating system operations, such as file copying and deletion, and network
+support for threads and sockets. wxWindows also supports basic data structures
+such as arrays, strings, linked lists, and hash tables. If you are coming from
+an MFC architecture, you can consider yourself lucky because both frameworks
+are very similar, which makes it easier to port applications from one to
+another. Python and wxWindows have a great thing in common, both had a
+object-oriented conception. That was one thing that made it possible to develop
+wxPython, a fully compatible interface to the libraries. Remember that it is
+very easy to translate C++ calls to Python calls.</P>
+
+					<P>wxPython is a very active Open Source project that makes its
+source code freely available for anyone who wants to use or modify it. If you
+want, you can also participate by contributing with new ideas and bug solutions
+for the project.</p>
+
+					<p>Using wxPython, it is easier to run the same program on multiple
+platforms without modification. Currently, wxPython supports Microsoft Windows
+and most UNIX-like systems.</p>
+
+					<p>This extension module allows programmers to use a strong, highly
+functional graphical user interface to easily write Python programs that can
+create instances of wxWindows 2.0 C++ classes, and invoke their methods.</P>
+
+					<P>wxPython classes are mirrored as closely as possible to the
+wxWindows class hierarchy. But, we need to consider the difference between
+Python and C++, and understand that we don't have a 100% match. However, these
+distinctions can be easily handled by Python. For example, some methods in the
+wxWindows library return multiple values by returning argument pointers; the
+equivalent Python method returns a tuple of values instead.</P>
+
+					<P>If you go to wxPython's Web site, you can get the latest version
+of wxPython, and optionally download a self-installer for Win32 systems. The
+distribution includes a pre-built extension module, documentation in HTML help
+format and a set of demos. You also have available, among other things, a Linux
+RPM, wxPython sources, and documentation in raw HTML.</p>
+
+					<p>If you will build wxPython from sources yourself, you will also
+need the wxWindows sources, available from 
+<a tARGEt="_blank" hreF="http://www.wxwindows.org/">http://www.wxwindows.org/</A>.</P>
+
+					<P>wxPython has its own mailing list. It is not that difficult to
+find WxPython's creator, 
+<a name="idx1073748199"></a>Robin Dunn, answering messages on the list. But as in any
+other list, always check the archives before posting a question.
+<a name="idx1073748200"></a>
+						<a name="idx1073748201"></a>
+						<a nAme="idx1073748202"></A>
+						<a naMe="idx1073748203"></a>
+						<a nAme="idx1073748204"></a>
+					</P>
+
+					<P>A number of documentation resources are available for both
+wxPython and wxWindows. The wxPython interface is very close to the wxWindows
+implementation in C++, which makes most of the wxPython documentation be just
+simple notes attached to the C++ documents that describe the places where
+wxPython is different.</P>
+
+					<P>The Web site has a series of sample programs and documentation
+pages that can assist you in getting started with wxPython.</p>
+
+					<p>By downloading wxPython, you get two other documentation
+resources, on 
+<a nAME="idx1073748205"></A>
+						<i>Ogl</i> (for graphics) and an
+introduction to wxWindows, which has received additional wxPython material from
+Robin. This addendum demonstrates how all wxWindows classes are implemented in
+wxPython. Not all binaries contain this document, hence, you might need to get
+it directly from the Web site.</p>
+
+					<bLOCKquotE>
+<P>
+							<P>wxPython home page</P>
+
+						</p>
+<p>
+							<p>
+								<a target="_blank" href="http://wxpython.org/">http://wxpython.org/</a>
+							</p>
+
+						</p>
+<p>
+							<p>wxPython Tutorial</p>
+
+						</P>
+<p>
+							<p>
+								<A tarGet="_blank" hrEf="http://wxpython.org/tutorial.html">http://wxpython.org/tutorial.html</a>
+								<a NAME="idx1073748206"></a>
+								<a naME="idx1073748207"></A>
+								<A name="idx1073748208"></A>
+								<A NAme="idx1073748209"></a>
+								<a NAME="idx1073748210"></a>
+							</p>
+
+						</p>
+</blockquote>
+				
+				
+					<h4>STDWIN</h4>
+					<p>STDWIN stands for <i>Standard Window Interface.</i>
+It is a platform-independent interface to C-based window systems. Currently,
+STDWIN is obsolete and unsupported, without any further development effort
+being made. The <tt ClaSs="monofont">stdwin</tt> module has been removed for Python
+2.0. The Python people say that if you want to use <Tt claSs="monofont">stdwin,</tt>
+you should grab an older Python release. There is not really any reason you
+would want to use this toolkit.</P>
+
+					<P>Python's <TT clasS="monofont">stdwin</TT> module defines several new
+object types and functions that provide access to the functionality of the
+Standard Window Interface, STDWIN.</P>
+
+					<div cLASS="note"><p claSS="notetitle"><B>Tip</B></p><p>
+
+						<p>For a complete description of STDWIN, take a look at the
+documentation of STDWIN for C programmers (CWI report CR-R8817).</p>
+
+					</p></div>
+<br>
+<br>
+
+					<p>This module is available on systems to which STDWIN has been
+ported, including UNIX, Mac, and Windows. Initially, many Python developers had
+adopted this module, but later, most of them migrated to Tkinter mostly because
+of the limited functionality imposed by <tt class="monofont">stdwin's</Tt> design.
+However, if you install the latest available version available of this module,
+you can still use it as a solution for many types of applications. Of course,
+you probably wouldn't want to use <tT claSs="monofont">stdwin</tt> ever.</p>
+
+					<P>The next example demonstrates a simple implementation of the
+<tt cLASS="monofont">stdwin</tt> module.</p>
+
+					<pRE>
+						
+  1: import stdwin, stdwinevents
+  2:
+  3: def mainloop():
+  4:     appwin = stdwin.open('Hello')
+  5:     while 1:
+  6:         (type, win, detail) = stdwin.getevent()
+  7:         if type == stdwinevents.WE_DRAW:
+  8:             draw = win.begindrawing()
+  9:             draw.text((0, 0), 'Hello Python world')
+ 10:             del draw
+ 11:         elif type == stdwinevents.WE_CLOSE:
+ 12:             break
+ 13:
+ 14:  mainloop()
+
+					</PRe>
+
+					<p>This small program works by creating a main loop, and checking
+the events that occur in the windowing environment. When the program starts, it
+creates and draws a window. Every time the window needs to be redrawn, a
+<tt CLASs="monofont">WE_DRAW</tt> event is caught by this program (line 7), triggering
+the line of code that draws a message in the window (line 9). This program only
+ends when the user closes the window, sending the <tT CLAss="monofont">WE_CLOSE</tt>
+event notification to the main loop (line 11).</p>
+
+					<p>The latest STDWIN distribution can be downloaded at</p>
+
+					<p><a target="_blank" href="ftp://ftp.cwi.nl/pub/stdwin/index.html">ftp://ftp.cwi.nl/pub/stdwin/index.html</a></P>
+
+					<a nAme="idx1073748211"></a>
+					<A name="idx1073748212"></A>
+					<a naME="idx1073748213"></A>
+					<A name="idx1073748214"></A>
+					<A NAme="idx1073748215"></a>
+					<a NAME="idx1073748216"></a>
+					
+						<h5>
+
+
+
+
+PyQt</h5>
+						<p>PyQt is a set of straightforward Python bindings for the Qt
+toolkit, which is written in C++. The bindings are implemented as a single
+Python module called <I>qt,</I> and this module exposes a very
+comprehensive collection of useful classes. The current version supports Qt
+versions 1.42 to 2.1.x. The main new feature is support for the new Qt v2.0.x
+widgets. PyQt will also compile with Qt v2.1.0-beta3, but the new Qt v2.1.x
+widgets are not yet supported.</P>
+
+						<Div class="note"><p class="notetitle"><b>Tip</b></p><p>
+
+							<p>QT is a cross-platform product between UNIX and Windows. The
+main difference is that you have to pay for using it on Windows platforms,
+whereas on UNIX, you just need to pay for proprietary usage. It is completely
+legal to use Qt commercially if you meet its license conditions.</p>
+
+						</p></Div>
+<Br>
+<br>
+
+						<P>PyQT's Web site is a good source of documentation about PyQT
+and QT itself. You can even learn how to migrate your QT calls from C++ to
+Python. But if you need more information about PyQT, you can use the PyQT
+mailing list.</p>
+
+						<bloCkquOTE>
+<P>
+								<p>PyQT: Development Tools for Qt Libraries</p>
+
+								<p><a TARGet="_blank" hrEF="http://www.thekompany.com/projects/pykde">http://www.thekompany.com/projects/pykde</A></P>
+
+							</p>
+</bloCKQUote>
+						<p>Check the following article, written by Boudewijn Rempt and
+Cameron Laird, about implementing QT bindings on the next release of
+Python:</p>
+
+						<p><a target="_blank" href="http://www.sunworld.com/sunworldonline/swol-05-2000/swol-05-qt.html">http://www.sunworld.com/sunworldonline/swol-05-2000/swol-05-qt.html</a>
+							<a nAme="idx1073748217"></A>
+							<a naMe="idx1073748218"></a>
+							<a nAme="idx1073748219"></a>
+							<A NAMe="idx1073748220"></a>
+							<a nAME="idx1073748221"></A>
+						</p>
+
+					
+				
+				
+					<h4>
+
+
+
+
+PyKDE</h4>
+					<p>
+						<I>PyKDE</I> is a set of Python bindings, developed
+by 
+<A Name="idx1073748222"></a>Phil Thompson, for the KDE toolkit—the KDE classes.
+It is important to know that the Python bindings for the Qt toolkit (PyQt) must
+also be installed because it comes in a different package, and that KDE 2 is
+not yet supported. Just as KDE uses QT, PyKDE uses PyQT.</P>
+
+					<P>The bindings are implemented as a number of Python modules
+corresponding to the names of the separate KDE libraries; that is,
+<TT class="monofont">kdecore,</tt>
+						<tt class="monofont">kdeui,</tt>
+						<tt clAss="monofont">kfm,</Tt>
+						<tt Class="monofont">kfile,</Tt>
+						<tt CLASs="monofont">khtmlw,</tt> and
+<tT CLAss="monofont">kspell.</tt> They support all KDE version 1 releases. Keep in
+mind that KDE is licensed under the LPGL.</P>
+
+					<P>You can find help and more information about PyKDE in the project
+mailing list, which is the same mailing list as for PyQT. Also, note that
+because PyKDE requires the KDE libraries, it runs only on the UNIX
+platform.</P>
+
+					<BlockQUOTe>
+<p>
+							<p>PyKDE: Development Tools for KDE Libraries</p>
+
+							<p><a target="_blank" href="http://www.thekompany.com/projects/pykde">http://www.thekompany.com/projects/pykde</a>
+							</p>
+
+						</p>
+<p>
+							<P>
+								<i>Python + KDE Tutorial and Examples,</i> by
+Boudewijn Rempt</P>
+
+							<p><a tArget="_blank" Href="http://www.xs4all.nl/~bsarempt/python/tutorial.html">http://www.xs4all.nl/~bsarempt/python/tutorial.html</A>http://www.valdyas.org/python/tutorial.html
+<A NAme="idx1073748223"></a>
+								<a NAME="idx1073748224"></a>
+								<a naME="idx1073748225"></A>
+								<A name="idx1073748226"></A>
+								<A NAme="idx1073748227"></a>
+							</p>
+
+						</p>
+</blockquote>
+				
+				
+					<h4>
+
+
+
+
+Wpy</h4>
+					<p>Wpy is a class library system, based on the Microsoft Foundation
+Classes, that is used for writing GUI code easily in Python. Wpy is designd
+for simplicity and portability.</p>
+
+					<p>The Wpy Web site provides instructions about how to install the
+library and use it to run Python programs with windowing GUI capability on UNIX
+using Tk, Windows 3.1 (16-bit native), and Windows 95, 98, and NT (32-bit
+native). The source code and the main standard binary ports are available for
+download.</P>
+
+					<p>A Python/Wpy Netscape plug-in DLL is also provided. This plug-in
+enables you to write Wpy programs that access the Netscape plug-in API and run
+in the browser window.</p>
+
+					<BlocKquotE>
+<p>
+							<p>Wpy Index</p>
+
+							<P><A TArget="_blank" HREF="http://www.cwi.nl/ftp/python/wpy/">http://www.cwi.nl/ftp/python/wpy/</a>
+								<a naME="idx1073748228"></A>
+								<A name="idx1073748229"></A>
+								<A NAme="idx1073748230"></a>
+								<a name="idx1073748231"></a>
+								<a name="idx1073748232"></a>
+							</p>
+
+						</p>
+</bloCkqUote>
+				
+				
+					<H4>
+
+
+
+
+PyGTK</h4>
+					<p>
+						<a nAme="idx1073748233"></a>
+						<A NAMe="idx1073748234"></a>GTK+ is a Free Software GUI Toolkit that has a large
+number of widgets, primarily developed for use with the X Window System.
+Everything about GTK+ from the object-oriented design to the Free Software LGPL
+licensing allows you to code your project with the most freedom possible. GTK
+is similar to Qt, but the difference is that you can develop open software,
+free software, or even commercial non-free software without having to pay
+anything for licenses. GTK's license allows linking to proprietary applications
+although the library itself must remain free (in the sense of freedom). The
+upcoming GTK+ 2.0 includes multi-language support, and framebuffer, Mac,
+Windows, and BeOS ports are being worked on.</p>
+
+					<p>
+						<A TARget="_blank" hREF="http://www.gtk.org/">http://www.gtk.org/</A>
+					</p>
+
+					<p>PyGTK is a set of bindings developed by 
+<a nAME="idx1073748235"></A>James Henstridge, for the GTK widget set and GNOME
+libraries that runs on any platform that supports GTK. It provides an
+object-oriented interface that is a slightly higher level than the C one. It
+automatically does all the type casting and reference counting that you would
+have to do normally with the C API. Talking about C, all the underlying C
+classes are documented on the GTK homepage.</p>
+
+					<p>Many simple examples come with PyGTK. They are a good start for
+your projects. Look in the <tt class="monofont">pygtk/examples</tt> or
+<tt class="monofont">pygnome/examples</tt> directory for details. The
+<Tt cLass="monofont">pygnome/examples</Tt> directory is only part of the
+<tt cLass="monofont">gnome-python</TT> package that is covered in the next
+section.</P>
+
+					<P>The following code, extracted from 
+<a namE="idx1073748236"></A>James Henstridge PyGTK's Web site, shows how simple it is
+to use the PyGTK module:</P>
+
+					<Pre>
+						
+from gtk import *
+
+def hello_cb(button):
+    print "Hello World"
+    window.destroy()
+
+window = GtkWindow(WINDOW_TOPLEVEL) # create a top level window
+window.connect("destroy", mainquit) # quit the event loop on destruction
+window.set_border_width(10)          # set padding round child widget
+
+button =GtkButton("Hello World")
+button.connect("clicked", hello_cb) # call hello_cb when clicked
+window.add(button)                   # add button to window
+button.show()                         # show button
+
+window.show()
+mainloop()                            # enter the main event loop
+
+					</prE>
+
+					<P>PyGTK is available for download at the following FTP
+sites:</P>
+
+					<A name="idx1073748237"></A>
+					<A NAme="idx1073748238"></a>
+					<a name="idx1073748239"></a>
+					<a name="idx1073748240"></a>
+					<a name="idx1073748241"></A>
+					<p><a TargEt="_blank" hreF="http://ftp://ftp.gtk.org/pub/gtk/python/">http://ftp://ftp.gtk.org/pub/gtk/python/</a></p>
+
+					<p><A TARget="_blank" hREF="http://ftp://ftp.python.org/bub/contrib/Grahics/">http://ftp://ftp.python.org/bub/contrib/Grahics/</A></p>
+
+					<p><a tARGEt="_blank" hreF="http://ftp://ftp.daa.com.au/pub/james/python/">http://ftp://ftp.daa.com.au/pub/james/python/</A>
+					</P>
+
+					<P>More information about PyGTK can be found at James Henstridge's
+PyGTK home page:</p>
+
+					<p>
+						<a target="_blank" href="http://www.daa.com.au/~james/pygtk/">http://www.daa.com.au/~james/pygtk/</a>
+					</p>
+
+					<p>
+						<a namE="idx1073748242"></a>
+						<i>pygtools,</I> a Web site maintained by 
+<a naMe="idx1073748243"></a>J.W. Bizzaro, is an excellent resource for PyGTK
+information. It contains the latest news about GNU development for Python,
+including GTK projects.</p>
+
+					<p><A tarGET="_blank" Href="http://theopenlab.uml.edu/pygtools">http://theopenlab.uml.edu/pygtools</a>
+					</P>
+
+					<P>If you need to implement GTK application on Windows, there are a
+couple of Python wrappers over GTK+ that you can use, such as</P>
+
+					<BlockQUOTe>
+<p>
+							<p>
+								<i> PyGTK on Win32,</I> by Kevin J.
+Butler</P>
+
+							<P><A target="_blank" href="http://theopenlab.uml.edu/pygtkwin/">http://theopenlab.uml.edu/pygtkwin/</a></p>
+
+						</p>
+<p>
+							<p>
+								<i>PyGTK on Win32</i>, by Hans Breuer</p>
+
+							<p><a TarGet="_blank" hRef="http://hans.breuer.org/ports/">http://hans.breuer.org/ports/</a></p>
+
+						</P>
+</bloCKQUote>
+					
+						<h5>
+
+Gnome-Python</H5>
+						<P>The Gnome project has built a complete free and easy-to-use
+desktop environment for the user, as well as a powerful application framework
+for the software developer. For more information, check out</P>
+
+						<P><a tarGET="_blank" Href="http://www.gnome.org/">http://www.gnome.org/</a></P>
+
+						<P>The next Web address points you to a set of bindings for the
+Gnome libraries for use with python. Although <TT class="monofont">gnome-python</tt>
+uses PyGTK, you don't need to have the PyGTK package compiled or individually
+installed before compiling <tt class="monofont">gnome-python.</tt> This library runs
+on UNIX only, and it is licensed under the LGPL.</p>
+
+						<p><a tArgEt="_blank" hrEf="ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnome-thon/"> ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnome-thon/</a></p>
+
+						<p>
+							<A namE="idx1073748244"></A>
+							<I>Developing Gnome Applications with
+Gnome-Python</I> is a very comprehensive article written by 
+<a namE="idx1073748245"></A>Daniel Solin that covers the main aspects of writing a
+program using Gnome-Python. It is located at</P>
+
+						<P>
+							<a tarGET="_blank" Href="http://www.linuxdev.net/features/articles/05.24.2000/">http://www.linuxdev.net/features/articles/05.24.2000/</a>
+							<A NAMe="idx1073748246"></a>
+							<a name="idx1073748247"></a>
+							<a name="idx1073748248"></a>
+							<a name="idx1073748249"></a>
+							<A naMe="idx1073748250"></a>
+							<a Name="idx1073748251"></a>
+							<A namE="idx1073748252"></A>
+						</P>
+
+					
+				
+				
+					<H4>
+
+
+
+
+
+PyOpenGL</h4>
+					<p>
+						<i>OpenGL</i> is the premier environment for
+developing portable, interactive 2D and 3D graphics applications from modeling
+to scientific to games. Since its introduction in 1992, OpenGL has become the
+industry's most widely used and supported 2D and 3D graphics
+<I>application programming interface (API),</I> bringing
+thousands of applications to a wide variety of computer platforms. OpenGL
+fosters innovation and speeds application development by incorporating a broad
+set of rendering, texture mapping, special effects, and other powerful
+visualization functions. Developers can leverage the power of OpenGL across all
+popular desktop and workstation platforms, ensuring wide application
+deployment.</P>
+
+					<P>
+						<i>PyOpenGL</i>
+						<i>(Python Tk-OpenGL
+Module)</i> is the OpenGL-Widget for Python/Tk. Initially based on the
+Togl widget, this module was written by David Ascher, Mike Hartshorn, Jim
+Hugunin, and Tom Schwaller. <TT CLass="monofont">PyOpenGL</tT> contains both a wrapper
+for the Togl Tk widget and bindings for OpenGL. The non-Tk portions of PyOpenGL
+can be used with other toolkits, such as PyGTK and others. For more
+information, see the following sites:</P>
+
+					<BLockquote>
+<p>
+							<p>History, installation, and tutorial for the Python Tk-OpenGL
+Module (with sample code).</p>
+
+							<p><a target="_blank" hRef="http://www.python.de/">http://www.python.de/</A>
+								<a naMe="idx1073748253"></a>
+								<a nAme="idx1073748254"></a>
+								<A NAMe="idx1073748255"></a>
+								<a nAME="idx1073748256"></A>
+								<a namE="idx1073748257"></A>
+								<A Name="idx1073748258"></a>
+							</P>
+
+						</P>
+</BLockquote>
+				
+				
+					<h4>
+
+
+
+
+
+wafepython</h4>
+					<p>
+						<i>Wafe,</i> which stands for <i>Widget
+Athena front end,</i> is a package that implements a symbolic,
+string-based interface based on Tcl to the X Toolkit, the Athena Widget Set,
+the OSF/Motif Widget Set (versions 1.1 to 2.0), and various complementary
+widget classes and extension packages. Using Wafe, one can develop applications
+with high-level graphical user interfaces in the scripting language Tcl, or one
+can use Wafe mostly as a graphical front end that provides an easy access to
+GUI programming for various programming languages.</p>
+
+					<p>Because Wafe can be easily linked with C programs, it can also be
+used to provide GUI functionality for other interpretative languages by
+extending these languages by a few commands. In the Wafe distribution are
+sample implementations for embedding Wafe in interpretative languages,
+including Python. These implementations provide a bidirectional interface from
+and to Wafe (for example, Wafe calls Python and Python calls Wafe).</p>
+
+					<blOckQuotE>
+<p>
+							<p>wafepython (a version of Python enhanced with Wafe
+commands)</p>
+
+							<p><A tarGET="_blank" Href="http://www.wu-wien.ac.at/wafe/wafe.html">http://www.wu-wien.ac.at/wafe/wafe.html</a>
+								<A NAMe="idx1073748259"></a>
+								<a nAME="idx1073748260"></A>
+								<a namE="idx1073748261"></A>
+								<A Name="idx1073748262"></a>
+								<a name="idx1073748263"></a>
+								<a name="idx1073748264"></a>
+							</p>
+
+						</p>
+</blOckQuotE>
+				
+				
+					<h4>
+
+
+
+
+
+pyFLTK</h4>
+					<p>
+						<i>FLTK (Fast Light Tool Kit,</I> pronounced
+"fulltick") is a C++ graphical user interface toolkit for X
+(UNIX), OpenGL, and WIN32 (Microsoft Windows NT 4.0, 95, or 98). It is also
+largely compatible with the <tt cLASS="monofont">XForms</tt> library. FLTK is
+currently maintained by a small group of developers across the world with a
+central repository in the United States, and it is distributed under the GNU
+Library GPL (LGPL).</p>
+
+					<p>FLTK was originally created to build in-house applications at
+Digital Domain for image processing and 3D graphics. The original author, Bill
+Spitzak, received permission from Digital Domain to release it to the public
+domain in the hopes that it could be used to make better, faster, and
+nicer-looking UNIX programs. Digital Domain has since withdrawn support for
+FLTK, but Bill is still able to work on it from time to time.</P>
+
+					<P>
+						<TT clasS="monofont">pyFLTK</TT> is the Python wrapper for the Fast
+Light Tool Kit graphical user interface library. The development team is using
+SWIG to create the wrapper.</P>
+
+					<p>Kevin Dalhausen and Bjorn Petterson, among others, are working on
+these bindings for Python. They conduct their work through a mailing list. The
+main goals of the Project are to develop usable Python and Perl wrappers for
+the FLTK library; to demonstrate the wrapper's functionality by converting the
+test programs supplied with FLTK to Python and Perl; and to allow the use of
+Fluid (FLTK User Interface Designer) to generate Python and Perl graphical user
+interfaces.</p>
+
+					<p><a TARGet="_blank" href="http://netpedia.net/hosting/fltk/">http://netpedia.net/hosting/fltk/</a><a name="idx1073748265"></a>
+						<a name="idx1073748266"></a>
+						<a NamE="idx1073748267"></a>
+						<a nAme="idx1073748268"></a>
+						<a Name="idx1073748269"></A>
+						<A NAme="idx1073748270"></a>
+					</p>
+
+				
+				
+					<H4>
+
+
+
+
+
+FXPy</H4>
+					<P>FOX is a C++ based toolkit for developing GUIs easily and
+effectively. FOX runs on UNIX and Windows, and supports the LGPL kind of
+license. It offers a wide, and growing, collection of Controls and provides
+state of the art facilities such as drag and drop, selection, as well as OpenGL
+widgets for 3D graphical manipulation. FOX also implements icons, images, and
+user-convenience features such as status line help, and tooltips. Tooltips can
+even be used for 3D objects!</P>
+
+					<p>Considerable importance has been placed on making FOX one of the
+fastest toolkits around. To minimize memory use, FOX uses a number of
+techniques to speed up drawing and spatial layout of the GUI. Memory is
+conserved by allowing programmers to create and destroy GUI elements
+one-fly.</p>
+
+					<p>Even though FOX offers a large collection of Controls already,
+FOX leverages C++ to allow programmers to easily build additional Controls and
+GUI elements by taking existing controls and creating a derived class that
+simply adds or redefines the desired behavior.</p>
+
+					<P>One of the prime design goals of FOX is the ease of programming;
+thus, most controls can be created using a single line of C++ code; most
+parameters have sensible default values so that they may be omitted, and layout
+managers ensure that designers of GUIs do not have to worry about precise
+alignments.</P>
+
+					<P>Another nice feature of FOX that significantly reduces the number
+of lines of code which have to be written is FOX's ability to have widgets
+connect to each other, and pass certain commands between them. For example, a
+menu entry Hide Toolbar can be directly connected to the Toolbar, and cause it
+to hide.</P>
+
+					<p>Finally, FOX makes it easy to maintain the state of the GUI in an
+application by having the GUI elements automatically updating themselves by
+interrogating the application's state. This feature eliminates the large amount
+of effort that might go into sensitizing, graying out, checking/unchecking, and
+so on depending on the application state. For more information, check
+out</p>
+
+					<blOCKQuote>
+<p>
+							<p>FOX</p>
+
+							<p><a target="_blank" href="http://www.cfdrc.com/FOX/fox.html">http://www.cfdrc.com/FOX/fox.html</a></P>
+
+						</p>
+</bLockQuote>
+					<P>FXPy is a Python extension module, written by 
+<a naME="idx1073748271"></A>Lyle Johnson, which provides an interface to the FOX GUI
+library. FXPy is a good Python extension, and up to this date, has a quite
+complete documentation.</P>
+
+					<blocKQUOte>
+<p>
+							<p>FXPy</P>
+
+							<P><A TargeT="_blank" HREf="http://home.hiwaay.net/~johnson2/FXPy/">http://home.hiwaay.net/~johnson2/FXPy/</a>
+								<a name="idx1073748272"></a>
+								<a name="idx1073748273"></a>
+								<a name="idx1073748274"></a>
+								<A naMe="idx1073748275"></a>
+								<a Name="idx1073748276"></a>
+								<A namE="idx1073748277"></A>
+							</P>
+
+						</P>
+</blocKQUOte>
+				
+				
+					<h4>
+
+
+
+
+Motif</h4>
+					<P>Fearing the success of Sun in creating a GUI standard, other UNIX
+vendors created a committee called the 
+<A NAme="idx1073748278"></a>
+						<a NAME="idx1073748279"></a>
+						<i>Open Software Foundation (OSF).
+Motif</i> is a widely-accepted set of user interface guidelines
+developed by this committee around 1989, to specify how an X Window System
+application should look and feel.</p>
+
+					<p>Motif is the market leader among UNIX GUI toolkits—the
+single most widely used toolkit in the UNIX world, and almost 10 years after
+its creation, it enjoys both the advantages and disadvantages of maturity. It
+has the most advanced support for text from languages other than English, a
+wealth of third-party tools support it, and hundreds of books and online
+documents explain it. The disadvantages are that it has regular performance, it
+is in decline, it is a lot more difficult to program than many other toolkits,
+and it is not suitable for the current object-oriented programming
+styles.</p>
+
+					<p>Motif is so ubiquitous that many UNIX users confuse it with GUI
+operations, window managers, or other pieces of technology, and some speak as
+if Motif is the only GUI foundation or toolkit.</p>
+
+					<p>
+						<a name="idx1073748280"></a>Sjoerd Mullender bound Motif to Python in a package he
+calls the 
+<a name="idx1073748281"></A>
+						<a nAme="idx1073748282"></a>Python X Extension. Currently, this is a work in
+progress. For more information, check out</P>
+
+					<blocKquoTE>
+<P>
+							<P>Source of the Python X Extension</p>
+
+							<p><a tARGEt="_blank" hreF="http://www.cwi.nl/ftp/sjoerd/index.html">http://www.cwi.nl/ftp/sjoerd/index.html</A></P>
+
+						</P>
+</blocKQUOte>
+					<p>The following files are currently found in this site:</p>
+
+					<blockquote>
+<p>
+							<p>X-extension.tar.gz—The complete source (including
+source of documentation).</p>
+
+						</p>
+<p>
+							<p>X-extension.ps.gz—The complete documentation in
+Postscript.</P>
+
+						</p>
+<p>
+							<P>X-extension.html.tar.gz—The complete documentation as a
+set of HTML files.</p>
+
+						</p>
+<p>
+							<P>vpApp.tar.gz—A GUI application framework for (X)Python.
+<a namE="idx1073748283"></a>
+								<a nAME="idx1073748284"></A>
+								<a namE="idx1073748285"></A>
+								<A Name="idx1073748286"></a>
+								<A NAMe="idx1073748287"></a>
+							</p>
+
+						</p>
+</BLOCkquote>
+				
+				
+					<h4>
+
+
+
+
+PyAmulet</h4>
+					<p>
+						<i>PyAmulet</i> is another Python GUI. It wraps an
+underlying C library, called OpenAmulet. This GUI has been successfully tested
+on Windows platforms. For more information, check out</p>
+
+					<blockquoTe>
+<p>
+							<P>PyAmulet home page</p>
+
+							<p><a TargeT="_blank" hreF="http://www.openip.org/html/pyamulet/">http://www.openip.org/html/pyamulet/</A></P>
+
+						</P>
+<p>
+							<p>PyAmulet Documentation</p>
+
+							<p><A TARget="_blank" hREF="http://www.openip.org/html/PyAmulet/">http://www.openip.org/html/PyAmulet/</A></p>
+
+						</p>
+</blOCKQuote>
+				
+				
+					<h4>
+
+
+
+
+DynWin</h4>
+					<p>
+						<i>DynWin</i> is a dynamic GUI class library for
+Windows (Win32) and Python. It looks similar to Java's Swing library. For more
+information, check out</p>
+
+					<p><a target="_blank" hrEf="http://www.nightmare.com/~rushing/dynwin/index.html">http://www.nightmare.com/~rushing/dynwin/index.html</a>
+					</P>
+
+				
+				
+					<h4>
+
+
+
+
+
+JPI</h4>
+					<p>The <I>Java Python Interface (JPI)</i> is an
+interface that allows Java and Python (<i>the C Implementation, not
+JPython</i>) to primitively work together. Therefore, you can use Python
+as a scripting language for the Java language. Prototyping routines in Python,
+and later migrating them to Java is a simple and straightforward process
+because the similarity between both syntaxes is huge. This interface is a work
+in progress because it currently doesn't provide a total match between both
+languages.</p>
+
+					<P>This interface enables one to dynamically manipulate Java objects
+using a Python application, including GUI widget managers such as AWT, for
+example.</p>
+
+					<p><a TARGet="_blank" hrEF="http://www.ndim.edrc.cmu.edu/dougc/jpi/Home.html">http://www.ndim.edrc.cmu.edu/dougc/jpi/Home.html</A>
+					</P>
+
+					
+						<h5>
+
+
+
+
+
+AWT</h5>
+						<p>The <i>Abstract Windowing Toolkit (AWT)</I> is a
+user interface toolkit provided by the Java programming language class
+library.</P>
+
+						<P>AWT is very simple to use. Although the documentation that is
+currently provided in the Java distribution seems to scare AWT programmers
+away, the language is very strong and flexible. After you find the right
+direction, you will see yourself creating GUIs with your eyes closed.</P>
+
+						<p>As AWT is written in Java, you might want to use JPython in
+order to manipulate it because JPython gives convenient access to Java classes
+and packages. However, you can also try to use Python, also known as CPython,
+and JPI. Together, they can be used to prototype AWT objects and create
+bindings calling Python routines.</p>
+
+						<p>For more information about JPython and AWT, see 
+<a HREF="241.html">Chapter 18, "JPython."
+							</a>
+							<a name="idx1073748288"></a>
+							<a name="idx1073748289"></a>
+							<a name="idx1073748290"></a>
+							<a NamE="idx1073748291"></a>
+							<a nAme="idx1073748292"></a>
+							<a Name="idx1073748293"></A>
+							<A NAme="idx1073748294"></a>
+							<a NAME="idx1073748295"></a>
+							<a naME="idx1073748296"></A>
+							<A name="idx1073748297"></A>
+							<A NAme="idx1073748298"></a>
+							<a name="idx1073748299"></a>
+						</p>
+
+					
+				
+				
+					<h4>
+
+
+
+
+FORMS</h4>
+					<p>
+						<i>FORMS</i> is a module for the SGI IRIX platform
+that provides an interface to the FORMS Library developed by 
+<a name="idx1073748300"></A>Mark Overmars.</p>
+
+					<p>Among other things that might interest you, you better pay
+attention to the terminology used by FORMS: The word
+<I>object</i> is used for buttons, sliders, and anything else
+that you can place in a form.</p>
+
+					<p>The Python interface to FORMS introduces two new Python object
+types: <I>form</i> objects (representing an entire form) and
+<i>FORMS</i> objects (representing one button, slider, and so
+on).</p>
+
+					<P>There are no "free objects" in the Python interface
+to FORMS, nor is there an easy way to add object classes written in Python. The
+FORMS interface to GL event handling is available, though, so you can mix FORMS
+with pure GL windows.</p>
+
+					<blOCKQuote>
+<P>
+							<P>FORMS library interface for GUI applications</P>
+
+							<P><a tarGET="_blank" Href="http://www.python.org/doc/current/lib/module-fl.html">http://www.python.org/doc/current/lib/module-fl.html</a>
+								<A NAMe="idx1073748301"></a>
+								<a name="idx1073748302"></a>
+								<a name="idx1073748303"></a>
+								<a name="idx1073748304"></a>
+								<A naMe="idx1073748305"></a>
+							</p>
+
+						</P>
+</blocKquoTE>
+				
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="202.html" title="The Tkinter Module"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=203" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="203.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="204.html" title="Designing a Good Interface"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073748297">Abstract Windowing Toolkit (AWT) module</a><BR>
+ <a href="#idx1073748299">AWT (Abstract Windowing Toolkit) module</a><BR>
+ <a href="#idx1073748243">Bizzaro, J.W.</a><BR>
+ <a href="#idx1073748244">Developing Gnome Applications with Gnome-Python</a><BR>
+ <a href="#idx1073748199">Dunn, Robin</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748282">Python X</a><BR>
+ <a href="#idx1073748270">Fast Light Tool Kit (pyFLTK) module</a><BR>
+ <a href="#idx1073748304">FORMS module</a><BR>
+ <a href="#idx1073748277">FOX (FXPy) module</a><BR>
+ <a href="#idx1073748275">FXPy module</a><BR>
+ <a href="#idx1073748251">Gnome-Python module</a><BR>
+graphical user interfaces (GUIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toolkits<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748294">Abstract Windowing Toolkit (AWT)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748301">FORMS</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748272">FXPy</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748288">Java Python Interface (JPI)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748283">Motif</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748265">pyFLTK</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748237">PyGTK</a> <a href="#idx1073748246">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748223">PyKDE</a> <a href="#idx1073748228">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748253">PyOpenGL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748217">PyQt</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748189">Pythonwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748211">stdwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748259">wafepython</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748194">wxPython</a> <a href="#idx1073748200">2nd</a> <a href="#idx1073748206">3rd</a><BR>
+ <a href="#idx1073748233">GTK+ module</a><BR>
+ <a href="#idx1073748186">Hammond, Mark</a><BR>
+ <a href="#idx1073748235">Henstridge, James</a> <a href="#idx1073748236">2nd</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphical user (GUI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748295">toolkits;Abstract Windowing Toolkit (AWT)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748302">toolkits;FORMS</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748273">toolkits;FXPy</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748289">toolkits;Java Python Interface (JPI)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748284">toolkits;Motif</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748266">toolkits;pyFLTK</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748238">toolkits;PyGTK</a> <a href="#idx1073748247">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748224">toolkits;PyKDE</a> <a href="#idx1073748229">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748254">toolkits;PyOpenGL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748218">toolkits;PyQt</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748190">toolkits;Pythonwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748212">toolkits;stdwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748260">toolkits;wafepython</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748195">toolkits;wxPython</a> <a href="#idx1073748201">2nd</a> <a href="#idx1073748207">3rd</a><BR>
+ <a href="#idx1073748291">Java Python Interface (JPI) module</a><BR>
+ <a href="#idx1073748271">Johnson, Lyle</a><BR>
+ <a href="#idx1073748293">JPI (Java Python Interface) module</a><BR>
+ <a href="#idx1073748188">MFC (Microsoft Foundation Class Library)</a><BR>
+ <a href="#idx1073748187">Microsoft Foundation Class Library (MFC)</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748298">Abstract Windowing Toolkit (AWT)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748305">FORMS</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748276">FXPy</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748252">Gnome-Python</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748234">GTK+</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748292">Java Python Interface (JPI)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748287">Motif</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748269">pyFLTK</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748241">PyGTK</a> <a href="#idx1073748250">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748227">PyKDE</a> <a href="#idx1073748232">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748257">PyOpenGL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748221">PyQt</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748193">Pythonwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748215">stdwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748263">wafepython</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748198">wxPython</a> <a href="#idx1073748204">2nd</a> <a href="#idx1073748210">3rd</a><BR>
+ <a href="#idx1073748286">Motif module</a><BR>
+ <a href="#idx1073748280">Mullender, Sjoerd</a><BR>
+ <a href="#idx1073748205">Og1</a><BR>
+ <a href="#idx1073748278">Open Software Foundation (OSF)</a><BR>
+ <a href="#idx1073748279">OSF (Open Software Foundation)</a><BR>
+ <a href="#idx1073748300">Overmars, Mark</a><BR>
+ <a href="#idx1073748268">pyFLTK module</a><BR>
+ <a href="#idx1073748240">PyGTK module</a> <a href="#idx1073748249">2nd</a><BR>
+ <a href="#idx1073748242">pygtools</a><BR>
+ <a href="#idx1073748226">PyKDE module</a> <a href="#idx1073748231">2nd</a><BR>
+ <a href="#idx1073748256">PyOpenGL module</a><BR>
+ <a href="#idx1073748220">PyQt module</a><BR>
+ <a href="#idx1073748258">Python Tk-OpenGL (PyOpenGL) Module</a><BR>
+ <a href="#idx1073748281">Python X Extension</a><BR>
+ <a href="#idx1073748192">Pythonwin module</a><BR>
+ <a href="#idx1073748245">Solin, Daniel</a><BR>
+ <a href="#idx1073748216">Standard Window Interface (stdwin module)</a><BR>
+ <a href="#idx1073748214">stdwin module</a><BR>
+ <a href="#idx1073748222">Thompson, Phil</a><BR>
+toolkits<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphical user interfaces (GUIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748296">Abstract Windowing Toolkit (AWT)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748303">FORMS</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748274">FXPy</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748290">Java Python Interface (JPI)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748285">Motif</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748267">pyFLTK</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748239">PyGTK</a> <a href="#idx1073748248">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748225">PyKDE</a> <a href="#idx1073748230">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748255">PyOpenGL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748219">PyQt</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748191">Pythonwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748213">stdwin</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748261">wafepython</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748196">wxPython</a> <a href="#idx1073748202">2nd</a> <a href="#idx1073748208">3rd</a><BR>
+ <a href="#idx1073748262">wafepython module</a><BR>
+ <a href="#idx1073748264">Widget Athena front end (Wafe) module</a><BR>
+ <a href="#idx1073748197">wxPython module</a> <a href="#idx1073748203">2nd</a> <a href="#idx1073748209">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

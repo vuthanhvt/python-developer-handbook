@@ -1,0 +1,144 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Creating Graphical Interfaces</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">Creating Graphical Interfaces</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="247.html" title="The JPython Registry"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=248" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="248.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="249.html" title="Embedding"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A25%3A52+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218069155130211067010101</font><a href="read6.asp?bookname=0672319942&snode=248&now=6%2F1%2F2002+6%3A25%3A52+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+Creating Graphical Interfaces</h3>
+				<p>Windowing applications are written in JPython using the same set of options that you have available for Java applications. Currently, the two names that you will hear most for this kind of implementation are <tT CLAss="monofont">awt</tt> and <TT CLass="monofont">swing.</tT>
+				</P>
+
+				<P>
+					<A name="idx1073750706"></a>
+					<a name="idx1073750707"></a>
+					<a name="idx1073750708"></a>
+					<a naMe="idx1073750709"></a>
+					<I>AWT</i> stands for <i>Abstract Windowing Toolkit,</i> which is the official name for the Java GUI. Note that the syntax is very similar to Tkinter, thus it will not be a problem for you to understand and use it.</P>
+
+				<pre>
+					
+import java
+frame = java.awt.Frame("Ni!", visible = 1)
+labeltop = java.awt.Label("Hello Python World!")
+frame.add(labeltop)
+frame.pack()
+
+				</pRe>
+
+				<p>JPython also contains a package called <tT CLAss="monofont">pawt</tt> (stands for Python AWT), which wrappes the access to <TT CLass="monofont">awt,</tT> providing some additional functionality.</P>
+
+				<P>The successor of Java's windowing toolkit is provided as part of the <A name="idx1073750710"></A>
+					<A NAme="idx1073750711"></a>
+					<a name="idx1073750712"></a>Java Foundation Classes. This set of classes extends the original AWT by adding a comprehensive set of graphical user interface class libraries, commonly known as <a name="idx1073750713"></a>
+					<a name="idx1073750714"></A>
+					<a nAme="idx1073750715"></a>
+					<I>JFC/Swing</i> GUI Components, or simply <i>Swing.</i> These components are simple to read and understand, and they are written in the Java programming language, without window-system–specific code. This causes less problems when distributing JPython applications because you do not rely on the code of a specific windowing system.<a Name="idx1073750716"></A>
+					<A NAme="idx1073750717"></a>
+					<a NAME="idx1073750718"></a>
+					<a naME="idx1073750719"></A>
+				</P>
+
+				<p>For details, see <a taRGET="_blank" href="http://java.sun.com/products/jfc/">http://java.sun.com/products/jfc/</a>.</p>
+
+				<p>At this page, you can download the latest version of the Java Foundation Classes (JFC)/Swing, which at this moment is in release 1.1.1. After downloading it, make sure that you have the following environment variables correctly defined: <tt class="monofont">JAVA_HOME,</tt>
+					<tt clAss="monofont">SWING_HOME,</Tt>
+					<tt Class="monofont">CLASSPATH,</Tt> and <tt CLASs="monofont">PATH.</tt>
+				</p>
+
+				<P>Next, you have the section of the <TT Class="monofont">autoexec.bat</TT> of my Win98 machine that handles these definitions, for your information.</P>
+
+				<Pre>
+					
+set JAVA_HOME=C:\ JDK1.1.8
+set SWING_HOME=C:\ JDK1.1.8\ swing-1.1.1
+set PATH=%PATH%;%JAVA_HOME%\ bin
+set CLASSPATH=.;%JAVA_HOME%\ lib\ classes.zip
+set CLASSPATH=%CLASSPATH%;%SWING_HOME%;%SWING_HOME%\ swing.jar;
+set CLASSPATH=%CLASSPATH%;%SWING_HOME%\ windows.jar
+
+				</prE>
+
+				<P>The next code shows an example that uses the Python package <TT class="monofont">pawt</tt> to <a name="idx1073750720"></a>
+					<a name="idx1073750721"></a>
+					<a NamE="idx1073750722"></a>
+					<a nAme="idx1073750723"></a>
+					<a Name="idx1073750724"></A>access the swing components.</P>
+
+				<PRe>
+					
+import java
+import pawt
+def exit(h):
+    java.lang.System.exit(0)
+frame = pawt.swing.JFrame('Ni! again!', visible=1)
+display = pawt.swing.JTextField()
+display.text = "Click on the button below to exit!"
+frame.contentPane.add(display)
+button = pawt.swing.JButton('Exit', actionPerformed=exit)
+frame.contentPane.add(button)
+frame.pack()
+
+				</pre>
+
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="247.html" title="The JPython Registry"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=248" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="248.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="249.html" title="Embedding"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073750707">Abstract Windowing Toolkit (AWT)</a> <a href="#idx1073750717">2nd</a><BR>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750720">swing components</a><BR>
+ <a href="#idx1073750716">AWT (Abstract Windowing Toolkit)</a><BR>
+ <a href="#idx1073750706">AWT Abstract Windowing Toolkit</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750712">Java Foundation (JFC)</a><BR>
+components<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750722">accessing</a><BR>
+graphical user interfaces (GUIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750708">Abstract Windowing Toolkit (AWT)</a> <a href="#idx1073750718">2nd</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphical user (GUI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750709">Abstract Windowing Toolkit (AWT)</a> <a href="#idx1073750719">2nd</a><BR>
+ <a href="#idx1073750711">Java Foundation Classes (JFC)</a><BR>
+ <a href="#idx1073750710">JFC (Java Foundation Classes)</a><BR>
+ <a href="#idx1073750713">JFC/Swing GUI Components (Swing) library</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750714">JFC/Swing GUI Components (Swing)</a><BR>
+packages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pawt<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750724">accessing swing components</a><BR>
+pawt package<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750723">accessing swing components</a><BR>
+ <a href="#idx1073750715">Swing (JFC/Swing GUI Components) library</a><BR>
+swing components<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750721">accessing</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

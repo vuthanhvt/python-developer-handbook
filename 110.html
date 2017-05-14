@@ -1,0 +1,163 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Polymorphism</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Polymorphism</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="109.html" title="Inheritance"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=110" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="110.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="111.html" title="Encapsulation"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A33%3A50+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147039203225032135115025</font><a href="read2.asp?bookname=0672319942&snode=110&now=5%2F31%2F2002+4%3A33%3A50+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Polymorphism</h3>
+				<p>The concept of polymorphism doesn't really apply to Python objects because Python doesn't offer type declaration. This concept (having a function or method work for multiple argument types) is something you get for free with Python because of the dynamic typing. It does exist, but you don't usually explicitly code for it. When handling an <tT CLAss="monofont">obj.method</tt> expression, the meaning of <TT CLass="monofont">method</tT> depends on the type, or <I>class,</I> of the object <Tt class="monofont">obj.</tt></p>
+
+				<p>Python doesn't know what type of object implements an interface until the program is running. This feature is called <a name="idx1073743471"></a><a namE="idx1073743472"></a><i>runtime binding.</I></p>
+
+				<p>Python <a Name="idx1073743473"></a><A namE="idx1073743474"></A>variables are typed, just not explicitly so. They are typed implicitly as the program uses them. For instance, if a program invokes <TT clasS="monofont">abs(x),</TT> it doesn't make sense for <Tt claSS="monofont">x</TT> to be any object but a number. Therefore, the variable <tt clASS="monofont">x</Tt> is informally typed.</p>
+
+				<p>The capability of dealing with objects at different levels of abstraction is one of the most important features of object-oriented programming and a very important part of Python.</p>
+
+				<p>The next example shows how you can use just one function to implement poly morphism in Python. C++ refers to this variety of polymorphism as <a name="idx1073743475"></a><a name="idx1073743476"></a><a naMe="idx1073743477"></a><I>method overloading.</i></p>
+
+				<pRe>
+					
+&gt;&gt;&gt; class polymorph:
+…def handle_int(self, argint):
+…    print '%d is an int'% argint
+…def handle_str(self, argStr):
+…    print '%s is a string'% argStr
+…def handle(self, arg):
+…    if type(arg) == type(1):
+…        self.handle_int(arg)
+…         elif type(arg) == type(''):
+…             self.handle_str(arg)
+…         else:
+…             print "%s is not a string nor an integer" % arg
+…
+&gt;&gt;&gt; p = polymorph()
+&gt;&gt;&gt; p.handle(10)
+10 is an integer
+
+&gt;&gt;&gt; p.handle("Albatross!!")
+Albatross!! is a string
+
+				</pre>
+
+				<P>The following code implements a class that <i>does not work</i> because the program tries to apply the general concept of polymorphism. This is a very common mistake that always catches programmers who don't know this concept doesn't exist in Python.</p>
+
+				<P>Note that we try to define two different implementations of the same method (see lines 3 and 6). Right below this sample of code, you can see a traceback message that is provided by the interpreter when we try to run it.</P>
+
+				<PRe>
+					
+ 1:&gt;&gt;&gt; ## Beginning of a Python class THAT DOES NOT WORK…
+ 2:…
+ 3:&gt;&gt;&gt; class Polimorpherror:
+ 4:…     def __init__(self):
+ 5:…         print 'No arguments!'
+ 6:…     def __init__(self, args):
+ 7:…         print 'One argument!'
+ 8:…         self.args = args
+ 9:…
+10:&gt;&gt;&gt; ## End of a python class THAT DOES NOT WORK
+11:…
+12:&gt;&gt;&gt; x = Polimorpherror()
+&gt;&gt;&gt; x = Polimorpherror()
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+TypeError: not enough arguments; expected 2, got 1
+
+				</pre>
+
+				<P>You cannot do method overloading as shown in the previous example. The next example presents a suggestion for the correct way to implement a solution for this problem.</P>
+
+				<PRe>
+					
+&gt;&gt;&gt; class Polimorpherror:
+…def __init__(self, args=None):
+…    if args == None:
+…        print 'No arguments!'
+…    if args == 1:
+…        print 'One argument!'
+…        self.args = args
+…
+
+				</pre>
+
+				<P>The behavior of overloaded functions and methods is better implemented in Python using default arguments or by explicitly looking at the types of the arguments passed into the function.<A NAme="idx1073743478"></a><a NAME="idx1073743479"></a><a name="idx1073743480"></a></p>
+
+				<p>If you have a class for which you need to specify both a default constructor and a constructor that takes initial values of state as arguments, I suggest that you do so by transporting default arguments to the <tt class="monofont">__init__</tt> method.<a nAme="idx1073743481"></A><a naMe="idx1073743482"></a><a nAme="idx1073743483"></a></P>
+
+				<PRE>
+					
+&gt;&gt;&gt; class Animal:
+…def __init__(self, name = "Parrot"):
+…    self.name = name
+…def printAnimal(self):
+…    print self.name
+…
+&gt;&gt;&gt; p = Animal()
+&gt;&gt;&gt; p.printAnimal()
+Parrot
+&gt;&gt;&gt; p = Animal("Monkey")
+&gt;&gt;&gt; p.printAnimal()
+Monkey
+
+				</pre>
+
+				<p>If you want to <A NAMe="idx1073743484"></a><a nAME="idx1073743485"></A>initialize a variable but you don't want to enforce an object type, you can use the <tt clASS="monofont">None</Tt> type.</p>
+
+				<pre>
+					
+&gt;&gt;&gt; class Animal:
+…def __init__(self, name = None):
+…    self.name = name
+…def printAnimal(self):
+…    print self.name
+…
+
+				</pre>
+
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="109.html" title="Inheritance"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=110" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="110.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="111.html" title="Encapsulation"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+binding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743472">runtime</a><BR>
+implementing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743475">polymorphism</a> <a href="#idx1073743478">2nd</a><BR>
+initializing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743484">variables</a><BR>
+ <a href="#idx1073743476">method overloading</a> <a href="#idx1073743479">2nd</a><BR>
+object-oriented programming (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743481">polymorphism</a><BR>
+overloading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743477">method</a> <a href="#idx1073743480">2nd</a><BR>
+ <a href="#idx1073743483">polymorphism</a><BR>
+programming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object-oriented (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743482">polymorphism</a><BR>
+ <a href="#idx1073743471">runtime binding</a><BR>
+ <a href="#idx1073743474">typed variables</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743485">initializing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743473">typed</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

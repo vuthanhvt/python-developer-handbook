@@ -1,0 +1,106 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Reference Counting</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="255.html" class="navtitle">A. Python/C API</a> &gt; <span class="nonavtitle">Reference Counting</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="258.html" title="The Very High Level Layer"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=259" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="259.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="260.html" title="Exception Handling"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A28%3A24+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218072221087111231141199</font><a href="read5.asp?bookname=0672319942&snode=259&now=6%2F1%2F2002+6%3A28%3A24+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Reference Counting</h3>
+				<p>The macros in this section are used for managing reference counts of Python objects.</p>
+
+				<PRE>
+					
+void Py_INCREF(PyObject *o)
+
+				</Pre>
+
+				<p>Increments the reference count for object <tT CLAss="monofont">o.</tt> The object must not be <TT CLass="monofont">NULL</tt>; if you aren't sure that it isn't <tt class="monofont">NULL,</tt> use <tt clasS="monofont">Py_XINCREF().</tt></P>
+
+				<pre>
+					
+void Py_XINCREF(PyObject *o)
+
+				</Pre>
+
+				<p>Increments the reference count for object <tT claSS="monofont">o.</TT> The object might be <tt clASS="monofont">NULL,</Tt> in which case the macro has no effect.</p>
+
+				<prE>
+					
+void Py_DECREF(PyObject *o)
+
+				</PRE>
+
+				<p>Decrements the reference count for object <tt cLASS="monofont">o.</tt> The object must not be <tt class="monofont">NULL</tt>; if you aren't sure that it isn't <tt class="monofont">NULL,</tt> use <Tt cLass="monofont">Py_XDECREF().</Tt> If the reference count reaches zero, the object's type's deallocation function (which must not be <tt cLass="monofont">NULL</TT>) is invoked.</P>
+
+				<Div clASS="note"><P clasS="notetitle"><B>Caution</B></P><p>
+
+					<p>The <a nAME="idx1073750930"></A><a name="idx1073750931"></a>deallocation function can cause arbitrary Python code to be invoked (for example, when a class instance with a <tt class="monofont">__del__()</tt> method is deallocated). Although exceptions in such code are not propagated, the executed code has free access to all Python global variables. This means that any object reachable from a global variable should be in a consistent state before <a name="idx1073750932"></A><a nAme="idx1073750933"></a><Tt claSs="monofont">Py_DECREF()</tt> is invoked. For example, code to delete an object from a list should copy a reference to the deleted object in a temporary variable, update the list data structure, and then call <TT CLass="monofont">Py_DECREF()</tT> for the temporary variable.</P>
+
+				</P></Div>
+<br>
+<BR>
+
+				<PRe>
+					
+void Py_XDECREF(PyObject *o)
+
+				</pre>
+
+				<P>Decrements the reference count for object <TT Class="monofont">o.</tt> The object might be <tt class="monofont">NULL,</tt> in which case the macro has no effect; otherwise the effect is the same as for <tt claSs="monofont">Py_DECREF(),</tT> and the same caution applies.</p>
+
+				<p>The following functions or macros are only for use within the interpreter core: <tT clasS="monofont">_Py_Dealloc(),</tt>
+					<tT CLAss="monofont">_Py_ForgetReference(),</tt>
+					<TT CLass="monofont">_Py_NewReference(),</tT> as well as the global variable <TT Class="monofont">_Py_RefTotal.</TT><A Name="idx1073750934"></a><a name="idx1073750935"></a><a name="idx1073750936"></a><a namE="idx1073750937"></a><a Name="idx1073750938"></A><a namE="idx1073750939"></a><a nAME="idx1073750940"></A><a namE="idx1073750941"></A></P>
+
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="258.html" title="The Very High Level Layer"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=259" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="259.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="260.html" title="Exception Handling"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750935">managing reference counts, Python objects</a><BR>
+counts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reference<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750939">managing, Python objects</a><BR>
+ <a href="#idx1073750930">deallocation function</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750931">deallocation</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750941">managing reference counts, Python objects</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750936">managing reference counts, Python objects</a><BR>
+macros<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750932">Py_DECREF()</a><BR>
+managing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750937">reference counts, Python objects</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750940">managing reference counts</a><BR>
+ <a href="#idx1073750933">Py_DECREF() macro</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750934">managing reference counts, Python objects</a><BR>
+reference counts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750938">managing, Python objects</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

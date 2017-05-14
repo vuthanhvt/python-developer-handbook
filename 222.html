@@ -1,0 +1,768 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Development Strategy</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="219.html" class="navtitle">16. Development Environment</a> &gt; <span class="nonavtitle">Development Strategy</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="221.html" title="Building Python Applications"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=222" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="222.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="223.html" title="Integrated Development Environments"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A16%3A27+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222217074025151062064201046</font><a href="read2.asp?bookname=0672319942&snode=222&now=6%2F1%2F2002+6%3A16%3A27+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Development Strategy</h3>
+				<p>Writing a program is something very easy, but writing a good and optimized program requires some level of experience. A good way to start is to learn all the nuances of the language, which in our case involves learning Python. You should know a little bit of everything, and this book helps you learn most of them, including classes, modules, functions, exception handling, dynamic typing, GUI, operator overloading, indentation, and so forth.</p>
+
+				<P>Of course, you must know many other important items too.</P>
+
+				<P>Nowadays, the most important development efforts are focusing on the Internet. Python offers the basic necessary tools that you might need for your  Web projects. Python can be used either for Web-based interface projects or to generate entire back-end frameworks, using tools such as Zope.</P>
+
+				<p>Note that by extending Grail, the Web browser written in Python, you can embed your Python application directly on it and distribute a browser to your clients that carries specific and customized interfaces.</p>
+
+				<p>Even if you don't use Grail, you can use any browser to provide GUI interfaces for your applications. Have you ever considered delivering information and products through the Web? If so, you can do it using Python.<a NAME="idx1073749407"></a>
+					<a naME="idx1073749408"></A>
+					<A name="idx1073749409"></a>
+					<a name="idx1073749410"></a>
+					<a name="idx1073749411"></a>
+					<a naMe="idx1073749412"></a>
+					<A namE="idx1073749413"></a>
+					<a naMe="idx1073749414"></a>
+				</p>
+
+				<P>Python is a perfect language for project prototyping. Python's design allows you to make changes very quickly. Later you can decide whether you will re-implement the code using a compiled language, or stick to Python and continue the development effort using the prototype as a startup. Remember that after spending some time creating a prototype, you probably have a huge amount of code that you do not want to throw away.</P>
+
+				<P>
+					<A name="idx1073749415"></A>Prototyping with Python is very easy. You can, for example, wrap your code in a function inside a module and use a development environment, such as Pythonwin or IDLE, to run the script. To test this application, you just need to save it and execute it—very simple. No intermediate stages are necessary.</P>
+
+				<P>Python testing mechanisms also allow you to forge command-line arguments. You can  <A name="idx1073749416"></A>
+					<A NAme="idx1073749417"></a>
+					<a NAME="idx1073749418"></a>test your command-line scripts by first setting their expected arguments to predefined values using the built-in variable <tt class="monofont">sys.argv.</tt>
+				</p>
+
+				<p>Along the development stage, you will soon see that Python can be easily used to code entire applications, without discarding the prototyped code.</p>
+
+				<p>If speed is a requirement, you can use a compiled language in the back-end side of your application to support the high-demand operations. Python, in this case, can be used as the front end of the application, leaving the hard work to the other language. This kind of implementation allows you to create black boxes of code, which get called by Python, and Python doesn't necessarily need to know what is happening behind the scenes because only the external interface of the compiled language needs to be exposed.</p>
+
+				<p>But whenever possible, select just Python. It is good to remember that supporting a scripting language is much easier than supporting a compiled language. The usage of a scripting language makes tasks such as debug the application, fix bugs, and add enhancements look very simple. Because we are not using a compiled language, we don't need to spend time compiling and linking the files. Updating client sites with the latest version of the application is also very easy because we just need to send the file that carries the changed Python module.</p>
+
+				<p>As you can see, a lot of thinking is involved in the process of preparing yourself to handle a Python development. Next, we will see some ideas about how to optimize your code, and how to write a program with style. Both are very important things that you must have in mind, not only when using Python, but also when writing in any other language.<a nAme="idx1073749419"></A>
+					<a naMe="idx1073749420"></a>
+					<a nAme="idx1073749421"></a>
+					<A NAMe="idx1073749422"></a>
+					<a nAME="idx1073749423"></A>
+					<a namE="idx1073749424"></A>
+					<A Name="idx1073749425"></a>
+					<A NAMe="idx1073749426"></a>
+				</p>
+
+				
+					<h4>
+
+
+
+
+
+
+
+Optimizing the Code</h4>
+					<p>To prevent your program from running very slowly, you might consider following some basic Python optimization rules. By designing your application from the start with these guidelines in mind, you will certainly be satisfied with the final overall performance that you will get.</p>
+
+					<p>My goal in this section is to provide ways to generate acceptable performance in your Python routines. Note that I don't cover everything, but a good set of basic concepts is covered.</p>
+
+					<p>Many things can be done to reduce the processing time of your application. Remember that you have an interpreter being called every time you execute a Python script. Consequently, you need to work on your code in order to compensate that somehow. The fact that it is an interpreted language is a big concern, but by reducing the number of statements that get parsed, you can also reduce the interpreter overhead.</p>
+
+					<p>By the way, the Python interpreter has a <a name="idx1073749427"></a>
+						<a nAme="idx1073749428"></A>
+						<a naMe="idx1073749429"></a>command-line option (<tt ClasS="monofont">-O,</TT> which stands for <I>optimize</i>) that enables you to execute your code in such a way that some of the bytecode operations are not executed. Basically, it is used to remove the comments in the bytecode that give the line number where exceptions occur, and does not compile in the doc strings and a few other things. This flag does not give that much speed increase, and it makes things harder to debug.<a naME="idx1073749430"></A>
+						<A name="idx1073749431"></A>
+						<A NAme="idx1073749432"></a>
+						<a NAME="idx1073749433"></a>
+						<a name="idx1073749434"></a>
+						<a name="idx1073749435"></a>
+						<a name="idx1073749436"></a>
+						<a NamE="idx1073749437"></a>
+						<a nAme="idx1073749438"></a>
+						<a Name="idx1073749439"></A>
+						<A NAme="idx1073749440"></a>
+						<a NAME="idx1073749441"></a>
+						<a naME="idx1073749442"></A>
+						<A name="idx1073749443"></A>
+						<A NAme="idx1073749444"></a>
+						<a name="idx1073749445"></a>
+					</p>
+
+					<p>Some useful optimization hints are as follows:</p>
+
+					<ul>
+<li>
+							<p>
+								<a naMe="idx1073749446"></a>Variables—Depending on how your variables are defined, the interpreter spends more or less time trying to figure out their values. Python deals with dynamic scope rules when trying to resolve variable names. After it finds a variable in the code, it first tries to discover if the variable is a local variable by looking at the local namespace dictionary. If it finds the variable, it grabs the variable's value. Otherwise, it searches in the global namespace dictionary, and if necessary, in the built-in namespace dictionary. As you can see, local variable lookups are pretty much faster than other types. Consequently, the access to their values is faster too. Also, local variable lookups are much faster because they correspond to indexing into an array, whereas global variable lookups correspond to hash table lookups. A good optimization hint might be that if you are using a global variable a lot in a function, assigning its value to a local variable can help a lot.<A namE="idx1073749447"></a>
+							</p>
+
+						</li>
+<Li>
+							<p>
+								<a NAME="idx1073749448"></a>Modules—Within a single script, you just need to import an external module once. Therefore, it is not necessary to have multiple <tt cLASS="monofont">import</tt> statements inside your code. Actually, you should avoid trying to re-import modules on your program. As a rule of thumb, put all the <tt CLASs="monofont">import</tt> statements in the very first part of your program header. However, calling <tT CLAss="monofont">import</tt> on a module multiple times is not really a problem because it is just a dictionary lookup.</p>
+
+							<p>In cases where you have to do a lot of referencing to particular attributes of an external module, you should consider copying those elements to a single variable (when that's possible, of course) before starting to code—especially, if the references are made inside a loop.<a name="idx1073749449"></a>
+								<a name="idx1073749450"></a>
+								<a nAme="idx1073749451"></A>
+								<a naMe="idx1073749452"></a>
+								<a nAme="idx1073749453"></a>
+								<A NAMe="idx1073749454"></a>
+								<a nAME="idx1073749455"></A>
+								<a namE="idx1073749456"></A>
+								<A Name="idx1073749457"></a>
+								<A NAMe="idx1073749458"></a>
+								<a name="idx1073749459"></a>
+								<a name="idx1073749460"></a>
+								<a name="idx1073749461"></a>
+								<A naMe="idx1073749462"></a>
+								<a Name="idx1073749463"></a>
+								<A namE="idx1073749464"></A>
+								<A Name="idx1073749465"></a>
+							</P>
+
+							<P>Whenever you <A Name="idx1073749466"></a>import a module, the interpreter looks for a byte-compiled version of the module. In case it doesn't find any, it automatically bytecompiles the module and generates a .<TT CLass="monofont">pyc</tT> file. So, the next time you try to import the module, the byte-compiled file will be there. As you can feel, <TT Class="monofont">.pyc</tt> files are executed much faster than regular <tt class="monofont">.py</tt> files because they have already being interpreted by the interpreter prior to the execution. The suggestion here is to use byte-compiled modules the more you can. The Python code executes at the same speed no matter if there is a <tt claSs="monofont">.pyc</tT> file or not. The only difference is that if there is a byte-compiled file, startup will be a bit quicker. The actual running speed of the code is no different.<a naMe="idx1073749467"></a>
+							</p>
+
+						</lI>
+<li>
+							<p>
+								<A NAMe="idx1073749468"></a>Strings—Use format strings whenever you need to concatenate strings with other variables. Check out the next concatenation forms.</p>
+
+							<pRE>
+								
+name = "Andre"
+print "Hello " + name
+print "Hello %s" % (name)
+
+							</PRe>
+
+							<p>Be sure that the second <tt CLASs="monofont">print</tt> statement is more optimized than the first one. The parentheses on the third line are not necessary. Another option would be</p>
+
+							<PRE>
+								
+print "Hello", name
+
+							</Pre>
+
+						</li>
+<li>
+							<p>
+								<a name="idx1073749469"></a>Tkinter—Avoid creating unnecessary instances of widgets. If you are not planning to manipulate the attributes of a widget after it has been created, stick to direct calls to the class. In a GUI app, this won't affect the running speed that much—just the startup time.</p>
+
+							<p>There is no reason to say</p>
+
+							<pre>
+								
+mybutton = Button(root, text="Close")
+mybutton.pack(side=right)
+
+							</pRe>
+
+							<p>when you can simply use</P>
+
+							<pre>
+								
+mybutton = Button(root, text="Close").pack(side=right) 
+
+							</Pre>
+
+							<p>Now, the interpreter has one less variable to handle.</p>
+
+							<P>I open a parenthesis here to let you know that if you are testing a Tkinter application using IDLE, you need to comment your <a naME="idx1073749470"></A>
+								<A name="idx1073749471"></A>
+								<TT Class="monofont">mainloop()</TT> command. That's because IDLE is already running inside a Tkinter mainloop, and calling another one might freeze your entire environment.</P>
+
+						</Li>
+<li>
+							<p>
+								<A NAMe="idx1073749472"></a>Loops—You can optimize a lot of things in your loops in order to make them run smoothly. In a short list, I can tell you the following:</p>
+
+							<ul>
+<li>
+									<p>You should use built-in functions in your inner loop instead of using functions written in Python. By using built-in functions that support list manipulation (such as <tt class="monofont">map(),</tt>
+										<tt cLasS="monofont">reduce(),</tt> and <tT clasS="monofont">filter()</tt>) instead of straight loops, you can move some of the loop overhead to the C code. Passing built-in functions to <tT CLAss="monofont">map,</tt>
+										<TT CLass="monofont">reduce,</tT> or <TT Class="monofont">filter</TT> gives even better performance.</P>
+
+								</Li>
+<li>
+									<p>Whenever you have multiple levels of loop, it is worth it to optimize only the innermost one. When optimizing multiple-level loops, the idea is to reduce the number of memory allocations. Making the innermost loop to be the one with the fewer number of interactions should help your performance design.</p>
+
+								</li>
+<li>
+									<p>Working with local variables is a great thing that improves the processing time inside a loop. Whenever possible, copy all your global variables and attribute look-ups to local variables before entering a loop.</p>
+
+								</li>
+<li>
+									<p>If you use construction methods such as <tt clAss="monofont">range(n)</Tt> inside a <a nAme="idx1073749473"></a>
+										<a Name="idx1073749474"></A>
+										<A NAme="idx1073749475"></a>
+										<a NAME="idx1073749476"></a>nested loop, it is much faster to allocate the value range to a local variable outside the outmost loop, and use this variable in the loop definitions.</p>
+
+									<prE>
+										
+yRange = range(500)
+for xItem in range(100000):
+    for yItem in yRange:
+
+       print xItem, yItem
+
+									</PRE>
+
+								</li>
+<li>
+									<P>Another optimization here would be using <TT Class="monofont">xrange</tt> for the <tt class="monofont">x</tt> for loop because a 100000 item list is a quite large list.</p>
+
+									<pre>
+										
+yRange = range(500)
+for xItem in xrange(100000):
+    for yItem in yRange:
+        print xItem, yItem
+
+									</pRe>
+
+								</lI>
+</ul>
+						</lI>
+<li>
+							<p>
+								<a Name="idx1073749477"></A>Functions—Python built-in functions are faster to execute than functions written in clean Python because the built-in functions are already written in C. <A NAme="idx1073749478"></a>
+								<a NAME="idx1073749479"></a>
+								<tt cLASS="monofont">map(),</tt>
+								<a nAME="idx1073749480"></A>
+								<a name="idx1073749481"></a>
+								<tt class="monofont">filter()</tt>, and <a name="idx1073749482"></A>
+								<a nAme="idx1073749483"></a>
+								<Tt claSs="monofont">reduce()</tt> are examples of built-in functions that can be used to beat the performance of functions written in Python. It is also good to know that Python handles function names as global constants. Having said that, the whole conception of namespace look-up that we saw previously also applies to functions as well. If you have the option to choose, use the <TT CLass="monofont">map()</tT> function's implied loop than a <TT Class="monofont">for</TT> loop—it is much faster. The runtime of the loop functions that I mention here is highly dependent on what function you pass in. Passing a Python function will not be as fast as passing in a built-in function (such as the ones in the <TT clasS="monofont">operator</TT> module).<A name="idx1073749484"></a>
+							</p>
+
+						</li>
+</ul>
+					<p>In case you want to test the performance of your routines, you can use a simple concept, which is explained next. The idea is to measure the time spent between calling the routine and finishing its execution.</p>
+
+					<p>After you add these lines to your program, you can benchmark it and test new kinds of approach. Note that we have a little time overhead because we have to call the <a name="idx1073749485"></a>
+						<a NamE="idx1073749486"></a>
+						<tt Class="monofont">time()</Tt> function.</p>
+
+					<p>First, you need to <A NAMe="idx1073749487"></a>
+						<a nAME="idx1073749488"></A>
+						<a namE="idx1073749489"></A>import the time module:</P>
+
+					<Pre>
+						
+import time
+
+					</prE>
+
+					<P>Second, you just need to set a timer after executing and before starting your routine. This is done using the <A Name="idx1073749490"></a>
+						<a name="idx1073749491"></a>
+						<tt class="monofont">time.clock()</tt> function:</p>
+
+					<Pre>
+						
+start_timer = time.clock()
+call_your_routine()
+end_timer = time.clock()
+print end_timer-start_timer
+
+					</Pre>
+
+					<p>Code optimization is a very complex science that is not restricted just to Python programs. Sometimes when you booster the performance in one place, it breaks something somewhere else. What I mean by that is that if the processing time of your application seems OK for you, don't touch it. I suggest that you to just try to optimize your code when a real performance problem is creating an unsupportable bottleneck in your application.</P>
+
+					<p>
+						<a hrEf="227.html">Chapter 17, "Development Tools,"
+						</a>  introduces the Python <i>Profiler</I>  module to you. This tool can help you to identify the bottlenecks in your code.</P>
+
+					<P>The following links have some more additional thoughts about code optimization for Python applications:</P>
+
+					<blocKQUOte>
+<p>
+							<p>
+								<I> Python Patterns—An Optimization Anecdote,</I> essay by Guido Van Rossum</P>
+
+							<P><a tarGET="_blank" Href="http://www.python.org/doc/essays/list2str.html">http://www.python.org/doc/essays/list2str.html</a>
+							</p>
+
+						</p>
+<p>
+							<p>
+								<i>Python Performance Tips,</i> by Skip Montanaro</p>
+
+							<p><a target="_blank" hRef="http://www.musi-cal.com/~skip/python/fastpython.html">http://www.musi-cal.com/~skip/python/fastpython.html</A>
+								<a naMe="idx1073749492"></a>
+								<a nAme="idx1073749493"></a>
+								<A NAMe="idx1073749494"></a>
+								<a nAME="idx1073749495"></A>
+								<a namE="idx1073749496"></A>
+								<A Name="idx1073749497"></a>
+								<A NAMe="idx1073749498"></a>
+								<a name="idx1073749499"></a>
+							</p>
+
+						</p>
+</blockquote>
+				
+				
+					<H4>
+
+
+
+Style Guide</h4>
+					<p>The following guidelines are directly based from some of the ideas of <A namE="idx1073749500"></a>Guido van Rossum about how to write a Python program within style. The main quality that we need to acquire is the ability to decide exactly when we can apply these guidelines, and when it is better to be a little inconsistent and step out of these rules in order to have a more reliable implementation.</p>
+
+					<p>These are just suggestions. Feel free to write your code any way you want it. Nothing or no one will force you to follow these rules, but you will see by yourself how practical it is to have these guidelines in mind when coding a program.<a Name="idx1073749501"></A>
+						<A NAme="idx1073749502"></a>
+						<a NAME="idx1073749503"></a>
+						<a naME="idx1073749504"></A>
+						<A name="idx1073749505"></A>
+						<A NAme="idx1073749506"></a>
+						<a name="idx1073749507"></a>
+						<a name="idx1073749508"></a>
+						<a name="idx1073749509"></A>
+						<a nAme="idx1073749510"></a>
+						<A name="idx1073749511"></A>
+						<a naME="idx1073749512"></A>
+					</P>
+
+				
+				
+					<h4>
+Code Layout</h4>
+					<p>Python's core definition says that we must delimit structures using <a NAME="idx1073749513"></a>
+						<a naME="idx1073749514"></A>indented blocks. A standard indentation consists of four spaces for each indentation level. Most of the time, you can alternatively use one tab instead of four spaces.</P>
+
+					<p>Try to write your code with lines containing less than 80 characters each. If it turns out to be necessary to break a line, use parentheses, brackets, and braces to continue the code on the next line, using a backslash only if that is not possible.</p>
+
+					<p>Blank lines are used to separate chunks of related code, such as top-level function and class definitions (two blank lines), class definition and the first method definition (one line), and methods definitions inside a class (one blank line). You can omit the blank lines in case your definitions have just one line each.</p>
+
+					<P>Handling whitespaces is another issue that you need to be aware of. The following are <I>bad</I> examples of <A name="idx1073749515"></a>whitespace usage:</p>
+
+					<pre>
+						
+lst = [ 3,4,5]          # After open parentheses, brackets or braces.
+if var &lt; 10 :        # Preceding a comma, semicolon, or colon.
+xrange (7)              # Preceding the parenthesis of a function call.
+car ["plate"]           # Preceding indexing or slicing brackets.
+var      = 3            # Multiple whitespaces preceding an operator.
+
+					</pre>
+
+					<p>The next group of operators should always be preceded and followed by just one space on each side.</p>
+
+					<pre>
+						
+=, ==, &lt;, &gt;, !=, &lt;&gt;, &lt;=, &gt;=, in, not in, is, is not, and, or, not.
+
+					</pre>
+
+					<P>However, there is a special remark here for the <a nAme="idx1073749516"></a>
+						<A name="idx1073749517"></A>
+						<tt cLASS="monofont">=</tt> (equal) sign. Whenever it is used to indicate a keyword argument or a default parameter value, you should suppress the spaces that surround it.</p>
+
+					<pRE>
+						
+def printvar(input=10):
+    print input
+printvar(input=20)
+20
+printvar()
+10
+
+					</PRe>
+
+					<p>Sometimes, arithmetic operators shouldn't be surrounded by spaces either. By avoiding whitespaces, you can make some expressions more readable, as you will see next.</p>
+
+					<pRE>
+						
+var = (x+y * (w/z))
+
+					</PRe>
+
+					<p>The previous expression resembles <tt CLASs="monofont">((x+y) * (w/z))</tt> when in fact it is  <tt class="monofont">(x+(y * (w/z))).</tt> A good way to write that would be</p>
+
+					<pre>
+						
+var = (x + y*(w/z))
+
+					</pre>
+
+				
+				
+					<h4>
+
+
+Comments</H4>
+					<p>If you decide to add comments to your code, you need to remember to keep them up-to-date all the time. Otherwise, it can become more of a problem than being a helper thing. Some of the basic rules for writing comments are listed next:</p>
+
+					<Ul>
+<li>
+							<P>Write your comments in plain English. For large projects with members of different nationalities, English is often the common language. Of course, if no developers know English, this rule is not a good idea.</p>
+
+						</li>
+<lI>
+							<p>Capitalize the first word of sentences and phrases.</p>
+
+						</lI>
+<LI>
+							<P>Omit the period at the end of short comments.</p>
+
+						</li>
+<lI>
+							<P>Never alter the case of identifiers. Remember that Python is case sensitive; thus, you should write your helper comments using the same notation used by the definition of the object that you are describing.</P>
+
+						</Li>
+</ul>
+					<p>There are two kinds of comments: block comments and inline comments. The former applies to the code that follows it, and the latter is put on the code's own line. Both types require at least a single <A NAMe="idx1073749518"></a>
+						<a nAME="idx1073749519"></A>
+						<tt class="monofont">#,</tt> followed by a single space at the beginning of each commented line. When writing block comments, insert a blank line above them, and another one below each paragraph.</p>
+
+					<p>Be careful when using <a name="idx1073749520"></a>
+						<a naMe="idx1073749521"></a>inline comments because it can cause over-pollution of text in your code—comments are no substitute for readable code. Inline comments are best used when preceded by at least two whitespace characters from the inline statement.<A namE="idx1073749522"></a>
+						<a naMe="idx1073749523"></a>
+						<a NAME="idx1073749524"></a>
+						<a naME="idx1073749525"></A>
+						<A name="idx1073749526"></A>
+						<A NAme="idx1073749527"></a>
+						<a NAME="idx1073749528"></a>
+						<a name="idx1073749529"></a>
+						<a name="idx1073749530"></a>
+						<a name="idx1073749531"></a>
+						<a NamE="idx1073749532"></a>
+						<a nAme="idx1073749533"></a>
+						<a Name="idx1073749534"></A>
+						<A NAme="idx1073749535"></a>
+						<a NAME="idx1073749536"></a>
+					</p>
+
+					<p>A <a NAME="idx1073749537"></a>
+						<a naME="idx1073749538"></A>
+						<I>documentation string</i> is a special kind of comment that goes beyond the <i>remarking concept</i> that we get when using the <tt class="monofont">#</tt> literal. All objects that accept the usage of documentation strings incorporate those strings to their structure, allowing you to later query, read, and use their documentation strings (see <a href="22.html">Chapter 2, "Language Review,"
+						</a>  for details).</p>
+
+					<p>Documentation strings are, by convention, surrounded by a <A naMe="idx1073749539"></a>
+						<a Name="idx1073749540"></a>triple quote structure on each side. Do not use the documentation string to store a description. Instead, try to be functional, showing the command's action. Things that you should try to register in documentation strings include: the environment variables, files, routine objective, and the syntax design of scripts, modules, functions, classes, and public methods exported by classes.</P>
+
+					<p>There are two types of documentation strings: the one-liners and the multi-line ones. The former must entirely fit in a single line, including the closing quotes, and you are not instructed to insert blank lines surrounding it. On the other hand, multi-line documentation strings are formed by a single line of documentation followed by a block that contains a complete description of the object. Note that we are instructed to insert a blank line between these two structures. Also, note that additional lines in a documentation string do not need to be indented following the pattern established by the first line (it does look nicer if they are though). Before typing the closing quotes, it is also advised that you enter a new paragraph in order to let the quotes stand in a line of their own.<a nAME="idx1073749541"></A>
+						<a namE="idx1073749542"></A>
+					</P>
+
+					<P>Next, you will have some suggestions about what to include in the documentation string of modules, functions, methods, and classes.</p>
+
+					<p>
+						<a nAME="idx1073749543"></A>Modules should document the objects they export, such as the classes, exceptions, and functions, with a one-line summary for each one of them.</p>
+
+					<p>
+						<a nAME="idx1073749544"></A>
+						<a name="idx1073749545"></a>Functions and methods should document their behavior, arguments (including optional arguments and keywords), return value(s), side effects, exceptions raised, and so forth. When documenting arguments, put each one of them in a single line and separate each name from its description using two dashes. Single blank lines separate lists of methods and functions from each other.</p>
+
+					<p>
+						<a name="idx1073749546"></a>Classes should document their public methods and instance variable properties. If the class subclasses another class, you have to mention the <a name="idx1073749547"></a>superclasses as well, along with the differences between both implementations. As a suggestion, use the verbs override and extend to respectively indicate that a specific method entirely replaces, or acts in addition to the superclass's own method definition. It is also recommended that when creating the documentation string for a class, you should surround it using single blank lines.<A naMe="idx1073749548"></a>
+						<a Name="idx1073749549"></a>
+						<A namE="idx1073749550"></A>
+						<A Name="idx1073749551"></a>
+						<A NAMe="idx1073749552"></a>
+						<a nAME="idx1073749553"></A>
+						<a namE="idx1073749554"></A>
+						<A Name="idx1073749555"></a>
+						<a name="idx1073749556"></a>
+						<a name="idx1073749557"></a>
+						<a namE="idx1073749558"></a>
+						<a Name="idx1073749559"></A>
+						<a namE="idx1073749560"></a>
+						<a nAME="idx1073749561"></A>
+						<a namE="idx1073749562"></A>
+						<A Name="idx1073749563"></a>
+						<A NAMe="idx1073749564"></a>
+					</p>
+
+				
+				
+					<h4>
+
+
+Naming Styles and Conventions</H4>
+					<P>When it comes time to name your objects and variables, you have a list of options to choose from. You just can't mix all styles throughout your code because it might cause a big mess. You need to be consistent, and I suggest that you stick to a pattern and use it in every part of your code. As I said before, many styles are available. You might already be a big fan of one of them without even knowing it. It is quite common to have different naming conventions for classes, functions, and variables (for instance, <I>CapWords</I> for classes, <i>lower_case_with_underscores</i> for functions). In order to give you an idea of what kind of different styles we have, the following case conventions are introduced to you:</p>
+
+					<blockquote>
+<p>
+							<p>x (single lowercase letter)</p>
+
+						</p>
+<p>
+							<p>X (single uppercase letter)</p>
+
+						</P>
+<p>
+							<p>lowercase</P>
+
+						</p>
+<p>
+							<p>lower_case_with_underscores</P>
+
+						</p>
+<p>
+							<p>UPPERCASE</p>
+
+						</P>
+<p>
+							<p>UPPER_CASE_WITH_UNDERSCORES</p>
+
+						</P>
+<P>
+							<P>CapitalizedWords (or CapWords)</P>
+
+						</p>
+<p>
+							<p>mixedCase</p>
+
+						</P>
+</BLOckquOTE>
+					<P>Capitalized_Words_With_Underscores<a namE="idx1073749565"></A>
+						<A Name="idx1073749566"></a>
+						<a name="idx1073749567"></a>
+						<a name="idx1073749568"></a>
+						<a namE="idx1073749569"></a>
+						<a Name="idx1073749570"></A>
+						<a namE="idx1073749571"></a>
+						<a nAME="idx1073749572"></A>
+						<a namE="idx1073749573"></A>
+						<A Name="idx1073749574"></a>
+						<A NAMe="idx1073749575"></a>
+						<a nAME="idx1073749576"></A>
+					</p>
+
+					<p>The following leading/trailing underscore structures can be combined with any one of the previously listed naming styles. You can substitute the variable <tt class="monofont">VAR</tt> for any other <a name="idx1073749577"></a>object name that you want (considering Python's rules for object naming seen in <a hrEf="22.html">Chapter 2</a>).</P>
+
+					<bloCkquoTe>
+<p>
+							<p>
+								<TT CLass="monofont">_VAR</tT> — 
+    Objects that have a single leading underscore indicate that the object can be used only on the local module namespace. The <TT Class="monofont">from module import *</TT> statement doesn't import objects that start with a single leading underscore. The main concern about writing global variables is that if you want to have the variable only visible by the module that defines it, you need to have an underscore preceding it.</P>
+
+						</P>
+<p>
+							<p>
+								<tt CLASs="monofont">VAR_</tt> — 
+    You need to append a trailing underscore to the end of the name in order to avoid naming conflicts whenever you want to use a Python keyword (such as <tt class="monofont">print_</tt>) as your own variable. This is one just possible way of getting rid of a conflict with a Python keyword.</p>
+
+						</p>
+<p>
+							<p>
+								<tt clAss="monofont">__VAR</Tt> — 
+    The double leading underscore identifies class-private names.</p>
+
+						</p>
+<P>
+							<p>
+								<tt cLass="monofont">__VAR__</TT>— 
+    When you have an object that has both leading and trailing underscores, you can consider yourself in front of an object that, in most cases, is defined by the Python interpreter. This definition applies to both objects and attributes that work under the user namespace, which includes the <TT clasS="monofont">__init__</TT> method. Try to avoid using this type of structure when naming your own objects because it might cause name conflicts in your application as future releases of Python arrive.<A name="idx1073749578"></A>
+								</P>
+
+						</P>
+</BlockQUOTe>
+					<p>Although there is no current naming standard among the files that are part of the Python's Standard Library, I can list some guidelines that can make the task of naming new modules easier for you.<a name="idx1073749579"></a>
+						<a name="idx1073749580"></a>
+						<a name="idx1073749581"></a>
+						<A naMe="idx1073749582"></a>
+						<a Name="idx1073749583"></a>
+						<A namE="idx1073749584"></A>
+						<A Name="idx1073749585"></a>
+						<A NAMe="idx1073749586"></a>
+						<a nAME="idx1073749587"></A>
+						<a namE="idx1073749588"></A>
+						<A Name="idx1073749589"></a>
+						<a name="idx1073749590"></a>
+					</p>
+
+					<p>When creating <a name="idx1073749591"></a>modules, give them MixedCase or lowercase names. Use the first option whenever the module exports a single class or a bunch of related classes, and the second option when the module exports a group of functions. Also, note that module names are mapped to filenames in Python. Therefore, it is a good idea to pay special attention when giving a name to a module in order to avoid long names (module names can become truncated on some systems), and keep in mind that Python is case sensitive, which makes a module called <tt ClaSs="monofont">MyModule.py</tt> different from a module called <Tt claSs="monofont">mymodule.py.</tt> If you have two modules where one is a low-level interface written in C/C++, and the other one is a high-level object-oriented interface written in Python, the almost common standard nowadays is to give the Python's module a CapWords name (it isn't quite as widely used). On the other hand, the C/C++ module should be written entirely using lowercase letters, and preceded by a leading underscore (this is pretty much standardized). A known example of this concept is the pair of modules <TT CLass="monofont">Tkinter</tT> and <TT Class="monofont">_tkinter</TT>.</P>
+
+					<P>When writing <a namE="idx1073749592"></A>class names, you can stick to the CapWords pattern. Although this is a convention used most of the time, you are encouraged to modify this rule when handling internal classes of modules that are not supposed to be exported. You have to precede these classes with leading underscores.</P>
+
+					<P>When working with <a name="idx1073749593"></a>exceptions, you have two options. Their names are usually written in lowercase letters when part of built-in modules, whereas the ones that are part of Python modules are usually written using CapitalizedWords. The main deciding factor for creating exception names is whether you expect people to normally use <tt class="monofont">from ... import *</tt> or <tt claSs="monofont">import ...</tT> in the module.</p>
+
+					<p>When naming <a Name="idx1073749594"></a>functions, you are encouraged to use one from the next two style options: CapWords for functions that provide a large functionality (less used), and lowercase for functions that expose less useful classes.</P>
+
+					<p>When naming <a nAME="idx1073749595"></A>methods, you should stick to the CapWords style for methods that are published by an ILU interface. For all other cases, you should consider switching to lowercase. If you don't want a method to be visible by external methods or instances, you must put an underscore in front of it. As you can see in <a hreF="102.html">Chapter 5, "Object-Oriented Programming,"
+						</A>  the use of this same concept can be applied to certain attributes in order to make them available only to their classes. Note that this last feature can be easily manipulated using the <TT clasS="monofont">__dict__</TT>  attribute.</P>
+
+					<p>More details about these concepts can be found at</p>
+
+					<blOCKQuote>
+<p>
+							<p>
+								<i> Python Style Guide,</i> by Guido Van Rossum</p>
+
+							<p><a target="_blank" hreF="http://www.python.org/doc/essays/styleguide.html">http://www.python.org/doc/essays/styleguide.html</a>
+								<a Name="idx1073749596"></A>
+								<a namE="idx1073749597"></a>
+								<a nAME="idx1073749598"></A>
+								<a namE="idx1073749599"></A>
+								<A Name="idx1073749600"></a>
+								<A NAMe="idx1073749601"></a>
+								<a nAME="idx1073749602"></A>
+								<a name="idx1073749603"></a>
+								<a name="idx1073749604"></a>
+								<a name="idx1073749605"></a>
+								<a nAme="idx1073749606"></A>
+								<a naMe="idx1073749607"></a>
+							</p>
+
+						</p>
+</BlocKQUOte>
+				
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="221.html" title="Building Python Applications"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=222" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="222.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="223.html" title="Integrated Development Environments"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073749518"># (pound sign)</a><BR>
+ <a href="#idx1073749516">= (equal sign)</a><BR>
+ <a href="#idx1073749429">[nd]O command-line option</a><BR>
+adding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749535">comments to code</a> <a href="#idx1073749561">2nd</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749442">optimizing performance</a> <a href="#idx1073749462">2nd</a> <a href="#idx1073749496">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749410">building</a> <a href="#idx1073749422">2nd</a> <a href="#idx1073749433">3rd</a> <a href="#idx1073749452">4th</a> <a href="#idx1073749504">5th</a> <a href="#idx1073749525">6th</a> <a href="#idx1073749551">7th</a> <a href="#idx1073749568">8th</a> <a href="#idx1073749582">9th</a> <a href="#idx1073749599">10th</a><BR>
+blocks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749514">indented</a><BR>
+building<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749409">Python applications</a> <a href="#idx1073749421">2nd</a> <a href="#idx1073749432">3rd</a> <a href="#idx1073749451">4th</a> <a href="#idx1073749503">5th</a> <a href="#idx1073749524">6th</a> <a href="#idx1073749550">7th</a> <a href="#idx1073749567">8th</a> <a href="#idx1073749581">9th</a> <a href="#idx1073749598">10th</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749546">documentation strings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749592">naming styles and conventions</a><BR>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749439">optimizing</a> <a href="#idx1073749458">2nd</a> <a href="#idx1073749493">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749512">style guides</a> <a href="#idx1073749533">2nd</a> <a href="#idx1073749559">3rd</a> <a href="#idx1073749576">4th</a> <a href="#idx1073749590">5th</a> <a href="#idx1073749607">6th</a><BR>
+command-line options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749428">[nd]O</a><BR>
+command-line scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749417">testing</a><BR>
+comments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749534">adding to code</a> <a href="#idx1073749560">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749521">inline</a><BR>
+construction methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749474">nested loops</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749440">optimizing</a> <a href="#idx1073749459">2nd</a> <a href="#idx1073749494">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749511">style guides</a> <a href="#idx1073749532">2nd</a> <a href="#idx1073749558">3rd</a> <a href="#idx1073749575">4th</a> <a href="#idx1073749589">5th</a> <a href="#idx1073749606">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749536">comments for code</a> <a href="#idx1073749562">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749413">Python applications</a> <a href="#idx1073749425">2nd</a> <a href="#idx1073749436">3rd</a> <a href="#idx1073749455">4th</a> <a href="#idx1073749507">5th</a> <a href="#idx1073749528">6th</a> <a href="#idx1073749554">7th</a> <a href="#idx1073749571">8th</a> <a href="#idx1073749585">9th</a> <a href="#idx1073749602">10th</a><BR>
+development environments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749407">building Python applications</a> <a href="#idx1073749419">2nd</a> <a href="#idx1073749430">3rd</a> <a href="#idx1073749449">4th</a> <a href="#idx1073749501">5th</a> <a href="#idx1073749522">6th</a> <a href="#idx1073749548">7th</a> <a href="#idx1073749565">8th</a> <a href="#idx1073749579">9th</a> <a href="#idx1073749596">10th</a><BR>
+ <a href="#idx1073749537">documentation strings</a> <a href="#idx1073749541">2nd</a> <a href="#idx1073749563">3rd</a><BR>
+environments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749408">building Python applications</a> <a href="#idx1073749420">2nd</a> <a href="#idx1073749431">3rd</a> <a href="#idx1073749450">4th</a> <a href="#idx1073749502">5th</a> <a href="#idx1073749523">6th</a> <a href="#idx1073749549">7th</a> <a href="#idx1073749566">8th</a> <a href="#idx1073749580">9th</a> <a href="#idx1073749597">10th</a><BR>
+ <a href="#idx1073749517">equal (=) sign</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749593">naming styles and conventions</a><BR>
+ <a href="#idx1073749481">filter() function</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749544">documentation strings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749480">filter()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749470">mainloop()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749478">map()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749594">naming styles and conventions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749477">optimizing</a> <a href="#idx1073749484">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749482">reduce()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749485">time()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749490">time.clock()</a><BR>
+importing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749466">modules</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749487">time module</a><BR>
+ <a href="#idx1073749513">indented blocks</a><BR>
+ <a href="#idx1073749520">inline comments</a><BR>
+loops<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nested<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749476">construction methods</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749472">optimizing</a><BR>
+ <a href="#idx1073749471">mainloop() function</a><BR>
+ <a href="#idx1073749479">map() function</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;construction<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749475">nested loops</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749545">documentation strings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749595">naming styles and conventions</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749543">documentation strings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749591">naming styles and conventions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749448">optimizing</a> <a href="#idx1073749461">2nd</a> <a href="#idx1073749467">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749489">importing</a><BR>
+nested loops<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749473">construction methods</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749577">naming styles and conventions</a> <a href="#idx1073749578">2nd</a><BR>
+optimizing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749438">code</a> <a href="#idx1073749457">2nd</a> <a href="#idx1073749492">3rd</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command-line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749427">[nd]O</a><BR>
+performance<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749445">applications, optimizing</a> <a href="#idx1073749465">2nd</a> <a href="#idx1073749499">3rd</a><BR>
+ <a href="#idx1073749519">pound (#) sign</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749443">optimizing performance</a> <a href="#idx1073749463">2nd</a> <a href="#idx1073749497">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749411">building</a> <a href="#idx1073749423">2nd</a> <a href="#idx1073749434">3rd</a> <a href="#idx1073749453">4th</a> <a href="#idx1073749505">5th</a> <a href="#idx1073749526">6th</a> <a href="#idx1073749552">7th</a> <a href="#idx1073749569">8th</a> <a href="#idx1073749583">9th</a> <a href="#idx1073749600">10th</a><BR>
+ <a href="#idx1073749415">protyping</a><BR>
+quotes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;triple<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749540">documentation strings</a><BR>
+ <a href="#idx1073749483">reduce() function</a><BR>
+ <a href="#idx1073749500">Rossum, Guido van</a><BR>
+scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command-line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749418">testing</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749444">optimizing performance</a> <a href="#idx1073749464">2nd</a> <a href="#idx1073749498">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749412">building</a> <a href="#idx1073749424">2nd</a> <a href="#idx1073749435">3rd</a> <a href="#idx1073749454">4th</a> <a href="#idx1073749506">5th</a> <a href="#idx1073749527">6th</a> <a href="#idx1073749553">7th</a> <a href="#idx1073749570">8th</a> <a href="#idx1073749584">9th</a> <a href="#idx1073749601">10th</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749538">documentation</a> <a href="#idx1073749542">2nd</a> <a href="#idx1073749564">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749468">optimizing</a><BR>
+style guides<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749509">writing code</a> <a href="#idx1073749530">2nd</a> <a href="#idx1073749556">3rd</a> <a href="#idx1073749573">4th</a> <a href="#idx1073749587">5th</a> <a href="#idx1073749604">6th</a><BR>
+superclasses<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749547">documentation strings</a><BR>
+testing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749416">command-line scripts</a><BR>
+time module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749488">importing</a><BR>
+ <a href="#idx1073749486">time() function</a><BR>
+ <a href="#idx1073749491">time.clock() function</a><BR>
+Tkinter<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749469">optimizing</a><BR>
+triple quotes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749539">documentation strings</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749446">optimizing</a> <a href="#idx1073749447">2nd</a><BR>
+ <a href="#idx1073749515">whitespace</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749441">optimizing</a> <a href="#idx1073749460">2nd</a> <a href="#idx1073749495">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749510">style guides</a> <a href="#idx1073749531">2nd</a> <a href="#idx1073749557">3rd</a> <a href="#idx1073749574">4th</a> <a href="#idx1073749588">5th</a> <a href="#idx1073749605">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749414">Python applications</a> <a href="#idx1073749426">2nd</a> <a href="#idx1073749437">3rd</a> <a href="#idx1073749456">4th</a> <a href="#idx1073749508">5th</a> <a href="#idx1073749529">6th</a> <a href="#idx1073749555">7th</a> <a href="#idx1073749572">8th</a> <a href="#idx1073749586">9th</a> <a href="#idx1073749603">10th</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

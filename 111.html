@@ -1,0 +1,175 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Encapsulation</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Encapsulation</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="110.html" title="Polymorphism"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=111" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="111.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="112.html" title="Metaclasses"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A33%3A59+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147039203225041225189172</font><a href="read5.asp?bookname=0672319942&snode=111&now=5%2F31%2F2002+4%3A33%3A59+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Encapsulation</h3>
+				<p>All Python attributes (variables and methods) are public. Even though you cannot have private attributes in Python, you can use the following two agreements:</p>
+
+				<UL>
+<LI><p>By convention, attributes preceded with a single underscore (for example, <i><tt CLASs="monofont">_n</tt></i>) are to be viewed as internal variables, not to be used externally.</P>
+</LI>
+<Li><p>Attributes starting with double underscores (for example, <i><tt class="monofont">__n</tt></i>) aren't explicitly exported. They are renamed to <i><tt clasS="monofont">_Class__Variablename</tt></I> when byte compiled. Because the name of a class is used as part of the variable name, the attribute <i><tt Class="monofont">__n</Tt></i> (when inside a subclass) isn't the same <i><TT CLass="monofont">__n</tT></I> variable defined at a base class. This is probably the closest to <TT clasS="monofont">private</TT> that you will get. But, it isn't really a private implementation because when you know the name of the class, you can access the attribute. C++ programmers probably know this as <A name="idx1073743486"></A><A NAme="idx1073743487"></a><i>name mangling.</i></p>
+
+					</li>
+</ul>
+				<p>We cannot say that Python supports private attributes because it is still possible to have access to the attributes if you know the class and attributes names. For example, in a class called <i><tt class="monofont">C,</tT></i> the attribute <tT claSs="monofont">self.__attr</tt> becomes <tT claSS="monofont">self._C__attr,</TT> when exported from the class. Hence, you can <a namE="idx1073743488"></A><A Name="idx1073743489"></a><A NAMe="idx1073743490"></a>access this attribute by referencing it as <tt CLASs="monofont">_C__attr.</tt></p>
+
+				<pre>
+					
+&gt;&gt;&gt; class Number:
+…def __init__(self, value):
+…    self._n = value
+…    self.__n = value
+…def __repr__(self):
+…    return '%s(%s)'% (self.__class__.__name__, self._n)
+…def add(self, value):
+…    self._n = self._n + value
+…def incr(self):
+…    self._n = self._n + 1
+…
+
+				</pre>
+
+				<p>Based on the previous class, we will have some interactive examples next.</p>
+
+				<pre>
+					
+&gt;&gt;&gt; a = Number(20)
+&gt;&gt;&gt; a
+Number(20)
+&gt;&gt;&gt; a.add(4)
+&gt;&gt;&gt; a
+Number(24)
+&gt;&gt;&gt; a.incr()
+&gt;&gt;&gt; a
+Number(25)
+&gt;&gt;&gt; a._n
+25
+&gt;&gt;&gt; a._n = 30
+&gt;&gt;&gt; a
+Number(30)
+&gt;&gt;&gt; a._Number__n
+20
+
+				</pre>
+
+				<p>The important thing to remember is that nothing in Python is <i>private</I> (unless it is hidden within a C extension type).<a nAme="idx1073743491"></a><A name="idx1073743492"></A><a naME="idx1073743493"></A></P>
+
+				<p>To demonstrate that you can use default arguments to help storing the environment variables in a variable from the <a naME="idx1073743494"></A><A name="idx1073743495"></A><I>class namespace,</I> the next example initializes the value of the variable <Tt claSS="monofont">n</TT> by using a default argument. The value of <tt class="monofont">n</tt> is assigned at the time of defining the function and is stored at the class <i>namespace.</i><a name="idx1073743496"></a><a naMe="idx1073743497"></a><A namE="idx1073743498"></a></p>
+
+				<prE>
+					
+&gt;&gt;&gt; v = 10
+&gt;&gt;&gt; class C:
+…def storen(self, n=v):
+…    return n
+…
+&gt;&gt;&gt; objA = C()
+&gt;&gt;&gt; objA.storen()
+10
+&gt;&gt;&gt; v = 20
+&gt;&gt;&gt; objB = C()
+&gt;&gt;&gt; objB.storen()
+10
+&gt;&gt;&gt; n = 30
+&gt;&gt;&gt; objC = C()
+&gt;&gt;&gt; objC.storen()
+10
+
+				</pre>
+
+				<P>Note that the value of <TT Class="monofont">n</TT> remains constant for all instances of the class <TT clasS="monofont">C.</TT><A name="idx1073743499"></A><A NAme="idx1073743500"></a></p>
+
+				<p>The following example shows that it is possible to <a name="idx1073743501"></a><a name="idx1073743502"></a><a naMe="idx1073743503"></a><A namE="idx1073743504"></a><a naMe="idx1073743505"></a><a NAME="idx1073743506"></a>manipulate the internal attributes of an object by directly accessing the members of a class.</p>
+
+				<prE>
+					
+&gt;&gt;&gt; class fun:
+…def __init__(self):
+…    self.total = None
+…
+&gt;&gt;&gt; a = fun()
+&gt;&gt;&gt; b = fun()
+&gt;&gt;&gt; a.total = 2
+&gt;&gt;&gt; b.total = 3
+&gt;&gt;&gt; print a, b
+2 3
+
+				</PRE>
+
+				<p>In this next example, we hide the <tt cLASS="monofont">a()</tt> method definition by preceding it with two underscores. Note that if you later need to access this method (and you don't want to rename it), you must create a reference to the method, as shown in the following example.</p>
+
+				<pRE>
+					
+&gt;&gt;&gt; class C:
+…def __a(self):
+…    print "ni!"
+…b = __a
+…
+&gt;&gt;&gt; a = C()
+&gt;&gt;&gt; a.b()
+ni! 
+
+				</PRe>
+
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="110.html" title="Polymorphism"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=111" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="111.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="112.html" title="Metaclasses"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743488">private attributes</a> <a href="#idx1073743491">2nd</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743505">changing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743490">accessing</a> <a href="#idx1073743493">2nd</a><BR>
+changing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743501">object attributes</a><BR>
+ <a href="#idx1073743494">class namespaces</a> <a href="#idx1073743499">2nd</a><BR>
+editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743504">object attributes</a><BR>
+ <a href="#idx1073743498">encapsulation</a><BR>
+mangling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743487">name</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743506">object attributes</a><BR>
+modifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743503">object attributes</a><BR>
+ <a href="#idx1073743486">name mangling</a><BR>
+namespaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743495">class</a> <a href="#idx1073743500">2nd</a><BR>
+object-oriented programming (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743496">encapsulation</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743502">changing attributes</a><BR>
+private attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743489">accessing</a> <a href="#idx1073743492">2nd</a><BR>
+programming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object-oriented (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743497">encapsulation</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

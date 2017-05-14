@@ -1,0 +1,393 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Flat Databases</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="137.html" class="navtitle">8. Working with Databases</a> &gt; <span class="nonavtitle">Flat Databases</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="139.html" title="Working with Databases"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=140" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="140.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="141.html" title="DBM (Database Managers) Databases"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A38%3A39+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147044209056142149179093</font><a href="read8.asp?bookname=0672319942&snode=140&now=5%2F31%2F2002+4%3A38%3A39+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Flat Databases</h3>
+				<p>The simplest way to store any kind of information in Python is using flat files. You just need to use the <tT CLAss="monofont">open</tt> function that we already studied in <A HREf="22.html">Chapter 2, "Language Review."
+					</a>  Two options are available: You can either store the information as simple text or as binary data.</p>
+
+				
+					<h4>
+				
+				Text Data</H4>
+					<P>The next example is a straightforward case of using flat files to store and to retrieve information. First we try to read from the file. If the file doesn't exist, it is created, and the information provided by the user is saved on it.</P>
+
+					<Pre>
+						
+filename = "myflatfile.txt"
+try:
+    file = open(filename, "r")
+    data = file.read()
+    file.close()
+    print data
+except IOError:
+    data = raw_input("Enter data to save:")
+    file = open(filename,"w")
+    file.write(data)
+    file.close()
+
+					</pre>
+
+				
+				
+					<h4>
+				
+				
+				
+				Binary Data—The <tt class="monofont">struct</tt> Module</h4>
+					<p>The <tt cLasS="monofont">struct</tt> module is largely used to manipulate code of platform-independent binary files. It is a good choice for handling small files. For large files, you should consider using the <a Name="idx1073744834"></a>
+						<A namE="idx1073744835"></A>
+						<TT clasS="monofont">array</TT> module.</P>
+
+					<p>Binary data files are much less likely to be platform independent. Also, it is easier to extend a text file format without breaking compatibility.</p>
+
+					<p>The <tT CLAss="monofont">struct</tt> module works by converting data between Python and binary data structures, which normally interact using functions written in C.</P>
+
+					<P>This module implements only three functions: <TT class="monofont">pack, unpack,</tt> and <tt class="monofont">calcsize.</tt>
+					</p>
+
+					<ul>
+<lI>
+							<p>
+								
+									<tT claSs="monofont">pack—</tt>
+								 
+    
+								Takes the list of values and returns a binary object based on the <tT claSS="monofont">formatstring</TT> provided.
+							</p>
+
+							<pre>
+								
+binobject = pack (<I>formatstring, value1, value2, value3, …</I>)
+
+							</PRe>
+
+						</li>
+<lI>
+							<P>
+								
+									<TT clasS="monofont">unpack—</TT>
+								 
+    
+								Returns a Python tuple containing the original values. It uses the <Tt class="monofont">formatstring</tt> to translate the <tt class="monofont">string.</tt>
+								
+							</p>
+
+							<prE>
+								
+pythontuple = unpack (<i>formatstring, string</i>)
+
+							</Pre>
+
+						</lI>
+<li>
+							<p>
+								
+									<tT claSS="monofont">calcsize—</TT>
+								 
+    
+								Provides the size in bytes of the structure matching the format string.<a namE="idx1073744836"></A>
+									<A Name="idx1073744837"></a>
+									<A NAMe="idx1073744838"></a>
+									<a nAME="idx1073744839"></A>
+									<a name="idx1073744840"></a>
+									<a name="idx1073744841"></a>
+								
+							</p>
+
+							<pre>
+								
+no_of_bytes = calcsize(<i>formatstring</i>)
+
+							</prE>
+
+						</li>
+</Ul>
+					<p>The next example packs the values (<tT clasS="monofont">1, 2, 3</tt>) into binary format based on the format string <tT CLAss="monofont">"ihb",</tt> and later converts them back to the original values.</P>
+
+					<PRE>
+						
+&gt;&gt;&gt; import struct
+&gt;&gt;&gt; buffer = struct.pack("ihb", 1,2,3)
+&gt;&gt;&gt; print repr(buffer)
+'\001\000\000\000\002\000\003'
+&gt;&gt;&gt; print struct.unpack('ihb', buffer)
+(1,2,3)
+
+					</pre>
+
+					<p>Note that the binary data is represented as a Python string.</P>
+
+					<P>The next example is based on a binary file that stores three different objects. The first one is the author's initial, the second one is the number of bytes used by an article written by the author, and the last object is the article itself.</P>
+
+					<Pre>
+						
+&gt;&gt;&gt; import struct
+&gt;&gt;&gt; data = open('mybinaryfile.dat').read()
+&gt;&gt;&gt; start, stop = 0, struct.calcsize('cl')
+&gt;&gt;&gt; author, num_bytes = struct.unpack('cl', data[start:stop])
+&gt;&gt;&gt; start, stop = stop, start + struct.calcsize('B'*num_bytes)
+&gt;&gt;&gt; bytes = struct.unpack('B'*num_bytes, data[start:stop])
+
+					</prE>
+
+					<P>The next table shows the list of formatting units that can be used by this module.</P>
+
+					<P><table border="1" cellspaciNg="0" cEllpAddinG="1" widTH="100%">
+<CAptioN><H5>Table 8.1. 
+					  Formatting Units Used by the <TT clasS="monofont">struct</TT> Module</H5></captION><Colgroup align="left" span="3">
+<tr vaLigN="top">
+<th>
+<fOnt siZe="2">Format</foNT></TH>
+<th>
+<foNT SIze="2">C Type</foNT></TH>
+<th>
+<foNT SIze="2">Python Type</font></th>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2">
+										<a namE="idx1073744842"></a>
+										<tt CLASs="monofont">b</tt>
+									</fONT></Td>
+<td>
+<fONT Size="2">signed char</fONT></Td>
+<td>
+<font size="2">Integer</font></td>
+</tr>
+<tR vaLign="top">
+<Td>
+<fonT sizE="2">
+										<A NAme="idx1073744843"></a>
+										<tT CLAss="monofont">B</tt>
+									</FONT></td>
+<td>
+<FONT size="2">unsigned char</font></td>
+<td>
+<font size="2">Integer</FonT></td>
+</tR>
+<tr vaLign="top">
+<TD>
+<FOnt siZE="2">
+										<A Name="idx1073744844"></a>
+										<TT CLass="monofont">c</tT>
+									</FONt></td>
+<td>
+<font size="2">char</font></td>
+<tD>
+<foNt siZe="2">String of length 1</fonT></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2">
+										<A name="idx1073744845"></A>
+										<TT Class="monofont">d</tt>
+									</font></td>
+<td>
+<font siZe="2">double</fOnt></tD>
+<td>
+<foNt siZE="2">Float</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2">
+										<a name="idx1073744846"></a>
+										<tt class="monofont">f</tt>
+									</font></tD>
+<td>
+<Font Size="2">float</fOnt></tD>
+<TD>
+<Font sIZE="2">Float</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<font size="2">
+										<a name="idx1073744847"></a>
+										<tt claSs="monofont">h</tT>
+									</fonT></td>
+<td>
+<Font SIZE="2">short</font></TD>
+<TD>
+<font SIZE="2">Integer</font></TD>
+</TR>
+<tr valign="top">
+<td>
+<font size="2">
+										<a nAme="idx1073744848"></A>
+										<tt cLass="monofont">H</tT>
+									</fonT></TD>
+<Td>
+<fonT SIZe="2">unsigned short</fonT></TD>
+<Td>
+<fonT SIZe="2">Integer</font></td>
+</tr>
+<tr valign="top">
+<td>
+<fOnt Size="2">
+										<A name="idx1073744849"></A>
+										<tt cLASS="monofont">i</tt>
+									</foNT></TD>
+<td>
+<foNT SIze="2">int</foNT></TD>
+<td>
+<font size="2">Integer</font></td>
+</tr>
+<tr ValIgn="top">
+<tD>
+<font Size="2">
+										<A NAMe="idx1073744850"></a>
+										<tt CLASs="monofont">I</tt>
+									</fONT></Td>
+<td>
+<fONT Size="2">unsigned int</font></td>
+<td>
+<font size="2">Integer</fOnt></Td>
+</tr>
+<Tr valIgn="top">
+<tD>
+<FONt sizE="2">
+										<A NAme="idx1073744851"></a>
+										<tT CLAss="monofont">l</tt>
+									</FONT></td>
+<td>
+<font size="2">long</font></td>
+<td>
+<FonT sizE="2">Integer</font></Td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt siZE="2">
+										<A Name="idx1073744852"></a>
+										<TT CLass="monofont">L</tt>
+									</font></td>
+<td>
+<font sizE="2">unsigned long</foNt></td>
+<Td>
+<fonT sizE="2">Integer</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2">
+										<A name="idx1073744853"></a>
+										<tt class="monofont">p</tt>
+									</font></td>
+<Td>
+<fOnt sIze="2">char[]</foNt></td>
+<TD>
+<FOnt siZE="2">String</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font size="2">
+										<a name="idx1073744854"></a>
+										<tt clasS="monofont">P</tt>
+									</Font></Td>
+<td>
+<fOnt sIZE="2">void *</Font></tD>
+<TD>
+<Font sIZE="2">Integer</Font></tD>
+</TR>
+<Tr valign="top">
+<td>
+<font size="2">
+										<a naMe="idx1073744855"></a>
+										<Tt clAss="monofont">s</tt>
+									</Font></TD>
+<TD>
+<font SIZE="2">char[]</font></TD>
+<TD>
+<font SIZE="2">String</font></td>
+</tr>
+<tr valign="top">
+<td>
+<foNt sIze="2">
+										<a Name="idx1073744856"></a>
+										<Tt clASS="monofont">x</Tt>
+									</fonT></TD>
+<Td>
+<fonT SIZe="2">pad byte</fonT></TD>
+<Td>
+<font size="2">No value<a name="idx1073744857"></a>
+									</font></tD>
+</tr>
+</ColgRoup>
+</tAble></P>
+
+					<P>Are you looking for more information about handling binary data? Check out the file <TT clasS="monofont">npstruct-980726.zip</TT> at the following address:</P>
+
+					<p>
+						<a taRGET="_blank" href="http://www.nightmare.com/software.html">http://www.nightmare.com/software.html</A>
+					</P>
+
+					<P>
+						<A name="idx1073744858"></a>Sam Rushing has created an extension module useful for parsing and unparsing binary data structures. It is similar to the standard <tt class="monofont">struct</tt> module, but with a few extra features (bit-fields, user-function-fields, byte order specification, and so on), and a different API that is more convenient for streamed and context-sensitive formats like network protocol packets, image, and sound files.<a name="idx1073744859"></a>
+						<A naMe="idx1073744860"></a>
+						<a Name="idx1073744861"></a>
+						<A namE="idx1073744862"></A>
+						<A Name="idx1073744863"></a>
+						<A NAMe="idx1073744864"></a>
+					</p>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="139.html" title="Working with Databases"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=140" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="140.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="141.html" title="DBM (Database Managers) Databases"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073744834">array module</a><BR>
+ <a href="#idx1073744842">b format</a><BR>
+ <a href="#idx1073744843">B format</a><BR>
+ <a href="#idx1073744839">binary data</a> <a href="#idx1073744862">2nd</a><BR>
+ <a href="#idx1073744844">c format</a><BR>
+ <a href="#idx1073744845">d format</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744838">binary</a> <a href="#idx1073744861">2nd</a><BR>
+databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744836">flat</a> <a href="#idx1073744859">2nd</a><BR>
+ <a href="#idx1073744846">f format</a><BR>
+ <a href="#idx1073744837">flat databases</a> <a href="#idx1073744860">2nd</a><BR>
+formats<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744857">data, struct module</a><BR>
+ <a href="#idx1073744847">h format</a><BR>
+ <a href="#idx1073744848">H format</a><BR>
+ <a href="#idx1073744849">i format</a><BR>
+ <a href="#idx1073744850">I format</a><BR>
+ <a href="#idx1073744851">l format</a><BR>
+ <a href="#idx1073744852">L format</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744835">array</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744841">struct</a> <a href="#idx1073744864">2nd</a><BR>
+ <a href="#idx1073744853">p format</a><BR>
+ <a href="#idx1073744854">P format</a><BR>
+ <a href="#idx1073744858">Rushing, Sam</a><BR>
+ <a href="#idx1073744855">s format</a><BR>
+ <a href="#idx1073744840">struct module</a> <a href="#idx1073744863">2nd</a><BR>
+ <a href="#idx1073744856">x format</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

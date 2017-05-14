@@ -1,0 +1,389 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Compiling and Linking Extension Modules</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="117.html" class="navtitle">6. Extending and Embedding Python</a> &gt; <span class="nonavtitle">Compiling and Linking Extension Modules</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="121.html" title="Extending"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=122" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="122.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="123.html" title="SWIG—The Simple Wrapper Interface Generator"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A35%3A24+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147033230213142232249029</font><a href="read3.asp?bookname=0672319942&snode=122&now=5%2F31%2F2002+4%3A35%3A24+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Compiling and Linking Extension Modules</h3>
+				<p>Two options are available for building Python extension modules. The first one compiles and links the module into the interpreter. This option makes the module always available to the interpreter.</p>
+
+				<P>The second option doesn't require that you recompile the interpreter because it dynamically links the modules to the system.</P>
+
+				<H4>Linking Static Extensions to the Interpreter</H4>
+					<p>Before starting, make sure that you have already compiled the interpreter's source code (refer to <a hrEF="227.html">Chapter 17, "Development Tools,"</A>  for more details). Building and installing Python before adding new modules is essential to have the libraries and other files in the right places.</P>
+
+					<h5>Static Extensions on UNIX</h5>
+						<p>On UNIX, Python modules written in C are easily identified by looking at the <tT CLAss="monofont">/usr/lib/Python1.5</tt> directory. Most of the time, they are the shared library files with the <tt class="monofont">.so</tt> extension. Although, if you are using HPUX, the extension is <tt class="monofont">.sl,</Tt> and on some others it is just <tT claSs="monofont">.o.</tt></p>
+
+						<P>The next few steps show how to create static extensions on UNIX.<a naME="idx1073743891"></A><A name="idx1073743892"></A><A NAme="idx1073743893"></a><a NAME="idx1073743894"></a><a naME="idx1073743895"></A><A name="idx1073743896"></a><a name="idx1073743897"></a><a name="idx1073743898"></a><a naMe="idx1073743899"></a><A namE="idx1073743900"></a><a naMe="idx1073743901"></a><a NAME="idx1073743902"></a><a naME="idx1073743903"></A><A name="idx1073743904"></A><A NAme="idx1073743905"></a><a NAME="idx1073743906"></a><a name="idx1073743907"></a><a name="idx1073743908"></a><a name="idx1073743909"></a></p>
+
+						
+							<P>
+							<p>
+						<dL>
+<dd>
+<b>Step 1. </B>
+<p>You need to copy your module to the <tt cLass="monofont">Modules</TT> directory.</P>
+</Dd>
+<dd>
+<b>Step 2. </B>
+<P>You have to add the following entry to the end of the <TT clasS="monofont">/modules/Setup.in</TT> configuration file, which is located in the Python source tree. This file has the list of all the external libraries needed by the interpreter.</P>
+
+								<pre>
+									
+*static*
+modulename filename
+
+								</pRE>
+
+							</DD>
+</dl>
+
+						<p>For example,</p>
+
+						<pre>
+							
+hello /mnt/hda/python/helloworldmodule.c
+
+						</pre>
+
+						<p>If your extension module requires additional libraries, add the argument  <tt class="monofont">-l</tt><I><tt ClasS="monofont">libraryname</tt></i> at the end of the line.</p>
+
+						<P>For example,</p>
+
+						<prE>
+							
+hello /mnt/hda/python/helloworldmodule.c -l/mnt/hda/python/auxmodule.c
+
+						</PRE>
+
+						<p>The <a naME="idx1073743910"></A><A name="idx1073743911"></A><TT Class="monofont">*static*</TT> flag builds the modules as static modules. The other option is to use the <A Name="idx1073743912"></a><a name="idx1073743913"></a><tt class="monofont">*shared*</tt> flag, which means that they have to be built as shared modules (known as <tT clAss="monofont">DLL</tT>s on Windows).</p>
+
+						<p>The last step is to recompile Python as normal to include the extra module by typing <b><tT claSS="monofont">./configure</TT></b> and <b><tt CLASs="monofont">make</tt></b> in the top of the Python Source tree. The Python interpreter is rebuilt after that.</P>
+
+						<P>To execute the new interpreter and test your new extension module, just call it like this:</P>
+
+						<Pre>
+							
+./python<a nAME="idx1073743914"></A>
+
+						</pre>
+
+					
+					<h5>Static Extensions on Windows</h5>
+						<p>The following instructions are based on the use of Microsoft Visual C++ version 5.</p>
+
+						<p>First, you need to inform Python's <tt class="monofont">include path.</tt> To do that, go to Tools, Options, Directories (see <a hrEf="122#4.html">Figure 6.2</a>).<A namE="idx1073743915"></a><a naMe="idx1073743916"></a><a NAME="idx1073743917"></a><a naME="idx1073743918"></A><A name="idx1073743919"></A><A NAme="idx1073743920"></a><a NAME="idx1073743921"></a><a name="idx1073743922"></a><a name="idx1073743923"></a><a name="idx1073743924"></a><a NamE="idx1073743925"></a><a nAme="idx1073743926"></a><a Name="idx1073743927"></A><A NAme="idx1073743928"></a><a NAME="idx1073743929"></a><a naME="idx1073743930"></A><A name="idx1073743931"></A><A NAme="idx1073743932"></a></p>
+
+						<center>
+							<h5>
+<a name="4"></a>Figure 6.2. You need to inform the include path.</h5><imG boRder="0" Width="500" HeigHT="375" SRc="graphics/06fig02.gif" alt="graphics/06fig02.gif"></CENTer>
+
+						<p>It is also necessary to inform the library's location (see <a HREF="122#5.html">Figure 6.3</a>). You need to add the <tt cLASS="monofont">python15.lib</tt> directory to your Tools, Options, Directories, Library files.</p>
+
+						<center><h5>
+<a name="5"></a>Figure 6.3. You need to inform the python15.lib path.</h5><img BorDer="0" wIdth="500" hEighT="375" SRC="graphics/06fig03.gif" alt="graphics/06fig03.gif"></cENTEr>
+<p>Now, the rest is easy.</p>
+
+						<oL TYPe="1">
+<li>
+<p>Using a text editor, open the <TT CLass="monofont">\PC\config.c</tt> file.</p>
+</li>
+<li>
+<p>Look for the first comment. You need to add an external reference to the <tt class="monofont">init</tt> function of your module.</P>
+
+								<prE>
+									
+/* -- ADDMODULE MARKER 1 -- */
+extern void init<i>modulename</i>();
+
+								</pRe>
+</li>
+<lI>
+<p>Locate the next comment. You need to add the module name and the init function.</p>
+
+								<pRE>
+									
+/* -- ADDMODULE MARKER 2 -- */
+{"modulename", init<I>modulename</I>},
+
+								</pre>
+
+							</lI>
+<LI>
+<P>Using a text editor, open the <tt clASS="monofont">/PCbuild/python15.dsp</Tt> file.</p>
+</li>
+<LI>
+<P>Go to the end of the file. Locate the entry that references the <Tt class="monofont">yuvconvert.c</tt> source file. You need to add the location of your module's source file just before that entry.<a name="idx1073743933"></a><a name="idx1073743934"></a><A naMe="idx1073743935"></a><a Name="idx1073743936"></a><A namE="idx1073743937"></A><A Name="idx1073743938"></a><A NAMe="idx1073743939"></a><a nAME="idx1073743940"></A><a namE="idx1073743941"></A><A Name="idx1073743942"></a><a name="idx1073743943"></a><a name="idx1073743944"></a><a namE="idx1073743945"></a><a Name="idx1073743946"></A></p>
+
+								<pre>
+									
+SOURCE=..\Modules\<B><i>yourmodulename</i></b>module.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\Modules\yuvconvert.c
+# End Source File
+# End Target
+
+
+# End Project
+
+								</PRE>
+</Li>
+<li>
+<p>Using Microsoft Visual C++, open the <TT CLass="monofont">/PCbuild/pcbuild.dsw</tT> workspace.</P>
+</LI>
+<li>
+<p>Select the <tT CLAss="monofont">Batch Build</tt> option and say <tt class="monofont">Rebuild All.</tt></p>
+</li>
+</ol>
+
+						<p>By default, the <tT clAss="monofont">EXE</tT> file and the <tt clAss="monofont">DLL</tT>s will be saved in your <TT Class="monofont">/Pcbuild/</TT> directory.<A Name="idx1073743947"></a><A NAMe="idx1073743948"></a><a nAME="idx1073743949"></A><a name="idx1073743950"></a><a name="idx1073743951"></a></p>
+
+					
+				
+				<h4>Linking Dynamic Extensions to the Interpreter</h4>
+					<p>Now look at what you should do in order to create dynamic extension modules.</p>
+
+					<h5>Dynamic Extensions on UNIX</h5>
+						<p>The next few steps show how to build Dynamic extensions on UNIX.</P>
+
+						
+							<p>
+							<p>
+							<P>
+						<dl>
+<dD>
+<b>Step 1. </b>
+<p>Put the reference to your module in the <tT claSS="monofont">Setup.in</TT> file. If your module references other source files, you should include them too. You might want to create a new <tt clASS="monofont">Setup.in</Tt> file in the directory containing your module.</p>
+
+								<prE>
+									
+*shared*
+spam helloworldmodule.c
+
+								</PRE>
+</dd>
+<dd>
+<B>Step 2. </B>
+<P>Copy the <Tt class="monofont">Makefile.pre.in</tt> file to the directory where your module is located.<a name="idx1073743952"></a>
+									<a name="idx1073743953"></a><A naMe="idx1073743954"></a><a Name="idx1073743955"></a><A namE="idx1073743956"></A><A Name="idx1073743957"></a><A NAMe="idx1073743958"></a><a nAME="idx1073743959"></A><a namE="idx1073743960"></A><A Name="idx1073743961"></a><a name="idx1073743962"></a><a name="idx1073743963"></a><a namE="idx1073743964"></a><a Name="idx1073743965"></A><a namE="idx1073743966"></a><a nAME="idx1073743967"></A><a namE="idx1073743968"></A><A Name="idx1073743969"></a></P>
+</DD>
+<Dd>
+<b>Step 3. </b>
+<p>Type</P>
+
+								<PRE>
+									
+make -f Makefile.pre.in boot
+make
+
+								</pre>
+
+							</dd>
+</dl>
+
+						<p>This process creates a <tt class="monofont">helloworldmodule.so</tt> file.</p>
+
+						<p>You could also try</p>
+
+						<Pre>
+							
+gcc -c -I/usr/local/include/python1.5 helloworldmodule.c
+gcc -shared helloworldmodule.o -o helloworldmodule.so
+
+						</Pre>
+
+					
+					<h5>Dynamic Extension on Windows</H5>
+						<p>Next, how you can build a Dynamic Extension on Windows is illustrated.</p>
+
+						
+							<p>
+							<p>
+							<P>
+							<p>
+							<p>
+						<dL>
+<DD>
+<B>Step 1. </b>
+Create a directory in the Python top-level directory. Give it the name of your module.
+								<p>For example, <tt CLASs="monofont">c:\python\Python-1.5.2\pimodule</tt></p>
+</DD>
+<DD>
+<b>Step 2. </b>
+<p>Copy your <i><TT CLass="monofont">modulenamemodule.</tt></i>
+									<tt class="monofont">c</tt> file to this directory.</p>
+</dd>
+<dd>
+<B>Step 3. </b>
+<p>Copy the files <Tt clAss="monofont">example.def, example.dsp, example.dsw,</tt> and <Tt clASS="monofont">example.mak,</Tt> which are located at the <tt cLASS="monofont">/PC/example_nt</tt> directory of the standard distribution to your new directory. Don't forget to rename the prefix of these files in order to match the name of your module.</p>
+</dD>
+<DD>
+<B>Step 4. </b>
+<p>On each file, replace the occurrences of <tt CLASs="monofont">example</tt> with your module name.</p>
+</dd>
+<dd>
+<b>Step 5. </b>
+<p>Choose the <tt class="monofont">Build</tt> Menu option in order to generate your <I><tt ClasS="monofont">modulename.</tt></i><tT claSS="monofont">dll.</TT></p>
+</dd>
+</dL>
+
+						<P>A subdirectory was created underneath your working directory. This subdirectory, called <TT clasS="monofont">Release,</TT> contains your <Tt claSS="monofont">modulename.dll.</TT></p>
+
+						<p>A tool created by <a name="idx1073743970"></a>David Ascher is very useful to create Python extension modules. It uses a UNIX <tt class="monofont">Setup.in</tt> file to generate and build a Microsoft Visual C++ project. This tool is called <a naMe="idx1073743971"></a><A namE="idx1073743972"></a><a naMe="idx1073743973"></a><tT CLAss="monofont">compile.py.</tt></P>
+
+						<P>To use it, you just need to put your C module and the <TT clasS="monofont">compile.py</TT> file in the same directory, and execute the tool. When fired, the program creates a MS Visual C++ project (<Tt claSS="monofont">.dsp</TT> extension) and the workspace (<tt class="monofont">.dsw</tt> extension).<a name="idx1073743974"></a><a name="idx1073743975"></A><a nAme="idx1073743976"></a><A name="idx1073743977"></A><a naME="idx1073743978"></A><A name="idx1073743979"></A><A NAme="idx1073743980"></a><a NAME="idx1073743981"></a><a naME="idx1073743982"></A><A name="idx1073743983"></a><a name="idx1073743984"></a><a name="idx1073743985"></a><a naMe="idx1073743986"></a><A namE="idx1073743987"></a><a naMe="idx1073743988"></a><a NAME="idx1073743989"></a><a naME="idx1073743990"></A><A name="idx1073743991"></A><A NAme="idx1073743992"></a></p>
+
+						<P>Along with those files, it also creates a subdirectory called <TT Class="monofont">/pyds</tt> in which it stores the python extension module (<tt class="monofont">.pyd</tt> extension).</p>
+
+						<p>In order to use this extension in your application, the interpreter needs to be able to locate the <tt cLasS="monofont">.pyd</tt> file by looking at the <tT clasS="monofont">sys.path</tt>'s variable.</p>
+
+						<P><TT Class="monofont">compile.py</TT> is available at</P>
+
+						<P><a tarGET="_blank" Href="http://starship.python.net:9673/crew/da/code/compile">http://starship.python.net:9673/crew/da/Code/compile</a><A NAMe="idx1073743993"></a><a name="idx1073743994"></a><a name="idx1073743995"></a><a name="idx1073743996"></a>
+						</P>
+
+					
+					<h5>Installing and Using Dynamic Modules</h5>
+						<P>You have four simple choices:</p>
+
+						<ul>
+<Li><p>Place your <tt ClasS="monofont">module.so</TT> or <Tt claSS="monofont">module.dll</TT> in a directory that is defined by your <tt clASS="monofont">PYTHONPATH</Tt> environment variable. The <tt cLASS="monofont">site-packages</tt> directory under the <tt class="monofont">lib</tt> directory is a good place to put your extension modules.</p>
+</li>
+<li><p>At runtime, you can add the extension module's path to <tt cLasS="monofont">sys.path.</tt></p>
+</Li>
+<li><p>On Windows, you can place the extension module in the same directory of the <Tt clASS="monofont">python.exe</Tt> file.</p>
+</li>
+<LI><P>Put the extension in the current directory when you start Python.</P>
+</li>
+</ul>
+						<P>You won't find any difference while running dynamic modules. They act exactly the same way as the static modules that are linked to the interpreter.<A NAme="idx1073743997"></a><a NAME="idx1073743998"></a><a name="idx1073743999"></a><a name="idx1073744000"></a><a name="idx1073744001"></a><a NamE="idx1073744002"></a><a nAme="idx1073744003"></a><a Name="idx1073744004"></A><A NAme="idx1073744005"></a><a NAME="idx1073744006"></a><a naME="idx1073744007"></A><A name="idx1073744008"></A><A NAme="idx1073744009"></a><a name="idx1073744010"></a><a name="idx1073744011"></a><a name="idx1073744012"></A><a nAme="idx1073744013"></a><A name="idx1073744014"></A><a naME="idx1073744015"></A><A name="idx1073744016"></A><A NAme="idx1073744017"></a><a NAME="idx1073744018"></a></p>
+
+					
+					<h5>Accessing Generic DLLs</h5>
+						<P><A NAme="idx1073744019"></a>Sam Rushing has created an extension module called <a name="idx1073744020"></a><a name="idx1073744021"></a><tt claSs="monofont">calldll</tT> that enables Python to call any function that is part of a <tt cLass="monofont">Windows DLL.</tT> It doesn't matter whether the <tt cLASS="monofont">DLL</tt> is a Python extension.</p>
+
+						<p>The problem to remember is that <A NAMe="idx1073744022"></a><a nAME="idx1073744023"></A>errors caused by non-Python extension <tt clASS="monofont">DLL</Tt>s don't return exception codes but error messages.</p>
+
+						<p>With this module you can call any function in any <tt class="monofont">DLL.</tt> This means that you can do just about anything on Win32. This module includes a library that gives access to lots of the system GUI features, and a 'callback'generator for <tt class="monofont">i386,</tT> which lets external functions call back into Python as if it were C. (Much of the Win32 API uses callbacks.)</p>
+
+						<p>Along with that, you can access ODBC by directly calling functions in <Tt clAss="monofont">odbc32.dll</tt> using a wrapper module called <A namE="idx1073744024"></A><A Name="idx1073744025"></a><TT CLass="monofont">odbc.py.</tT> The ODBC module is implemented using <TT Class="monofont">calldll,</TT> and it has a few extra practical pieces; code for managing data sources, installing ODBC itself, and creating and maintaining Jet (Microsoft Access) databases. It has also been tested with ODBC drivers from Oracle and Objectivity. Of course, using <TT class="monofont">calldll</tt> destroys any platform or architecture independence your program may have had.</p>
+
+						<p>You can see more details at <a target="_blank" href="http://www.nightmare.com/software.html">http://www.nightmare.com/software.html</A>.<a nAme="idx1073744026"></a><A name="idx1073744027"></A><a naME="idx1073744028"></A><A name="idx1073744029"></A><A NAme="idx1073744030"></a><a NAME="idx1073744031"></a><a naME="idx1073744032"></A><A name="idx1073744033"></a><a name="idx1073744034"></a><a name="idx1073744035"></a><a naMe="idx1073744036"></a><A namE="idx1073744037"></a><a naMe="idx1073744038"></a><a NAME="idx1073744039"></a><a naME="idx1073744040"></A><A name="idx1073744041"></A></P>
+
+					
+				
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="121.html" title="Extending"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=122" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="122.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="123.html" title="SWIG—The Simple Wrapper Interface Generator"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073743912">*shared* flag</a><BR>
+ <a href="#idx1073743910">*static* flag</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743898">embedding Python objects in;compiling and linking extension modules</a> <a href="#idx1073743922">2nd</a> <a href="#idx1073743940">3rd</a> <a href="#idx1073743959">4th</a> <a href="#idx1073743981">5th</a> <a href="#idx1073744004">6th</a> <a href="#idx1073744033">7th</a><BR>
+ <a href="#idx1073743970">Ascher, David</a><BR>
+C programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743901">extending and embedding Python</a> <a href="#idx1073743925">2nd</a> <a href="#idx1073743943">3rd</a> <a href="#idx1073743962">4th</a> <a href="#idx1073743984">5th</a> <a href="#idx1073744007">6th</a><BR>
+C++ programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743903">extending and embedding Python</a> <a href="#idx1073743927">2nd</a> <a href="#idx1073743945">3rd</a> <a href="#idx1073743964">4th</a> <a href="#idx1073743986">5th</a> <a href="#idx1073744009">6th</a><BR>
+ <a href="#idx1073744020">calldll module</a> <a href="#idx1073744040">2nd</a><BR>
+ <a href="#idx1073743971">compile.py tool</a> <a href="#idx1073743994">2nd</a><BR>
+compiling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743893">extension modules</a> <a href="#idx1073743917">2nd</a> <a href="#idx1073743935">3rd</a> <a href="#idx1073743954">4th</a> <a href="#idx1073743976">5th</a> <a href="#idx1073743999">6th</a> <a href="#idx1073744028">7th</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python extension modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743891">compiling and linking</a> <a href="#idx1073743915">2nd</a> <a href="#idx1073743933">3rd</a> <a href="#idx1073743952">4th</a> <a href="#idx1073743974">5th</a> <a href="#idx1073743997">6th</a> <a href="#idx1073744026">7th</a><BR>
+dynamic extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743967">linking to interpreters</a> <a href="#idx1073743989">2nd</a> <a href="#idx1073744012">3rd</a> <a href="#idx1073744037">4th</a><BR>
+dynamic modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744016">installing and running</a><BR>
+embedding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743892">compiling and linking extension modules</a> <a href="#idx1073743916">2nd</a> <a href="#idx1073743934">3rd</a> <a href="#idx1073743953">4th</a> <a href="#idx1073743975">5th</a> <a href="#idx1073743998">6th</a> <a href="#idx1073744027">7th</a><BR>
+error messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744022">non-Python extension dynamic link libraries (DLLs)</a><BR>
+extension modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743895">compiling and linking</a> <a href="#idx1073743919">2nd</a> <a href="#idx1073743937">3rd</a> <a href="#idx1073743956">4th</a> <a href="#idx1073743978">5th</a> <a href="#idx1073744001">6th</a> <a href="#idx1073744030">7th</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dynamic<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743968">linking to interpreters</a> <a href="#idx1073743990">2nd</a> <a href="#idx1073744013">3rd</a> <a href="#idx1073744038">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;static<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743907">linking to interpreters</a> <a href="#idx1073743931">2nd</a> <a href="#idx1073743949">3rd</a><BR>
+flags<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743913">*shared*</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743911">*static*</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744015">dynamic modules</a><BR>
+interpreters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743969">linking dynamic extensions</a> <a href="#idx1073743991">2nd</a> <a href="#idx1073744014">3rd</a> <a href="#idx1073744039">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743908">linking static extensions</a> <a href="#idx1073743932">2nd</a> <a href="#idx1073743950">3rd</a><BR>
+linking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743966">dynamic extensions to interpreters</a> <a href="#idx1073743988">2nd</a> <a href="#idx1073744011">3rd</a> <a href="#idx1073744036">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743894">extension modules</a> <a href="#idx1073743918">2nd</a> <a href="#idx1073743936">3rd</a> <a href="#idx1073743955">4th</a> <a href="#idx1073743977">5th</a> <a href="#idx1073744000">6th</a> <a href="#idx1073744029">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743905">static extensions to interpreters</a> <a href="#idx1073743929">2nd</a> <a href="#idx1073743947">3rd</a><BR>
+messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744023">non-Python extension dynamic link libraries (DLLs)</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744021">calldll</a> <a href="#idx1073744041">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dynamic<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744017">installing and running</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743896">compiling and linking</a> <a href="#idx1073743920">2nd</a> <a href="#idx1073743938">3rd</a> <a href="#idx1073743957">4th</a> <a href="#idx1073743979">5th</a> <a href="#idx1073744002">6th</a> <a href="#idx1073744031">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744025">odbc.py</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743897">embedding in non-Python applications;compiling and linking extension modules</a> <a href="#idx1073743921">2nd</a> <a href="#idx1073743939">3rd</a> <a href="#idx1073743958">4th</a> <a href="#idx1073743980">5th</a> <a href="#idx1073744003">6th</a> <a href="#idx1073744032">7th</a><BR>
+ <a href="#idx1073744024">odbc.py module</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743902">extending and embedding Python</a> <a href="#idx1073743926">2nd</a> <a href="#idx1073743944">3rd</a> <a href="#idx1073743963">4th</a> <a href="#idx1073743985">5th</a> <a href="#idx1073744008">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743904">extending and embedding Python</a> <a href="#idx1073743928">2nd</a> <a href="#idx1073743946">3rd</a> <a href="#idx1073743965">4th</a> <a href="#idx1073743987">5th</a> <a href="#idx1073744010">6th</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743899">embedding Python objects in;compiling and linking extension modules</a> <a href="#idx1073743923">2nd</a> <a href="#idx1073743941">3rd</a> <a href="#idx1073743960">4th</a> <a href="#idx1073743982">5th</a> <a href="#idx1073744005">6th</a> <a href="#idx1073744034">7th</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744018">dynamic modules</a><BR>
+ <a href="#idx1073744019">Rushing, Sam</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743900">embedding Python objects in;compiling and linking extension modules</a> <a href="#idx1073743924">2nd</a> <a href="#idx1073743942">3rd</a> <a href="#idx1073743961">4th</a> <a href="#idx1073743983">5th</a> <a href="#idx1073744006">6th</a> <a href="#idx1073744035">7th</a><BR>
+static extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743906">linking to interpreters</a> <a href="#idx1073743930">2nd</a> <a href="#idx1073743948">3rd</a><BR>
+tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743972">compile.py</a> <a href="#idx1073743995">2nd</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743909">linking static extensions to interpreters</a> <a href="#idx1073743914">2nd</a><BR>
+utilities<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743973">compile.py</a> <a href="#idx1073743996">2nd</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743992">linking dynamic extensions to interpreters</a> <a href="#idx1073743993">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743951">linking static extensions to interpreters</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

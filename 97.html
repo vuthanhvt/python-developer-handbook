@@ -1,0 +1,70 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; try/finally </TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="91.html" class="navtitle">4. Exception Handling</a> &gt; <span class="nonavtitle">try/finally </span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="96.html" title="Catching Exceptions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=97" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="97.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="98.html" title="Creating User-defined Exceptions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A32%3A12+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147038000013112057241206</font><a href="read6.asp?bookname=0672319942&snode=97&now=5%2F31%2F2002+4%3A32%3A12+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3><tt cLASS="monofont"><a namE="idx1073743206"></A><A Name="idx1073743207"></a><A NAMe="idx1073743208"></a>try/finally</tt></h3>
+				<p>The <a name="idx1073743209"></a><a name="idx1073743210"></a><tt ClaSs="monofont">try/finally</tt> statement is good for clean-up actions. The code in the <A name="idx1073743211"></A><a naME="idx1073743212"></A><Tt claSS="monofont">finally</TT> block is always executed, no matter whether the <tt clASS="monofont">try</Tt> block fails or not.</p>
+
+				<prE>
+					
+1: try:
+2:     f = open("c:\\autoexec.bat")
+3:     lines = f.readlines()
+4: finally:
+5:     f.close()              # it is always executed
+6: print "It is done"         # it is executed on success only
+
+				</PRE>
+
+				<p>The previous piece of code opens a file and tries to read its lines. It is not necessary to check whether the process raises an error in order to close the file because the <tt class="monofont">close</tt> function in line 5 is always executed, no matter what. Now, take a look at line 6. The <tt class="monofont">print</tt> statement is only executed when the <tT clAss="monofont">finally</tT> block is bypassed because when an error is raised, the <tt clAss="monofont">finally</tT> block is executed and the program is terminated immediately afterwards if the exception is not handled, leaving the exception unhandled.</P>
+
+				<DIv claSS="note"><P Class="notetitle"><B>Tip</B></P><P>
+
+					<p><tt cLASS="monofont">finally</tt> and <a name="idx1073743213"></a><a name="idx1073743214"></a><tt clasS="monofont">except</tt> clauses cannot be used together along with a unique <A namE="idx1073743215"></a><a naMe="idx1073743216"></a><tT CLAss="monofont">try</tt> clause.<A NAMe="idx1073743217"></a><a nAME="idx1073743218"></A><a namE="idx1073743219"></A><A Name="idx1073743220"></a><a name="idx1073743221"></a></p>
+
+				</p></div>
+<br>
+<br>
+
+			</fOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="96.html" title="Catching Exceptions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=97" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="97.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="98.html" title="Creating User-defined Exceptions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+clauses<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743214">except</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743212">finally</a> <a href="#idx1073743221">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743216">try</a><BR>
+ <a href="#idx1073743213">except clause</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743206">try/finally statement</a> <a href="#idx1073743217">2nd</a><BR>
+ <a href="#idx1073743211">finally clause</a> <a href="#idx1073743220">2nd</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743207">try/finally</a> <a href="#idx1073743210">2nd</a> <a href="#idx1073743218">3rd</a><BR>
+ <a href="#idx1073743215">try clause</a><BR>
+ <a href="#idx1073743208">try/finally statement</a> <a href="#idx1073743209">2nd</a> <a href="#idx1073743219">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

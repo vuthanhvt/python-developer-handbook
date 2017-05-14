@@ -1,0 +1,220 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="187.html" class="navtitle">13. Data Manipulation</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="195.html" title="Generic Conversion Functions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=196" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="196.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="198.html" title="IV: Graphical Interfaces"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A47%3A03+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148043124058173185002141</font><a href="read1.asp?bookname=0672319942&snode=196&now=5%2F31%2F2002+4%3A47%3A03+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Summary</h3>
+				<p>This chapter provides information concerning how to use Python for
+data parsing and manipulation. You learned how to interpret XML, SGML, and HTML
+documents and how to parse and manipulate email messages, among other things.
+As you might already know, Python can be used as a very effective and
+productive tool to parse and manipulate information from the Web.</p>
+
+				<P>Extensible Markup Language describes a class of data objects called
+XML documents and partially describes the behavior of computer programs that
+process them. For those who want to play around with XML in Python, there is a
+Python/XML package to serve several purposes at once. This package contains
+everything required for basic XML applications, along with documentation and
+sample code.</P>
+
+				<P>Besides that, the <Tt claSS="monofont">xmllib</TT> module serves as the
+basis for parsing text files formatted in XML. Note that
+<tt clASS="monofont">xmllib</Tt> is not XML 1.0 compliant, and it doesn't provide any
+Unicode support. It provides just simple XML support for ASCII only element and
+attribute names.</p>
+
+				<p>Many XML-based technologies are available for Python/XML development,
+such as</p>
+
+				<blockquote>
+<p><p><b>SAX— </b>
+
+							This is a common event-based interface for object-oriented XML parsers.
+ <a nAme="idx1073748166"></A><a naMe="idx1073748167"></a></p>
+
+						<p>The Document Object Model (DOM)—This is a standard
+ interface for manipulating XML and HTML documents developed by the World Wide
+ Web Consortium. 4DOM is a Python library for XML and HTML processing and
+ manipulation using the W3C's Document Object Model for interface.</P>
+
+					</p>
+<p><p><B>XSLT— </B>
+
+							This is an XML transformation processor based on the W3C's specification.</P>
+
+					</P>
+<p><p><b>XML Bookmark Exchange Language (XBEL)— </b>
+
+							This is an Internet "bookmarks" interchange format.</P>
+
+					</P>
+<P><P><b>SOAP— </b>
+
+							This is an XML/HTTP-based protocol for accessing services, objects, and servers in a platform-independent manner. Scarab is a
+ minimal Python SOAP implementation.</p>
+
+					</p>
+<P><P><B>PythonPoint— </B>
+
+							This has a simple XML markup language for doing presentation slides and converting them to PDF documents.</p>
+
+					</p>
+<p><p><B>Pyxie— </B>
+
+							This is an Open Source XML processing library for Python.</P>
+
+					</P>
+<p><p><b>XML-RPC— </b>
+
+							This is a specification and a set of implementations that allow software running on different operating systems and different environments to make procedure calls over the Internet. It is important to say that Python has its own implementation of XML-RPC.</p>
+
+					</p>
+<p><p><b>XDR— </b>
+
+							This is a standard for data description and encoding. Protocols such as RPC and NFS use XDR to describe the format of their data.</p>
+
+					</p>
+</blockquoTe>
+				<p>But Python is not just XML. It also provides support for other markup
+languages.</P>
+
+				<p>The <tt Class="monofont">sgmllib</Tt> module is an SGML (Standard Generalized Markup Language) parser subset. Although it has a simple implementation, it is powerful enough to build the HTML parser.</p>
+
+				<p>The <TT CLass="monofont">htmllib</tT> module defines a parser class that can serve as a base for parsing text files formatted in HTML. Two helper modules are used by <TT Class="monofont">htmllib</TT>:</P>
+
+				<Ul>
+<li><p>The <TT CLass="monofont">htmlentitydefs</tt> module is a dictionary that
+ contains all the definitions for the general entities defined by HTML
+ 2.0.</p>
+
+					</li>
+<li><p>The formatter module is used for generic output formatting by the
+ <tt class="monofont">HTMLPARSER</tt> class of the <Tt cLass="monofont">htmllib</Tt>
+ module.</p>
+</li>
+</Ul>
+				<p>Apart from markup languages, this chapter also covers mail messages
+manipulation.</p>
+
+				<P>MIME (Multipurpose Internet Mail Extensions) is a standard for
+sending multi-part multimedia data through Internet mail. This standard exposes
+mechanisms for specifying and describing the format of Internet message bodies.
+Python provides many modules to support MIME messages, including the
+following:</P>
+
+				<BLockqUOTE>
+<p><p><tt CLASs="monofont">mimetools</tt>— 
+    
+							Provides utility tools for parsing and manipulation of MIME multi-part and encoded messages.</p>
+
+					</P>
+<P><P><Tt class="monofont">MimeWriter</tt>— 
+    
+							Implements a generic file-writing class that is used to create MIME encoded multi-part files (messages).</p>
+
+					</p>
+<p><p><tt class="monofont">multifile</tT>— 
+    
+							Enables you to treat distinct parts of a text file as file-like input objects.</p>
+
+					</p>
+<P><p><tt Class="monofont">mailcap</Tt>— 
+    
+							Reads mailcap files and configures how MIME-aware applications react to files with different MIME types.</p>
+
+					</p>
+<P><P><TT clasS="monofont">mimetypes</TT>— 
+    
+							Supports conversions between a filename or URL and the MIME type associated with the filename extension.</P>
+
+					</p>
+<p><p><tT CLAss="monofont">quopri</tt>— 
+    
+							Performs quoted-printable transport encoding and decoding of MIME quoted-printable data.</P>
+
+					</P>
+<P><P><tt class="monofont">mailbox</tt>— 
+    
+							Implements classes that allow easy and uniform access to read various mailbox formats in a UNIX system.</p>
+
+					</p>
+<p><p><tt class="monofont">mimify</Tt>— 
+    
+							Contains functions to convert and process simple and multi-part mail messages to/from MIME format.</p>
+
+					</P>
+<p><p><tT clasS="monofont">rfc822</tt>— 
+    
+							Parses mail headers that are defined by the Internet standard RFC 822.</p>
+
+					</P>
+</BLOckquOTE>
+				<P>Python uses the following modules for general data
+conversions:</p>
+
+				<bloCKQUote>
+<p><P><TT Class="monofont">netrc</tt>— 
+    
+							Parses, processes, and encapsulates the <tt class="monofont">.netrc</tt> configuration file format used by UNIX FTP program and other FTP clients.</p>
+
+					</p>
+<p><p><tT clAss="monofont">mhlib</tT>— 
+    
+							Provides a Python interface to access MH folders, mailboxes, and their contents.</p>
+
+					</p>
+<p><p><Tt clASS="monofont">base64</Tt>— 
+    
+							Performs <tt cLASS="monofont">base64</tt> encoding and decoding of arbitrary binary strings into text string that can be safely emailed or posted.</p>
+
+					</p>
+<P><P><TT clasS="monofont">binhex</TT>— 
+    
+							Encodes and decodes files in <Tt class="monofont">binhex4</tt> format. This format is commonly used to represent files on Macintosh systems.</p>
+
+					</p>
+<p><p><tt class="monofont">uu</tT>— 
+    
+							Encodes and decodes files in uuencode format.</p>
+
+					</p>
+<P><p><tt Class="monofont">binascii</Tt>— 
+    
+							Implements methods to convert data between binary and various ASCII-encoded binary representations, including <tt CLASs="monofont">binhex,</tt><tT CLAss="monofont">uu,</tt> and <TT CLass="monofont">base64.</tT></P>
+
+					</P>
+</Blockquote>
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="195.html" title="Generic Conversion Functions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=196" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="196.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="198.html" title="IV: Graphical Interfaces"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748166">manipulating</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748167">data</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,78 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="137.html" class="navtitle">8. Working with Databases</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="146.html" title="Python DB API"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=147" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="147.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="149.html" title="9. Other Advanced Topics"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A39%3A43+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147045098080135126044008</font><a href="read9.asp?bookname=0672319942&snode=147&now=5%2F31%2F2002+4%3A39%3A43+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Summary</h3>
+				<p>This chapter shows all the database options that Python has available. The simplest solution to handle databases in Python is to use plain text files. A tiny variation of this method is to store the information in binary format.</p>
+
+				<P>The next solution is to use the indexing mechanism provided by the dbm-like modules (such as <TT Class="monofont">dbm, gdbm,</TT> and <TT clasS="monofont">dbhash</TT>). DBM stands for Database Manager, and it has its own storing implementation. This format specifies a simple, disk-based storage facility that handles data in a way equivalent to dictionaries. The objects are manipulated by using unique key strings.</P>
+
+				<p>These are database modules that are part of the standard Python distribution, and each one of them is an interface to a specific library.</p>
+
+				<p>Also included in the standard Python distribution is the <tt class="monofont">anydbm</tt> module, which is a generic interface to all the dbm-like modules. It uses whichever modules are installed.</p>
+
+				<p>The <tt clasS="monofont">dbhash</tt> module provides a function that offers a dbm-style interface to access the BSD database library.</P>
+
+				<p>The <tt Class="monofont">whichdb</Tt> module provides a function that guesses which <tt CLASs="monofont">dbm</tt> module (<tT CLAss="monofont">dbm, gdbm,</tt> or <TT CLass="monofont">dbhash</tT>) should be used to open a specific database.</P>
+
+				<P>The <Tt class="monofont">dumbdbm</tt> module is a simple, portable, and slow dbm-style database implemented entirely in pure Python.</p>
+
+				<p>Also, a group of other modules provide persistent storage of arbitrary Python objects. Whenever you need to save objects whose value is not a simple <tt class="monofont">string</tt> (such as <tT clAss="monofont">None, integer, long integer, float, complex, tuple, list, dictionary, code object,</tT> and so on), you need to serialize the object before sending it to a file.<a namE="idx1073745242"></a>
+				</p>
+
+				<p>Included in the standard Python distribution, the <TT CLass="monofont">pickle</tT> module can convert Python objects to and from a string representation.</P>
+
+				<P>The <Tt claSS="monofont">cPickle</TT> module is a faster implementation of the <tt clASS="monofont">pickle</Tt> module.</p>
+
+				<p>The <tt class="monofont">copy_reg</tt> module extends the capabilities of the <tt class="monofont">pickle</tT> and <tt ClasS="monofont">cpickle</tt> modules by registering support functions.</p>
+
+				<p>The <Tt clASS="monofont">marshal</Tt> module is an alternate method to implement Python object serialization.</p>
+
+				<p>The <tT CLAss="monofont">shelve</tt> module offers persistent object storage capability to Python by using <TT CLass="monofont">dictionary</tT> objects. Both keys and values can use any data type, as long as the <TT Class="monofont">pickle</tt> module can handle it.</p>
+
+				<p>ODBC is a standard interface, created by Microsoft, that provides access to almost every database. Python's official ODBC module is included in the <tt class="monofont">PythonWin</tt> distribution, which is very stable, by the way. However, it is no longer going to be improved. This <tt cLasS="monofont">odbc</tt> module works along with the <tT clasS="monofont">dbi</tt> module.</p>
+
+				<P>Besides this <TT Class="monofont">odbc</TT> module, we have other technologies (such as <TT clasS="monofont">mxODBC, calldll,</TT> and <Tt claSS="monofont">unixODBC</TT>) that make the task of opening ODBC connections easier. Although ODBC seems to be the standard in the market, ADO offers significant benefits. ADO is a rich and fully featured object model.</p>
+
+				<p>In order to correctly manipulate data, the use of SQL is essential. SQL consists of a list of powerful and flexible commands that are used to manipulate information collected in tables, by operating and controlling sets of records at a time. The main SQL commands are: <tt class="monofont">SELECT, INSERT, DELETE,</tt> and <tt class="monofont">UPDATE.</tt>
+				</P>
+
+				<p>
+					<tT claSs="monofont">PostgreSQL, MySQL, GadFly,</tt> and <tT claSS="monofont">Metakit</TT> are some of the SQL database mechanisms that run on Python.</p>
+
+				<p>Many third-party database extension modules are available for Python, such as the native Python interfaces to MySQL, Oracle, and Sybase database systems.</p>
+
+				<p>The quest to provide a standard way to interface to database systems drove a group of people to develop a Python Database API. The Python DB API is maintained by the Database Special Interest Group (DB-SIG). <TT CLass="monofont">GadFly, mxODBC, MySQL, odbc,</tT> and many other modules have already adopted this API. This API has been defined to encourage similarity between the Python Modules that are used to access databases.</P>
+
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="146.html" title="Python DB API"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=147" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="147.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="149.html" title="9. Other Advanced Topics"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073745242">databases</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

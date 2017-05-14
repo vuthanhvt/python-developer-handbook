@@ -1,0 +1,169 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Metaclasses</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Metaclasses</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="111.html" title="Encapsulation"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=112" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="112.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="113.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A34%3A09+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147032037055053230108169</font><a href="read3.asp?bookname=0672319942&snode=112&now=5%2F31%2F2002+4%3A34%3A09+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Metaclasses</h3>
+				<p>A <i>metaclass</I> is just a class that is used as a template to create class-like entities.</P>
+
+				<P>Normally, you create instances based on classes. The goal here is to create classes (<A name="idx1073743507"></A><I>metainstances</I>) based on other classes (<I>metaclasses</i>). The resulting metainstances are used as base classes for your own classes.</p>
+
+				<p>The whole idea is to offer you the possibility of operating Python's internal class-handling engine. Everything that usually happens behind the scenes while manipulating your classes and objects now can be accessed and changed. The meta instance makes it easier for you to handle the task of modifying the attribute lookup behavior of objects.</p>
+
+				<P>Prior to Python, version 1.5, it was necessary to use C extensions in order to define metaclasses.</P>
+
+				<P>The subsequent code defines a simple metaclass and its supporting classes. Note that this structure doesn't cover the whole model.</P>
+
+				<pre>
+					
+ 1: &gt;&gt;&gt; import types
+ 2: &gt;&gt;&gt; class METACLASS:
+ 3: …    def __init__(self, name, bases, namespace):
+ 4: …        self.__name__ = name
+ 5: …        self.__bases__ = bases
+ 6: …        self.__namespace__ = namespace
+ 7: …    def __call__(self):
+ 8: …        return METAINSTANCE(self)
+ 9: …
+10: &gt;&gt;&gt; class METAINSTANCE:
+11: …def __init__(self, metaclass):
+12: …    self.__metaclass__ = metaclass
+13: …def __getattr__(self, name):
+14: …    try:
+15: …        value = self.__metaclass__.__namespace__[name]
+16: …    except KeyError:
+17: …        raise AttributeError, name
+18: …    if type(value) is not types.FunctionType:
+19: …        return value
+20: …    return METHODWRAPPER(value, self)
+21: …
+22: &gt;&gt;&gt; class METHODWRAPPER:
+23: …def __init__(self, function, metainstance):
+24: …    self.function = function
+25: …    self.instance = metainstance
+26: …    self.__name__ = self.function.__name__
+27: …def __call__(self, *args):
+28: …    return apply(self.function, (self.instance,) + args)
+29: …
+
+				</pre>
+
+				<p>Line 2 : Defines the metaclass <tt class="monofont">METACLASS.</tt></p>
+
+				<p>Lines 3-6 : Creates a new metaclass. The __init__ method expects three arguments: The metainstance name, a tuple of base classes, and a dictionary of the metainstance namespace.</p>
+
+				<p>Lines 7-8 : Invokes <Tt cLass="monofont">METAINSTANCE.__init__</Tt> when <tt cLass="monofont">METACLASS</TT> is called, returning a metainstance.</P>
+
+				<P>Line 10 : Defines the metainstance <tt clASS="monofont">METAINSTANCE.</Tt></p>
+
+				<p>Line 13 : Handles the access to attributes of the user instance by checking whether it is part of the user class namespace (lines 14-17). If the attribute is a value, it returns the value. Otherwise, if the attribute is a function, it returns an instance of the <tT CLAss="monofont">METHODWRAPPER</tt> class, which is actually the result of the function call.</P>
+
+				<P>Line 22 : Defines the <TT class="monofont">METHODWRAPPER</tt> class, which handles all the accesses to the method attributes of the user class.</p>
+
+				<p>Now that we are ready to call metaclasses, you can use metainstances as base classes of your own classes, trapping the access to your class objects. The next line of code <a name="idx1073743508"></a><a name="idx1073743509"></A><a nAme="idx1073743510"></a>creates an instance of a metainstance.</P>
+
+				<pre>
+					
+&gt;&gt;&gt; BASECLASS = METACLASS('BASECLASS', (), { } )
+
+				</pRe>
+
+				<p>Let me explain to you what is really happening here:</p>
+
+				<P>We are creating a class called <TT Class="monofont">BASECLASS</TT> whose behavior is inherited from the <TT clasS="monofont">METACLASS</TT> constructor class. The <Tt claSS="monofont">METACLASS.__init__</TT> method is invoked at this stage.</p>
+
+				<p>From now on, every class that you create—which uses <tt class="monofont">BASECLASS</tt> as the base class—will inherit the whole behavior that you have specified in the <tt class="monofont">METACLASS</tt> definition.<A naMe="idx1073743511"></a><a Name="idx1073743512"></a><A namE="idx1073743513"></A></P>
+
+				<P>The following code exemplifies a user class that has our <tt clASS="monofont">BASECLASS</Tt> as the base class.</p>
+
+				<prE>
+					
+&gt;&gt;&gt; class CEO(BASECLASS):
+…    def push(self, name):
+…        self.name = [name]
+…    def pop(self):
+…        if len(self.name) &gt; 0:
+…            item = self.name[-1]
+…            del self.name[-1]
+…            print item
+…
+
+				</PRE>
+
+				<p>Now it's time to illustrate the use of this whole concept.</p>
+
+				<prE>
+					
+&gt;&gt;&gt; ITCEO = CEO()
+&gt;&gt;&gt; ITCEO.push("Andre")
+&gt;&gt;&gt; ITCEO.pop()
+<I>['Andre']</I>
+&gt;&gt;&gt; <I>ITCEO.name</i>
+<i>[]</i>
+
+				</pre>
+
+				<p>Note that <tt class="monofont">ITCEO = CEO()</tt> invokes <tt clAss="monofont">METACLASS.__call__,</Tt> which creates a <tt Class="monofont">METAINSTANCE</Tt> instance, whereas all the other calls invoke <tt CLASs="monofont">METAINSTANCE.__getattr__.</tt></p>
+
+				<P>More details about metaclasses can be found at the following addresses:</P>
+
+				<P><A targET="_blank" HRef="http://www.python.org/doc/essays/metaclasses/">http://www.python.org/doc/essays/metaclasses/</a></p>
+
+				<P>and Mess—The Meta-Extension System Set (old stuff) at <A TArget="_blank" href="http://starship.python.net/crew/da/mess/doc/Tutorial">http://starship.python.net/crew/da/mess/doc/Tutorial</a>.</p>
+
+				<p><a name="idx1073743514"></a><a naMe="idx1073743515"></a>Mess is a set of extensions that allows the creation of new types, among other things. It's not certain whether it will ever be integrated into Python, but its documentation can provide a lot of help in understanding metaclass concepts.</P>
+
+				<p>Maybe you will like to take a look at the <a nAme="idx1073743516"></a><a Name="idx1073743517"></A><A NAme="idx1073743518"></a><tT CLAss="monofont">ExtensionClass</tt> extension by Digital Creations that uses metaclasses to allow creation of class-like objects in C (and is a lot easier to use than Mess). This extension illustrates how the Python class mechanism can be extended, and provides a lightweight mechanism developed for making Python extension types more class-like. Classes can be developed in an extension language, such as C or C++, and treated like other Python classes.</P>
+
+				<P><A TargeT="_blank" HREf="http://www.digicool.com/releases/ExtensionClass/">http://www.digicool.com/releases/ExtensionClass/</a><a name="idx1073743519"></a><a name="idx1073743520"></a><a name="idx1073743521"></a></P>
+
+			</foNt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="111.html" title="Encapsulation"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=112" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="112.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="113.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743508">metainstances</a><BR>
+Digital Creations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743518">ExtensionClass extension</a><BR>
+ <a href="#idx1073743516">ExtensionClass extension</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743517">ExtensionClass</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743515">Mess</a><BR>
+instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;metainstances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743509">creating</a><BR>
+ <a href="#idx1073743514">Mess</a><BR>
+ <a href="#idx1073743513">metaclasses</a> <a href="#idx1073743521">2nd</a><BR>
+ <a href="#idx1073743507">metainstances</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743510">creating instances of</a><BR>
+object-oriented programming (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743511">metaclasses</a> <a href="#idx1073743519">2nd</a><BR>
+programming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object-oriented (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743512">metaclasses</a> <a href="#idx1073743520">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

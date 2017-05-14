@@ -1,0 +1,1322 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Concrete Objects Layer</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="255.html" class="navtitle">A. Python/C API</a> &gt; <span class="nonavtitle">Concrete Objects Layer</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="263.html" title="Abstract Objects Layer"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=264" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="264.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="265.html" title="Initialization, Finalization, and Threads"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A29%3A44+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218073235215104098039061</font><a href="read7.asp?bookname=0672319942&snode=264&now=6%2F1%2F2002+6%3A29%3A44+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Concrete Objects Layer</h3>
+				<p>The functions in this section are specific to certain Python <a NAME="idx1073751071"></a>object types. Passing them an object of the wrong type is not a good idea; if you receive an object from a Python program and you are not sure that it has the right type, you must perform a type check first; for example: to check that an object is a dictionary, use <tt cLASS="monofont">PyDict_Check().</tt> This section is structured similar to the "family tree" of Python object types.<a nAME="idx1073751072"></A><a name="idx1073751073"></a><a name="idx1073751074"></a><a name="idx1073751075"></a><a nAme="idx1073751076"></A><a naMe="idx1073751077"></a><a nAme="idx1073751078"></a></P>
+
+				<H4>Fundamental Objects</H4>
+					<P>This section describes Python type objects and the singleton object <tt clASS="monofont">None.</Tt></p>
+
+					<h5>Type Objects</h5><PRE>
+							
+PyTypeObject
+
+						</Pre>
+
+						<p>The C structure of the objects used to describe built-in types.</p>
+
+						<PRE>
+							
+PyObject* PyType_Type
+
+						</Pre>
+
+						<p>This is the type object for type objects; it is the same object as <tt class="monofont">types.TypeType</tt> in the Python layer.</p>
+
+						<pre>
+							
+int PyType_Check(PyObject *o)
+
+						</pre>
+
+						<p>Returns <Tt cLass="monofont">true</Tt> if the object <tt cLass="monofont">o</TT> is a type object.</P>
+
+						<Pre>
+							
+int PyType_HasFeature(PyObject *o, int feature)
+
+						</prE>
+
+						<P>Returns <TT clasS="monofont">true</TT> if the type object <Tt claSS="monofont">o</TT> sets the feature identified by the <tt class="monofont">feature argument.</tt> Type features are denoted by single bit flags. The only defined feature flag is <tt class="monofont">Py_TPFLAGS_HAVE_GETCHARBUFFER,</tt> which is described in a later section.<a nAme="idx1073751079"></A><a naMe="idx1073751080"></a><a nAme="idx1073751081"></a><A NAMe="idx1073751082"></a></p>
+
+					
+					<h5>The None Object</H5>
+						<P>Note that the PyTypeObject for <TT clasS="monofont">None</TT> is not directly exposed in the Python/C API. Because <Tt claSS="monofont">None</TT> is a singleton, testing for object identity (using <tt class="monofont">==</tt> in C) is sufficient. There is no <tt class="monofont">PyNone_Check()</tt> function for the same reason.</p>
+
+						<pRe>
+							
+PyObject* Py_None
+
+						</pRe>
+
+						<p>The Python <tT clasS="monofont">None</tt> object denotes lack of value. This object has no methods.<a NAME="idx1073751083"></a><a naME="idx1073751084"></A><A name="idx1073751085"></A><A NAme="idx1073751086"></a></p>
+
+					
+				
+				<H4>Sequence Objects</H4>
+					<P>Generic operations on sequence objects were discussed in the previous subsection; this subsection deals with the specific kinds of sequence objects that are intrinsic to the Python language.</P>
+
+					<h5>String Objects</h5><pre>
+							
+PyStringObject
+
+						</pre>
+
+						<p>This subtype of PyObject represents a Python string object.</p>
+
+						<pre>
+							
+PyTypeObject PyString_Type
+
+						</pre>
+
+						<p>This instance of PyTypeObject represents the Python string type; it is the same object as <tt cLasS="monofont">types.TypeType</tt> in the Python layer.</p>
+
+						<Pre>
+							
+int PyString_Check(PyObject *o)
+
+						</prE>
+
+						<p>Returns <tt CLASs="monofont">true</tt> if the object <tT CLAss="monofont">o</tt> is a string object.</P>
+
+						<PRE>
+							
+PyObject* PyString_FromString(const char *v)
+
+						</pre>
+
+						<p>Return value: New reference. Returns a new string object with the value <TT CLass="monofont">v</tt> on success, and <tt class="monofont">NULL</tt> on failure.</p>
+
+						<pre>
+							
+PyObject* PyString_FromStringAndSize(const char *v, int len)
+
+						</prE>
+
+						<p>Return value: New reference. Returns a new string object with the value <tT claSs="monofont">v</tt> and length <tT claSS="monofont">len</TT> on success, and <tt clASS="monofont">NULL</Tt> on failure. If <tt cLASS="monofont">v</tt> is <tt CLASs="monofont">NULL,</tt> the contents of the string are uninitialized.</p>
+
+						<pre>
+							
+int PyString_Size(PyObject *string)
+
+						</pre>
+
+						<p>Returns the length of the string object identified by the given pointer.</p>
+
+						<pre>
+							
+int PyString_GET_SIZE(PyObject *string)
+
+						</pre>
+
+						<p>Macro form of <tT clAss="monofont">PyString_GetSize()</tT> but without error checking.</p>
+
+						<pre>
+							
+char* PyString_AsString(PyObject *string)
+
+						</Pre>
+
+						<p>Returns a null-terminated representation of the contents of string. The pointer refers to the internal buffer of string, not a copy. The data must not be modified in any way. It must not be de-allocated.</P>
+
+						<PRE>
+							
+char* PyString_AS_STRING(PyObject *string)
+
+						</pre>
+
+						<p>Macro form of <TT CLass="monofont">PyString_AsString()</tT> but without error checking.</P>
+
+						<PRe>
+							
+void PyString_Concat(PyObject **string, PyObject *newpart)
+
+						</pre>
+
+						<P>Creates a new string object in <TT Class="monofont">*string</tt> containing the contents of <tt class="monofont">newpart</tt> appended to string. The old value of string has its reference count decremented. If the new string cannot be created, the old reference to string will still be discarded and the value of <tt claSs="monofont">*string</tT> will be set to <tt cLass="monofont">NULL</tT>; the appropriate exception will be set.</p>
+
+						<prE>
+							
+void PyString_ConcatAndDel(PyObject **string, PyObject *newpart)
+
+						</PRE>
+
+						<p>Creates a new string object in <tt cLASS="monofont">*string</tt> containing the contents of <tt CLASs="monofont">newpart</tt> appended to string. This version decrements the reference count of <tT CLAss="monofont">newpart.</tt></p>
+
+						<pre>
+							
+int _PyString_Resize(PyObject **string, int newsize)
+
+						</pre>
+
+						<p>A way to resize a string object even though it is "immutable". Only use this to build up a brand new string object; don't use this if the string might already be known in other parts of the code.</p>
+
+						<pre>
+							
+PyObject* PyString_Format(PyObject *format, PyObject *args)
+
+						</pre>
+
+						<p>Return value: New reference. Returns a new string object from format and args. Analogous to format <Tt cLass="monofont">%</Tt> args. The args argument must be a tuple.</p>
+
+						<prE>
+							
+void PyString_InternInPlace(PyObject **string)
+
+						</pre>
+
+						<P>Interns the argument <TT Class="monofont">*string</TT> in place. The argument must be the address of a pointer variable pointing to a Python string object. If there is an existing interned string that is the same as <TT clasS="monofont">*string,</TT> it sets <Tt claSS="monofont">*string</TT> to it (decrementing the reference count of the old string object and incrementing the reference count of the interned string object), otherwise it leaves <tt class="monofont">*string</tt> alone and interns it (incrementing its reference count). (Clarification: even though there is a lot of talk about reference counts, think of this function as reference-count–neutral; you own the object after the call if and only if you owned it before the call.)</p>
+
+						<pre>
+							
+PyObject* PyString_InternFromString(const char *v)
+
+						</pre>
+
+						<p>Return value: New reference. A combination of <tt cLasS="monofont">PyString_FromString()</tt> and <tT clasS="monofont">PyString_InternInPlace(),</tt> returning either a new string object that has been interned, or a new ("owned") reference to an earlier interned string object with the same value.<a NAME="idx1073751087"></a><a naME="idx1073751088"></A><A name="idx1073751089"></A><A NAme="idx1073751090"></a><a NAME="idx1073751091"></a><a name="idx1073751092"></a><a name="idx1073751093"></a><a name="idx1073751094"></a><a NamE="idx1073751095"></a><a nAme="idx1073751096"></a><a Name="idx1073751097"></A><A NAme="idx1073751098"></a><a NAME="idx1073751099"></a><a naME="idx1073751100"></A></P>
+
+					
+					<h5>Buffer Objects</h5>
+						<p>Python objects implemented in C can export a group of functions called the <a NAME="idx1073751101"></a><a name="idx1073751102"></a><i>buffer interface</i>. These functions can be used by an object to expose its data in a raw, byte- oriented format. Clients of the object can use the buffer interface to access the object data directly, without needing to copy it first.</p>
+
+						<p>Two examples of objects that support the buffer interface are <a name="idx1073751103"></a><a naMe="idx1073751104"></a><A namE="idx1073751105"></a>strings and arrays. The string object exposes the character contents in the buffer interface's byte-oriented form. An array can also expose its contents, but it should be noted that array elements can be multi-byte values.</p>
+
+						<p>An example user of the buffer interface is the file object's <a Name="idx1073751106"></A><A NAme="idx1073751107"></a><tT CLAss="monofont">write()</tt> method. Any object that can export a series of bytes through the buffer interface can be written to a file. There are a number of format codes to <A NAMe="idx1073751108"></a><a nAME="idx1073751109"></A><tt class="monofont">PyArgs_ParseTuple()</tt> that operate against an object's buffer interface, returning data from the target object.</p>
+
+						<p>More information on the buffer interface is provided in the section "<a href="267#5.html">Buffer Object Structures,</a>" under the description for <tt cLasS="monofont">PyBufferProcs.</tt></p>
+
+						<P>A buffer object is defined in the <a namE="idx1073751110"></a><a nAME="idx1073751111"></A><a namE="idx1073751112"></A>bufferobject.h header (included by Python.h). These objects look very similar to string objects at the Python programming level: They support slicing, indexing, concatenation, and some other standard string operations. However, their data can come from one of two sources: from a block of memory, or from another object that exports the buffer interface.</P>
+
+						<P>Buffer objects are useful as a way to expose the data from another object's buffer interface to the Python programmer. They can also be used as a zero-copy slicing mechanism. Using their ability to reference a block of memory, it is possible to expose any data to the Python programmer quite easily. The memory could be a large, constant array in a C extension, it could be a raw block of memory for manipulation before passing to an operating system library, or it could be used to pass around structured data in its native, in-memory format.</p>
+
+						<pre>
+							
+PyBufferObject
+
+						</PRE>
+
+						<P>This subtype of PyObject represents a buffer object.</p>
+
+						<pre>
+							
+PyTypeObject PyBuffer_Type
+
+						</PRE>
+
+						<P>The instance of PyTypeObject that represents the Python buffer type; it is the same object as <tt class="monofont">types.BufferType</tt> in the Python layer.</p>
+
+						<pre>
+							
+int Py_END_OF_BUFFER
+
+						</pre>
+
+						<p>This constant can be passed as the size parameter to <tt cLasS="monofont">PyBuffer_FromObject()</tt> or <tT clasS="monofont">PyBuffer_FromReadWriteObject().</tt> It indicates that the new PyBufferObject should refer to the base object from the specified offset to the end of its exported buffer. Using this enables the caller to avoid querying the base object for its length.</p>
+
+						<PRE>
+							
+int PyBuffer_Check(PyObject *p)
+
+						</Pre>
+
+						<p>Returns <tT CLAss="monofont">true</tt> if the argument has type <TT CLass="monofont">PyBuffer_Type.</tT></P>
+
+						<PRe>
+							
+PyObject* PyBuffer_FromObject(PyObject *base, int offset, int size)
+
+						</pre>
+
+						<p>Return value: New reference. Returns a new read-only buffer object. This raises TypeError if <tt class="monofont">base</tt> doesn't support the read-only buffer protocol or doesn't provide exactly one buffer segment. It raises ValueError if <tt clasS="monofont">offset</tt> is less than zero. The buffer will hold a reference to the <Tt clAss="monofont">base</tt> object, and the buffer's contents will refer to the <Tt clASS="monofont">base</Tt> object's buffer interface, starting as position <tt cLASS="monofont">offset</tt> and extending for <tt CLASs="monofont">size</tt> bytes. If <tT CLAss="monofont">size</tt> is <tt class="monofont">Py_END_OF_BUFFER,</tt> the new buffer's contents extend to the length of the base object's exported buffer data.</p>
+
+						<pre>
+							
+PyObject* PyBuffer_FromReadWriteObject(PyObject *base, int offset,
+int size)
+
+						</pre>
+
+						<P>Return value: New reference. Returns a new writable buffer object. Parameters and exceptions are similar to those for <tt ClasS="monofont">PyBuffer_FromObject().</tt> If the base object does not export the writable buffer protocol, TypeError is raised.</p>
+
+						<pRe>
+							
+PyObject* PyBuffer_FromMemory(void *ptr, int size)
+
+						</prE>
+
+						<P>Return value: New reference. Returns a new read-only buffer object that reads from a specified location in memory, with a specified size. The caller is responsible for ensuring that the memory buffer, passed in as <TT clasS="monofont">ptr,</TT> is not deallocated while the returned buffer object exists. Raises ValueError if <Tt claSS="monofont">size</TT> is less than zero. Note that <tt clASS="monofont">Py_END_OF_BUFFER</Tt> might not be passed for the size parameter; ValueError will be raised in that case.</p>
+
+						<pre>
+							
+PyObject* PyBuffer_FromReadWriteMemory(void *ptr, int size)
+
+						</pre>
+
+						<p>Return value: New reference. Similar to <tt class="monofont">PyBuffer_FromMemory(),</tt> but the returned buffer is writable.</p>
+
+						<pRe>
+							
+PyObject* PyBuffer_New(int size)
+
+						</pRe>
+
+						<p>Return value: New reference. Returns a new writable buffer object that maintains its own memory buffer of size bytes. ValueError is returned if size is not zero or positive.<a Name="idx1073751113"></a><A namE="idx1073751114"></A><A Name="idx1073751115"></a><A NAMe="idx1073751116"></a><a nAME="idx1073751117"></A><a namE="idx1073751118"></A><A Name="idx1073751119"></a></p>
+
+					
+					<h5>Tuple Objects</h5><pre>
+							
+PyTupleObject
+
+						</pre>
+
+						<p>This subtype of PyObject represents a Python tuple object.</p>
+
+						<pre>
+							
+PyTypeObject PyTuple_Type
+
+						</prE>
+
+						<p>This instance of PyTypeObject represents the Python tuple type; it is the same object as <tT claSs="monofont">types.TupleType</tt> in the Python layer.</p>
+
+						<Pre>
+							
+int PyTuple_Check(PyObject *p)
+
+						</pRE>
+
+						<P>Return <Tt claSS="monofont">true</TT> if the argument is a tuple object.</p>
+
+						<pre>
+							
+PyObject* PyTuple_New(int len)
+
+						</PRE>
+
+						<P>Return value: New reference. Returns a new tuple object of size <tt clASS="monofont">len,</Tt> or <tt class="monofont">NULL</tt> on  failure.</p>
+
+						<pre>
+							
+int PyTuple_Size(PyTupleObject *p)
+
+						</pre>
+
+						<p>Takes a pointer to a tuple object, and returns the size of that tuple.</p>
+
+						<pRe>
+							
+PyObject* PyTuple_GetItem(PyTupleObject *p, int pos)
+
+						</pRe>
+
+						<p>Return value: Borrowed reference. Returns the object at position <tT clasS="monofont">pos</tt> in the tuple pointed to by <tT CLAss="monofont">p.</tt> If <TT CLass="monofont">pos</tT> is out of bounds, it returns <TT Class="monofont">NULL</TT> and sets an IndexError exception.</P>
+
+						<Pre>
+							
+PyObject* PyTuple_GET_ITEM(PyTupleObject *p, int pos)
+
+						</pre>
+
+						<p>Return value: Borrowed reference. Does the same, but does no checking of its arguments.</p>
+
+						<pre>
+							
+PyObject* PyTuple_GetSlice(PyTupleObject *p, int low, int high)
+
+						</pre>
+
+						<p>Return value: New reference. Takes a slice of the tuple pointed to by <tt clasS="monofont">p</tt> from <Tt clAss="monofont">low</tt> to <Tt clASS="monofont">high</Tt> and returns it as a new tuple.</p>
+
+						<prE>
+							
+int PyTuple_SetItem(PyObject *p, int pos, PyObject *o)
+
+						</PRE>
+
+						<p>Inserts a reference to object <tt cLASS="monofont">o</tt> at position <tt CLASs="monofont">pos</tt> of the tuple pointed to by <tt class="monofont">p.</tt> It returns <tt class="monofont">0</tT> on success.</p>
+
+						<dIv clAss="note"><p cLass="notetitle"><B>Note</B></P><P>
+
+							<p>This function "steals" a reference to <tt cLASS="monofont">o.</tt></p>
+
+						</p></DIV>
+<Br>
+<br>
+
+						<pRE>
+							
+void PyTuple_SET_ITEM(PyObject *p, int pos, PyObject *o)
+
+						</PRe>
+
+						<p>Does the same, but does no error checking, and should only be used to fill in brand new tuples.</p>
+
+						<div class="note"><p class="notetitle"><b>Note</b></p><P>
+
+							<p>This function "steals" a reference to <tT claSs="monofont">o.</tt></p>
+
+						</P></div>
+<BR>
+<BR>
+
+						<pre>
+							
+int _PyTuple_Resize(PyTupleObject *p, int newsize, int last_is_sticky)
+
+						</pRE>
+
+						<P>Can be used to resize a tuple. <Tt claSS="monofont">newsize</TT> will be the new length of the tuple. Because tuples are supposed to be immutable, this should only be used if there is only one reference to the object. Do not use this if the tuple might already be known to some other part of the code. <tt clASS="monofont">last_is_sticky</Tt> is a flag—if <tt class="monofont">true,</tt> the tuple will grow or shrink at the front, otherwise it will grow or shrink at the end. Think of this as destroying the old tuple and creating a new one, only more efficiently. Returns <tt class="monofont">0</tt> on success and <tT clAss="monofont">-1</tT> on failure (in which case, a MemoryError or SystemError will be raised).<a namE="idx1073751120"></a><a nAME="idx1073751121"></A><a namE="idx1073751122"></A><A Name="idx1073751123"></a><A NAMe="idx1073751124"></a><a nAME="idx1073751125"></A><a name="idx1073751126"></a><a name="idx1073751127"></a><a name="idx1073751128"></a><a nAme="idx1073751129"></A><a naMe="idx1073751130"></a><a nAme="idx1073751131"></a><A NAMe="idx1073751132"></a><a nAME="idx1073751133"></A></p>
+
+					
+					<h5>List Objects</h5><pRE>
+							
+PyListObject
+
+						</PRe>
+
+						<p>This subtype of PyObject represents a Python list object.</p>
+
+						<pRE>
+							
+PyTypeObject PyList_Type
+
+						</PRe>
+
+						<p>This instance of PyTypeObject represents the Python list type. This is the same object as <tt class="monofont">types.ListType.</tt></p>
+
+						<pre>
+							
+int PyList_Check(PyObject *p)
+
+						</pre>
+
+						<p>Returns <tT clAss="monofont">true</tT> if its argument is a PyListObject.</p>
+
+						<pre>
+							
+PyObject* PyList_New(int len)
+
+						</Pre>
+
+						<p>Return value: New reference. Returns a new list of length <TT CLass="monofont">len</tT> on success, or <TT Class="monofont">NULL</TT> on failure.</P>
+
+						<Pre>
+							
+int PyList_Size(PyObject *list)
+
+						</prE>
+
+						<P>Returns the length of the list object in list; this is equivalent to <TT class="monofont">"len(list)"</tt> on a list object.</p>
+
+						<pre>
+							
+int PyList_GET_SIZE(PyObject *list)
+
+						</pre>
+
+						<p>Macro form of <tt claSs="monofont">PyList_GetSize()</tT> without error checking.</p>
+
+						<prE>
+							
+PyObject* PyList_GetItem(PyObject *list, int index)
+
+						</pre>
+
+						<p>Return value: Borrowed reference. Returns the object at position <Tt clASS="monofont">pos</Tt> in the list pointed to by <tt cLASS="monofont">p.</tt> If <tt CLASs="monofont">pos</tt> is out of bounds, it returns <tT CLAss="monofont">NULL</tt> and sets an IndexError exception.</p>
+
+						<pre>
+							
+PyObject* PyList_GET_ITEM(PyObject *list, int i)
+
+						</pre>
+
+						<p>Return value: Borrowed reference. Macro form of <tt class="monofont">PyList_GetItem()</tT> without error checking.</p>
+
+						<pRe>
+							
+int PyList_SetItem(PyObject *list, int index, PyObject *item)
+
+						</prE>
+
+						<p>Sets the item at the position identified by the integer <tt cLass="monofont">index</TT> in the given <TT clasS="monofont">list</TT> to the value of the object identified by the pointer called <Tt claSS="monofont">item.</TT></p>
+
+						<div CLASs="note"><p class="notetitle"><b>Note</b></p><p>
+
+							<p>This function "steals" a reference to item.<a name="idx1073751134"></a><a nAme="idx1073751135"></A><a naMe="idx1073751136"></a><a nAme="idx1073751137"></a><A NAMe="idx1073751138"></a><a nAME="idx1073751139"></A><a namE="idx1073751140"></A><A Name="idx1073751141"></a><A NAMe="idx1073751142"></a><a name="idx1073751143"></a><a name="idx1073751144"></a><a name="idx1073751145"></a><A naMe="idx1073751146"></a><a Name="idx1073751147"></a></P>
+
+						</p></diV>
+<BR>
+<Br>
+
+						<pre>
+							
+PyObject* PyList_SET_ITEM(PyObject *list, int i, PyObject *o)
+
+						</PRE>
+
+						<P>Return value: Borrowed reference. Macro form of <tt clASS="monofont">PyList_SetItem()</Tt> without error checking.</p>
+
+						<diV CLAss="note"><p class="notetitle"><b>Note</b></p><p>
+
+							<p>This function "steals" a reference to item.</p>
+
+						</p></div>
+<br>
+<Br>
+
+						<pRe>
+							
+int PyList_Insert(PyObject *list, int index, PyObject *item)
+
+						</prE>
+
+						<p>Inserts the item called <tt cLass="monofont">item</TT> into the list called <TT clasS="monofont">list</TT> in front of the index called <Tt claSS="monofont">index.</TT> Returns <tt clASS="monofont">0</Tt> if successful; returns <tt class="monofont">-1</tt> and raises an exception if unsuccessful. Analogous to <tt class="monofont">list.insert(index, item).</tt></p>
+
+						<Pre>
+							
+int PyList_Append(PyObject *list, PyObject *item)
+
+						</Pre>
+
+						<p>Appends the object item at the end of the list called <Tt claSs="monofont">list.</tt> Returns <TT CLass="monofont">0</tT> if successful; returns <TT Class="monofont">-1</TT> and sets an exception if unsuccessful. Analogous to <TT clasS="monofont">list.append(item).</TT></P>
+
+						<pre>
+							
+PyObject* PyList_GetSlice(PyObject *list, int low, int high)
+
+						</pre>
+
+						<p>Return value: New reference. Returns a list of the objects in list containing the objects between <tt class="monofont">low</tt> and <tt clAss="monofont">high.</Tt> Returns <tt Class="monofont">NULL</Tt> and sets an exception if unsuccessful. Analogous to <tt CLASs="monofont">list[low:high].</tt></p>
+
+						<PRE>
+							
+int PyList_SetSlice(PyObject *list, int low, int high, PyObject
+*itemlist)
+
+						</Pre>
+
+						<p>Sets the slice of list between <tT CLAss="monofont">low</tt> and <TT CLass="monofont">high</tt> to the contents of <tt class="monofont">itemlist.</tt> Analogous to <tt clasS="monofont">list[low:high] = itemlist.</tt> Returns <Tt clAss="monofont">0</tt> on success, <Tt clASS="monofont">-1</Tt> on failure.</p>
+
+						<prE>
+							
+int PyList_Sort(PyObject *list)
+
+						</PRE>
+
+						<p>Sorts the items of list in place. Returns <tt cLASS="monofont">0</tt> on success, <tt CLASs="monofont">-1</tt> on failure. This is equivalent to <tt class="monofont">"list.sort()".</tt></p>
+
+						<pre>
+							
+int PyList_Reverse(PyObject *list)
+
+						</pre>
+
+						<p>Reverses the items of list in place. Returns <Tt cLass="monofont">0</Tt> on success, <tt cLass="monofont">-1</TT> on failure. This is the equivalent of <TT clasS="monofont">"list.reverse()".</TT></P>
+
+						<pre>
+							
+PyObject* PyList_AsTuple(PyObject *list)
+
+						</pRE>
+
+						<P>Return value: New reference. Returns a new tuple object containing the contents of list; equivalent to <Tt claSS="monofont">"tuple(list)".</TT><a name="idx1073751148"></a><a name="idx1073751149"></a><a name="idx1073751150"></a></p>
+
+					
+				
+				<h4>Mapping/Dictionary Objects</H4><prE>
+						
+PyDictObject
+
+					</pre>
+
+					<P>This subtype of PyObject represents a Python dictionary object.</p>
+
+					<pre>
+						
+PyTypeObject PyDict_Type
+
+					</Pre>
+
+					<p>This instance of PyTypeObject represents the Python dictionary type. This is exposed to Python programs as <TT CLass="monofont">types.DictType</tT> and <TT Class="monofont">types.DictionaryType.</TT></P>
+
+					<Pre>
+						
+int PyDict_Check(PyObject *p)
+
+					</prE>
+
+					<P>Returns <TT class="monofont">true</tt> if its argument is a PyDictObject.</p>
+
+					<pre>
+						
+PyObject* PyDict_New()
+
+					</pre>
+
+					<p>Return value: New reference. Returns a new empty dictionary, or <tt claSs="monofont">NULL</tT> on failure.</p>
+
+					<prE>
+						
+void PyDict_Clear(PyObject *p)
+
+					</pre>
+
+					<p>Empties an existing dictionary of all key/value pairs.</P>
+
+					<pre>
+						
+int PyDict_SetItem(PyObject *p, PyObject *key, PyObject *val)
+
+					</PRE>
+
+					<P>Inserts value into the dictionary with a key of <tt clASS="monofont">key.</Tt>
+						<tt cLASS="monofont">key</tt> must be hashable; if it isn't, TypeError will be raised.</p>
+
+					<pRE>
+						
+int PyDict_SetItemString(PyObject *p, char *key, PyObject *val)
+
+					</PRe>
+
+					<p>Inserts value into the dictionary using <tt class="monofont">key</tt> as a key. <tt class="monofont">key</tt> should be a <Tt cLass="monofont">char*.</Tt> The key object is created using <tt cLass="monofont">PyString_FromString(key).</TT></P>
+
+					<Pre>
+						
+int PyDict_DelItem(PyObject *p, PyObject *key)
+
+					</prE>
+
+					<P>Removes the entry in dictionary <TT clasS="monofont">p</TT> with key called <Tt claSS="monofont">key.</TT>
+						<tt class="monofont">key</tt> must be hashable; if it isn't, TypeError is raised.</p>
+
+					<pre>
+						
+int PyDict_DelItemString(PyObject *p, char *key)
+
+					</pre>
+
+					<p>Removes the entry in dictionary <tt cLasS="monofont">p</tt> which has a key specified by the string <tT clasS="monofont">key.</tt></p>
+
+					<PRE>
+						
+PyObject* PyDict_GetItem(PyObject *p, PyObject *key)
+
+					</Pre>
+
+					<p>Return value: Borrowed reference. Returns the object from dictionary <tT CLAss="monofont">p,</tt> which has a key called <TT CLass="monofont">key.</tT> Returns <TT Class="monofont">NULL</tt> if the key called <tt class="monofont">key</tt> is not present, but without setting an exception.</p>
+
+					<pre>
+						
+PyObject* PyDict_GetItemString(PyObject *p, char *key)
+
+					</pRe>
+
+					<p>Return value: Borrowed reference. This is the same as <Tt clAss="monofont">PyDict_GetItem(),</tt> but <Tt clASS="monofont">key</Tt> is specified as a <tt cLASS="monofont">char*,</tt> rather than a <tt CLASs="monofont">PyObject*.</tt></p>
+
+					<PRE>
+						
+PyObject* PyDict_Items(PyObject *p)
+
+					</Pre>
+
+					<p>Return value: New reference. Returns a PyListObject containing all the items from the dictionary, as in the dictionary method <tt class="monofont">items()</tt> (see <a href="22.html">Chapter 2, "Language Review"</a> ).</p>
+
+					<pRe>
+						
+PyObject* PyDict_Keys(PyObject *p)
+
+					</pRe>
+
+					<p>Return value: New reference. Returns a PyListObject containing all the keys from the dictionary, as in the dictionary method <tT clasS="monofont">keys()</tt> (see <a HREF="22.html">Chapter 2</a>).</p>
+
+					<prE>
+						
+PyObject* PyDict_Values(PyObject *p)
+
+					</PRE>
+
+					<p>Return value: New reference. Returns a PyListObject containing all the values from the dictionary <tt cLASS="monofont">p,</tt> as in the dictionary method <tt CLASs="monofont">values()</tt> (see <a href="22.html">Chapter 2</a>).</p>
+
+					<pre>
+						
+int PyDict_Size(PyObject *p)
+
+					</pre>
+
+					<p>Returns the number of items in the dictionary. This is equivalent to <tt cLasS="monofont">"len(p)"</tt> on a dictionary.<a Name="idx1073751151"></a><A namE="idx1073751152"></A><A Name="idx1073751153"></a><A NAMe="idx1073751154"></a><a nAME="idx1073751155"></A><a namE="idx1073751156"></A><A Name="idx1073751157"></a><a name="idx1073751158"></a><a name="idx1073751159"></a><a namE="idx1073751160"></a><a Name="idx1073751161"></A><a namE="idx1073751162"></a><a nAME="idx1073751163"></A><a namE="idx1073751164"></A></P>
+
+				
+				<H4>Numeric Objects</h4>
+					<p>Next, you have the API function for numerical objects, which are classified in: plain integer, long integer, floating point, and complex number objects.</p>
+
+					<h5>Plain Integer Objects</H5><PRE>
+							
+PyIntObject
+
+						</pre>
+
+						<p>This subtype of PyObject represents a Python integer object.</P>
+
+						<PRE>
+							
+PyTypeObject PyInt_Type
+
+						</pre>
+
+						<p>This instance of PyTypeObject represents the Python plain integer type. This is the same object as <tt class="monofont">types.IntType.</tt></p>
+
+						<pre>
+							
+int PyInt_Check(PyObject* o)
+
+						</pre>
+
+						<P>Return value: Borrowed reference. Returns <tt ClasS="monofont">true</tt> if <tt ClasS="monofont">o</TT> is of type <Tt claSS="monofont">PyInt_Type.</TT></p>
+
+						<pre>
+							
+PyObject* PyInt_FromLong(long ival)
+
+						</PRE>
+
+						<P>Return value: New reference. Creates a new integer object with a value of <tt clASS="monofont">ival.</Tt></p>
+
+						<div class="note"><p class="notetitle"><b>Tip</b></p><p>
+
+							<P>The current implementation keeps an array of integer objects for all integers between -1 and 100. When you create an int in that range, you actually just get back a reference to the existing object. So it should be possible to change the value of 1. It is suspected that the behavior of Python in this case is undefined.</p>
+
+						</p></Div>
+<bR>
+<br>
+
+						<prE>
+							
+long PyInt_AsLong(PyObject *io)
+
+						</pre>
+
+						<P>Will first attempt to cast the object to a PyIntObject, if it is not already one, and then return its value.</P>
+
+						<PRe>
+							
+long PyInt_AS_LONG(PyObject *io)
+
+						</pre>
+
+						<P>Returns the value of the object <TT Class="monofont">io.</TT> No error checking is performed.</P>
+
+						<Pre>
+							
+long PyInt_GetMax()
+
+						</prE>
+
+						<P>Returns the system's idea of the largest integer it can handle (<TT class="monofont">LONG_MAX,</tt> as defined in the system header files).<a name="idx1073751165"></a><a name="idx1073751166"></a><a NamE="idx1073751167"></a><a nAme="idx1073751168"></a><a Name="idx1073751169"></A><A NAme="idx1073751170"></a><a NAME="idx1073751171"></a><a naME="idx1073751172"></A><A name="idx1073751173"></A><A NAme="idx1073751174"></a><a name="idx1073751175"></a><a name="idx1073751176"></a><a name="idx1073751177"></A><a nAme="idx1073751178"></a></P>
+
+					
+					<h5>Long Integer Objects</h5><prE>
+							
+PyLongObject
+
+						</pre>
+
+						<P>This subtype of PyObject represents a Python long integer object.</P>
+
+						<PRe>
+							
+PyTypeObject PyLong_Type
+
+						</pre>
+
+						<P>This instance of PyTypeObject represents the Python long integer type. This is the same object as <TT Class="monofont">types.LongType.</TT></P>
+
+						<Pre>
+							
+int PyLong_Check(PyObject *p)
+
+						</prE>
+
+						<P>Returns <TT class="monofont">true</tt> if its argument is a PyLongObject.</p>
+
+						<pre>
+							
+PyObject* PyLong_FromLong(long v)
+
+						</pre>
+
+						<p>Return value: New reference. Returns a new PyLongObject object from <tt claSs="monofont">v,</tT> or <tt cLass="monofont">NULL</tT> on failure.</p>
+
+						<prE>
+							
+PyObject* PyLong_FromUnsignedLong(unsigned long v)
+
+						</PRE>
+
+						<p>Return value: New reference. Returns a new PyLongObject object from a C unsigned long, or <tt cLASS="monofont">NULL</tt> on failure.</p>
+
+						<pRE>
+							
+PyObject* PyLong_FromDouble(double v)
+
+						</PRe>
+
+						<p>Return value: New reference. Returns a new PyLongObject object from the integer part of <tt CLASs="monofont">v,</tt> or <tt class="monofont">NULL</tt> on failure.</p>
+
+						<pre>
+							
+long PyLong_AsLong(PyObject *pylong)
+
+						</pre>
+
+						<p>Returns a C long representation of the contents of pylong. If pylong is greater than <Tt cLass="monofont">LONG_MAX,</Tt> an OverflowError is <tt cLass="monofont">raised.OverflowError.</TT></P>
+
+						<Pre>
+							
+unsigned long PyLong_AsUnsignedLong(PyObject *pylong)
+
+						</prE>
+
+						<P>Returns a C unsigned long representation of the contents of <TT clasS="monofont">pylong.</TT> If pylong is greater than <Tt claSS="monofont">ULONG_MAX,</TT> an OverflowError is <tt class="monofont">raised.OverflowError.</tt></p>
+
+						<pre>
+							
+double PyLong_AsDouble(PyObject *pylong)
+
+						</pre>
+
+						<p>Returns a C double representation of the contents of <tt cLasS="monofont">pylong.</tt></p>
+
+						<Pre>
+							
+PyObject* PyLong_FromString(char *str, char **pend, int base)
+
+						</prE>
+
+						<p>Return value: New reference. Returns a new PyLongObject based on the string value in <tt CLASs="monofont">str,</tt> which is interpreted according to the radix in base. If <tT CLAss="monofont">pend</tt> is non-<TT CLass="monofont">NULL,</tT>
+							<TT Class="monofont">*pend</tt> will point to the first character in <tt class="monofont">str</tt> which follows the representation of the number. If base is 0, the radix will be determined based on the leading characters of <tt claSs="monofont">str</tT>: if <tt cLass="monofont">str</tT> starts with <tt cLASS="monofont">0x</tt> or <tt CLASs="monofont">0X,</tt> radix 16 will be used; if <tT CLAss="monofont">str</tt> starts with <TT CLass="monofont">0,</tt> radix 8 will be used; otherwise, radix 10 will be used. If base is not <tt class="monofont">0,</tt> it must be between 2 and 36, inclusive. Leading spaces are ignored. If there are no digits, ValueError will be raised.<a name="idx1073751179"></a><A naMe="idx1073751180"></a><a Name="idx1073751181"></a><A namE="idx1073751182"></A><A Name="idx1073751183"></a><A NAMe="idx1073751184"></a><a nAME="idx1073751185"></A></p>
+
+					
+					<h5>Floating Point Objects</h5><pRE>
+							
+PyFloatObject
+
+						</PRe>
+
+						<p>This subtype of PyObject represents a Python floating point object.</p>
+
+						<pre>
+							
+PyTypeObject PyFloat_Type
+
+						</pre>
+
+						<p>This instance of PyTypeObject represents the Python floating point type. This is the same object as <tt class="monofont">types.FloatType.</tt></p>
+
+						<Pre>
+							
+int PyFloat_Check(PyObject *p)
+
+						</Pre>
+
+						<p>Returns <Tt claSs="monofont">true</tt> if its argument is a PyFloatObject.</P>
+
+						<PRE>
+							
+PyObject* PyFloat_FromDouble(double v)
+
+						</pre>
+
+						<p>Return value: New reference. Creates a PyFloatObject object from <TT CLass="monofont">v,</tT> or <TT Class="monofont">NULL</TT> on failure.</P>
+
+						<Pre>
+							
+double PyFloat_AsDouble(PyObject *pyfloat)
+
+						</pre>
+
+						<p>Returns a C double representation of the contents of <tt class="monofont">pyfloat.</tt></p>
+
+						<pre>
+							
+double PyFloat_AS_DOUBLE(PyObject *pyfloat)
+
+						</pRe>
+
+						<p>Returns a C double representation of the contents of <Tt clAss="monofont">pyfloat,</tt> but without error checking.<A namE="idx1073751186"></A><A Name="idx1073751187"></a><A NAMe="idx1073751188"></a></p>
+
+					
+					<h5>Complex Number Objects</H5>
+						<P>Python's complex number objects are implemented as two distinct types when viewed from the C API: one is the Python object exposed to Python programs, and the other is a C structure that represents the actual complex number value. The API provides functions for working with both.<A Name="idx1073751189"></a><A NAMe="idx1073751190"></a><a name="idx1073751191"></a><a name="idx1073751192"></a><a name="idx1073751193"></a><A naMe="idx1073751194"></a><a Name="idx1073751195"></a><A namE="idx1073751196"></A><A Name="idx1073751197"></a><A NAMe="idx1073751198"></a><a nAME="idx1073751199"></A><a namE="idx1073751200"></A><A Name="idx1073751201"></a><a name="idx1073751202"></a></p>
+
+						<h5>Complex Numbers as C Structures</h5>
+							<p>Note that the functions which accept these structures as parameters and return them as results do so by value rather than dereferencing them through pointers. This is consistent throughout the API.</p>
+
+							<pre>
+								
+Py_complex
+
+							</prE>
+
+							<p>This is the C structure that corresponds to the value portion of a Python complex number object. Most of the functions for dealing with complex number objects use structures of this type as input or output values, as appropriate. It is defined as</p>
+
+							<Pre>
+								
+typedef struct {
+   double real;
+   double imag;
+} Py_complex;
+
+Py_complex _Py_c_sum(Py_complex left, Py_complex right)
+
+							</pRe>
+
+							<p>Returns the sum of two complex numbers, using the C <tt ClasS="monofont">Py_complex</TT> representation.</P>
+
+							<pre>
+								
+Py_complex _Py_c_diff(Py_complex left, Py_complex right)
+
+							</pRE>
+
+							<P>Returns the difference between two complex numbers, using the C <Tt claSS="monofont">Py_complex</TT> representation.</p>
+
+							<pre>
+								
+Py_complex _Py_c_neg(Py_complex complex)
+
+							</PRE>
+
+							<P>Returns the negation of the complex number complex, using the C <tt class="monofont">Py_complex</tt> representation.</p>
+
+							<pre>
+								
+Py_complex _Py_c_prod(Py_complex left, Py_complex right)
+
+							</pre>
+
+							<p>Returns the product of two complex numbers, using the C <tt cLasS="monofont">Py_complex</tt> representation.</p>
+
+							<Pre>
+								
+Py_complex _Py_c_quot(Py_complex dividend, Py_complex divisor)
+
+							</prE>
+
+							<p>Returns the quotient of two complex numbers, using the C <tt CLASs="monofont">Py_complex</tt> representation.</p>
+
+							<PRE>
+								
+Py_complex _Py_c_pow(Py_complex num, Py_complex exp)
+
+							</Pre>
+
+							<p>Returns the exponentiation of <tT CLAss="monofont">num</tt> by <TT CLass="monofont">exp,</tt> using the C <tt class="monofont">Py_complex</tt> representation.<a name="idx1073751203"></a><A naMe="idx1073751204"></a></p>
+
+						
+						<H5>Complex Numbers as Python Objects</h5><pre>
+								
+PyComplexObject
+
+							</Pre>
+
+							<p>This subtype of PyObject represents a Python complex number object.</P>
+
+							<PRE>
+								
+PyTypeObject PyComplex_Type
+
+							</pre>
+
+							<p>This instance of PyTypeObject represents the Python complex number type.</P>
+
+							<PRE>
+								
+int PyComplex_Check(PyObject *p)
+
+							</pre>
+
+							<p>Returns <TT CLass="monofont">true</tT> if its argument is a <TT Class="monofont">PyComplexObject.</tt></p>
+
+							<pre>
+								
+PyObject* PyComplex_FromCComplex(Py_complex v)
+
+							</pre>
+
+							<p>Return value: New reference. Creates a new Python complex number object from a C <tt clasS="monofont">Py_complex</tt> value.</P>
+
+							<pre>
+								
+PyObject* PyComplex_FromDoubles(double real, double imag)
+
+							</Pre>
+
+							<p>Return value: New reference. Returns a new <tT claSS="monofont">PyComplexObject</TT> object from <tt clASS="monofont">real</Tt> and <tt cLASS="monofont">imag.</tt></p>
+
+							<pRE>
+								
+double PyComplex_RealAsDouble(PyObject *op)
+
+							</PRe>
+
+							<p>Returns the real part of <tt class="monofont">op</tt> as a C double.</p>
+
+							<pre>
+								
+double PyComplex_ImagAsDouble(PyObject *op)
+
+							</pre>
+
+							<p>Returns the imaginary part of <tT clAss="monofont">op</tT> as a C double.</p>
+
+							<pre>
+								
+Py_complex PyComplex_AsCComplex(PyObject *op)
+
+							</Pre>
+
+							<p>Returns the <TT CLass="monofont">Py_complex</tT> value of the complex number <TT Class="monofont">op.</TT><A Name="idx1073751205"></a><A NAMe="idx1073751206"></a><a name="idx1073751207"></a><a name="idx1073751208"></a><a name="idx1073751209"></a><A naMe="idx1073751210"></a><a Name="idx1073751211"></a><A namE="idx1073751212"></A><A Name="idx1073751213"></a><A NAMe="idx1073751214"></a><a nAME="idx1073751215"></A><a namE="idx1073751216"></A><A Name="idx1073751217"></a><a name="idx1073751218"></a><a name="idx1073751219"></a><a namE="idx1073751220"></a></p>
+
+						
+					
+				
+				<H4>Other Objects</h4>
+					<p>Next, you have the list of API function for all the other objects, including File, Module, and C Objects.</p>
+
+					<H5>File Objects</h5>
+						<p>Python's built-in file objects are implemented entirely on the FILE* support from the C standard library. This is an implementation detail and might change in future releases of Python.</p>
+
+						<pRe>
+							
+PyFileObject
+
+						</prE>
+
+						<P>This subtype of PyObject represents a Python file object.</P>
+
+						<Pre>
+							
+PyTypeObject PyFile_Type
+
+						</prE>
+
+						<P>This instance of PyTypeObject represents the Python file type. This is exposed to Python programs as <TT clasS="monofont">types.FileType.</TT></P>
+
+						<pre>
+							
+int PyFile_Check(PyObject *p)
+
+						</pRE>
+
+						<P>Returns <Tt class="monofont">true</tt> if its argument is a <tt class="monofont">PyFileObject.</tt></p>
+
+						<prE>
+							
+PyObject* PyFile_FromString(char *filename, char *mode)
+
+						</prE>
+
+						<p>Return value: New reference. On success, returns a new file object that is opened on the file given by filename, with a file mode given by mode, where mode has the same semantics as the standard C routine <tt Class="monofont">fopen().</Tt> On failure, returns <tt CLASs="monofont">NULL.</tt></p>
+
+						<PRE>
+							
+PyObject* PyFile_FromFile(FILE *fp, char *name, char *mode, int
+(*close)(FILE*))
+
+						</Pre>
+
+						<p>Return value: New reference. Creates a new <tT CLAss="monofont">PyFileObject</tt> from the already-open standard C file pointer, <TT CLass="monofont">fp.</tt> The function close will be called when the file should be closed. Returns <tt class="monofont">NULL</tt> on failure.</p>
+
+						<pre>
+							
+FILE* PyFile_AsFile(PyFileObject *p)
+
+						</prE>
+
+						<p>Returns the file object associated with <tT claSs="monofont">p</tt> as a <tT claSS="monofont">FILE*.</TT></p>
+
+						<pre>
+							
+PyObject* PyFile_GetLine(PyObject *p, int n)
+
+						</PRE>
+
+						<P>Return value: New reference. Equivalent to <tt clASS="monofont">p.readline([n]),</Tt> this function reads one line from the object <tt cLASS="monofont">p.</tt>
+							<tt class="monofont">p</tt> can be a file object or any object with a <tt class="monofont">readline()</tt> method. If <Tt cLass="monofont">n</Tt> is <tt cLass="monofont">0,</TT> exactly one line is read, regardless of the length of the line. If <TT clasS="monofont">n</TT> is greater than <Tt claSS="monofont">0,</TT> no more than <tt clASS="monofont">n</Tt> bytes will be read from the file; a partial line can be returned. In both cases, an empty string is returned if the end of the file is reached immediately. If <tt class="monofont">n</tt> is less than <tt class="monofont">0,</tt> however, one line is read regardless of length, but EOFError is raised if the end of the file is reached immediately.</p>
+
+						<Pre>
+							
+PyObject* PyFile_Name(PyObject *p)
+
+						</Pre>
+
+						<p>Return value: Borrowed reference. Returns the name of the file specified by <Tt claSs="monofont">p</tt> as a string object.</P>
+
+						<PRE>
+							
+void PyFile_SetBufSize(PyFileObject *p, int n)
+
+						</pre>
+
+						<p>Available on systems with <TT CLass="monofont">setvbuf()</tT> only. This should only be called immediately after file object creation.</P>
+
+						<PRe>
+							
+int PyFile_SoftSpace(PyObject *p, int newflag)
+
+						</pre>
+
+						<P>This function exists for internal use by the interpreter. Sets the softspace attribute of <TT Class="monofont">p</tt> to <tt class="monofont">newflag</tt> and returns the previous value. <tt claSs="monofont">p</tT> does not have to be a file object for this function to work properly; any object is supported (though it's only interesting if the softspace attribute can be set). This function clears any errors, and will return <tt cLass="monofont">0</tT> as the previous value if the attribute either does not exist or if there were errors in retrieving it. There is no way to detect errors from this function, but doing so should not be needed.</p>
+
+						<prE>
+							
+int PyFile_WriteObject(PyObject *obj, PyFileObject *p, int flags)
+
+						</PRE>
+
+						<p>Writes object <tt cLASS="monofont">obj</tt> to file object <tt CLASs="monofont">p.</tt> The only supported flag for flags is <tT CLAss="monofont">Py_PRINT_RAW</tt>; if given, the <tt class="monofont">str()</tt> of the object is written instead of the <tt class="monofont">repr().</Tt> Returns <tT claSs="monofont">0</tt> on success or <tT claSS="monofont">-1</TT> on failure; the appropriate exception will be set.</p>
+
+						<pre>
+							
+int PyFile_WriteString(char *s, PyFileObject *p, int flags)
+
+						</PRE>
+
+						<P>Writes string <tt clASS="monofont">s</Tt> to file object <tt cLASS="monofont">p.</tt> Returns <tt class="monofont">0</tt> on success or <tt class="monofont">-1</tt> on failure; the appropriate exception will be set.<A naMe="idx1073751221"></a><a Name="idx1073751222"></a><A namE="idx1073751223"></A></P>
+
+					
+					<H5>Module Objects</h5>
+						<p>There are only a few functions special to module objects.</p>
+
+						<pRE>
+							
+PyTypeObject PyModule_Type
+
+						</PRe>
+
+						<p>This instance of PyTypeObject represents the Python module type. This is exposed to Python programs as <tt CLASs="monofont">types.ModuleType.</tt></p>
+
+						<PRE>
+							
+int PyModule_Check(PyObject *p)
+
+						</Pre>
+
+						<p>Returns <tt class="monofont">true</tt> if its argument is a module object.</p>
+
+						<pre>
+							
+PyObject* PyModule_New(char *name)
+
+						</pre>
+
+						<p>Return value: New reference. Returns a new module object with the <Tt cLass="monofont">__name__ attribute</Tt> set to <tt cLass="monofont">name.</TT> Only the module's <TT clasS="monofont">__doc__</TT> and <Tt claSS="monofont">__name__</TT> attributes are filled in; the caller is responsible for providing a <tt clASS="monofont">__file__</Tt> attribute.</p>
+
+						<pre>
+							
+PyObject* PyModule_GetDict(PyObject *module)
+
+						</pre>
+
+						<p>Return value: Borrowed reference. Returns the dictionary object that implements module's namespace; this object is the same as the <tt class="monofont">__dict__</tt> attribute of the module object. This function never fails.</p>
+
+						<pRe>
+							
+char* PyModule_GetName(PyObject *module)
+
+						</pRe>
+
+						<p>Returns module's <tT clasS="monofont">__name__</tt> value. If the module does not provide one, or if it is not a string, SystemError is raised and <tT CLAss="monofont">NULL</tt> is returned.</P>
+
+						<PRE>
+							
+char* PyModule_GetFilename(PyObject *module)
+
+						</pre>
+
+						<p>Returns the name of the file from which module was loaded using module's <TT CLass="monofont">__file__</tT> attribute. If this is not defined, or if it is not a string, raises SystemError and returns <TT Class="monofont">NULL.</tt><a name="idx1073751224"></a><a name="idx1073751225"></a><a nAme="idx1073751226"></A></p>
+
+					
+					<h5>C Objects</h5>
+						<P>Refer to the document "<a hreF="249.html">Extending and Embedding the Python Interpreter,</a>"  ("<i>Providing a C API for an Extension Module</i>"), for more information on using these objects. This document is part of the Python distribution. Note that it is also available on-line at the <TT CLass="monofont">python.org.</tT></P>
+
+						<PRe>
+							
+PyCObject
+
+						</pre>
+
+						<P>This subtype of PyObject represents an opaque value, useful for C extension modules that need to pass an opaque value (as a <TT Class="monofont">void*</TT> pointer) through Python code to other C code. It is often used to make a C function pointer defined in one module available to other modules, so the regular import mechanism can be used to access C APIs defined in dynamically loaded modules.</P>
+
+						<Pre>
+							
+int PyCObject_Check(PyObject *p)
+
+						</pre>
+
+						<p>Returns <tt class="monofont">true</tt> if its argument is a <tt claSs="monofont">PyCObject.</tT></p>
+
+						<prE>
+							
+PyObject* PyCObject_FromVoidPtr(void* cobj, void (*destr)(void *))
+
+						</pre>
+
+						<p>Return value: New reference. Creates a <Tt clASS="monofont">PyCObject</Tt> from the <tt cLASS="monofont">void * cobj.</tt> The <tt CLASs="monofont">destr</tt> function will be called when the object is reclaimed, unless it is <tT CLAss="monofont">NULL.</tt></p>
+
+						<pre>
+							
+PyObject* PyCObject_FromVoidPtrAndDesc(void* cobj, void* desc,
+void (*destr)(void *, void *))
+
+						</pre>
+
+						<p>Return value: New reference. Creates a <tt class="monofont">PyCObject</tT> from the <tt ClasS="monofont">void *cob</tt>j. The <tt ClasS="monofont">destr</TT> function will be called when the object is reclaimed. The <Tt claSS="monofont">desc</TT> argument can be used to pass extra callback data for the destructor function.</p>
+
+						<pre>
+							
+void* PyCObject_AsVoidPtr(PyObject* self)
+
+						</PRE>
+
+						<P>Returns the object <tt clASS="monofont">void *</Tt> that the PyCObject self was created with.</p>
+
+						<pre>
+							
+void* PyCObject_GetDesc(PyObject* self)
+
+						</pre>
+
+						<p>Returns the description <tt class="monofont">void *</tt> that the PyCObject self was created with.<a nAme="idx1073751227"></A><a naMe="idx1073751228"></a><a nAme="idx1073751229"></a><A NAMe="idx1073751230"></a><a nAME="idx1073751231"></A><a namE="idx1073751232"></A><A Name="idx1073751233"></a><A NAMe="idx1073751234"></a><a name="idx1073751235"></a><a name="idx1073751236"></a></p>
+
+					
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="263.html" title="Abstract Objects Layer"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=264" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="264.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="265.html" title="Initialization, Finalization, and Threads"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751073">Concrete Objects Layer</a> <a href="#idx1073751088">2nd</a> <a href="#idx1073751121">3rd</a> <a href="#idx1073751135">4th</a> <a href="#idx1073751152">5th</a> <a href="#idx1073751166">6th</a> <a href="#idx1073751190">7th</a> <a href="#idx1073751206">8th</a> <a href="#idx1073751228">9th</a><BR>
+arrays<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751104">buffer interface support</a><BR>
+ <a href="#idx1073751101">buffer interface</a><BR>
+ <a href="#idx1073751117">buffer objects</a><BR>
+ <a href="#idx1073751110">bufferobject.h header file</a><BR>
+ <a href="#idx1073751234">C objects</a><BR>
+C structures<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751203">complex numbers as</a><BR>
+ <a href="#idx1073751200">complex number objects</a> <a href="#idx1073751216">2nd</a><BR>
+ <a href="#idx1073751077">Concrete Objects Layer, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751092">2nd</a> <a href="#idx1073751125">3rd</a> <a href="#idx1073751139">4th</a> <a href="#idx1073751156">5th</a> <a href="#idx1073751170">6th</a> <a href="#idx1073751194">7th</a> <a href="#idx1073751210">8th</a> <a href="#idx1073751232">9th</a><BR>
+ <a href="#idx1073751162">dictionary objects</a><BR>
+ <a href="#idx1073751221">file objects</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;header<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751112">bufferobject.h</a><BR>
+ <a href="#idx1073751186">floating point objects</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751071">object types</a> <a href="#idx1073751082">2nd</a> <a href="#idx1073751086">3rd</a> <a href="#idx1073751097">4th</a> <a href="#idx1073751116">5th</a> <a href="#idx1073751130">6th</a> <a href="#idx1073751144">7th</a> <a href="#idx1073751161">8th</a> <a href="#idx1073751175">9th</a> <a href="#idx1073751182">10th</a> <a href="#idx1073751199">11th</a> <a href="#idx1073751215">12th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751119">buffer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751236">C</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751202">complex number</a> <a href="#idx1073751218">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751164">dictionary</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751223">file</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751188">floating point</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751147">list</a> <a href="#idx1073751150">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751185">long integer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751160">mapping</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751226">module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751085">none</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751174">numeric</a> <a href="#idx1073751181">2nd</a> <a href="#idx1073751198">3rd</a> <a href="#idx1073751214">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751178">plain integer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751096">sequence</a> <a href="#idx1073751115">2nd</a> <a href="#idx1073751129">3rd</a> <a href="#idx1073751143">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751100">string</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751133">tuple</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751081">type</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751109">PyArgs_ParseTuple</a><BR>
+header files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751111">bufferobject.h</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751102">buffer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751074">Concrete Objects Layer</a> <a href="#idx1073751089">2nd</a> <a href="#idx1073751122">3rd</a> <a href="#idx1073751136">4th</a> <a href="#idx1073751153">5th</a> <a href="#idx1073751167">6th</a> <a href="#idx1073751191">7th</a> <a href="#idx1073751207">8th</a> <a href="#idx1073751229">9th</a><BR>
+layers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751078">Concrete Objects, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751093">2nd</a> <a href="#idx1073751126">3rd</a> <a href="#idx1073751140">4th</a> <a href="#idx1073751157">5th</a> <a href="#idx1073751171">6th</a> <a href="#idx1073751195">7th</a> <a href="#idx1073751211">8th</a> <a href="#idx1073751233">9th</a><BR>
+ <a href="#idx1073751145">list objects</a> <a href="#idx1073751148">2nd</a><BR>
+ <a href="#idx1073751183">long integer objects</a><BR>
+ <a href="#idx1073751158">mapping objects</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751107">write()</a><BR>
+ <a href="#idx1073751224">module objects</a><BR>
+ <a href="#idx1073751083">none objects</a><BR>
+ <a href="#idx1073751172">numeric objects</a> <a href="#idx1073751179">2nd</a> <a href="#idx1073751196">3rd</a> <a href="#idx1073751212">4th</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751118">buffer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751235">C</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751201">complex number</a> <a href="#idx1073751217">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751163">dictionary</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751222">file</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751187">floating point</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751146">list</a> <a href="#idx1073751149">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751184">long integer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751159">mapping</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751225">module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751084">none</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751173">numeric</a> <a href="#idx1073751180">2nd</a> <a href="#idx1073751197">3rd</a> <a href="#idx1073751213">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751075">passing to object types, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751090">2nd</a> <a href="#idx1073751123">3rd</a> <a href="#idx1073751137">4th</a> <a href="#idx1073751154">5th</a> <a href="#idx1073751168">6th</a> <a href="#idx1073751192">7th</a> <a href="#idx1073751208">8th</a> <a href="#idx1073751230">9th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751177">plain integer</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751220">complex numbers as</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751095">sequence</a> <a href="#idx1073751114">2nd</a> <a href="#idx1073751128">3rd</a> <a href="#idx1073751142">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751099">string</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751132">tuple</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751080">type</a><BR>
+passing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751076">objects to object types, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751091">2nd</a> <a href="#idx1073751124">3rd</a> <a href="#idx1073751138">4th</a> <a href="#idx1073751155">5th</a> <a href="#idx1073751169">6th</a> <a href="#idx1073751193">7th</a> <a href="#idx1073751209">8th</a> <a href="#idx1073751231">9th</a><BR>
+ <a href="#idx1073751176">plain integer objects</a><BR>
+ <a href="#idx1073751108">PyArgs_ParseTuple function</a><BR>
+Python objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751219">complex numbers as</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751072">Concrete Objects Layer</a> <a href="#idx1073751087">2nd</a> <a href="#idx1073751120">3rd</a> <a href="#idx1073751134">4th</a> <a href="#idx1073751151">5th</a> <a href="#idx1073751165">6th</a> <a href="#idx1073751189">7th</a> <a href="#idx1073751205">8th</a> <a href="#idx1073751227">9th</a><BR>
+ <a href="#idx1073751094">sequence objects</a> <a href="#idx1073751113">2nd</a> <a href="#idx1073751127">3rd</a> <a href="#idx1073751141">4th</a><BR>
+ <a href="#idx1073751098">string objects</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751103">buffer interface support</a><BR>
+structures<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751204">complex numbers as</a><BR>
+support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751105">buffer interface, strings and arrays</a><BR>
+ <a href="#idx1073751131">tuple objects</a><BR>
+ <a href="#idx1073751079">type objects</a><BR>
+ <a href="#idx1073751106">write() method</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

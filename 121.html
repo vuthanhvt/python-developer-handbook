@@ -1,0 +1,1102 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Extending</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="117.html" class="navtitle">6. Extending and Embedding Python</a> &gt; <span class="nonavtitle">Extending</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="120.html" title="The Python/C API"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=121" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="121.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="122.html" title="Compiling and Linking Extension Modules"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A35%3A05+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147033230215011031082157</font><a href="read6.asp?bookname=0672319942&snode=121&now=5%2F31%2F2002+4%3A35%3A05+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Extending</h3>
+				<p>Because Python cannot access C/C++ functions in a straightforward way, it is necessary to handle the conversion between Python and C/C++ data types when putting them to work together. That is when we use the Python extension modules. These extensions work like a thin wrapper of functions written in C/C++ that are necessary to bring the C/C++ functionality to the developer.</p>
+
+				<P>It is widely known that interpreted languages execute intensive applications slower than compiled languages. As a result, it is a good choice to implement as extension modules the application routines that need to run fast, such as network access, database manipulation, and routines that intensively use the graphical interface.</P>
+
+				<P>Keep in mind that you always have to think about whether it is really necessary to implement routines as extension modules. Are you sure that the processing speed will get better by calling C functions instead of just using plain Python?</P>
+
+				<p>Before starting to implement anything in C, I suggest that you analyze and test your Python code. Check to see whether it can be optimized. Profile it, and only if you find some big problem, create C extensions. As an example, if you have the execution time of a function that only accounts for 1% of the program execution time, you have only reduced total execution time by 0.5%.</p>
+
+				<p>And remember, before you implement some surreal extension, to first check the Python distribution and the contributed modules. What you need might already be there.<a NAME="idx1073743560"></a><a naME="idx1073743561"></A><A name="idx1073743562"></a><a name="idx1073743563"></a><a name="idx1073743564"></a><a naMe="idx1073743565"></a><A namE="idx1073743566"></a><a naMe="idx1073743567"></a><a NAME="idx1073743568"></a><a naME="idx1073743569"></A><A name="idx1073743570"></A><A NAme="idx1073743571"></a></p>
+
+				<P>Some good links to where you can check for existing modules are</P>
+
+				<P>The Python contributed modules page at</P>
+
+				<p><a target="_blank" href="http://www.python.org/download/Contributed.html">http://www.python.org/download/Contributed.html</a></p>
+
+				<p><i>The Vaults of Parnassus</i> collection of Python resources at</p>
+
+				<p><a TarGet="_blank" hRef="http://www.vex.net/~x/parnassus/">http://www.vex.net/~x/parnassus/</a></p>
+
+				<P>The extension modules should be used to write specific operations, and not complete applications. By doing this, you will spend less time developing the wrapping interfaces.</p>
+
+				<p>The next two links provide a good source of information about writing an extension module:</p>
+
+				<BLOCkquoTE>
+<P><P>"How to Write a Python Extension," by Michael P. Reilly:</p>
+</p>
+<p><p><A TARget="_blank" hREF="http://starship.python.net/crew/arcege/extwriting/pyext.html">http://starship.python.net/crew/arcege/extwriting/pyext.html</A></p>
+</p>
+<p><p>"Extension Classes, Python Extension Types Become Classes," by Jim Fulton:</p>
+</p>
+<p><p><a target="_blank" href="http://www.digicool.com/releases/ExtensionClass/">http://www.digicool.com/releases/ExtensionClass/</a></P>
+</p>
+</bLockQuote>
+				<H4>Creating New Extensions</h4>
+					<p>I presume that if you came this far, you are sure that you want to use extension modules. So, let's start developing something.</p>
+
+					<P>First, in many places, you will see the naming convention for extension module files defined as <I><TT clasS="monofont">modulenamemodule.</TT></I>
+						<tt clASS="monofont">c.</Tt> Second, all extension modules must include the Python/C API <tt cLASS="monofont">"&lt;Python.h&gt;"</tt> system header file.</p>
+
+					<p>The next example is an extension module called <tt class="monofont">helloworldmodule.c</tt> that is used to demonstrate how easy it is to create a Python extension.</p>
+
+					<pre>
+						
+/* File: helloworldmodule.c */
+
+#include "&lt;Python.h&gt;"
+
+/* external function*/
+static PyObject *sayhello(PyObject *self)
+{
+  return Py_BuildValue("s","Hello Python World!");
+}
+
+/* name binding table */
+static PyMethodDef hellomethods[] = {
+  {"say", sayhello, METH_VARARGS },
+  {NULL, NULL}             /* sentinel */
+};
+
+/* initialization function*/
+DL_EXPORT(void) inithello()
+{
+    Py_InitModule("hello", hellomethods);
+}
+
+					</pre>
+
+					<P>After linking this module to your interpreter, it becomes promptly accessible for your use (see <a hRef="121#2.html">Figure 6.1</a>).</P>
+
+					<centEr>
+						<h5>
+<a NAME="2"></a>Figure 6.1. As you can see, there is no difference between the way you use an extension module and the other modules.</h5><imG BORder="0" wIDTH="500" heigHT="375" SRc="graphics/06fig01.gif" alt="graphics/06fig01.gif"></center>
+
+					<p>It is important to stick to the naming convention because when the module is first imported, the <tt class="monofont">init</tt><I><tt ClasS="monofont">modulename</tt></i><tT claSS="monofont">()</TT> function is called.</p>
+
+					<p>Every time you implement a C function that Python will call, you have to define two arguments. The first one is called <a nAME="idx1073743572"></A><a namE="idx1073743573"></A><TT clasS="monofont">self,</TT> and it is a pointer to the called object. The argument <Tt class="monofont">self</tt> is used when implementing built-in methods to point to the bound object. When a function is implemented, <tt class="monofont">self</tt> is set to <tt cLasS="monofont">NULL.</tt></p>
+
+					<P>The other argument is usually called <a namE="idx1073743574"></a><a nAME="idx1073743575"></A><tt clASS="monofont">args,</Tt> which is a pointer to a tuple object that contains the arguments of the function.</p>
+
+					<p>Check out another example. This one passes arguments between Python and C.<a NAME="idx1073743576"></a><a naME="idx1073743577"></A><A name="idx1073743578"></a><a name="idx1073743579"></a><a name="idx1073743580"></a><a naMe="idx1073743581"></a><A namE="idx1073743582"></a><a naMe="idx1073743583"></a><a NAME="idx1073743584"></a><a naME="idx1073743585"></A><A name="idx1073743586"></A><A NAme="idx1073743587"></a><a NAME="idx1073743588"></a><a name="idx1073743589"></a></p>
+
+					<pre>
+						
+/* File: systemmodule.c*/
+
+#include "&lt;Python.h&gt;"
+
+static PyObject *system_command(PyObject *self, PyObject *args)
+
+
+{
+    int  return_status;
+    char *program;
+    char *argument;
+    static char statement[255];
+
+   if (!PyArg_ParseTuple(args, "ss", &amp;program, &amp;argument))
+       return NULL;
+
+   sprintf(statement, "%s %s", program, argument);
+
+   return_status = system(statement);
+   return Py_BuildValue("i", return_status);
+}
+
+static PyMethodDef systemmethods[] = {
+   {"command", system_command, METH_VARARGS},
+
+   {NULL, NULL}
+};
+
+
+DL_EXPORT(void) initsystem() {
+   Py_InitModule("system", systemmethods);
+}
+
+					</pre>
+
+					<p>The next set of instructions calls the <a name="idx1073743590"></A><a nAme="idx1073743591"></a><Tt claSs="monofont">command()</tt> function that is part of the <TT CLass="monofont">system</tT> module, which is stored in the <TT Class="monofont">systemmodule.c</TT> file.</P>
+
+					<Pre>
+						
+&gt;&gt;&gt; import system
+&gt;&gt;&gt; system.command("dir","|more")
+
+					</prE>
+
+					<P>All interface items are Python objects. Thus, function arguments and return values are pointers to <TT class="monofont">PyObject</tt> structures. <tt class="monofont">PyObject</tt>s are C representations of real Python objects. All <tt clAss="monofont">PyObject</Tt>s have a reference count.</p>
+
+					<p>You shouldn't <A name="idx1073743592"></A><a naME="idx1073743593"></A><A name="idx1073743594"></A>declare a variable of type <TT Class="monofont">PyObject.</TT> Instead, you have to declare <TT clasS="monofont">PyObject *</TT> pointers to the actual storage of the object. Because all Python objects have a similar behavior, they can be represented by a single C type (<Tt class="monofont">PyObject *</tt>). Note that a variable of type <tt class="monofont">PyObject</tt> can be defined, but it won't be of much use.</p>
+
+					<p>In order to <a NamE="idx1073743595"></a><a nAme="idx1073743596"></a>implement basic extensions, you essentially use the following <a Name="idx1073743597"></A>commands:</P>
+
+					<BLockqUOTE>
+<p><p><a nAME="idx1073743598"></A><a namE="idx1073743599"></A><TT class="monofont">PyArg_ParseTuple(args, format, arg1 [, arg2 [,…]])—</tt>Checks the argument types and converts them to C values. It returns a <tt class="monofont">true</tt> value when the checking and the conversion doesn't return any errors.<a namE="idx1073743600"></a></p>
+</P>
+<p><p><a Name="idx1073743601"></a><A namE="idx1073743602"></A><TT clasS="monofont">PyArg_ParseTuple—</TT>Used to parse the <Tt claSS="monofont">PyObject</TT> that contains the function arguments (<tt clASS="monofont">args</Tt>). The <i>second argument</i> is a format string that lists the object types that you expect to collect, and all the other arguments are pointers to be filled with values from the parsing operation. Note that you can add the function name to the format string to make error messages a bit more informative.</p>
+</p>
+<p><p><a name="idx1073743603"></a><a name="idx1073743604"></a><tT clAss="monofont">Py_BuildValue(format, Cvar1 [, Cvar2 [,…]])—</tT>Converts C objects into Python Objects based on the formatting string. <tt clAss="monofont">Py_BuildValue</tT> is mostly used when it is necessary to return values to the Python interpreter.</P>
+</P>
+</BlockQUOTe>
+					<div CLASs="note"><p clASS="notetitle"><B>Tip</b></p><p>
+
+						<p>C functions that return a void argument must return the Python type called None.</p>
+
+						<pre>
+							
+Py_INCREF(Py_None);
+return Py_None;
+
+						</pre>
+
+					</p></div>
+<br>
+<br>
+
+					<p>For this other example, let's create a function that takes two Python objects and returns a pointer to a Python object.</P>
+
+					<prE>
+						
+/* File: divisionmodule.c*/
+
+#include "&lt;Python.h&gt;"
+
+static PyObject *division_function(PyObject *self, PyObject *args)
+
+  { PyObject *result = NULL;
+    long a, b;
+
+    if (PyArg_ParseTuple(args, "ii", &amp;a, &amp;b)) {
+      result = Py_BuildValue("i", a / b);
+    }
+
+    return result;
+  }
+
+static PyMethodDef divisionmethods[] = {
+  {"divide", division_function, METH_VARARGS},
+  {NULL, NULL},
+};
+
+
+DL_EXPORT(void) initdivision()
+  {
+    Py_InitModule("division", divisionmethods);
+  }
+
+					</pre>
+
+				
+				<H4>Importing an Extension Module</h4>
+					<p>As you could see in the previous example, in order to allow Python to import your module, a few steps are required.</p>
+
+					
+						<p>
+						<P>
+					<dl>
+<dD>
+<B>Step 1. </B>
+Create a method array. Each element of this array is a structure that contains: the function's name to be exported to the Python interface, the C function's name and a indicator that shows how arguments must be passed. Each function of the module to be exported to Python must be an element in this array. Note that the last element of the array works as a sentinel, and it must contain <Tt claSS="monofont">NULL</TT>s.
+							<pre>
+								
+static PyMethodDef systemmethods[] = {
+   {"command", system_command, METH_VARARGS},
+   {NULL, NULL}
+};
+
+							</pRE>
+
+							The third argument of each array entry can be<TT clasS="monofont">METH_VARARGS</TT> means that the arguments are in a tuple format.<Tt class="monofont">METH_VARARGS | METH_KEYWORDS</tt> indicates that keyword arguments are also allowed. It will just pass a <tt class="monofont">NULL</tt> for the extra argument if no keyword arguments are given.<p>The <i><tT clAss="monofont">modulename</tT></i><tt cLass="monofont">methods[]</TT> array has a fourth optional element, which is a <I>documentation string.</I></p>
+</dd>
+<dD>
+<B>Step 2. </B>
+Create the initialization function of the module. This function should be declared as non-static. All the others should be defined as static in order to avoid name conflicts with other modules.
+							<P>The <tt clASS="monofont">init</Tt><i><tt CLASs="monofont">modulename</tt></i><tt class="monofont">()</tt> function is automatically called by the interpreter. The <tt class="monofont">DL_EXPORT()</Tt> definition is used to expose the module entry point. Note that the <tT claSs="monofont">DL_EXPORT</tt> macro only does something on the Win32 platform.</p>
+
+							<Pre>
+								
+DL_EXPORT(void) initsystem() {
+   Py_InitModule("system", systemmethods);
+
+							</pRE>
+
+						</DD>
+</dl>
+
+					<p>In this example, the <tT CLAss="monofont">Py_InitModule</tt> creates a "<TT CLass="monofont">system</tT>" module object based on the array <TT Class="monofont">systemmethods.</tt></p>
+
+					<p>You can verify that by checking the <tt class="monofont">sys.modules</tt> dictionary after importing the extension module.<a naMe="idx1073743605"></a><A namE="idx1073743606"></a><a naMe="idx1073743607"></a><a NAME="idx1073743608"></a><a naME="idx1073743609"></A><A name="idx1073743610"></A><A NAme="idx1073743611"></a><a NAME="idx1073743612"></a><a name="idx1073743613"></a><a name="idx1073743614"></a><a name="idx1073743615"></a><a NamE="idx1073743616"></a><a nAme="idx1073743617"></a><a Name="idx1073743618"></A><A NAme="idx1073743619"></a></p>
+
+				
+				<H4>Formatting Strings</H4>
+					<P>Whenever you use the <A name="idx1073743620"></A><A NAme="idx1073743621"></a><tT CLAss="monofont">PyArg_ParseTuple()</tt> or the <a name="idx1073743622"></a><a name="idx1073743623"></a><tt clAss="monofont">Py_BuildValue()</Tt> function, you must follow a mechanism that is based on some formatting tables, which are mentioned next, in order to make the correct conversion between Python types and C types.</p>
+
+					<p>Both functions check the arguments type by looking at a formatting string. All the elements of the formatting string must match in type and number with the variables that are also part of the function's list of arguments.</P>
+
+					<p>Sometimes, it isn't strictly necessary to have both sides (C and Python) matching in type. The reality is that the receiving field only has to be big enough to fit the received value; hence, the Python type called <a naMe="idx1073743624"></a><a NAME="idx1073743625"></a><tt cLASS="monofont">float</tt> is easily stored by a C <a nAME="idx1073743626"></A><a namE="idx1073743627"></A><TT class="monofont">double</tt> variable. Of course, using a C type that doesn't match the format character will cause problems that might only affect some platforms.</p>
+
+					<p>The literals <tt class="monofont">|, :,</tt> and <tt ClaSs="monofont">;</tt> have special meanings when placed inside a formatting string.</P>
+
+					<blocKquoTE>
+<P><P><tt clASS="monofont">|—</Tt> 
+    The remaining arguments in the formatting string are optional. The C variables will keep their original values in case they aren't assigned to any arguments. You should make sure that the variables are initialized for optional arguments.</p>
+</p>
+<p><P><TT Class="monofont">:—</TT> 
+    The string after the colon is the function name to be called in case of error messages.</P>
+</P>
+<p><p><tt class="monofont">;—</tt> 
+    The string after the semicolon is the user error message that must substitute for the original error message.<a name="idx1073743628"></a><a naMe="idx1073743629"></a><A namE="idx1073743630"></a><a naMe="idx1073743631"></a><a NAME="idx1073743632"></a><a naME="idx1073743633"></A><A name="idx1073743634"></A><A NAme="idx1073743635"></a><a NAME="idx1073743636"></a><a name="idx1073743637"></a><a name="idx1073743638"></a><a name="idx1073743639"></a><a NamE="idx1073743640"></a><a nAme="idx1073743641"></a></p>
+</P>
+</bloCKQUote>
+					<dIV CLass="note"><p CLASs="notetitle"><b>Tip</b></p><P>
+
+						<P>A given formatting string must contain only one <TT class="monofont">|</tt>with <tt class="monofont">:</tt> or <tt clAss="monofont">;</Tt> because <tt Class="monofont">:</Tt> and <tt CLASs="monofont">;</tt> are mutually exclusive.</p>
+
+					</P></DIV>
+<br>
+<br>
+
+					<P><A HRef="121#5.html">Table 6.1</a> covers all the elements that can be part of a <tT CLAss="monofont">PyArg_ParseTuple</tt>'s formatting string. Just to remind you, <tt class="monofont">PyArg_ParseTuple()</tt> is used to convert Python objects into <i>C</i> objects.</p>
+
+					<a namE="5"></a><p><TablE bordEr="1" ceLLSPacinG="0" CELlpadDING="1" widtH="100%">
+<CAPtion><h5>Table 6.1.   A <tt class="monofont">PyArg_ParseTuple</tt>'s Formatting String Elements</h5></captiOn><cOlgrOup alIgn="left" sPAN="4">
+<Tr valIGN="top">
+<Th>
+<fonT SIZe="2">Element</fonT></TH>
+<Th>
+<font size="2">Python Type</font></th>
+<th>
+<fonT siZe="2">C Type</foNt></th>
+<tH>
+<fonT SIZe="2">Notes</fonT></TH>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2"><a name="idx1073743642"></a><a name="idx1073743643"></a><tt claSs="monofont">s</tT></fonT></td>
+<td>
+<Font SIZE="2">string</font></TD>
+<TD>
+<font SIZE="2"><tt clASS="monofont">char *</Tt></font></td>
+<td>
+<font size="2">The C <tt cLasS="monofont">string</tt> is <tT clasS="monofont">NULL</tt> terminated;</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2"> </FONt></td>
+<td>
+<font size="2"> </font></td>
+<tD>
+<foNt siZe="2"> </fonT></td>
+<tD>
+<FONt sizE="2">The Python <TT Class="monofont">string</TT> cannot be <TT clasS="monofont">None</TT> and it cannot contain embedded <Tt class="monofont">NULL</tt>s, otherwise, a <tt class="monofont">TypeError</tt> exception is raised.</fonT></td>
+</Tr>
+<tr ValigN="top">
+<td>
+<fONT Size="2"><a NAME="idx1073743644"></a><a naME="idx1073743645"></A><Tt claSS="monofont">s#</TT></font></td>
+<td>
+<font size="2">string</font></Td>
+<tD>
+<fonT size="2"><Tt clASS="monofont">char *, int</Tt></fonT></TD>
+<Td>
+<fonT SIZe="2">Pointer to the character <tt cLASS="monofont">string</tt> and its length. Note that <tt class="monofont">s#</tt> allows embedded <tt class="monofont">NULL</tt>s in the string.</FonT></td>
+</tR>
+<tr vaLign="top">
+<TD>
+<FOnt siZE="2"><A Name="idx1073743646"></a><A NAMe="idx1073743647"></a><tt CLASs="monofont">z</tt></font></td>
+<td>
+<font size="2">string or None</fOnt></Td>
+<td>
+<Font sIze="2"><tT CLAss="monofont">char *</tt></FONT></td>
+<td>
+<FONT size="2">Python <TT CLass="monofont">string</tt> can be <tt class="monofont">None.</tt> If that happens, the C pointer is set to <tt clasS="monofont">NULL.</tt></Font></Td>
+</tr>
+<tR valIGN="top">
+<Td>
+<fonT SIZe="2"><a naME="idx1073743648"></A><A name="idx1073743649"></A><TT Class="monofont">z#</tt></font></td>
+<td>
+<font siZe="2">string or None</fOnt></tD>
+<td>
+<foNt siZE="2"><TT clasS="monofont">char *, int</TT></Font></tD>
+<TD>
+<Font sIZE="2">Similar to <Tt class="monofont">s#.</tt></font></td>
+</tr>
+<tr vaLigN="top">
+<td>
+<fOnt siZe="2"><a nAME="idx1073743650"></A><a namE="idx1073743651"></A><TT clasS="monofont">b</TT></Font></tD>
+<TD>
+<Font size="2">integer</font></td>
+<td>
+<font sIze="2"><Tt clAss="monofont">char</tt></Font></TD>
+<TD>
+<font SIZE="2">Stores a <tt clASS="monofont">tiny int</Tt> (8-bit integer) in a <tt cLASS="monofont">char.</tt><a name="idx1073743652"></a><a name="idx1073743653"></a><a name="idx1073743654"></a><A naMe="idx1073743655"></a><a Name="idx1073743656"></a><A namE="idx1073743657"></A><A Name="idx1073743658"></a><A NAMe="idx1073743659"></a><a nAME="idx1073743660"></A><a namE="idx1073743661"></A><A Name="idx1073743662"></a><a name="idx1073743663"></a><a name="idx1073743664"></a><a namE="idx1073743665"></a><a Name="idx1073743666"></A><a namE="idx1073743667"></a></foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2"><A NAMe="idx1073743668"></a><a name="idx1073743669"></a><tt class="monofont">h</tt></fonT></td>
+<Td>
+<foNt sizE="2">integer</fonT></TD>
+<Td>
+<fonT SIZe="2"><tt cLASS="monofont">short int</tt></foNT></TD>
+<td>
+<font size="2"> </font></td>
+</tr>
+<tr ValIgn="top">
+<tD>
+<font Size="2"><A NAMe="idx1073743670"></a><a nAME="idx1073743671"></A><tt clASS="monofont">i</Tt></fonT></TD>
+<Td>
+<font size="2">integer</font></td>
+<td>
+<fonT siZe="2"><tt Class="monofont">int</Tt></foNT></TD>
+<td>
+<foNT SIze="2"> </foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<font size="2"><a name="idx1073743672"></a><a nAme="idx1073743673"></A><tt cLass="monofont">l</tT></fonT></TD>
+<Td>
+<fonT SIZe="2">integer</fonT></TD>
+<Td>
+<fonT SIZe="2"><tt class="monofont">long int</tt></font></td>
+<td>
+<foNt sIze="2"> </fOnt></td>
+</Tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2"><A NAMe="idx1073743674"></a><a nAME="idx1073743675"></A><tt class="monofont">c</tt></font></td>
+<td>
+<fonT siZe="2">string of length 1</foNt></td>
+<tD>
+<fonT SIZe="2"><tt cLASS="monofont">char</tt></foNT></TD>
+<td>
+<foNT SIze="2"> </font></td>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2"><a namE="idx1073743676"></a><a nAME="idx1073743677"></A><tt clASS="monofont">f</Tt></fonT></TD>
+<Td>
+<fonT SIZe="2">float</font></td>
+<td>
+<font size="2"><tt cLasS="monofont">float</tt></fOnt></td>
+<Td>
+<foNT SIze="2"> </foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2"><a name="idx1073743678"></a><a name="idx1073743679"></a><tt clAss="monofont">d</Tt></foNt></td>
+<tD>
+<fonT SIZe="2">float</fonT></TD>
+<Td>
+<fonT SIZe="2"><tt cLASS="monofont">double</tt></font></td>
+<td>
+<font size="2"> </foNt></tD>
+</tr>
+<tR valiGn="top">
+<td>
+<FONT size="2"><A NAMe="idx1073743680"></a><a nAME="idx1073743681"></A><tt clASS="monofont">D</Tt></font></td>
+<td>
+<font size="2">complex</fonT></td>
+<Td>
+<foNt sizE="2"><tt cLASS="monofont">Py_complex</tt></foNT></TD>
+<td>
+<foNT SIze="2"> </foNT></TD>
+</tr>
+<tr valign="top">
+<td>
+<font size="2"><A naMe="idx1073743682"></a><a Name="idx1073743683"></a><Tt clASS="monofont">O</Tt></fonT></TD>
+<Td>
+<fonT SIZe="2">object</fonT></TD>
+<Td>
+<font size="2"><tt class="monofont">PyObject *</tt></foNt></tD>
+<td>
+<fOnt siZe="2">The C variable (of type <tt CLASs="monofont">PyObject *</tt>) stores an <tT CLAss="monofont">s</tt> pointer to the address of the Python <TT CLass="monofont">object.</tT> The object reference count isn't increased.</FONt></td>
+</tr>
+<tr valign="top">
+<td>
+<font sIze="2"><A namE="idx1073743684"></a><a naMe="idx1073743685"></a><tT CLAss="monofont">O!</tt></FONT></td>
+<td>
+<FONT size="2">object</FONT></td>
+<td>
+<font size="2"><tt class="monofont">typeobject,  PyObject *</tT></foNt></td>
+<Td>
+<fonT sizE="2">Similar to O, but it also looks at the address of the Python-type object that specifies the required type. If the Python object doesn't match the required type, a <I>TypeError</I> exception is raised.</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2"><a name="idx1073743686"></a><a name="idx1073743687"></a><tt class="monofont">O&amp;</Tt></fOnt></tD>
+<td>
+<foNt siZE="2">object</FOnt></td>
+<TD>
+<FOnt siZE="2">function, variable</FOnt></td>
+<TD>
+<FOnt size="2">Converts a Python object into a C variable of arbitrary type (<tt class="monofont">void *</tt>), using a function.</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2"> </fonT></TD>
+<Td>
+<fonT SIZe="2"> </fonT></TD>
+<Td>
+<font size="2"> </font></td>
+<td>
+<fonT siZe="2">It is equivalent to: <tt Class="monofont">status = function(object, variable).</Tt></foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2"> </FONT></td>
+<td>
+<font size="2"> </font></td>
+<td>
+<FonT sizE="2"> </font></Td>
+<td>
+<FONT size="2">The returned <TT CLass="monofont">status</tT> should be 1 for success and 0 for failure.</FONt></td>
+</tR>
+<TR Valign="top">
+<td>
+<font size="2"><a name="idx1073743688"></A><a nAme="idx1073743689"></a><Tt claSs="monofont">S</tt><A NAMe="idx1073743690"></a><a nAME="idx1073743691"></A><a namE="idx1073743692"></A><A Name="idx1073743693"></a><A NAMe="idx1073743694"></a><a name="idx1073743695"></a><a name="idx1073743696"></a><a name="idx1073743697"></a><A naMe="idx1073743698"></a><a Name="idx1073743699"></a><A namE="idx1073743700"></A><A Name="idx1073743701"></a><A NAMe="idx1073743702"></a><a nAME="idx1073743703"></A><a namE="idx1073743704"></A><A Name="idx1073743705"></a></font></td>
+<td>
+<font size="2">string</FonT></td>
+<tD>
+<font Size="2"><TT CLass="monofont">PyStringObject *</tT></FONt></td>
+<tD>
+<FONt sizE="2">Similar to <TT Class="monofont">O,</tt> but it expects a <tt class="monofont">string</tt>
+object. It raises a <tt claSs="monofont">TypeError</tT> exception otherwise.</fonT></td>
+</tr>
+</ColgROUP>
+</tablE></P>
+
+					<DIv claSS="note"><P Class="notetitle"><B>Note</B></P><P>
+
+						<p>Using anything other than the given types could very easily cause problems on some architectures.</p>
+
+					</p></div>
+<br>
+<br>
+
+					<p>If the Python object is a tuple, the number of matching variables passed to the C function must be equal to the number of formatting elements informed. A tuple is indicated in the formatting string by placing the formatting elements between parenthesis.</p>
+
+					<p>The <tt class="monofont">Py_BuildValue</Tt> function is used to return values to the Python program that has called the extension module. Its functionality is similar to <tT claSs="monofont">PyArg_ParseTuple.</tt></p>
+
+					<P>This function doesn't create a tuple of one element automatically, unless you enclose the single formatting element in parentheses.</p>
+
+					<p><a HREF="121#6.html">Table 6.2</a> covers the <tt cLASS="monofont">Py_BuildValue</tt> function and all the elements that can be part of its formatting string. Just to remind you, this function is used to convert C objects into Python objects.<a nAME="idx1073743706"></A><a namE="idx1073743707"></A><A Name="idx1073743708"></a><a name="idx1073743709"></a><a name="idx1073743710"></a><a namE="idx1073743711"></a><a Name="idx1073743712"></A><a namE="idx1073743713"></a><a nAME="idx1073743714"></A><a namE="idx1073743715"></A><A Name="idx1073743716"></a><A NAMe="idx1073743717"></a><a nAME="idx1073743718"></A><a name="idx1073743719"></a></p>
+
+					<a name="6"></a><p><table bOrdEr="1" ceLlspaCing="0" CELLpaddING="1" Width="100%">
+<CAPTion><h5>Table 6.2.   A <TT CLass="monofont">Py_BuildValue</tt>'s Formatting String Elements</h5></caption><colgrouP alIgn="left" sPan="4">
+<tr ValiGN="top">
+<TH>
+<font SIZE="2">Element</font></TH>
+<TH>
+<font SIZE="2">C type</font></th>
+<th>
+<font size="2">Python type</font></Th>
+<tH>
+<fonT size="2">Notes</Font></TH>
+</TR>
+<tr vaLIGN="top">
+<td>
+<foNT SIze="2"><a nAME="idx1073743720"></A><a name="idx1073743721"></a><tt class="monofont">s</tt></font></tD>
+<td>
+<Font Size="2"><tT claSS="monofont">char *</TT></font></TD>
+<TD>
+<font SIZE="2">string</font></TD>
+<TD>
+<font size="2">If the C string pointer is <tt class="monofont">NULL, None</tt> is returned.</fonT></td>
+</Tr>
+<tr ValigN="top">
+<td>
+<fONT Size="2"><a NAME="idx1073743722"></a><a naME="idx1073743723"></A><Tt claSS="monofont">s#</TT></font></td>
+<td>
+<font size="2"><tt clAss="monofont">char *, int</Tt></foNt></td>
+<tD>
+<fonT SIZe="2">string</fonT></TD>
+<Td>
+<fonT SIZe="2">Converts the C pointer to a character string and its length into a Python string object. If the C pointer is <tt cLASS="monofont">NULL, None</tt> is returned.</font></td>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2"><a namE="idx1073743724"></a><a nAME="idx1073743725"></A><tt clASS="monofont">z</Tt></fonT></TD>
+<Td>
+<fonT SIZe="2"><tt class="monofont">char *</tt></font></td>
+<td>
+<foNt sIze="2">string or None</fOnt></td>
+<Td>
+<foNT SIze="2">Similar to <tt CLASs="monofont">s.</tt></fONT></Td>
+</tr>
+<tR VALign="top">
+<td>
+<font size="2"><a name="idx1073743726"></a><a NamE="idx1073743727"></a><tt Class="monofont">z#</Tt></foNT></TD>
+<td>
+<foNT SIze="2"><tt CLASs="monofont">char *, int</tt></fONT></Td>
+<td>
+<font size="2">string or None</font></td>
+<td>
+<fOnt Size="2">Similar to <Tt claSs="monofont">s#.</tt></FONT></td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt siZE="2"><A Name="idx1073743728"></a><a name="idx1073743729"></a><tt class="monofont">b</tt></fOnt></Td>
+<td>
+<Font sIze="2"><tT CLAss="monofont">char</tt></FONT></td>
+<td>
+<FONT size="2">integer</FONT></td>
+<td>
+<font size="2"> </font></td>
+</tr>
+<Tr vAligN="top">
+<td>
+<foNt siZE="2"><A Name="idx1073743730"></a><A NAMe="idx1073743731"></a><tt CLASs="monofont">h</tt></fONT></Td>
+<td>
+<font size="2"><tt class="monofont">short int</tt></FonT></td>
+<tD>
+<font Size="2">integer</FONT></td>
+<td>
+<FONT size="2"> </FONT></td>
+</tr>
+<TR VAlign="top">
+<td>
+<font size="2"><a name="idx1073743732"></a><A naMe="idx1073743733"></a><tT clasS="monofont">i</tt></fONT></Td>
+<td>
+<fONT Size="2"><tT CLAss="monofont">int</tt></FONT></td>
+<td>
+<font size="2">integer</font></td>
+<td>
+<FonT sizE="2"> </font></Td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt siZE="2"><A Name="idx1073743734"></a><A NAMe="idx1073743735"></a><tt class="monofont">l</tt></font></td>
+<td>
+<fOnt Size="2"><Tt claSs="monofont">long int</tt></FONT></td>
+<td>
+<FONT size="2">integer</FONT></td>
+<td>
+<FONT size="2"> </font></td>
+</tr>
+<tr valign="top">
+<Td>
+<fOnt sIze="2"><a nAme="idx1073743736"></a><A NAMe="idx1073743737"></a><tt CLASs="monofont">c</tt></fONT></Td>
+<td>
+<fONT Size="2"><tt class="monofont">char</tt></font></td>
+<td>
+<FonT sizE="2">string of length 1</font></Td>
+<td>
+<FONT size="2"> </FONT></td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt size="2"><a name="idx1073743738"></a><a name="idx1073743739"></a><tt ClaSs="monofont">f</tt></Font></tD>
+<td>
+<fONT Size="2"><tT CLAss="monofont">float</tt></FONT></td>
+<td>
+<FONT size="2">float</font></td>
+<td>
+<font size="2"> </FonT></td>
+</tR>
+<tr vaLign="top">
+<TD>
+<FOnt siZE="2"><A Name="idx1073743740"></a><A NAMe="idx1073743741"></a><tt CLASs="monofont">d</tt></font></td>
+<td>
+<font size="2"><tT clAss="monofont">double</tT></font></Td>
+<td>
+<FONT size="2">float</FONT></td>
+<td>
+<FONT size="2"> </FONT></td>
+</tr>
+<tr valign="top">
+<td>
+<font siZe="2"><a Name="idx1073743742"></A><a namE="idx1073743743"></a><tt CLASs="monofont">O</tt></fONT></Td>
+<td>
+<fONT Size="2"><tT CLAss="monofont">PyObject *</tt></font></td>
+<td>
+<font size="2">object</FonT></td>
+<tD>
+<font Size="2">It increments the reference count of the transported object.</FONT></td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt siZE="2"><A Name="idx1073743744"></a><a name="idx1073743745"></a><tt class="monofont">O!</tt></fOnt></Td>
+<td>
+<Font sIze="2"><tT CLAss="monofont">typeobject,</tt></FONT></td>
+<td>
+<FONT size="2"> </FONT></td>
+<td>
+<font size="2"> </font></td>
+</tr>
+<Tr vAligN="top">
+<td>
+<foNt siZE="2"> </FOnt></td>
+<TD>
+<FOnt siZE="2"><TT clasS="monofont">PyObject *</TT></Font></td>
+<td>
+<font size="2">object</font></tD>
+<td>
+<Font Size="2"> </fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2"><a naME="idx1073743746"></A><A name="idx1073743747"></a><tt class="monofont">O&amp;</tt></font></td>
+<Td>
+<fOnt sIze="2">function, variable</foNt></td>
+<TD>
+<FOnt siZE="2">object</FOnt></td>
+<TD>
+<FOnt siZE="2">It returns a Python object, or <TT class="monofont">NULL</tt> if an error occurs.</font></td>
+</tr>
+<tr valIgn="top">
+<Td>
+<foNt sizE="2"><a naME="idx1073743748"></A><A name="idx1073743749"></A><TT Class="monofont">S</TT></FOnt></td>
+<TD>
+<FOnt size="2"><tt class="monofont">PyObject *</tt></font></tD>
+<td>
+<Font Size="2">object</fOnt></tD>
+<TD>
+<Font sIZE="2">Same as <Tt claSS="monofont">O.</TT></font></TD>
+</TR>
+<tr valign="top">
+<td>
+<font size="2"><a nAme="idx1073743750"></A><a naMe="idx1073743751"></a><tt ClasS="monofont">N</TT></Font></tD>
+<TD>
+<Font sIZE="2"><Tt claSS="monofont">PyObject *</TT></font></td>
+<td>
+<font size="2">object</font></Td>
+<tD>
+<fonT size="2">Similar to <Tt clASS="monofont">O,</Tt> except that the reference count isn't incremented. <a naME="idx1073743752"></A><A name="idx1073743753"></A></FONt></td>
+</tR>
+</COLgroup>
+</table></p>
+
+					<p>The following list complements the previous table by showing how Python tuples, lists, and dictionaries are generated.</p>
+
+					<ul>
+<li><p>Matching items between parenthesis are converted into a Python tuple.</p>
+</lI>
+<li><P>Matching items between square brackets are converted into a Python list.</p>
+</li>
+<Li><p>Matching items between curly braces are converted into a Python dictionary. Each consecutive pair of values forms a dictionary entry in the format (key, value).<a nAme="idx1073743754"></a><A NAMe="idx1073743755"></a><a nAME="idx1073743756"></A><a namE="idx1073743757"></A><A Name="idx1073743758"></a><A NAMe="idx1073743759"></a><a name="idx1073743760"></a><a name="idx1073743761"></a><a name="idx1073743762"></a><A naMe="idx1073743763"></a><a Name="idx1073743764"></a><A namE="idx1073743765"></A><A Name="idx1073743766"></a><A NAMe="idx1073743767"></a></p>
+</lI>
+</UL>
+				
+				<H4>Exporting Constants</h4>
+					<p>In addition to methods, you can also export <i>constants</i> back to Python. You just need to bind the constant name to the module namespace dictionary.</P>
+
+					<PRE>
+						
+/* File: pimodule.c*/
+
+#include "&lt;Python.h&gt;"
+
+static PyMethodDef pimethods[] = {
+   {NULL, NULL}
+};
+
+DL_EXPORT(void)
+initpi()
+  { PyObject *module, *dictionary;
+    PyObject *pivalue;
+
+    module = Py_InitModule("pi", pimethods);
+    dictionary = PyModule_GetDict(module);
+
+    pivalue = PyFloat_FromDouble(3.1415926);
+    PyDict_SetItemString(dictionary, "pi", pivalue);
+    Py_DECREF(pivalue);
+  }
+
+					</pre>
+
+				
+				<h4>Error Checking</h4>
+					<p>You must indicate errors in your extension module by returning <a name="idx1073743768"></a><a name="idx1073743769"></a><tt ClaSs="monofont">NULL</tt> to the interpreter because functions signal errors by returning <Tt claSs="monofont">NULL.</tt> If your function has no <TT CLass="monofont">return</tT> at all, you need to return the <TT Class="monofont">None</TT> object.</P>
+
+					<Pre>
+						
+return Py_BuildValue("");
+
+					</prE>
+
+					<P>or</P>
+
+					<Pre>
+						
+Py_INCREF(Py_None);
+return Py_None;
+
+					</pre>
+
+					<p>In case you need to raise an exception, you can do that prior to the <tt class="monofont">return NULL</tt> statement. Note that <a name="idx1073743770"></A><a nAme="idx1073743771"></a><A name="idx1073743772"></A><a naME="idx1073743773"></A><A name="idx1073743774"></A>returning <TT Class="monofont">NULL</TT> without raising an exception is bad.<A Name="idx1073743775"></a><A NAMe="idx1073743776"></a><a name="idx1073743777"></a><a name="idx1073743778"></a><a name="idx1073743779"></a><A naMe="idx1073743780"></a><a Name="idx1073743781"></a><A namE="idx1073743782"></A><A Name="idx1073743783"></a><A NAMe="idx1073743784"></a><a nAME="idx1073743785"></A><a namE="idx1073743786"></A><A Name="idx1073743787"></a><a name="idx1073743788"></a><a name="idx1073743789"></a></p>
+
+					<h5>Handling Exceptions</h5>
+						<p>Exceptions work as functions in the Python/C API. For example, to raise an <Tt cLass="monofont">IndexError</Tt> exception, you just need to call <tt cLass="monofont">PyExc_SetString()</TT> prior to the <TT clasS="monofont">return NULL</TT> statement.</P>
+
+						<p>Extension modules also support the creation of new exception types.</p>
+
+						<prE>
+							
+/* File: testexceptionmodule.c*/
+
+#include "&lt;Python.h&gt;"
+
+static PyObject *exception = NULL;
+
+static PyMethodDef testexceptionmethods[] = {
+   {NULL, NULL}
+};
+
+DL_EXPORT(void)
+inittestexception()
+  { PyObject *module, *dictionary;
+    module = Py_InitModule("testexception", testexceptionmethods);
+    dictionary = PyModule_GetDict(module);
+
+    exception = PyErr_NewException("testexception.error", NULL, NULL);
+    PyDict_SetItemString(dictionary, "error", exception);
+  }
+
+						</PRE>
+
+						<p>If you need to <a naME="idx1073743790"></A><A name="idx1073743791"></a>raise your just-created exception, just call it:</p>
+
+						<pre>
+							
+PyErr_SetString(exception, "I could not do that");
+
+						</pre>
+
+						<p>Check <a href="255.html">Appendix A</a> for more information about the Python/C API exception functions, including how to handle threads in your extensions.<a NamE="idx1073743792"></a><a nAme="idx1073743793"></a><a Name="idx1073743794"></A><A NAme="idx1073743795"></a><a NAME="idx1073743796"></a><a naME="idx1073743797"></A><A name="idx1073743798"></A></P>
+
+					
+				
+				<H4>Reference Counting</H4>
+					<p>We all know that programmers are responsible for dynamic memory allocation and deallocation in C and C++.</p>
+
+					<p>However, Python extensions don't benefit from all the security provided by the Python runtime system. There are a lot of things that you have to be worried about. The main thing is reference counting.<a name="idx1073743799"></a><a name="idx1073743800"></a><a name="idx1073743801"></A><a nAme="idx1073743802"></a><A name="idx1073743803"></A><a naME="idx1073743804"></A><A name="idx1073743805"></A><A NAme="idx1073743806"></a><a NAME="idx1073743807"></a><a naME="idx1073743808"></A><A name="idx1073743809"></a><a name="idx1073743810"></a><a name="idx1073743811"></a><a naMe="idx1073743812"></a></P>
+
+					<p>The core Python counts references to every Python object that is created, which enables it to deallocate an object when it doesn't have any more references.</p>
+
+					<p>If an object's reference count reaches 0, this object is marked for deallocation. If this same object references other objects, their references are decremented too. The code for <A name="idx1073743813"></A><a naME="idx1073743814"></A>deallocating referenced objects occurs in the object destructor.</P>
+
+					<p>The counter is <a naME="idx1073743815"></A><A name="idx1073743816"></A><A NAme="idx1073743817"></a>incremented when a reference to the object is created, and it is decremented when the reference is deleted. If the reference count becomes zero, the object is released. That's how Python works.</p>
+
+					<P>However, Python extensions don't have this functionality built in. You have to increment (<A NAme="idx1073743818"></a><a name="idx1073743819"></a><tt class="monofont">Py_INCREF</tt>) and decrement (<a nAme="idx1073743820"></A><a naMe="idx1073743821"></a><tt ClasS="monofont">Py_DECREF</TT>) the references by yourself.</P>
+
+					<p>You can be sure that your reference counting is wrong if your system crashes when you either return a value from the extension module or when you exit the application.</p>
+
+					<p>Too few <tT CLAss="monofont">Py_INCREF</tt>s can cause the application to freeze at an unspecific time, whereas too few <TT CLass="monofont">Py_DECREF</tT>s cause memory leaks that drive the application to use more and more memory for the process.</P>
+
+					<P>An object reference count is defined as the number of owned references to it. The owner of a reference is responsible for calling <Tt class="monofont">Py_DECREF().</tt> It is also possible to borrow a reference to an object. The borrower should neither call <tt class="monofont">Py_DECREF()</tt> nor use the reference after the reference owner has disposed of it. If you are borrowing a reference, make sure that you are absolutely certain the owner will not release the reference while you are using it.</p>
+
+					<p>To make a <a NamE="idx1073743822"></a><a nAme="idx1073743823"></a>borrowed reference to become an <a Name="idx1073743824"></A><A NAme="idx1073743825"></a>owned reference, you just need to call <tT CLAss="monofont">Py_INCREF()</tt> for the mentioned object.<A NAMe="idx1073743826"></a><a nAME="idx1073743827"></A><a name="idx1073743828"></a><a name="idx1073743829"></a><a name="idx1073743830"></a><a nAme="idx1073743831"></A><a naMe="idx1073743832"></a><a nAme="idx1073743833"></a><A NAMe="idx1073743834"></a><a nAME="idx1073743835"></A><a namE="idx1073743836"></A><A Name="idx1073743837"></a><A NAMe="idx1073743838"></a><a name="idx1073743839"></a><a name="idx1073743840"></a></p>
+
+					<p>Take a look at following lines of code:</p>
+
+					<pre>
+						
+PyObject *O;
+    if (! PyArg_ParseTuple(args, "O", &amp;O)) return NULL;
+
+					</Pre>
+
+					<P>You don't need to call <tt cLass="monofont">Py_DECREF()</tT> before leaving the module that implements this kind of code because <tt cLASS="monofont">PyArg_ParseTuple()</tt> returns borrowed references, and releasing references that you don't own can cause you severe problems. <tt CLASs="monofont">Py_INCREF</tt> and <tT CLAss="monofont">Py_DECREF</tt> are implemented as macros, so only pass a variable as the argument because the argument is evaluated twice after macro expansion.<A NAMe="idx1073743841"></a><a name="idx1073743842"></a><a name="idx1073743843"></a><a name="idx1073743844"></a></P>
+
+					<p>Python Official Documentation—Reference Counts</p>
+
+					<P><a taRget="_blank" hRef="http://www.python.org/doc/current/api/refcounts.html">http://www.python.org/doc/current/api/refcounts.html</a></P>
+
+					<P>"Debugging Reference Count Problems," by Guido van Rossum</P>
+
+					<P><a tarGET="_blank" Href="http://www.python.org/doc/essays/refcnt.html">http://www.python.org/doc/essays/refcnt.html</a><A NAMe="idx1073743845"></a><a nAME="idx1073743846"></A><a name="idx1073743847"></a><a name="idx1073743848"></a><a name="idx1073743849"></a></p>
+
+				
+				<h4>Building Extensions in C++</H4>
+					<p>Python has a C-based interpreter, and it becomes a bit harder to adjust code to compile it as C++ because Python has some restrictions when it comes to creating extension modules using C++. However, there are some things that you can do in order to reduce your problems. The next hints will help you to link Python to a C++ compiler.</p>
+
+					<P>The problems depend on the C++ compiler that you are using. However the most common ones are discussed in the following paragraphs.</p>
+
+					<p>If the Python interpreter is compiled and liked by a C compiler, you cannot use global or static C++ objects with constructors. Unless you use a C++ compiler. But, you can initialize the globals in the module's init function instead.</p>
+
+					<P>You need to place <a namE="idx1073743850"></a><a nAME="idx1073743851"></A><tt clASS="monofont">extern "C" { … }</Tt>around the Python include files. You need to define the Python API as a C segment to the C++ compiler as well.<a naME="idx1073743852"></A><A name="idx1073743853"></A><A NAme="idx1073743854"></a><a name="idx1073743855"></a><a name="idx1073743856"></a><a name="idx1073743857"></A><a nAme="idx1073743858"></a><A name="idx1073743859"></A><a naME="idx1073743860"></A><A name="idx1073743861"></A><A NAme="idx1073743862"></a><a NAME="idx1073743863"></a><a naME="idx1073743864"></A><A name="idx1073743865"></a><a name="idx1073743866"></a><a name="idx1073743867"></a><a naMe="idx1073743868"></a></P>
+
+					<pre>
+						
+extern "C"{
+#include "&lt;Python.h&gt;"
+}
+
+					</Pre>
+
+					<p>If the header files for Python on your machine already include the <tT claSS="monofont">extern "C" { … }</TT>stuff, adding an extra <tt clASS="monofont">extern "C"</Tt> block will cause an error on most compilers (as the <tt cLASS="monofont">extern "C"</tt> syntax is not valid C).</p>
+
+					<p>Functions that are going to be called by the interpreter (in particular, module initialization functions) have to be declared using <TT CLass="monofont">extern "C".</tt></p>
+
+					<pre>
+						
+extern "C" {
+    DL_EXPORT(void)
+    initmodulename()
+    {
+        Py_InitModule("modulename", modulename_methods);
+    }
+}
+
+					</pre>
+
+					<p>This same declaration could also be written as</p>
+
+					<pre>
+						
+extern "C" DL_EXPORT(void)
+    initmodulename()
+    {
+        Py_InitModule("modulename", modulename_methods);
+
+					</pre>
+
+					<P>You have these same concerns when building a dynamic module. In fact, there are more concerns (for instance, the <tt ClasS="monofont">DL_EXPORT</tt> stuff isn't required if the module is statically linked to the interpreter).</p>
+
+					<p>You can use Python to access many C++ class libraries. You just need to have the right wrapper that provides the necessary access to the libraries.</P>
+
+					<div CLASs="note"><p clASS="notetitle"><B>Tip</b></p><p>
+
+						<p>When embedding Python in your C++ code, it isn't necessary to <A NAMe="idx1073743869"></a><a nAME="idx1073743870"></A><a name="idx1073743871"></a>recompile Python itself using C++. However, if you want to use C++ extension modules, the Python interpreter might have to be compiled with a C++ compiler though recent Linux distributions should work fine without a recompile.</p>
+
+						<p>For more information, check out</p>
+
+						<p>"Binding Python to C++," by Guido van Rossum</p>
+
+						<p><a target="_blank" hRef="http://www.python.org/workshops/1994-11/C++Python.txt">http://www.python.org/workshops/1994-11/C++Python.txt</A><a naMe="idx1073743872"></a><a nAme="idx1073743873"></a><A NAMe="idx1073743874"></a><a nAME="idx1073743875"></A><a namE="idx1073743876"></A><A Name="idx1073743877"></a><A NAMe="idx1073743878"></a><a name="idx1073743879"></a><a name="idx1073743880"></a><a name="idx1073743881"></a><A naMe="idx1073743882"></a><a Name="idx1073743883"></a><A namE="idx1073743884"></A><A Name="idx1073743885"></a><A NAMe="idx1073743886"></a><a nAME="idx1073743887"></A><a namE="idx1073743888"></A><A Name="idx1073743889"></a><a name="idx1073743890"></a></p>
+
+					</p></div>
+<br>
+<br>
+
+				
+			</fOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="120.html" title="The Python/C API"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=121" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="121.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="122.html" title="Compiling and Linking Extension Modules"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743565">embedding Python objects in</a> <a href="#idx1073743581">2nd</a> <a href="#idx1073743610">3rd</a> <a href="#idx1073743633">4th</a> <a href="#idx1073743657">5th</a> <a href="#idx1073743695">6th</a> <a href="#idx1073743711">7th</a> <a href="#idx1073743759">8th</a> <a href="#idx1073743780">9th</a> <a href="#idx1073743804">10th</a> <a href="#idx1073743831">11th</a> <a href="#idx1073743857">12th</a> <a href="#idx1073743877">13th</a><BR>
+ <a href="#idx1073743574">args argument</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743575">args</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743573">self</a><BR>
+ <a href="#idx1073743650">b element</a> <a href="#idx1073743728">2nd</a><BR>
+blocks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extern Ò<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743851">CÓ { É }</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743890">CÓ {É }</a><BR>
+ <a href="#idx1073743822">borrowed references</a><BR>
+building<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743864">extensions, C++</a> <a href="#idx1073743884">2nd</a><BR>
+ <a href="#idx1073743674">c element</a> <a href="#idx1073743736">2nd</a><BR>
+C programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743568">extending and embedding Python</a> <a href="#idx1073743584">2nd</a> <a href="#idx1073743613">3rd</a> <a href="#idx1073743636">4th</a> <a href="#idx1073743660">5th</a> <a href="#idx1073743698">6th</a> <a href="#idx1073743714">7th</a> <a href="#idx1073743762">8th</a> <a href="#idx1073743783">9th</a> <a href="#idx1073743807">10th</a> <a href="#idx1073743834">11th</a> <a href="#idx1073743860">12th</a> <a href="#idx1073743880">13th</a><BR>
+C++ programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743866">building extensions</a> <a href="#idx1073743886">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743570">extending and embedding Python</a> <a href="#idx1073743586">2nd</a> <a href="#idx1073743615">3rd</a> <a href="#idx1073743638">4th</a> <a href="#idx1073743662">5th</a> <a href="#idx1073743700">6th</a> <a href="#idx1073743716">7th</a> <a href="#idx1073743764">8th</a> <a href="#idx1073743785">9th</a> <a href="#idx1073743809">10th</a> <a href="#idx1073743836">11th</a> <a href="#idx1073743862">12th</a> <a href="#idx1073743882">13th</a><BR>
+checking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errors<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743788">extension modules</a> <a href="#idx1073743793">2nd</a><BR>
+ <a href="#idx1073743590">command() function</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743597">implementing extensions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743604">Py_BuildValue(format, Cvar1 [, Cvar2 [, ]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743602">PyArg_ParseTuple</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743599">PyArg_ParseTuple(args, format, arg1 [, arg2 [, ]])</a><BR>
+compiling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743871">Python</a><BR>
+counters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743816">incrementing and decrementing</a> <a href="#idx1073743839">2nd</a> <a href="#idx1073743848">3rd</a><BR>
+counting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;references<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743812">extension modules</a> <a href="#idx1073743846">2nd</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743588">extensions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743868">extensions, C++</a> <a href="#idx1073743888">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743560">Python extension modules</a> <a href="#idx1073743576">2nd</a> <a href="#idx1073743600">3rd</a> <a href="#idx1073743605">4th</a> <a href="#idx1073743628">5th</a> <a href="#idx1073743652">6th</a> <a href="#idx1073743690">7th</a> <a href="#idx1073743706">8th</a> <a href="#idx1073743754">9th</a> <a href="#idx1073743775">10th</a> <a href="#idx1073743799">11th</a> <a href="#idx1073743826">12th</a> <a href="#idx1073743852">13th</a> <a href="#idx1073743872">14th</a><BR>
+ <a href="#idx1073743678">d element</a><BR>
+ <a href="#idx1073743680">D element</a><BR>
+ <a href="#idx1073743740">d element</a><BR>
+deallocating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743813">objects</a><BR>
+declaring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743592">PyObject</a><BR>
+decrementing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743817">counters</a> <a href="#idx1073743840">2nd</a> <a href="#idx1073743849">3rd</a><BR>
+ <a href="#idx1073743626">double variable</a><BR>
+elements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743651">b</a> <a href="#idx1073743729">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743675">c</a> <a href="#idx1073743737">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743679">d</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743681">D</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743741">d</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743677">f</a> <a href="#idx1073743739">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743669">h</a> <a href="#idx1073743731">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743671">i</a> <a href="#idx1073743733">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743673">l</a> <a href="#idx1073743735">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743751">N</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743683">O</a> <a href="#idx1073743743">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743685">O!</a> <a href="#idx1073743745">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743687">O&amp;</a> <a href="#idx1073743747">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743643">s</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743689">S</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743721">s</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743749">S</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743645">s#</a> <a href="#idx1073743723">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743647">z</a> <a href="#idx1073743725">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743649">z#</a> <a href="#idx1073743727">2nd</a><BR>
+embedding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743561">Python objects</a> <a href="#idx1073743577">2nd</a> <a href="#idx1073743606">3rd</a> <a href="#idx1073743629">4th</a> <a href="#idx1073743653">5th</a> <a href="#idx1073743691">6th</a> <a href="#idx1073743707">7th</a> <a href="#idx1073743755">8th</a> <a href="#idx1073743776">9th</a> <a href="#idx1073743800">10th</a> <a href="#idx1073743827">11th</a> <a href="#idx1073743853">12th</a> <a href="#idx1073743873">13th</a><BR>
+error checking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743787">extension modules</a> <a href="#idx1073743792">2nd</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743796">extension modules</a> <a href="#idx1073743798">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743791">raising</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743774">returning NULL values</a><BR>
+extension modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743562">creating</a> <a href="#idx1073743578">2nd</a> <a href="#idx1073743607">3rd</a> <a href="#idx1073743630">4th</a> <a href="#idx1073743654">5th</a> <a href="#idx1073743692">6th</a> <a href="#idx1073743708">7th</a> <a href="#idx1073743756">8th</a> <a href="#idx1073743777">9th</a> <a href="#idx1073743801">10th</a> <a href="#idx1073743828">11th</a> <a href="#idx1073743854">12th</a> <a href="#idx1073743874">13th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743618">importing</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743865">building, C++</a> <a href="#idx1073743885">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743589">creating</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743596">implementing</a><BR>
+extern Ò<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743850">{ É } block</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743889">{É }block</a><BR>
+ <a href="#idx1073743676">f element</a> <a href="#idx1073743738">2nd</a><BR>
+ <a href="#idx1073743624">float variable</a><BR>
+formatting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743640">strings</a> <a href="#idx1073743664">2nd</a> <a href="#idx1073743702">3rd</a> <a href="#idx1073743718">4th</a> <a href="#idx1073743766">5th</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743591">command()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743622">Py_BuildValue()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743752">string elements</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743820">Py_DECREF()</a> <a href="#idx1073743843">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743818">Py_INCREF()</a> <a href="#idx1073743841">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743620">PyArg_ParseTuple()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743666">string elements</a> <a href="#idx1073743704">2nd</a><BR>
+ <a href="#idx1073743668">h element</a> <a href="#idx1073743730">2nd</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743795">extension modules</a> <a href="#idx1073743797">2nd</a><BR>
+ <a href="#idx1073743670">i element</a> <a href="#idx1073743732">2nd</a><BR>
+implementing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743595">extensions</a><BR>
+importing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743617">extension modules</a><BR>
+incrementing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743815">counters</a> <a href="#idx1073743838">2nd</a> <a href="#idx1073743847">3rd</a><BR>
+ <a href="#idx1073743672">l element</a> <a href="#idx1073743734">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743563">creating</a> <a href="#idx1073743579">2nd</a> <a href="#idx1073743608">3rd</a> <a href="#idx1073743631">4th</a> <a href="#idx1073743655">5th</a> <a href="#idx1073743693">6th</a> <a href="#idx1073743709">7th</a> <a href="#idx1073743757">8th</a> <a href="#idx1073743778">9th</a> <a href="#idx1073743802">10th</a> <a href="#idx1073743829">11th</a> <a href="#idx1073743855">12th</a> <a href="#idx1073743875">13th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743619">importing</a><BR>
+ <a href="#idx1073743750">N element</a><BR>
+NULL value<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743768">checking errors, extension modules</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743771">returning without raising exceptions</a><BR>
+ <a href="#idx1073743682">O element</a> <a href="#idx1073743742">2nd</a><BR>
+ <a href="#idx1073743684">O! element</a> <a href="#idx1073743744">2nd</a><BR>
+O&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743686">element</a> <a href="#idx1073743746">2nd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743814">deallocating</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743564">embedding in non-Python applications</a> <a href="#idx1073743580">2nd</a> <a href="#idx1073743609">3rd</a> <a href="#idx1073743632">4th</a> <a href="#idx1073743656">5th</a> <a href="#idx1073743694">6th</a> <a href="#idx1073743710">7th</a> <a href="#idx1073743758">8th</a> <a href="#idx1073743779">9th</a> <a href="#idx1073743803">10th</a> <a href="#idx1073743830">11th</a> <a href="#idx1073743856">12th</a> <a href="#idx1073743876">13th</a><BR>
+ <a href="#idx1073743824">owned references</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743569">extending and embedding Python</a> <a href="#idx1073743585">2nd</a> <a href="#idx1073743614">3rd</a> <a href="#idx1073743637">4th</a> <a href="#idx1073743661">5th</a> <a href="#idx1073743699">6th</a> <a href="#idx1073743715">7th</a> <a href="#idx1073743763">8th</a> <a href="#idx1073743784">9th</a> <a href="#idx1073743808">10th</a> <a href="#idx1073743835">11th</a> <a href="#idx1073743861">12th</a> <a href="#idx1073743881">13th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743867">building extensions</a> <a href="#idx1073743887">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743571">extending and embedding Python</a> <a href="#idx1073743587">2nd</a> <a href="#idx1073743616">3rd</a> <a href="#idx1073743639">4th</a> <a href="#idx1073743663">5th</a> <a href="#idx1073743701">6th</a> <a href="#idx1073743717">7th</a> <a href="#idx1073743765">8th</a> <a href="#idx1073743786">9th</a> <a href="#idx1073743810">10th</a> <a href="#idx1073743837">11th</a> <a href="#idx1073743863">12th</a> <a href="#idx1073743883">13th</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743566">embedding Python objects in</a> <a href="#idx1073743582">2nd</a> <a href="#idx1073743611">3rd</a> <a href="#idx1073743634">4th</a> <a href="#idx1073743658">5th</a> <a href="#idx1073743696">6th</a> <a href="#idx1073743712">7th</a> <a href="#idx1073743760">8th</a> <a href="#idx1073743781">9th</a> <a href="#idx1073743805">10th</a> <a href="#idx1073743832">11th</a> <a href="#idx1073743858">12th</a> <a href="#idx1073743878">13th</a><BR>
+ <a href="#idx1073743623">Py_BuildValue() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743753">string elements</a><BR>
+ <a href="#idx1073743603">Py_BuildValue(format, Cvar1 [, Cvar2 [, ]]) command</a><BR>
+ <a href="#idx1073743821">Py_DECREF() function</a> <a href="#idx1073743844">2nd</a><BR>
+ <a href="#idx1073743819">Py_INCREF() function</a> <a href="#idx1073743842">2nd</a><BR>
+ <a href="#idx1073743601">PyArg_ParseTuple command</a><BR>
+ <a href="#idx1073743621">PyArg_ParseTuple() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743667">string elements</a> <a href="#idx1073743705">2nd</a><BR>
+ <a href="#idx1073743598">PyArg_ParseTuple(args, format, arg1 [, arg2 [, ]]) command</a><BR>
+PyObject<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743594">declaring variables</a><BR>
+Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743870">recompiling</a><BR>
+raising<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743790">exceptions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743773">returning NULL values</a><BR>
+recompiling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743869">Python</a><BR>
+reference counting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743845">extension</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743811">extension modules</a><BR>
+references<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743823">borrowed</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743825">owned</a><BR>
+returning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743770">NULL value without raising exceptions</a><BR>
+ <a href="#idx1073743642">s element</a><BR>
+ <a href="#idx1073743688">S element</a><BR>
+ <a href="#idx1073743720">s element</a><BR>
+ <a href="#idx1073743748">S element</a><BR>
+ <a href="#idx1073743644">s# element</a> <a href="#idx1073743722">2nd</a><BR>
+ <a href="#idx1073743572">self argument</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743567">embedding Python objects in</a> <a href="#idx1073743583">2nd</a> <a href="#idx1073743612">3rd</a> <a href="#idx1073743635">4th</a> <a href="#idx1073743659">5th</a> <a href="#idx1073743697">6th</a> <a href="#idx1073743713">7th</a> <a href="#idx1073743761">8th</a> <a href="#idx1073743782">9th</a> <a href="#idx1073743806">10th</a> <a href="#idx1073743833">11th</a> <a href="#idx1073743859">12th</a> <a href="#idx1073743879">13th</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743641">formatting</a> <a href="#idx1073743665">2nd</a> <a href="#idx1073743703">3rd</a> <a href="#idx1073743719">4th</a> <a href="#idx1073743767">5th</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NULL<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743769">checking errors, extension modules</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743772">returning without raising exceptions</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;declaring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743593">PyObject</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743627">double</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743625">float</a><BR>
+verifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errors<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743789">extension modules</a> <a href="#idx1073743794">2nd</a><BR>
+ <a href="#idx1073743646">z element</a> <a href="#idx1073743724">2nd</a><BR>
+ <a href="#idx1073743648">z# element</a> <a href="#idx1073743726">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

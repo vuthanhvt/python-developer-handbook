@@ -1,0 +1,568 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; DBM (Database Managers) Databases</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="137.html" class="navtitle">8. Working with Databases</a> &gt; <span class="nonavtitle">DBM (Database Managers) Databases</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="140.html" title="Flat Databases"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=141" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="141.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="142.html" title="Object Serialization and Persistent Storage"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A38%3A47+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147044209063089000142000</font><a href="read2.asp?bookname=0672319942&snode=141&now=5%2F31%2F2002+4%3A38%3A47+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			DBM (Database Managers) Databases</h3>
+				<p>Now, let's look at this other mechanism for storing data. The next modules store data in dbm-style format. This format specifies a simple disk-based storage facility that handles data in a way equivalent to dictionaries. The objects are manipulated by using unique key strings. Each of these modules is an interface to a specific library.</p>
+
+				<P>
+					<A NAme="idx1073744865"></a>
+					<a NAME="idx1073744866"></a>
+					<tt cLASS="monofont">dbm,</tt>
+					<a name="idx1073744867"></a>
+					<a name="idx1073744868"></a>
+					<tt clasS="monofont">gdbm,</tt> and <Tt clAss="monofont">dbhash</tt> are database modules that are part of the standard Python distribution.</P>
+
+				<p>Also included with the standard Python distribution is the <a nAME="idx1073744869"></A>
+					<a namE="idx1073744870"></A>
+					<TT clasS="monofont">anydbm</TT> module, which is a generic interface to all the dbm-like modules. It uses the modules that are installed.</P>
+
+				<p>The <a naME="idx1073744871"></A>
+					<A name="idx1073744872"></a>
+					<tt class="monofont">dbhash</tt> module provides a function that offers a dbm-style interface to access the BSD database library.</p>
+
+				<p>All these modules have some behavior in common. For example, to open the files, the following syntax is used by all of them.<a namE="idx1073744873"></a>
+					<a Name="idx1073744874"></A>
+				</p>
+
+				<pre>
+					
+dbhandle = open(<I>filename [, flag [,mode]]</i>)
+
+				</prE>
+
+				<P>Where, <I>filename</I> is the database filename; <i>flag</i> can have one of the following values: <a nAME="idx1073744875"></A>
+					<a namE="idx1073744876"></A>
+					<TT clasS="monofont">r</TT> (read-only access), <A name="idx1073744877"></a>
+					<a name="idx1073744878"></a>
+					<tt class="monofont">w</tt> (read/write access), <A naMe="idx1073744879"></a>
+					<a Name="idx1073744880"></a>
+					<Tt clASS="monofont">c</Tt> (create the database), <a naME="idx1073744881"></A>
+					<A name="idx1073744882"></A>
+					<TT Class="monofont">n</TT> (force the creation of a new database); and <A Name="idx1073744883"></a>
+					<a name="idx1073744884"></a>
+					<i>mode</i> specifies the file access mode (specific for UNIX systems).</p>
+
+				<p>The following operations are supported:</p>
+
+				<pre>
+					
+dbhandle[key] = value    # Set the value of a given key entry
+value = dbhandle[key]    # Get the value of a given key entry
+dbhandle.has_key(key)    # Test whether a key exists
+dbhandle.keys()          # Returns a list of the current keys available
+del dbhandle[key]        # Delete a key
+dbhandle.close()         # Close the file
+
+				</prE>
+
+				<p>For all these dbm-like modules, the keys and the values to be stored must be of type <i>string.</I> Later, you will see a module called <a naMe="idx1073744885"></a>
+					<a nAme="idx1073744886"></a>
+					<TT CLass="monofont">shelve</tT> with a behavior similar to these dbm-like modules. However, it stores persistent objects.</P>
+
+				<P>Each <A name="idx1073744887"></A>
+					<A NAme="idx1073744888"></a>module provides its own exception, which is called <i>
+						<TT CLass="monofont">modulename.</tt>
+					</i>
+					<tt class="monofont">error.</tt>
+				</p>
+
+				<pre>
+					
+&gt;&gt;&gt; import anydbm
+&gt;&gt;&gt; try:
+…        dbhandle = anydbm.open("datafile","r")
+…    except anydbm.error:
+…        print "Error while opening file"
+…
+Error while opening file
+&gt;&gt;&gt;
+
+				</pRe>
+
+				<p>This is a simplified database system based on key/value pairs. Depending on the module and the system, it uses one or two files to store the data (for example, both <A namE="idx1073744889"></a>
+					<a naMe="idx1073744890"></a>
+					<tT CLAss="monofont">gdbm</tt> and <A NAMe="idx1073744891"></a>
+					<a nAME="idx1073744892"></A>
+					<tt clASS="monofont">bsddb</Tt> use a single file).</p>
+
+				<p>The disadvantage of this kind of implementation is that it is not portable. The storage format is specific to a particular hardware platform and operating system. Also, it is not designed for large volumes of data. The smaller the file, the better the performance. This is caused by the original specification, which wanted information to be accessed in a single system call. After some interactions, the data file gets very fragmented, full of data holes, which drives the performance to very low indexes. Of course, they are very efficient when you do lots of reads and almost no writes.<a name="idx1073744893"></a>
+					<a name="idx1073744894"></a>
+				</p>
+
+				<p>If you have a data file but you don't know which database you used to create it, take a look at the <tt cLasS="monofont">whichdb</tt> module.</p>
+
+				<P>The <a namE="idx1073744895"></a>
+					<a nAME="idx1073744896"></A>
+					<tt clASS="monofont">whichdb</Tt> module provides a function that guesses which <tt cLASS="monofont">dbm</tt> module (<tt CLASs="monofont">dbm, gdbm,</tt> or <tt class="monofont">dbhash</tt>) should be used to open a specific database. However, using the <tt class="monofont">anydbm</tT> module should take care of guessing the format for you.</p>
+
+				<p>Another important fact you must know is concerning the storage size limitation of each <A namE="idx1073744897"></a>key/value pair, which is also known as <a naMe="idx1073744898"></a>
+					<i>bucket size.</I> The <TT Class="monofont">dbm</TT> module accepts between 1K and 2K of data. However, both <A Name="idx1073744899"></a>
+					<A NAMe="idx1073744900"></a>
+					<tt CLASs="monofont">gdbm</tt> and <a name="idx1073744901"></a>
+					<a name="idx1073744902"></a>
+					<tt claSs="monofont">bsddb</tT> don't have any limitation at all.</p>
+
+				
+					<h4>
+						<tT clasS="monofont">dbm</tt> Module</h4>
+					<P>The <TT Class="monofont">dbm</TT> module is a database interface that implements a simple UNIX <TT clasS="monofont">dbm</TT> library access method. <Tt claSS="monofont">dbm</TT> objects behave similar to dictionaries in which keys and values must contain string objects. This module allows strings, which can encode any Python object, to be archived in indexed files. <tt class="monofont">dbm</tt> is the original implementation of the DBM toolkit. The main function of this module opens a <tt class="monofont">dbm</tt> database and returns a <tt ClaSs="monofont">dbm</tt> object that behaves similar to a dictionary.</P>
+
+					<pre>
+						
+&gt;&gt;&gt; import dbm
+&gt;&gt;&gt; dbhandle = dbm.open("datafile", "c")
+&gt;&gt;&gt; dbhandle["animal"] = "parrot"
+&gt;&gt;&gt; dbhandle["country"] = "Spain"
+&gt;&gt;&gt; dbhandle.close()
+&gt;&gt;&gt;
+&gt;&gt;&gt; dbhandle = dbm.open("datafile ", "r")
+&gt;&gt;&gt; for key in dbhandle.keys():
+        print dbhandle[key]
+parrot
+Spain
+&gt;&gt;&gt; db.close()
+
+					</pRe>
+
+				
+				
+					<h4>
+						<tT CLAss="monofont">
+							<a nAME="idx1073744903"></A>
+							<a namE="idx1073744904"></A>gdbm</TT> Module</h4>
+					<p>The <tt CLASs="monofont">gdbm</tt> module is similar to the <tt class="monofont">dbm</tt> module. However, their files are incompatible. This module provides a <tt class="monofont">GNU/FSF</tT> reinterpretation of the GNU <tt ClasS="monofont">dbm</tt> library. This module supports multi-user application, it is faster than the <tt ClasS="monofont">dbm</TT> module (the performance gets better when the number of records increases), and it was already ported to a larger number of platforms.<A name="idx1073744905"></A>
+						<A NAme="idx1073744906"></a>
+					</p>
+
+					<P>Check out the GNU Web site for more details:</P>
+
+					<P>
+						<A targET="_blank" HRef="http://www.gnu.org/software/gdbm/gdbm.html">http://www.gnu.org/software/gdbm/gdbm.html</a>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import gdbm
+&gt;&gt;&gt; key = raw_input("key: ")
+&gt;&gt;&gt; data = raw_input("value: ")
+&gt;&gt;&gt; dbhandle = gdbm.open("DATABASE","w")
+&gt;&gt;&gt; while not(dbhandle.has_key(key)):
+…    dbhandle[key]=value
+…    key = raw_input("key: ")
+…    data = raw_input("value: ")
+…
+&gt;&gt;&gt; dbhandle.close()
+
+					</pre>
+
+					<p>The <tt class="monofont">gdbm</tt> module implements the following additional methods:</P>
+
+					<prE>
+						
+dbhandle.firstkey()
+
+					</pre>
+
+					<P>Returns the first key in the database.</p>
+
+					<pre>
+						
+dbhandle.nextkey(key)
+
+					</Pre>
+
+					<p>Returns the next key located after the provided key.</P>
+
+					<PRE>
+						
+dbhandle.reorganize()
+
+					</pre>
+
+					<p>Reorganizes the database by eliminating unused disk space that is created when deletions occur.</P>
+
+					<PRE>
+						
+dbhandle.sync()
+
+					</pre>
+
+					<p>Synchronizes the database file by writing unsaved data to the disk.</P>
+
+					<P>If you append "
+							<I>f</I>
+						" to the <tt clASS="monofont">flag</Tt> clause in the <tt class="monofont">open</tt> statement, Python opens the database in fast mode. This means that data is not automatically saved to disk. You must call the <a name="idx1073744907"></a>
+						<a namE="idx1073744908"></a>
+						<tT claSs="monofont">sync</tt> method in order to <a Name="idx1073744909"></A>
+						<A NAme="idx1073744910"></a>
+						<a NAME="idx1073744911"></a>save all the unwritten information to disk. This is done to improve performance.<a naME="idx1073744912"></A>
+						<A name="idx1073744913"></A>
+						<A NAme="idx1073744914"></a>
+						<a name="idx1073744915"></a>
+					</p>
+
+				
+				
+					<h4>
+						<tt class="monofont">bsddb</tt> Module</H4>
+					<p>The <tT claSs="monofont">bsddb</tt> module is part of the standard Python distribution. In addition to the dictionary-like behavior, this module also supports B-trees (which allows traversing the keys in sorted order), extended linear hashing, and fixed- and variable-length records. Although this module has the more complex implementation, this is the fastest dbm-like module.</p>
+
+					<P>The <tt cLASS="monofont">bsddb</tt> module provides an interface to access routines from the Berkeley <tt CLASs="monofont">db</tt> library, a C library of database access methods copyrighted by Sleepycat Software. This library provides full transactional support, database recovery, online backups, and separate access to locking, logging, and shared-memory caching subsystems.</p>
+
+					<P>More information about the <TT Class="monofont">Berkeley DB package</TT> can be found at <A Target="_blank" href="http://www.sleepycat.com">http://www.sleepycat.com</a>.</p>
+
+					<p>The <tt class="monofont">bsddb</tT> module implements the following <a nAme="idx1073744916"></a>
+						<A name="idx1073744917"></A>
+						<tt cLASS="monofont">open</tt> interfaces:</p>
+
+					<pRE>
+						
+dbhandle = hashopen(<I>filename</I> [, <i>flag</i> [,<i>mode]</i>])
+
+					</PRE>
+
+					<P>Handles hash format files.</p>
+
+					<pre>
+						
+dbhandle = btopen(<I>filename</I> [, <I>flag</I> [,<i>mode</i>]])
+
+					</pre>
+
+					<p>Handles btree format files.</p>
+
+					<pre>
+						
+dbhandle = rnopen(<i>filename</i> [, <i>flag</i> [,<i>mode</i>]])
+
+					</pre>
+
+					<p>Handles record-based files.</P>
+
+					<p>Along with the previous interfaces, this module also provides the following additional methods—these methods are used to move a cursor across the database.</p>
+
+					<Pre>
+						
+cursor = dbhandle.set_location(<i>key</I>)
+
+					</pre>
+
+					<p>Moves the cursor to the location indicated by the <Tt clASS="monofont">key</Tt> and assigns the location's value to the <tt cLASS="monofont">cursor</tt> variable.</p>
+
+					<pRE>
+						
+cursor = dbhandle.first()
+
+					</PRe>
+
+					<p>Moves the cursor to the first element and assigns its value to the <tt CLASs="monofont">cursor</tt> variable.</p>
+
+					<pre>
+						
+cursor = dbhandle.next()
+
+					</pre>
+
+					<p>Moves the cursor to the next element and assigns its value to the <tt class="monofont">cursor</tt> variable.<A naMe="idx1073744918"></a>
+						<a Name="idx1073744919"></a>
+						<A namE="idx1073744920"></A>
+						<A Name="idx1073744921"></a>
+					</P>
+
+					<PRE>
+						
+cursor = dbhandle.previous()
+
+					</pre>
+
+					<p>Sets the cursor to the previous element and assigns its value to the cursor variable.</P>
+
+					<PRE>
+						
+cursor = dbhandle.last()
+
+					</pre>
+
+					<p>Moves the cursor to the last element and assigns its value to the cursor variable.</P>
+
+					<PRE>
+						
+dbhandle.sync()
+
+					</pre>
+
+					<p>Synchronizes the database file by writing unsaved data to the disk.</p>
+
+					<p>These methods are not supported by the <tt class="monofont">hash</tt> format databases.</p>
+
+					<p>Although the standard Python distribution installs the <tt cLasS="monofont">bsddb</tt> module on Windows machines, there is another interesting Win32 port of the <tT clasS="monofont">bsddb</tt> module, which was created by Sam Rushing. For more information, check out <a TARGet="_blank" hrEF="http://www.nightmare.com/software.html">http://www.nightmare.com/software.html</A>
+						<A name="idx1073744922"></A>
+						<A NAme="idx1073744923"></a>.</p>
+
+				
+				
+					<H4>
+						<TT Class="monofont">
+							<a name="idx1073744924"></a>
+							<a name="idx1073744925"></a>dbhash</tt> Module</h4>
+					<p>The <Tt cLass="monofont">dbhash</Tt> module provides a "clean" open interface to the Berkeley DB hash database. Note that the <tt cLass="monofont">bsddb</TT> module must be installed before trying to call <TT clasS="monofont">dbhash</TT> because the <Tt claSS="monofont">bsddb</TT> module is used to open the databases.</p>
+
+					<p>The <a nAME="idx1073744926"></A>
+						<a name="idx1073744927"></a>
+						<a name="idx1073744928"></a>
+						<a name="idx1073744929"></a>syntax to open the hash database is the same as the one used by the other dbm-like modules.</p>
+
+					<pRe>
+						
+dbhandle = open(<i>filename</I> [, <i>flag</i> [,<i>mode]]</I>)
+
+					</pre>
+
+					<p>This module provides the following additional methods:</P>
+
+					<pre>
+						
+dbhandle.first()
+
+					</PRE>
+
+					<P>Returns the first element.</p>
+
+					<pre>
+						
+dbhandle.last()
+
+					</PRE>
+
+					<P>Returns the last element.</p>
+
+					<pre>
+						
+dbhandle.next(<I>key</I>)
+
+					</PRe>
+
+					<p>Returns the next element after the key element.<a nAME="idx1073744930"></A>
+						<a name="idx1073744931"></a>
+						<a name="idx1073744932"></a>
+						<a name="idx1073744933"></a>
+					</p>
+
+					<pRe>
+						
+dbhandle.previous(<i>key</I>)
+
+					</pre>
+
+					<P>Returns the previous element before the key element.</p>
+
+					<pre>
+						
+dbhandle.sync()
+
+					</Pre>
+
+					<p>Synchronizes the database file by writing unsaved data to the disk.</P>
+
+					<P>Let's look at an example:</P>
+
+					<Pre>
+						
+&gt;&gt;&gt; import dbhash
+&gt;&gt;&gt; key = raw_input("key: ")
+&gt;&gt;&gt; data = raw_input("value: ")
+&gt;&gt;&gt; dbhandle = dbhash.open("DATABASE","w")
+&gt;&gt;&gt; while not(dbhandle.has_key(key)):
+… dbhandle[key]=value
+…  key = raw_input("key: ")
+…  data = raw_input("value: ")
+…
+&gt;&gt;&gt; dbhandle.close()
+				
+					</prE>
+
+				
+				
+					<H4>
+						<TT clasS="monofont">
+							<A NAme="idx1073744934"></a>
+							<a NAME="idx1073744935"></a>anydbm</tt> Module</h4>
+					<p>The <tt class="monofont">anydbm</tt> module opens (or creates) a database using the best implementation available. It searches within the available databases using the following order: Berkeley <tt clasS="monofont">bsddb, gdbm,</tt> and <Tt clAss="monofont">dbm.</tt> It only loads the <Tt clASS="monofont">dumbdbm</Tt> module when none of the others are available. Actually, the module doesn't know what database packages are installed and available—it just tries to use them.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; import anydbm
+&gt;&gt;&gt; def opendatabase(filename, flag):
+...    try:
+...        dbhandle = anydbm.open(filename, flag)
+...    except:
+...        raise "Error opening file " + anydbm.error
+...    return dbhandle
+...
+&gt;&gt;&gt; dbhandle = opendatabase("mydata","c")
+
+					</PRE>
+
+				
+				
+					<h4>
+						<tt cLASS="monofont">dumbdbm</tt> Module</h4>
+					<p>The <TT CLass="monofont">dumbdbm</tt> module is a simple, portable, and slow dbm-style database implemented entirely in pure Python. It shouldn't be used for development because it is slow, inefficient, and inconsistent. The only case acceptable for using this module is when no other module is available.<a name="idx1073744936"></a>
+						<a name="idx1073744937"></a>
+						<a naMe="idx1073744938"></a>
+						<A namE="idx1073744939"></a>
+					</p>
+
+				
+				
+					<h4>
+						<tT claSS="monofont">whichdb</TT> Module</h4>
+					<p>The <tt CLASs="monofont">whichdb</tt> module tries to identify which database was used to create a given file. This module implements a function of the same name. The <a NAME="idx1073744940"></a>
+						<a naME="idx1073744941"></A>
+						<A name="idx1073744942"></a>
+						<a name="idx1073744943"></a>syntax is</p>
+
+					<pre>
+						
+dbtype = whichdb(<i>filename</i>)
+
+					</pre>
+
+					<P>This function returns the module name (for example, <tt ClasS="monofont">gdbm</tt>) when the format is identified.</p>
+
+					<p>The function returns an empty string if the format is not identified. Note that databases created using the <Tt clASS="monofont">dumbdbm</Tt> module were <a naME="idx1073744944"></A>
+						<A name="idx1073744945"></A>
+						<A NAme="idx1073744946"></a>not supported by this module prior to Python 2.0.</p>
+
+					<P>The function returns <TT Class="monofont">None</tt> if the file doesn't exist or if it can't be opened.</p>
+
+					<pre>
+						
+import whichdb
+dbtype = whichdb.whichdb("filename")
+
+if dbtype:
+    handler = __import__(result)
+    dbhandle = handler.open("filename","r")
+    print dbhandle.keys()
+if dbtype = "":
+    print "I cannot recognize this file "
+if dbtype = None:
+    print "An error happened while reading this file"
+
+					</pre>
+
+					<div clasS="note"><p cLass="notetitle"><B>Note</b></p><p>
+
+						<p>You shouldn't need to use this module. <Tt clASS="monofont">anydbm</Tt> uses <tt cLASS="monofont">whichdb</tt> to work out what module to use to open a database.<a nAME="idx1073744947"></A>
+							<a namE="idx1073744948"></A>
+							<A Name="idx1073744949"></a>
+							<a name="idx1073744950"></a>
+						</p>
+
+					</p></div>
+<br>
+<br>
+
+				
+			</fOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="140.html" title="Flat Databases"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=141" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="141.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="142.html" title="Object Serialization and Persistent Storage"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073744869">anydbm module</a> <a href="#idx1073744934">2nd</a><BR>
+ <a href="#idx1073744891">bsddb module</a> <a href="#idx1073744901">2nd</a> <a href="#idx1073744920">3rd</a> <a href="#idx1073744922">4th</a><BR>
+ <a href="#idx1073744898">bucket size</a><BR>
+ <a href="#idx1073744879">c value</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744910">saving to disk</a><BR>
+ <a href="#idx1073744874">database managers (DBM) databases</a> <a href="#idx1073744894">2nd</a> <a href="#idx1073744906">3rd</a> <a href="#idx1073744913">4th</a> <a href="#idx1073744919">5th</a> <a href="#idx1073744931">6th</a> <a href="#idx1073744937">7th</a> <a href="#idx1073744948">8th</a><BR>
+databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744873">database managers (DBM)</a> <a href="#idx1073744893">2nd</a> <a href="#idx1073744905">3rd</a> <a href="#idx1073744912">4th</a> <a href="#idx1073744918">5th</a> <a href="#idx1073744930">6th</a> <a href="#idx1073744936">7th</a> <a href="#idx1073744947">8th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744928">opening</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744941">identifying</a><BR>
+ <a href="#idx1073744944">databases:dumbdbm module</a><BR>
+ <a href="#idx1073744871">dbhash module</a> <a href="#idx1073744924">2nd</a> <a href="#idx1073744932">3rd</a><BR>
+ <a href="#idx1073744865">dbm module</a><BR>
+disks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744911">saving data to</a><BR>
+ <a href="#idx1073744938">dumbdbm module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744945">databases</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744887">modules</a><BR>
+finding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744943">databases</a><BR>
+ <a href="#idx1073744867">gdbm module</a> <a href="#idx1073744889">2nd</a> <a href="#idx1073744899">3rd</a> <a href="#idx1073744903">4th</a> <a href="#idx1073744914">5th</a><BR>
+hash databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744929">opening</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744917">open</a><BR>
+key/value pairs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744897">bucket size</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744908">sync</a><BR>
+ <a href="#idx1073744883">mode value</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744870">anydbm</a> <a href="#idx1073744935">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744892">bsddb</a> <a href="#idx1073744902">2nd</a> <a href="#idx1073744921">3rd</a> <a href="#idx1073744923">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744872">dbhash</a> <a href="#idx1073744925">2nd</a> <a href="#idx1073744933">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744866">dbm</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744939">dumbdbm</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744946">databa</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744888">exceptions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744868">gdbm</a> <a href="#idx1073744890">2nd</a> <a href="#idx1073744900">3rd</a> <a href="#idx1073744904">4th</a> <a href="#idx1073744915">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744886">shelve</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744896">whichdb</a> <a href="#idx1073744950">2nd</a><BR>
+ <a href="#idx1073744881">n value</a><BR>
+ <a href="#idx1073744916">open interface</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744927">hash databases</a><BR>
+ <a href="#idx1073744875">r value</a><BR>
+saving<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744909">data to disk</a><BR>
+searching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744942">databases</a><BR>
+ <a href="#idx1073744885">shelve module</a><BR>
+ <a href="#idx1073744907">sync method</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744940">identifying databases</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744926">opening hash databases</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744880">c</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744884">mode</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744882">n</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744876">r</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744878">w</a><BR>
+ <a href="#idx1073744877">w value</a><BR>
+ <a href="#idx1073744895">whichdb module</a> <a href="#idx1073744949">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

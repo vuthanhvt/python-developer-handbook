@@ -1,0 +1,1207 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Networking Concepts</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="161.html" class="navtitle">10. Basic Network Background</a> &gt; <span class="nonavtitle">Networking Concepts</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="163.html" title="Networking"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=164" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="164.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="165.html" title="HTTP"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A41%3A44+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148045048067056107174087</font><a href="read1.asp?bookname=0672319942&snode=164&now=5%2F31%2F2002+4%3A41%3A44+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Networking Concepts</h3>
+				<p>Networking systems are well-defined by the <a NAME="idx1073745634"></a>
+					<a naME="idx1073745635"></A>
+					<I>OSI/ISO</i> (<i>Open Systems Interconnection/ International Standards Organization</i>) seven-layer model, which suggests the following levels of the networking process: physical, data link, network, transport, session, presentation, and application. However, keep in mind that, in practice, protocols span multiple layers, and you shouldn't worry if your application doesn't fit in this model. Most of today's networking stacks (including TCP/IP) use less layers that are not quite as well separated as in the OSI model. Consequently, if you try to map a TCP/IP session onto the <a NAME="idx1073745636"></a>
+					<a name="idx1073745637"></a>
+					<a name="idx1073745638"></a>
+					<a name="idx1073745639"></a>OSI model, you will get a bit confused because some layers are merged, and some others are removed.</p>
+
+				<BloCkquOte>
+<p>
+						<p><B>
+					
+					Physical layer— </b>
+Defines the information necessary to transport data over physical components, such as cables.</p>
+
+					</p>
+<P>
+						<P><B>
+					
+					Data link layer— </B>
+Defines how data is passed to and from the physical components. Point-to-point error correction is usually performed at this layer.</p>
+
+					</p>
+<p>
+						<p><B>
+					
+					Network layer— </B>
+Organizes the network by assigning distinct addresses for its elements, so the information in traffic can be routed to the right computers. The IP protocol works at this layer.</P>
+
+					</P>
+<p>
+						<p><b>
+					
+					Transport layer— </b>
+Packs the data and makes sure that the data transfer between the machines is error-free. TCP and UDP are protocols that implement these responsibilities.</P>
+
+					</P>
+<P>
+						<P><b>
+					
+					Session layer— </b>
+Handles each individual connection (session) made by the machines.</p>
+
+					</p>
+<P>
+						<P><B>
+					
+					Presentation layer— </B>
+Used to overcome differences such as different formats for integers on different platforms. TCP/IP makes this the application's responsibility, and Python has some modules to help with this (for instance, the <tt class="monofont">struct</tt> module).</p>
+
+					</p>
+<p>
+						<p><b>
+					
+					Application layer— </b>
+Implements your final product, your application. FTP clients, SMTP/POP3 mail handlers, and HTTP browsers are examples of complete applications that run over your network.<a name="idx1073745640"></A>
+								<a nAme="idx1073745641"></a>
+								<A name="idx1073745642"></A>
+								<a naME="idx1073745643"></A>
+							</P>
+
+					</p>
+</bloCKQUote>
+				<p>Network connections can be of two types: connection-oriented or connectionless (packet-oriented).</P>
+
+				<P>Let's talk about the pair <A Name="idx1073745644"></a>
+					<A NAMe="idx1073745645"></a>
+					<a name="idx1073745646"></a>
+					<a name="idx1073745647"></a>TCP/IP, which is a packet-oriented implementation. Nowadays, I can't imagine a unique machine that doesn't support it. TCP/IP is the most widely used networking protocol possibly because it is robust and untied to any particular physical medium, and maybe also because the specifications are freely available.</p>
+
+				<p>TCP/IP was originally created by the <a namE="idx1073745648"></a>United States Department of Defense, and soon, this protocol combination became the network of choice for the U.S. government, the Internet, and the universities. This tuple runs on virtually every operating system platform, which makes it strong when internetworking between different LAN environments is required. Today, a great number of commercial and public networks are built on top of this implementation. Although the Internet grew out of the TCP/IP work done at universities and the U.S. Department of Defense, it didn't adopt TCP/IP until part of the way through.</p>
+
+				<P>The network layer of the TCP/IP stack is provided by the <a naMe="idx1073745649"></a>
+					<a nAme="idx1073745650"></a>
+					<A NAMe="idx1073745651"></a>Internet Protocol (commonly known as IP). This protocol provides the basic mechanism for routing packets in the Internet because it sends packets of data back and forth without building an end-to-end connection.<a nAME="idx1073745652"></A>
+					<a namE="idx1073745653"></A>
+					<A Name="idx1073745654"></a>
+					<A NAMe="idx1073745655"></a>
+				</p>
+
+				<p>IP doesn't understand the relationships between packets, and doesn't perform retransmission. (It is not a reliable communication protocol!) Therefore, it requires higher-level protocols such as TCP and UDP to provide a reliable class of service. It does ensure that the IP header is not corrupted though.<a name="idx1073745656"></a>
+					<a name="idx1073745657"></a>
+					<a namE="idx1073745658"></a>
+				</p>
+
+				<P>TCP stands for <i>Transmission Control Protocol,</i> and it is the main form of communication over the Internet because it provides a reliable, session-based service for the delivery of sequenced packets.</p>
+
+				<P>This connection-oriented protocol provides a reliable two-way connection service over a session. Each packet of information exchanged over a session is given a sequence number through which it gets tracked and individually acknowledged. Duplicate packages are detected and discarded by the session services. Sequence numbers are not globally unique or even necessarily unique to the session. Although in a small enough time window, they would be unique to the session.</p>
+
+				<p>The TCP/IP protocol doesn't provide an application interface layer—the application provides the application layer. However, sockets have emerged as TCP/IP's premier peer-to-peer API, providing a way of writing portable networking applications.<a nAme="idx1073745659"></a>
+					<A NAMe="idx1073745660"></a>
+					<a nAME="idx1073745661"></A>
+				</p>
+
+				<p>
+					<a nAME="idx1073745662"></A>
+					<a namE="idx1073745663"></A>
+					<A Name="idx1073745664"></a>UDP, which stands for <i>User Datagram Protocol,</i> is another protocol that provides transport services. This protocol provides an unreliable but fast datagram service. They are unreliable in the sense that they are not acknowledged or tracked through a sequence number. After transmitting the diagram, you have to hope that it gets received. We don't know if the recipient is there, or even if he is expecting a diagram. Some statistics say that about 5% of the diagrams don't make it. That's depressing, isn't it?</p>
+
+				<div class="note"><p clasS="notetitle"><b>Note</b></P><p>
+
+					<p>UDP is useful for streaming media, where a packet that is late is useless, so retransmission is not desirable.</p>
+
+				</P></div>
+<bR>
+<br>
+
+				<p>UDP is a connectionless transport protocol that doesn't guarantee delivery or packet sequence. As an example, UDP is used by the <TT CLass="monofont">ping</tT> command in order to check whether a host is reachable in the network.</P>
+
+				<P>No doubt the UDP protocol is faster than the TCP protocol. The reason is because the TCP protocol spends more time switching information between the machines in order to guarantee that the information gets transferred. That doesn't happen when using UDP, which makes it considerably faster than TCP. Another fact is that while transferring data packets, the TCP protocol waits until all the packets arrive, and organizes them in sequence for the client program. However, the UDP protocol doesn't do that. It allows the client program to decide how the packets should be interpreted because packets aren't received in any specific ordering format. The problem is that this kind of implementation is completely unreliable because there is no way to confirm whether the information has reached its destiny. If you need a stream-oriented protocol, TCP is about as fast as you will get it. If it was such a bad protocol, it would have been replaced by now.<A name="idx1073745665"></A>
+					<A NAme="idx1073745666"></a>
+					<a NAME="idx1073745667"></a>
+				</p>
+
+				
+					<h4>
+				Protocols</h4>
+					<p>The most commonly used application protocols are built on top of TCP/IP infrastructures. Actually, they don't have to know any details about TCP nor about IP because a thin layer called <a name="idx1073745668"></a>
+						<a name="idx1073745669"></a>
+						<tt cLasS="monofont">sockets</tt> exists between TCP/IP and them.<a Name="idx1073745670"></a>
+						<A namE="idx1073745671"></A>
+						<A Name="idx1073745672"></a>
+					</P>
+
+					<P>Python has modules that handle and support the access to all the following protocols. These protocols use the services provided by the sockets in order to transport packets on the network and to make connections to other hosts.</P>
+
+					<Ul>
+<li>
+							<p>HTTP processes Web pages.</P>
+
+						</LI>
+<Li>
+							<p>FTP transfers files between different machines.</p>
+
+						</lI>
+<LI>
+							<P>Gopher browses Gopher servers.</p>
+
+						</li>
+<li>
+							<p>Telnet provides access to another machine.</p>
+
+						</li>
+<li>
+							<p>POP3 reads mail files on POP3 servers.</p>
+
+						</li>
+<li>
+							<p>IMAP reads mail files on IMAP servers.</p>
+
+						</lI>
+<li>
+							<P>NNTP provides access to the Usenet news.</p>
+
+						</li>
+<Li>
+							<p>SMTP sends mail to standard mail servers. <a nAme="idx1073745673"></a>
+							</P>
+
+						</LI>
+</Ul>
+				
+				
+					<h4>
+				
+				Addresses</h4>
+					<p>A <A NAMe="idx1073745674"></a>
+						<a nAME="idx1073745675"></A>socket address, on the TCP/IP internet structure, consists of two parts: an Internet address (commonly known as an IP address) and a port number.</p>
+
+					<p>The <a nAME="idx1073745676"></A>
+						<a name="idx1073745677"></a>IP address defines the addressing and routing of information around the network, uniquely identifying a network interface.</p>
+
+					<p>An IP address is a 32-bit number (a sequence of four bytes), usually represented by four decimal numbers ranging from 0 to 255, separated by dots. A IP address looks something similar to <tt class="monofont">128.85.15.53.</tt>
+					</p>
+
+					<p>Each IP <a NamE="idx1073745678"></a>number must be unique for each TCP/IP network interface card within an administered domain, which in most cases means that each machine connected to the Internet has a unique IP address. Actually, a networked machine can have more Internet addresses than network interfaces. This is quite common in virtual hosting situations.</p>
+
+					<p>A <A name="idx1073745679"></A>port is an entry point to an application/service that resides on a server. It is a number represented by a 16-bit integer. This number can range between 0 and 65535, but you can't freely use all of them inside your programs. Always choose a port number greater than 1024 because the range 0–1023 is reserved by the operation system for some network protocols. Specific ports are shown in <a hrEF="164#3.html">Table 10.1</A>.</P>
+
+					<div cLASS="note"><p claSS="notetitle"><B>Note</B></p><p>
+
+						<p>Ports <tT CLAss="monofont">0-1023</tt> are called <a name="idx1073745680"></a>privileged ports and on most systems only the super user can run applications that use them. If you do not specify a port for one of the end points of your connection, one from the <tt class="monofont">1024-65535</tt> range will be chosen.</p>
+
+					</P></diV>
+<br>
+<bR>
+
+					<a namE="3"></a><p><tABLE bordER="1" CEllspACINg="0" celLPADding="1" width="100%">
+<caption><h5>Table 10.1. Many Server Programs Have Their Own Famous Ports</h5></caPtiOn><coLgrouP aliGN="left" SPan="2">
+<tr VALIgn="top">
+<th>
+<FONT size="2">Port</FONT></th>
+<th>
+<font size="2">Protocol</font></th>
+</tr>
+<Tr vAligN="top">
+<td>
+<foNt siZE="2">20</FOnt></td>
+<TD>
+<FOnt siZE="2">FTP (data)</FOnt></td>
+</TR>
+<TR valign="top">
+<td>
+<font size="2">21</font></Td>
+<tD>
+<fonT size="2">FTP (control)</Font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<foNT SIze="2">23</foNT></TD>
+<td>
+<font size="2">Telnet</font></td>
+</tr>
+<tr ValIgn="top">
+<tD>
+<font Size="2">25</FONT></td>
+<td>
+<FONT size="2">SMTP</FONT></td>
+</tr>
+<TR VAlign="top">
+<td>
+<font size="2">80</font></td>
+<Td>
+<fOnt sIze="2">HTTP</foNt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2">119</font></TD>
+<TD>
+<font size="2">NNTP<a name="idx1073745681"></a>
+										<a name="idx1073745682"></a>
+									</FonT></td>
+</tR>
+</colgRoup>
+</TABLe></p>
+
+					<p>A larger list of ports can be found in the <tT CLAss="monofont">/etc/services</tt> file on UNIX machines or <TT CLass="monofont">c:\windows\services</tT> on Win95/Win98 machines. <A NAme="idx1073745683"></a>
+					</p>
+
+					<p>Most of the time, you don't need to worry about knowing the IP addresses offhand. DNS services provide a translation between IP addresses and hostnames because it is much easier to remind a name than a sequence of numbers. You should know that extra mappings between IP addresses and hostnames can be added in the <tt class="monofont">/etc/hosts</tt> or <tt clasS="monofont">c:\windows\hosts</tt> file.</P>
+
+					<p>The conclusion is that if you need to connect your client program to an application running on a server, you just need to know the server's IP address or hostname, and the port number in which the application is listening.</p>
+
+					<p>Together TCP and IP provide the basic network services for the Internet.<A name="idx1073745684"></A>
+						<a naME="idx1073745685"></A>
+						<A name="idx1073745686"></A>
+						<A NAme="idx1073745687"></a>
+					</p>
+
+				
+				<A NAMe="4"></a>
+					<h4>
+				
+				
+				Sockets</h4>
+					<P>Sockets are objects that provide the current portable standard for network application providers on certain suites of network protocols (such as TCP/IP, ICMP/IP, UDP/IP, and so forth). They allow programs to accept and make connections, such as to send and receive data. It is important that each end of a network communication have a socket object in order to establish the communication channel.</P>
+
+					<P>Sockets were first introduced in 1981 as the UNIX BSD 4.2 generic interface that would provide UNIX-to-UNIX communications over networks. Since that occasion, sockets have become part of the BSD UNIX system kernel, and they have also been adopted on a lot of other UNIX-like Operating Systems, including Linux.</P>
+
+					<p>Support for sockets is also provided, in the form of libraries, on a multiplicity of non-BSD UNIX systems, including MS-DOS, Windows, OS/2, Mac OS, and most mainframe environments. The <a name="idx1073745688"></a>
+						<a name="idx1073745689"></a>
+						<a name="idx1073745690"></a>
+						<a NamE="idx1073745691"></a>
+						<i>Windows socket API,</i> known colloquially as <I>WinSock,</i> is a multivendor specification that has standardized the use of <i>TCP/IP</i> under Windows.</p>
+
+					<P>This library is based on the Berkeley sockets interface as well. Of course, WinSock is not as convenient as a real sockets interface because the socket descriptors can't be passed to the <a naME="idx1073745692"></A>
+						<A name="idx1073745693"></A>
+						<TT Class="monofont">select</TT> function as file descriptors can.</P>
+
+					<P>The reason for all this multi-environment possibility is because sockets are implemented using a standard <i>C-level</i> interface, which makes it easier to implement in other operating systems.</p>
+
+					<p>Each socket has a type that defines the protocol which implements the environment where the socket is used. These types are specified at creation time. The three most popular socket types are: <TT CLass="monofont">stream, datagram,</tt> and <tt class="monofont">raw.</tt>
+						<a name="idx1073745694"></a>
+						<A naMe="idx1073745695"></a>
+						<tT clasS="monofont">stream</tt> and <a NAME="idx1073745696"></a>
+						<a naME="idx1073745697"></A>
+						<Tt claSS="monofont">datagram</TT> sockets can interface directly to the TCP protocol, whereas the <a namE="idx1073745698"></A>
+						<A Name="idx1073745699"></a>
+						<tt class="monofont">raw</tt> sockets interface to the IP protocol. Note, however, that sockets are not limited to TCP/IP. Stream over a <i>PF_INET</i> connection will give TCP, and datagram over <i>PF_INET</i> will give UDP.</p>
+
+					
+						<h5>
+					
+					The <tT clAss="monofont">socket</tT> Module</h5>
+						<p>The <tt ClasS="monofont">socket</TT> module is a very simple object-based interface that provides access to a low-level BSD socket-style network. Both client and server sockets can be implemented using this module.</P>
+
+						<p>This module provides an exception called <tt cLASS="monofont">error,</tt> which is raised every time a socket- or address-related error happens.</p>
+
+						<p>Now we will look at the <A NAMe="idx1073745700"></a>methods that are implemented by this module.</p>
+
+						<bLOCKquote>
+<p>
+								<p>
+										<tt class="monofont">socket(family, type [, protocol])—</tt>
+									 
+    
+									This method creates and returns a new socket object, which is an instance of the <tt clAss="monofont">SocketType</Tt> class.
+								</p>
+
+								<p>The <A name="idx1073745701"></A>
+									<a naME="idx1073745702"></A>
+									<Tt claSS="monofont">family</TT> value can be either <tt clASS="monofont">AF_UNIX</Tt> (for UNIX domain protocols) or <tt cLASS="monofont">AF_INET</tt> (for IPv4 protocols such as TCP and UDP). Note that Python currently doesn't support IPv6, IPX, and other protocols used also.</p>
+
+								<p>The <a name="idx1073745703"></a>
+									<a name="idx1073745704"></a>socket <i>type</i> defines whether the socket is a <tt ClaSs="monofont">stream</tt> socket (<Tt claSs="monofont">SOCK_STREAM,</tt> for the TCP protocol), a <TT CLass="monofont">datagram</tT> socket (<TT Class="monofont">SOCK_DGRAM,</TT> for the UDP protocol), a <TT clasS="monofont">raw</TT> socket (<Tt class="monofont">SOCK_RAW</tt>), or a <i>Sequenced connection-mode</i> (<tt class="monofont">SOCK_SEQPACKET</tt>).<a NamE="idx1073745705"></a>
+									<a nAme="idx1073745706"></a>
+									<a Name="idx1073745707"></A>
+									<A NAme="idx1073745708"></a>
+									<a NAME="idx1073745709"></a>
+									<a naME="idx1073745710"></A>
+								</P>
+
+								<p>The third and optional argument <a naME="idx1073745711"></A>
+									<A name="idx1073745712"></a> (<tt class="monofont">protocol</tt>) is only used along with <tt clasS="monofont">raw</tt> sockets, which are used only with <Tt clAss="monofont">AF_INET</tt> families. This argument is a constant value that identifies the protocol to be used. The default value is <Tt clASS="monofont">0</Tt> for all socket types, and the list of possible values is: <tt cLASS="monofont">IPPROTO_TCP, IPPROTO_UDP, IPPROTO_RAW, IPPROTO_IP,</tt> and <tt CLASs="monofont">IPPROTO_ICMP.</tt> Note that these constant values are returned by the <tT CLAss="monofont">getprotobyname()</tt> function.</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt class="monofont">gethostname()—</tt>
+									 
+    
+									Returns the hostname of the local machine.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<tt ClasS="monofont">gethostbyname(hostname)—</tt>
+									 
+    
+									Converts a <tt ClasS="monofont">hostname</TT> to an IP address.
+								</P>
+
+							</p>
+<p>
+								<p>
+									
+										<tT CLAss="monofont">gethostbyname_ex(hostname)—</tt>
+									 
+    
+									Returns a tuple (hostname, hostname_alias_list, host_ip_list).
+								</P>
+
+							</P>
+<P>
+								<P>
+									
+										<tt clASS="monofont">gethostbyaddr(ipaddress)—</Tt>
+									 
+    
+									Returns a tuple (hostname, hostname_alias_list, host_ip_list).
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt class="monofont">getprotobyname(protocol)—</tt>
+									 
+    
+									Returns a constant value that is equivalent to the <tt clasS="monofont">protocol</tt> name.
+								</P>
+
+							</p>
+<p>
+								<p>
+									
+										<Tt claSs="monofont">getservbyname(service, protocol)—</tt>
+									 
+    
+									Returns the port number associate to the pair service+protocol. The <TT CLass="monofont">protocol</tT> argument must be either <TT Class="monofont">'tcp'</TT> or <TT clasS="monofont">'udp'.</TT>
+										<A name="idx1073745713"></a>
+									
+								</p>
+
+							</p>
+</blockquote>
+						<p>Each <a nAme="idx1073745714"></A>
+							<a naMe="idx1073745715"></a>
+							<a nAme="idx1073745716"></a>
+							<TT CLass="monofont">socket</tT> object has the following methods:</P>
+
+						<BLockqUOTE>
+<p>
+								<p>
+									
+										<tt CLASs="monofont">accept()—</tt>
+									 
+    
+									Accepts a new connection and returns two values: a new socket object to be used while transferring data back and forth, and the address of the socket that this object is talking to.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt class="monofont">bind(hostname, port)—</tt>
+									 
+    
+									Binds the socket to a port address.<a namE="idx1073745717"></a>
+										<a Name="idx1073745718"></A>
+										<a namE="idx1073745719"></a>
+										<a nAME="idx1073745720"></A>
+										<a namE="idx1073745721"></A>
+										<A Name="idx1073745722"></a>
+										<A NAMe="idx1073745723"></a>
+										<a nAME="idx1073745724"></A>
+									
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt class="monofont">close()—</tt>
+									 
+    
+									Closes the socket.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt cLasS="monofont">connect(hostname, port)—</tt>
+									 
+    
+									Connects to another socket, which can be an external socket or a local socket. The hostname for local sockets is <tT clasS="monofont">localhost.</tt>
+									
+								</p>
+
+							</P>
+<P>
+								<P>
+									
+										<Tt claSS="monofont">getpeername()—</TT>
+									 
+    
+									Returns the IP address and the port to which the socket is connected.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<TT CLass="monofont">getsocketname()—</tT>
+									 
+    
+									Returns the IP address and the port of it's own socket.
+								</P>
+
+							</P>
+<P>
+								<p>
+									
+										<tt class="monofont">listen(max_connections)—</tt>
+									 
+    
+									Starts listening to the port, waiting for other sockets to connect. Before it starts refusing connections, the OS queues the maximum number of connections that you inform.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt clasS="monofont">makefile([mode [, buffersize]])—</tt>
+									 
+    
+									Creates a file object that you can use <Tt clAss="monofont">read()</tt> and <Tt clASS="monofont">write()</Tt> on, which is useful for stream-oriented protocols. The arguments <tt cLASS="monofont">mode</tt> and <tt CLASs="monofont">buffersize</tt> have the same meaning as the built-in <tT CLAss="monofont">open()</tt> function.
+								</p>
+
+								<p>The next two functions are normally used for receiving packets on a datagram oriented protocol such as <tt class="monofont">UDP.recv(buffersize)—</tt>Returns the data string received from the socket. <tt claSs="monofont">buffersize</tT> limits the maximum amount of data to be received.</p>
+
+							</p>
+<p>
+								<P>
+									
+										<tt clAss="monofont">recvfrom(buffersize)—</tT>
+									 
+    
+									Returns the data string received from the socket and the IP address that has originated from the socket. <TT Class="monofont">buffersize</TT> limits the maximum amount of data to be received.<A Name="idx1073745725"></a>
+										<A NAMe="idx1073745726"></a>
+										<a nAME="idx1073745727"></A>
+									
+								</p>
+
+							</p>
+</blockquote>
+						<p>The next two <a name="idx1073745728"></a>functions are usually used for sending packets on a datagram oriented protocol such as UDP.</p>
+
+						<BloCkquOte>
+<p>
+								<p>
+									
+										<Tt clASS="monofont">
+											<A name="idx1073745729"></A>
+											<A NAme="idx1073745730"></a>send(string)—</tT>
+									 
+    
+									Sends the data string to the socket.
+								</P>
+
+							</P>
+<P>
+								<p>
+									
+										<tt cLASS="monofont">sendto(string, (hostname, port))—</tt>
+									 
+    
+									Sends the data string to the socket hosted by hostname at the provided port.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt class="monofont">setblocking(flag)—</tt>
+									 
+    
+									Blocks all read and write operations until they can proceed if the flag is set to <tt claSs="monofont">1,</tT> the default value. If you change the value to <tt cLass="monofont">0,</tT> an error exception is raised when those operations cannot proceed.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<TT Class="monofont">shutdown(flag)—</TT>
+									 
+    
+									Shuts down the client sockets if the flag is set to <TT clasS="monofont">0.</TT> If the flag is set to <Tt claSS="monofont">1,</TT> the server sockets are shut down. If the flag is set to <tt class="monofont">2,</tt> both types of sockets are shut down.<a name="idx1073745731"></a>
+										<a name="idx1073745732"></A>
+										<a nAme="idx1073745733"></a>
+										<A name="idx1073745734"></A>
+										<a naME="idx1073745735"></A>
+										<A name="idx1073745736"></A>
+									
+								</P>
+
+							</P>
+</BlockQUOTe>
+						<p>For those that already have Python 2.0 installed, you should know that as a result of some changes in the Python design, you are encouraged to use an extra pair of parenthesis when<a nAME="idx1073745737"></A>
+							<a name="idx1073745738"></a>
+							<a name="idx1073745739"></a> passing tuples as arguments to some functions of the <tt class="monofont">socket</tT> module. Note that some funtions <a nAme="idx1073745740"></a>
+							<A name="idx1073745741"></A>still accept the old interface, but you are encouraged to start using the new model right away, for example, <tt cLASS="monofont">socket.connect( ('hostname', 80) ).</tt> Among the functions that still accept the old interface, we have: <tt CLASs="monofont">socket.connect(), socket.connect_ex(),</tt> and <tT CLAss="monofont">socket.bind().</tt>
+						</P>
+
+						<P>Starting with Python 2.0, it's available <I>OpenSSL</I> support for the<a name="idx1073745742"></a>
+							<a name="idx1073745743"></a>
+							<a name="idx1073745744"></a>
+							<tt ClaSs="monofont">socket</tt> module. That means that from now on you can encrypt the data you send over a socket using this implementation of the <I>Secure Socket Layer.</i> In order to have it properly installed you need to edit the <tt cLass="monofont">Modules/Setup</TT> file to include <I>SSL</I> support before compiling Python. Doing so will add the <tt clASS="monofont">socket.ssl()</Tt> function to your <tt cLASS="monofont">socket</tt> module.</p>
+
+						<p>
+							<B>socket.ssl()</B>
+						</P>
+
+						<P>This function takes a socket<a name="idx1073745745"></a>
+							<a name="idx1073745746"></a>
+							<a name="idx1073745747"></a> object and returns an SSL socket.</p>
+
+						<p>basic syntax: <Tt cLass="monofont">socket.ssl(socket, keyfile, certfile)</Tt>
+						</p>
+
+					
+					
+						<h5>
+					Making Connections</h5>
+						<P>Because we already know that sockets are mostly used for TCP and UDP connections, let's see how to implement those interfaces using Python. Initially, we will check the necessary steps to <a naME="idx1073745748"></A>
+							<A name="idx1073745749"></A>
+							<A NAme="idx1073745750"></a>start a TCP connection.</p>
+
+						<P>The server application needs to</P>
+
+						<OL type="1">
+<LI>
+
+								<P>Create a socket.</P>
+
+							</li>
+<li>
+
+								<p>Bind the socket to an available port.</p>
+
+							</li>
+<li>
+
+								<p>Tell the system to start listening to that port.</p>
+
+							</li>
+<li>
+
+								<p>Query the port for new connections.<a naMe="idx1073745751"></a>
+									<A namE="idx1073745752"></a>
+									<a naMe="idx1073745753"></a>
+								</p>
+
+							</LI>
+</OL>
+
+						<p>After these steps are performed, the TCP client application just needs to</p>
+
+						<ol TYPE="1">
+<li>
+
+								<p>Create a socket.</p>
+
+							</LI>
+<LI>
+
+								<p>Open a connection to the server.</p>
+
+							</li>
+</OL>
+
+						<P>
+							<A name="idx1073745754"></a>When the server receives the client request to establish a connection, it processes the request and sends the response back to the client.</p>
+
+						<pre>
+							
+ 1: # TCP server example
+ 2: import socket
+ 3: svrsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ 4: svrsocket.bind("", 8888)
+ 5: svrsocket.listen(5)
+ 6: while 1:
+ 7:     data_to_send = "This string could be anything"
+ 8:     clisocket, address = svrsocket.accept()
+ 9:     print "I got a connection from ", address
+10:     clisocket.send(data_to_send)
+11:     clisocket.close()
+
+						</pre>
+
+						<p>The first argument in line 3 is the family address protocol. Currently, Python supports only two values: <a name="idx1073745755"></a>
+							<a NamE="idx1073745756"></a> AF_UNIX (for UNIX domain sockets) and <a nAme="idx1073745757"></a>
+							<a Name="idx1073745758"></A>AF_INET (for Internet sockets). If you are using a non-UNIX system, you must use the AF_INET protocol.</P>
+
+						<P>The second argument in line 3 defines the type of connection that must be open. The common choices are <A name="idx1073745759"></A>SOCK_STREAM for stream-based connections (TCP) and <A NAme="idx1073745760"></a>SOCK_DGRAM for datagram-based connection (UDP). Depending on your system, you might also have other options: SOCK_SEQPACKET, SOCK_RAW, SOCK_RDM, SOCK_PACKET (Obsolete).<a NAME="idx1073745761"></a>
+							<a naME="idx1073745762"></A>
+							<A name="idx1073745763"></a>
+							<a name="idx1073745764"></a>
+							<a name="idx1073745765"></a>
+						</p>
+
+						<p>After creating a server socket, you need to <a NamE="idx1073745766"></a>
+							<a nAme="idx1073745767"></a>bind the socket to a port on the local machine (line 4). The socket will listen to this port and process all the requests that come to this port.</p>
+
+						<P>In this example, we are connecting to port 8888. Remember that you should not use port numbers up to 1024 because they are reserved for system services. The 20,000–30,000 range is also prohibited because it is reserved for the <a naME="idx1073745768"></A>
+							<A name="idx1073745769"></A>
+							<I>Remote Procedure Call (RPC)</I> services. Of course you should use these port numbers if you are implementing one of those services.</P>
+
+						<div cLASS="note"><p claSS="notetitle"><B>Tip</B></p><p>
+
+							<p>On <a name="idx1073745770"></a>
+								<a name="idx1073745771"></a>
+								<a name="idx1073745772"></A>UNIX systems, you need to have root privileges to implement services on ports lower than 1024. NT systems implement the same concept where ports lower than 1024 can only be used by system (or root) processes or by programs executed by privileged users.<a nAme="idx1073745773"></a>
+								<A name="idx1073745774"></A>
+							</p>
+
+						</p></dIV>
+<BR>
+<br>
+
+						<p>The <a NAME="idx1073745775"></a>
+							<a naME="idx1073745776"></A>
+							<Tt claSS="monofont">listen()</TT> method (line 5) tells the server to start "listening" to the port, waiting for connections.</p>
+
+						<p>After a client connects to this server, the <a name="idx1073745777"></a>
+							<a name="idx1073745778"></a>
+							<tt clasS="monofont">accept()</tt> method (line 8) is invoked, and a new socket is created. Note that two sockets are involved in the whole process: one to establish the connection, and the other one to manage all the transactions between the client and the server.</P>
+
+						<p>The following example implements the client version of our program:</p>
+
+						<pRe>
+							
+1: # TCP client example
+2: import socket
+3: clisocket = socket.socket(socket.AD_INET, SOCK_STREAM)
+4: clisocket.connect("lessaworld.com", 8888)
+5: data = clisocket.recv(512)
+6: clisocket.close()
+7: print "The data received is ", data
+
+						</pre>
+
+						<P>The <a naME="idx1073745779"></A>
+							<A name="idx1073745780"></A>
+							<TT Class="monofont">socket()</TT> method (line 3) creates a TCP socket that tries to connect to the server/port specified as arguments of the <A Name="idx1073745781"></a>
+							<A NAMe="idx1073745782"></a>
+							<tt class="monofont">connect()</tt> method (line 4).<a name="idx1073745783"></a>
+							<a naMe="idx1073745784"></a>
+							<A namE="idx1073745785"></a>
+							<a naMe="idx1073745786"></a>
+						</p>
+
+						<P>After the connection is set up, the <A NAme="idx1073745787"></a>
+							<a NAME="idx1073745788"></a>
+							<tt cLASS="monofont">recv()</tt> method (line 5) is used to read the data. In this example, we are limiting the maximum number of 512 bytes to be read.<a nAME="idx1073745789"></A>
+							<a name="idx1073745790"></a>
+						</p>
+
+						<p>The next task is to implement the same client/server architecture using the UPD protocol. The steps necessary to <a name="idx1073745791"></a>
+							<a name="idx1073745792"></a>
+							<A naMe="idx1073745793"></a>start a UDP connection are as follows:</p>
+
+						<Ol typE="1">
+<li>
+
+								<p>Create a socket.</P>
+
+							</LI>
+<Li>
+
+								<p>Bind the socket to an available port.</p>
+
+							</lI>
+<LI>
+
+								<P>Query the port for new connections.</p>
+
+							</li>
+</oL>
+
+						<P>After these steps are performed, the UDP client application just needs to</P>
+
+						<Ol typE="1">
+<LI>
+
+								<P>Create a socket.</p>
+
+							</li>
+<li>
+
+								<p>Send a request to the server.</p>
+
+							</li>
+</ol>
+
+						<p>When the server receives the client request to establish a connection, it sends the response back to the client. And that's it. As you know, there is no concept of connection here. The following code example demonstrates an example of how to handle an UDP server.</p>
+
+						<pre>
+							
+1: # UDP server example
+2: import socket
+3: svrsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+4: svrsocket.bind("", 8000)
+5: while 1:
+6:     data, address = svrsocket.recvfrom(256)
+7:     print address[0], "said : ", data
+
+						</pre>
+
+						<p>The <A naMe="idx1073745794"></a>
+							<a Name="idx1073745795"></a>
+							<Tt clASS="monofont">recvfrom()</Tt> method (line 6) is used to read datagrams that are sent to the port, which is informed in line 4. The <tt cLASS="monofont">recvfrom()</tt> method returns two arguments: the actual data and the address of the host that has sent the data.<a nAME="idx1073745796"></A>
+							<a namE="idx1073745797"></A>
+							<A Name="idx1073745798"></a>
+							<a name="idx1073745799"></a>
+						</p>
+
+						<p>The following code example demonstrates an example of how to <a name="idx1073745800"></a>
+							<a nAme="idx1073745801"></A>handle an UDP client.</p>
+
+						<prE>
+							
+ 1: # UDP client example
+ 2: import socket
+ 3: clisocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+ 4: while 1:
+ 5:     data = raw_input("Type something: ")
+ 6:     if data:
+ 7:         clisocket.sendto(data, ("lessaworld.com", 8000))
+ 8:     else:
+ 9:         break
+10: s.close()
+
+						</pre>
+
+						<p>To send data to the server implementation, you need to use the <A namE="idx1073745802"></A>
+							<A Name="idx1073745803"></a>
+							<TT CLass="monofont">sendto()</tT> method (line 7). The first argument is the data you want to send, and the second one is a tuple containing both the hostname and the port number waiting for your connection.</P>
+
+						<P>The UDP implementation doesn't try to set up a connection before starting to send diagrams. When you transmit data using UDP, it's hard to know whether the other machine has received the datagram.</P>
+
+						<p>For more information about sockets, you should consider viewing Gordon McMillan's HOWTO on socket programming at</p>
+
+						<prE>
+							
+<A TArget="_blank" href="http://www.python.org/doc/howto/sockets/">http://www.python.org/doc/howto/sockets/</a>
+						</pre>
+
+						<p>Darrell Gallion's Web site also has some examples that might help you get started with sockets:</p>
+
+						<pre>
+							
+<a taRgeT="_blank" hreF="http://www.dorb.com/darrell/sockets">http://www.dorb.com/darrell/sockets</a>
+						</pre>
+
+					
+					
+						<H5>
+					Asynchronous Sockets</h5>
+						<p>The <a NAME="idx1073745804"></a>
+							<a naME="idx1073745805"></A>
+							<Tt claSS="monofont">asyncore</TT> module provides the basic infrastructure for writing and handling asynchronous socket service clients and servers that are the result of a series of events dispatched by an event loop. This module is used to check what is happening with sockets in the system, and it implements routines to handle each situation. The core of this module is the <tt clASS="monofont">dispatcher</Tt> class.<a name="idx1073745806"></a>
+							<a name="idx1073745807"></a>
+							<a name="idx1073745808"></a>
+							<a NamE="idx1073745809"></a>
+							<a nAme="idx1073745810"></a>
+							<a Name="idx1073745811"></A>
+						</P>
+
+						
+							<H5>
+								<Tt claSS="monofont">dispatcher ([socket])</TT>
+							</h5>
+							<p>This is supposed to be the constructor of the <tt CLASs="monofont">asyncore.dispatcher</tt> class. To use this class, you need to subclass it, and override the method that you want to handle. This class is just a wrapper on top of a <tT CLAss="monofont">socket</tt> object. If the socket argument is omitted, you need to call the <a name="idx1073745812"></a>
+								<a name="idx1073745813"></a>
+								<tt clAss="monofont">create_socket()</Tt> method as shown in the following example:</p>
+
+							<pRe>
+								
+import asyncore
+import socket
+class Dispatcher(asyncore.dispatcher):
+    def handle_write(self):
+        self.send("data")
+        self.close()
+
+class DataServer(asyncore.dispatcher):
+    def __init__(self, port=8888):
+        self.port = port
+        self.create_socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.bind(("", port))
+        self.listen(5)
+    def handle_accept(self):
+        link, address = self.accept()
+        Dispatcher(link)
+dataserverobj = DataServer(8888)
+asyncore.loop
+
+							</pre>
+
+							<P>This example overrides two methods from the <tt cLASS="monofont">dispatcher</tt> class: <a nAME="idx1073745814"></A>
+								<a namE="idx1073745815"></A>
+								<TT clasS="monofont">handle_write()</TT> and <A name="idx1073745816"></a>
+								<a name="idx1073745817"></a>
+								<tt class="monofont">handle_accept().</tt> The first one is called when the socket receives an attempt to be written, and the other one is called when the listening socket receives a connection request.</P>
+
+							<p>The other methods available in this class are as follows:</p>
+
+							<BlocKquotE>
+<p>
+									<p>
+										
+											<tT CLAss="monofont">handle_connect()—</tt>
+										 
+    
+										Called when a connection is set up with success.
+									</P>
+
+								</P>
+<P>
+									<P>
+										
+											<tt clASS="monofont">handle_expt()—</Tt>
+										 
+    
+										Called when a connection fails.
+									</p>
+
+								</p>
+<p>
+									<P>
+										
+											<TT Class="monofont">handle_read()—</tt>
+										 
+    
+										Called when the socket has data available to be read.
+									</p>
+
+								</p>
+<p>
+									<p>
+										
+											<tt class="monofont">handle_close()—</tt>
+										 
+    
+										Called when the connection to the socket is closed or reset.
+									</p>
+
+								</P>
+<p>
+									<p>
+										
+											<Tt clAss="monofont">handle_error(error_type, error_value, traceback)—</tt>
+										 
+    
+										Called whenever one of the other handlers causes a Python error.
+									</P>
+
+								</p>
+<p>
+									<p>
+										
+											<TT CLass="monofont">readable()—</tT>
+										 
+    
+										Returns <TT Class="monofont">1</TT> if the object has data to be read, <TT clasS="monofont">0</TT> if not.
+									</P>
+
+								</p>
+<p>
+									<p>
+										
+											<tt class="monofont">writable()—</tt>
+										 
+    
+										Returns <tt class="monofont">1</tT> if the object wants to write data, <tt ClasS="monofont">0</tt> if not.
+									</p>
+
+								</p>
+</BlocKQUOte>
+							<p>The <tT CLAss="monofont">dispatcher</tt> class also provides methods that have a implementation similar to those available in the <TT CLass="monofont">socket</tT> module. Here is the list: <TT Class="monofont">create_socket</tt> (equivalent to <tt class="monofont">socket</tt>), <tt claSs="monofont">connect, bind, listen, send, recv, accept,</tT> and <tt cLass="monofont">close.</tT>
+								<a naME="idx1073745818"></A>
+								<A name="idx1073745819"></A>
+								<A NAme="idx1073745820"></a>
+								<a NAME="idx1073745821"></a>
+								<a naME="idx1073745822"></A>
+								<A name="idx1073745823"></a>
+								<a name="idx1073745824"></a>
+								<a name="idx1073745825"></a>
+							</p>
+
+							<p>This module also reveals two <a NamE="idx1073745826"></a>functions:</p>
+
+							<bLockqUote>
+<P>
+									<P>
+										
+											<TT clasS="monofont">asyncore.poll([timeout=0 [, exceptions=0]])—</TT>
+										 
+    
+										Pools for events, calling the proper handler functions. If you set the exceptions flag to <Tt claSS="monofont">1,</TT> every exception generated in event handlers will be raised.
+									</p>
+
+								</p>
+<p>
+									<p>
+										
+											<TT CLass="monofont">asyncore.loop([timeout=30])—</tt>
+										 
+    
+										Repeatedly calls <tt class="monofont">asyncore.poll().</tt>
+										
+									</p>
+
+								</p>
+</blocKquOte>
+							<p>You can also check out the <A name="idx1073745827"></A>
+								<i>Asynchronous Sockets Library,</i> by <a NAME="idx1073745828"></a>Sam Rushing, which is used for building asynchronous socket clients and servers:</p>
+
+							<prE>
+								
+<A TArget="_blank" HREF="http://www.nightmare.com/software.html">http://www.nightmare.com/software.html</a>
+							</pre>
+
+							<P>This is a single program that can simultaneously communicate with many other clients and servers, using and implementing multiple protocols running within a single address space on a single thread. Included in the library are sample clients, servers, and demonstrations for several Internet protocols, including HTTP, finger, DNS, POP3, and FTP.<A NAme="idx1073745829"></a>
+								<a name="idx1073745830"></a>
+								<a name="idx1073745831"></a>
+								<a name="idx1073745832"></A>
+								<a nAme="idx1073745833"></a>
+							</P>
+
+						
+					
+					
+						<h5>
+					
+					The <tt cLass="monofont">select</TT> Module</H5>
+						<P>The <tt clASS="monofont">select</Tt> module is used to implement polling and to multiplex processing across multiple I/O streams without using threads or subprocesses. It provides access to the BSD <a naME="idx1073745834"></A>
+							<A name="idx1073745835"></A>
+							<TT Class="monofont">select()</tt> function interface, available in most operating systems. On Windows, this function only works for <tt class="monofont">sockets.</tt> On UNIX, it is used for <tt claSs="monofont">pipes, sockets, files,</tT> or any other stream-compatible objects. Also note that the that <tt cLass="monofont">asyncore</tT> module is built on top of the <tt cLASS="monofont">select</tt> module.</p>
+
+						<p>The <TT CLass="monofont">select</tT> function accepts socket lists as arguments. The following example implements a loop that will keep checking the sockets in order to identify the exact moment when they become readable, writable, or signal an error. (An error is assigned whenever a socket tries to open a connection, and the connection fails. A few other conditions will trigger one of the sockets, not just connect errors.)</P>
+
+						<P>A <A name="idx1073745836"></A>socket becomes readable when it successfully gets a connection after calling the <TT Class="monofont">listener,</tt> or when it receives data. On the other hand, if a connection is set up after a non-blocking call to the <tt class="monofont">connect</tt> method, the socket becomes writable.</p>
+
+						<pre>
+							
+import select
+import socket
+App_Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+App_Socket.bind("", 8888)
+App_Socket.listen(5)
+while 1:
+    readable_sockets = [App_Socket]
+    writable_sockets = []
+    r, w, err = select.select(readable_sockets, writable_sockets, [], 0)
+    if r:
+        client, address = service.accept()
+        client.send("data")
+        client.close()
+					
+						</pRe>
+
+					
+				
+			</fOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="163.html" title="Networking"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=164" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="164.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="165.html" title="HTTP"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+() (parenthesis)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745738">tuples</a><BR>
+ <a href="#idx1073745777">accept() method</a><BR>
+addresses<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745677">IP</a> <a href="#idx1073745687">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745682">networks</a> <a href="#idx1073745685">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745675">socket</a><BR>
+ <a href="#idx1073745757">AF_INET value</a><BR>
+ <a href="#idx1073745755">AF_UNIX value</a><BR>
+application program interfaces (APIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745689">Winsock</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745712">protocol</a><BR>
+ <a href="#idx1073745809">asynchronous sockets</a> <a href="#idx1073745821">2nd</a> <a href="#idx1073745829">3rd</a><BR>
+ <a href="#idx1073745827">Asynchronous Sockets Library</a><BR>
+ <a href="#idx1073745804">asyncore module</a> <a href="#idx1073745810">2nd</a> <a href="#idx1073745824">3rd</a> <a href="#idx1073745832">4th</a><BR>
+binding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745766">sockets</a> <a href="#idx1073745773">2nd</a> <a href="#idx1073745789">3rd</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745823">dispatcher</a> <a href="#idx1073745831">2nd</a><BR>
+clients<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Datagram Protocol (UDP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745801">handling</a><BR>
+ <a href="#idx1073745782">connect() method</a><BR>
+connecting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745764">sockets</a> <a href="#idx1073745786">2nd</a> <a href="#idx1073745799">3rd</a><BR>
+ <a href="#idx1073745812">create_socket method</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745754">sockets</a> <a href="#idx1073745765">2nd</a><BR>
+ <a href="#idx1073745696">datagram sockets</a><BR>
+ <a href="#idx1073745822">dispatcher class</a> <a href="#idx1073745830">2nd</a><BR>
+ <a href="#idx1073745701">family value</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745826">asyncore module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745740">interfaces</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745692">select</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745835">select()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745730">send(string)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745728">sending packets on datagram protocols</a> <a href="#idx1073745736">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;socket.ssl()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745746">syntax</a><BR>
+ <a href="#idx1073745817">handle_accept() method</a><BR>
+ <a href="#idx1073745815">handle_write() method</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clients<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745800">User Datagram Protocol (UDP)</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application program (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745690">Winsock</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745741">functions</a><BR>
+ <a href="#idx1073745650">Internet Protocol (IP)</a> <a href="#idx1073745657">2nd</a><BR>
+ <a href="#idx1073745651">IP (Internet Protocol)</a> <a href="#idx1073745658">2nd</a><BR>
+ <a href="#idx1073745676">IP addresses</a> <a href="#idx1073745686">2nd</a><BR>
+layers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745669">sockets</a><BR>
+ <a href="#idx1073745776">listen() method</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745778">accept()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745781">connect()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745813">create_socket</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745816">handle_accept()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745814">handle_write()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745775">listen()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745787">recv()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745794">recvform()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745802">sendto()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745700">socket module</a> <a href="#idx1073745710">2nd</a> <a href="#idx1073745713">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745714">socket objects</a> <a href="#idx1073745722">2nd</a> <a href="#idx1073745725">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745779">socket()</a><BR>
+models<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745639">Open Systems Interconnection (OSI)</a> <a href="#idx1073745643">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745805">asyncore</a> <a href="#idx1073745811">2nd</a> <a href="#idx1073745825">3rd</a> <a href="#idx1073745833">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745709">socket</a> <a href="#idx1073745721">2nd</a> <a href="#idx1073745735">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745743">OpenSSL support</a><BR>
+networking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745681">addresses</a> <a href="#idx1073745684">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745636">Open Systems Interconnection (OSI) model</a> <a href="#idx1073745640">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745644">protocols</a> <a href="#idx1073745652">2nd</a> <a href="#idx1073745673">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745705">sockets</a> <a href="#idx1073745717">2nd</a> <a href="#idx1073745731">3rd</a> <a href="#idx1073745761">4th</a> <a href="#idx1073745783">5th</a> <a href="#idx1073745796">6th</a> <a href="#idx1073745806">7th</a> <a href="#idx1073745818">8th</a><BR>
+numbers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745678">IP addresses</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745716">socket</a> <a href="#idx1073745724">2nd</a> <a href="#idx1073745727">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745707">sockets</a> <a href="#idx1073745719">2nd</a> <a href="#idx1073745733">3rd</a> <a href="#idx1073745763">4th</a> <a href="#idx1073745785">5th</a> <a href="#idx1073745798">6th</a> <a href="#idx1073745808">7th</a> <a href="#idx1073745820">8th</a><BR>
+ <a href="#idx1073745637">Open Systems Interconnection (OSI) model</a> <a href="#idx1073745641">2nd</a><BR>
+ <a href="#idx1073745635">Open Systems Interconnection/International Standards Organization (OSI/ISO)</a><BR>
+OpenSSL support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745744">socket modules</a><BR>
+ <a href="#idx1073745638">OSI (Open Systems Interconnection) model</a> <a href="#idx1073745642">2nd</a><BR>
+ <a href="#idx1073745634">OSI/ISO (Open Systems Interconnection/International Standards Organization)</a><BR>
+parenthesis ()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745737">tuples</a><BR>
+ <a href="#idx1073745679">port</a><BR>
+ <a href="#idx1073745683">ports</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745767">binding sockets</a> <a href="#idx1073745774">2nd</a> <a href="#idx1073745790">3rd</a><BR>
+ <a href="#idx1073745680">privileged ports</a><BR>
+privileges<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745772">root, UNIX</a><BR>
+ <a href="#idx1073745711">protocol argument</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745649">Internet Protocol (IP)</a> <a href="#idx1073745656">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Transmission Control (TCP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745750">starting connections</a> <a href="#idx1073745753">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745645">Transmission Control Protocol/Internet Protocol (TCP/IP)</a> <a href="#idx1073745653">2nd</a> <a href="#idx1073745659">3rd</a> <a href="#idx1073745670">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Datagram (UDP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745793">starting connections</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745662">User Datagram Protocol (UDP)</a> <a href="#idx1073745665">2nd</a><BR>
+ <a href="#idx1073745698">raw sockets</a><BR>
+ <a href="#idx1073745836">readable sockets</a><BR>
+ <a href="#idx1073745788">recv() method</a><BR>
+ <a href="#idx1073745795">recvform() method</a><BR>
+ <a href="#idx1073745768">Remote Procedure Call (RPC)</a><BR>
+ <a href="#idx1073745771">root privileges, UNIX</a><BR>
+ <a href="#idx1073745769">RPC (Remote Procedure Call)</a><BR>
+ <a href="#idx1073745828">Rushing, Sam</a><BR>
+ <a href="#idx1073745693">select function</a><BR>
+ <a href="#idx1073745834">select() function</a><BR>
+ <a href="#idx1073745729">send(string) function</a><BR>
+ <a href="#idx1073745803">sendto() method</a><BR>
+ <a href="#idx1073745760">SOCK_DGRAM connection</a><BR>
+ <a href="#idx1073745759">SOCK_STREAM connection</a><BR>
+ <a href="#idx1073745674">socket addresses</a><BR>
+ <a href="#idx1073745708">socket module</a> <a href="#idx1073745720">2nd</a> <a href="#idx1073745734">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745742">OpenSSL support</a><BR>
+ <a href="#idx1073745715">socket objects</a> <a href="#idx1073745723">2nd</a> <a href="#idx1073745726">3rd</a><BR>
+ <a href="#idx1073745703">socket type value</a><BR>
+ <a href="#idx1073745780">socket() method</a><BR>
+socket.ssl() function<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745745">syntax</a><BR>
+sockets<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745697">datagram</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745706">networks</a> <a href="#idx1073745718">2nd</a> <a href="#idx1073745732">3rd</a> <a href="#idx1073745762">4th</a> <a href="#idx1073745784">5th</a> <a href="#idx1073745797">6th</a> <a href="#idx1073745807">7th</a> <a href="#idx1073745819">8th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745699">raw</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745695">stream</a><BR>
+ <a href="#idx1073745668">sockets layer</a><BR>
+starting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745748">Transmission Control Protocol (TCP)</a> <a href="#idx1073745751">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745791">User Datagram Protocol (UDP)</a><BR>
+ <a href="#idx1073745694">stream sockets</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745747">socket.ssl()</a><BR>
+ <a href="#idx1073745647">TCP/IP (Transmission Control Protocol/Internet Protocol)</a> <a href="#idx1073745655">2nd</a> <a href="#idx1073745661">3rd</a> <a href="#idx1073745672">4th</a><BR>
+Transmission Control Protocol (TCP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745749">starting connections</a> <a href="#idx1073745752">2nd</a><BR>
+ <a href="#idx1073745646">Transmission Control Protocol/Internet Protocol (TCP/IP)</a> <a href="#idx1073745654">2nd</a> <a href="#idx1073745660">3rd</a> <a href="#idx1073745671">4th</a><BR>
+tuples<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745739">() (parenthesis)</a><BR>
+ <a href="#idx1073745648">U.S. Department of Defense</a><BR>
+ <a href="#idx1073745664">UDP (User Datagram Protocol)</a> <a href="#idx1073745667">2nd</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745770">root privileges</a><BR>
+ <a href="#idx1073745663">User Datagram Protocol (UDP)</a> <a href="#idx1073745666">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745792">starting connections</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745758">AF_INET</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745756">AF_UNIX</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745702">family</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745704">socket type</a><BR>
+ <a href="#idx1073745688">Windows socket application program interface (Winsock)</a><BR>
+ <a href="#idx1073745691">Winsock (Windows socket application program interface)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

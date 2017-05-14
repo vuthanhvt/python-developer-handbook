@@ -1,0 +1,637 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Abstract Objects Layer</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="255.html" class="navtitle">A. Python/C API</a> &gt; <span class="nonavtitle">Abstract Objects Layer</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="262.html" title="Utilities"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=263" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="263.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="264.html" title="Concrete Objects Layer"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A29%3A19+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218073235210198230006105</font><a href="read7.asp?bookname=0672319942&snode=263&now=6%2F1%2F2002+6%3A29%3A19+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Abstract Objects Layer</h3>
+				<p>The functions in this section interact with Python objects regardless of their type, or with wide classes of object types (for example, all numerical types, or all sequence types). When used on object types for which they do not apply, they will raise a Python exception.</p>
+
+				<H4>Object Protocol</H4><PRe>
+						
+int PyObject_Print(PyObject *o, FILE *fp, int flags)
+
+					</pre>
+
+					<P>Prints an object <TT Class="monofont">o,</TT> on file <TT class="monofont">fp.</tt> Returns <tt class="monofont">-1</tt> on error. The flags argument is used to enable certain printing options. The only option currently supported is <tt clAss="monofont">Py_PRINT_RAW</Tt>; if given, the <tt Class="monofont">str()</Tt> of the object is written instead of the <tt CLASs="monofont">repr().</tt></p>
+
+					<PRE>
+						
+int PyObject_HasAttrString(PyObject *o, char *attr_name)
+
+					</Pre>
+
+					<p>Returns <tT CLAss="monofont">1</tt> if <TT CLass="monofont">o</tt> has the attribute <tt class="monofont">attr_name,</tt> and <tt clasS="monofont">0</tt> otherwise. This is equivalent to the Python expression <Tt clAss="monofont">"hasattr(o, attr_name)".</tt> This function always succeeds.</P>
+
+					<pre>
+						
+PyObject* PyObject_GetAttrString(PyObject *o, char *attr_name)
+
+					</PRE>
+
+					<P>Return value: New reference. Retrieves an attribute named <tt clASS="monofont">attr_name</Tt> from object <tt cLASS="monofont">o.</tt> Returns the attribute value on success, or <tt CLASs="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt class="monofont">"o.attr_name".</tt></p>
+
+					<pre>
+						
+int PyObject_HasAttr(PyObject *o, PyObject *attr_name)
+
+					</pre>
+
+					<p>Returns <Tt cLass="monofont">1</Tt> if <tt cLass="monofont">o</TT> has the attribute <TT clasS="monofont">attr_name,</TT> and <Tt claSS="monofont">0</TT> otherwise. This is equivalent to the Python expression <tt clASS="monofont">"hasattr(o, attr_name)".</Tt> This function always succeeds.</p>
+
+					<pre>
+						
+PyObject* PyObject_GetAttr(PyObject *o, PyObject *attr_name)
+
+					</pre>
+
+					<p>Return value: New reference. Retrieves an attribute named <tt class="monofont">attr_name</tt> from object <tt ClaSs="monofont">o.</tt> Returns the attribute value on success, or <Tt claSs="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <TT CLass="monofont">"o.attr_name".</tT></P>
+
+					<PRe>
+						
+int PyObject_SetAttrString(PyObject *o, char *attr_name, PyObject *v)
+
+					</pre>
+
+					<P>Sets the value of the attribute named <TT Class="monofont">attr_name,</TT> for object <TT class="monofont">o,</tt> to the value <tt class="monofont">v.</tt> Returns  <tt clAss="monofont">-1</Tt> on failure. This is the equivalent of the Python statement <tt Class="monofont">"o.attr_name = v".</Tt></p>
+
+					<pRE>
+						
+int PyObject_SetAttr(PyObject *o, PyObject *attr_name, PyObject *v)
+
+					</PRe>
+
+					<p>Sets the value of the attribute named <tt CLASs="monofont">attr_name,</tt> for object <tT CLAss="monofont">o,</tt> to the value <TT CLass="monofont">v.</tt> Returns  <tt class="monofont">-1</tt> on failure. This is the equivalent of the Python statement <tt clasS="monofont">"o.attr_name = v".</tt></P>
+
+					<pre>
+						
+int PyObject_DelAttrString(PyObject *o, char *attr_name)
+
+					</Pre>
+
+					<p>Deletes attribute named <tT claSS="monofont">attr_name,</TT> for object <tt clASS="monofont">o.</Tt> Returns <tt cLASS="monofont">-1</tt> on failure. This is the equivalent of the Python statement <tt CLASs="monofont">"del o.attr_name".</tt></p>
+
+					<pre>
+						
+int PyObject_DelAttr(PyObject *o, PyObject *attr_name)
+
+					</pre>
+
+					<p>Deletes attribute named <tt class="monofont">attr_name,</tt> for object <Tt cLass="monofont">o.</Tt> Returns <tt cLass="monofont">-1</TT> on failure. This is the equivalent of the Python statement <TT clasS="monofont">"del o.attr_name".</TT></P>
+
+					<pre>
+						
+int PyObject_Cmp(PyObject *o1, PyObject *o2, int *result)
+
+					</pRE>
+
+					<P>Compares the values of <Tt claSS="monofont">o1</TT> and <tt class="monofont">o2</tt> using a routine provided by <tt class="monofont">o1,</tt> if one exists, otherwise with a routine provided by <tt ClaSs="monofont">o2.</tt> The result of the comparison is returned in result. Returns <Tt claSs="monofont">-1</tt> on failure. This is the equivalent of the Python statement  <TT CLass="monofont">"result = cmp(o1, o2)".</tT></P>
+
+					<PRe>
+						
+int PyObject_Compare(PyObject *o1, PyObject *o2)
+
+					</pre>
+
+					<P>Compares the values of <TT Class="monofont">o1</TT> and <TT class="monofont">o2</tt> using a routine provided by <tt class="monofont">o1,</tt> if one exists, otherwise with a routine provided by <tt clAss="monofont">o2.</Tt> Returns the result of the comparison on success. On error, the value returned is undefined; uses <tt Class="monofont">PyErr_Occurred()</Tt> to detect an error. This is equivalent to the Python expression <tt CLASs="monofont">"cmp(o1, o2)".</tt></p>
+
+					<PRE>
+						
+PyObject* PyObject_Repr(PyObject *o)
+
+					</Pre>
+
+					<p>Return value: New reference. Computes a string representation of object <tT CLAss="monofont">o.</tt> Returns the string representation on success, or <TT CLass="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt class="monofont">"repr(o)".</tt> Called by the <tt clasS="monofont">repr()</tt> built-in function and by reverse quotes.</P>
+
+					<pre>
+						
+PyObject* PyObject_Str(PyObject *o)
+
+					</Pre>
+
+					<p>Return value: New reference. Computes a string representation of object <tT claSS="monofont">o.</TT> Returns the string representation on success, or <tt clASS="monofont">NULL</Tt> on failure. This is the equivalent of the Python expression <tt cLASS="monofont">"str(o)".</tt> Called by the <tt CLASs="monofont">str()</tt> built-in function and by the print statement.</p>
+
+					<pre>
+						
+int PyCallable_Check(PyObject *o)
+
+					</pre>
+
+					<p>Determines if the object <tt class="monofont">o</tt> is callable. Returns <Tt cLass="monofont">1</Tt> if the object is callable and <tt cLass="monofont">0</TT> otherwise. This function always succeeds.</P>
+
+					<Pre>
+						
+PyObject* PyObject_CallObject(PyObject *callable_object, PyObject *args)
+
+					</prE>
+
+					<P>Return value: New reference. Calls a callable Python object <TT clasS="monofont">callable_object,</TT> with arguments given by the tuple args. If no arguments are needed, args might be <Tt claSS="monofont">NULL.</TT> Returns the result of the call on success, or <tt class="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt class="monofont">"apply(o, args)".</tt></p>
+
+					<pRe>
+						
+PyObject* PyObject_CallFunction(PyObject *callable_object, char
+*format,...)
+
+					</pRe>
+
+					<p>Return value: New reference. Calls a callable Python object <tT clasS="monofont">callable_object,</tt> with a variable number of C arguments. The C arguments are described using a <tT CLAss="monofont">Py_BuildValue()</tt> style format string. The format might be <TT CLass="monofont">NULL,</tT> indicating that no arguments are provided. Returns the result of the call on success, or <TT Class="monofont">NULL</TT> on failure. This is the equivalent of the Python expression <TT class="monofont">"apply(o, args)".</tt></p>
+
+					<pre>
+						
+PyObject* PyObject_CallMethod(PyObject *o, char *m, char *format, ...)
+
+					</pre>
+
+					<p>Return value: New reference. Calls the method named <tt claSs="monofont">m</tT> of object <tt cLass="monofont">o</tT> with a variable number of C arguments. The C arguments are described by a <tt cLASS="monofont">Py_BuildValue()</tt> format string. The format might be <tt CLASs="monofont">NULL,</tt> indicating that no arguments are provided. Returns the result of the call on success, or <tT CLAss="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <TT CLass="monofont">"o.method(args)".</tt> Note that special method names, such as <tt class="monofont">__add__(),</tt>
+						<tt clasS="monofont">__getitem__(),</tt> and so on are not supported. The specific abstract-object routines for these must be used.</P>
+
+					<pre>
+						
+int PyObject_Hash(PyObject *o)
+
+					</Pre>
+
+					<p>Computes and returns the hash value of an object <tT claSS="monofont">o.</TT> On failure, it returns <tt clASS="monofont">-1.</Tt> This is the equivalent of the Python expression <tt cLASS="monofont">"hash(o)".</tt></p>
+
+					<pRE>
+						
+int PyObject_IsTrue(PyObject *o)
+
+					</PRe>
+
+					<p>Returns <tt class="monofont">1</tt> if the object <tt class="monofont">o</tt> is considered to be <Tt cLass="monofont">true,</Tt> and <tt cLass="monofont">0</TT> otherwise. This is equivalent to the Python expression <TT clasS="monofont">"not not o".</TT> This function always succeeds.</P>
+
+					<pre>
+						
+PyObject* PyObject_Type(PyObject *o)
+
+					</pRE>
+
+					<P>Return value: New reference. On success, returns a type object corresponding to the object type of object <Tt claSS="monofont">o.</TT> On failure, it returns <tt class="monofont">NULL.</tt> This is equivalent to the Python expression <tt class="monofont">"type(o)".</tt></p>
+
+					<pRe>
+						
+int PyObject_Length(PyObject *o)
+
+					</pRe>
+
+					<p>Returns the length of object <tT clasS="monofont">o.</tt> If the object <tT CLAss="monofont">o</tt> provides both sequence and mapping protocols, the sequence length is returned. On error, <TT CLass="monofont">-1</tT> is returned. This is the equivalent to the Python expression <TT Class="monofont">"len(o)".</TT></P>
+
+					<Pre>
+						
+PyObject* PyObject_GetItem(PyObject *o, PyObject *key)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the element of <tt class="monofont">o</tt> corresponding to the object key or <tt claSs="monofont">NULL</tT> on failure. This is the equivalent of the Python expression <tt cLass="monofont">"o[key]".</tT></p>
+
+					<prE>
+						
+int PyObject_SetItem(PyObject *o, PyObject *key, PyObject *v)
+
+					</PRE>
+
+					<p>Maps the object key to the value <tt cLASS="monofont">v.</tt> Returns <tt CLASs="monofont">-1</tt> on failure. This is the equivalent of the Python statement <tT CLAss="monofont">"o[key] = v".</tt></p>
+
+					<pre>
+						
+int PyObject_DelItem(PyObject *o, PyObject *key)
+
+					</pre>
+
+					<p>Deletes the mapping for key from <tt class="monofont">o.</tT> Returns <tt ClasS="monofont">-1</tt> on failure. This is the equivalent of the Python statement <tt ClasS="monofont">"del o[key]".</TT><A name="idx1073751004"></A><A NAme="idx1073751005"></a><a NAME="idx1073751006"></a><a naME="idx1073751007"></A></P>
+
+				
+				<h4>Number Protocol</h4><pre>
+						
+int PyNumber_Check(PyObject *o)
+
+					</pre>
+
+					<p>Returns <tt class="monofont">1</tt> if the object <tt ClaSs="monofont">o</tt> provides numeric protocols, and <Tt claSs="monofont">false</tt> otherwise. This function always succeeds.<A NAMe="idx1073751008"></a><a nAME="idx1073751009"></A><a namE="idx1073751010"></A><A Name="idx1073751011"></a><A NAMe="idx1073751012"></a><a name="idx1073751013"></a><a name="idx1073751014"></a><a name="idx1073751015"></a><A naMe="idx1073751016"></a><a Name="idx1073751017"></a><A namE="idx1073751018"></A></P>
+
+					<Pre>
+						
+PyObject* PyNumber_Add(PyObject *o1, PyObject *o2)
+
+					</prE>
+
+					<P>Return value: New reference. Returns the result of adding <TT clasS="monofont">o1</TT> and <Tt claSS="monofont">o2,</TT> or <tt class="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt class="monofont">"o1 + o2".</tt></p>
+
+					<pRe>
+						
+PyObject* PyNumber_Subtract(PyObject *o1, PyObject *o2)
+
+					</pRe>
+
+					<p>Return value: New reference. Returns the result of subtracting <tT clasS="monofont">o2</tt> from <tT CLAss="monofont">o1,</tt> or <TT CLass="monofont">NULL</tT> on failure. This is the equivalent of the Python expression <TT Class="monofont">"o1 - o2".</TT></P>
+
+					<Pre>
+						
+PyObject* PyNumber_Multiply(PyObject *o1, PyObject *o2)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the result of multiplying <tt class="monofont">o1</tt> and <tt claSs="monofont">o2,</tT> or <tt cLass="monofont">NULL</tT> on failure. This is the equivalent of the Python expression <tt cLASS="monofont">"o1 * o2".</tt></p>
+
+					<pRE>
+						
+PyObject* PyNumber_Divide(PyObject *o1, PyObject *o2)
+
+					</PRe>
+
+					<p>Return value: New reference. Returns the result of dividing <tt CLASs="monofont">o1</tt> by <tT CLAss="monofont">o2,</tt> or <tt class="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt class="monofont">"o1 / o2".</Tt></p>
+
+					<Pre>
+						
+PyObject* PyNumber_Remainder(PyObject *o1, PyObject *o2)
+
+					</pRe>
+
+					<p>Return value: New reference. Returns the remainder of dividing <tt ClasS="monofont">o1</TT> by <Tt claSS="monofont">o2,</TT> or <tt clASS="monofont">NULL</Tt> on failure. This is the equivalent of the Python expression <tt cLASS="monofont">"o1 % o2".</tt></p>
+
+					<pre>
+						
+PyObject* PyNumber_Divmod(PyObject *o1, PyObject *o2)
+
+					</pre>
+
+					<p>Return value: New reference. See the built-in function <tt class="monofont">divmod().</tt> Returns <tT clAss="monofont">NULL</tT> on failure. This is the equivalent of the Python expression <tt clAss="monofont">"divmod(o1, o2)".</tT></P>
+
+					<PRe>
+						
+PyObject* PyNumber_Power(PyObject *o1, PyObject *o2, PyObject *o3)
+
+					</pre>
+
+					<P>Return value: New reference. See the built-in function <TT Class="monofont">pow().</TT> Returns <TT clasS="monofont">NULL</TT> on failure. This is the equivalent of the Python expression <Tt class="monofont">"pow(o1, o2, o3)",</tt> where <tt class="monofont">o3</tt> is optional. If <tt cLasS="monofont">o3</tt> is to be ignored, pass <tT clasS="monofont">Py_None</tt> in its place (passing <tT CLAss="monofont">NULL</tt> for <TT CLass="monofont">o3</tT> would cause an illegal memory access).</P>
+
+					<PRe>
+						
+PyObject* PyNumber_Negative(PyObject *o)
+
+					</pre>
+
+					<P>Return value: New reference. Returns the negation of <TT Class="monofont">o</tt> on success, or <tt class="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt claSs="monofont">"-o"</tT><a naMe="idx1073751019"></a><a nAme="idx1073751020"></a><A NAMe="idx1073751021"></a><a nAME="idx1073751022"></A><a namE="idx1073751023"></A><A Name="idx1073751024"></a><A NAMe="idx1073751025"></a><a name="idx1073751026"></a><a name="idx1073751027"></a><a name="idx1073751028"></a><A naMe="idx1073751029"></a></p>
+
+					<Pre>
+						
+PyObject* PyNumber_Positive(PyObject *o)
+
+					</prE>
+
+					<p>Return value: New reference. Returns <tt CLASs="monofont">o</tt> on success, or <tT CLAss="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <TT CLass="monofont">"+o".</tT></P>
+
+					<PRe>
+						
+PyObject* PyNumber_Absolute(PyObject *o)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the absolute value of <tt class="monofont">o,</tt> or <tt clasS="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <Tt clAss="monofont">"abs(o)".</tt></P>
+
+					<pre>
+						
+PyObject* PyNumber_Invert(PyObject *o)
+
+					</PRE>
+
+					<P>Return value: New reference. Returns the bitwise negation of <tt clASS="monofont">o</Tt> on success, or <tt cLASS="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt CLASs="monofont">"~o".</tt></p>
+
+					<pre>
+						
+PyObject* PyNumber_Lshift(PyObject *o1, PyObject *o2)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the result of left shifting <tt class="monofont">o1</tt> by <Tt cLass="monofont">o2</Tt> on success, or <tt cLass="monofont">NULL</TT> on failure. This is the equivalent of the Python expression <TT clasS="monofont">"o1 &lt;&lt; o2".</TT></P>
+
+					<pre>
+						
+PyObject* PyNumber_Rshift(PyObject *o1, PyObject *o2)
+
+					</pRE>
+
+					<P>Return value: New reference. Returns the result of right shifting <Tt claSS="monofont">o1</TT> by <tt class="monofont">o2</tt> on success, or <tt class="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt ClaSs="monofont">"o1 &gt;&gt; o2".</tt></P>
+
+					<pre>
+						
+PyObject* PyNumber_And(PyObject *o1, PyObject *o2)
+
+					</pRe>
+
+					<p>Return value: New reference. Returns the result of "anding"
+						<tT CLAss="monofont">o1</tt> and <TT CLass="monofont">o2</tT> on success and <TT Class="monofont">NULL</TT> on failure. This is the equivalent of the Python expression <TT class="monofont">"o1 and o2".</tt></p>
+
+					<pre>
+						
+PyObject* PyNumber_Xor(PyObject *o1, PyObject *o2)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the bitwise exclusive <tt claSs="monofont">or</tT> of <tt cLass="monofont">o1</tT> by <tt cLASS="monofont">o2</tt> on success, or <tt CLASs="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tT CLAss="monofont">"o1 ^ o2".</tt></P>
+
+					<PRE>
+						
+PyObject* PyNumber_Or(PyObject *o1, PyObject *o2)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the result of <tt class="monofont">o1</tt> and <tt class="monofont">o2</Tt> on success, or <tT claSs="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tT claSS="monofont">"o1 or o2".</TT><a namE="idx1073751030"></A><A Name="idx1073751031"></a><A NAMe="idx1073751032"></a><a nAME="idx1073751033"></A><a name="idx1073751034"></a><a name="idx1073751035"></a><a name="idx1073751036"></a><a nAme="idx1073751037"></A><a naMe="idx1073751038"></a><a nAme="idx1073751039"></a><A NAMe="idx1073751040"></a></p>
+
+					<pRE>
+						
+PyObject* PyNumber_Coerce(PyObject **p1, PyObject **p2)
+
+					</PRe>
+
+					<p>This function takes the addresses of two variables of type <tt CLASs="monofont">PyObject*.</tt> If the objects pointed to by <tT CLAss="monofont">*p1</tt> and <tt class="monofont">*p2</tt> have the same type, increment their reference count and return <tt class="monofont">0</Tt> (success). If the objects can be converted to a common numeric type, replace <tT claSs="monofont">*p1</tt> and <tT claSS="monofont">*p2</TT> by their converted value (with <i>new</i> reference counts), and return <tt CLASs="monofont">0.</tt> If no conversion is possible, or if some other error occurs, return <tT CLAss="monofont">-1</tt> (failure) and don't increment the reference counts. The call <TT CLass="monofont">PyNumber_Coerce(&amp;o1, &amp;o2)</tt> is equivalent to the Python statement <tt class="monofont">"o1, o2 = coerce(o1, o2)".</tt></p>
+
+					<pre>
+						
+PyObject* PyNumber_Int(PyObject *o)
+
+					</prE>
+
+					<p>Return value: New reference. Returns the <tT claSs="monofont">o</tt> converted to an integer object on success, or <tT claSS="monofont">NULL</TT> on failure. This is the equivalent of the Python expression <tt clASS="monofont">"int(o)".</Tt></p>
+
+					<prE>
+						
+PyObject* PyNumber_Long(PyObject *o)
+
+					</PRE>
+
+					<p>Return value: New reference. Returns the <tt cLASS="monofont">o</tt> converted to a long integer object on success, or <tt class="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt class="monofont">"long(o)".</tt></P>
+
+					<prE>
+						
+PyObject* PyNumber_Float(PyObject *o)
+
+					</pre>
+
+					<P>Return value: New reference. Returns the <tt clAss="monofont">o</tT> converted to a float object on success, or <TT Class="monofont">NULL</TT> on failure. This is the equivalent of the Python expression <TT clasS="monofont">"float(o)".</TT><A name="idx1073751041"></A><A NAme="idx1073751042"></a><a name="idx1073751043"></a><a name="idx1073751044"></a></p>
+
+				
+				<h4>Sequence Protocol</h4>
+					<prE>
+						
+int PySequence_Check(PyObject *o)
+
+					</prE>
+
+					<p>Returns <tt Class="monofont">1</Tt> if the object provides sequence protocol, and <tt CLASs="monofont">0</tt> otherwise. This function always succeeds.</p>
+
+					<PRE>
+						
+int PySequence_Length(PyObject *o)
+
+					</Pre>
+
+					<p>Returns the number of objects in sequence; <tT CLAss="monofont">o</tt> on success, and <TT CLass="monofont">-1</tt> on failure. For objects that do not provide sequence protocol, this is equivalent to the Python expression <tt class="monofont">"len(o)".</tt></p>
+
+					<pre>
+						
+PyObject* PySequence_Concat(PyObject *o1, PyObject *o2)
+
+					</prE>
+
+					<p>Return value: New reference. Returns the concatenation of <tT claSs="monofont">o1</tt> and <tT claSS="monofont">o2</TT> on success, and <tt clASS="monofont">NULL</Tt> on failure. This is the equivalent of the Python expression <tt cLASS="monofont">"o1 + o2".</tt><a nAME="idx1073751045"></A><a name="idx1073751046"></a><a name="idx1073751047"></a><a name="idx1073751048"></a><a nAme="idx1073751049"></A><a naMe="idx1073751050"></a><a nAme="idx1073751051"></a><A NAMe="idx1073751052"></a><a nAME="idx1073751053"></A><a namE="idx1073751054"></A><A Name="idx1073751055"></a></P>
+
+					<PRE>
+						
+PyObject* PySequence_Repeat(PyObject *o, int count)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the result of repeating sequence object <tt class="monofont">o</tt> count times, or <tt class="monofont">NULL</Tt> on failure. This is the equivalent of the Python expression <tT claSs="monofont">"o * count".</tt></p>
+
+					<Pre>
+						
+PyObject* PySequence_GetItem(PyObject *o, int i)
+
+					</pRE>
+
+					<P>Return value: New reference. Returns the <Tt claSS="monofont">i</TT>th element of <tt clASS="monofont">o,</Tt> or <tt cLASS="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <tt class="monofont">"o[i]".</tt></p>
+
+					<pre>
+						
+PyObject* PySequence_GetSlice(PyObject *o, int i1, int i2)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the slice of sequence object <tT clAss="monofont">o</tT> between <tt clAss="monofont">i1</tT> and <TT Class="monofont">i2,</TT> or <TT clasS="monofont">NULL</TT> on failure. This is the equivalent of the Python expression <Tt claSS="monofont">"o[i1:i2]".</TT></p>
+
+					<pre>
+						
+int PySequence_SetItem(PyObject *o, int i, PyObject *v)
+
+					</pre>
+
+					<p>Assigns object <tt class="monofont">v</tt> to the <tt cLasS="monofont">i</tt>th element of <tT clasS="monofont">o.</tt> Returns <tT CLAss="monofont">-1</tt> on failure. This is the equivalent of the Python statement <TT CLass="monofont">"o[i] = v".</tT></P>
+
+					<PRe>
+						
+int PySequence_DelItem(PyObject *o, int i)
+
+					</pre>
+
+					<P>Deletes the <TT Class="monofont">i</tt>th element of object <tt class="monofont">v.</tt> Returns <tt claSs="monofont">-1</tT> on failure. This is the equivalent of the Python statement <tt cLass="monofont">"del o[i]".</tT></p>
+
+					<prE>
+						
+int PySequence_SetSlice(PyObject *o, int i1, int i2, PyObject *v)
+
+					</PRE>
+
+					<p>Assigns the sequence object <tt cLASS="monofont">v</tt> to the slice in sequence object <tt CLASs="monofont">o</tt> from <tT CLAss="monofont">i1</tt> to <tt class="monofont">i2.</tt> This is the equivalent of the Python statement <tt class="monofont">"o[i1:i2] = v".</Tt></p>
+
+					<Pre>
+						
+int PySequence_DelSlice(PyObject *o, int i1, int i2)
+
+					</pRe>
+
+					<p>Deletes the slice in sequence object <tt ClasS="monofont">o</TT> from <Tt claSS="monofont">i1</TT> to <tt clASS="monofont">i2.</Tt> Returns <tt cLASS="monofont">-1</tt> on failure. This is the equivalent of the Python statement <tt class="monofont">"del o[i1:i2]".</tt></p>
+
+					<pre>
+						
+PyObject* PySequence_Tuple(PyObject *o)
+
+					</pre>
+
+					<p>Return value: New reference. Returns the <tT clAss="monofont">o</tT> as a tuple on success, and <tt clAss="monofont">NULL</tT> on failure. This is equivalent to the Python expression <TT Class="monofont">"tuple(o)".</TT></P>
+
+					<Pre>
+						
+int PySequence_Count(PyObject *o, PyObject *value)
+
+					</prE>
+
+					<P>Returns the number of occurrences of value in <TT clasS="monofont">o;</TT> that is, returns the number of keys for which <Tt class="monofont">o[key] == value.</tt> On failure, returns <tt class="monofont">-1.</tt> This is equivalent to the Python expression <tt cLasS="monofont">"o.count(value)".</tt></p>
+
+					<Pre>
+						
+int PySequence_Contains(PyObject *o, PyObject *value)
+
+					</prE>
+
+					<p>Determines if <tt CLASs="monofont">o</tt> contains value. If an item in <tT CLAss="monofont">o</tt> is equal to value, returns <TT CLass="monofont">1,</tT> otherwise returns <TT Class="monofont">0.</tt> On error, returns <tt class="monofont">-1.</tt> This is equivalent to the Python expression  <tt claSs="monofont">"value in o".</tT></p>
+
+					<prE>
+						
+int PySequence_Index(PyObject *o, PyObject *value)
+
+					</pre>
+
+					<p>Returns the first index <Tt clASS="monofont">i</Tt> for which <tt cLASS="monofont">o[i] == value.</tt> On error, returns <tt CLASs="monofont">-1.</tt> This is equivalent to the Python expression <tT CLAss="monofont">"o.index(value)".</tt><a name="idx1073751056"></a><a name="idx1073751057"></a><a namE="idx1073751058"></a><a Name="idx1073751059"></A></p>
+
+				
+				<h4>Mapping Protocol</h4>
+					<pRe>
+						
+int PyMapping_Check(PyObject *o)
+
+					</prE>
+
+					<P>Returns <TT clasS="monofont">1</TT> if the object provides mapping protocol, and <Tt claSS="monofont">0</TT> otherwise. This function always succeeds.</p>
+
+					<pre>
+						
+int PyMapping_Length(PyObject *o)
+
+					</PRE>
+
+					<P>Returns the number of keys in object <tt class="monofont">o</tt> on success, and <tt class="monofont">-1</tt> on failure. For objects that do not provide mapping protocol, this is equivalent to the Python expression <tt ClaSs="monofont">"len(o)".</tt></P>
+
+					<pre>
+						
+int PyMapping_DelItemString(PyObject *o, char *key)
+
+					</pRe>
+
+					<p>Removes the mapping for object key from the object <tT CLAss="monofont">o.</tt> Returns <TT CLass="monofont">-1</tT> on failure. This is equivalent to the Python statement <TT Class="monofont">"del o[key]".</TT></P>
+
+					<Pre>
+						
+int PyMapping_DelItem(PyObject *o, PyObject *key)
+
+					</pre>
+
+					<p>Removes the mapping for object key from the object <tt class="monofont">o.</tt> Returns <tt claSs="monofont">-1</tT> on failure. This is equivalent to the Python statement <tt cLass="monofont">"del o[key]".</tT></p>
+
+					<prE>
+						
+int PyMapping_HasKeyString(PyObject *o, char *key)
+
+					</PRE>
+
+					<p>On success, returns <tt cLASS="monofont">1</tt> if the mapping object has the key identified by the <tt CLASs="monofont">key pointer,</tt> and <tT CLAss="monofont">0</tt> otherwise. This is equivalent to the Python expression <tt class="monofont">"o.has_key(key)".</tt> This function always succeeds.</p>
+
+					<pre>
+						
+int PyMapping_HasKey(PyObject *o, PyObject *key)
+
+					</pre>
+
+					<P>Returns <tt ClasS="monofont">1</tt> if the mapping object has the key identified by the <tt ClasS="monofont">key pointer</TT> and <Tt claSS="monofont">0</TT> otherwise. This is equivalent to the Python expression <tt clASS="monofont">"o.has_key(key)".</Tt> This function always succeeds.</p>
+
+					<prE>
+						
+PyObject* PyMapping_Keys(PyObject *o)
+
+					</PRE>
+
+					<p>Return value: New reference. On success, returns a list of the keys in object <tt class="monofont">o.</tt> On failure, returns <tt class="monofont">NULL.</tt> This is equivalent to the Python expression <tT clAss="monofont">"o.keys()".</tT></p>
+
+					<pre>
+						
+PyObject* PyMapping_Values(PyObject *o)
+
+					</Pre>
+
+					<p>Return value: New reference. On success, returns a list of the values in object <TT CLass="monofont">o.</tT> On failure, returns <TT Class="monofont">NULL.</TT> This is equivalent to the Python expression <TT clasS="monofont">"o.values()".</TT></P>
+
+					<pre>
+						
+PyObject* PyMapping_Items(PyObject *o)
+
+					</pre>
+
+					<p>Return value: New reference. On success, returns a list of the items in object <tt class="monofont">o,</tt> where each item is a tuple containing a key-value pair. On failure, returns <tt clAss="monofont">NULL.</Tt> This is equivalent to the Python expression <tt Class="monofont">"o.items()".</Tt></p>
+
+					<pRE>
+						
+PyObject* PyMapping_GetItemString(PyObject *o, char *key)
+
+					</PRe>
+
+					<p>Return value: New reference. Returns element of <tt CLASs="monofont">o</tt> corresponding to the object key or <tT CLAss="monofont">NULL</tt> on failure. This is the equivalent of the Python expression <TT CLass="monofont">"o[key]".</tt></p>
+
+					<pre>
+						
+int PyMapping_SetItemString(PyObject *o, char *key, PyObject *v)
+
+					</pre>
+
+					<p>Maps the object key to the value <tt class="monofont">v</Tt> in object <tT claSs="monofont">o.</tt> Returns <tT claSS="monofont">-1</TT> on failure. This is the equivalent of the Python statement <tt clASS="monofont">"o[key] = v".</Tt><a naME="idx1073751060"></A><A name="idx1073751061"></A><A NAme="idx1073751062"></a><a name="idx1073751063"></a><a name="idx1073751064"></a><a name="idx1073751065"></A><a nAme="idx1073751066"></a><A name="idx1073751067"></A><a naME="idx1073751068"></A><A name="idx1073751069"></A><A NAme="idx1073751070"></a></p>
+
+				
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="262.html" title="Utilities"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=263" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="263.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="264.html" title="Concrete Objects Layer"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073751013">Abstract Objects Layer, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751024">2nd</a> <a href="#idx1073751035">3rd</a> <a href="#idx1073751050">4th</a> <a href="#idx1073751065">5th</a><BR>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751009">Abstract Objects Layer</a> <a href="#idx1073751020">2nd</a> <a href="#idx1073751031">3rd</a> <a href="#idx1073751046">4th</a> <a href="#idx1073751061">5th</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751007">object interactions</a> <a href="#idx1073751018">2nd</a> <a href="#idx1073751029">3rd</a> <a href="#idx1073751040">4th</a> <a href="#idx1073751044">5th</a> <a href="#idx1073751055">6th</a> <a href="#idx1073751059">7th</a> <a href="#idx1073751070">8th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751069">mapping</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751017">number</a> <a href="#idx1073751028">2nd</a> <a href="#idx1073751039">3rd</a> <a href="#idx1073751043">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751006">object</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751054">sequence</a> <a href="#idx1073751058">2nd</a><BR>
+interactions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751012">objects, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751023">2nd</a> <a href="#idx1073751034">3rd</a> <a href="#idx1073751049">4th</a> <a href="#idx1073751064">5th</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751010">Abstract Objects Layer</a> <a href="#idx1073751021">2nd</a> <a href="#idx1073751032">3rd</a> <a href="#idx1073751047">4th</a> <a href="#idx1073751062">5th</a><BR>
+layers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751014">Abstract Objects, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751025">2nd</a> <a href="#idx1073751036">3rd</a> <a href="#idx1073751051">4th</a> <a href="#idx1073751066">5th</a><BR>
+ <a href="#idx1073751067">mapping protocol</a><BR>
+ <a href="#idx1073751015">number protocol</a> <a href="#idx1073751026">2nd</a> <a href="#idx1073751037">3rd</a> <a href="#idx1073751041">4th</a><BR>
+ <a href="#idx1073751004">object protocol</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751011">interactions with, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751022">2nd</a> <a href="#idx1073751033">3rd</a> <a href="#idx1073751048">4th</a> <a href="#idx1073751063">5th</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751068">mapping</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751016">number</a> <a href="#idx1073751027">2nd</a> <a href="#idx1073751038">3rd</a> <a href="#idx1073751042">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751005">object</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751053">sequence</a> <a href="#idx1073751057">2nd</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751008">Abstract Objects Layer</a> <a href="#idx1073751019">2nd</a> <a href="#idx1073751030">3rd</a> <a href="#idx1073751045">4th</a> <a href="#idx1073751060">5th</a><BR>
+ <a href="#idx1073751052">sequence protocol</a> <a href="#idx1073751056">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

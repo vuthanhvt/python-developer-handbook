@@ -1,0 +1,418 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Interpreter</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="227.html" class="navtitle">17. Development Tools</a> &gt; <span class="nonavtitle">Interpreter</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="233.html" title="Generating an Executable Python Bytecode"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=234" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="234.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="235.html" title="Debugging the Application"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A22%3A16+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218066183101016112088125</font><a href="read4.asp?bookname=0672319942&snode=234&now=6%2F1%2F2002+6%3A22%3A16+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Interpreter</h3>
+				<p>After installing Python, some special environment variables can be configured in order to guarantee the maximum usage of the Python environment. The following list shows some important <a NAME="idx1073750177"></a>
+					<a naME="idx1073750178"></A>
+					<A name="idx1073750179"></A>environment variables recognized by the Python interpreter.</P>
+
+				<BLockquote>
+<p>
+						<a name="idx1073750180"></a>
+						<a name="idx1073750181"></A>
+						<p><tT claSs="monofont">PYTHONPATH</tt>— 
+    This variable contains a list of directories used by the interpreter, as search path, when importing modules. The best installation strategy is to put extra Python modules in the <tT claSS="monofont">/lib/python$(ver)/site-packages</TT> subdirectory under the root Python installation, so you can tell between standard Python packages and add-ons. Then you just need to set <tt clASS="monofont">PYTHONPATH </Tt>to your Python search path.</p>
+
+					</p>
+<p>
+						<A NAMe="idx1073750182"></a>
+						<a nAME="idx1073750183"></A>
+						<p><tt class="monofont">PYTHONSTARTUP</tt>— 
+    This variable contains the name of the directory that must have all its files automatically loaded at the time of starting the Python interpreter.</p>
+
+					</p>
+<p>
+						<a name="idx1073750184"></a>
+						<a NamE="idx1073750185"></a>
+						<p><tT clasS="monofont">PATH(or path)</tt>— 
+    This is a system environment variable that contains the directory where the Python interpreter is located.</p>
+
+					</P>
+<P>
+						<A Name="idx1073750186"></a>
+						<A NAMe="idx1073750187"></a>
+						<a nAME="idx1073750188"></A>
+						<a namE="idx1073750189"></A>
+						<P><Tt class="monofont">TCL_LIBRARY, TK_LIBRARY</tt>— 
+    These variables set the names of the directories where we can find the libraries for both the Tcl and Tk systems. You don't need to set these variables unless you move your Tcl or Tk files after building and installing them (the same as for Python).</p>
+
+					</p>
+</blockquote>
+				<P>Each system has a different way to set up these variables. For example, UNIX users running all <i>bourne</i> shell compatible shells, could type</P>
+
+				<pre>
+					
+PYTHONPATH=".:/usr/local/python/lib"
+export PYTHONPATH
+
+				</Pre>
+
+				<p>On the other hand, Windows and DOS users are familiar with the following syntax:</p>
+
+				<Pre>
+					
+set PYTHONPATH=.;c:\ python\ lib
+
+				</pRE>
+
+				<P>The Macintosh people must use the <A name="idx1073750190"></A>
+					<A NAme="idx1073750191"></a>
+					<a NAME="idx1073750192"></a>
+					<a naME="idx1073750193"></A>
+					<A name="idx1073750194"></a>
+					<tt class="monofont">EditPythonPrefs</tt> program that comes along with their version of the Python distribution. Note that this application is also used to set up the values for the command line options that are passed to the interpreter.<a name="idx1073750195"></a>
+					<A naMe="idx1073750196"></a>
+					<a Name="idx1073750197"></a>
+				</P>
+
+				<p>When your system is able to locate the Python installation, you can <a nAME="idx1073750198"></A>
+					<a namE="idx1073750199"></A>call the interpreter by typing the command</P>
+
+				<Pre>
+					
+python
+
+				</prE>
+
+				<P>invoking the interpreter without arguments, connecting the standard input to a tty device, executing commands interactively.</P>
+
+				<Pre>
+					
+python filename
+
+				</prE>
+
+				<P>If you inform a filename, the interpreter tries to read and execute the contents of the file.</P>
+
+				<P>The next line shows the general syntax to <a name="idx1073750200"></a>
+					<a name="idx1073750201"></a>start up the Python interpreter.</p>
+
+				<pre>
+					
+python [options] [-c cmd | filename | -] [file_arguments]
+
+				</pre>
+
+				<p>The <A naMe="idx1073750202"></a>
+					<a Name="idx1073750203"></a>
+					<A namE="idx1073750204"></A>
+					<A Name="idx1073750205"></a>command line options in <A HREf="234#1.html">Table 17.5</a> are available on Windows and UNIX systems.</p>
+
+				<a NAME="1"></a><p><taBLE Border="1" cellspacing="0" cellPadDing="1" Width="100%">
+<CaptION><H5>Table 17.5. Python Interpreter Command Line Options</h5></capTION><colgROUP aligN="left" SPAn="2">
+<tr valign="top">
+<th>
+<font size="2">
+									<b>Option</B>
+								</foNt></th>
+<Th>
+<fonT sizE="2">
+									<B>Description</B>
+								</Font></tH>
+</TR>
+<Tr>
+<td>
+<fONT Size="2">
+									<a NAME="idx1073750206"></a>
+									<tt class="monofont">-d</tt>
+								</font></td>
+<td>
+<foNt sIze="2">Generates parser debugging information.</fOnt></td>
+</Tr>
+<tr>
+<TD>
+<FOnt siZE="2">
+									<A Name="idx1073750207"></a>
+									<TT CLass="monofont">-i</tT>
+								</FONt></td>
+<td>
+<font size="2">Enters interactive mode after program execution.</font></td>
+</tR>
+<tr>
+<Td>
+<foNt sizE="2">
+									<a naME="idx1073750208"></A>
+									<Tt claSS="monofont">-O</TT>
+								</font></TD>
+<TD>
+<font SIZE="2">Sets optimized mode that optimizes bytecompiled files.</font></td>
+</tr>
+<tr>
+<td>
+<font size="2">
+									<A naMe="idx1073750209"></a>
+									<tT clasS="monofont">-OO</tt>
+								</fONT></Td>
+<td>
+<fONT Size="2">Acts like -O, but also strips <i>docstrings</I>.</FONt></td>
+</tR>
+<TR>
+<Td>
+<font size="2">
+									<a name="idx1073750210"></a>
+									<tt claSs="monofont">-S</tT>
+								</fonT></td>
+<td>
+<Font SIZE="2">Prevents inclusion of the site initialization module.</font></TD>
+</TR>
+<tr>
+<td>
+<FONT size="2">
+									<A NAMe="idx1073750211"></a>
+									<tt class="monofont">-t</tt>
+								</font></td>
+<td>
+<fOnt Size="2">Reports warnings about inconsistent tab usage.</Font></tD>
+</tr>
+<tR>
+<TD>
+<Font sIZE="2">
+									<A name="idx1073750212"></A>
+									<TT Class="monofont">-u</TT>
+								</FOnt></td>
+<td>
+<font size="2">Sets unbuffered binary stdout and stdin.</font></td>
+</Tr>
+<tR>
+<td>
+<fOnt siZe="2">
+									<a nAME="idx1073750213"></A>
+									<tt clASS="monofont">-v</Tt>
+								</fonT></TD>
+<Td>
+<fonT SIZe="2">Sets the verbose mode.</font></td>
+</tr>
+<tr>
+<td>
+<font sizE="2">
+									<a nAme="idx1073750214"></a>
+									<Tt claSs="monofont">-x</tt>
+								</FONT></td>
+<td>
+<FONT size="2">Skips the first line of the source program.</FONT></td>
+</tr>
+<TR>
+<TD>
+<font size="2">
+									<a name="idx1073750215"></a>
+									<tt clasS="monofont">-X</tt>
+								</Font></Td>
+<td>
+<fOnt sIZE="2">Disables class-based exceptions. Note that release 2.0 doesn't contain this option anymore—it has been removed. Standard exceptions cannot be strings anymore. They always have to be classes. Also note that since release 2.0 the <Tt claSS="monofont">exceptions</TT> module was converted from Python to a built-in C module.</font></TD>
+</TR>
+<tr>
+<td>
+<FONT size="2">
+									<a name="idx1073750216"></a>
+									<tt class="monofont">-c cmd</tt>
+								</fOnt></Td>
+<td>
+<Font sIze="2">Executes the provided Python command <i>cmd</I>. It's important to use double quotes here because the Python command can contain spaces.</FONt></td>
+</tR>
+<TR>
+<Td>
+<fonT SIZe="2">
+									<a naME="idx1073750217"></A>
+									<Tt class="monofont">-</tt>
+								</font></td>
+<td>
+<font SizE="2">using <tt cLass="monofont">-</tT> as a filename makes the interpreter read from the standard input.<a naME="idx1073750218"></A>
+									<A name="idx1073750219"></A>
+									<A NAme="idx1073750220"></a>
+									<a NAME="idx1073750221"></a>
+								</fonT></TD>
+</Tr>
+</colgroup>
+</table></p>
+
+				<div clAss="note"><P claSs="notetitle"><b>Note</b></p><P>
+
+					<p>Note that Python 2.0 brings the new <tt CLASs="monofont">-U</tt> command line <a NAME="idx1073750222"></a>
+						<a naME="idx1073750223"></A>option to you. This option tells the Python compiler to interpret all 8-bit string literals as Unicode string literals. You should hang on to this one as the support for 8-bit strings might be abandoned in future releases.</P>
+
+				</p></div>
+<BR>
+<BR>
+
+				<p>Whenever you inform the script's filename and additional arguments to the interpreter, that information gets stored in the <a name="idx1073750224"></a>
+					<a name="idx1073750225"></a>
+					<tt class="monofont">sys.argv</Tt> variable, which is a list of strings. To be part of this list, the arguments must appear after the filename or after the <tT claSs="monofont">-.</tt>
+				</p>
+
+				<P>When commands are read from a tty, the interpreter is said to be in <a naME="idx1073750226"></A>
+					<A name="idx1073750227"></A>interactive mode. In this mode, it prompts for the next command with the primary prompt, which is by default three greater than signs (<TT Class="monofont">&gt;&gt;&gt;</TT>); for continuation lines, it prompts with the secondary prompt, which is by default three dots (<TT clasS="monofont">...</TT>). Note that these prompts can be <A name="idx1073750228"></a>
+					<a name="idx1073750229"></a>
+					<a name="idx1073750230"></a>
+					<a naMe="idx1073750231"></a>modified by changing the values of <Tt clAss="monofont">sys.ps1</tt> and <Tt clASS="monofont">sys.ps2</Tt>, respectively. Users might want to modify the default values of these variables by putting these definitions in a file that can be found in a directory in the <a naME="idx1073750232"></A>
+					<A name="idx1073750233"></A>
+					<TT Class="monofont">$PYTHONSTARTUP</TT> directory.</P>
+
+				<P>When you <a name="idx1073750234"></a>
+					<a name="idx1073750235"></a>start the interpreter, a welcome message is printed stating its version number and a copyright notice before printing the first prompt as follows:</p>
+
+				<pre>
+					
+Python 1.5.2 (#0, Apr 13 1999, 10:51:12) [MSC 32 bit (Intel)] on win32
+Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam
+&gt;&gt;&gt;
+
+				</pre>
+
+				<p>If you are using Python on a UNIX system, you can extend its line-editing features by using the GNU readline library. To check whether you have this library installed on your system, just press CONTROL+P on the primary prompt. If the letter P is echoed back to you, it means that you don't have access to the library. Otherwise, you can check the documentation and use all the editing and history features that are provided by the library.</P>
+
+				<p>To <a Name="idx1073750236"></A>
+					<a namE="idx1073750237"></a>
+					<a nAME="idx1073750238"></A>
+					<a namE="idx1073750239"></A>exit the interpreter, you can type an EOF character (Control+D on UNIX, Control+Z on DOS or Windows) at the primary prompt, import the <TT clasS="monofont">sys</TT> module and call the <Tt claSS="monofont">sys.exit()</TT> function, or just raise the <tt class="monofont">SystemExit</tt> exception.</p>
+
+				<p>In order to <a name="idx1073750240"></a>
+					<a naMe="idx1073750241"></a>
+					<A namE="idx1073750242"></a>
+					<a naMe="idx1073750243"></a>
+					<a NAME="idx1073750244"></a>
+					<a naME="idx1073750245"></A>launch the Python applications, you have a different kind of approach, depending on your system. The <A name="idx1073750246"></A>UNIX people need to adjust the shebang in the first line of the Python program to point to the Python interpreter. On <A NAme="idx1073750247"></a>Windows, you can either click on the program icon or use batch files to transport arguments to the script (or to the interpreter). Note that you can also open your files without opening the interpreter; you just need to rename them to <tT CLAss="monofont">.pyw</tt>. This extension is associated with the <tt class="monofont">pythonw.exe</tt> application, which is responsible for executing the script without opening a command window for the interpreter. If you are using a <a name="idx1073750248"></a>Macintosh system, you need to use some special programs that come as part of the Python distribution for Macintoshes. The first one is called <a NamE="idx1073750249"></a>
+					<a nAme="idx1073750250"></a>
+					<a Name="idx1073750251"></A>
+					<A NAme="idx1073750252"></a>
+					<tT CLAss="monofont">BuildApplet.</tt> This program takes your program and generates a file that automatically starts up the interpreter and executes the code, when opened. The other program is called <A NAMe="idx1073750253"></a>
+					<a nAME="idx1073750254"></A>
+					<a name="idx1073750255"></a>
+					<a name="idx1073750256"></a>
+					<tt class="monofont">BuildApplication.</tT> This one takes your program and generates a standalone application that doesn't need a Python installation running behind the scenes. This application is useful for cases in which you want to distribute your Python application to other Macs that don't have Python installed.<a nAme="idx1073750257"></a>
+					<A name="idx1073750258"></A>
+					<a naME="idx1073750259"></A>
+					<A name="idx1073750260"></A>
+					<A NAme="idx1073750261"></a>
+					<a NAME="idx1073750262"></a>
+				</p>
+
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="233.html" title="Generating an Executable Python Bytecode"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=234" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="234.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="235.html" title="Debugging the Application"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073750232">$PYTHONSTARTUP directory</a><BR>
+ <a href="#idx1073750222">-U command line option</a><BR>
+ <a href="#idx1073750217">[nd] option</a><BR>
+ <a href="#idx1073750216">[nd]c cmd option</a><BR>
+ <a href="#idx1073750206">[nd]d option</a><BR>
+ <a href="#idx1073750207">[nd]i option</a><BR>
+ <a href="#idx1073750208">[nd]O option</a><BR>
+ <a href="#idx1073750209">[nd]OO option</a><BR>
+ <a href="#idx1073750210">[nd]S option</a><BR>
+ <a href="#idx1073750211">[nd]t option</a><BR>
+ <a href="#idx1073750212">[nd]u option</a><BR>
+ <a href="#idx1073750213">[nd]v option</a><BR>
+ <a href="#idx1073750214">[nd]x option</a><BR>
+ <a href="#idx1073750215">[nd]X option</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750250">BuildApplet</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750254">BuildApplication</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750192">EditPythonPrefs</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750243">launching</a> <a href="#idx1073750260">2nd</a><BR>
+ <a href="#idx1073750249">BuildApplet</a><BR>
+ <a href="#idx1073750253">BuildApplication</a><BR>
+calling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750198">interpreters</a><BR>
+changing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750228">prompts</a><BR>
+closing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750236">interpreters</a><BR>
+command line options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750223">-U</a><BR>
+command-line options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750202">interpreters, Windows and UNIX</a> <a href="#idx1073750218">2nd</a><BR>
+directories<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750233">$PYTHONSTARTUP</a><BR>
+editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750231">prompts</a><BR>
+ <a href="#idx1073750191">EditPythonPrefs</a><BR>
+environment variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750177">recognized by interpreters</a> <a href="#idx1073750195">2nd</a><BR>
+exiting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750237">interpreters</a><BR>
+ <a href="#idx1073750226">interactive mode</a><BR>
+interpreters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750199">calling</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750239">closing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750179">environment variables recognized by</a> <a href="#idx1073750197">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750201">starting</a> <a href="#idx1073750235">2nd</a><BR>
+launching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750240">applications</a> <a href="#idx1073750257">2nd</a><BR>
+Macintosh<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750248">launching Python applications</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750190">setting up environment variables</a><BR>
+modes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750227">interactive</a><BR>
+modifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750230">prompts</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750241">applications</a> <a href="#idx1073750258">2nd</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command-line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750203">interpreters, Windows and UNIX</a> <a href="#idx1073750219">2nd</a><BR>
+ <a href="#idx1073750184">PATH variable</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750252">BuildApplet</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750256">BuildApplication</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750193">EditPythonPrefs</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750245">launching</a> <a href="#idx1073750262">2nd</a><BR>
+prompts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750229">changing</a><BR>
+ <a href="#idx1073750180">PYTHONPATH variable</a><BR>
+ <a href="#idx1073750182">PYTHONSTARTUP variable</a><BR>
+quitting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750238">interpreters</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750251">BuildApplet</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750255">BuildApplication</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750194">EditPythonPrefs</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750244">launching</a> <a href="#idx1073750261">2nd</a><BR>
+starting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750242">applications</a> <a href="#idx1073750259">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750200">interpreters</a> <a href="#idx1073750234">2nd</a><BR>
+ <a href="#idx1073750224">sys.argv variable</a><BR>
+ <a href="#idx1073750186">TCL_LIBRARY variable</a><BR>
+ <a href="#idx1073750188">TK_LIBRARY variable</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750205">command-line options, interpreters</a> <a href="#idx1073750221">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750246">launching Python applications</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;environment<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750178">recognized by interpreters</a> <a href="#idx1073750196">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750185">PATH</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750181">PYTHONPATH</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750183">PYTHONSTARTUP</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750225">sys.argv</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750187">TCL_LIBRARY</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750189">TK_LIBRARY</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750204">command-line options, interpreters</a> <a href="#idx1073750220">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750247">launching Python applications</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

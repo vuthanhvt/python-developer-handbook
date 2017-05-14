@@ -1,0 +1,208 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Catching Exceptions</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="91.html" class="navtitle">4. Exception Handling</a> &gt; <span class="nonavtitle">Catching Exceptions</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="95.html" title="Raising Exceptions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=96" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="96.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="97.html" title="try/finally "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A32%3A06+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147038000012206233109254</font><a href="read6.asp?bookname=0672319942&snode=96&now=5%2F31%2F2002+4%3A32%3A06+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Catching Exceptions</h3>
+				<p>Look at an example that shows how to catch a specific exception message.</p>
+
+				<PRE>
+					
+ 1: &gt;&gt;&gt; def zerodivision(x):
+ 2: …       return 1/x
+ 3: …
+ 4: &gt;&gt;&gt; def test(x):
+ 5: …       try:
+ 6: …           print zerodivision(x)
+ 7: …       except ZeroDivisionError:
+ 8: …           print "You can not divide this number by Zero"
+ 9: …
+10: test(0)
+
+				</Pre>
+
+				<p>In line 7, we are specifying the exact exception type that we want to catch.</p>
+
+				<P>You can also replace lines 7 and 8 from the previous example with the text from the next snippet. The difference is that this new scenario also shows the error message provided by the interpreter.</P>
+
+				<PRe>
+					
+except ZeroDivisionError, error_message:
+    print "You can't divide this number by Zero - ", error_message
+
+				</pre>
+
+				<P>Besides catching Python standard exceptions, it is also possible to catch user-defined, <I>non-Error</I> exceptions.</P>
+
+				<pre>
+					
+&gt;&gt;&gt; found = "Item found"
+&gt;&gt;&gt; def searcher(arg):
+…       if arg == 1:
+…           print "executing the routine."
+…       else:
+…           raise found
+…
+&gt;&gt;&gt; try:
+…       searcher()
+&gt;&gt;&gt; except found:
+…       print "The routine has failed."
+… else:
+…       print "The routine was successfully concluded"
+
+				</pre>
+
+				<p>The next example re-raises an exception because the <tt class="monofont">win32pipe</tt> module is not present in the system.<a namE="idx1073743192"></a><a Name="idx1073743193"></A></p>
+
+				<pre>
+					
+&gt;&gt;&gt; try:
+…       import win32pipe
+…   except:
+…       raise ImportError, "The module is not available"
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 4, in ?
+ImportError: The module is not available
+
+				</Pre>
+
+				<p>The next example actually shows how to raise the same exception (provided the exception is a class exception). This type of implementation doesn't require you to know the name of the exception being raised.</P>
+
+				<PRE>
+					
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; try:
+…       import win32pipe
+…   except:
+…       raise sys.exc_value
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 4, in ?
+ImportError: No module named win32pipe
+
+				</pre>
+
+				<p>The following code catches an <TT CLass="monofont">IOError</tT> exception and raises a <TT Class="monofont">SystemExit</TT> exception by using the <TT class="monofont">sys.exit()</tt> function.</p>
+
+				<pre>
+					
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; try:
+…       file = open("file.txt")
+…   except IOError:
+…       print "Error opening file for reading"
+…       sys.exit(0)
+
+				</pre>
+
+				<h4>Catching Standard Errors</h4>
+					<p>The <a naMe="idx1073743194"></a><A namE="idx1073743195"></a><tt cLass="monofont">errno</TT> module makes available the standard <TT clasS="monofont">errno</TT> system symbols, which can be used to check the meaning of an error.</P>
+
+					<pre>
+						
+&gt;&gt;&gt; import errno
+&gt;&gt;&gt; try:
+&gt;&gt;&gt;     file = open("test.py")
+&gt;&gt;&gt; except IOError, (errcode, errmsg):
+&gt;&gt;&gt;     if errcode == errno.ENOENT:
+&gt;&gt;&gt;         print "File does not exist!"
+&gt;&gt;&gt;
+
+					</pRE>
+
+					<P>You can <A name="idx1073743196"></A><A NAme="idx1073743197"></a><a name="idx1073743198"></a>check the entire list of <tt class="monofont">error</tt> symbols by typing,<a nAme="idx1073743199"></A><a naMe="idx1073743200"></a></p>
+
+					<pRe>
+						
+&gt;&gt;&gt; import errno
+&gt;&gt;&gt; dir(errno)
+['E2BIG', 'EACCES', 'EADDRINUSE', 'EADDRNOTAVAIL', EAFNOSUPPORT', 'EAGAIN',
+ 'EALREADY', 'EBADF', 'EBUSY', 'ECHILD', 'ECONNABORTED', 'ECONNREFUSED',
+ 'ECONNRESET', 'EDEADLK', 'EDEADLOCK', 'EDESTADDRREQ', 'EDOM', 'EDQUOT',
+ 'EEXIST', 'EFAULT', 'EFBIG', 'EHOSTDOWN', 'EHOSTUNREACH', 'EILSEQ',
+ 'EINPROGRESS', 'EINTR', 'EINVAL', 'EIO', 'EISCONN', 'EISDIR', 'ELOOP',
+ 'EMFILE', 'EMLINK', 'EMSGSIZE', 'ENAMETOOLONG', 'ENETDOWN', 'ENETRESET',
+ 'ENETUNREACH', 'ENFILE', 'ENOBUFS', 'ENODEV', 'ENOENT', 'ENOEXEC', 'ENOLCK',
+ 'ENOMEM', 'ENOPROTOOPT', 'ENOSPC', 'ENOSYS', 'ENOTCONN', 'ENOTDIR',
+'ENOTEMPTY', 'ENOTSOCK', 'ENOTTY', 'ENXIO', 'EOPNOTSUPP', 'EPERM',
+ 'EPFNOSUPPORT', 'EPIPE', 'EPROTONOSUPPORT', 'EPROTOTYPE', 'ERANGE',
+ 'EREMOTE', 'EROFS', 'ESHUTDOWN', 'ESOCKTNOSUPPORT', 'ESPIPE', 'ESRCH',
+ 'ESTALE', 'ETIMEDOUT', 'ETOOMANYREFS', 'EUSERS', 'EWOULDBLOCK', 'EXDEV',
+ 'WSABASEERR', 'WSAEACCES', 'WSAEADDRINUSE', 'WSAEADDRNOTAVAIL',
+ 'WSAEAFNOSUPPORT', 'WSAEALREADY', 'WSAEBADF', 'WSAECONNABORTED',
+ 'WSAECONNREFUSED', 'WSAECONNRESET', 'WSAEDESTADDRREQ', 'WSAEDISCON',
+ 'WSAEDQUOT', 'WSAEFAULT', 'WSAEHOSTDOWN', 'WSAEHOSTUNREACH',
+ 'WSAEINPROGRESS', 'WSAEINTR', 'WSAEINVAL', 'WSAEISCONN', 'WSAELOOP',
+ 'WSAEMFILE', 'WSAEMSGSIZE', 'WSAENAMETOOLONG', 'WSAENETDOWN',
+ 'WSAENETRESET', 'WSAENETUNREACH', 'WSAENOBUFS', 'WSAENOPROTOOPT',
+ 'WSAENOTCONN', 'WSAENOTEMPTY', 'WSAENOTSOCK', 'WSAEOPNOTSUPP',
+ 'WSAEPFNOSUPPORT', 'WSAEPROCLIM', 'WSAEPROTONOSUPPORT', 'WSAEPROTOTYPE',
+ 'WSAEREMOTE', 'WSAESHUTDOWN', 'WSAESOCKTNOSUPPORT', 'WSAESTALE',
+ 'WSAETIMEDOUT', 'WSAETOOMANYREFS', 'WSAEUSERS', 'WSAEWOULDBLOCK',
+ 'WSANOTINITIALISED', 'WSASYSNOTREADY', 'WSAVERNOTSUPPORTED', '__doc__',
+ '__name__', 'errorcode']
+
+					</prE>
+
+					<P>Use the <A Name="idx1073743201"></a><A NAMe="idx1073743202"></a><tt CLASs="monofont">os.strerror()</tt> function to <a NAME="idx1073743203"></a><a name="idx1073743204"></a><a name="idx1073743205"></a>\ retrieve the system message associated to a specific error symbol.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import os, errno
+&gt;&gt;&gt; os.strerror(errno.EPERM)
+"Operation not permitted"
+
+					</pre>
+
+				
+			</FonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="95.html" title="Raising Exceptions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=96" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="96.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="97.html" title="try/finally "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+catching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743193">exceptions</a> <a href="#idx1073743200">2nd</a><BR>
+displaying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743197">error symbols</a><BR>
+ <a href="#idx1073743194">errno module</a><BR>
+error symbols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743198">viewing</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743192">catching</a> <a href="#idx1073743199">2nd</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743202">os.sterror()</a><BR>
+messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743205">retrieving</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743195">errno</a><BR>
+ <a href="#idx1073743201">os.sterror() function</a><BR>
+retrieving<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743203">system messages</a><BR>
+system messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743204">retrieving</a><BR>
+viewing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743196">error symbols</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,187 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Internet Data Handling</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">Internet Data Handling</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="79.html" title="Internet Protocol and Support"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=80" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="80.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="81.html" title="Restricted Execution"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A29%3A53+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146115096217178215107072</font><a href="read1.asp?bookname=0672319942&snode=80&now=5%2F31%2F2002+4%3A29%3A53+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Internet Data Handling</h3>
+				<p>This group covers modules that support encoding and decoding of data handling formats and that are largely used in Internet applications.</p>
+
+				<P>For more details and examples about using these modules, see <A HRef="187.html">Chapter 13, "Data Manipulation."</a></p>
+
+				<H4><TT Class="monofont">sgmllib</TT></H4>
+					<P>The <tt class="monofont">sgmllib</tt> module is an SGML (Standard Generalized Markup Language) parser subset. Although it has a simple implementation, it is powerful enough to build the HTML parser.</p>
+
+				
+				<h4><tt class="monofont">htmllib</tt></H4>
+					<p>The <tT claSs="monofont">htmllib</tt> module defines a parser for text files formatted in HTML (Hypertext Markup Language).</p>
+
+				
+				<H4><tt cLASS="monofont">htmlentitydefs</tt></h4>
+					<p>The <TT CLass="monofont">htmlentitydefs</tT> module is a dictionary that contains all the definitions for the general entities defined by HTML 2.0.</P>
+
+				
+				<H4><Tt claSS="monofont">xmllib</TT></h4>
+					<p>The <tt class="monofont">xmllib</tt> module defines a parser for text files formatted in XML (Extensible Markup Language).</p>
+
+				
+				<h4><tt class="monofont">formatter</Tt></h4>
+					<P>The <tt cLass="monofont">formatter</tT> module is used for generic output formatting by the <tt cLASS="monofont">HTMLParser</tt> class of the <tt CLASs="monofont">htmllib</tt> module.</p>
+
+				
+				<H4><TT Class="monofont">rfc822</TT></H4>
+					<P>The <tt class="monofont">rfc822</tt> module parses mail headers that are defined by the Internet standard RFC 822. The headers of this form are used in a number of contexts including mail handling and in the HTTP protocol.<a name="idx1073742965"></a><a name="idx1073742966"></A><a nAme="idx1073742967"></a><A name="idx1073742968"></A></p>
+
+				
+				<h4><tT CLAss="monofont">mimetools</tt></H4>
+					<P>The <TT clasS="monofont">mimetools</TT> module provides utility tools for parsing and manipulation of MIME multipart and encoded messages.</P>
+
+					<div cLASS="note"><p class="notetitle"><b>Tip</b></p><p>
+
+						<p>MIME (multipurpose Internet mail extensions) is a standard for sending multipart multimedia data through Internet mail.</p>
+
+					</p></div>
+<br>
+<br>
+
+				
+				<H4><tt ClasS="monofont">MimeWrite</tt></h4>
+					<p>The <Tt clASS="monofont">MimeWrite</Tt> module implements a generic file-writing class that is used to create MIME-encoded multipart files.</p>
+
+				
+				<h4><tT CLAss="monofont">multifile</tt></H4>
+					<P>The <TT clasS="monofont">multifile</TT> module enables you to treat distinct parts of a text file as file-like input objects. Usually, this module uses text files that are found in MIME encoded messages.</P>
+
+				
+				<h4><tt class="monofont">binhex</tt></h4>
+					<p>The <tt class="monofont">binhex</tT> module encodes and decodes files in <tt ClasS="monofont">binhex4</tt> format. This format is commonly used to represent files on Macintosh systems.</p>
+
+				
+				<h4><Tt clASS="monofont">uu</Tt></h4>
+					<p>The <tT CLAss="monofont">uu</tt> module encodes and decodes files in <TT CLass="monofont">uuencode</tT> format. This module does its job by transferring binary data over an ASCII-only connection.</P>
+
+				
+				<H4><Tt class="monofont">binascii</tt></h4>
+					<p>The <tt class="monofont">binascii</tt> module implements methods to convert data between binary and various ASCII-encoded binary representations.<a NamE="idx1073742969"></a><a nAme="idx1073742970"></a><a Name="idx1073742971"></A><A NAme="idx1073742972"></a></p>
+
+				
+				<H4><TT Class="monofont">base64</TT></H4>
+					<P>The <tt clASS="monofont">base64</Tt> module performs base64 encoding and decoding of arbitrary binary strings into text strings that can be safely emailed or posted. This module is commonly used to encode binary data in mail attachments.</p>
+
+				
+				<h4><tt class="monofont">xdrlib</tt></h4>
+					<p>The <tt clasS="monofont">xdrlib</tt> module is used extensively in applications involving Remote Procedure Calls (RPC). Similarly, it is often used as a portable way to encode binary data for use in networked applications. This module is able to encode and decode XDR data because it supports the external data representation (XDR) Standard.<A namE="idx1073742973"></a><a naMe="idx1073742974"></a></p>
+
+				
+				<H4><TT Class="monofont">mailcap</TT></H4>
+					<P>The <tt clASS="monofont">mailcap</Tt> module is used to read <tt cLASS="monofont">mailcap</tt> files and to configure how MIME-aware applications react to files with different MIME types.</p>
+
+					<div class="note"><p class="notetitle"><b>Note</b></p><P>
+
+						<p><tT claSs="monofont">mailcap</tt> files are used to inform mail readers and Web browsers how to process files with different MIME types.</p>
+
+					</P></div>
+<BR>
+<BR>
+<a namE="idx1073742975"></A><A Name="idx1073742976"></a>
+				
+				<H4><TT Class="monofont">mimetypes</TT></H4>
+					<P>The <tt class="monofont">mimetypes</tt> module supports conversions between a filename or URL and the MIME type associated with the filename extension.</p>
+
+					<p>Essentially, it is used to guess the MIME type associated with a file, based on its extension, as shown in <a href="80#17.html">Table 3.1</a>.</p>
+
+					<a nAme="17"></A><p><taBle boRder="1" CELLspacING="0" CellpADDIng="1" wiDTH="100%">
+<Caption><h5>Table 3.1. Some MIME Type Examples</h5></caption><colgrOup AligN="left" span="2">
+<Tr vaLIGN="top">
+<th>
+<foNT SIze="2"><tt CLASs="monofont">Filename Extension</tt></fONT></Th>
+<th>
+<font size="2"><tt class="monofont">MIME Type Associated</tt></FonT></th>
+</tR>
+<tr vaLign="top">
+<TD>
+<FOnt siZE="2"><TT clasS="monofont">.html</TT>
+									</Font></tD>
+<TD>
+<Font size="2">text/html</font></td>
+</tr>
+<tr valIgn="top">
+<Td>
+<foNt sizE="2"><tt cLASS="monofont">.rdf</tt>
+									</foNT></TD>
+<td>
+<foNT SIze="2">application/xml</foNT></TD>
+</tr>
+<tr valign="top">
+<td>
+<font size="2"><Tt cLass="monofont">.gif</Tt>
+									</fonT></td>
+<tD>
+<FONt sizE="2">image/gif</FONt></td>
+</tR>
+</COLgrouP>
+</TABle></p>
+
+				
+				<h4><tt class="monofont">quopri</tt></h4>
+					<p>The <tt claSs="monofont">quopri</tT> module performs encoding and decoding of MIME quoted printable data. This format is primarily used to encode text files.<a naMe="idx1073742977"></a><a nAme="idx1073742978"></a><A NAMe="idx1073742979"></a><a nAME="idx1073742980"></A></p>
+
+				
+				<h4><tt CLASs="monofont">mailbox</tt></h4>
+					<P>The <TT Class="monofont">mailbox</tt> module implements classes that allow easy and uniform access to read various mailbox formats in a UNIX system.</p>
+
+				
+				<h4><tt class="monofont">mhlib</tt></h4>
+					<p>The <tT clAss="monofont">mhlib</tT> module provides a Python interface to access <tt clAss="monofont">MH</tT> folders and their contents.</P>
+
+				
+				<H4><Tt claSS="monofont">mimify</TT></h4>
+					<p>The <tt CLASs="monofont">mimify</tt> module has functions to convert and process simple and multipart mail messages to/from the MIME format.</p>
+
+				
+				<H4><TT Class="monofont">netrc</tt></h4>
+					<p>The <tt class="monofont">netrc</tt> module parses, processes, and encapsulates the <tt cLasS="monofont">.netrc</tt> configuration file format used by the UNIX FTP program and other FTP clients.<a Name="idx1073742981"></a><A namE="idx1073742982"></A><A Name="idx1073742983"></a><A NAMe="idx1073742984"></a></p>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="79.html" title="Internet Protocol and Support"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=80" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="80.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="81.html" title="Restricted Execution"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742967">Internet Data Handling library</a> <a href="#idx1073742971">2nd</a> <a href="#idx1073742979">3rd</a> <a href="#idx1073742983">4th</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742968">Internet Data Handling library</a> <a href="#idx1073742972">2nd</a> <a href="#idx1073742980">3rd</a> <a href="#idx1073742984">4th</a><BR>
+ <a href="#idx1073742966">Internet Data Handling library</a> <a href="#idx1073742970">2nd</a> <a href="#idx1073742978">3rd</a> <a href="#idx1073742982">4th</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742965">Internet Data Handling</a> <a href="#idx1073742969">2nd</a> <a href="#idx1073742977">3rd</a> <a href="#idx1073742981">4th</a><BR>
+ <a href="#idx1073742975">mailcap module</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742976">mailcap</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742974">xdrlib</a><BR>
+ <a href="#idx1073742973">xdrlib module</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

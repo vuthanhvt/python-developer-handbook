@@ -1,0 +1,310 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Editing Code</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="227.html" class="navtitle">17. Development Tools</a> &gt; <span class="nonavtitle">Editing Code</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="230.html" title="Compiling Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=231" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="231.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="232.html" title="Python Scripts"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A21%3A24+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218065012143150139177233</font><a href="read0.asp?bookname=0672319942&snode=231&now=6%2F1%2F2002+6%3A21%3A24+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+
+
+
+Editing Code</h3>
+				<p>As you already know, Python provides two development environments that offer a lot of useful features which can help you while coding: Pythonwin and IDLE. However, for simple programs, or in case you don't have a graphical environment available, you can stick to simple text editors that can be used to handle the job very nicely.</p>
+
+				<P>On Windows systems, you can use editors such as Editpad and Notepad to write Python scripts; on DOS systems, EDIT, and on UNIX systems you have choices such as Pico, Vi, Emacs, and others.</P>
+
+				<P>
+					<A name="idx1073749970"></A>
+					<A NAme="idx1073749971"></a>
+					<a NAME="idx1073749972"></a>
+					<a name="idx1073749973"></a>Pico is a full screen editor that is reasonably intuitive. Pico's commands can be learned in just some minutes and Pico itself is good for editing small texts with just a few changes. However, you need commands that are more powerful when a text becomes bigger because Pico only has a limited number of commands. These commands are shown at the bottom of the editing screen. Also note that Pico makes limited use of mice. Pico is not 100% recommended for Python programming because it wasn't designed as a programmer's editor. It does things such as automatic word wrap, which might not be what you want.</p>
+
+				<p>
+					<a name="idx1073749974"></a>
+					<a name="idx1073749975"></A>
+					<a nAme="idx1073749976"></a>
+					<A name="idx1073749977"></A>
+					<a naME="idx1073749978"></A>Vi (visual editor) is another full screen editor that was seen as a big improvement over line editing. Vi is highly customizable, allows filtering, has number prefixes for commands, has an invocation of a shell, has better jump commands, can read in the result of external commands, save parts of text, substitute literal strings and regular expressions, and many other options. The vi clone <I>vim</i>
+					<i>(vi improved)</i> can be scripted in Python among other languages.</p>
+
+				<P>
+					<A NAme="idx1073749979"></a>
+					<a NAME="idx1073749980"></a>
+					<a naME="idx1073749981"></A>
+					<A name="idx1073749982"></a>JED is a freely available text editor for UNIX, VMS, MSDOS, OS/2, and MS Windows. This editor has many features, including drop-down menus, folding support, color syntax highlighting on color terminals, and emulation of Emacs, EDT, Wordstar, and Borland editors. It's said that the latest version of the JED editor has a Python mode, with many of the same features as the Emacs/XEmacs Python mode.</p>
+
+				<p>See its Web page for more information:</p>
+
+				<p><a target="_blank" href="http://space.mit.edu/~davis/jed.html">http://space.mit.edu/~davis/jed.html</A></p>
+
+				<p>Vi, Pico, and JED are certainly powerful editors. However, Emacs is quite a jump in feature variety. Emacs is a very extensible and customizable editor. The richness of Emacs makes it more difficult to learn, but it is worth the try. A version of Emacs called XEmacs (which is a very famous implementation) can also be used for writing Python programs.<A namE="idx1073749983"></a>
+					<a naMe="idx1073749984"></a>
+					<a NAME="idx1073749985"></a>
+					<a naME="idx1073749986"></A>
+					<A name="idx1073749987"></A>
+					<A NAme="idx1073749988"></a>
+					<a NAME="idx1073749989"></a>
+					<a name="idx1073749990"></a>
+				</p>
+
+				
+					<h4>
+
+
+
+
+
+
+
+Emacs</h4>
+					<p>Emacs originally was an acronym for Editor MACroS. The heart of Emacs is an interpreter for <a name="idx1073749991"></a>
+						<a naMe="idx1073749992"></a>
+						<A namE="idx1073749993"></a>
+						<i>elisp (Emacs Lisp)</i>, which is a dialect of the Lisp programming language with extensions to support text editing. Currently, Emacs is much more than a text editor. Besides allowing you to edit several styles of source codes and other general-purpose files, it contains many extensions that provide support for features such as Web browsing and mail reading. Emacs is a GNU project, and it is maintained by the <a Name="idx1073749994"></A>Free Software Foundation.</P>
+
+					<P>Some of the features of Emacs include</P>
+
+					<ul>
+<li>
+							<P>Content sensitive major modes for a wide variety of file types, from plain text to source code to HTML files.</P>
+
+						</LI>
+<li>
+							<p>Complete online documentation, including a tutorial for new users.</p>
+
+						</LI>
+<LI>
+							<p>Emacs is highly extensible through the Emacs Lisp language.</p>
+
+						</li>
+<LI>
+							<P>Support for many human languages and their scripts.</P>
+
+						</li>
+<li>
+							<p>A large number of extensions which add other functionality (the GNU Emacs distribution includes many extensions).</p>
+
+						</li>
+</ul>
+					<p>Check out the GNU Emacs Web site for details:</p>
+
+					<p><a target="_blank" HreF="http://www.gnu.org/software/emacs/">http://www.gnu.org/software/emacs/</a></p>
+
+					<dIv claSs="note"><p cLASS="notetitle"><b>Note</b></p><p>
+
+						<P>XEmacs is a highly customizable open source text editor and application development system, which is based on GNU Emacs, and shares a lot of code with it. XEmacs is protected under the GNU Public License, and its emphasis is on modern graphical user interface support and an open software development model. XEmacs has an active development community and runs on Win32 and UNIX platforms. See <A TArget="_blank" HREF="http://www.xemacs.org/">http://www.xemacs.org/</a> for details.<a naME="idx1073749995"></A>
+							<A name="idx1073749996"></a>
+							<a name="idx1073749997"></a>
+							<a name="idx1073749998"></a>
+							<a naMe="idx1073749999"></a>
+							<A namE="idx1073750000"></a>
+							<a naMe="idx1073750001"></a>
+							<a NAME="idx1073750002"></a>
+							<a naME="idx1073750003"></A>
+							<A name="idx1073750004"></A>
+							<A NAme="idx1073750005"></a>
+							<a NAME="idx1073750006"></a>
+							<a name="idx1073750007"></a>
+							<a name="idx1073750008"></a>
+							<a name="idx1073750009"></a>
+							<a NamE="idx1073750010"></a>
+						</p>
+
+					</p></Div>
+<br>
+<Br>
+
+					<p>Emacs has its own section on the Python Web site, precisely at the following address:</p>
+
+					<P><A TArget="_blank" HREF="http://www.python.org/emacs/">http://www.python.org/emacs/</a></p>
+
+					<p>At that page, you can find a collection of links to several Emacs codes that might help with your Python programming. Most of the code works fine on top of the latest versions of both Emacs and XEmacs.</p>
+
+					<P>From that page, you can also get access to some Emacs modes that enable the coding of Python source code when using Emacs, such as the Python Mode, located at</P>
+
+					<P><A targET="_blank" HRef="http://www.python.org/emacs/python-mode/">http://www.python.org/emacs/python-mode/</a></p>
+
+					<p>You might want to byte-compile that <tt class="monofont">python-mode</tt> file when installing it on your system, primarily for better performance. To do so, you need to open Emacs (or XEmacs) and execute the following commands. Note that you can safely ignore any byte compiler warnings.</p>
+
+					<pre>
+						
+C-x C-f /path/to/python-mode.el RET
+M-x byte-compile-file RET
+
+					</prE>
+
+					<p>On the Web site, besides getting access to the latest release of the python-mode (the current version is 3.105), you can also obtain other useful stuff, which includes: a detailed list of changes since the last released version, installation notes, a FAQ, and a Emacs/XEmacs compatibility details list, which brings special notes about Emacs/XEmacs versions and package interactions.<a Name="idx1073750011"></A>
+						<a namE="idx1073750012"></a>
+						<a nAME="idx1073750013"></A>
+						<a namE="idx1073750014"></A>
+						<A Name="idx1073750015"></a>
+						<A NAMe="idx1073750016"></a>
+						<a nAME="idx1073750017"></A>
+						<a name="idx1073750018"></a>
+						<a name="idx1073750019"></a>
+						<a name="idx1073750020"></a>
+						<a nAme="idx1073750021"></A>
+						<a naMe="idx1073750022"></a>
+						<a nAme="idx1073750023"></a>
+						<A NAMe="idx1073750024"></a>
+						<a nAME="idx1073750025"></A>
+						<a namE="idx1073750026"></A>
+					</P>
+
+					<P>To <a namE="idx1073750027"></A>
+						<A Name="idx1073750028"></a>
+						<a name="idx1073750029"></a>install the python-mode package so that it can be used in Python, you would put it in the <tt class="monofont">site-lisp</tt> directory, and edit your <tT clAss="monofont">site-start.el</tT> to autoload <tt clAss="monofont">python-mode.el</tT> and bind it to <TT Class="monofont">.py</TT> files.</P>
+
+					<P>The following links provide additional information related to the usage of Emacs/XEmacs along with Python.</p>
+
+					<bloCKQUote>
+<p>
+							<P>
+								<A NAme="idx1073750030"></a>
+								<a name="idx1073750031"></a>The OO-Browser—This is a multi-windowed, interactive, object-oriented class browser that supports Python, and was designed for professional use under the Emacs editor. See the following Web site for details:</p>
+
+						</p>
+</blockquotE>
+					<p><a TargEt="_blank" hreF="http://www.beopen.com/manuals/alt-oobr-cover.html">http://www.beopen.com/manuals/alt-oobr-cover.html</a></p>
+
+					<bLOCKquotE>
+<P>
+							<P>
+								<A name="idx1073750032"></A>
+								<A NAme="idx1073750033"></a>
+								<i>Introduction to Using OO-Browser with Python</I>—This is a paper by Harri Pasanen, presented at the International Python Conference IV, June 1996.</P>
+
+						</P>
+</Blockquote>
+					<p><a target="_blank" hreF="http://www.python.org/workshops/1996-06/papers/h.pasanen/oobr_contents.html">http://www.python.org/workshops/1996-06/papers/h.pasanen/oobr_contents.html</a></p>
+
+					<BlocKquotE>
+<p>
+							<p>
+								<a NAME="idx1073750034"></a>
+								<a naME="idx1073750035"></A>
+								<I>Python Library Reference Hot-Key Help System for XEmacs</i>—This is Harri Pasanen's work. This program shows the Python Library Reference for the word under cursor every time you press the F1 key when in Python mode under the XEmacs.</p>
+
+						</p>
+</bLOCKquotE>
+					<P><A Target="_blank" href="http://bigbear.pc.helsinki.fi/harri/">http://bigbear.pc.helsinki.fi/harri/</a>
+						<a name="idx1073750036"></a>
+						<a namE="idx1073750037"></a>
+						<a Name="idx1073750038"></A>
+						<a namE="idx1073750039"></a>
+						<a nAME="idx1073750040"></A>
+						<a namE="idx1073750041"></A>
+						<A Name="idx1073750042"></a>
+						<A NAMe="idx1073750043"></a>
+						<a nAME="idx1073750044"></A>
+						<a name="idx1073750045"></a>
+						<a name="idx1073750046"></a>
+						<a name="idx1073750047"></a>
+						<a nAme="idx1073750048"></A>
+						<a naMe="idx1073750049"></a>
+						<a nAme="idx1073750050"></a>
+						<A NAMe="idx1073750051"></a></p>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="230.html" title="Compiling Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=231" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="231.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="232.html" title="Python Scripts"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emacs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750005">editing source code</a> <a href="#idx1073750021">2nd</a> <a href="#idx1073750046">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749980">JED</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749971">Pico</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749986">editing</a> <a href="#idx1073749998">2nd</a> <a href="#idx1073750014">3rd</a> <a href="#idx1073750039">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749975">Vi (visual editor)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XEmacs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750009">editing source code</a> <a href="#idx1073750025">2nd</a> <a href="#idx1073750050">3rd</a><BR>
+browsers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750031">OO</a><BR>
+changing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749989">source code</a> <a href="#idx1073750001">2nd</a> <a href="#idx1073750017">3rd</a> <a href="#idx1073750042">4th</a><BR>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749985">editing</a> <a href="#idx1073749997">2nd</a> <a href="#idx1073750013">3rd</a> <a href="#idx1073750038">4th</a><BR>
+editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749983">source code</a> <a href="#idx1073749995">2nd</a> <a href="#idx1073750011">3rd</a> <a href="#idx1073750036">4th</a><BR>
+ <a href="#idx1073749992">elisp (Emacs Lisp) programming language</a><BR>
+Emacs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750003">source code</a> <a href="#idx1073750019">2nd</a> <a href="#idx1073750044">3rd</a><BR>
+ <a href="#idx1073749991">Emacs Lisp (elisp) programming language </a><BR>
+ <a href="#idx1073749994">Free Software Foundation</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750027">python-mode package</a><BR>
+ <a href="#idx1073750032">Introduction to using OO-Browser with Python</a><BR>
+ <a href="#idx1073749979">JED</a><BR>
+modifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749990">source code</a> <a href="#idx1073750002">2nd</a> <a href="#idx1073750018">3rd</a> <a href="#idx1073750043">4th</a><BR>
+ <a href="#idx1073750030">OO-Browser</a><BR>
+packages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;python-mode<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750028">installing</a><BR>
+ <a href="#idx1073750033">Pasanen, Harry</a> <a href="#idx1073750035">2nd</a><BR>
+ <a href="#idx1073749970">Pico</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749993">elisp (Emacs Lisp)</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emacs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750006">editing source code</a> <a href="#idx1073750022">2nd</a> <a href="#idx1073750047">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749981">JED</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749972">Pico</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749987">editing</a> <a href="#idx1073749999">2nd</a> <a href="#idx1073750015">3rd</a> <a href="#idx1073750040">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749976">Vi (visual editor)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XEmacs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750010">editing source code</a> <a href="#idx1073750026">2nd</a> <a href="#idx1073750051">3rd</a><BR>
+ <a href="#idx1073750034">Python Library Hot-Key Help System for XEmacs</a><BR>
+python-mode package<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750029">installing</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Emacs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750004">editing source code</a> <a href="#idx1073750020">2nd</a> <a href="#idx1073750045">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749982">JED</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749973">Pico</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749988">editing</a> <a href="#idx1073750000">2nd</a> <a href="#idx1073750016">3rd</a> <a href="#idx1073750041">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749977">Vi (visual editor)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XEmacs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750008">editing source code</a> <a href="#idx1073750024">2nd</a> <a href="#idx1073750049">3rd</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749984">editing</a> <a href="#idx1073749996">2nd</a> <a href="#idx1073750012">3rd</a> <a href="#idx1073750037">4th</a><BR>
+ <a href="#idx1073749974">Vi (visual editor)</a><BR>
+ <a href="#idx1073749978">visual editor (Vi)</a><BR>
+XEmacs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750007">source code</a> <a href="#idx1073750023">2nd</a> <a href="#idx1073750048">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

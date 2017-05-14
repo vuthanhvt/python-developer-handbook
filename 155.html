@@ -1,0 +1,1126 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Regular Expressions</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="148.html" class="navtitle">9. Other Advanced Topics</a> &gt; <span class="nonavtitle">Regular Expressions</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="154.html" title="Scientific Computing"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=155" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="155.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="156.html" title="Threads"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A40%3A44+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148044238000231176115064</font><a href="read9.asp?bookname=0672319942&snode=155&now=5%2F31%2F2002+4%3A40%3A44+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Regular Expressions</h3>
+				<p>We already know that the <tT CLAss="monofont">string</tt> module is used to apply basic manipulation operations on strings; meanwhile, at the time of developing advanced routines, you might need to enhance Python's string-processing capabilities. That's when you should consider using the <A NAMe="idx1073745487"></a>
+					<a nAME="idx1073745488"></A>
+					<tt class="monofont">re</tt> module (<tt class="monofont">re</tt> stands for <i>regular expression</i>).</P>
+
+				<p>Regular expressions are strings, which contain a mix of text and special characters, that let you define complicated pattern matching and replacement rules for other strings.</p>
+
+				<P>Some of the special characters that compound regular expressions must be preceded by backslashes in order to be matched. Consequently, regular expressions are usually written as raw strings because they tend to use a lot of backslashes. That means that instead of writing <tt cLass="monofont">"\\b(usa)\\d",</tT> it is much easier to say <tt cLASS="monofont">r"\b(usa)\d".</tt>
+				</p>
+
+				<p>Older versions of Python used to support the following regular expression obsolete modules are: <TT CLass="monofont">regexp, regex,</tT> and <TT Class="monofont">regsub.</TT>
+				</P>
+
+				<P><table border="1" cellspaciNg="0" cEllpAddinG="1" widTH="100%">
+<CAptioN><H5>Table 9.3. 
+				  Special Characters Recognized by the <TT clasS="monofont">re</TT> Module</H5></captION><Colgroup align="left" span="2">
+<tr vaLigN="top">
+<th>
+<fOnt siZe="2">Special Character</foNT></TH>
+<th>
+<foNT SIze="2">What It Matches</foNT></TH>
+</tr>
+<tr VALIgn="top">
+<td>
+<font size="2">
+									<a name="idx1073745489"></a>
+									<a nAme="idx1073745490"></A>
+									<a naMe="idx1073745491"></a>
+									<tt ClasS="monofont">.</TT>
+								</Font></tD>
+<TD>
+<Font sIZE="2">Any character (except newline by default).</Font></tD>
+</TR>
+<Tr valign="top">
+<td>
+<font size="2">
+									<a naMe="idx1073745492"></a>
+									<A namE="idx1073745493"></a>
+									<tt cLass="monofont">^</TT>
+								</FOnt></td>
+<TD>
+<FOnt siZE="2">The start of the string, or of a line (in case of multiline re's).</FOnt></td>
+</TR>
+<TR valign="top">
+<td>
+<font size="2">
+									<a namE="idx1073745494"></a>
+									<a Name="idx1073745495"></A>
+									<tt clAss="monofont">$</tT>
+								</FONt></td>
+<tD>
+<FONt sizE="2">The end of the string, or of a line (in case of multiline re's).</FONt></td>
+</tR>
+<TR Valign="top">
+<td>
+<font size="2">
+									<a name="idx1073745496"></A>
+									<a nAme="idx1073745497"></a>
+									<Tt claSs="monofont">*</tt>
+								</FONT></td>
+<td>
+<FONT size="2">Any number of occurrences of the preceding expression.</FONT></td>
+</tr>
+<TR VAlign="top">
+<td>
+<font size="2">
+									<a name="idx1073745498"></a>
+									<A naMe="idx1073745499"></a>
+									<tT clasS="monofont">+</tt>
+								</fONT></Td>
+<td>
+<fONT Size="2">
+									<tT CLAss="monofont">1</tt> or <TT CLass="monofont">n</tt> number of occurrences of the preceding expression.</font></td>
+</tr>
+<tr valigN="top">
+<td>
+<Font Size="2">
+									<a Name="idx1073745500"></A>
+									<A NAme="idx1073745501"></a>
+									<tT CLAss="monofont">|</tt>
+								</FONT></td>
+<td>
+<FONT size="2">Either the preceding <tt class="monofont">re</tt> or the following <tt class="monofont">re,</Tt> whichever is true.</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2">
+									<a namE="idx1073745502"></A>
+									<A Name="idx1073745503"></a>
+									<TT CLass="monofont">?</tt>
+								</font></td>
+<td>
+<font sizE="2">
+									<tt ClasS="monofont">1</tt> or <tt ClasS="monofont">0</TT> number of occurrences of the preceding expression.</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+									<a name="idx1073745504"></a>
+									<tt class="monofont">*?</tt>
+								</font></Td>
+<tD>
+<fonT size="2">Similar to <Tt clASS="monofont">*,</Tt> but it matches as few occurrences as possible.</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">
+									<a name="idx1073745505"></a>
+									<tt class="monofont">+?</tt>
+								</foNt></tD>
+<td>
+<fOnt siZe="2">Similar to <tt CLASs="monofont">+,</tt> but it matches as few occurrences as possible.</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt size="2">
+									<a name="idx1073745506"></a>
+									<tt class="monofont">??</tt>
+								</FonT></td>
+<tD>
+<font Size="2">Similar to <TT CLass="monofont">?,</tT> but it matches as few occurrences as possible.</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font size="2">
+									<a name="idx1073745507"></a>
+									<tt class="monofont">{</Tt>
+									<i>
+										<Tt clAss="monofont">m, n</tt>
+									</I>
+									<tt cLASS="monofont">}</tt>
+								</foNT></TD>
+<td>
+<foNT SIze="2">From <tt CLASs="monofont">m</tt> to <tt class="monofont">n</tt> occurrences of the preceding expression. It matches as many occurrences as possible.<a name="idx1073745508"></a>
+									<a nAme="idx1073745509"></A>
+									<a naMe="idx1073745510"></a>
+									<a nAme="idx1073745511"></a>
+									<A NAMe="idx1073745512"></a>
+								</foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+									<a name="idx1073745513"></a>
+									<tt class="monofont">{</tt>
+									<i>
+										<Tt cLass="monofont">m, n</Tt>
+									</i>
+									<tt ClasS="monofont">}?</TT>
+								</Font></tD>
+<TD>
+<Font sIZE="2">From <Tt claSS="monofont">m</TT> to <tt class="monofont">n</tt> occurrences of the preceding expression. It matches as few occurrences as possible.</font></td>
+</tr>
+<tr vAliGn="top">
+<td>
+<Font sIze="2">
+									<a NAME="idx1073745514"></a>
+									<tt cLASS="monofont">[</tt>
+									<i>
+										<tT CLAss="monofont">list</tt>
+									</I>
+									<TT Class="monofont">]</tt>
+								</font></td>
+<td>
+<font siZe="2">A set of characters, such as <tT claSs="monofont">r"[A-Z]".</tt>
+								</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+									<a naME="idx1073745515"></A>
+									<Tt class="monofont">[^</tt>
+									<i>
+										<tt class="monofont">list</tt>
+									</i>
+									<tT clAss="monofont">]</tT>
+								</font></Td>
+<td>
+<FONT size="2">Characters that are not in the list.</FONT></td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt size="2">
+									<a name="idx1073745516"></a>
+									<tt class="monofont">(</tT>
+									<i>
+										<tT claSs="monofont">re</tt>
+									</i>
+									<Tt clASS="monofont">)</Tt>
+								</fonT></TD>
+<Td>
+<fonT SIZe="2">Matches the regular expression as a group. It specifies logical groups of operations and saves the matched substring.</fonT></TD>
+</Tr>
+<tr valign="top">
+<td>
+<font size="2">
+									<a NamE="idx1073745517"></a>
+									<i>
+										<tT clasS="monofont">Anystring</tt>
+									</i>
+								</FONT></td>
+<td>
+<FONT size="2">The string anystring.</FONT></td>
+</tr>
+<TR VAlign="top">
+<td>
+<font size="2">
+									<a name="idx1073745518"></a>
+									<Tt cLass="monofont">\w</Tt>
+								</fonT></td>
+<tD>
+<FONt sizE="2">Any alphanumeric character.</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font size="2">
+									<a name="idx1073745519"></a>
+									<tt class="monofont">\W</Tt>
+								</fOnt></tD>
+<td>
+<foNt siZE="2">Any non-alphanumeric character.</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2">
+									<a name="idx1073745520"></a>
+									<tt class="monofont">\d</tt>
+								</font></tD>
+<td>
+<Font Size="2">Any decimal digit.</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+									<a naME="idx1073745521"></A>
+									<Tt class="monofont">\D</tt>
+								</font></td>
+<td>
+<font SizE="2">Any non-decimal digit.</fonT></td>
+</tr>
+<Tr vaLIGN="top">
+<td>
+<foNT SIze="2">
+									<a nAME="idx1073745522"></A>
+									<tt clASS="monofont">\b</Tt>
+								</font></td>
+<td>
+<font size="2">Empty strings at the starting or ending of words.</fonT></td>
+</Tr>
+<tr ValigN="top">
+<td>
+<fONT Size="2">
+									<a NAME="idx1073745523"></a>
+									<tt cLASS="monofont">\B</tt>
+								</foNT></TD>
+<td>
+<font size="2">Empty strings that are not at the starting or ending of words.</font></td>
+</tr>
+<tr ValIgn="top">
+<tD>
+<font Size="2">
+									<A NAMe="idx1073745524"></a>
+									<tt CLASs="monofont">\s</tt>
+								</fONT></Td>
+<td>
+<fONT Size="2">Matches a whitespace character.</font></td>
+</tr>
+<tr valign="top">
+<tD>
+<foNt siZe="2">
+									<a naMe="idx1073745525"></a>
+									<tT CLAss="monofont">\S</tt>
+								</FONT></td>
+<td>
+<FONT size="2">Matches any non-whitespace character.</FONT></td>
+</tr>
+<tr valign="top">
+<td>
+<font siZe="2">
+									<a Name="idx1073745526"></A>
+									<tt clAss="monofont">\</tT>
+									<I>
+										<TT clasS="monofont">number</TT>
+									</I>
+								</font></TD>
+<TD>
+<font SIZE="2">Text already matched by the group <i>number.</i>
+								</font></td>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2">
+									<a namE="idx1073745527"></a>
+									<tt CLASs="monofont">\A</tt>
+								</fONT></Td>
+<td>
+<fONT Size="2">Only at the start of the string.</fONT></Td>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2">
+									<a nAme="idx1073745528"></a>
+									<Tt claSs="monofont">\Z</tt>
+								</FONT></td>
+<td>
+<FONT size="2">Only at the end of the string.</FONT></td>
+</tr>
+<TR VAlign="top">
+<td>
+<font size="2">
+									<a name="idx1073745529"></a>
+									<Tt cLass="monofont">\\</Tt>
+								</fonT></td>
+<tD>
+<FONt sizE="2">The literal backslash.</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font size="2">
+									<a name="idx1073745530"></a>
+									<tt class="monofont">(?:</Tt>
+									<i>
+										<Tt clAss="monofont">str</tt>
+									</I>
+									<tt cLASS="monofont">)</tt>
+								</foNT></TD>
+<td>
+<foNT SIze="2">Matches <tt CLASs="monofont">str,</tt> but the group can't be retrieved when matched.</font></td>
+</tr>
+<tr valign="top">
+<tD>
+<foNt siZe="2">
+									<a naMe="idx1073745531"></a>
+									<tT CLAss="monofont">(?!</tt>
+									<I>
+										<TT Class="monofont">str</TT>
+									</I>
+									<Tt claSS="monofont">)</TT>
+								</font></td>
+<td>
+<font size="2">If not followed by <tt clAss="monofont">str</Tt> (for example, only matches <tt Class="monofont">r"Andre (?!Lessa)"</Tt> if it doesn't find <tt CLASs="monofont">"Andre Lessa"</tt>).</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt size="2">
+									<a name="idx1073745532"></a>
+									<tt class="monofont">(?=</tt>
+									<I>
+										<tt ClasS="monofont">str</tt>
+									</i>
+									<tT claSS="monofont">)</TT>
+								</font></TD>
+<TD>
+<font SIZE="2">If followed by <tt clASS="monofont">str.</Tt>
+								</font></td>
+</tr>
+<tr valign="top">
+<td>
+<fOnt Size="2">
+									<A name="idx1073745533"></A>
+									<tt cLASS="monofont">(?=.*</tt>
+									<i>
+										<tT CLAss="monofont">str</tt>
+									</I>
+									<TT Class="monofont">)</TT>
+								</FOnt></td>
+<td>
+<font size="2">If followed at some point by <tt clasS="monofont">str</tt> (for example, only matches <Tt clAss="monofont">r"Andre (?=.*Lessa)"</tt> if it finds something similar to <Tt clASS="monofont">"Andre S Lessa"</Tt>). This syntax doesn't consume any of the string, so in this example, the <tt cLASS="monofont">re</tt> only matches the <tt CLASs="monofont">"Andre "</tt> portion of the string.</fONT></Td>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2">
+									<a nAme="idx1073745534"></a>
+									<Tt claSs="monofont">(?#</tt>
+									<I>
+										<TT Class="monofont">str</TT>
+									</I>
+									<Tt claSS="monofont">)</TT>
+								</font></TD>
+<TD>
+<font size="2">This is just to insert a comment in the middle of the regular expression string.</font></td>
+</tr>
+<tr vaLigN="top">
+<td>
+<fOnt siZe="2">
+									<a nAME="idx1073745535"></A>
+									<tt clASS="monofont">(?P&lt;</Tt>
+									<i>
+										<tt CLASs="monofont">name</tt>
+									</i>
+									<TT CLass="monofont">&gt;…)</tt>
+								</font></td>
+<td>
+<font sizE="2">Matches the regular expression that follows the name and creates a group name.</foNt></td>
+</Tr>
+<tr vAligN="top">
+<TD>
+<Font sIZE="2">
+									<A name="idx1073745536"></A>
+									<TT Class="monofont">(?P=</TT>
+									<I>
+										<Tt class="monofont">name</tt>
+									</i>
+									<tt class="monofont">)</tt>
+								</foNt></tD>
+<td>
+<fOnt siZe="2">Matches the same things that the group name has matched.</foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+									<A NAMe="idx1073745537"></a>
+									<tt class="monofont">.*</tt>
+								</font></td>
+<td>
+<fOnt Size="2">Any number of characters.<A name="idx1073745538"></A>
+									<a naME="idx1073745539"></A>
+									<A name="idx1073745540"></A>
+									<A NAme="idx1073745541"></a>
+									<a NAME="idx1073745542"></a>
+								</fonT></TD>
+</Tr>
+</colgroup>
+</table></p>
+
+				<p>In case you need to know a full definition of the syntax, visit the following link:</p>
+
+				<pre>
+					
+				<A taRget="_blank" Href="http://www.python.org/doc/current/lib/re-syntax.html">http://www.python.org/doc/current/lib/re-syntax.html</a>
+			
+				</Pre>
+
+				<p>Next, you have the regular expression flags. These flags are used as <TT CLass="monofont">bitwise-or</tT> operators in the <TT Class="monofont">re</TT> functions.</P>
+
+				<BlockQUOTe>
+<p>
+						<p>
+							
+								<tt class="monofont">re.DOTALL</tt> (also used as <tt class="monofont">re.S</tT>)— 
+    
+							Allows the dot character to match all characters, including newlines.
+						</p>
+
+					</p>
+<P>
+						<p>
+							
+								<tt Class="monofont">re.IGNORE</Tt> (also used as <tt CLASs="monofont">re.I</tt>)— 
+    
+							Allows non case sensitive matching.
+						</p>
+
+					</P>
+<P>
+						<P>
+							
+								<Tt claSS="monofont">re.LOCALE</TT> (also used as <tt clASS="monofont">re.L</Tt>)— 
+    
+							Enables locale settings for <tt class="monofont">\w, \W, \b,</tt> and <tt class="monofont">\B.</tt>
+							
+						</p>
+
+					</P>
+<p>
+						<p>
+							
+								<Tt clAss="monofont">re.MULTILINE</tt> (also used as <Tt clASS="monofont">re.M</Tt>)— 
+    
+							Applies <tt cLASS="monofont">^</tt> and <tt CLASs="monofont">$</tt> for each line, and not for each string.
+						</p>
+
+					</P>
+<P>
+						<P>
+							
+								<Tt class="monofont">re.VERBOSE</tt> (also used as <tt class="monofont">re.X</tt>)— 
+    
+							Ignores unescaped whitespace and comments.
+						</p>
+
+					</p>
+</bLocKquoTe>
+				<p>Let's look at our first example of regular expressions. Suppose that you have the following conversation text:</p>
+
+				<pRe>
+					
+oldtext = """
+    That terrible dead PARROT sketch must end!
+    Oh, Come on! It is a terrific parrot joke.
+    I agree, but I don't like to see dead parrot.
+    Ok. I will suggest a new terrific parrot sketch."""
+
+				</prE>
+
+				<P>Okay. Now our challenge is to create an expression that is able to identify all the words <TT clasS="monofont">"parrot"</TT> that</P>
+
+				<ol tyPE="1">
+<LI>
+
+						<p>Are preceded by either <tt cLASS="monofont">"terrible"</tt> or <tt class="monofont">"terrific"</tt> (such as <tt class="monofont">"terrible parrot", "terrific parrot"</tt>).</P>
+
+					</li>
+<Li>
+
+						<p>Are not immediately preceded by the word <tT clasS="monofont">"dead".</tt>
+						</p>
+
+					</LI>
+<LI>
+
+						<p>Are separated from the previous word by a whitespace (<tt cLASS="monofont">"terribleparrot"</tt> does not work).</p>
+
+					</lI>
+<LI>
+
+						<P>Are not followed by the word <tt clASS="monofont">"joke",</Tt> hence, <tt class="monofont">"parrot joke"</tt> is an invalid string.</p>
+
+					</li>
+<li>
+
+						<p>Are followed by a whitespace, and right after, by the word <tt clAss="monofont">"sketch"</Tt> (neither <tt Class="monofont">"parrotsketch"</Tt> nor <tt CLASs="monofont">"parrot old sketch"</tt> are valid).</p>
+
+					</LI>
+<LI>
+
+						<p>The matching must not be case sensitive.<a naME="idx1073745543"></A>
+							<A name="idx1073745544"></A>
+							<A NAme="idx1073745545"></a>
+							<a name="idx1073745546"></a>
+						</p>
+
+					</li>
+</ol>
+
+				<p>The word <tt claSs="monofont">"parrot"</tT> that gets identified must be replaced with the word <tt cLass="monofont">"spam".</tT>
+				</p>
+
+				<p>The following code is a possible solution for this problem:</p>
+
+				<PRE>
+					
+ 1: import re
+ 2: restring = re.compile(
+ 3:     r"""\b(terrible|terrific)
+ 4:         (?!dead)
+ 5:         (\s+
+ 6:          parrot
+ 7:         (?!joke)
+ 8:         \s+sketch)""",
+ 9:     re.DOTALL | re.IGNORECASE | re.VERBOSE)
+10: newline = restring.sub(r'\1 spam', oldtext)
+
+				</Pre>
+
+				<p>We are calling the <tT CLAss="monofont">compile</tt> function (line 2), which generates a compiled regular expression object called <TT CLass="monofont">restring.</tT> Then, we call the class method <TT Class="monofont">sub</tt> (line 10) to substitute the matches found in the text variable that we have already defined (<tt class="monofont">oldtext</tt>). The <tt claSs="monofont">sub()</tT> method replaces the entire matched section of the string. Note that the <tt cLass="monofont">r'\1 spam'</tT> argument uses <tt cLASS="monofont">\1</tt> to make sure that the result collected in the first group of parenthesis (<tt CLASs="monofont">"Terrible"</tt> and <tT CLAss="monofont">"Terrific"</tt>) is placed right before the word <TT CLass="monofont">"spam".</tt>
+				</p>
+
+				
+					<h4>
+				
+				Regular Expression Functions and Object Methods</h4>
+					<p>The <tt class="monofont">re</tt> module implements just one exception—the <tt ClaSs="monofont">error</tt> exception, which is raised only when a regular expression string is not valid.</P>
+
+					<p>Next, you have the list of available <tt cLass="monofont">re</TT> functions.</P>
+
+					
+						<H5>
+							<tt clASS="monofont">re.compile()</Tt>
+						</h5>
+						<p>Compiles a regular expression pattern string and generates a regular expression object.<a NAME="idx1073745547"></a>
+							<a naME="idx1073745548"></A>
+							<A name="idx1073745549"></a>
+							<a name="idx1073745550"></a>
+							<a name="idx1073745551"></a>
+							<a naMe="idx1073745552"></a>
+						</P>
+
+						<pre>
+							
+RegExpObject = compile(<I>string</i> [, <i>flags</i>])
+
+						</pRe>
+
+						<p>For details about the <tT CLAss="monofont">flags</tt> argument, check out the previous list of available flags.</P>
+
+						<P>Every regular expression object exposes the following attributes and methods:<A Name="idx1073745553"></a>
+							<A NAMe="idx1073745554"></a>
+						</p>
+
+					
+					
+						<h5>
+							<TT CLass="monofont">RegExpObject.search()</tt>
+						</h5>
+						<p>Searches for the compiled pattern in the string.</p>
+
+						<pre>
+							
+MatchObject = RegExpObject.search(<i>string</i> [,<i>startpos</i>] [,<i>endpos</i>])
+
+						</pre>
+
+						<P>It uses the <tt ClasS="monofont">startpos</tt> and <tt ClasS="monofont">endpos</TT> arguments to delimit the range of the search.</P>
+
+						<p>All functions that are supposed to return a <tt cLASS="monofont">MatchObject</tt> when the function succeeds, return <tt CLASs="monofont">None</tt> when a fail occurs.</p>
+
+					
+					
+						<H5>
+							<TT Class="monofont">RegExpObject.match()</tt>
+						</h5>
+						<p>Checks whether the initial characters of <tt class="monofont">string</tt> match the compiled pattern.</p>
+
+						<prE>
+							
+MatchObject = RegExpObject.match(<i>string</i> [,<I>startpos</i>] [,<i>endpos</i>])
+
+						</Pre>
+
+						<p>It uses the <tT claSS="monofont">startpos</TT> and <tt clASS="monofont">endpos</Tt> arguments to delimit the scope of the matching.</p>
+
+					
+					
+						<h5>
+							<tT CLAss="monofont">RegExpObject.findall()</tt>
+						</H5>
+						<P>Finds nonoverlapping matches of the compiled pattern in <TT class="monofont">string.</tt>
+						</p>
+
+						<pre>
+							
+MatchList = RegExpObject.findall(<i>string</i>)
+
+						</pre>
+
+					
+					
+						<h5>
+							<tt cLasS="monofont">
+								<a naMe="idx1073745555"></a>
+								<a nAme="idx1073745556"></a>RegExpObject.split()</TT>
+						</H5>
+						<P>Splits the <tt clASS="monofont">string</Tt> by the occurrences of the compiled pattern.<a naME="idx1073745557"></A>
+							<A name="idx1073745558"></A>
+							<A NAme="idx1073745559"></a>
+							<a name="idx1073745560"></a>
+							<a name="idx1073745561"></a>
+							<a name="idx1073745562"></A>
+						</p>
+
+						<pRe>
+							
+StringList = RegExpObject.split(<i>string</i> [, <I>maxsplit</i>])
+
+						</pre>
+
+					
+					
+						<H5>
+							<tt cLASS="monofont">
+								<a namE="idx1073745563"></A>
+								<A Name="idx1073745564"></a>RegExpObject.sub()</TT>
+						</H5>
+						<P>Substitutes the matches of pattern in <tt clASS="monofont">string</Tt> with <tt class="monofont">newtext.</tt>
+						</p>
+
+						<pre>
+							
+RegExpObject.sub(<i>newtext,</i>
+						<i>string</i> [, <i>count</i>])
+
+						</Pre>
+
+						<P>The replacements are done <tt cLass="monofont">count</tT> number of times, starting from the left side of string. When you leave out the <tt cLASS="monofont">count</tt> argument, you are not really saying don't perform the substitution at all, but apply it as many times as necessary.</p>
+
+					
+					
+						<h5>
+							<TT CLass="monofont">RegExpObject.subn()</tT>
+						</H5>
+						<P>It is similar to sub. However, it returns a tuple that contains the new <Tt claSS="monofont">string</TT> and the number of substitutions executed. When you leave out the count argument, you are not really saying don't perform the substitution at all, but apply it as many times as necessary.</p>
+
+						<pre>
+							
+RegExpObject.subn(<i>newtext, string</i> [, <i>count</i>])
+
+						</pre>
+
+					
+					
+						<h5>
+							<tt class="monofont">
+								<a NamE="idx1073745565"></a>
+								<a nAme="idx1073745566"></a>re.search()</tT>
+						</h5>
+						<p>Searches for the <tT CLAss="monofont">pattern</tt> in the <TT CLass="monofont">string.</tT>
+						</P>
+
+						<PRe>
+							
+MatchObject = search(<i>pattern, string</i> [,<i>flags</I>])
+
+						</PRE>
+
+					
+					
+						<h5>
+							<tt class="monofont">
+								<a name="idx1073745567"></a>
+								<a name="idx1073745568"></a>re.match()</Tt>
+						</h5>
+						<P>Sees whether the initial characters of <tt cLass="monofont">string</tT> match the <tt cLASS="monofont">pattern.</tt>
+						</p>
+
+						<pRE>
+							
+MatchObject = match(<I>pattern, string</I> [,<i>flags</i>])
+
+						</prE>
+
+					
+					
+						<H5>
+							<TT clasS="monofont">
+								<A NAme="idx1073745569"></a>
+								<a name="idx1073745570"></a>re.findall()</tt>
+						</h5>
+						<p>Finds nonoverlapping matches of <tt class="monofont">pattern</Tt> in <tT claSs="monofont">string.</tt>
+						</p>
+
+						<Pre>
+							
+MatchList = findall(<i>pattern, string</I>)
+
+						</PRE>
+
+					
+					
+						<h5>
+							<tt cLASS="monofont">
+								<a namE="idx1073745571"></A>
+								<A Name="idx1073745572"></a>re.split()</TT>
+						</H5>
+						<P>Splits the <tt class="monofont">string</tt> by the occurrences of <tt class="monofont">pattern.</tt>
+						</p>
+
+						<pRe>
+							
+StringList = split(<i>pattern, string</I> [, <i>maxsplit</i>])
+
+						</pRe>
+
+					
+					
+						<h5>
+							<tt ClasS="monofont">
+								<A NAme="idx1073745573"></a>
+								<a NAME="idx1073745574"></a>re.sub()</tt>
+						</h5>
+						<P>Substitutes the matches of <TT Class="monofont">pattern</TT> in <TT class="monofont">string</tt> with <tt class="monofont">newtext.</tt>
+							<a namE="idx1073745575"></a>
+							<a Name="idx1073745576"></A>
+							<a namE="idx1073745577"></a>
+							<a nAME="idx1073745578"></A>
+							<a namE="idx1073745579"></A>
+							<A Name="idx1073745580"></a>
+						</P>
+
+						<PRE>
+							
+sub(<i>pattern, newtext, string</i> [, <i>count</i>])
+
+						</PRE>
+
+						<P>The replacements are done <tt class="monofont">count</tt> number of times, starting from the left side of string.<a name="idx1073745581"></a>
+							<a name="idx1073745582"></A>
+						</p>
+
+					
+					
+						<h5>
+							<Tt clAss="monofont">re.subn()</tt>
+						</H5>
+						<p>It is similar to <tt CLASs="monofont">sub().</tt> However, it returns a tuple that contains the new string and the number of substitutions executed.</p>
+
+						<PRE>
+							
+subn(<I>pattern, newtext, string</i> [, count = 0])
+
+						</pre>
+
+					
+					
+						<H5>
+							<TT Class="monofont">re.escape()</TT>
+						</H5>
+						<P>Backslashes all the nonalphanumeric characters of <tt class="monofont">string.</tt>
+						</p>
+
+						<pre>
+							
+newstring = escape(<i>string</i>)
+
+						</pre>
+
+						<p>Each <a NamE="idx1073745583"></a>
+							<a nAme="idx1073745584"></a>
+							<a Name="idx1073745585"></A>
+							<TT Class="monofont">RegExpObject</TT> also implements the following methods and attributes:</P>
+
+						<BlockQUOTe>
+<p>
+								<p>
+									
+										<tT CLAss="monofont">RegExpObject.flags—</tt>
+									 
+    
+									Returns the flag arguments used at the compilation time of the regular expression object.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt class="monofont">RegExpObject.groupindex—</tt>
+									 
+    
+									Returns a dictionary that maps symbolic group names to group numbers.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<tt ClasS="monofont">RegExpObject.pattern—</tt>
+									 
+    
+									Returns the object's original pattern string.
+								</p>
+
+							</p>
+</BlocKQUOte>
+						<p>Each <a NAME="idx1073745586"></a>
+							<a naME="idx1073745587"></A>
+							<A name="idx1073745588"></A>
+							<TT Class="monofont">MatchObject</tt> implements the following methods and attributes:</p>
+
+						<blockquote>
+<p>
+								<p>
+									
+										<tT clAss="monofont">MatchObject.group([groupid,…])—</tT>
+									 
+    
+									Once you provide a list of group names or numbers, Python returns a tuple containing the text matched by each of the groups.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<Tt clASS="monofont">MatchObject.groupdict()—</Tt>
+									 
+    
+									Returns a dictionary that contains all the named subgroups of the match.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<TT Class="monofont">MatchObject.groups()—</TT>
+									 
+    
+									Returns a tuple that contains all the text matched by all groups.
+								</P>
+
+							</P>
+<p>
+								<p>
+									
+										<tt CLASs="monofont">MatchObject.start([group])</tt> and 
+								
+								<tt class="monofont">MatchObject.end([group])—</tt>
+									 
+    
+									Returns the first and last positions of the substring matched by the group.
+								</p>
+
+							</p>
+<p>
+								<p>
+									
+										<tt clAss="monofont">MatchObject.span([group])—</Tt>
+									 
+    
+									Returns a tuple that contains both the <tt Class="monofont">MatchObject.start</Tt> and the <tt CLASs="monofont">MatchObject.end</tt> values.
+								</p>
+
+							</P>
+<P>
+								<P>
+									
+										<Tt claSS="monofont">MatchObject.pos</TT> and 
+								
+								<tt clASS="monofont">MatchObject.endpos—</Tt>
+									 
+    
+									Returns the <tt class="monofont">pos</tt> and <tt class="monofont">endpos</tt> values, which were passed to the function when creating it.
+								</p>
+
+							</P>
+<p>
+								<p>
+									
+										<Tt clAss="monofont">MatchObject.string—</tt>
+									 
+    
+									Returns the <Tt clASS="monofont">string</Tt> value, which was passed to the function when creating it.
+								</p>
+
+							</p>
+<p>
+								<P>
+									
+										<TT Class="monofont">MatchObject.re—</TT>
+									 
+    
+									Return the <TT clasS="monofont">RegExpObject</TT> that was used to generate the <Tt class="monofont">MatchObject</tt> instance.<a name="idx1073745589"></a>
+										<a name="idx1073745590"></a>
+										<A naMe="idx1073745591"></a>
+										<a Name="idx1073745592"></a>
+										<A namE="idx1073745593"></A>
+										<A Name="idx1073745594"></a>
+										<A NAMe="idx1073745595"></a>
+										<a nAME="idx1073745596"></A>
+									
+								</p>
+
+							</p>
+</blOCKQuote>
+						<div class="note"><p class="notetitle"><b>Special Note for Python 2.0 Users</b></P><p>
+
+							
+							<p>All the internals of the <Tt clAss="monofont">re</tt> module <A namE="idx1073745597"></A>
+								<A Name="idx1073745598"></a>were changed in Python 2.0. Now, the regular expression engine is located in a new module called <TT CLass="monofont">SRE</tT>
+								<A NAme="idx1073745599"></a>
+								<a NAME="idx1073745600"></a>written by <i>Fredrik Lundh of Secret Labs AB.</i> The reason for that was to allow Unicode strings to be used in regular expressions along with 8-bit strings. Pay attention to the <tt class="monofont">re</tt> module as it continues to be the front-end module, which internally calls the <tt class="monofont">SRE</tT> module.</p>
+
+						</p></Div>
+<bR>
+<br>
+
+					
+				
+			</foNt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="154.html" title="Scientific Computing"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=155" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="155.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="156.html" title="Threads"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+$ (dollar sign)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745495">re module</a><BR>
+(?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745530">re module</a><BR>
+(?!str)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745531">re module</a><BR>
+(?#str)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745534">re module</a><BR>
+(?=.str)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745533">re module</a><BR>
+(?=str)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745532">re module</a><BR>
+(?P&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745535">name</a><BR>
+(?P=name)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745536">re module</a><BR>
+(re)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745516">re module</a><BR>
+* (asterisk)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745497">re module</a><BR>
+*?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745504">re module</a><BR>
++ (plus sign)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745499">re module</a><BR>
++?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745505">re module</a><BR>
+. (period)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745489">re module</a><BR>
+.*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745537">re module</a><BR>
+? (question mark)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745503">re module</a><BR>
+??<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745506">re module</a><BR>
+[^list]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745515">re module</a><BR>
+[list]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745514">re module</a><BR>
+\\<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745529">re module</a><BR>
+\A<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745527">re module</a><BR>
+\b<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745522">re module</a><BR>
+\B<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745523">re module</a><BR>
+\d<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745520">re module</a><BR>
+\D<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745521">re module</a><BR>
+\number<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745526">re module</a><BR>
+\s<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745524">re module</a><BR>
+\S<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745525">re module</a><BR>
+\W<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745519">re module</a><BR>
+\Z<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745528">re module</a><BR>
+^ (carat)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745493">re module</a><BR>
+{m, n}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745507">re module</a><BR>
+{m, n}?<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745513">re module</a><BR>
+| (pipe)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745501">re module</a><BR>
+Anystring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745517">re module</a><BR>
+asterisk (*)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745496">re module</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745588">MatchObject</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745585">RegExpObject</a><BR>
+carat (^)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745492">re module</a><BR>
+characters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745512">recognized by re module</a> <a href="#idx1073745542">2nd</a><BR>
+dollar sign ($)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745494">re module</a><BR>
+dot(.)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745491">re module</a><BR>
+expressions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745509">regular</a> <a href="#idx1073745539">2nd</a> <a href="#idx1073745544">3rd</a> <a href="#idx1073745548">4th</a> <a href="#idx1073745558">5th</a> <a href="#idx1073745576">6th</a> <a href="#idx1073745590">7th</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745553">re.compile()</a><BR>
+MatchObject<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745586">methods and attributes</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745587">MatchObject</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745552">regular expressions</a> <a href="#idx1073745562">2nd</a> <a href="#idx1073745580">3rd</a> <a href="#idx1073745594">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745595">re.escape()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745569">re.findall()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745567">re.match()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745565">re.search()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745571">re.split()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745573">re.sub()</a> <a href="#idx1073745581">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745584">RegExpObject</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745555">RegExpObject.split()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745563">RegExpObject.sub()</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745488">re</a> <a href="#idx1073745511">2nd</a> <a href="#idx1073745541">3rd</a> <a href="#idx1073745546">4th</a> <a href="#idx1073745550">5th</a> <a href="#idx1073745560">6th</a> <a href="#idx1073745578">7th</a> <a href="#idx1073745592">8th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745598">internals</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745600">SRE</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745551">regular expressions</a> <a href="#idx1073745561">2nd</a> <a href="#idx1073745579">3rd</a> <a href="#idx1073745593">4th</a><BR>
+period (.)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745490">re module</a><BR>
+pipe (|)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745500">re module</a><BR>
+plus sign (+)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745498">re module</a><BR>
+question mark (?)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745502">re module</a><BR>
+ <a href="#idx1073745487">re module</a> <a href="#idx1073745510">2nd</a> <a href="#idx1073745518">3rd</a> <a href="#idx1073745540">4th</a> <a href="#idx1073745545">5th</a> <a href="#idx1073745549">6th</a> <a href="#idx1073745559">7th</a> <a href="#idx1073745577">8th</a> <a href="#idx1073745591">9th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745597">internals</a><BR>
+ <a href="#idx1073745554">re.compile() function</a><BR>
+ <a href="#idx1073745596">re.escape() method</a><BR>
+ <a href="#idx1073745570">re.findall() method</a><BR>
+ <a href="#idx1073745568">re.match() method</a><BR>
+ <a href="#idx1073745566">re.search() method</a><BR>
+ <a href="#idx1073745572">re.split() method</a><BR>
+ <a href="#idx1073745574">re.sub() method</a> <a href="#idx1073745582">2nd</a><BR>
+RegExpObject<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745583">methods and attributes</a><BR>
+ <a href="#idx1073745556">RegExpObject.split() method</a><BR>
+ <a href="#idx1073745564">RegExpObject.sub() method</a><BR>
+ <a href="#idx1073745508">regular expressions</a> <a href="#idx1073745538">2nd</a> <a href="#idx1073745543">3rd</a> <a href="#idx1073745547">4th</a> <a href="#idx1073745557">5th</a> <a href="#idx1073745575">6th</a> <a href="#idx1073745589">7th</a><BR>
+ <a href="#idx1073745599">SRE module</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

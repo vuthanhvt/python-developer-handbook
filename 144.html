@@ -1,0 +1,114 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; ADO (ActiveX Data Objects)</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="137.html" class="navtitle">8. Working with Databases</a> &gt; <span class="nonavtitle">ADO (ActiveX Data Objects)</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="143.html" title="The ODBC Module"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=144" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="144.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="145.html" title="Using SQL"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A39%3A13+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147045098085067243103033</font><a href="read9.asp?bookname=0672319942&snode=144&now=5%2F31%2F2002+4%3A39%3A13+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			ADO (ActiveX Data Objects)</h3>
+				<p>
+					<i>ActiveX Data Objects</I>
+					<I>(ADO)</I> is an Automation-based interface technology for accessing data. ADO uses the OLE DB interface to access a broad range of data sources, including but not limited to data provided via ODBC.</P>
+
+				<p>Although ODBC seems to be the standard in the market, ADO offers significant benefits. ADO is a rich and fully featured object model (see <a hrEF="128.html">Chapter 7, "Objects Interfacing and Distribution,"
+					</A>  for details). The library name in which ADO lives is called <Tt claSS="monofont">ADODB.</TT>  The ADO object model gives you fantastic flexibility.<a name="idx1073745047"></a>
+					<a name="idx1073745048"></a>
+					<a name="idx1073745049"></a>
+				</p>
+
+				<p>Users of <A naMe="idx1073745050"></a>
+					<a Name="idx1073745051"></a>
+					<A namE="idx1073745052"></A>
+					<I>RDO (Remote Data Objects)</I> and <a namE="idx1073745053"></A>DAO should have no problem moving to ADO because the overall design of ADO comes from Microsoft's experience in developing those interfaces.</P>
+
+				<P>Microsoft's <a namE="idx1073745054"></A>
+					<A Name="idx1073745055"></a>
+					<A NAMe="idx1073745056"></a>
+					<i>Remote Data Service (RDS)</i> is a component of ADO that provides fast and efficient data connectivity and the data-publishing framework for applications hosted in Microsoft Internet Explorer. It is based on a client/server distributed technology that works over HTTP, HTTPS (HTTP over Secure Sockets layer), and DCOM application protocols. Using data-aware ActiveX controls, RDS provides data access programming in the style of Microsoft Visual Basic to Web developers who need to build distributed, data-intensive applications for use over corporate intranets and the Internet. The use of ADO ties your application to Win32, whereas using the Python DB API does not.</p>
+
+				<p>After you have created the <tt class="monofont">Connection</tt> object, you need to <a name="idx1073745057"></A>
+					<a nAme="idx1073745058"></a>
+					<A name="idx1073745059"></A>open a database connection by assigning a string value to the <tt cLASS="monofont">Open</tt> method. This string can be the name of a <i>DSN (Data Source Name)</i> or a complete connection string.</P>
+
+				<PRE>
+					
+&gt;&gt;&gt; import win32com.client
+&gt;&gt;&gt; adoConn = win32com.client.Dispatch('ADODB.Connection')
+&gt;&gt;&gt; adoConn.Open('data source=mySQLServer;')
+&gt;&gt;&gt; adoRS = adoConn.Execute ('truncate table tmp_table')
+&gt;&gt;&gt; args = "34,25"
+&gt;&gt;&gt; del adoRS
+&gt;&gt;&gt; adoRS = adoConn.Execute ('insert into tmp_table values ('+args+')')
+&gt;&gt;&gt; args = "11,12"
+&gt;&gt;&gt; del adoRS
+&gt;&gt;&gt; adoRS = adoConn.Execute ('insert into tmp_table values ('+args+')')
+&gt;&gt;&gt; del adoRS
+&gt;&gt;&gt; (adoRS, success) = adoConn.Execute ('Select c1, c2 from tmp_table')
+&gt;&gt;&gt; while not adoRS.EOF:
+…     vl_a = adoRS.Fields('c1').Value
+…     vl_b = adoRS.Fields('c2').Value
+…     print vl_a, vl_b
+…     adoRS.MoveNext()
+…
+34 25
+11 12
+&gt;&gt;&gt; adoRS.MoveFirst()
+&gt;&gt;&gt; (adoRS, success) = adoConn.Execute ('Select c1, c2 from tmp_table')
+&gt;&gt;&gt; print vl_a, vl_b
+34 25
+			
+				</pre>
+
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="143.html" title="The ODBC Module"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=144" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="144.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="145.html" title="Using SQL"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073745048">ActiveX Data Objects (ADOs)</a><BR>
+connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745058">opening</a><BR>
+ <a href="#idx1073745053">DAO</a><BR>
+databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745047">ActiveX Data Objects (ADOs)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745059">opening connections</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745049">ActiveX Data (ADO)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745051">Remote Data (RDO)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745055">Remote Data (RDS)</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745057">databases</a><BR>
+RDOÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745052">Ò</a><BR>
+RDSÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745056">Ò</a><BR>
+ <a href="#idx1073745050">Remote Data Objects (RDOs)</a><BR>
+ <a href="#idx1073745054">Remote Data Service (RDS)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

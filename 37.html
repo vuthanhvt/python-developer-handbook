@@ -1,0 +1,289 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Code Example</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Code Example</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="36.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=37" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="37.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="39.html" title="3. Python Libraries"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A20%3A50+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146122163090063130189016</font><a href="read9.asp?bookname=0672319942&snode=37&now=5%2F31%2F2002+4%3A20%3A50+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			
+			Code Example</h3>
+				<p>This is a very simple benchmark application that offers you a general overview of Python programming. Note that this version doesn't provide any type or error handling and the interface is still very rough.</p>
+
+				<P>Before going through the code, you must first understand what the program does. <A HRef="37#1.html">Figure 2.4</a> shows an interaction with the program.</p>
+
+				<CENTer>
+					<h5>
+<a NAME="1"></a>Figure 2.4. This example covers many aspects of basic Python concepts.</h5>
+					
+						
+							<img border="0" width="500" heigHt="459" sRc="graphics/02fig04.gif" alT="graphics/02fig04.gif">
+						
+					
+				</centEr>
+
+				<p>The program consists of two questions that should be answered by an <i>n</I> number of companies. These questions cover the number of IT employees and the total IT cost of a company. The benchmark uses the <TT Class="monofont">total cost / employee</TT> value to calculate the statistics.</P>
+
+				<P>After checking the results, you have the option to save them in a file, and later when opening the application again, you get the option to visualize them again.</p>
+
+				
+					<h5>
+Listing 2.1 Benchmark Tool (File benchmark.py)</h5>
+					<pRE CLass="monofont">
+  1: ###
+  2: # Program: Benchmark tool
+  3: # Author: Andre S Lessa
+  4: ###
+  5:
+  6: ### import modules
+  7:
+  8: import sys
+  9: import string
+ 10: import operator
+ 11:
+ 12: ### create dictionary of questions
+ 13:
+ 14: def definequiz():
+ 15:     questions = { }
+ 16:     questions["1"] = "What is the number of IT employees of this
+         company?"
+ 17:     questions["2"] = "What is the total IT cost of this company?"
+ 18:
+ 19:     return questions
+ 20:
+ 21: ### Loop to collect companies data
+ 22:
+ 23: def collectresults():
+ 24:     company = getcompanyname()
+ 25:     while company:
+ 26:         if company == "":
+ 27:             break
+ 28:
+ 29:         quizkeys = quiz.keys()
+ 30:         quizkeys.sort()
+ 31:         for question in quizkeys:
+ 32:             showquestion(lo_question=question, lo_company=company)
+ 33:
+ 34:         company = getcompanyname()
+ 35:
+ 36:     if len(answers) &gt; 0:
+ 37:         generateresults()
+ 38:         showresults(gl_companies, gl_avg, gl_max, gl_min)
+ 39:
+ 40:         userinput = raw_input ("Do you want to save your results ? ")
+ 41:         if string.upper(userinput[0]) == "Y":
+ 42:             saveresults(gl_companies, gl_avg, gl_max, gl_min)
+ 43:
+ 44:     return
+ 45:
+ 46: ### Generate benchmark results
+ 47:
+ 48: def generateresults():
+ 49:     global gl_companies, gl_avg, gl_max, gl_min
+ 50:
+ 51:     gl_companies = string.join(answers.keys(), ",")
+ 52:
+ 53:     company_count = len(answers.keys())
+ 54:
+ 55:     lo_avg = []
+ 56:
+ 57:     for company in answers.keys():
+ 58:         lo_employees = answers[company][0][1]
+ 59:         lo_cost = answers[company][1][1]
+ 60:         average = (float(lo_cost) / int(lo_employees))
+ 61:         lo_avg = lo_avg + [average]
+ 62:
+ 63:     gl_max = max(lo_avg)
+ 64:     gl_min = min(lo_avg)
+ 65:     gl_avg = reduce(operator.add, lo_avg) / company_count
+ 66:
+ 67:     return
+ 68:
+ 69: ### Interface to enter company name
+ 70:
+ 71: def getcompanyname():
+ 72:     print "Please enter the company name, " }
+ 73:     "or press ENTER when you are done."
+ 74:     userinput = raw_input()
+ 75:     return userinput
+ 76:
+ 77: ### Displays questions and collect results
+ 78:
+ 79: def showquestion(lo_question, lo_company):
+ 80:     print quiz[lo_question]
+ 81:     if answers.has_key(lo_company):
+ 82:         answers[lo_company] = answers[lo_company] + }
+ 83:         [coerce(lo_question, raw_input())]
+ 84:     else:
+ 85:         answers[lo_company] = [coerce(lo_question, raw_input())]
+ 86:     return
+ 87:
+ 88: ### Save results in a file
+ 89:
+ 90: def saveresults(*arguments):
+ 91:     file = open(filename, "w")
+ 92:     for value in arguments:
+ 93:         file.write(repr(value)+"\ n")
+ 94:     file.close
+ 95:     showresults(gl_companies, gl_avg, gl_max, gl_min)
+ 96:     print "The results were saved."
+ 97:     print
+ 98:
+ 99: ### Load results from a file
+100:
+101: def loadresults():
+102:     count = 0
+103:     file = open(filename, "r")
+104:     line = file.readline()
+105:     line = line[:-1]
+106:     while line:
+107:         if count == 0:
+108:             lo_companies = line
+109:         if count == 1:
+110:             lo_avg = float(line)
+111:         elif count == 2:
+112:             lo_max = float(line)
+113:         elif count == 3:
+114:             lo_min = float(line)
+115:         line = file.readline()
+116:         line = line[:-1]
+117:         count = count + 1
+118:     file.close()
+119:     return(lo_companies, lo_avg, lo_max, lo_min)
+120:
+121: ### Show results in the screen
+122:
+123: def showresults(lo_companies, lo_avg, lo_max, lo_min):
+124:     print "Companies : "
+125:     print lo_companies
+126:     print "-------------------------------------"
+127:     print "%0.2f is the average cost/employees" % lo_avg
+128:     print "%0.2f is the maximum cost/employees" % lo_max
+129:     print "%0.2f is the minimum cost/employees" % lo_min
+130:     print
+131:     return
+132:
+133: ### Main action block
+134:
+135: def main():
+136:     print
+137:     print "Welcome to the benchmark tool!"
+138:     print
+139:
+140:     userinput = raw_input("Do you want to load the saved results ? ")
+141:
+142:     if userinput == "":
+143:         collectresults()
+144:     elif string.upper(userinput[0]) == "Y":
+145:         gl_companies, gl_avg, gl_max, gl_min = loadresults()
+146:         showresults(gl_companies, gl_avg, gl_max, gl_min)
+147:     else:
+148:         collectresults()
+149:
+150:     print
+151:     sys.exit()
+152:
+153: ### Global Variables
+154:
+155: quiz = definequiz()
+156: answers = { }
+157: filename = "results.txt"
+158: gl_companies = ""
+159: gl_avg = 0
+160: gl_max = 0
+161: gl_min = 0
+162:
+163: main()
+			</pRE>
+				
+				<P>Note that the program  effectively starts at line 155, when the global variables are declared, and soon after that, the <Tt class="monofont">main()</tt> function is executed.</p>
+
+				<p>The following list shows some of the important concepts that are provided by this simple example.</p>
+
+				<p>Lines 8-10—Loads the required modules.</p>
+
+				<p>Lines 15-17, 53, 81—Dictionary manipulation.</p>
+
+				<p>The <tt clAss="monofont">answers</Tt> dictionary has the following structure:</p>
+
+				<p>{company1: [(question1,answer1), (question2,answer2), company2: [(question1,answer1), (question2,answer2), …}</P>
+
+				<p>Note that the dictionary values are lists of tuples.</p>
+
+				<p>Line 27—<tT claSS="monofont">break</TT> statement that exits the <tt clASS="monofont">while</Tt> loop.</p>
+
+				<p>Lines 29,30—Sorts dictionary keys.</p>
+
+				<P>Line 32—Named arguments.</P>
+
+				<P>Line 40—User input.</P>
+
+				<p>Lines 41, 51—Uses functions from imported modules.</p>
+
+				<p>Line 41—String manipulation.</p>
+
+				<P>Lines 53, 63-65—Uses built-in functions.</P>
+
+				<P>Line 90—Function with undefined number of arguments.</P>
+
+				<p>Lines 81-85—Creates and inserts a tuple in the dictionary.</p>
+
+				<p>Line 93—Adds a newline character to the value.</p>
+
+				<p>Line 104—Reads a line (delimited by the newline character).</p>
+
+				<p>Line 105—Removes the newline character.</p>
+
+				<p>Line 127—Formats the numbers to display only two decimals.</p>
+
+				<p>Line 151—Exits the application.</p>
+
+				<p>Line 163—Calls to the function that initializes the program.<a name="idx1073742656"></a>
+					<a NamE="idx1073742657"></a>
+					<a nAme="idx1073742658"></a>
+					<a Name="idx1073742659"></A>
+					<A NAme="idx1073742660"></a>
+				</p>
+
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="36.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=37" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="37.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="39.html" title="3. Python Libraries"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742658">benchmark tool source code</a><BR>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742656">benchmark tool</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742657">benchmark tool</a><BR>
+tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;benchmark<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742659">source code</a><BR>
+utilities<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;benchmark<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742660">source code</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

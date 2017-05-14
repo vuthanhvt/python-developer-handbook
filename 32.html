@@ -1,0 +1,552 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Functions and Procedures</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Functions and Procedures</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="31.html" title="Data Structures"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=32" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="32.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="33.html" title="Modules and Packages"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A19%3A53+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145080038234097053096052</font><a href="read3.asp?bookname=0672319942&snode=32&now=5%2F31%2F2002+4%3A19%3A53+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Functions and Procedures</h3>
+				<p>Functions and procedures are blocks of code that you can access from several different parts of your code. As you already know, Python gives you some <tT CLAss="monofont">built-in</tt> functions, but you can also create your own functions. Yours are called <A NAMe="idx1073742460"></a>
+					<a nAME="idx1073742461"></A>
+					<tt class="monofont">user-defined functions.</tt> Functions and procedures provide better modularity for your application and a high degree of code reusing.</p>
+
+				<p>Procedures are functions that don't return a value. The only difference between a function and a procedure is that a procedure has either a <a name="idx1073742462"></a>
+					<a naMe="idx1073742463"></a>
+					<Tt clAss="monofont">return</tt> command without arguments (that returns <Tt clASS="monofont">None</Tt>), or it doesn't have any return statement. From now on, I will use only the word <tt cLASS="monofont">function.</tt>
+				</p>
+
+				<p>While functions are being executed, they create their own <A NAMe="idx1073742464"></a>
+					<a nAME="idx1073742465"></A>
+					<tt class="monofont">namespace.</tt>
+				</p>
+
+				<p>Every time you invoke a function, such as <i>
+						<tt class="monofont">function</tT>
+					</i>
+					<tT claSs="monofont">(a,b,c)</tt>
+				</p>
+
+				<Ul>
+<li>
+						<P>Python does a search within its <TT Class="monofont">namespaces</TT> looking for <I>
+								<Tt claSS="monofont">function</TT>
+							</i> to identify whether this is a python object.</p>
+
+					</li>
+<LI>
+						<P>Python creates a tuple of the <I>arguments</i> that were passed. Following our example, we have <i>arguments</i>=(a,b,c).</p>
+
+					</li>
+<li>
+						<p>Python invokes the function internally like this: <tt class="monofont">apply(</tt>
+							<i>
+								<tT clAss="monofont">function,arguments</tT>
+							</i>
+							<tt cLass="monofont">).</TT>
+						</P>
+
+					</Li>
+</ul>
+				<p>As you can see, tuples are an unavoidable concept inside the language.</P>
+
+				<P>Python, by nature, allows introspection to an unprecedented degree. You can separate a function name from its parameters, store them in some place, play around with them, and later use the <TT clasS="monofont">apply built-in</TT> function to execute the function.</P>
+
+				
+					<h4>Functions</h4>
+					<p>Functions always start with the abbreviation <a NAME="idx1073742466"></a>
+						<a name="idx1073742467"></a>
+						<tt class="monofont">def.</tt> Their end is defined by the last line of the indented block of code that goes underneath.</p>
+
+					<p>The general <a nAme="idx1073742468"></A>
+						<a naMe="idx1073742469"></a>format of a function is as follows:</p>
+
+					<pRe>
+						
+def functionname(<i>arg1, arg2, …</i>):  # tuple of arguments
+    "documentation string"        # optional
+    &lt;statements&gt;
+
+					</PRE>
+
+					<P>Let's see a real example now:<a namE="idx1073742470"></A>
+						<A Name="idx1073742471"></a>
+					</P>
+
+					<PRE>
+						
+&gt;&gt;&gt; def addnumbers(x,y):
+…     "This function returns arg1 + arg2"
+…     return x + y
+…
+&gt;&gt;&gt; addnumbers(3,4)
+9
+
+					</pre>
+
+					<p>Remember that to <A NAMe="idx1073742472"></a>
+						<a name="idx1073742473"></a>
+						<a name="idx1073742474"></a>call a function without arguments, it's necessary to use empty parentheses.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; variable = name()      # instead of variable = name
+
+					</prE>
+
+					<p>As a matter of fact, remember that you can <a Name="idx1073742475"></A>
+						<a namE="idx1073742476"></a>
+						<a nAME="idx1073742477"></A>assign functions to variables.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; x = abs
+&gt;&gt;&gt; print x(-2)        # it's the same as saying print abs(-2)
+-2
+
+					</PRE>
+
+					<P>
+						<tt clASS="monofont">x = abs</Tt> returns the own function, and assigns its value to <tt cLASS="monofont">x.</tt>
+					</p>
+
+					<p>Python uses <a name="idx1073742478"></a>
+						<a name="idx1073742479"></a>
+						<i>dynamic namespaces.</i> In order to show that, the next example uses the value of <tt ClaSs="monofont">n,</tt> available at the time of calling the function, because <Tt claSs="monofont">n</tt> isn't defined inside the function nor is it part of its list of arguments. <TT CLass="monofont">n</tT> is part of the global namespace of the function.</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; def add_to_n(arg):
+…       return n + arg
+…
+
+					</pre>
+
+					<P>Variables that have values assigned to them inside a function always belong to the function <A NAme="idx1073742480"></a>
+						<a NAME="idx1073742481"></a>
+						<tt class="monofont">namespace.</tt> Study the next example to learn how to <a name="idx1073742482"></a>
+						<a namE="idx1073742483"></a>
+						<a Name="idx1073742484"></A>
+						<a namE="idx1073742485"></a>
+						<a nAME="idx1073742486"></A>
+						<a namE="idx1073742487"></A>change a global variable inside a function by using the <A Name="idx1073742488"></a>
+						<A NAMe="idx1073742489"></a>keyword <tt CLASs="monofont">global.</tt>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; x = 10
+&gt;&gt;&gt; def nudge():
+…       global x
+…       x = 20
+…       return x
+…
+
+					</pre>
+
+					<p>Python implements <a name="idx1073742490"></a>
+						<a naMe="idx1073742491"></a>procedural abstraction. Although this topic has a scary name, it is something very easy and simple. Python offers this feature by providing anonymous functions implemented with the <A namE="idx1073742492"></a>
+						<a naMe="idx1073742493"></a>keyword <tT CLAss="monofont">lambda.</tt> This type of abstraction can be used when the function is just an expression. In other words, <TT CLass="monofont">lambda</tT> is just another way of writing <TT Class="monofont">def,</TT> except that it doesn't have to be named, and you can only put an expression in it. (The return is implicit.) It is intended to be just a shorthand to write small functions easier as shown in the following:<A Name="idx1073742494"></a>
+						<a name="idx1073742495"></a>
+						<a name="idx1073742496"></a>
+						<a namE="idx1073742497"></a>
+					</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; f = lambda x: x * 2
+&gt;&gt;&gt; f(20)
+40
+
+					</pRe>
+
+					<p>The previous case can also be written as follows:</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; def f(x):
+…           return x * 2
+&gt;&gt;&gt; f(30)
+60
+
+					</prE>
+
+					<P>Here's another example:</P>
+
+					<Pre>
+						
+&gt;&gt;&gt; def compose(func1,func2,y):
+…     f = lambda x, f1=func1, f2=func2: f1(f2(x))
+…     return f(y)
+…
+&gt;&gt;&gt; compose(chr,abs,-65)
+'A'
+
+					</prE>
+
+					<P>Note that in this last example, it is necessary to pass the default arguments to the <TT clasS="monofont">lambda</TT> function because Python has only local and global namespaces.</P>
+
+					<p>
+						<tt cLASS="monofont">lambda</tt> is very useful for functions—such as <tt class="monofont">map, filter,</tt> and <tt class="monofont">reduce—</tt>that need a function as an argument.</P>
+
+					<prE>
+						
+&gt;&gt;&gt; def listtostring(list):
+…       return reduce(lambda string, item: string + chr(item), list, "")
+…
+&gt;&gt;&gt; listtostring([1,2,3,4,5])
+"\001\002\003\004\005"
+				
+					</pre>
+
+					
+						<H5>
+					
+					Parameters</h5>
+						<p>All parameters (arguments) in the Python language are passed by reference. Modules, classes, instances, and other functions can be used as arguments to functions and examined dynamically. Keep in mind that you don't need to specify the object type of an argument. By default, arguments have a positional behavior, and you need to inform them in the same order that they were defined.<a nAme="idx1073742498"></a>
+							<A NAMe="idx1073742499"></a>
+							<a nAME="idx1073742500"></A>
+						</p>
+
+						<pre>
+							
+&gt;&gt;&gt; def powerdivision(x,y):
+…           return x/y
+…
+&gt;&gt;&gt; print powerdivision(4,2)
+2
+
+						</PRE>
+
+						<P>Whenever mutable objects (dictionaries and lists)—that are transported to a function as arguments—change within the function, their external values also change.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; a = [1]
+&gt;&gt;&gt; def changelist(argument):
+…       argument.append(4)
+…
+…   changelist(a)
+&gt;&gt;&gt; a
+[1,4]
+
+						</PRE>
+
+						<P>Python also offers you <a name="idx1073742501"></a>
+							<i>named</i> arguments. This type is different from <a name="idx1073742502"></a>
+							<i>positional</i> arguments because it enables you to call a function and pass argument names and values in an arbitrary way—the order isn't important at all.</p>
+
+						<p>Both function calls</p>
+
+						<pRe>
+							
+&gt;&gt;&gt; connect(port=80, name="www.bebemania.com.br")
+
+						</pRe>
+
+						<p>and</p>
+
+						<Pre>
+							
+&gt;&gt;&gt; connect(name="www.bebemania.com.br", port=80)
+
+						</prE>
+
+						<p>are executed perfectly well and in the same way (when the function is implemented, of course).</p>
+
+						<p>
+							<I>
+								<A NAme="idx1073742503"></a>
+							</i>
+							<I>Default</I> arguments are also allowed by the syntax. If the argument isn't provided, the default value takes place. The default value is optional. Even though its absence doesn't break your program, its presence cuts many lines from your code, as shown in the following:</P>
+
+						<Pre>
+							
+&gt;&gt;&gt; def connect(port=80):
+
+						</prE>
+
+						<P>The following example demonstrates <A Name="idx1073742504"></a>
+							<A NAMe="idx1073742505"></a>
+							<a name="idx1073742506"></a>namespace handling along with default arguments:</p>
+
+						<pre>
+							
+&gt;&gt;&gt; a = 5
+&gt;&gt;&gt; def test(b = a):
+…       print b
+…
+&gt;&gt;&gt; test()
+5
+&gt;&gt;&gt; test(2)
+2
+&gt;&gt;&gt; a = 10
+&gt;&gt;&gt; test()        # Note that the b wasn't reassigned
+5
+
+						</pre>
+
+						<p>This effect is because the value of <tt clAss="monofont">a</Tt> was collected when the function was created.<a nAme="idx1073742507"></a>
+							<a Name="idx1073742508"></A>
+						</P>
+
+						<P>In some cases, you cannot <A name="idx1073742509"></A>pre-identify the number of arguments that you might need. For this kind of situation, you can use the special symbols <A NAme="idx1073742510"></a>
+							<a NAME="idx1073742511"></a>
+							<tt cLASS="monofont">*</tt> and <a name="idx1073742512"></a>
+							<tt class="monofont">**</tt> next to a generic argument name.</p>
+
+						<p>
+							<tT clAss="monofont">*args</tT> gets a tuple of values in the received order; <tt clAss="monofont">**args</tT> gets a dictionary mapping <TT Class="monofont">argumentname:value.</TT>
+						</P>
+
+						<Pre>
+							
+&gt;&gt;&gt; def showargs(*args):
+…     # defines a list of an undefined number of arguments.
+…     print args
+…
+&gt;&gt;&gt; showargs(10,20,30)
+(10, 20, 30)
+
+&gt;&gt;&gt; def add(*args):
+…     sum=0
+…     for arg in args:
+…         sum=sum+arg
+…     return sum
+…
+&gt;&gt;&gt; add(1,2,3,4)
+10
+&gt;&gt;&gt; add(1,2,3,4,5,6,7)
+28
+					
+						</prE>
+
+					
+					
+						<H5>
+					
+					Returning Values</H5>
+						<P>The <tt clASS="monofont">return</Tt> expression halts the execution of a function, but when it's followed by an expression, it returns the expression.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; def returnargument(x):
+…       return x
+…
+&gt;&gt;&gt; 5
+5
+
+						</pre>
+
+						<p>A function can return <a name="idx1073742513"></a>multiple values by using <a name="idx1073742514"></A>tuples.<a nAme="idx1073742515"></a>
+							<A name="idx1073742516"></A>
+						</p>
+
+						<prE>
+							
+&gt;&gt;&gt; def returntuple(s,p):
+…       return (s,p)
+…
+&gt;&gt;&gt; x = 10
+&gt;&gt;&gt; y = 20
+&gt;&gt;&gt; a, b = returntuple(x,y) # or (a, b) = returntuple(x,y)
+&gt;&gt;&gt; print a, b
+10, 20
+
+						</PRE>
+
+						<p>It is also possible for a function to have no <tt cLASS="monofont">return</tt> at all. When that happens, the value <tt CLASs="monofont">None</tt> is returned. <a NAME="idx1073742517"></a>
+							<a name="idx1073742518"></a>
+						</p>
+
+					
+					
+						<h5>
+					
+					Built-In Methods</h5>
+						<p>When you have a function <tt class="monofont">f,</tt> the following <Tt cLass="monofont">built-in</Tt> methods can be accessed:</p>
+
+						<prE>
+							
+&gt;&gt;&gt; f.__doc__ or f.func_doc        # "documentation string"
+&gt;&gt;&gt; f.__name__ or f.func_name        # "function name"
+&gt;&gt;&gt; f.func_code                     # byte-compile code
+&gt;&gt;&gt; f.func_defaults        # tuple containing the default arguments
+&gt;&gt;&gt; f.func_globals        # dictionary defining the global namespace
+
+						</pre>
+
+						<P>Let's get the <TT Class="monofont">documentation string</TT> of the <TT clasS="monofont">join</TT> function, which is part of the <Tt claSS="monofont">string</TT> module.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; import string
+&gt;&gt;&gt; print string.join.__doc__
+join(list [,sep]) -&gt; string
+joinfields(list [,sep]) -&gt; string
+Return a string composed of the words in list, with intervening
+occurences of sep.  Sep defaults to a single space.
+(join and joinfields are synonymous)
+
+						</pre>
+
+					
+				
+				
+					<h4>
+				
+				Dynamic Namespace</h4>
+					<p>Maybe you haven't noticed yet, but Python uses dynamic namespace concepts. Each function, module, and class defines its own namespace when it is created.</p>
+
+					<p>When you inform an instruction, command, or statement to Python, it searches first inside the local namespace and afterwards inside the global namespace.</p>
+
+					<p>Python has the following namespaces:</p>
+
+					<blockQuoTe>
+<p>
+							<p>
+								<B>
+							
+							Built-in names— </b>
+
+								
+									<tt cLass="monofont">int, string, def, print,</TT> and so on
+							</P>
+
+						</P>
+<p>
+							<p>
+								<b>
+							
+							Global names— </b>
+
+								Declared as global and assigned at the top-level of a module
+							</P>
+
+						</P>
+<P>
+							<P>
+								<b>
+							
+							Local names— </b>
+
+								Assigned inside a function
+							</p>
+
+						</p>
+</BLOCkquoTE>
+					<P>When you are writing your code, you have two forms of writing an object name. You can use qualified names and unqualified names. Qualified names use object namespaces as references, for example:</P>
+
+					<pre>
+						
+&gt;&gt;&gt; print objectnamespace.objectname
+
+					</pre>
+
+					<p>Unqualified names deal with scopes, provided the object is in your namespace. For example</p>
+
+					<pre>
+						
+&gt;&gt;&gt; print objectname
+				
+					</pre>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="31.html" title="Data Structures"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=32" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="32.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="33.html" title="Modules and Packages"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+* (asterisk)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742510">identifying number of arguments, functions</a><BR>
+**<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742512">identifying number of arguments, functions</a><BR>
+abbreviations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742467">def, functions</a><BR>
+abstraction<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742491">procedural</a> <a href="#idx1073742497">2nd</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742474">calling functions without</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742500">functions</a><BR>
+assigning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742475">functions to variables</a><BR>
+asterisk (*)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742511">identifying number of arguments, functions</a><BR>
+calling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742472">functions without arguments</a><BR>
+changing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742482">global variables inside functions</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742463">return</a><BR>
+ <a href="#idx1073742466">def abbreviation, functions</a><BR>
+ <a href="#idx1073742503">default arguments</a><BR>
+ <a href="#idx1073742478">dynamic namespaces</a><BR>
+editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742487">global variables inside functions</a><BR>
+format<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742468">functions</a><BR>
+ <a href="#idx1073742470">functions</a> <a href="#idx1073742494">2nd</a> <a href="#idx1073742498">3rd</a> <a href="#idx1073742507">4th</a> <a href="#idx1073742515">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742476">assigning to variables</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742473">calling without arguments</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742485">changing global variables inside</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742469">formats of</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742465">namespace</a> <a href="#idx1073742481">2nd</a> <a href="#idx1073742505">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742460">user-defined</a><BR>
+ <a href="#idx1073742488">global keyword</a><BR>
+global variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742483">changing inside functions</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742506">namespaces</a><BR>
+identifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742509">number of arguments, functions</a><BR>
+keywords<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742489">global</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742493">lambda</a><BR>
+ <a href="#idx1073742492">lambda keyword</a><BR>
+modifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742486">global variables inside functions</a><BR>
+multiple values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742513">returning, functions</a><BR>
+ <a href="#idx1073742501">named arguments</a><BR>
+ <a href="#idx1073742464">namespace function</a> <a href="#idx1073742480">2nd</a> <a href="#idx1073742504">3rd</a><BR>
+namespaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742479">dynamic</a><BR>
+ <a href="#idx1073742502">positional arguments</a><BR>
+ <a href="#idx1073742490">procedural abstraction</a> <a href="#idx1073742496">2nd</a><BR>
+ <a href="#idx1073742471">procedures</a> <a href="#idx1073742495">2nd</a> <a href="#idx1073742499">3rd</a> <a href="#idx1073742508">4th</a> <a href="#idx1073742516">5th</a><BR>
+ <a href="#idx1073742462">return command</a><BR>
+returning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742517">values</a><BR>
+tuples<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742514">returning multiple values, functions</a><BR>
+ <a href="#idx1073742461">user-defined functions</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742518">returning</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742477">assigning functions to</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;global<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742484">changing inside functions</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,1740 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; XML Processing</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="187.html" class="navtitle">13. Data Manipulation</a> &gt; <span class="nonavtitle">XML Processing</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="189.html" title="Parsing and Manipulating Data"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=190" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="190.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="191.html" title="XML-RPC"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A45%3A56+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148041040017229250144100</font><a href="read6.asp?bookname=0672319942&snode=190&now=5%2F31%2F2002+4%3A45%3A56+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>
+
+
+
+XML Processing</h3>
+				<p>The first standard that you will learn how to manipulate in Python is
+XML.</p>
+
+				<P>The Web already has a standard for defining markup languages like
+HTML, which is called 
+<A NAme="idx1073747053"></a>
+					<a NAME="idx1073747054"></a>
+					<a naME="idx1073747055"></A>SGML. HTML is actually defined in SGML. SGML could have been
+used as this new standard, and browsers could have been extended with SGML
+parsers. However, SGML is quite complex to implement and contains a lot of
+features that are very rarely used.</P>
+
+				<p>SGML is much more than a Web standard because it was around long
+before the Web. HTML is an application of SGML, and XML is a subset.</p>
+
+				<p>SGML also lacks character sets support, and it is difficult to
+interpret an SGML document without having the definition of the markup language
+(the DTD—Document Type Definition) available.</p>
+
+				<p>Consequently, it was decided to develop a simplified version of SGML,
+which was called XML. The main point of XML is that you, by defining your own
+markup language, can encode the information of your documents more precisely
+than is possible with HTML. This meas that programs processing these documents
+can "understand" them much better and therefore process the
+information in ways that are impossible with HTML (or ordinary text processor
+documents).</p>
+
+				
+					<h4>Introduction to XML</h4>
+					<p>The <i>Extensible Markup Language (XML)</i> is a
+  subset of SGML. Its goal is to enable generic SGML to be served, received, and
+  processed on the Web in the way that is now possible with HTML. XML has been
+  designed for ease of implementation and for interoperability with both SGML and
+  HTML.
+  <a name="idx1073747056"></a>
+						<a naMe="idx1073747057"></a>
+						<A namE="idx1073747058"></a>
+						<a naMe="idx1073747059"></a></p>
+
+					<P>XML describes a class of data objects called XML documents and
+  partially describes the behavior of computer programs that process them. XML is
+  an application profile or restricted form of <I>SGML, </I>the
+  <I>Standard Generalized Markup Language</i> (ISO 8879). By
+  construction, XML documents are conforming SGML documents. An XML parser can
+  check if an XML document is formal without the aid of a DTD.
+  <a naME="idx1073747060"></A>
+						<A name="idx1073747061"></A>
+						<A NAme="idx1073747062"></a></p>
+
+					<P>XML documents are made up of storage units called 
+  <A NAme="idx1073747063"></a><i>elements</i>, which contain either parsed
+  or unparsed data, and are delimited by tags. Parsed data is made up of
+  characters, some of which form character data, and some of which form markup
+  elements. Markup encodes a description of the document's storage layout and
+  logical structure. XML provides a mechanism to impose constraints on the
+  storage layout and logical structure.</p>
+
+					<p>A software module called an 
+  <a name="idx1073747064"></a>
+						<a name="idx1073747065"></a>XML parser is used to read XML documents and provide access
+  to their content and structure. It is assumed that an XML parser is doing its
+  work on behalf of another module, called the application. This specification
+  describes the required behavior of an XML parser in terms of how it must read
+  XML data and the information it must provide to the application. For more
+  information, check out</p>
+
+					<BloCkquOte>
+<p>
+							<p>Extensible Markup Language (XML) Recommendation</P>
+
+						</p>
+<p>
+							<p>W3C Recommendation—Extensible Markup Language (XML)
+1.0</P>
+
+						</P>
+<P>
+							<P>
+								<a tarGET="_blank" Href="http://www.w3.org/TR/REC-xml.html">http://www.w3.org/TR/REC-xml.html</a></P>
+
+						</P>
+</BLockqUOTE>
+				
+				
+					<h4>
+  
+  
+  Writing an XML File</h4>
+					<p>As you can see next, it is simple to define your own markup language with XML. The next block of code is the content of a file called <tt class="monofont">survey.xml.</tt> This code defines a specific markup language for a given survey.</p>
+
+					<pre>
+						
+&lt;!DOCTYPE SURVEY SYSTEM  "SURVEY.DTD"&gt;
+&lt;SURVEY&gt;
+  &lt;CLIENT&gt;
+     &lt;NAME&gt;         Lessaworld Corp.           &lt;/NAME&gt;
+     &lt;LOCATION&gt;     Pittsburgh, PA             &lt;/LOCATION&gt;
+     &lt;CONTACT&gt;      Andre Lessa                &lt;/CONTACT&gt;
+     &lt;EMAIL&gt;        webmaster@lessaworld.com   &lt;/EMAIL&gt;
+     &lt;TELEPHONE&gt;   (412)555-5555                &lt;/TELEPHONE&gt;
+  &lt;/CLIENT&gt;
+  &lt;SECTION SECTION_ID="1"&gt;
+  &lt;QUESTION QUESTION_ID="1" QUESTION_LEVEL="1"&gt;
+   &lt;QUESTION_DESC&gt;What is your favorite language?&lt;/QUESTION_DESC&gt;
+   &lt;Op1&gt;Python&lt;/Op1&gt;
+   &lt;Op2&gt;Perl&lt;/Op2&gt;
+  &lt;/QUESTION&gt;
+  &lt;QUESTION QUESTION_ID="2" QUESTION_LEVEL="1"&gt;
+    &lt;QUESTION_DESC&gt;Do you use this language at work?&lt;/QUESTION_DESC&gt;
+    &lt;Op1&gt;Yes&lt;/Op1&gt;
+    &lt;Op2&gt;No&lt;/Op2&gt;
+  &lt;/QUESTION&gt; &lt;QUESTION QUESTION_ID="3" QUESTION_LEVEL="1"&gt;
+    &lt;QUESTION_DESC&gt;Did you expect the Spanish inquisition?&lt;/QUESTION_DESC&gt;
+    &lt;Op1&gt;No&lt;/Op1&gt; 
+    &lt;Op2&gt;Of course not&lt;/Op2&gt;
+  &lt;/QUESTION&gt; 
+   &lt;/SECTION&gt;
+&lt;/SURVEY&gt;
+
+					</pre>
+
+					<p>In order to complement the XML markup language shown previously, we
+  need a 
+  <A naMe="idx1073747066"></a>
+						<a Name="idx1073747067"></a><I>Document Type Definition (DTD)</i>, just
+  like the following one. The DTD can be part of the XML file, or it can be
+  stored as an independent file, as we are doing here. Note the first line of the
+  XML file, where we are passing the name of the DTD file
+  (<tt CLASs="monofont">survey.dtd</tt>). Also, it seems that XML is standardizing the
+  use of XML Schemas rather the DTDs.</p>
+
+					<PRE>
+						
+&lt;!ELEMENT SURVEY      (CLIENT, SECTION+)&gt;
+
+&lt;!ELEMENT CLIENT (NAME, LOCATION, CONTACT?, EMAIL?, TELEPHONE?)&gt;
+&lt;!ELEMENT NAME         (#PCDATA)&gt;
+&lt;!ELEMENT LOCATION     (#PCDATA)&gt;
+&lt;!ELEMENT CONTACT      (#PCDATA)&gt; 
+&lt;!ELEMENT EMAIL        (#PCDATA)&gt;
+&lt;!ELEMENT TELEPHONE    (#PCDATA)&gt;
+
+&lt;!ELEMENT SECTION     (QUESTION+)&gt;
+&lt;!ELEMENT QUESTION    (QUESTION_DESC, Op1, Op2)&gt;
+
+&lt;!ELEMENT QUESTION_DESC   (#PCDATA)&gt;
+&lt;!ELEMENT Op1              (#PCDATA)&gt;
+&lt;!ELEMENT Op2              (#PCDATA)&gt;
+
+&lt;!ATTLIST SECTION    SECTION_ID     CDATA #IMPLIED&gt;
+&lt;!ATTLIST QUESTION   QUESTION_ID    CDATA #IMPLIED
+                     QUESTION_LEVEL CDATA #IMPLIED&gt;
+
+					</Pre>
+
+					<p>Now, let's understand how a DTD works. For a simple example, like
+  this one, we need two special tags called <tT CLAss="monofont">&lt;!ELEMENT&gt;</tt>
+  and <TT CLass="monofont">&lt;!ATTLIST&gt;.</tt>
+						<a name="idx1073747068"></a>
+						<a name="idx1073747069"></a>
+						<a naMe="idx1073747070"></a>
+						<A namE="idx1073747071"></a>
+						<a naMe="idx1073747072"></a>
+						<a NAME="idx1073747073"></a>
+						<a naME="idx1073747074"></A>
+						<A name="idx1073747075"></A>
+						<A NAme="idx1073747076"></a></p>
+
+					<P>The 
+  <A NAme="idx1073747077"></a>
+						<a name="idx1073747078"></a><tt class="monofont">&lt;!ELEMENT&gt;</tt> definition tag is used
+  to define the elements presented in the XML file. The general syntax is</p>
+
+					<pRe>
+						
+lt;!ELEMENT NAME
+ CONTENTS&gt;
+					</pRe>
+
+					<p>The first argument 
+  <a Name="idx1073747079"></a>
+						<A namE="idx1073747080"></A>(<TT clasS="monofont">NAME</TT>) gives the name of the element,
+  and the second one 
+  <A name="idx1073747081"></A>
+						<A NAme="idx1073747082"></a>(<tT CLAss="monofont">CONTENTS</tt>) lists the element names that
+  are allowed to be underneath the element that we are defining.</p>
+
+					<p>The ordering that we use to list the contents is important. When we
+  say, for example,</p>
+
+					<pre>
+						
+lt;!ELEMENT SURVEY (CLIENT,
+ SECTION+)&gt;
+					</pre>
+
+					<p>it means that we must have a <tt clasS="monofont">CLIENT</tt> first,
+  followed by a <Tt clAss="monofont">SECTION.</tt> Note that we have a special character
+  (the plus sign) just after the second element in the content list. This
+  character, as well as some others, has a special meaning:</P>
+
+					<ul>
+<lI>
+							<P>A 
+<A Name="idx1073747083"></a>
+								<A NAMe="idx1073747084"></a><tt CLASs="monofont">+</tt> sign after an element means that
+it can be included one or more times.</p>
+
+						</LI>
+<LI>
+							<p>A 
+<a name="idx1073747085"></a>
+								<a name="idx1073747086"></a><tt class="monofont">?</Tt> sign indicates that the element
+can be skipped.</p>
+
+						</Li>
+<li>
+							<P>A 
+<a namE="idx1073747087"></a>
+								<a nAME="idx1073747088"></A><tt clASS="monofont">*</Tt> sign indicates an entity that can
+be skipped or included one or more times.</p>
+
+						</li>
+</UL>
+					<DIv claSS="note"><P Class="notetitle"><b>Note</b></p><p>
+
+						<p>These characters have similar meanings to what they do in regular
+ expressions. (Of course, not everything you use in an <tt class="monofont">re</tt> can
+ be used in a DTD.)</p>
+
+					</p></Div>
+<Br>
+<br>
+
+					<P>Note that 
+  <a namE="idx1073747089"></a>#PCDATA is used to indicate an entity that carries the
+  information.</p>
+
+					<p>
+						<A NAMe="idx1073747090"></a>
+						<a nAME="idx1073747091"></A><tt clASS="monofont">&lt;!ATTLIST&gt;,</Tt> the other definition
+  tag in the example, defines the attributes of an element. In our DTD, we have
+  three attributes, one for SECTION, and two for QUESTION.</p>
+
+					<p>An important difference between XML and SMGL is that elements in
+  XML that do not have any contents (like <tT CLAss="monofont">&lt;IMG&gt;</tt> and
+  <tt class="monofont">&lt;BR&gt;</tt> of HTML) are written like this in XML:</p>
+
+					<pre>
+						
+lt;IMG
+ SRC="stuff.gif"/&gt;
+					</pre>
+
+					<P>or in an equivalent format, such as</p>
+
+					<pRe>
+						
+  lt;img
+ src="stuff.gif"&gt;&lt;/img&gt;
+
+					</prE>
+
+					<p>Note the 
+  <a naMe="idx1073747092"></a>
+						<a NAME="idx1073747093"></a>slash before the final <tt cLASS="monofont">&gt;.</tt> This means
+  that a program can read the document without knowing the DTD (which is where it
+  says that <tt CLASs="monofont">IMG</tt> does not have any contents) and still know
+  that <tT CLAss="monofont">IMG</tt> does not have an end tag as well as what follows
+  IMG is not inside the element.</p>
+
+					<p>For more information about XML and Python, check out the XML
+  package. It comes with a Python XML-HOWTO in the <tt class="monofont">doc</tt>
+  directory, and very good examples:</p>
+
+					<p>
+						<a taRgeT="_blank" hreF="http://www.python.org/sigs/xml-sig/status.html">http://www.python.org/sigs/xml-sig/status.html</a>
+						<a naMe="idx1073747094"></a>
+						<a NAME="idx1073747095"></a>
+						<a naME="idx1073747096"></A></P>
+
+				
+				
+					<h4>
+  
+  Python XML Package</h4>
+					<p>For those who want to play around with XML in Python, there will be
+  a Python/XML package to serve several purposes at once. This package will
+  contain everything required for basic XML applications, along with
+  documentation and sample code—basically, something easy to compile and
+  install.</p>
+
+					<P>A release candidate of the latest release of this package is now
+  available as PyXML-0.5.5.tar.gz (GPG signature), dated June 5, 2000. This
+  version contains <TT Class="monofont">SAX,</TT> the <TT class="monofont">Pyexpat</tt> module,
+  <tt class="monofont">sgmlop,</tt> the prototype DOM code, and
+  <tt clAss="monofont">xmlproc,</Tt> an XML parser written in Python.</p>
+
+					<p>The individual components contained in the Python/XML package
+  include</P>
+
+					<ul>
+<li>
+							<P>A Python implementation of SAX (Simple API for XML)</p>
+
+							<p>A SAX implementation has been written by Lars Marius Garshol.
+Garshol has also written a draft specification of the Python version of SAX
+1.0.
+<a NAME="idx1073747097"></a>
+								<a naME="idx1073747098"></A>
+								<A name="idx1073747099"></A>
+								<A NAme="idx1073747100"></a>
+								<a NAME="idx1073747101"></a>
+								<a name="idx1073747102"></a></p>
+
+						</li>
+<li>
+							<p>An XML-HOWTO containing an overview of Python and XML
+processing. (This is still being actively revised.)</p>
+
+							<p>
+								<a name="idx1073747103"></A>Andrew Kuchling is working on this. A first draft of
+the XML-HOWTO is available, and introduces the SAX interface in tutorial form.
+A reference manual is available separately.</p>
+
+						</lI>
+<li>
+							<p>A fairly stable Python interface to 
+<A name="idx1073747104"></A>James Clark's <tt cLASS="monofont">Expat</tt> parser. A
+Pyexpat C extension has been written by 
+<a nAME="idx1073747105"></A>Jack Jansen.</p>
+
+						</li>
+<lI>
+							<P>Both Python and C implementations of the <I>DOM
+(Document Object Model)</I>.</p>
+
+							<p>
+								<a nAME="idx1073747106"></A>Stefane Fermigier's DOM package has been modified to
+match the final DOM W3C Recommendation.</p>
+
+						</li>
+<li>
+							<p>A module to marshal simple Python data types into XML. A module
+called <tt class="monofont">xml.marshal</tt> is available. However, it might end up
+being superseded by Lotos, WDDX, or some other DTD.</p>
+
+						</li>
+</ul>
+					<P>The document called 
+  <a nAme="idx1073747107"></a><I>Python/XML Reference Guide</i> is the
+  reference manual for the Python/XML package, containing descriptions for
+  several XML modules. For more information, check out the following
+  sites:</p>
+
+					<blOckqUOTE>
+<p>
+							<p>Python/XML Reference Guide</p>
+
+							<p>
+								<A TARget="_blank" hREF="http://www.python.org/doc/howto/xml-ref/">http://www.python.org/doc/howto/xml-ref/</A></p>
+
+						</p>
+<p>
+							<p><I>"SAX Implementation".</I> by Lars
+Marius Garshol</P>
+
+							<P>
+								<a target="_blank" href="http://www.stud.ifi.uio.no/~lmariusg/download/python/xml/saxlib.html">http://www.stud.ifi.uio.no/~lmariusg/download/python/xml/saxlib.html</a></p>
+
+						</p>
+<p>
+							<p>Draft specification of the Python version of SAX 1.0</p>
+
+							<p>
+								<a tArgEt="_blank" hrEf="http://www.stud.ifi.uio.no/~lmariusg/download/python/xml/sax-spec.html">http://www.stud.ifi.uio.no/~lmariusg/download/python/xml/sax-spec.html</a></p>
+
+						</p>
+<P>
+							<p>XML-HOWTO</p>
+
+							<p>
+								<A TARget="_blank" hREF="http://www.python.org/doc/howto/xml/">http://www.python.org/doc/howto/xml/</A></p>
+
+						</p>
+<p>
+							<p>Pyexpat C extension written by Jack Jansen</P>
+
+							<P>
+								<A TargeT="_blank" HREf="http://ftp://ftp.cwi.nl/pub/jack/python/pyexpat.tgz">http://ftp://ftp.cwi.nl/pub/jack/python/pyexpat.tgz</a></p>
+
+						</p>
+<p>
+							<p>DOM Recommendation</p>
+
+							<p>
+								<a target="_blank" href="http://www.w3.org/TR/REC-DOM-Level-1/">http://www.w3.org/TR/REC-DOM-Level-1/</a></P>
+
+						</p>
+<p>
+							<P>Stefane Fermigier's DOM package</p>
+
+							<p>
+								<a TargeT="_blank" hreF="http://www.math.jussieu.fr/~fermigie/python/">http://www.math.jussieu.fr/~fermigie/python/</A>
+								<A Name="idx1073747108"></a>
+								<A NAMe="idx1073747109"></a></p>
+
+						</p>
+</BLOCkquoTE>
+					<P>Python 2.0 was released with a lot of enhancements concerning the
+  XML support, including a SAX2 interface and a re-designed DOM interface as part
+  of the <Tt class="monofont">xml</tt> package. Note that the xml package that is
+  shipped with Python 2.0 contains just a basic set of options for XML
+  development. If you want (or need) to use the full XML package, you are 
+  <a name="idx1073747110"></a>
+						<a name="idx1073747111"></a>
+						<A naMe="idx1073747112"></a>suggested to install <tT clasS="monofont">PyXML.</tt></p>
+
+					<P>The <TT Class="monofont">PyXML</TT> distribution also uses the
+  <TT clasS="monofont">xml</TT> package. That's the reason why PyXML versions 0.6.0 or
+  greater can be used to replace the <Tt claSS="monofont">xml</TT> package that is
+  bundled with Python. By doing so, you will extend the set of XML
+  functionalities that you can have available. That includes</p>
+
+					<ul>
+<li>
+							<p>4DOM, a full DOM implementation from
+<a name="idx1073747113"></a> FourThought, Inc</p>
+
+						</li>
+<li>
+							<p>The <tt ClaSs="monofont">xmlproc</tt> validating parser, written
+<A name="idx1073747114"></A> by Lars Marius Garshol</p>
+
+						</li>
+<LI>
+							<P>The <Tt claSS="monofont">sgmlop</TT> parser accelerator 
+<a namE="idx1073747115"></A>
+								<A Name="idx1073747116"></a>
+								<A NAMe="idx1073747117"></a>module, written
+<a name="idx1073747118"></a> by Fredrik Lundh</p>
+
+						</li>
+</ul>
+					
+						<h5>
+							<tt clasS="monofont">xmllib</tt></H5>
+						<p>The <tt Class="monofont">xmllib</Tt> module defines a class
+ <tt CLASs="monofont">XMLParser,</tt> which serves as the basis for parsing text files
+ formatted in XML. Note that <tT CLAss="monofont">xmllib</tt> is not XML 1.0 compliant,
+ and it doesn't provide any Unicode support. It provides simple XML support for
+ ASCII only element and attribute names. Of course, it probably handles UTF8
+ character data without problems.</P>
+
+					
+					
+						<H5>
+							<TT clasS="monofont">XMLParser()</TT></H5>
+						<p>The <tt class="monofont">XMLParser</tt> class must be instantiated
+ without a arguments. This class provides the following interface methods and
+ instance variables:
+ <a name="idx1073747119"></a>
+							<a namE="idx1073747120"></a>
+							<a Name="idx1073747121"></A>
+							<a namE="idx1073747122"></a></p>
+
+						<bLOCKquotE>
+<P>
+								<A Name="idx1073747123"></a>
+								<A NAMe="idx1073747124"></a>
+								<p>
+									<tT CLAss="monofont">attributes</tt>— 
+    
+									This is a mapping of element names to mappings. The latter
+ mapping maps attribute names that are valid for the element to the default
+ value of the attribute, or to None if there is no default. The default value is
+ the empty dictionary. This variable is meant to be overridden and not extended
+ because the default is shared by all instances of
+ <tt class="monofont">XMLParser.</tt>
+								</p>
+
+							</p>
+<p>
+								<a namE="idx1073747125"></a>
+								<a Name="idx1073747126"></A>
+								<p>
+									<tt cLass="monofont">elements</TT> 
+    
+									This is a mapping of element names to tuples. The tuples
+ contain a function for handling the start and end tag, respectively, of the
+ element, or None if the method <TT clasS="monofont">unknown_starttag()</TT> or
+ <Tt claSS="monofont">unknown_endtag()</TT> is to be called. The default value is the
+ empty dictionary. This variable is meant to be overridden and not extended
+ because the default is shared by all instances of
+ <tt clASS="monofont">XMLParser.</Tt>
+								</p>
+
+							</p>
+<p>
+								<a name="idx1073747127"></a>
+								<a name="idx1073747128"></a>
+								<p>
+									<tt cLasS="monofont">entitydefs</tt>— 
+    
+									This is a mapping of entitynames to their values. The
+ default value contains definitions for
+ <tT clasS="monofont">lt,</tt><tT CLAss="monofont">gt,</tt><TT CLass="monofont">amp,</tT><TT Class="monofont">quot,</TT>
+ and <TT class="monofont">apos.</tt>
+								</p>
+
+							</p>
+<p>
+								<a name="idx1073747129"></a>
+								<a namE="idx1073747130"></a>
+								<p>
+									<Tt clAss="monofont">reset()</tt>— 
+    
+									Resets the instance. Loses all unprocessed data. This is
+ called implicitly at the instantiation time.
+								</P>
+
+							</p>
+<p>
+								<a NAME="idx1073747131"></a>
+								<p>
+									<tt CLASs="monofont">setnomoretags()</tt>— 
+    
+									<a NAME="idx1073747132"></a>
+									Stops processing tags. Treats all following input as
+ literal input (CDATA).
+ <a naME="idx1073747133"></A>
+										<A name="idx1073747134"></a>
+								</p>
+
+							</p>
+<p>
+								<a name="idx1073747135"></a>
+								<a name="idx1073747136"></a>
+								<P>
+									<tt ClasS="monofont">setliteral()</tt>— 
+    
+									Enters literal mode (CDATA mode). This mode is
+ automatically exited when the close tag matching the last unclosed open tag is
+ encountered.
+								</p>
+
+							</p>
+<P>
+								<a naME="idx1073747137"></A>
+								<A name="idx1073747138"></A>
+								<P>
+									<TT clasS="monofont">feed (data)</TT>— 
+    
+									Feeds some text to the parser. It is processed insofar as
+ it consists of complete tags; incomplete data is buffered until more data is
+ fed or <Tt claSS="monofont">close()</TT> is called.
+								</p>
+
+							</p>
+<p>
+								<a name="idx1073747139"></a>
+								<a name="idx1073747140"></a>
+								<p>
+									<tt clAss="monofont">close()</Tt>— 
+    
+									Forces processing of all buffered data as if it were
+ followed by an end-of-file mark. This method can be redefined by a derived
+ class to define additional processing at the end of the input, but the
+ redefined version should always call <tt Class="monofont">close().</Tt>
+										<a nAME="idx1073747141"></A>
+										<a namE="idx1073747142"></A>
+										<A Name="idx1073747143"></a>
+										<A NAMe="idx1073747144"></a>
+								</p>
+
+							</p>
+<P>
+								<A NAme="idx1073747145"></a>
+								<p>
+									<tt class="monofont">translate_references</tt><i>(data)</i>— 
+    
+									<a name="idx1073747146"></A>
+									Translates all entity and character references in data and
+ returns the translated string.
+								</p>
+
+							</p>
+<P>
+								<a naMe="idx1073747147"></a>
+								<a nAme="idx1073747148"></a>
+								<P>
+									<TT Class="monofont">handle_xml</TT>(<I>encoding,
+ standalone</I>)<tt clASS="monofont">handle_xml(encoding,
+ standalone)</Tt>— 
+    
+									This method is called when the <tt cLASS="monofont">&lt;?xml
+ ...?&gt;</tt> tag is processed. The arguments are the values of the
+ encoding and standalone attributes in the tag. Both encoding and standalone are
+ optional. The values passed to <tt class="monofont">handle_xml()</tt> default to None
+ and the string <tt class="monofont">no,</tt> respectively.
+								</P>
+
+							</p>
+<p>
+								<A namE="idx1073747149"></a>
+								<a naMe="idx1073747150"></a>
+								<p>
+									<TT CLass="monofont">handle_doctype</tT>(<I>tag,
+ data</I>)— 
+    
+									This method is called when the
+ <Tt claSS="monofont">&lt;!DOCTYPE...&gt;</TT> tag is processed. The arguments are the
+ name of the root element and the uninterpreted contents of the tag, starting
+ following the whitespace after the name of the root element.
+								</p>
+
+							</p>
+<p>
+								<a NAME="idx1073747151"></a>
+								<p>
+									<tt class="monofont">handle_starttag</tt>(<i>tag, method,
+ attributes</i>)— 
+    
+									<a name="idx1073747152"></a>
+									This method is called to handle
+ <tT clAss="monofont">starttags</tT> for which a start tag handler is defined in the
+ instance variable elements. The tag argument is the name of the tag, and the
+ method argument is the function (method) that should be used to support
+ semantic interpretation of the start tag. The attributes argument is a
+ dictionary of attributes; the key being the name and the value being the value
+ of the attribute found inside the tag's <tt clAss="monofont">&lt;&gt;</tT> brackets.
+ Character and entity references in the value have been interpreted. For
+ instance, for the start tag &lt;A HREF="http://www.python.org/"&gt;, this
+ method would be called as <TT Class="monofont">handle_starttag</TT> ('A',
+ self.elements['A'][0], { 'HREF': 'http://www.python.org/'} ). The base
+ implementation simply calls a method with attributes as the only
+ argument.
+								</P>
+
+							</P>
+<p>
+								<a naME="idx1073747153"></A>
+								<A name="idx1073747154"></A>
+								<P>
+									<TT class="monofont">handle_endtag</tt>(<i>tag,
+ method</i>)— 
+    
+									This method is called to handle <tt class="monofont">endtags</tt>
+ for which an end tag handler is defined in the instance variable elements. The
+ tag argument is the name of the tag, and the method argument is the function
+ (method) that should be used to support semantic interpretation of the end tag.
+ For instance, for the endtag <tt ClaSs="monofont">&lt;/A&gt;,</tt> this method would
+ be called as <Tt claSs="monofont">handle_endtag('A', self.elements['A'][1]).</tt> The
+ base implementation simply calls method.
+ <A NAMe="idx1073747155"></a>
+										<a nAME="idx1073747156"></A>
+										<a namE="idx1073747157"></A>
+										<A Name="idx1073747158"></a>
+								</P>
+
+							</P>
+<P>
+								<A name="idx1073747159"></a>
+								<a name="idx1073747160"></a>
+								<p>
+									<tt class="monofont">handle_charref</tT>(<i>ref</i>)— 
+    
+									This method is called to process arbitrary data. It is
+ intended to be overridden by a derived class; the base class implementation
+ does nothing.
+								</P>
+
+							</p>
+<p>
+								<a Name="idx1073747161"></a>
+								<A namE="idx1073747162"></A>
+								<P>
+									<Tt claSS="monofont">handle_charref</TT>(<i>ref</i>)— 
+    
+									This method is called to process a character reference of
+ the form <tt CLASs="monofont">&amp;#ref;.</tt><tT CLAss="monofont">ref</tt> can either be a
+ decimal number, or a hexadecimal number when preceded by an
+ <tt class="monofont">x.</tt> In the base implementation, <tt class="monofont">ref</Tt> must
+ be a number in the range 0-255. It translates the character to ASCII and calls
+ the method <tT claSs="monofont">handle_data()</tt> with the character as argument. If
+ <tT claSS="monofont">ref</TT> is invalid or out of range, the method
+ <tt clASS="monofont">unknown_charref(ref)</Tt> is called to handle the error. A
+ subclass must override this method to provide support for character references
+ outside the ASCII range.
+								</p>
+
+							</p>
+<p>
+								<A NAMe="idx1073747163"></a>
+								<a nAME="idx1073747164"></A>
+								<p>
+									<tt class="monofont">handle_entityref</tt>(<i>ref</i>)— 
+    
+									This method is called to process a general entity reference
+ of the form <tt class="monofont">&amp;ref;</tT> where <tt ClasS="monofont">ref</tt> is an
+ general entity reference. It looks for ref in the instance (or class) variable
+ entitydefs that should be mapping from entity names to corresponding
+ translations. If a translation is found, it calls the method
+ <tt ClasS="monofont">handle_data()</TT> with the translation; otherwise, it calls the
+ method <Tt claSS="monofont">unknown_entityref(ref).</TT> The default entitydefs
+ defines translations for
+ <tt clASS="monofont">&amp;amp;,</Tt><tt cLASS="monofont">&amp;apos;,</tt><tt class="monofont">&amp;gt;,</tt><tt class="monofont">&amp;lt;,</tt>
+ and <Tt cLass="monofont">&amp;quot;.</Tt>
+								</p>
+
+							</p>
+<p>
+								<A namE="idx1073747165"></A>
+								<A Name="idx1073747166"></a>
+								<P>
+									<TT Class="monofont">handle_comment</TT>(<I>comment</I>)— 
+    
+									This method is called when a comment is encountered. The
+ comment argument is a string containing the text between the
+ <tt clASS="monofont">&lt;!</Tt> and <tt class="monofont">-&gt;</tt> delimiters, but not the
+ delimiters themselves. For example, the comment
+ <tt class="monofont">&lt;!-text-&gt;</tt> will cause this method to be called with the
+ argument <tT clAss="monofont">text.</tT> The default method does nothing.
+								</p>
+
+							</p>
+<p>
+								<a Name="idx1073747167"></A>
+								<A NAme="idx1073747168"></a>
+								<p>
+									<TT CLass="monofont">handle_cdata</tT>(<I>data</I>)— 
+    
+									This method is called when a CDATA element is encountered.
+ The data argument is a string containing the text between the
+ <Tt claSS="monofont">&lt;![CDATA[" and "&gt;</TT> delimiters, but not the delimiters
+ themselves. For example, the entity <tt class="monofont">&lt;![CDATA[text&gt;</tt>
+ will cause this method to be called with the argument <tt class="monofont">text.</tt>
+ The default method does nothing, and is intended to be overridden.
+ <a nAme="idx1073747169"></A>
+										<a naMe="idx1073747170"></a>
+										<a nAme="idx1073747171"></a>
+										<A NAMe="idx1073747172"></a>
+										<a nAME="idx1073747173"></A>
+										<a namE="idx1073747174"></A>
+								</P>
+
+							</P>
+<p>
+								<a naME="idx1073747175"></A>
+								<A name="idx1073747176"></a>
+								<p>
+									<tt class="monofont">handle_proc</tt>(<i>name,
+ data</i>)— 
+    
+									This method is called when a processing instruction (PI) is
+ encountered. The name is the PI target, and the data argument is a string
+ containing the text between the PI target and the closing delimiter, but not
+ the delimiter itself. For example, the instruction <tt cLasS="monofont">&lt;?XML
+ text?&gt;</tt> will cause this method to be called with the arguments
+ <tT clasS="monofont">XML</tt> and <tT CLAss="monofont">text.</tt> The default method does
+ nothing. Note that if a document starts with <TT CLass="monofont">&lt;?xml
+ ..?&gt;,</tT><TT Class="monofont">handle_xml()</TT> is called to handle
+ it.
+								</P>
+
+							</P>
+<p>
+								<a name="idx1073747177"></a>
+								<a name="idx1073747178"></a>
+								<p>
+									<tt clasS="monofont">handle_special</tt>(<I>data</i>)— 
+    
+									This method is called when a declaration is encountered.
+ The data argument is a string containing the text between the
+ <tt Class="monofont">&lt;!</Tt> and <tt CLASs="monofont">&gt;</tt> delimiters, but not the
+ delimiters themselves. For example, the entity <tT CLAss="monofont">&lt;!ENTITY
+ text&gt;</tt> will cause this method to be called with the argument
+ <TT CLass="monofont">ENTITY text.</tT> The default method does nothing. Note that
+ <TT Class="monofont">&lt;!DOCTYPE ...&gt;</tt> is handled separately if it is located
+ at the start of the document.
+								</p>
+
+							</p>
+<p>
+								<a name="idx1073747179"></a>
+								<a name="idx1073747180"></A>
+								<p>
+									<tT claSs="monofont">syntax_error</tt>(<i>message</I>)— 
+    
+									This method is called when a syntax error is encountered.
+ The message is a description of what was wrong. The default method raises a
+ RuntimeError exception. If this method is overridden, it is permissible for it
+ to return. This method is only called when the error can be recovered from.
+ Unrecoverable errors raise a RuntimeError without first calling
+ <tt cLASS="monofont">syntax_error().</tt>
+								</p>
+
+							</p>
+<P>
+								<A NAme="idx1073747181"></a>
+								<a NAME="idx1073747182"></a>
+								<p>
+									<tt CLASs="monofont">unknown_starttag</tt>(<i>tag,
+ attributes</i>)— 
+    
+									This method is called to process an unknown start tag. It
+ is intended to be overridden by a derived class; the base class implementation
+ does nothing.
+								</p>
+
+							</p>
+<p>
+								<a name="idx1073747183"></a>
+								<a name="idx1073747184"></a>
+								<P>
+									<tt ClasS="monofont">unknown_endtag</tt>(<i>tag</i>)— 
+    
+									This method is called to process an unknown end tag. It is
+ intended to be overridden by a derived class; the base class implementation
+ does nothing.
+								</P>
+
+							</p>
+<p>
+								<a NAME="idx1073747185"></a>
+								<a naME="idx1073747186"></A>
+								<P>
+									<tt clASS="monofont">unknown_charref</Tt>(<i>ref</i>)— 
+    
+									This method is called to process unresolvable numeric
+ character references. It is intended to be overridden by a derived class; the
+ base class implementation does nothing.
+								</p>
+
+							</P>
+<P>
+								<A Name="idx1073747187"></a>
+								<a name="idx1073747188"></a>
+								<p>
+									<tt class="monofont">unknown_entityref</tt>(<I>ref</i>)— 
+    
+									This method is called to process an unknown entity
+ reference. It is intended to be overridden by a derived class; the base class
+ implementation does nothing.
+ <a Name="idx1073747189"></A>
+										<a namE="idx1073747190"></a>
+										<a nAME="idx1073747191"></A>
+										<a namE="idx1073747192"></A>
+										<A Name="idx1073747193"></a>
+										<A NAMe="idx1073747194"></a>
+								</p>
+
+							</p>
+</BLOCkquote>
+					
+					
+						<h5>
+ XML Namespaces</h5>
+						<p>The <tt class="monofont">xmllib</tt> module has support for XML
+ namespaces as defined in the XML namespaces proposed recommendation.</p>
+
+						<p>Tag and attribute names that are defined in an XML namespace are
+ handled as if the name of the tag or element consisted of the namespace (that
+ is, the URL that defines the namespace) followed by a space and the name of the
+ tag or attribute. For instance, the tag <Tt cLass="monofont">&lt;html xmlns:html=</Tt>
+							<a taRget="_blank" HREF="http://www.w3.org/TR/REC-html40">http://www.w3.org/TR/REC-html40</a>
+ is treated as if the tag name was 
+ <a taRGET="_blank" href="http://www.w3.org/TR/REC-html40 html">http://www.w3.org/TR/REC-html40
+html</A>, and the tag <TT Class="monofont">&lt;html:a href=</TT>
+							<A Target="_blank" href="http://frob.com">http://frob.com</a> inside the
+ previous element is treated as if the tag name were 
+ <a target="_blank" hreF="http://www.w3.org/TR/REC-html40 a">http://www.w3.org/TR/REC-html40
+a</a> and the attribute name as if it were 
+ <a TargEt="_blank" hreF="http://www.w3.org/TR/REC-html40 src">http://www.w3.org/TR/REC-html40
+src</a>.</p>
+
+						<p>An older draft of the XML namespaces proposal is also recognized,
+ but triggers warn about it.
+ <A NAMe="idx1073747195"></a></p>
+
+					
+					
+						<h5>XML Examples</H5>
+						<P>The next example uses <TT clasS="monofont">xmllib</TT> to parse a XML
+ file. The file being used is the same <Tt claSS="monofont">survey.xml</TT> that you
+ saw in the beginning of this chapter. Our proposal is to read the file, parse
+ it, and convert it to a structure such as the following:</p>
+
+						<pre>
+							
+Survey of section number 1
+1- What is your favorite language? Python Perl 2- Do you use this language at
+work? Yes No 3- Did you expect the Spanish inquisition? No Of course not
+
+						</pre>
+
+						<p>The following code implements a solution for our problem.
+ Remember that XML tags are case sensitive, thus the code must be properly
+ balanced. In this code, note that attributes are passed to the tag handlers in
+ a dictionary, not in a tuple.
+ <a name="idx1073747196"></a>
+							<a name="idx1073747197"></a>
+							<A naMe="idx1073747198"></a>
+							<a Name="idx1073747199"></a>
+							<A namE="idx1073747200"></A>
+							<A Name="idx1073747201"></a></P>
+
+						<PRE>
+							
+import xmllib, string
+class myparser(xmllib.XMLParser):
+    def __init__(self):
+         xmllib.XMLParser.__init__(self)
+         self.currentquestiondesc = ''
+         self.currentOp1 = '' 
+         self.currentOp2 = ''
+         self.currentquestion = ''
+         self.currentdata = []
+
+    def handle_data(self, data):
+        self.currentdata.append(data)
+
+    def start_SURVEY(self, attrs):
+        print "Survey of section number ",
+
+    def end_SURVEY(self):
+        pass
+
+    def start_SECTION(self, attrs):
+        print attrs['SECTION_ID']
+
+    def end_SECTION(self):
+        pass 
+
+    def start_QUESTION(self, attrs):
+        self.currentquestion = attrs['QUESTION_ID']
+
+    def end_QUESTION(self): 
+        print """ 
+
+%(currentquestion)s- %(currentquestiondesc)s
+      %(currentOp1)s 
+      %(currentOp2)s 
+""" % self.__dict__ 
+
+    def start_QUESTION_DESC(self, attrs):
+        self.currentdata = []
+    def end_QUESTION_DESC(self):
+        self.currentquestiondesc = string.join(self.currentdata,'')
+
+    def start_Op1(self, attrs):
+        self.currentdata = []
+
+    def end_Op1(self): 
+        self.currentOp1 = string.join(self.currentdata,'')
+
+    def start_Op2(self, attrs): self.currentdata = []
+
+    def end_Op2(self):
+        self.currentOp2 = string.join(self.currentdata,'')
+
+
+if __name__ == "__main__":
+    filehandle = open("survey.xml")
+    data = filehandle.read()
+    filehandle.close()
+
+    parser=myparser()
+    parser.feed(data)
+    parser.close()
+
+						</pre>
+
+						<p>Let's see another example. The next one opens our
+ <TT CLass="monofont">survey.xml</tT> file and lists all the questions available. It
+ also tries to find question <TT Class="monofont">#</tt>4, but as we don't have it, it
+ raises a message to the user.</p>
+
+						<pre>
+							
+import xmllib
+
+class QuestionNotFound:
+    pass
+
+class Parser(xmllib.XMLParser):
+
+    def __init__(self, filename=None):
+         self.found = 0
+         xmllib.XMLParser.__init__(self)
+         if filename:
+             self.load(filename)
+
+    def load(self, filename):
+        while 1:
+            xmldata=filename.read(1024)
+            if not xmldata:
+                break
+            self.feed(xmldata)
+        self.close()
+
+    def start_QUESTION(self, attrs): 
+        question_id = attrs.get("QUESTION_ID")
+        print "I found Question #" + question_id
+        if question_id == "4":
+            self.found = 1
+
+    def end_SECTION(self):
+        if not self.found:
+            raise QuestionNotFound
+try:
+    MyParser = Parser()
+    MyParser.load(open("survey.xml"))
+except QuestionNotFound(Exception):
+    print "I couldn't find Question #4 !!!" 
+
+						</pre>
+
+					
+					
+						<h5>
+ 
+ 
+ The SAX API</h5>
+						<p>SAX is a common event-based interface for object-oriented XML
+ parsers. The Simple API for XML isn't a standard in the formal sense, but an
+ informal specification designed by 
+ <a namE="idx1073747202"></a>David Megginson, with input from many people on the
+ XML-DEV mailing list. SAX defines an event-driven interface for parsing XML. To
+ use SAX, you must create Python class instances that implement a specified
+ interface, and the parser will then call various methods of those
+ objects.</p>
+
+						<P>SAX is most suitable for purposes in which you want to read
+ through an entire XML document from beginning to end, and perform some
+ computation, such as building a data structure representing a document, or
+ summarizing information in a document (computing an average value of a certain
+ element, for example). It isn't very useful if you want to modify the document
+ structure in some complicated way that involves changing how elements are
+ nested, though it could be used if you simply want to change element contents
+ or attributes. For example, you would not want to re-order chapters in a book
+ using SAX, but you might want to change the contents of any name elements with
+ the attribute <tt cLass="monofont">lang</tT> equal to <tt cLASS="monofont">greek</tt> into
+ Greek letters. Of course, if this is an XML file, we would use the standard
+ attribute <tt CLASs="monofont">xml:lang</tt> rather than just <tT CLAss="monofont">lang</tt>
+ to store the language.</P>
+
+						<P>One advantage of SAX is speed and simplicity. There is no need to
+ expend effort examining elements that are irrelevant to your application. You
+ can therefore write a class instance that ignores all elements that aren't what
+ you need. Another advantage is that you don't have the whole document resident
+ in memory at any one time, which matters if you are processing huge
+ documents.</P>
+
+						<P>SAX defines four basic interfaces; a SAX-compliant XML parser can
+ be passed any objects that support these interfaces, and will call various
+ methods as data is processed. Your task, therefore, is to implement those
+ interfaces relevant to your application.
+ <a name="idx1073747203"></a>
+							<a name="idx1073747204"></a>
+							<a name="idx1073747205"></a>
+							<a nAme="idx1073747206"></A>
+							<a naMe="idx1073747207"></a>
+							<a nAme="idx1073747208"></a>
+							<A NAMe="idx1073747209"></a></p>
+
+						<p>The SAX interfaces are as follows:</P>
+
+						<BLOckquOTE>
+<P>
+								<a namE="idx1073747210"></A>
+								<A Name="idx1073747211"></a>
+								<p>
+									<tt class="monofont">DocumentHandler</tt>— 
+    
+									Called for general document events. This interface is the
+ heart of SAX; its methods are called for the start of the document, the start
+ and end of elements, and for the characters of data contained inside
+ elements.
+								</p>
+
+							</p>
+<p>
+								<a naMe="idx1073747212"></a>
+								<A namE="idx1073747213"></a>
+								<p>
+									<tt ClasS="monofont">DTDHandler</TT>— 
+    
+									Called to handle DTD events required for basic parsing.
+ This means notation declarations (XML spec 
+ <A href="195.html">section 4.7</A>
+								</P>
+
+							</P>
+<P>
+								<a namE="idx1073747214"></A>
+								<A Name="idx1073747215"></a>
+								<P>
+									<TT Class="monofont">DTDHandler</tt>— 
+    
+									Called to handle DTD events required for basic parsing.
+ This means notation declarations (XML spec ) and unparsed entity declarations
+ (XML spec section 4
+								</p>
+
+							</p>
+<p>
+								<a name="idx1073747216"></a>
+								<a name="idx1073747217"></A>
+								<p>
+									<tT claSs="monofont">DTDHandler</tt>— 
+    
+									Called to handle DTD events required for basic parsing.
+ This means notation declarations (XML spec ) and unparsed entity declarations
+ (XML spec ).
+								</p>
+
+							</P>
+<p>
+								<a nAME="idx1073747218"></A>
+								<a namE="idx1073747219"></A>
+								<P>
+									<Tt claSS="monofont">EntityResolver</TT>— 
+    
+									Called to resolve references to external entities. If your
+ documents will have no external entity references, you won't need to implement
+ this interface.
+								</p>
+
+							</p>
+<p>
+								<a NAME="idx1073747220"></a>
+								<a name="idx1073747221"></a>
+								<p>
+									<tt class="monofont">ErrorHandler</tt>— 
+    
+									Called for error handling. The parser will call methods
+ from this interface to report all warnings and errors.
+								</p>
+
+							</p>
+</bLocKquoTe>
+						<p>Because Python doesn't support the concept of interfaces, the
+ previous interfaces are implemented as Python classes. The default method
+ implementations are defined to do nothing—the method body is just a
+ Python pass statement—so usually you can simply ignore methods that
+ aren't relevant to your application. The one big exception is the
+ <tt ClasS="monofont">ErrorHandler</TT> interface; if you don't provide methods that
+ print a message or otherwise take some action, errors in the XML data will be
+ silently ignored. This is almost certainly not what you want your application
+ to do, so always implement at least the <Tt claSS="monofont">error()</TT> and
+ <tt clASS="monofont">fatalError()</Tt> methods. <tt cLASS="monofont">xml.sax.saxutils</tt>
+ provides an 
+ <a name="idx1073747222"></a>
+							<a name="idx1073747223"></a><tt clasS="monofont">ErrorPrinter</tt> class that sends error
+ messages to standard error, and an 
+ <A namE="idx1073747224"></a>
+							<a naMe="idx1073747225"></a><tT CLAss="monofont">ErrorRaiser</tt> class that raises an
+ exception for any warnings or errors.</P>
+
+						<P>Pseudo-code for using SAX looks similar to the following:</P>
+
+						<Pre>
+							
+# <i>Define your specialized handler classes</i>
+<I>from xml.sax import saxlib</I>
+<I>class docHandler(saxlib.DocumentHandler):</I>
+     …
+# <i>Create an instance of the handler classes</i>
+<i>dh = docHandler()</i>
+# <I>Create an XML parser</I>
+<I>parser = …</I>
+# <i>Tell the parser to use your handler instance
+parser.setDocumentHandler(dh)</i>
+# <i>Parse the file; your handler's method will get called
+parser.parseFile(sys.stdin)</i>
+# <i>Close the parser</i>
+<i>parser.close()</i>
+
+						</pre>
+
+						<p>For more information, check out the following sites:</p>
+
+						<blockquOte>
+<P>
+								<p>SAX: The Simple API for XML</p>
+
+							</p>
+<P>
+								<p>
+									<a taRget="_blank" HREF="http://www.python.org/doc/howto/xml/SAX.html">http://www.python.org/doc/howto/xml/SAX.html</a></p>
+
+							</p>
+<p>
+								<P>David Megginson's SAX page
+  <A NAme="idx1073747226"></a>
+									<a NAME="idx1073747227"></a>
+									<a naME="idx1073747228"></A>
+									<A name="idx1073747229"></a>
+									<a name="idx1073747230"></a>
+									<a name="idx1073747231"></a>
+									<a naMe="idx1073747232"></a></P>
+
+							</p>
+<p>
+								<p>
+									<A name="idx1073747233"></A>Megginson was the primary force behind SAX's
+  development, and implemented the Java version of SAX.</p>
+
+							</p>
+<p>
+								<P>
+									<A TArget="_blank" HREF="http://www.megginson.com/SAX/">http://www.megginson.com/SAX/</a></p>
+
+							</p>
+<p>
+								<P><I>What is an Event-Based Interface?</I></P>
+
+							</p>
+<p>
+								<p>This page explains what an event-based interface is, and
+  contrasts the event-based SAX with the tree-based Document Object Model
+  (DOM).</p>
+
+							</P>
+<P>
+								<P>
+									<A target="_blank" href="http://www.megginson.com/SAX/event.html">http://www.megginson.com/SAX/event.html</a></p>
+
+							</p>
+<p>
+								<p>Writing an application for a SAX-compliant XML parser</p>
+
+							</p>
+<p>
+								<p>
+									<a NamE="idx1073747234"></a>Simon Pepping gives a short overview of the Simple
+  API for XML (SAX). He describes how a SAX-compliant parser and a SAX
+  application interact, and how one should proceed to write a SAX application.
+  The description focuses on the Python implementation of SAX. The examples are
+  written in Python.</p>
+
+							</p>
+<P>
+								<p>
+									<a taRget="_blank" HREF="http://www.hobby.nl/~scaprea/XML/">http://www.hobby.nl/~scaprea/XML/</a>
+									<a naME="idx1073747235"></A>
+									<A name="idx1073747236"></A>
+									<A NAme="idx1073747237"></a></p>
+
+							</P>
+</BLOckquote>
+					
+					
+						<h5>
+ 
+ 
+ DOM: The Document Object Model</h5>
+						<p>The <i>Document Object Model (DOM)</i> is a
+ standard interface for manipulating XML and HTML documents developed by the 
+ <a name="idx1073747238"></a>
+							<a nAme="idx1073747239"></A><i>World Wide Web Consortium
+ (W3C)</i>.</p>
+
+						<P>
+							<a namE="idx1073747240"></a>
+							<a nAME="idx1073747241"></A><i>4DOM</i> is a Python library developed
+ by 
+ <a nAME="idx1073747242"></A><i>FourThought LLC</i> for XML and HTML
+ processing and manipulation using the W3C's Document Object Model for
+ interface. 4DOM supports all of DOM level 1 (core and HTML), as well as core,
+ HTML and Document Traversal from level 2. 4DOM also adds some helper components
+ for DOM Tree creation and printing, python integration, whitespace
+ manipulation, and so on.</p>
+
+						<p>4DOM is designed to allow developers to rapidly design
+ applications that read, write, or manipulate HTML and XML. Check out</P>
+
+						<P>
+							<A TargeT="_blank" HREf="http://www.fourthought.com/4Suite/4DOM/">http://www.fourthought.com/4Suite/4DOM/</a>
+							<a name="idx1073747243"></a>
+							<a name="idx1073747244"></a>
+							<a name="idx1073747245"></a>
+							<A naMe="idx1073747246"></a></p>
+
+					
+					
+						<H5>
+ 
+ XSL Transformations (XSLT)</h5>
+						<p>This W3C specification defines the syntax and semantics of XSLT,
+ which is a language for transforming XML documents into other XML
+ documents.</p>
+
+						<p>XSLT is designed for use as part of XSL, which is a stylesheet
+ language for XML. In addition to XSLT, XSL includes an XML vocabulary for
+ specifying formatting. XSL specifies the styling of an XML document by using
+ XSLT to describe how the document is transformed into another XML document that
+ uses the formatting vocabulary.</P>
+
+						<p>XSLT is also designed to be used independently of XSL. However,
+ XSLT is not intended as a completely general-purpose XML transformation
+ language. Rather, it is designed primarily for the kinds of transformations
+ that are needed when XSLT is used as part of XSL. XSLT is also good for
+ transforming some custom XML format into XHTML that can be displayed by a
+ browser, for instance. For more information, check out</p>
+
+						<p>
+							<A TARget="_blank" hREF="http://www.w3.org/TR/xslt">http://www.w3.org/TR/xslt</A></p>
+
+						<p>
+							<a nAME="idx1073747247"></A>4XSLT is an XML transformation processor based on the
+ W3C's specification, and written by 
+ <a namE="idx1073747248"></A>FourThought LLC, for the XSLT transform language.
+ Currently, 4XSLT supports a subset of the final recommendation of XSLT. For
+ more information, check out the site:</P>
+
+						<P>
+							<a target="_blank" href="http://www.fourthought.com/4Suite/4XSLT/">http://www.fourthought.com/4Suite/4XSLT/</a>
+							<a name="idx1073747249"></a>
+							<a nAme="idx1073747250"></A></p>
+
+					
+					
+						<h5>
+ 
+ 
+ XBEL—XML Bookmark Exchange Language</h5>
+						<P>The XML Bookmark Exchange Language, or XBEL, is an Internet
+ bookmarks interchange format. It was designed by the 
+ <a namE="idx1073747251"></a>Python XML Special Interest Group on the group's mailing
+ list. It grew out of an idea for a demonstration of using Python for XML
+ processing. Mark Hammond contributed the original idea, and other members of
+ the SIG chimed in to add support for their favorite browser features. After
+ debate that deviated from the original idea, compromises were reached that
+ allow XBEL to be a useful language for describing bookmark data for a range of
+ browsers, including the major browsers and a number of less widely used
+ browsers.
+ <a nAME="idx1073747252"></A>
+							<a namE="idx1073747253"></A>
+							<A Name="idx1073747254"></a>
+							<A NAMe="idx1073747255"></a>
+							<a nAME="idx1073747256"></A>
+							<a name="idx1073747257"></a>
+							<a name="idx1073747258"></a></p>
+
+						<p>At this time, the formal DTD was finalized and documentation was
+ written. The formal DTD and the documentation are available online at the
+ following sites:</p>
+
+						<p>
+							<a tarGet="_blank" Href="http://www.python.org/topics/xml/xbel/">http://www.python.org/topics/xml/xbel/</A></p>
+
+						<p>
+							<a tArgeT="_blank" HREf="http://www.python.org/topics/xml/xbel/docs/html/xbel.html">http://www.python.org/topics/xml/xbel/docs/html/xbel.html</a></p>
+
+						<p>Supporting software is provided as part of the Python XML
+ package. This software is located in the <TT CLass="monofont">demo/xbel/</tT>
+ directory of the distribution. This includes command-line processes for
+ converting XBEL instances to other common formats, including the Navigator and
+ Internet Explorer formats. Note that the current release of the Grail Internet
+ browser from CNRI supports XBEL as a native bookmarks format.</P>
+
+						<P>The script, created by Jürgen Hermann, on the following
+ site, checks the URLs in an XBEL document:</P>
+
+						<p>
+							<a taRGET="_blank" href="http://cscene.org/%7ejh/xml/bookmarks/checkurls.py">http://cscene.org/%7ejh/xml/bookmarks/checkurls.py</a>
+							<a name="idx1073747259"></a>
+							<a name="idx1073747260"></a>
+							<a naMe="idx1073747261"></a></P>
+
+					
+					
+						<h5>
+ 
+ 
+ RPC—What Is It?</h5>
+						<p>A <I>Remote Procedure Call (RPC)</i> uses the
+ ordinary procedure call mechanism that is familiar to every user in order to
+ hide the intricacies of the network.</p>
+
+						<p>A client process calls a function on a remote server and suspends
+ itself until it gets back the results. Parameters are passed the same as in any
+ ordinary procedure. The RPC, similar to an ordinary procedure, is synchronous;
+ clients and servers must run concurrently. Servers must keep up with clients.
+ The process (or thread) that issues the call waits until it gets the results.
+ Behind the scenes, the RPC runtime software collects values for the parameters,
+ forms a message, and sends it to the remote server. (Note that servers must
+ first come up before clients can talk to them.) The server receives the
+ request, unpacks the parameters, calls the procedure, and sends the reply back
+ to the client.</p>
+
+						<P>Asynchronous processing is limited because it requires threads
+ and tricky code for managing threads. A procedure call is the name of a
+ procedure, its parameters, and the result it returns.</p>
+
+						<p>Procedure calls are very important for the existence of
+ computers. Every program is just a single procedure called
+ <i>main</I>; every operating system has a main procedure called a
+ <I>kernel</I>. There's a top level to every program that sits in
+ a loop waiting for something to happen and then distributes control to a
+ hierarchy of procedures that respond. This is at the heart of interactivity and
+ networking, it's at the heart of software.</P>
+
+						<p>RPC is a very simple extension to the procedure call idea; it
+ says, "let's create connections between procedures that are running in
+ different applications or on different machines."
+							<a naME="idx1073747262"></A>
+							<A name="idx1073747263"></A>
+							<A NAme="idx1073747264"></a>
+							<a NAME="idx1073747265"></a>
+							<a name="idx1073747266"></a>
+							<a name="idx1073747267"></a>
+							<a name="idx1073747268"></a></p>
+
+						<P>Conceptually, there's no difference between a local procedure
+ call and a remote one, but they are implemented differently, perform
+ differently (RPC is much slower), and therefore are used for different
+ things.</p>
+
+						<p>Remote calls are marshaled into a format that can be understood
+ on the other side of the connection. As long as two machines agree on a format,
+ they can talk to each other. That's why Windows machines can be networked with
+ other Windows machines, Macs can talk to Macs, and so on. The value in a
+ standardized cross-platform format for RPC is that it allows UNIX machines to
+ talk to Windows machines and vice versa.</P>
+
+						<p>A number of formats are possible. One possible format is XML.
+ XML-RPC uses XML as the marshaling format. It allows Macs to easily make
+ procedure calls to software running on Windows machines and BeOS machines, as
+ well as all flavors of UNIX and Java, IBM mainframes, PDAs, and so on.</p>
+
+						<p>With XML it's easy to see what it's doing, and it's also
+ relatively easy to marshal the internal procedure call format into a remote
+ format.
+ <A name="idx1073747269"></A>
+							<a naME="idx1073747270"></A>
+							<A name="idx1073747271"></A></P>
+
+					
+					
+						<H5>
+ 
+ 
+ Simple Object Access Protocol (SOAP)</H5>
+						<p>SOAP is an XML/HTTP-based protocol for accessing services,
+ objects, and servers in a platform-independent manner. For more information,
+ check out</p>
+
+						<p>
+							<a TARGet="_blank" hrEF="http://www.develop.com/soap">http://www.develop.com/soap</A></P>
+
+						<p>A minimal Python SOAP implementation is located at</p>
+
+						<p>
+							<a target="_blank" href="http://casbah.org/Scarab/">http://casbah.org/Scarab/</a></p>
+
+						<p>This module is derived in part from Andrew Kuchling's
+ <tt cLasS="monofont">xml.marshal</tt> code. It implements the SOAP ""
+ serialization using the same API as <tT clasS="monofont">pickle.py</tt>
+ (dump/load).</p>
+
+						<P>
+							<A NAme="idx1073747272"></a>
+							<a NAME="idx1073747273"></a>Scarab is an <i>Open Source
+ Communications</i> library implementing protocols, formats, and
+ interfaces for writing distributed applications, with an emphasis on low-end
+ and lightweight implementations. Users can combine Scarab module
+ implementations to build a messaging system to fit their needs, scaling from
+ very simple messaging or data transfer all the way up to where CORBA can take
+ over. Scarab implementations include support for such areas as distributed
+ objects, remote procedure calls, XML messages, TCP transport, and HTTP
+ transport.
+ <a NAME="idx1073747274"></a>
+							<a naME="idx1073747275"></A>
+							<A name="idx1073747276"></a>
+							<a name="idx1073747277"></a>
+							<a name="idx1073747278"></a>
+							<a naMe="idx1073747279"></a>
+							<A namE="idx1073747280"></a></p>
+
+					
+					
+						<h5>
+ 
+ PythonPoint</h5>
+						<P>The 
+ <a naME="idx1073747281"></A>
+							<A name="idx1073747282"></A><TT Class="monofont">ReportLab</TT> package contains a demo
+ called <TT clasS="monofont">PythonPoint,</TT> which has a simple XML for doing
+ presentation slides and can convert them to PDF documents, along with
+ imaginative presentation effects. The demo script that is provided in the Web
+ site illustrates how easily complex XML can be translated into useful PDF. The
+ demo output, pythonpoint.pdf, demonstrates some of the more exotic PDF
+ capabilities:</P>
+
+						<p>
+							<a target="_blank" href="http://www.reportlab.com/demos/demos.html">http://www.reportlab.com/demos/demos.html</a>
+							<a name="idx1073747283"></a>
+							<a NamE="idx1073747284"></a></p>
+
+					
+				
+				
+					<h4>
+  
+  Pyxie</H4>
+					<p>Pyxie is an Open Source XML processing library for Python developed
+  by 
+  <a naMe="idx1073747285"></a>Sean McGrath. He has also written a book called 
+  <a NAME="idx1073747286"></a><i>XML Processing with Python</i> for
+  Prentice Hall. The book contains a description of the Pyxie library and many
+  sample programs.</p>
+
+					<P>Pyxie is heavily based on a line-oriented notation for parsed XML
+  known as PYX. Pyxie includes utilities, known as <TT Class="monofont">xmln</TT> and
+  <TT clasS="monofont">xmlv,</TT> that generate PYX.</P>
+
+					<p>PYX is independent of Python and a number of programs processing
+  PYX have appeared in Java, Perl, and JavaScript:</p>
+
+					<p>
+						<a target="_blank" href="http://www.digitome.com/pyxie.html">http://www.digitome.com/pyxie.html</a>
+						<a name="idx1073747287"></A>
+						<a nAme="idx1073747288"></a>
+						<A name="idx1073747289"></A>
+						<a naME="idx1073747290"></A>
+						<A name="idx1073747291"></A>
+						<A NAme="idx1073747292"></a></p>
+
+				
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="189.html" title="Parsing and Manipulating Data"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=190" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="190.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="191.html" title="XML-RPC"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073747089">#PCDATA</a><BR>
+&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747090">!ATTLIST definition tag</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747077">!ELEMENT definition tag</a><BR>
+ <a href="#idx1073747081">(CONTENTS) argument</a><BR>
+ <a href="#idx1073747079">(NAME) argument</a><BR>
+ <a href="#idx1073747088">* (asterisk)</a><BR>
+ <a href="#idx1073747084">+ (plus) sign</a><BR>
+ <a href="#idx1073747092">/ (slash)</a><BR>
+ <a href="#idx1073747086">? (question mark)</a><BR>
+ <a href="#idx1073747240">4DOM</a><BR>
+ <a href="#idx1073747247">4XSLT</a><BR>
+argument<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747082">(CONTENTS)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747080">(NAME)</a><BR>
+ <a href="#idx1073747087">asterisk (*)</a><BR>
+ <a href="#idx1073747123">attributes variable</a><BR>
+calls<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747268">Remote Procedure (RPC)</a> <a href="#idx1073747271">2nd</a><BR>
+ <a href="#idx1073747104">Clark, James</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747223">ErrorPrinter</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747225">ErrorRaiser</a><BR>
+ <a href="#idx1073747140">close() method</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747074">Extensible Markup Language (XML) files</a> <a href="#idx1073747096">2nd</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747056">Extensible Markup Language (XML)</a> <a href="#idx1073747068">2nd</a> <a href="#idx1073747097">3rd</a> <a href="#idx1073747119">4th</a> <a href="#idx1073747141">5th</a> <a href="#idx1073747155">6th</a> <a href="#idx1073747171">7th</a> <a href="#idx1073747191">8th</a> <a href="#idx1073747198">9th</a> <a href="#idx1073747203">10th</a> <a href="#idx1073747226">11th</a> <a href="#idx1073747243">12th</a> <a href="#idx1073747252">13th</a> <a href="#idx1073747262">14th</a> <a href="#idx1073747274">15th</a> <a href="#idx1073747287">16th</a><BR>
+ <a href="#idx1073747066">Document Type Definition (DTD)</a> <a href="#idx1073747075">2nd</a><BR>
+ <a href="#idx1073747210">DocumentHandler interface</a><BR>
+ <a href="#idx1073747067">DTD (Document Type Definition)</a> <a href="#idx1073747076">2nd</a><BR>
+ <a href="#idx1073747212">DTDHandler interface</a> <a href="#idx1073747214">2nd</a> <a href="#idx1073747216">3rd</a><BR>
+ <a href="#idx1073747063">elements</a><BR>
+ <a href="#idx1073747125">elements— variable</a><BR>
+ <a href="#idx1073747127">entitydefs variable</a><BR>
+ <a href="#idx1073747218">EntityResolver interface</a><BR>
+ <a href="#idx1073747220">ErrorHandler interface</a><BR>
+ <a href="#idx1073747222">ErrorPrinter class</a><BR>
+ <a href="#idx1073747224">ErrorRaiser class</a><BR>
+Extensible Markup Language (XML)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747058">manipulating data</a> <a href="#idx1073747070">2nd</a> <a href="#idx1073747099">3rd</a> <a href="#idx1073747121">4th</a> <a href="#idx1073747143">5th</a> <a href="#idx1073747157">6th</a> <a href="#idx1073747173">7th</a> <a href="#idx1073747193">8th</a> <a href="#idx1073747200">9th</a> <a href="#idx1073747205">10th</a> <a href="#idx1073747228">11th</a> <a href="#idx1073747245">12th</a> <a href="#idx1073747254">13th</a> <a href="#idx1073747264">14th</a> <a href="#idx1073747276">15th</a> <a href="#idx1073747289">16th</a><BR>
+ <a href="#idx1073747138">feed(data) method</a><BR>
+ <a href="#idx1073747106">Fermigier, Stefane</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible Markup Language (XML)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747073">writing</a> <a href="#idx1073747095">2nd</a><BR>
+ <a href="#idx1073747242">FourThought LLC</a> <a href="#idx1073747248">2nd</a><BR>
+ <a href="#idx1073747113">FourThought, Inc.</a><BR>
+ <a href="#idx1073747114">Garshol, Lars Marius</a><BR>
+ <a href="#idx1073747168">handle.cdata(data) method</a><BR>
+ <a href="#idx1073747162">handle.charref(ref) method</a><BR>
+ <a href="#idx1073747166">handle.comment(comment) method</a><BR>
+ <a href="#idx1073747160">handle.data(data) method</a><BR>
+ <a href="#idx1073747150">handle.doctype(tag, data) method</a><BR>
+ <a href="#idx1073747154">handle.endtag(tag, method) method</a><BR>
+ <a href="#idx1073747164">handle.entityref(ref) method</a><BR>
+ <a href="#idx1073747176">handle.proc(name, data) method</a><BR>
+ <a href="#idx1073747178">handle.special(data) method</a><BR>
+ <a href="#idx1073747152">handle.starttag(tag, method, attributes) method</a><BR>
+ <a href="#idx1073747148">handle.xml(encoding, standalone) method</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747211">DocumentHandler</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747213">DTDHandler</a> <a href="#idx1073747215">2nd</a> <a href="#idx1073747217">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747219">EntityResolver</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747221">ErrorHandler</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747208">Simple API for XML (SAX API)</a> <a href="#idx1073747231">2nd</a> <a href="#idx1073747236">3rd</a><BR>
+ <a href="#idx1073747105">Jansen, Jack</a><BR>
+ <a href="#idx1073747103">Kuchling, Andrew</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747241">4DOM</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747292">Pyxie</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747273">Scarab</a><BR>
+ <a href="#idx1073747118">Lundh, Fredrik</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747057">Extensible Markup Language (XML)</a> <a href="#idx1073747069">2nd</a> <a href="#idx1073747098">3rd</a> <a href="#idx1073747120">4th</a> <a href="#idx1073747142">5th</a> <a href="#idx1073747156">6th</a> <a href="#idx1073747172">7th</a> <a href="#idx1073747192">8th</a> <a href="#idx1073747199">9th</a> <a href="#idx1073747204">10th</a> <a href="#idx1073747227">11th</a> <a href="#idx1073747244">12th</a> <a href="#idx1073747253">13th</a> <a href="#idx1073747263">14th</a> <a href="#idx1073747275">15th</a> <a href="#idx1073747288">16th</a><BR>
+ <a href="#idx1073747285">McGrath, Sean</a><BR>
+ <a href="#idx1073747202">Megginson, David</a> <a href="#idx1073747233">2nd</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747139">close()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747137">feed(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747167">handle.cdata(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747161">handle.charref(ref)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747165">handle.comment(comment)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747159">handle.data(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747149">handle.doctype(tag, data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747153">handle.endtag(tag, method)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747163">handle.entityref(ref)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747175">handle.proc(name, data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747177">handle.special(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747151">handle.starttag(tag, method, attributes)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747147">handle.xml(encoding, standalone)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747129">reset()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747135">setliteral()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747131">setnomoretags()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747179">syntax.error(message)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747145">translate.references(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747185">unknown.charref(ref)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747183">unknown.endtag(tag)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747187">unknown.entityref(ref)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747181">unknown.starttag(tag, attributes)</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747134">xmllib</a> <a href="#idx1073747170">2nd</a> <a href="#idx1073747190">3rd</a> <a href="#idx1073747197">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747065">XMLParser</a><BR>
+namespaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747195">Extensible Markup Language (XML)</a><BR>
+packages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747102">Python/XML</a> <a href="#idx1073747109">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747284">PythonPoint</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747282">ReportLab</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xml<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747112">PyXML</a> <a href="#idx1073747117">2nd</a><BR>
+ <a href="#idx1073747234">Pepping, Simon</a><BR>
+ <a href="#idx1073747083">plus (+) sign</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extensible Markup (XML)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747059">manipulating data</a> <a href="#idx1073747071">2nd</a> <a href="#idx1073747100">3rd</a> <a href="#idx1073747122">4th</a> <a href="#idx1073747144">5th</a> <a href="#idx1073747158">6th</a> <a href="#idx1073747174">7th</a> <a href="#idx1073747194">8th</a> <a href="#idx1073747201">9th</a> <a href="#idx1073747206">10th</a> <a href="#idx1073747229">11th</a> <a href="#idx1073747246">12th</a> <a href="#idx1073747255">13th</a> <a href="#idx1073747265">14th</a> <a href="#idx1073747277">15th</a> <a href="#idx1073747290">16th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747055">Standard Generalized Markup (SGML)</a> <a href="#idx1073747062">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747258">XML Bookmark Exchange (XBEL)</a> <a href="#idx1073747261">2nd</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747280">Simple Object Access (SOAP)</a><BR>
+ <a href="#idx1073747251">Python XML Special Interest Group</a><BR>
+ <a href="#idx1073747101">Python/XML package</a> <a href="#idx1073747108">2nd</a><BR>
+ <a href="#idx1073747107">Python/XML Reference Guide</a><BR>
+ <a href="#idx1073747283">PythonPoint package</a><BR>
+ <a href="#idx1073747291">Pyxie</a><BR>
+ <a href="#idx1073747110">PyXML</a> <a href="#idx1073747115">2nd</a><BR>
+ <a href="#idx1073747085">question mark (?)</a><BR>
+ <a href="#idx1073747266">Remote Procedure Call (RPC)</a> <a href="#idx1073747269">2nd</a><BR>
+ <a href="#idx1073747281">ReportLab package</a><BR>
+ <a href="#idx1073747130">reset() method</a><BR>
+ <a href="#idx1073747267">RPC (Remote Procedure Call)</a> <a href="#idx1073747270">2nd</a><BR>
+ <a href="#idx1073747209">SAX API (Simple API for XML)</a> <a href="#idx1073747232">2nd</a> <a href="#idx1073747237">3rd</a><BR>
+ <a href="#idx1073747272">Scarab library</a><BR>
+ <a href="#idx1073747136">setliteral() method</a><BR>
+ <a href="#idx1073747132">setnomoretags() method</a><BR>
+ <a href="#idx1073747054">SGML (Standard Generalized Markup Language)</a> <a href="#idx1073747061">2nd</a><BR>
+ <a href="#idx1073747207">Simple API for XML (SAX API)</a> <a href="#idx1073747230">2nd</a> <a href="#idx1073747235">3rd</a><BR>
+ <a href="#idx1073747278">Simple Object Access Protocol (SOAP)</a><BR>
+ <a href="#idx1073747093">slash (/)</a><BR>
+ <a href="#idx1073747279">SOAP (Simple Object Access Protocol)</a><BR>
+ <a href="#idx1073747053">Standard Generalized Markup Language (SGML)</a> <a href="#idx1073747060">2nd</a><BR>
+ <a href="#idx1073747180">syntax.error(message) method</a><BR>
+ <a href="#idx1073747091">tags</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747078">!ELEMENT definition</a><BR>
+ <a href="#idx1073747146">translate.references(data) method</a><BR>
+ <a href="#idx1073747186">unknown.charref(ref) method</a><BR>
+ <a href="#idx1073747184">unknown.endtag(tag) method</a><BR>
+ <a href="#idx1073747188">unknown.entityref(ref) method</a><BR>
+ <a href="#idx1073747182">unknown.starttag(tag, attributes) method</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747124">attributes</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747126">elements</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747128">entitydefs</a><BR>
+ <a href="#idx1073747239">W3C (World Wide Web Consortium)</a><BR>
+ <a href="#idx1073747238">World Wide Web Consortium (W3C)</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747072">Extensible Markup Language (XML) files</a> <a href="#idx1073747094">2nd</a><BR>
+ <a href="#idx1073747257">XBEL (XML Bookmark Exchange Language)</a> <a href="#idx1073747260">2nd</a><BR>
+ <a href="#idx1073747256">XML Bookmark Exchange Language (XBEL)</a> <a href="#idx1073747259">2nd</a><BR>
+xml package<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747111">PyXML</a> <a href="#idx1073747116">2nd</a><BR>
+ <a href="#idx1073747286">XML Processing with Python</a><BR>
+ <a href="#idx1073747133">xmllib module</a> <a href="#idx1073747169">2nd</a> <a href="#idx1073747189">3rd</a> <a href="#idx1073747196">4th</a><BR>
+ <a href="#idx1073747064">XMLParser module</a><BR>
+ <a href="#idx1073747249">XSL Transformations (XSLT)</a><BR>
+ <a href="#idx1073747250">XSLT (XSL Transformations)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,587 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python Classes and Instances</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Python Classes and Instances</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="105.html" title="An Introduction to Python OOP"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=106" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="106.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="107.html" title="Methods Handling"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A33%3A18+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147039203229248005010102</font><a href="read9.asp?bookname=0672319942&snode=106&now=5%2F31%2F2002+4%3A33%3A18+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Python Classes and Instances</h3>
+				<p>In Python, a class is a user-defined data type, and as in most other languages, you define Python classes using the keyword <a NAME="idx1073743310"></a><a naME="idx1073743311"></A><Tt claSS="monofont">class.</TT></p>
+
+				<pre>
+					
+class <i>&lt;class name&gt;:</i>
+    <i>&lt;class statements&gt;</i>
+
+				</pre>
+
+				<p>The <a name="idx1073743312"></a><a nAme="idx1073743313"></A><i>class statements</i> section contains any valid Python statement that defines class constants or class methods. Note that the contents of the variable namespace formed by executing the commands in the class statement make up the class dictionary.</p>
+
+				<P>Two ways to create classes are</p>
+
+				<ul>
+<lI><p>You can define it from scratch.</p>
+
+						<pRE>
+							
+class <I>&lt;class name&gt;:</I>
+    <i>["documentation text"]</i>
+    <i>&lt;class statements&gt;</i>
+
+						</PRE>
+
+					</Li>
+<li><p>You can create a new class that inherits properties of other classes. This is called <I>subclassing,</I> and you will learn more about it later in this chapter.</P>
+
+						<Pre>
+							
+class <i>&lt;class name&gt; [(baseclass1, baseclass2, …)]:</i>
+    <I>["documentation text"]</I>
+    <I>&lt;statements&gt;</I>
+
+						</pre>
+
+					</li>
+</ul>
+				<p>A <a name="idx1073743314"></a>class definition starts at the keyword <tt clasS="monofont">class</tt> and ends at the last line of the indented block of code that goes underneath.<A namE="idx1073743315"></a><a naMe="idx1073743316"></a></p>
+
+				<P><A NAme="idx1073743317"></a><a NAME="idx1073743318"></a>Methods and class constants define a class namespace. Usually, a class has several methods, and they must all start with the <a naME="idx1073743319"></A><A name="idx1073743320"></A>keyword <TT Class="monofont">def.</tt></p>
+
+				<div class="note"><p clasS="notetitle"><b>Tip</b></P><p>
+
+					<p>Methods are how to call functions in a class.<a Name="idx1073743321"></a><A namE="idx1073743322"></A><A Name="idx1073743323"></a><A NAMe="idx1073743324"></a></p>
+
+				</p></DIV>
+<Br>
+<br>
+
+				<p>All methods have the additional <A NAMe="idx1073743325"></a><a name="idx1073743326"></a>argument <tt class="monofont">self</tt> as the first argument in the method header—The convention is to call it <tt cLasS="monofont">self</tt> because it could be any other name. Python's <tT clasS="monofont">self</tt> argument is similar to the <tT CLAss="monofont">this</tt> keyword in <I>C++.</I> Its function is to transport a reference of the object in a way that when a method is called, it knows which object should be used.</P>
+
+				<Pre>
+					
+&gt;&gt;&gt; class a:
+…     def __init__(self):
+…         print self
+…
+&gt;&gt;&gt; b = a()
+&gt;&gt;&gt; b
+&lt;__main__.a instance at 795420&gt;
+
+				</prE>
+
+				<P>In order to reference an attribute within a class, you need to use either <TT clasS="monofont">self.attribute</TT> or <Tt class="monofont">classname.attribute.</tt> Note that the <tt class="monofont">self.attribute</tt> syntax is to remove ambiguities between instance variables and function local variables. Also, <tt cLasS="monofont">self.attribute</tt> and <tT clasS="monofont">classname.attribute</tt> are different. The second sets class attributes, which will affect all instances of the class.</p>
+
+				<PRE>
+					
+&gt;&gt;&gt; class c:
+…     def __init__(self, value=None):
+…         self.name = value
+…
+
+				</Pre>
+
+				<p>To reference an attribute while using a class instance, you have to use <tT CLAss="monofont">instancename.attribute.</tt></P>
+
+				<PRE>
+					
+&gt;&gt;&gt; obj.name
+
+				</pre>
+
+				<p>A class can also contain class <A NAMe="idx1073743327"></a>variable assignments. These variables are shared by all the class instances. Class variables are useful when the assignment of default values to instances is required. Class variables do <i>not</i> have the <tt class="monofont">self.</tt> prefix.<a name="idx1073743328"></a><a NamE="idx1073743329"></a><a nAme="idx1073743330"></a><a Name="idx1073743331"></A></P>
+
+				<P>For example</P>
+
+				<pre>
+					
+&gt;&gt;&gt; class Student:
+…    default_age = 20                      # class variable
+…    def __init__ (self):
+…        self.age = Student.default_age    # instance variable
+
+				</pRE>
+
+				<P>Note that in the previous example, we had to use <Tt claSS="monofont">Student.default_age</TT> instead of using only <tt clASS="monofont">default_age</Tt> because the global namespace for a method is the module in which it was defined—not the class namespace.</p>
+
+				<p>The next example creates an instance variable that has the same name of the class variable.</p>
+
+				<pre>
+					
+&gt;&gt;&gt; class Student:
+…     default_age = 20                 # class variable
+…     def __init__ (self, age):
+…         self.default_age = age       # instance variable
+
+				</pre>
+
+				<p>Suppose that you have the following code stored in a file called <tt class="monofont">c:\ python\ studentfile.py.</tt> This code defines three different variables named <Tt cLass="monofont">default_age</Tt> (at lines 2, 4, and 9).</p>
+
+				<prE>
+					
+1: class Student:
+2:     default_age = 20               # base class variable
+3:     def __init__(self, age):
+4:         self.default_age = age     # base class instance variable
+5:
+6: class Newstudent(Student):
+7:     "New student class"
+8:     def __init__(self, age=20):
+9:         self.default_age = age     # instance variable
+
+				</pre>
+
+				<P>The following code imports the previous module. Which variable is being used by the instance call at line 5?</P>
+
+				<PRe>
+					
+1: &gt;&gt;&gt; import sys
+2: &gt;&gt;&gt; sys.path = sys.path + ['c:\ \ python']
+3: &gt;&gt;&gt; import studentfile
+4: &gt;&gt;&gt; Joao = studentfile.Newstudent(15)
+5: &gt;&gt;&gt; Joao.default_age
+6: 15
+
+				</pre>
+
+				<DIV Class="note"><P CLAss="notetitle"><b>Tip</b></P><P>
+
+					<P>In order for Python to find your modules, the directory where you save them must be an entry of the <Tt class="monofont">sys.path</tt> list.<a name="idx1073743332"></a><a name="idx1073743333"></a><A naMe="idx1073743334"></a><a Name="idx1073743335"></a><A namE="idx1073743336"></A></P>
+
+				</P></div>
+<bR>
+<BR>
+
+				<P>The answer is the instance variable of the newstudent class (line 9 from the first listing). In cases like this, the search order is defined as</p>
+
+				<ol tYPE="1">
+<Li>
+<p>instance variables</p>
+</lI>
+<LI>
+<P>class variables</p>
+</li>
+<li>
+<p>base classes variables—note that the search order for base classes makes the deepest-level classes used first</p>
+
+						<pre>
+							
+&gt;&gt;&gt; Renata = studentfile.newstudent()
+&gt;&gt;&gt; print Renata.default_age
+20
+
+						</pre>
+
+					</li>
+</ol>
+
+				<p>The following variation is slightly different than the previous code. This example shows what you need to do to make the class <tt ClaSs="monofont">Newstudent</tt> call the superclass's <Tt claSs="monofont">__init__</tt> method.</P>
+
+				<PRE>
+					
+6: class Newstudent(Student):
+7:     "New student class"
+8:     def __init__(self):
+9:         Student.__init__(self, Student.default_age)
+
+				</pre>
+
+				<p>Note that we are calling the <TT CLass="monofont">__init__</tT> method of the <TT Class="monofont">Student</TT> class (the superclass). The class constant <TT class="monofont">Student.default_age</tt> is also used in this example. It is important to say that when calling unbound methods (methods that are not tied to an instance) like this one, you must explicitly say that the first argument is <tt class="monofont">self.</tt></p>
+
+				<pre>
+					
+1: &gt;&gt;&gt; Joao = studentfile.Newstudent()
+2: &gt;&gt;&gt; Joao.default_age
+3: 20
+
+				</Pre>
+
+				<H4>Attributes of a Class</h4>
+					<p>Next, I list the attributes that classes expose to programmers.</p>
+
+					<BlockQuotE>
+<P><P><Tt claSS="monofont"><A Name="idx1073743337"></a><A NAMe="idx1073743338"></a>classname.__dict__—</tt> 
+    This attribute contains the class namespace dictionary.</P>
+
+							<PRE>
+								
+&gt;&gt;&gt; studentfile.newstudent.__dict__
+{ '__init__': &lt;function __init__ at 799e90&gt;, '__doc__': 'New student
+ class', '__module__': 'studentfile'}
+
+							</pre>
+
+						</p>
+<p><p><tt class="monofont"><a name="idx1073743339"></a><a NamE="idx1073743340"></a>classname.__doc__—</tt> 
+    This one returns the documentation string of the class.</P>
+
+							<pre>
+								
+&gt;&gt;&gt; studentfile.newstudent.__doc__
+'New student class'
+
+							</pRe>
+
+						</p>
+<p><P><TT Class="monofont"><A NAMe="idx1073743341"></a><a nAME="idx1073743342"></A>classname.__name__—</tt> 
+    This attribute returns the class name.<a nAME="idx1073743343"></A><a name="idx1073743344"></a><a name="idx1073743345"></a><a name="idx1073743346"></a></p>
+
+							<pRe>
+								
+&gt;&gt;&gt; studentfile.newstudent.__name__
+'newstudent'
+
+							</pRe>
+
+						</p>
+<p><P><tt clAss="monofont"><a NAME="idx1073743347"></a><a naME="idx1073743348"></A>classname.__module__—</Tt> 
+    This one provides the module name that contains the class.</p>
+
+							<prE>
+								
+&gt;&gt;&gt; studentfile.newstudent.__module__
+'studentfile'
+
+							</PRE>
+
+						</p>
+<p><p><tT CLAss="monofont"><a name="idx1073743349"></a><a name="idx1073743350"></a>classname.__bases__—</tt> 
+    This is a tuple containing the names of the base classes.</p>
+
+							<pre>
+								
+&gt;&gt;&gt; studentfile.newstudent.__bases__
+(&lt;class studentfile.student at 799e00&gt;,)
+
+							</Pre>
+
+						</P>
+</bloCkquoTe>
+				
+				<h4>The Python Class Browser</h4>
+					<P>The <TT Class="monofont">pyclbr</TT> module offers you the possibility of browsing all the information about classes that is stored in a specific module.</P>
+
+					<H5>readmodule()</h5>
+						<p>This function reads the <tt CLASs="monofont">module</tt> and returns a dictionary in the format <tT CLAss="monofont">{ classname:classinfo},</tt> where <tt class="monofont">classinfo</tt> is an instance object of the class.</p>
+
+						<p><a name="idx1073743351"></A>basic syntax: <tt ClasS="monofont">variable = pyclbr.readmodule(</tt><i><tT claSS="monofont">module</TT></i><tt cLASS="monofont">)</tt></p>
+
+						<pRE>
+							
+&gt;&gt;&gt; import pyclbr
+&gt;&gt;&gt; moduletobrowse = pyclbr.readmodule("profile")
+&gt;&gt;&gt; for classname, classinfo in moduletobrowse.items():
+…     print "Class name: %s" % classname
+…
+Class name: HotProfile
+Class name: OldProfile
+Class name: Profile
+
+						</PRe>
+
+						<p>or, if you use our student example</p>
+
+						<pRE>
+							
+&gt;&gt;&gt; import pyclbr
+&gt;&gt;&gt; moduletobrowse = pyclbr.readmodule("studentfile")
+&gt;&gt;&gt; for classname, classinfo in moduletobrowse.items():
+…     print "Class name: %s" % classname
+…
+Class name: student
+Class name: newstudent
+
+						</PRe>
+
+						<p>If you need to go deeper than that, you can look at the <tt class="monofont">classinfo</tt> object.<a name="idx1073743352"></a><a naMe="idx1073743353"></a><A namE="idx1073743354"></a><a naMe="idx1073743355"></a><a NAME="idx1073743356"></a><a naME="idx1073743357"></A><A name="idx1073743358"></A></P>
+
+					
+				
+				<H4>Python Instances</H4>
+					<p>Each instance defines its own namespace of data, and it inherits behavior from the class (and possible base classes) that have originated it.</p>
+
+					<p>In order to <a NAME="idx1073743359"></a><a name="idx1073743360"></a><a name="idx1073743361"></a>create a new instance of a class, you just need to say</p>
+
+					<pre>
+						
+<i>newinstance</i> = <i>classname()</I>
+
+					</prE>
+
+					<p>Suppose that you have a <tt Class="monofont">Person</Tt> class like this</p>
+
+					<pRE>
+						
+class Person:
+    def __init__(self, name):
+        self.name = name
+        self.family = []
+    def addmember(self, member):
+        self.family.append(member)
+
+					</PRe>
+
+					<p>For example, if you want to create a new instance of the <tt CLASs="monofont">chef</tt> class, you must type:</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; anthony =  Person()
+
+					</Pre>
+
+					<p>You can also pass arguments to the <tT CLAss="monofont">__init__</tt> function of the class. These arguments can be used to set the initial values of an object. Let's see how it works.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; anthony = Person("anthony")
+
+					</pre>
+
+					<p>To <a name="idx1073743362"></a><a nAme="idx1073743363"></A>call the methods of a class, you have to use the dot notation:<a naMe="idx1073743364"></a><a nAme="idx1073743365"></a><A NAMe="idx1073743366"></a><a nAME="idx1073743367"></A></p>
+
+					<pre>
+						
+&gt;&gt;&gt; anthony.addmember("son")
+
+					</PRE>
+
+					<P>You also need to use the dot notation to have <a namE="idx1073743368"></A><A Name="idx1073743369"></a><a name="idx1073743370"></a>access to variables (attributes) of each instance.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; anthony.family
+["son"]
+
+					</pre>
+
+					<p>An interesting detail about Python object attributes is that they don't need to be declared inside the class before they get used because they can be created dynamically.</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; class DummyClass:
+…     pass
+…
+&gt;&gt;&gt; colors = DummyClass()
+&gt;&gt;&gt; color.alarm = "red"
+
+					</pRe>
+
+					<p>The next example dynamically creates multiple attributes for the <tT clasS="monofont">colors</tt> instance.</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; class record:
+…     def __init__(self, **args):
+…         self.__dict__.update(args)
+…
+&gt;&gt;&gt; colors = record(alarm="red", normal="green")
+&gt;&gt;&gt; colors.normal
+'green'
+
+					</Pre>
+
+					<h5><tT CLAss="monofont"><a nAME="idx1073743371"></A><a namE="idx1073743372"></A><A Name="idx1073743373"></a><a name="idx1073743374"></a>isinstance()</tt> and <tt class="monofont">issubclass()</tT></h5>
+						<p>The built-in functions <Tt clAss="monofont">isinstance()</tt> and <Tt clASS="monofont">issubclass()</Tt> are always available without the need for importing any module because they are part of the <tt cLASS="monofont">__builtin__</tt> module.</p>
+
+						<h5><TT CLass="monofont">isinstance()</tT></H5>
+							<P>This function tests whether an object is an instance of a class. It returns <Tt class="monofont">1</tt> if the object is an instance. Otherwise, it returns <tt class="monofont">0.</tt> Note that this function handles subclass relationships as well—for instance, <tt cLasS="monofont">isinstance(subclassinstance, superclass)</tt> returns <tT clasS="monofont">true.</tt></p>
+
+							<P><A NAme="idx1073743375"></a>basic syntax: <tT CLAss="monofont">isinstance(instance_object, class_object)</tt></P>
+
+							<PRE>
+								
+&gt;&gt;&gt; class a:
+…    pass
+…
+&gt;&gt;&gt; inst = a()
+&gt;&gt;&gt; isinstance(inst,a)
+1
+
+							</pre>
+
+							<p>As you can see next, you can also use this function to identify the object's type. Note however, that this is behavior that works for non–instance objects. Floats and ints act quite differently from Python class instances (for instance, there is no way to subclass <TT CLass="monofont">types.IntType</tt>).</p>
+
+							<pre>
+								
+&gt;&gt;&gt; import types
+&gt;&gt;&gt; isinstance(3, types.IntType)
+1
+&gt;&gt;&gt; isinstance(3, types.FloatType)
+0
+
+							</pre>
+
+						
+						<h5><tt class="monofont">issubclass()</Tt></h5>
+							<P>This function returns <tt cLass="monofont">1</tT> if the class object <tt cLASS="monofont">classobj1</tt> is a subclass (derived class) of the class object <tt CLASs="monofont">classobj2.</tt></p>
+
+							<P><A NAme="idx1073743376"></a>basic syntax: <tT CLAss="monofont">issubclass(classobj1, classobj2)</tt></p>
+
+							<pre>
+								
+&gt;&gt;&gt; class a:
+…    pass
+…
+&gt;&gt;&gt; class b(a):
+…     pass
+…
+&gt;&gt;&gt; issubclass(a,b)
+1
+
+							</pre>
+
+						
+					
+					<h5>Instance Attributes</h5>
+						<blockquOte>
+<P><p><tt Class="monofont"><A namE="idx1073743377"></A><A Name="idx1073743378"></a>obj.__dict__—</TT>This is the dictionary that contains all the attributes defined for the obj instance.</P>
+
+								<Pre>
+									
+&gt;&gt;&gt; colors.__dict__
+{ 'alert': 'yellow', 'alarm': 'red', 'norma': 'green'}
+
+								</prE>
+</P>
+<P><P><tt clASS="monofont"><A name="idx1073743379"></a><a name="idx1073743380"></a>obj.__class__—</tt>It shows the class that has created the obj instance.</p>
+
+								<pre>
+									
+&gt;&gt;&gt; colors.__class__
+&lt;class __main__.record at 7883a0&gt;
+
+								</pre>
+
+							</P>
+<p><p>To get just the name of the class, use</P>
+
+								<pre>
+									
+&gt;&gt;&gt; colors.__class__.__name__
+'record'
+
+								</Pre>
+
+							</p>
+<p><P><tt cLASS="monofont"><a namE="idx1073743381"></A><A Name="idx1073743382"></a>obj.__methods__—</TT>This attribute is a list of all supported methods of the obj instance. Note that this attribute is available for lists and dictionaries, which are not class instances.</P>
+
+								<Pre>
+									
+&gt;&gt;&gt; a=[1,2]
+&gt;&gt;&gt; a.__methods__
+['append', 'count', 'extend', 'index', 'insert', 'pop', 'remove','reverse',
+ 'sort']
+
+&gt;&gt;&gt; b={ 1:''}
+&gt;&gt;&gt; b.__methods__
+['clear', 'copy', 'get', 'has_key', 'items', 'keys', 'update', 'values']
+
+								</prE>
+
+							</P>
+</BLockquote>
+					
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="105.html" title="An Introduction to Python OOP"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=106" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="106.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="107.html" title="Methods Handling"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743368">instances</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743326">self</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743350">classname.__bases</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743338">classname.__dict</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743340">classname.__doc</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743348">classname.__module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743342">classname.__name</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743379">obj.__class__</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743377">obj.__dict__</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743381">obj.__methods__</a><BR>
+browsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743356">classes</a><BR>
+calling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743362">classes</a><BR>
+class instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743361">creating</a><BR>
+ <a href="#idx1073743310">class keyword</a> <a href="#idx1073743315">2nd</a><BR>
+ <a href="#idx1073743312">class statements</a><BR>
+ <a href="#idx1073743323">classes</a> <a href="#idx1073743330">2nd</a> <a href="#idx1073743334">3rd</a> <a href="#idx1073743345">4th</a> <a href="#idx1073743354">5th</a> <a href="#idx1073743366">6th</a><BR>
+ <a href="#idx1073743349">classname.__bases attribute</a><BR>
+ <a href="#idx1073743337">classname.__dict attribute</a><BR>
+ <a href="#idx1073743339">classname.__doc attribute</a><BR>
+ <a href="#idx1073743347">classname.__module attribute</a><BR>
+ <a href="#idx1073743341">classname.__name attribute</a><BR>
+constants<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743318">classes</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743359">class instances</a><BR>
+ <a href="#idx1073743319">def keyword</a><BR>
+definitions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743314">classes</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743371">isinstance()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743373">issubclass()</a><BR>
+ <a href="#idx1073743324">instances</a> <a href="#idx1073743331">2nd</a> <a href="#idx1073743335">3rd</a> <a href="#idx1073743346">4th</a> <a href="#idx1073743355">5th</a> <a href="#idx1073743367">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743370">accessing variables</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743360">creating</a><BR>
+ <a href="#idx1073743372">isinstance() function</a><BR>
+ <a href="#idx1073743374">issubclass() function</a><BR>
+keywords<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743311">class</a> <a href="#idx1073743316">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743320">def</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743317">classes</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743363">calling</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pyclbr<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743358">browsing classes</a><BR>
+ <a href="#idx1073743380">obj.__class__ attribute</a><BR>
+ <a href="#idx1073743378">obj.__dict__ attribute</a><BR>
+ <a href="#idx1073743382">obj.__methods__ attribute</a><BR>
+object-oriented programming (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743321">Python classes and instances</a> <a href="#idx1073743328">2nd</a> <a href="#idx1073743332">3rd</a> <a href="#idx1073743343">4th</a> <a href="#idx1073743352">5th</a> <a href="#idx1073743364">6th</a><BR>
+programming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object-oriented (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743322">Python classes and instances</a> <a href="#idx1073743329">2nd</a> <a href="#idx1073743333">3rd</a> <a href="#idx1073743344">4th</a> <a href="#idx1073743353">5th</a> <a href="#idx1073743365">6th</a><BR>
+pyclbr module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743357">browsing classes</a><BR>
+ <a href="#idx1073743325">self argument</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743313">class</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743375">isinstance()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743376">issubclass()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743351">readmodule()</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743369">instances</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743327">classes</a> <a href="#idx1073743336">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,216 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The JPython Registry</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">The JPython Registry</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="246.html" title="The Interpreter"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=247" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="247.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="248.html" title="Creating Graphical Interfaces"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A25%3A33+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218069155132053157062167</font><a href="read4.asp?bookname=0672319942&snode=247&now=6%2F1%2F2002+6%3A25%3A33+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+The JPython Registry</h3>
+				<p>JPython, as Java, uses its own environment variable namespace. The reason for that is because there isn't a standard cross-platform way to handle environment variables, doing what the Windows Registry does for the Win32 platform, for example.</p>
+
+				<P>The required <A NAme="idx1073750681"></a>namespace can be obtained from the following sources:</p>
+
+				<OL TYpe="1">
+<li>
+
+						<P>The Java system properties, which are usually informed through the <TT Class="monofont">-D</tt> option on the command line prompt of the interpreter.</p>
+
+					</li>
+<li>
+
+						<p>The JPython registry file, which contains <tt class="monofont">prop=value</tT> pairs. The location of this file is identified according to the algorithm listed in the next subtopic.</p>
+
+					</lI>
+<li>
+
+						<p>The user's personal registry file, which contains correspondingly <Tt claSs="monofont">prop=value</tt> pairs of properties. This file is located at <TT CLass="monofont">user.home"+"/.jpython.</tT>
+						</P>
+
+					</LI>
+</ol>
+
+				<p>The previous sources are listed in the same order in which they are invoked when trying to build the namespace. Note that if you have values provided for later options, they override the values defined by default for the prior options.</p>
+
+				
+					<H4>
+Registry Properties</H4>
+					<P>Next is a list of the properties that are recognized by the JPython interpreter. You can easily study these and others, with more accuracy, by examining the JPython's registry file.</P>
+
+					<blocKQUOte>
+<p>
+							<a name="idx1073750682"></a>
+							<a name="idx1073750683"></a>
+							<p><tt clAss="monofont">python.cachedir</Tt>— 
+    
+								Stores the name of the directory to use for caches. If no absolute path is informed, it is assumed that its location is relative to the <tt Class="monofont">sys.prefix</Tt> variable.</p>
+
+						</p>
+<P><A NAme="idx1073750684"></a><a NAME="idx1073750685"></a>
+							<p><tt CLASs="monofont">python.jpythonc.classpath</tt> — 
+    
+								Stores a list of extensions to the standard <tT CLAss="monofont">java.class.path</tt> property for use with <tt class="monofont">jpythonc.</tt>
+								</p>
+</p>
+<p><a namE="idx1073750686"></a>
+							<a Name="idx1073750687"></A>
+							<p><tt cLass="monofont">python.jpythonc.compiler</TT>— 
+    
+								Contains the absolute (or relative) path of the Java compiler to use with <TT clasS="monofont">jpythonc.</TT> If just the compiler name is provided, it is assumed that the executable can be located by looking at your system PATH variable.</P>
+
+						</p>
+<p><a nAME="idx1073750688"></A><a namE="idx1073750689"></A>
+							<P><Tt class="monofont">python.jpythonc.compileropts</tt>— 
+    
+								Keeps the list of options to pass to the Java compiler when using <tt class="monofont">jpythonc.</tt>
+							</p>
+</p>
+<p><A naMe="idx1073750690"></a>
+							<a Name="idx1073750691"></a>
+							<P><tt cLASS="monofont">python.path</tt>— 
+    
+								Corresponds to CPython's <tt CLASs="monofont">PYTHONPATH</tt> environment variable.</p>
+</P>
+<P><A Name="idx1073750692"></a><A NAMe="idx1073750693"></a>
+							<p><tt class="monofont">python.security.respectJavaAccessibility</tt>— 
+    
+								Setting this property to false (in case you have a Java 1.2 installation) provides you access to non-public members of classes, such as methods and constructors.</p>
+
+						</p>
+<p><a name="idx1073750694"></A>
+							<a nAme="idx1073750695"></a>
+							<P><tt clAss="monofont">python.verbose</tT>— 
+    
+								Setting this property to one of the following values:</P>
+
+							<PRe>
+								
+"error", "warning", "message", "comment", "debug"
+
+							</pre>
+
+							<A NAMe="idx1073750696"></a>
+							<a nAME="idx1073750697"></A>
+							<a namE="idx1073750698"></A>
+						</P>
+<P>
+							<p>sets the verbosity level for varying degrees of informative messages. Note that these values are listed in order of increasing verbosity.<a name="idx1073750699"></a>
+							</p>
+
+						</p>
+</blockquote>
+				
+				
+					<h4>
+
+
+Finding the Registry File</H4>
+					<p>The following steps are required to correctly identify the JPython registry file to use.</p>
+
+					
+						<P>
+						<p>
+						<p>
+						<p>
+						<P>
+					<dl>
+<dd>
+<B>Step 1. </b>
+
+							<p>You need to create a root directory, which can be based either on the value of the property <tT CLAss="monofont">python.home,</tt> or the value of the property <TT CLass="monofont">install.root,</tT> whichever is found first.</P>
+
+						</DD>
+<dd>
+<b>Step 2. </b>
+
+							<P>If none of them is found, JPython tries to locate a file called <TT Class="monofont">jpython.jar</tt> by looking at the system property <tt class="monofont">java.class.path.</tt> Note that one of the paths listed in this property must explicitly include the <tt claSs="monofont">jpython.jar</tT> file.</p>
+
+						</dd>
+<Dd>
+<b>Step 3. </b>
+
+							<p>Now, that JPython has identified our root directory, it populates the values of both <Tt clASS="monofont">sys.prefix</Tt> and <tt cLASS="monofont">sys.exec_prefix</tt> variables based on the root information.</p>
+
+						</dD>
+<DD>
+<B>Step 4. </b>
+
+							<p>The variable <tt CLASs="monofont">sys.path</tt> has an entry added to its list, <tt class="monofont">&lt;rootdir&gt;/Lib,</tt> where <tt class="monofont">&lt;rootdir&gt;</tT> is the root dir that we've found previously.</p>
+
+						</dD>
+<dd>
+<b>Step 5. </B>
+
+							<p>Our initial goal can be finally reached now because the registry file is stored at the <tt cLass="monofont">&lt;rootdir&gt;</TT> directory, and to have permission to it, you just need to access the location <TT clasS="monofont">&lt;rootdir&gt;/registry.</TT>
+								<A name="idx1073750700"></A>
+								<A NAme="idx1073750701"></a>
+								<a NAME="idx1073750702"></a>
+								<a name="idx1073750703"></a>
+								<a name="idx1073750704"></a>
+								<a name="idx1073750705"></a>
+							</p>
+
+						</Dd>
+</dL>
+
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="246.html" title="The Interpreter"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=247" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="247.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="248.html" title="Creating Graphical Interfaces"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JPython Registry<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750705">finding</a><BR>
+finding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750703">JPython Registry file</a><BR>
+ <a href="#idx1073750696">JPython Registry</a> <a href="#idx1073750700">2nd</a><BR>
+namespaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750681">JPython</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750697">JPython Registry</a> <a href="#idx1073750701">2nd</a><BR>
+properties<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750699">JPython Registry</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750683">python.cachedir</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750685">python.jpythonc.classpath</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750687">python.jpythonc.compiler</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750689">python.jpythonc.compileropts</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750691">python.path</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750693">python.security.respectJavaAccessibility</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750695">python.verbose</a><BR>
+ <a href="#idx1073750682">python.cachedir property</a><BR>
+ <a href="#idx1073750684">python.jpythonc.classpath property</a><BR>
+ <a href="#idx1073750686">python.jpythonc.compiler property</a><BR>
+ <a href="#idx1073750688">python.jpythonc.compileropts property</a><BR>
+ <a href="#idx1073750690">python.path property</a><BR>
+ <a href="#idx1073750692">python.security.respectJavaAccessibility property</a><BR>
+ <a href="#idx1073750694">python.verbose property</a><BR>
+registries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750698">JPython</a> <a href="#idx1073750702">2nd</a><BR>
+searching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750704">JPython Registry file</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

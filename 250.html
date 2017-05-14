@@ -1,0 +1,187 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; jpythonc </TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">jpythonc </span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="249.html" title="Embedding"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=250" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="250.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="251.html" title="Running JPython Applets"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A26%3A33+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218070220043007025254056</font><a href="read6.asp?bookname=0672319942&snode=250&now=6%2F1%2F2002+6%3A26%3A33+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+					<tt cLASS="monofont">jpythonc</tt>
+				</h3>
+				<p>The JPython distribution provides a tool called <TT CLass="monofont">jpythonc</tT> that works like a Python compiler for Java. This tool, which is actually just a JPython script, operates by taking a JPython source code (extension <TT Class="monofont">.py</tt>), and compiling it to real Java class bytecodes, which are executed by the <i>Java Runtime Environment (JRE).</i> Therefore you can write your code in JPython, and later use <tt class="monofont">jpythonc</tt> to generate a simple class, a JavaBean, a servlet, or an applet. Note that you need full access to a Java compiler in order to use <tt cLasS="monofont">jpythonc.</tt> Internally, the <tT clasS="monofont">jpythonc</tt> tool creates a Java source file file, but it needs an external compiler to generate the compiled Java <tT CLAss="monofont">.class</tt> file.</P>
+
+				<P>Check the installation directory where you installed the JPython package. That's where the tool is located.</P>
+
+				<P>The <tt clASS="monofont">jpythonc</Tt> tool is very useful for embedding your JPython application in a Java application. After you generate the <tt cLASS="monofont">.class</tt> file, you are able to subclass Python classes in Java, and also to create JavaBeans, Servlets, and Applets from a Python class file.</p>
+
+				<p>The <tt class="monofont">jpythonc</tt> script accepts several command line options, as listed next. The general format of the command's syntax is as follows:</p>
+
+				<pre>
+					
+jpythonc [options] [module]*
+
+				</pre>
+
+				<P>The available options are listed as follows. Note that the information provided between parenthesis shows a short way to say the same thing that the long name's <a nAme="idx1073750732"></a>option says.</P>
+
+				<blocKquoTE>
+<P><P><tt clASS="monofont">--package package  (-p package)</Tt>— 
+    
+							Puts all compiled code into the named Java package.</p>
+</p>
+<p><P><TT Class="monofont">--jar jarfile  (-j jarfile)</TT>— 
+    
+							Specifies a <TT class="monofont">.jar</tt> file to create and put the results of the freeze into. This option implies the <tt class="monofont">--deep</tt> option.</p>
+
+					</p>
+<p><p><Tt cLass="monofont">--deep  (-d)</Tt>— 
+    
+							Compiles all Python dependencies of the module. This is used for creating applets.</p>
+
+					</p>
+<p><P><tt cLASS="monofont">--core  (-c)</tt>— 
+    
+							Includes the core JPython libraries (about 130K). Needed for applets because Netscape doesn't yet support multiple archives. This option implies the <tt CLASs="monofont">--deep</tt> option.</p>
+
+					</P>
+<P><P><Tt claSS="monofont">--all  (-a)</TT>— 
+    
+							Includes all the JPython libraries (everything in core + compiler and parser). This option implies the <tt class="monofont">--</tt>deep option.</p>
+
+					</p>
+<p><p><tt class="monofont">--bean jarfile  (-b jarfile)</Tt>— 
+    
+							Compiles into <tT claSs="monofont">jarfile,</tt> including the correct manifest for the bean.</p>
+
+					</P>
+<p><p><tT CLAss="monofont">--addpackages pkgs  (-A pkgs)</tt>— 
+    
+							Includes Java dependencies from this list of packages. Default is <TT CLass="monofont">org.python.modules</tT> and <TT Class="monofont">com.oroinc.text.regex.</TT>
+							</P>
+</P>
+<p><p><tt class="monofont">--workdir directory  (-w directory)</tt>— 
+    
+							Specifies the working directory where the generated Java source code is placed. The default value is <tt class="monofont">./jpywork.</tt>
+							</P>
+</p>
+<p><P><tt cLass="monofont">--skip modules  (-s modules)</tT>— 
+    
+							Doesn't include any of these modules in compilation. This is a comma-separated list of modules.</p>
+
+					</p>
+<p><P><TT Class="monofont">--compiler path  (-C path)</TT>— 
+    
+							Uses a compiler different from <TT clasS="monofont">javac.</TT> If this is set to <Tt claSS="monofont">NONE,</TT> compiles end with the generation of the Java source file. Alternatively, you can set the property <tt class="monofont">python.jpythonc.compiler</tt> in the registry file.<a name="idx1073750733"></a>
+								<a name="idx1073750734"></A>
+								<a nAme="idx1073750735"></a>
+								<A name="idx1073750736"></A>
+								<a naME="idx1073750737"></A>
+								<A name="idx1073750738"></A>
+							</P>
+
+					</P>
+<P><p><tt cLASS="monofont">--compileropts options--  (-J options)</tt>— 
+    
+							Passes options directly to the Java compiler. Alternatively, you can set the property <tt CLASs="monofont">python.jpythonc.compileropts</tt> in the registry file.</p>
+
+					</p>
+<p><p><tt class="monofont">--falsenames names  (-f names)</tt>— 
+    
+							A comma-separated list of names that are always false. Can be used to short-circuit if clauses.</p>
+
+					</p>
+<p><p><Tt cLass="monofont">--help  (-h)</Tt>— 
+    
+							Prints a usage message and exits.</p>
+
+					</p>
+<p><P><tt cLASS="monofont">[module]*</tt>— 
+    
+							A list of Python modules to freeze. Can be either module names that are located on the <tt CLASs="monofont">python.path</tt> or <tT CLAss="monofont">.py</tt> files.<A NAMe="idx1073750739"></a>
+							</p>
+</p>
+</blockquote>
+				<p>In order to <a name="idx1073750740"></A>
+					<a nAme="idx1073750741"></a>
+					<A name="idx1073750742"></A>create an applet, the following syntax is suggested. Note that you need to use the <tt cLASS="monofont">-core</tt> option in order to include the JPython libraries as part of the applet.</p>
+
+				<pRE>
+					
+jpythonc -core -deep -jar &lt;appletapp.jar&gt; *.py
+
+				</PRe>
+
+				<p>In order to <a nAME="idx1073750743"></A>
+					<a namE="idx1073750744"></A>
+					<A Name="idx1073750745"></a>create a simple class, the following syntax is suggested:</p>
+
+				<pre>
+					
+jpythonc &lt;yourapp.py&gt;
+
+				</pre>
+
+				<p>Now, if you just need to <a name="idx1073750746"></a>
+					<a nAme="idx1073750747"></A>
+					<a naMe="idx1073750748"></a>create a bean, the following syntax should be used:</p>
+
+				<pRe>
+					
+jpythonc -deep -bean &lt;filename.jar&gt; &lt;beenname&gt;
+
+				</prE>
+
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="249.html" title="Embedding"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=250" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="250.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="251.html" title="Running JPython Applets"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applets<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750741">creating</a><BR>
+beans<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750747">creating</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750744">creating</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750740">applets</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750746">beans</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750743">classes</a><BR>
+JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750733">jpythonc tool</a><BR>
+ <a href="#idx1073750735">jpythonc tool</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750732">jpythonc tool</a> <a href="#idx1073750738">2nd</a> <a href="#idx1073750739">3rd</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750734">jpythonc tool</a><BR>
+tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750736">jpythonc</a><BR>
+utilities<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750737">jpythonc</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750742">applets</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750748">beans</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750745">classes</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

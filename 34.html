@@ -1,0 +1,533 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Input and Output</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Input and Output</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="33.html" title="Modules and Packages"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=34" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="34.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="35.html" title="File Handling"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A20%3A17+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146122163094222089189188</font><a href="read9.asp?bookname=0672319942&snode=34&now=5%2F31%2F2002+4%3A20%3A17+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			Input and Output</h3>
+				<p>Python, as any other language, provides means to get input from the user and also to display information to him.</p>
+
+				<P>Let's see how we can handle it.</P>
+
+				<PRe>
+					
+&gt;&gt;&gt; x = input ("type anything: ")
+&gt;&gt;&gt; print "You have typed ", x
+
+				</pre>
+
+				<P>Note that the input prompt can be anything, even an empty one.</P>
+
+				<P>If the user types <Tt claSS="monofont">5, x</TT> is properly treated as a number. To make <tt class="monofont">x</tt> become a string, the user must explicitly type the quotes.</p>
+
+				<p>To avoid this problem, you can use the <tt class="monofont">raw_input</tt> function:</P>
+
+				<prE>
+					
+&gt;&gt;&gt; x = raw_input ("type anything: ")
+&gt;&gt;&gt; print "You have typed ", x
+
+				</pre>
+
+				<P>Now, it doesn't matter whether the user types the quotes.</p>
+
+				<p>Note that the <tt ClasS="monofont">print</TT> command requires objects to be separated by commas:</P>
+
+				<pre>
+					
+&gt;&gt;&gt; print "parrot", "sketch"
+parrot sketch
+
+				</pRE>
+
+				
+					<H4>
+				
+				Displaying Information</H4>
+					<p>Let's delve a little bit deeper into this topic.</p>
+
+					<p>Python has three standard file objects, which are available from the <a NAME="idx1073742568"></a>
+						<a naME="idx1073742569"></A>
+						<Tt class="monofont">sys</tt> module. The interpreter uses them to provide input and output facilities. (Refer to <a href="38.html">Chapter 3, "Python Libraries,"
+						</a>  for details and examples—the <tt clasS="monofont">sys</tt>  module.)</P>
+
+					<p>They are known as <tt Class="monofont">sys.stdin, sys.stdout, sys.stderr</Tt>
+					</p>
+
+					<p>
+						<A NAMe="idx1073742570"></a>
+						<a nAME="idx1073742571"></A>
+						<tt clASS="monofont">print</Tt> statements are mapped to the <tt cLASS="monofont">sys.stdout.</tt> Hence, they send the textual representation of objects to the standard output stream:</p>
+
+					<pre>
+						
+&gt;&gt;&gt;import sys
+&gt;&gt;&gt;sys.stdout.write("Nudge-nudge\n")
+Nudge-nudge
+
+					</pre>
+
+					<p>Did you know that it is possible to re-map the standard output device?</p>
+
+					<p>Yes, that is possible.</p>
+
+					<p>You can run the following code to write to a file:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; sys.stdout = open("outputtest.txt", "w")
+&gt;&gt;&gt; print "hello"
+&gt;&gt;&gt; sys.stdout.close
+
+&gt;&gt;&gt; sys.stdout = sys.__stdout__
+&gt;&gt;&gt; sys.exit()
+
+					</prE>
+
+					<p>Note that <tT claSs="monofont">sys.__stdout__</tt> stores the original <tT claSS="monofont">stdout.</TT>
+					</p>
+
+					<p>The last line restores the <tt CLASs="monofont">sys.__stdout__</tt> original value to such an extent that new <tT CLAss="monofont">print</tt> statements will display onscreen, instead of being sent to a file.</P>
+
+					<P>As additional information, this program uses <TT class="monofont">sys.exit()</tt> to quit its execution (refer to <a href="38.html">Chapter 3</a> for details).<a name="idx1073742572"></a>
+						<a NamE="idx1073742573"></a>
+						<a nAme="idx1073742574"></a>
+						<a Name="idx1073742575"></A>
+						<A NAme="idx1073742576"></a>
+					</p>
+
+					<P>Starting with release 2.0, the <TT Class="monofont">print</TT> statement <A Name="idx1073742577"></a>
+						<A NAMe="idx1073742578"></a>
+						<a name="idx1073742579"></a>can have its output directed to a file-like object, as it is demonstrated in the following example.</p>
+
+					<pre>
+						
+print &gt;&gt; sys.stderr, "Sorry, you cannot do that!"
+
+					</pre>
+
+				
+				
+					<h4>
+				
+				Formatting Operations</h4>
+					<p>Python provides formatting operations similar to the <tt ClaSs="monofont">printf()</tt> function from the C language.</P>
+
+					<p>Take a look at the following example:</p>
+
+					<prE>
+						
+&gt;&gt;&gt; print "Mr. Lumberjack! do not sing!"
+
+					</pre>
+
+					<P>What if you don't want to hard-code the name inside the string? Compare the previous line of code against the following one:</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; print "Mr. %s, do not sing!" % someone
+
+					</pre>
+
+					<P>Flexible, don't you think? And by the way, the order of the elements doesn't affect the final result.</P>
+
+					<P>Therefore, saying</P>
+
+					<pre>
+						
+&gt;&gt;&gt; print "Mr. %s" % someone
+
+					</pRE>
+
+					<P>is the same as saying</P>
+
+					<pre>
+						
+&gt;&gt;&gt; print someone % "Mr. %s"
+
+					</pRE>
+
+					<P>As a matter of fact, the following example shows how Python handles multiple format arguments. Note that you need to provide a tuple of values to fill the position indicated by the formatting operators (see <A href="34#3.html">Table 2.2</a>).<a name="idx1073742580"></a>
+						<a name="idx1073742581"></a>
+						<a naMe="idx1073742582"></a>
+						<A namE="idx1073742583"></a>
+						<a naMe="idx1073742584"></a>
+					</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; print "The %s has %i wings" % ("parrot", 2)
+
+					</Pre>
+
+					<a nAME="3"></A><p><tabLE BOrder="1" CELLspacing="0" cellpadding="1" wiDth="100%">
+<CaptIon><h5>Table 2.2. Formatting Operators Table</h5></CaptION><ColgrOUP Align="left" SPAN="2">
+<tr vaLIGN="top">
+<th>
+<font size="2">Formatting Operator</font></th>
+<th>
+<foNt sIze="2">Description</fOnt></th>
+</Tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+										<A NAMe="idx1073742585"></a>
+										<tt CLASs="monofont">%d</tt>
+									</font></td>
+<td>
+<font size="2">decimal integer</fOnt></Td>
+</tr>
+<Tr valIgn="top">
+<tD>
+<FONt sizE="2">
+										<A NAme="idx1073742586"></a>
+										<tT CLAss="monofont">%i</tt>
+									</FONT></td>
+<td>
+<font size="2">decimal integer</font></td>
+</tr>
+<Tr vAligN="top">
+<td>
+<foNt siZE="2">
+										<A Name="idx1073742587"></a>
+										<TT CLass="monofont">%u</tT>
+									</FONt></td>
+<tD>
+<FONt size="2">unsigned integer</font></td>
+</tr>
+<tr valigN="top">
+<td>
+<Font Size="2">
+										<a Name="idx1073742588"></A>
+										<TT Class="monofont">%o</TT>
+									</FOnt></td>
+<TD>
+<FOnt siZE="2">octal integer</FOnt></td>
+</tr>
+<tr valign="top">
+<td>
+<font SizE="2">
+										<a naMe="idx1073742589"></a>
+										<tt ClasS="monofont">%x</TT>
+									</Font></tD>
+<TD>
+<Font sIZE="2">hexadecimal integer</Font></tD>
+</TR>
+<Tr valign="top">
+<td>
+<font size="2">
+										<a naMe="idx1073742590"></a>
+										<Tt clAss="monofont">%X</tt>
+									</Font></TD>
+<TD>
+<font SIZE="2">hexadecimal integer (uppercase letters)</font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<font size="2">
+										<a name="idx1073742591"></a>
+										<tt clAss="monofont">%f</Tt>
+									</foNt></td>
+<tD>
+<fonT SIZe="2">floating point as [-]m.dddddd</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">
+										<a name="idx1073742592"></a>
+										<tt class="monofont">%e</tt>
+									</foNt></tD>
+<td>
+<fOnt siZe="2">floating point as [-]m.dddddde±xx</foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+										<A NAMe="idx1073742593"></a>
+										<tt class="monofont">%E</tt>
+									</font></td>
+<td>
+<fOnt Size="2">floating point as [-]m.ddddddE±xx</Font></tD>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2">
+										<A NAme="idx1073742594"></a>
+										<a NAME="idx1073742595"></a>
+										<tt class="monofont">%g, %G</tt>
+									</font></td>
+<td>
+<foNt sIze="2">floating point where the exponent is less than -4 or greater than the precision</fOnt></td>
+</Tr>
+<tr VALIgn="top">
+<td>
+<FONT size="2">
+										<A NAMe="idx1073742596"></a>
+										<tt CLASs="monofont">%s</tt>
+									</font></td>
+<td>
+<font size="2">any printable object (such as strings)</fOnt></Td>
+</tr>
+<Tr valIgn="top">
+<tD>
+<FONt sizE="2">
+										<A NAme="idx1073742597"></a>
+										<tT CLAss="monofont">%c</tt>
+									</FONT></td>
+<td>
+<font size="2">a single character</font></td>
+</tr>
+<Tr vAligN="top">
+<td>
+<foNt siZE="2">
+										<A Name="idx1073742598"></a>
+										<TT CLass="monofont">%%</tT>
+									</FONt></td>
+<tD>
+<FONt size="2">the literal %</font></td>
+</tr>
+</colgrouP>
+</taBle></p>
+
+					<P>The following code is another simple example:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; value = 14
+&gt;&gt;&gt; print "The value is %d" % value
+The value is 14
+
+					</Pre>
+
+					<p>Next, you will see some special ways to format operations by putting special characters between the <TT CLass="monofont">%</tT> literal and the formatting operator. Before going through the examples, we need to initialize some variables.</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; intg = 42
+&gt;&gt;&gt; fltn = 13.142783
+&gt;&gt;&gt; strg = "hello"
+&gt;&gt;&gt; dict = {"xx":13, "yy":1.54321, "zz":"parrot"}
+
+					</pre>
+
+					<UL>
+<LI>
+							<p>You can use dictionary key names in parentheses.</p>
+
+							<prE>
+								
+&gt;&gt;&gt; print "%(zz)s" % dict
+parrot
+
+							</PRE>
+
+						</li>
+<li>
+							<p>By using the <tt class="monofont">-</tt> literal, you can left align the string block.</p>
+
+							<pre>
+								
+&gt;&gt;&gt; print "%-8dend" % fltn
+"13       end"
+
+							</prE>
+
+						</li>
+<Li>
+							<p>By using the <tT clasS="monofont">+</tt> literal, you can show positive and negative numerical signs.<a NAME="idx1073742599"></a>
+								<a naME="idx1073742600"></A>
+								<A name="idx1073742601"></A>
+								<A NAme="idx1073742602"></a>
+								<a NAME="idx1073742603"></a>
+							</p>
+
+							<pre>
+								
+&gt;&gt;&gt; print "%+d" % intg
++42
+
+							</pre>
+
+						</li>
+<li>
+							<p>If you insert a zero, you will get a zero-filling.</p>
+
+							<pre>
+								
+&gt;&gt;&gt; print "%08d " % intg
+"0000042"
+
+							</pre>
+
+						</Li>
+<lI>
+							<p>Maximum field width (strings)</p>
+
+							<pRe>
+								
+&gt;&gt;&gt; print "%0.2s" % strg
+"he"
+
+							</pre>
+
+						</Li>
+<li>
+							<P>Period (<TT Class="monofont">.</TT>) <TT clasS="monofont">+</TT> precision (floating-point numbers)</P>
+
+							<pre>
+								
+&gt;&gt;&gt; print "%0.2f" % fltn
+13.14
+
+							</pRE>
+
+						</LI>
+<li>
+							<p>Minimum number of digits (integer)</p>
+
+							<pre>
+								
+&gt;&gt;&gt; print "%0.10f" % intg
+0000000042
+
+							</pre>
+
+						</li>
+</ul>
+					<div claSs="note"><p ClasS="notetitle"><b>Tip</b></p><p>
+
+						<P>A <a naME="idx1073742604"></A>
+							<A name="idx1073742605"></A>
+							<A NAme="idx1073742606"></a>
+							<a NAME="idx1073742607"></a>
+							<tt cLASS="monofont">*</tt> can be used in the place of any number. It uses the next value that matches that format in a <a name="idx1073742608"></a>tuple.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; print "%*.*f" % (5,3,2.45)
+2.450
+					
+						</pre>
+
+					</p></div>
+<bR>
+<br>
+
+					<Div cLass="note"><p ClasS="notetitle"><B>Note</B></P><p>
+
+						<p>Python 2.0 contains a <a nAME="idx1073742609"></A>
+							<a namE="idx1073742610"></A>
+							<A Name="idx1073742611"></a>
+							<A NAMe="idx1073742612"></a>
+							<a name="idx1073742613"></a>new format string called <tt class="monofont">%r,</tt> which prints the <tt cLasS="monofont">repr()</tt> value of the given argument. You can clearly see the difference between %r and %s by looking at the following example.</p>
+
+						<Pre>
+							
+'%r %s'% ('Python', 'Python')
+
+						</prE>
+
+						<p>returns the string</p>
+
+						<pRE>
+							
+'Python'Python
+
+						</PRe>
+
+					</p></diV>
+<BR>
+<Br>
+
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="33.html" title="Modules and Packages"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=34" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="34.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="35.html" title="File Handling"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742598">%% formatting operator</a><BR>
+ <a href="#idx1073742597">%c formatting operator</a><BR>
+ <a href="#idx1073742585">%d formatting operator</a><BR>
+ <a href="#idx1073742592">%e formatting operator</a><BR>
+ <a href="#idx1073742593">%E formatting operator</a><BR>
+ <a href="#idx1073742591">%f formatting operator</a><BR>
+ <a href="#idx1073742594">%g formatting operator</a><BR>
+ <a href="#idx1073742595">%G formatting operator</a><BR>
+ <a href="#idx1073742586">%i formatting operator</a><BR>
+ <a href="#idx1073742588">%o formatting operator</a><BR>
+%r format string<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742609">comparing with %s format string</a><BR>
+%s format string<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742612">comparing with %r format string</a><BR>
+ <a href="#idx1073742596">%s formatting operator</a><BR>
+ <a href="#idx1073742587">%u formatting operator</a><BR>
+ <a href="#idx1073742589">%x formatting operator</a><BR>
+ <a href="#idx1073742590">%X formatting operator</a><BR>
+* (asterisk)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742604">replacing numbers with</a><BR>
+asterisks (*)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742605">replacing numbers with</a><BR>
+comparing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742613">%r and %s format strings</a><BR>
+displaying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742575">input and output</a><BR>
+format strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%r and %s<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742610">comparing</a><BR>
+ <a href="#idx1073742583">formatting operations</a> <a href="#idx1073742602">2nd</a><BR>
+input<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742572">users</a> <a href="#idx1073742580">2nd</a> <a href="#idx1073742599">3rd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742569">sys</a><BR>
+numbers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742607">replacing with asterisks (*)</a><BR>
+operations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742584">formatting</a> <a href="#idx1073742603">2nd</a><BR>
+output<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742579">print statements</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742573">users</a> <a href="#idx1073742581">2nd</a> <a href="#idx1073742600">3rd</a><BR>
+ <a href="#idx1073742570">print statement</a><BR>
+print statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742577">output</a><BR>
+replacing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742606">numbers with asterisks (*)</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742571">print</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742578">output</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742611">%r and %s, comparing</a><BR>
+ <a href="#idx1073742568">sys module</a><BR>
+tuples<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742608">replacing numbers with asterisks (*)</a><BR>
+users<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742574">input and output</a> <a href="#idx1073742582">2nd</a> <a href="#idx1073742601">3rd</a><BR>
+viewing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742576">input and output</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

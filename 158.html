@@ -1,0 +1,229 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Code Examples</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="148.html" class="navtitle">9. Other Advanced Topics</a> &gt; <span class="nonavtitle">Code Examples</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="157.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=158" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="158.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="160.html" title="III: Network Programming"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A41%3A11+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148045048070068078146247</font><a href="read4.asp?bookname=0672319942&snode=158&now=5%2F31%2F2002+4%3A41%3A11+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Code Examples</h3>
+				<p>Next, you have some code examples that demonstrate the concepts illustrated by this chapter.</p>
+
+				
+					<H4>
+				
+				
+				
+				
+				HTML Parsing Tool (File: <TT Class="monofont">parsing.py</TT>)</H4>
+					<P>We are going to use the <tt clASS="monofont">exchange.html</Tt> as the source of information for this program. The idea is to read the file, replace all the occurrences of the domain name <tt class="monofont"> "lessaworld"</tt> for <tt class="monofont">"bebemania",</tt> and add hyperlinks for all email and Web pages references that exist there.</p>
+
+					
+						<H5>
+Listing 9.1 File: <tt ClasS="monofont">exchange.html</tt>
+						</h5>
+						<pRe clASS="monofont">
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;TITLE&gt;Exchange Rates Home Page&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;p align=justify&gt;
+&lt;b&gt;List of current files that we have available at this site:&lt;/b&gt;&lt;/p&gt;
+&lt;br&gt;
+http://www.lessaworld.com/exchange/real.txt &lt;br&gt;
+http://www.lessaworld.com/exchange/pound.txt &lt;br&gt;
+http://www.lessaworld.com/exchange/dollar.txt &lt;br&gt;&lt;br&gt;
+
+Many people are currently working to keep these exchange rates updated.&lt;br&gt;
+Andre (andre@bebemania.com.br) handles all the Brazilian Real operations,
+ meanwhile,Joao Pedro (jp@bebemania.com.br) takes care of pounds and
+ dollars.&lt;br&gt;&lt;br&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</Pre>
+					
+					<p>The following code implements the parsing program.</p>
+
+					
+						<H5>
+Listing 9.2 File: <TT Class="monofont">parsing.py</TT>
+						</H5>
+						<Pre clASS="monofont">
+ 1:
+ 2: import re, sys
+ 3:
+ 4: TextOriginal = open("exchange.html").read()
+ 5:
+ 6: TextIn = re.sub("lessaworld", "bebemania", TextOriginal)
+ 7:
+ 8: operation_result = re.search(r'&lt;title&gt;(.*?)&lt;/title&gt;', TextIn
+    ,re.IGNORECASE)
+ 9: if operation_result:
+10:     HTML_TITLE = operation_result.group(1)
+11:
+12: link_pattern = re.compile(r'((ftp|http)://[\w-]+(?:\.[\w-]+)*(?:/[\w-]*)*
+                                   (?:\.[\w-]*)*)')
+13: links = re.findall(link_pattern, TextIn)
+14: TextIn = re.sub(link_pattern, r"&lt;a href=\1&gt;\1&lt;/a&gt;", TextIn)
+15:
+16: email_pattern = re.compile(r'([a-zA-Z][\w-]*@[\w-]+(?:\.[\w-]+)*)')
+17: emails = re.findall(email_pattern, TextIn)
+18: TextIn = re.sub(email_pattern, r"&lt;a href=mailto:\1&gt;\1&lt;/a&gt;", TextIn)
+19:
+20: FileOut = open("newexchange.html", "w")
+21: FileOut.write(TextIn)
+22: FileOut.close()
+23:
+24: print '"%s" is done.'% (HTML_TITLE)
+</Pre>
+					
+					<p>Line 4: Opens and reads the original file.</p>
+
+					<p>Line 6: Replaces occurrences of <tt class="monofont">"lessaworld"</tt> with <tt clasS="monofont">"bebemania".</tt>
+					</P>
+
+					<p>Lines 8–10: Locates the Web page title.</p>
+
+					<p>Line 10: The first group is the element between parenthesis in the regular expression of line 8.</P>
+
+					<p>Line 12: Creates a regular expression that locates all the Web addresses in the text.</p>
+
+					<p>Line 13: Creates a list of all the elements (links) that were found by the matching.<a Name="idx1073745628"></A>
+						<A NAme="idx1073745629"></a>
+						<a NAME="idx1073745630"></a>
+						<a naME="idx1073745631"></A>
+						<A name="idx1073745632"></A>
+					</P>
+
+					<P>Line 14: Adds the hyperlinks for all the Web links that were found.</P>
+
+					<p>Line 16: Creates a regular expression that locates all the email addresses in the text.</p>
+
+					<p>Line 17: Creates a list of all the elements (emails) that were found by the matching.</p>
+
+					<p>Line 18: Adds the hyperlinks for all the email addresses that were found.</p>
+
+					<p>Lines 20–22: Creates a new file with the new content.</p>
+
+					<p>In order to execute the routine, you just need to call it from the OS prompt, and then check the resulting file in your browser.</p>
+
+					<pre>
+						
+S:\python&gt; python parsing.py
+"Exchange Rates Home Page" is done.
+S:\python&gt;
+				
+					</pre>
+
+				
+				
+					<h4>
+				
+				
+				
+				TV Network Audiences (File: <tt cLasS="monofont">audience.py</tt>)</h4>
+					<P>The next example demonstrates the use of the <tt clAss="monofont">Queue</tT> module. The idea is to have several threads running and sharing information at the same time. The program starts several threads that execute some time-consuming operations, while the main thread is generating numbers that are used by all the other threads.</P>
+
+					
+						<H5>
+Listing 9.3 File: <Tt claSS="monofont">audience.py</TT>
+						</h5>
+						<pre CLASs="monofont">
+ 1:
+ 2: import threading, time
+ 3: import Queue, random
+ 4:
+ 5: class VCR(threading.Thread):
+ 6:     channels = ["KDSF", "FOKS", "CBA", "ESTN"]
+ 7:
+ 8:     def __init__(self, queue, channel, seconds):
+ 9:         self.__queue = queue
+10:         self.seconds = seconds
+11:         self.network = VCR.channels[channel-1]
+12:         threading.Thread.__init__(self)
+13:     def run(self):
+14:         for i in range(self.seconds):
+15:             time.sleep(0.0001)
+16:             self.public = self.__queue.get()
+17:             print "After %d seconds, %d people were watching %s" % }
+18:               (self.seconds, self.public, self.network)
+19:
+20: queue = Queue.Queue(0)
+21:
+22: VCR(queue, 1, 60).start()
+23: VCR(queue, 2, 40).start()
+24: VCR(queue, 3, 35).start()
+25: VCR(queue, 4, 75).start()
+26:
+27: audience = 0
+28: while audience &lt; random.randint(200,300):
+29:     queue.put(audience)
+30:     audience = audience + 1
+31:     print "The audience now has %d people." % (audience)
+32:     time.sleep(0.001)
+33:
+34: time.sleep(10)
+</pre>
+					
+					<P>Line 5: Defines a subclass of the <TT Class="monofont">Thread</tt> class.</p>
+
+					<p>Line 6: Creates a class variable.</p>
+
+					<p>Line 13: Implements the functionality that is executed when the thread is started.</p>
+
+					<p>Line 15: Pauses the execution, in order to let other threads run simultaneously.</p>
+
+					<p>Line 16: Gets the current value in the <tt clasS="monofont">Queue.</tt>
+					</P>
+
+					<p>Line 20: Initializes the <tt Class="monofont">Queue</Tt> object that is shared by all threads.</p>
+
+					<p>Lines 22–25: Starts all the threads.</P>
+
+					<P>Lines 28–32: Implements a routine that keeps generating numbers to be passed to the thread.</P>
+
+					<P>Line 29: Sends a value to the queue in order to be collected by the threads.</p>
+
+					<p>Line 34: Pauses the main thread so that the other threads can end normally.</p>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="157.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=158" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="158.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="160.html" title="III: Network Programming"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745628">HTML parsing tool</a><BR>
+ <a href="#idx1073745630">HTML parsing tool source code</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745629">HTML parsing tool</a><BR>
+tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML parsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745631">source code</a><BR>
+utilities<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML parsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745632">source code</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

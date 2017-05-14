@@ -1,0 +1,1363 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Expressions</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Expressions</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="28.html" title="Operators"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=29" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="29.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="30.html" title="Control Statements"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A19%3A17+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145080038238054061085253</font><a href="read1.asp?bookname=0672319942&snode=29&now=5%2F31%2F2002+4%3A19%3A17+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			Expressions</h3>
+				<p>Python operators support a wide range of expressions, such as</p>
+
+				<PRE>
+					
+&gt;&gt;&gt; x,y,z = z-x, y*z, x+y # Parallel assignment: example 1
+&gt;&gt;&gt; x,y,z = 5,4,3         # Parallel assignment: example 2
+&gt;&gt;&gt; a,b = b,a             # Switching assignments
+&gt;&gt;&gt; a = b = c = 10        # Multiple assignments
+&gt;&gt;&gt; string.atof(s)        # Functions support
+&gt;&gt;&gt; 20 &lt; x &lt; 40           # Multiple range testing
+
+				</Pre>
+
+				<p>The last example is equivalent to</p>
+
+				<PRE>
+					
+&gt;&gt;&gt; 20 &lt; x and x &lt; 40
+
+				</Pre>
+
+				<a nAME="1"></A>
+					<h4>
+				
+				Built-In Functions</h4>
+					<p>The following functions are always available when you load the Python interpreter. You don't need to import them because they are already part of the <tt class="monofont">__builtin__</tt> module, which is always imported when you launch Python.</p>
+
+					
+						<h5>
+							<tt clasS="monofont">apply()</tt>
+						</H5>
+						<p>It executes a given <i>
+								<tT clasS="monofont">function,</tt>
+							</i> passing the arguments provided.</P>
+
+						<P>
+							<A Name="idx1073742283"></a>basic syntax: <TT CLass="monofont">apply(function, (tuple of positional arguments) [, dictionary of keywords arguments])</tT>
+						</P>
+
+						<PRe>
+							
+&gt;&gt;&gt; apply (raise_salary, (6000), {'employee':'John', 'id':13})
+
+						</pre>
+
+						<P>Note that starting at Python 1.6, the functionality of <TT Class="monofont">apply</tt> is now available with normal function calling, such as<a name="idx1073742284"></a>
+							<a name="idx1073742285"></a>
+							<a nAme="idx1073742286"></A>
+						</p>
+
+						<prE>
+							
+&gt;&gt;&gt; args = (6000,)
+&gt;&gt;&gt; kwargs = { 'employee':'John', 'id':13}
+&gt;&gt;&gt; raise_salary(*args, **kwargs)
+
+						</pre>
+
+					
+					
+						<h5>
+							<Tt clASS="monofont">coerce()</Tt>
+						</h5>
+						<p>
+							<tT CLAss="monofont">coerce</tt> is used to try to convert the two given arguments <TT CLass="monofont">x</tT> and <TT Class="monofont">y</tt> to the same type, returning them as a tuple.</p>
+
+						<p>
+							<a name="idx1073742287"></a>basic syntax: <tt clasS="monofont">coerce(</tt>
+							<I>
+								<tt cLass="monofont">x, y</tT>
+							</i>
+							<tt CLASs="monofont">)</tt>
+						</p>
+
+						<PRE>
+							
+&gt;&gt;&gt; coerce(42,5.4)
+ (42.0, 5.4)
+
+						</Pre>
+
+					
+					
+						<h5>
+							<tT CLAss="monofont">filter()</tt>
+						</H5>
+						<P>It creates a new list by taking each element of <I>
+								<Tt class="monofont">list</tt>
+							</i> for which <i>
+								<tt class="monofont">function</tt>
+							</i> evaluates to <Tt cLass="monofont">true.</Tt>
+						</p>
+
+						<p>
+							<a Name="idx1073742288"></A>basic syntax: <TT Class="monofont">filter(</TT>
+							<I>
+								<Tt claSS="monofont">function, list</TT>
+							</i>
+							<tt cLASS="monofont">)</tt>
+						</p>
+
+						<pre>
+							
+&gt;&gt;&gt; a = range (4)
+&gt;&gt;&gt; b = filter(lambda x: x &lt; 3, a)
+&gt;&gt;&gt; print b
+[0,1,2]
+
+						</pre>
+
+					
+					
+						<h5>
+							<tt class="monofont">globals()</tt>
+						</h5>
+						<P>It returns the global namespace dictionary.</p>
+
+						<p>
+							<A namE="idx1073742289"></a>basic syntax: <tt cLass="monofont">globals()</TT>
+						</P>
+
+					
+					
+						<H5>
+							<tt clASS="monofont">input()</Tt>
+						</h5>
+						<p>It provides an input interface for the user. Only numbers are accepted.</p>
+
+						<P>
+							<A NAme="idx1073742290"></a>basic syntax: <tT CLAss="monofont">input(</tt>
+							<i>
+								<tt class="monofont">[prompt]</tt>
+							</i>
+							<tt claSs="monofont">)</tT>
+						</p>
+
+						<prE>
+							
+a = input("Please, type a number greater than 5: ")
+if a&lt;5:
+    print "a is not greater than 5"
+
+						</pre>
+
+					
+					
+						<h5>
+							<Tt clASS="monofont">locals()</Tt>
+						</h5>
+						<p>It returns the local namespace dictionary<a NAME="idx1073742291"></a>
+							<a naME="idx1073742292"></A>
+							<A name="idx1073742293"></A>
+						</P>
+
+						<P>
+							<A name="idx1073742294"></a>basic syntax: <tt class="monofont">locals()</tt>
+						</p>
+
+					
+					
+						<h5>
+							<tt clAss="monofont">map()</Tt>
+						</h5>
+						<p>It applies a <I>
+								<tt clAss="monofont">function</tT>
+							</I> to each element of <I>
+								<Tt claSS="monofont">list,</TT>
+							</i> producing another list. If <i>
+								<tt CLASs="monofont">function</tt>
+							</i> is set to <TT CLass="monofont">None</tt> and multiple lists are provided, a tuple matrix is generated in the format of a list.</p>
+
+						<p>
+							<a name="idx1073742295"></a>basic syntax: <tt class="monofont">map(</Tt>
+							<i>
+								<Tt clAss="monofont">function, list</tt>
+							</I>
+							<tt cLASS="monofont">)</tt>
+						</p>
+
+						<pRE>
+							
+&gt;&gt;&gt; lst = map(None, [1,2,3,4], [1,2,3,4,5,6])
+&gt;&gt;&gt; lst
+[(1, 1), (2, 2), (3, 3), (4, 4), (None, 5), (None, 6)]
+
+						</PRe>
+
+					
+					
+						<h5>
+							<tt CLASs="monofont">open()</tt>
+						</h5>
+						<P>It opens a file. (See the section <A HRef="35.html">
+								"File Handling"
+							</a> for details.)</p>
+
+						<p>
+							<a name="idx1073742296"></a>basic syntax: <tt class="monofont">open(</tt>
+							<I>
+								<tt ClasS="monofont">filename [,mode [,bufsize]]</tt>
+							</i>
+							<tT claSS="monofont">)</TT>
+						</p>
+
+					
+					
+						<h5>
+							<tt CLASs="monofont">pow()</tt>
+						</h5>
+						<P>It returns <TT Class="monofont">x**y</TT> or <TT class="monofont">(x**y) % z,</tt> depending on the number of arguments that are transported.</p>
+
+						<p>
+							<a name="idx1073742297"></a>basic syntax: <tt claSs="monofont">pow(</tT>
+							<i>
+								<tt Class="monofont">x, y [,z]</Tt>
+							</i>
+							<tT CLAss="monofont">)</tt>
+						</P>
+
+					
+					
+						<H5>
+							<TT clasS="monofont">raw_input()</TT>
+						</H5>
+						<p>It reads from standard input (<tt cLASS="monofont">sys.stdin</tt>), returning the read data as a string. <i>
+								<tt class="monofont">prompt</tt>
+							</i> is an optional text that can be displayed in the screen.</p>
+
+						<p>
+							<a name="idx1073742298"></A>basic syntax: <tt ClasS="monofont">raw_input(</tt>
+							<i>
+								<tT claSS="monofont">[prompt]</TT>
+							</i>
+							<tt cLASS="monofont">)</tt>
+						</p>
+
+					
+					
+						<h5>
+							<TT CLass="monofont">reduce()</tT>
+						</H5>
+						<P>It applies a <I>
+								<tt class="monofont">function</tt>
+							</i> cumulatively to the items in <i>
+								<tt class="monofont">sequence</tt>
+							</I> (implied loop), returning a single value. <i>
+								<tT claSs="monofont">initializer</tt>
+							</i> is an optional starting value.</P>
+
+						<p>
+							<a nAME="idx1073742299"></A>basic syntax: <tt clASS="monofont">reduce(</Tt>
+							<i>
+								<tt CLASs="monofont">function, sequence [,initializer]</tt>
+							</i>
+							<TT CLass="monofont">)</tt>
+						</p>
+
+						<pre>
+							
+&gt;&gt;&gt; import operator
+&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; print reduce(operator.add, a)
+6
+
+						</pre>
+
+						<p>The equivalent Python code for this function is something like<a name="idx1073742300"></a>
+						</p>
+
+						<Pre>
+							
+def reduce(func, list):
+    ret = list[0]
+    for x in list[1:]:
+        ret = func(ret, x)
+    return ret
+
+						</Pre>
+
+					
+					
+						<h5>
+							<Tt claSs="monofont">__import__()</tt>
+						</H5>
+						<P>This is a function invoked by the import statement. To import a module, you just need to inform the <I>
+								<Tt claSS="monofont">module name.</TT>
+							</i>
+						</p>
+
+						<p>
+							<a NAME="idx1073742301"></a>basic syntax: <tt cLASS="monofont">__import__(</tt>
+							<i>
+								<tt class="monofont">module_name [,globals() [, locals() [,from list]]]</tt>
+							</i>
+							<tt class="monofont">)</Tt>
+						</p>
+
+						<Pre>
+							
+&gt;&gt;&gt; modname = "string"
+&gt;&gt;&gt; string = __import__(modname)
+&gt;&gt;&gt; string
+
+						</pRe>
+
+					
+					
+						<h5>
+							<tt ClasS="monofont">reload()</TT>
+						</H5>
+						<p>It reloads an already imported <i>
+								<tt CLASs="monofont">module.</tt>
+							</i> Internally, it calls the <TT CLass="monofont">__import__</tT> function.</P>
+
+						<P>
+							<A name="idx1073742302"></a>basic syntax: <tt class="monofont">reload(</tt>
+							<i>
+								<tt claSs="monofont">module</tT>
+							</i>
+							<tt Class="monofont">)</Tt>
+						</p>
+
+					
+				
+				
+					<h4>
+				
+				Sequence Functions</H4>
+					<P>The next set is built-in functions that deal with sequences.</P>
+
+					
+						<H5>
+							<tt clASS="monofont">range()</Tt>
+						</h5>
+						<p>It returns a list of numbers according to the transported information.</p>
+
+						<P>
+							<A NAme="idx1073742303"></a>basic syntax: <tT CLAss="monofont">variable = range(</tt>
+							<i>
+								<tt class="monofont">[initial_value,] final_value-1 [, step]</tt>
+							</i>
+							<tt claSs="monofont">)</tT>
+						</p>
+
+						<prE>
+							
+&gt;&gt;&gt; lst = range(1,5)
+&gt;&gt;&gt; lst
+[1, 2, 3, 4]
+
+						</pre>
+
+						<p>See the section <A hreF="31.html">
+								"Data Structures"
+							</A> for details.<A Name="idx1073742304"></a>
+							<A NAMe="idx1073742305"></a>
+							<a nAME="idx1073742306"></A>
+							<a namE="idx1073742307"></A>
+							<A Name="idx1073742308"></a>
+						</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">xrange()</tt>
+						</h5>
+						<p>It is similar to <tt cLasS="monofont">range(),</tt> but it doesn't assign the returned list to a variable, Therefore, it doesn't use as much memory, so you won't run out of memory by typing <tT clasS="monofont">xrange(2000000000),</tt> for instance.</p>
+
+						<P>
+							<A NAme="idx1073742309"></a>basic syntax: <tT CLAss="monofont">xrange(</tt>
+							<I>
+								<TT Class="monofont">[initial_value,] final_value-1 [, step]</TT>
+							</I>
+							<Tt class="monofont">)</tt>
+						</p>
+
+						<p>See the section <a href="31.html">
+								"Data Structures"
+							</a> for details.</p>
+
+					
+					
+						<h5>
+							<tt ClaSs="monofont">len()</tt>
+						</H5>
+						<p>It returns the length/number of elements of <i>
+								<tt ClasS="monofont">string.</TT>
+							</I>
+						</p>
+
+						<p>
+							<a nAME="idx1073742310"></A>basic syntax: <tt clASS="monofont">len(</Tt>
+							<i>
+								<tt CLASs="monofont">variablename</tt>
+							</i>
+							<tt class="monofont">)</tt>
+						</p>
+
+					
+					
+						<h5>
+							<tt claSs="monofont">max()</tT>
+						</h5>
+						<p>It returns the maximum/largest element of <i>
+								<Tt claSs="monofont">sequence.</tt>
+							</I>
+						</P>
+
+						<P>
+							<A name="idx1073742311"></A>basic syntax: <TT Class="monofont">max(sequence)</TT>
+						</P>
+
+						<Pre>
+							
+&gt;&gt;&gt; max(1, 2, 3)
+3
+&gt;&gt;&gt; max("MY BRAIN HURTS")
+"Y"
+
+						</prE>
+
+					
+					
+						<H5>
+							<TT class="monofont">min()</tt>
+						</h5>
+						<p>It returns the minimum/smallest element of <i>
+								<tt class="monofont">sequence.</tt>
+							</i>
+							<A naMe="idx1073742312"></a>
+						</p>
+
+						<P>
+							<a namE="idx1073742313"></a>basic syntax: <tt CLASs="monofont">min(</tt>
+							<i>
+								<TT CLass="monofont">sequence</tT>
+							</I>
+							<TT clasS="monofont">)</TT>
+						</P>
+
+						<pre>
+							
+&gt;&gt;&gt; min("MY BRAIN HURTS")
+" "
+					
+						</pre>
+
+					
+					
+						<h5>
+							<tt class="monofont">zip()</tt>
+						</h5>
+						<p>It returns a list <a nAme="idx1073742314"></A>
+							<a naMe="idx1073742315"></a>
+							<a nAme="idx1073742316"></a>of tuples where each tuple contains the i-th element from each of the given sequences. This function generates a resulting list whose length is exactly the same as of the shortest given sequence. Note that, on the other hand, the function <TT CLass="monofont">map(None, sequence1, sequence2, …)</tT> pads the resulting list with <TT Class="monofont">None</TT> when the sequences don't have the same<A Name="idx1073742317"></a>
+							<A NAMe="idx1073742318"></a>
+							<a name="idx1073742319"></a>
+							<a name="idx1073742320"></a> length.</p>
+
+						<p>basic syntax: <tt clAss="monofont">zip(</Tt>
+							<i>
+								<tT clasS="monofont">sequence1, sequence 2, sequence3, …</tt>
+							</i>
+							<TT CLass="monofont">)</tT>
+						</P>
+
+					
+				
+				
+					<H4>
+				
+				
+				Object Manipulation</H4>
+					<p>The next set is built-in functions that deal with object handling.</p>
+
+					
+						<h5>
+							<tT CLAss="monofont">setattr()</tt>
+						</H5>
+						<P>It sets a new <I>
+								<Tt class="monofont">value</tt>
+							</i> for <i>
+								<tt class="monofont">object.name</tt>
+							</i>
+						</P>
+
+						<p>
+							<a Name="idx1073742321"></A>basic syntax: <tt clAss="monofont">setattr(</tT>
+							<I>
+								<TT clasS="monofont">object, name, value</TT>
+							</I>
+							<tt clASS="monofont">)</Tt>
+						</p>
+
+					
+					
+						<h5>
+							<tT CLAss="monofont">getattr()</tt>
+						</h5>
+						<p>It returns the <i>
+								<tt class="monofont">attribute</tt>
+							</i> from <i>
+								<tt ClaSs="monofont">object.</tt>
+							</I> This command is equivalent to <tt clAss="monofont">object.attribute.</tT>
+						</P>
+
+						<P>
+							<A name="idx1073742322"></A>basic syntax: <TT Class="monofont">getattr(</TT>
+							<I>
+								<Tt claSS="monofont">object, attribute</TT>
+							</i>
+							<tt class="monofont">)</tt>
+						</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">hasattr()</tT>
+						</h5>
+						<p>It returns <Tt clAss="monofont">1</tt> if <I>
+								<tt cLASS="monofont">object</tt>
+							</i> has <i>
+								<TT CLass="monofont">attribute,</tT>
+							</I>
+							<TT clasS="monofont">0</TT> if it doesn't.</P>
+
+						<p>
+							<a name="idx1073742323"></a>basic syntax: <tt class="monofont">hasattr(</tt>
+							<i>
+								<tt cLasS="monofont">object, attribute</tt>
+							</i>
+							<Tt claSs="monofont">)</tt>
+						</P>
+
+					
+					
+						<H5>
+							<TT clasS="monofont">delattr()</TT>
+						</H5>
+						<p>It deletes the <i>
+								<tt CLASs="monofont">attribute</tt>
+							</i> from <I>
+								<TT Class="monofont">object.</tt>
+							</i> This command is equivalent to <tt class="monofont">del object.attribute.</tt>
+						</p>
+
+						<p>
+							<a nAme="idx1073742324"></A>basic syntax: <tt cLass="monofont">delattr(</tT>
+							<i>
+								<tt CLASs="monofont">object, attribute</tt>
+							</i>
+							<TT CLass="monofont">)</tT>
+						</P>
+
+					
+					
+						<H5>
+							<Tt claSS="monofont">type()</TT>
+						</h5>
+						<p>It returns the type of <i>
+								<tt class="monofont">object.</tt>
+							</i>
+						</p>
+
+						<p>
+							<a name="idx1073742325"></A>basic syntax: <tt ClasS="monofont">type(</tt>
+							<i>
+								<tT claSS="monofont">object</TT>
+							</i>
+							<tt cLASS="monofont">)</tt>
+						</p>
+
+						<pRE>
+							
+&gt;&gt;&gt; type("andre")
+&lt;type "string"&gt;
+
+						</PRe>
+
+					
+					
+						<h5>
+							<tt CLASs="monofont">dir()</tt>
+						</h5>
+						<p>It returns a list of attribute names from the active namespace. <i>
+								<tt class="monofont">object</tt>
+							</i> can be anything (a variable, a module, a class, and so on).</p>
+
+						<p>
+							<a nAme="idx1073742326"></A>basic syntax: <tt cLass="monofont">dir(</tT>
+							<i>
+								<tt CLASs="monofont">[object]</tt>
+							</i>
+							<TT CLass="monofont">)</tT>
+						</P>
+
+					
+					
+						<H5>
+							<Tt claSS="monofont">callable()</TT>
+						</h5>
+						<p>It returns <tt class="monofont">1</tt> if <i>
+								<tt class="monofont">object</tT>
+							</i> is callable. Otherwise, it returns <tT claSs="monofont">0.</tt>
+						</p>
+
+						<P>
+							<a naME="idx1073742327"></A>basic syntax: <Tt claSS="monofont">callable(</TT>
+							<i>
+								<tt cLASS="monofont">object</tt>
+							</i>
+							<tT CLAss="monofont">)</tt>
+						</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">hash()</tt>
+						</h5>
+						<p>It returns a hash value for <i>
+								<tt ClaSs="monofont">object.</tt>
+							</I>
+							<a namE="idx1073742328"></a>
+							<a nAME="idx1073742329"></A>
+							<a namE="idx1073742330"></A>
+							<A Name="idx1073742331"></a>
+							<A NAMe="idx1073742332"></a>
+							<a nAME="idx1073742333"></A>
+						</p>
+
+						<p>
+							<a name="idx1073742334"></a>basic syntax: <tt class="monofont">hash(</tt>
+							<i>
+								<tt ClaSs="monofont">object</tt>
+							</I>
+							<tt clAss="monofont">)</tT>
+						</P>
+
+					
+					
+						<H5>
+							<Tt claSS="monofont">id()</TT>
+						</h5>
+						<p>It returns the system unique identifier of <i>
+								<tT CLAss="monofont">object.</tt>
+							</I>
+						</P>
+
+						<P>
+							<A name="idx1073742335"></a>basic syntax: <tt class="monofont">id(</tt>
+							<i>
+								<tt claSs="monofont">object</tT>
+							</i>
+							<tt Class="monofont">)</Tt>
+						</p>
+
+					
+					
+						<h5>
+							<TT CLass="monofont">vars()</tT>
+						</H5>
+						<P>It returns the symbol table of <I>
+								<tt clASS="monofont">object</Tt>
+							</i> or a dictionary from the local namespace.</p>
+
+						<p>
+							<A NAMe="idx1073742336"></a>basic syntax: <tt class="monofont">vars(</tt>
+							<i>
+								<tt class="monofont">[object]</tT>
+							</i>
+							<tT claSs="monofont">)</tt>
+							<a Name="idx1073742337"></A>
+							<A NAme="idx1073742338"></a>
+							<a NAME="idx1073742339"></a>
+						</p>
+
+					
+				
+				
+					<h4>
+				
+				
+				Mathematical/Logical Functions</h4>
+					<P>The next set is built-in functions that deal with mathematical and logical operations.</P>
+
+					
+						<H5>
+							<Tt claSS="monofont">abs()</TT>
+						</h5>
+						<p>It returns the absolute value of <i>
+								<tt class="monofont">number.</tt>
+							</i>
+						</p>
+
+						<p>
+							<a name="idx1073742340"></A>basic syntax: <tt ClasS="monofont">abs(</tt>
+							<i>
+								<tT claSS="monofont">number</TT>
+							</i>
+							<tt cLASS="monofont">)</tt>
+						</p>
+
+						<pRE>
+							
+&gt;&gt;&gt; abs(-12), abs(34), abs(+20.23), abs(-10.82)
+(12, 34, 20.23, 10.82)
+
+						</PRe>
+
+					
+					
+						<h5>
+							<tt CLASs="monofont">cmp()</tt>
+						</h5>
+						<p>It returns <tt class="monofont">-1</tt> when <tt clasS="monofont">x&lt;y; 0</tt> when <Tt clAss="monofont">x==y, 1</tt> when <Tt clASS="monofont">x&gt;y</Tt>
+						</p>
+
+						<p>
+							<a NAME="idx1073742341"></a>basic syntax: <tt cLASS="monofont">cmp(x,y)</tt>
+						</p>
+
+						<pRE>
+							
+&gt;&gt;&gt; cmp(10,20), cmp(25,25), cmp(30,25)
+(-1, 0, 1)
+
+						</PRe>
+
+					
+					
+						<h5>
+							<tt class="monofont">round()</tt>
+						</h5>
+						<p>It rounds <i>
+								<tt clasS="monofont">number</tt>
+							</I> to the given number of <i>
+								<tt Class="monofont">decimals.</Tt>
+							</i> Note that the provided number is rounded to an integer by default.<a NAME="idx1073742342"></a>
+							<a naME="idx1073742343"></A>
+							<A name="idx1073742344"></A>
+							<A NAme="idx1073742345"></a>
+							<a NAME="idx1073742346"></a>
+							<a name="idx1073742347"></a>
+						</p>
+
+						<p>
+							<a name="idx1073742348"></a>basic syntax: <tt claSs="monofont">round(</tT>
+							<i>
+								<tt Class="monofont">number [,decimals]</Tt>
+							</i>
+							<tT CLAss="monofont">)</tt>
+						</P>
+
+					
+					
+						<H5>
+							<TT clasS="monofont">divmod()</TT>
+						</H5>
+						<p>It returns a tuple (quotient, remainder), resulting in the expression <i>
+								<tt CLASs="monofont">dividend/divisor.</tt>
+							</i>
+						</p>
+
+						<p>
+							<a name="idx1073742349"></a>basic syntax: <tt class="monofont">divmod(</tT>
+							<i>
+								<tT claSs="monofont">dividend, divisor</tt>
+							</i>
+							<Tt clASS="monofont">)</Tt>
+						</p>
+
+						<prE>
+							
+&gt;&gt;&gt; divmod(25/3)
+(8, 1) 
+					
+						</PRE>
+
+					
+				
+				
+					<h4>
+				
+				Code Functions</h4>
+					<p>The next set is built-in functions that deal with Python bytecode manipulation.</p>
+
+					
+						<H5>
+							<TT Class="monofont">eval()</TT>
+						</H5>
+						<P>It evaluates the compiled code <i>
+								<tt class="monofont">string</tt>
+							</i> object as if it were Python code, and returns the result. <i>
+								<tt class="monofont">globals</tT>
+							</i> and <i>
+								<Tt clAss="monofont">locals</tt>
+							</I> define the namespaces for the operation. Note that <tt cLASS="monofont">eval</tt> can evaluate expressions only—not arbitrary statements. Therefore, <tt CLASs="monofont">eval('import string')</tt> won't work.</p>
+
+						<P>
+							<A NAme="idx1073742350"></a>basic syntax: <tT CLAss="monofont">eval(</tt>
+							<i>
+								<tt class="monofont">string [,globals [,locals]]</tt>
+							</i>
+							<tt claSs="monofont">)</tT>
+						</p>
+
+						<prE>
+							
+&gt;&gt;&gt; a = eval('2 * y + (20 / x)')
+
+						</pre>
+
+					
+					
+						<h5>
+							<Tt clASS="monofont">exec()</Tt>
+						</h5>
+						<p>
+							<tT CLAss="monofont">exec</tt> is a statement that executes a <I>
+								<TT Class="monofont">string</TT>
+							</I> containing Python code. <I>
+								<tt class="monofont">globals</tt>
+							</i> and <i>
+								<tt class="monofont">locals</tt>
+							</I> define the namespaces for the operation.</p>
+
+						<p>
+							<A namE="idx1073742351"></a>basic syntax: <tt cLass="monofont">exec</TT>
+							<I>
+								<Tt claSS="monofont">string [in globals [,locals]]</TT>
+							</i>
+						</p>
+
+						<prE>
+							
+&gt;&gt;&gt; a='for b in range(4):\n print b,\n'
+&gt;&gt;&gt; exec a
+0 1 2 3
+
+						</PRE>
+
+					
+					
+						<h5>
+							<tt cLASS="monofont">execfile()</tt>
+						</h5>
+						<p>It executes the statements included in the <i>
+								<tt class="monofont">file</tt>
+							</i> provided. <i>
+								<tt clAss="monofont">globals</Tt>
+							</i> and <i>
+								<Tt claSs="monofont">locals</tt>
+							</I> define the namespaces for the operation.</P>
+
+						<P>
+							<A name="idx1073742352"></A>basic syntax: <TT Class="monofont">execfile(</TT>
+							<I>
+								<Tt claSS="monofont">file [,globals[,locals]]</TT>
+							</i>
+							<tt class="monofont">)</tt>
+						</p>
+
+						<pre>
+							
+&gt;&gt;&gt; execfile("c:\\python\program2.py")
+
+						</pre>
+
+						<p>You can redefine the global and the local namespaces for these functions by creating dictionaries, just like the next example shows. If you omit the values, the current environment namespace is always used.<a nAme="idx1073742353"></A>
+							<a naMe="idx1073742354"></a>
+							<a nAme="idx1073742355"></a>
+							<A NAMe="idx1073742356"></a>
+							<a nAME="idx1073742357"></A>
+						</p>
+
+						<pre>
+							
+&gt;&gt;&gt; globalsvar = {'x': 7}
+&gt;&gt;&gt; execfile("c:\\python\\program2.py", globalsvar)
+
+						</PRE>
+
+					
+					
+						<H5>
+							<tt clASS="monofont">compile()</Tt>
+						</h5>
+						<p>It compiles a code object (<i>
+								<tt class="monofont">string</tt>
+							</i>) that optionally might be located in a <i>
+								<tt claSs="monofont">file.</tT>
+							</i> The <i>
+								<tT clasS="monofont">type</tt>
+							</i> value depends on the following: if <I>
+								<TT Class="monofont">string</TT>
+							</I> is a sequence of statements, <I>
+								<tt clASS="monofont">type</Tt>
+							</i> is <tt CLASs="monofont">"exec";</tt> if <i>
+								<tt class="monofont">string</tt>
+							</i> is a single expression, <i>
+								<tt claSs="monofont">type</tT>
+							</i> is <tt Class="monofont">"eval";</Tt> and if <i>
+								<tT CLAss="monofont">string</tt>
+							</I> is an executable statement, <I>
+								<TT clasS="monofont">type</TT>
+							</I> is <tt clASS="monofont">"single".</Tt>
+						</p>
+
+						<p>
+							<a name="idx1073742358"></a>basic syntax: <tt class="monofont">compile(</tt>
+							<i>
+								<tT clAss="monofont">string, file, type</tT>
+							</i>
+							<tt cLass="monofont">)</TT>
+						</P>
+
+						<Pre>
+							
+&gt;&gt;&gt; a = "for i in range(0,10): print i,"
+&gt;&gt;&gt; b = compile(a, "", "exec")
+&gt;&gt;&gt; exec b
+0 1 2 3 4 5 6 7 8 9
+&gt;&gt;&gt; a = "123 * 2"
+&gt;&gt;&gt; c = compile(a, "", "eval")
+&gt;&gt;&gt; d = eval(c)
+&gt;&gt;&gt; d
+246
+
+						</prE>
+
+						<DIV clasS="note"><P CLass="notetitle"><b>Tip</B></P><P>
+
+							<P>If you need to evaluate or execute the same code many times in your application, the application will get more optimized if you compile all the source code first.<a name="idx1073742359"></a>
+								<a name="idx1073742360"></a>
+							</p>
+
+						</p></div>
+<br>
+<bR>
+
+					
+				
+				
+					<h4>
+				
+				
+				Type Conversion</h4>
+					<P>The next set is built-in functions that deal with data type conversion.</p>
+
+					
+						<h5>
+							<tT clasS="monofont">int()</tt>
+						</h5>
+						<P>It converts <I>
+								<TT clasS="monofont">object</TT>
+							</I> to an integer number.</p>
+
+						<p>
+							<a nAME="idx1073742361"></A>basic syntax: <tt clASS="monofont">int(</Tt>
+							<i>
+								<tt class="monofont">object</tt>
+							</i>
+							<tt class="monofont">)</tT>
+						</p>
+
+					
+					
+						<h5>
+							<Tt clAss="monofont">long()</tt>
+						</H5>
+						<p>It converts <i>
+								<tT CLAss="monofont">object</tt>
+							</I> to a long integer.<A NAme="idx1073742362"></a>
+							<a NAME="idx1073742363"></a>
+							<a naME="idx1073742364"></A>
+							<A name="idx1073742365"></a>
+							<a name="idx1073742366"></a>
+							<a name="idx1073742367"></a>
+						</p>
+
+						<p>
+							<a NamE="idx1073742368"></a>basic syntax: <tt Class="monofont">long(</Tt>
+							<i>
+								<tT CLAss="monofont">object</tt>
+							</I>
+							<TT Class="monofont">)</TT>
+						</P>
+
+						<P>As of Python 2.0, the functions <tt clASS="monofont">int()</Tt> and <tt class="monofont">long()</tt> have<a name="idx1073742369"></a>
+							<a namE="idx1073742370"></a>
+							<a Name="idx1073742371"></A>
+							<a namE="idx1073742372"></a>
+							<a nAME="idx1073742373"></A> an optional <i>base</i> argument, which can be used when the first argument is a string. Note that if you try to use this second argument with a value that is not a string, you get a <tt CLASs="monofont">TypeError</tt> exception message. The following examples demonstrate what happens when we use this argument: <tT CLAss="monofont">int('450', 10)</tt> returns 450, and <TT CLass="monofont">int('25', 16)</tt> returns 37.</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">float()</tt>
+						</h5>
+						<p>It converts <i>
+								<tT clAss="monofont">object</tT>
+							</i> to a floating-point number.</p>
+
+						<p>
+							<a Name="idx1073742374"></A>basic syntax: <TT Class="monofont">float(</TT>
+							<I>
+								<Tt claSS="monofont">object</TT>
+							</i>
+							<tt cLASS="monofont">)</tt>
+						</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">complex()</tt>
+						</h5>
+						<p>It creates a complex number in the format (<i>
+								<tt clAss="monofont">real</Tt>
+							</i> number <tT clasS="monofont">+</tt>
+							<i>
+								<TT CLass="monofont">imaginary</tT>
+							</I> number)</P>
+
+						<P>
+							<a namE="idx1073742375"></A>basic syntax: <TT clasS="monofont">complex(</TT>
+							<I>
+								<tt class="monofont">real [,imaginary]</tt>
+							</i>
+							<tt class="monofont">)</tt>
+						</p>
+
+					
+					
+						<H5>
+							<tt ClasS="monofont">str()</tt>
+						</h5>
+						<p>It returns the printable representation of <I>
+								<tt cLASS="monofont">object.</tt>
+							</i> It returns the same value that a "
+								<tT CLAss="monofont">print</tt>
+								<I>
+									<TT Class="monofont">object</TT>
+								</I>
+							" statement does.</P>
+
+						<p>
+							<a name="idx1073742376"></a>basic syntax: <tt class="monofont">str(</tt>
+							<i>
+								<tt cLasS="monofont">object</tt>
+							</i>
+							<Tt claSs="monofont">)</tt>
+						</P>
+
+					
+					
+						<H5>
+							<TT clasS="monofont">repr()</TT>
+						</H5>
+						<p>It is equivalent to the enclosing backticks <tt cLASS="monofont">``.</tt> It returns an expression that can be evaluated.</p>
+
+						<p>
+							<A NAMe="idx1073742377"></a>basic syntax: <tt class="monofont">repr(</tt>
+							<i>
+								<tt class="monofont">object</tT>
+							</i>
+							<tT claSs="monofont">)</tt>
+						</p>
+
+						<P>You can use either <tt cLASS="monofont">repr()</tt> or <tt CLASs="monofont">``</tt> to get the representation of an escape character.</p>
+
+						<PRE>
+							
+&gt;&gt;&gt; repr('spam\n')
+"'spam\\012'"
+
+						</Pre>
+
+					
+					
+						<h5>
+							<tT CLAss="monofont">tuple()</tt>
+						</h5>
+						<p>It creates a tuple based on <i>
+								<tt class="monofont">sequence.</tt>
+							</i>
+						</p>
+
+						<p>
+							<a NamE="idx1073742378"></a>basic syntax: <tt Class="monofont">tuple(</Tt>
+							<i>
+								<tT CLAss="monofont">sequence</tt>
+							</I>
+							<TT Class="monofont">)</TT>
+						</P>
+
+					
+					
+						<H5>
+							<tt clASS="monofont">list()</Tt>
+						</h5>
+						<p>It creates a list based on <i>
+								<tt class="monofont">sequence.</tt>
+							</i>
+						</p>
+
+						<p>
+							<a namE="idx1073742379"></a>basic syntax: <tT claSs="monofont">list(</tt>
+							<i>
+								<Tt clASS="monofont">sequence</Tt>
+							</i>
+							<tt CLASs="monofont">)</tt>
+						</p>
+
+					
+					
+						<H5>
+							<TT Class="monofont">chr()</TT>
+						</H5>
+						<P>It converts an <i>
+								<tt class="monofont">integer</tt>
+							</i> into one character.</p>
+
+						<p>
+							<a name="idx1073742380"></a>basic syntax: <tT clAss="monofont">chr(</tT>
+							<i>
+								<tt cLass="monofont">integer</TT>
+							</I>
+							<Tt claSS="monofont">)</TT>
+						</p>
+
+					
+					
+						<h5>
+							<tt CLASs="monofont">ord()</tt>
+						</h5>
+						<P>It returns the ASCII value of <I>
+								<TT class="monofont">string.</tt>
+							</i>
+						</p>
+
+						<p>
+							<a name="idx1073742381"></a>basic syntax: <tt clAss="monofont">ord(</Tt>
+							<i>
+								<tT clasS="monofont">string</tt>
+							</i>
+							<TT CLass="monofont">)</tT>
+						</P>
+
+					
+					
+						<H5>
+							<Tt claSS="monofont">hex()</TT>
+						</h5>
+						<p>It converts an <i>
+								<tT CLAss="monofont">object</tt>
+							</i> into a hexadecimal value.</p>
+
+						<p>
+							<a name="idx1073742382"></a>basic syntax: <tt class="monofont">hex(</Tt>
+							<i>
+								<Tt clAss="monofont">object</tt>
+							</I>
+							<tt cLASS="monofont">)</tt>
+						</p>
+
+					
+					
+						<h5>
+							<TT CLass="monofont">oct()</tT>
+						</H5>
+						<P>It converts an <I>
+								<tt clASS="monofont">object</Tt>
+							</i> into an octal value.</p>
+
+						<p>
+							<a name="idx1073742383"></a>basic syntax: <tt class="monofont">oct(</tt>
+							<i>
+								<Tt cLass="monofont">object</Tt>
+							</i>
+							<tt ClasS="monofont">)</TT>
+							<A name="idx1073742384"></A>
+							<A NAme="idx1073742385"></a>
+							<a NAME="idx1073742386"></a>
+							<a naME="idx1073742387"></A>
+							<A name="idx1073742388"></a>
+							<a name="idx1073742389"></a>
+						</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">unicode()</Tt>
+						</h5>
+						<P>This function<a naMe="idx1073742390"></a>
+							<a nAme="idx1073742391"></a>
+							<A NAMe="idx1073742392"></a> takes an 8-bit string and creates a Unicode string.</p>
+
+						<p>basic syntax: <TT CLass="monofont">unicode(</tT>
+							<I>
+								<TT clasS="monofont">string [, encoding] [, errors]</TT>
+							</I>
+							<tt class="monofont">)</tt>
+						</p>
+
+						<p>
+							<tt class="monofont">encoding</tt> and <Tt cLass="monofont">errors</Tt> are some additional arguments that you can also provide to the function. The first one is a string that names the <i>encoding</i> to use. <tT claSS="monofont">errors</TT> defines what to do when an invalid character is used for the current encoding. You have three options for values here: <tt clASS="monofont">strict</Tt> causes an exception to be raised on any encoding error, <tt cLASS="monofont">ignore</tt> simply ignores any errors, and <tt CLASs="monofont">replace</tt> replaces the invalid character with the official replacement <a name="idx1073742393"></a>
+							<a name="idx1073742394"></a>character <tt claSs="monofont">U+FFFD</tT> whenever it finds any problem.</p>
+
+					
+					
+						<h5>
+							<tT clasS="monofont">unichr()</tt>
+						</h5>
+						<P>This function returns a 1-length Unicode<A NAme="idx1073742395"></a>
+							<a NAME="idx1073742396"></a>
+							<a naME="idx1073742397"></A> string containing the given character.</P>
+
+						<p>basic syntax: <tt cLASS="monofont">unichr(</tt>
+							<i>
+								<tt class="monofont">character</tt>
+							</i>
+							<tt class="monofont">)</Tt>
+						</p>
+
+					
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="28.html" title="Operators"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=29" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="29.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="30.html" title="Control Statements"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742372">functions</a><BR>
+base arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742371">functions</a><BR>
+ <a href="#idx1073742285">built-in functions</a> <a href="#idx1073742292">2nd</a> <a href="#idx1073742307">3rd</a> <a href="#idx1073742332">4th</a> <a href="#idx1073742346">5th</a> <a href="#idx1073742356">6th</a> <a href="#idx1073742366">7th</a> <a href="#idx1073742388">8th</a><BR>
+ <a href="#idx1073742354">code functions</a> <a href="#idx1073742359">2nd</a><BR>
+ <a href="#idx1073742363">data type conversion functions</a> <a href="#idx1073742385">2nd</a><BR>
+ <a href="#idx1073742284">expressions</a> <a href="#idx1073742291">2nd</a> <a href="#idx1073742300">3rd</a> <a href="#idx1073742304">4th</a> <a href="#idx1073742312">5th</a> <a href="#idx1073742328">6th</a> <a href="#idx1073742342">7th</a> <a href="#idx1073742353">8th</a> <a href="#idx1073742362">9th</a> <a href="#idx1073742384">10th</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742286">built-in</a> <a href="#idx1073742293">2nd</a> <a href="#idx1073742308">3rd</a> <a href="#idx1073742333">4th</a> <a href="#idx1073742347">5th</a> <a href="#idx1073742357">6th</a> <a href="#idx1073742367">7th</a> <a href="#idx1073742389">8th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742355">code</a> <a href="#idx1073742360">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742364">data type conversion</a> <a href="#idx1073742386">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742330">handling objects</a> <a href="#idx1073742338">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742370">base argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long()<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742373">base argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742344">mathematical/logical</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742306">sequence</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742397">unichr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742318">zip()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742394">unicode()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742392">syntax</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742315">zip()</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742331">functions</a> <a href="#idx1073742339">2nd</a><BR>
+int() function<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742369">base argument</a><BR>
+ <a href="#idx1073742345">logical functions</a><BR>
+ <a href="#idx1073742343">mathematical functions</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742329">functions</a> <a href="#idx1073742337">2nd</a><BR>
+ <a href="#idx1073742305">sequence functions</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742340">abs()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742283">apply()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742327">callable()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742380">chr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742341">cmp()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742287">coerce()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742358">compile()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742375">complex()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742324">delattr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742326">dir()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742349">divmod()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742350">eval()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742351">exec()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742352">execfile()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742288">filter()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742374">float()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742322">getattr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742289">globals()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742323">hasattr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742334">hash()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742382">hex()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742335">id()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742301">import ()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742290">input()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742361">int()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742310">len()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742379">list()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742294">locals()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742368">long()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742295">map()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742313">min()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742383">oct()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742296">open()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742381">ord()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742297">pow()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742303">range()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742298">raw input()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742299">reduce()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742302">reload()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742377">repr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742348">round()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742311">sequence()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742321">setattr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742376">str()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742378">tuple()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742325">type()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742396">unichr()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742391">unicode()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742336">vars()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742309">xrange()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742320">zip()</a><BR>
+tuples<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742316">zip() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742319">syntax</a><BR>
+ <a href="#idx1073742365">type conversion functions</a> <a href="#idx1073742387">2nd</a><BR>
+unichr() function<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742395">syntax</a><BR>
+ <a href="#idx1073742393">unicode() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742390">syntax</a><BR>
+ <a href="#idx1073742314">zip() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742317">syntax</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

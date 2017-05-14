@@ -1,0 +1,318 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Downloading and Installing JPython</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">Downloading and Installing JPython</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="244.html" title="Java Integration"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=245" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="245.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="246.html" title="The Interpreter"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A24%3A33+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218068074150171193064206</font><a href="read5.asp?bookname=0672319942&snode=245&now=6%2F1%2F2002+6%3A24%3A33+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+Downloading and Installing JPython</h3>
+				<p>Next, you find the required steps that you need to perform in order to download and install JPython. Visit the following address, and download the latest version.</p>
+
+				<P>
+					<A TArget="_blank" HREF="http://www.jpython.org/download.html">http://www.jpython.org/download.html</a>
+				</p>
+
+				<p>You have two choices for downloading JPython. You can either download the JPython version that contains the <a NAME="idx1073750631"></a>
+					<a name="idx1073750632"></a>OROMatcher regular expression library, or the other version that doesn't contain it. Note that it's required that you decide between the two versions. Only if you decide to use the version that comes with the OROMatcher, will you have access to the <tt class="monofont">re</tt> module. However, you will have to agree with a different kind of licensing.</p>
+
+				<p>Before spending time downloading the file, verify whether you have a working Java 1.1 or 1.2 compatible JVM installed. In case you don't have one, you will need to locate one on the Internet and install the right JVM for your system.</p>
+
+				<p>JPython is distributed as a self-extracting <Tt cLass="monofont">.class</Tt> file created by <tt cLass="monofont">InstallShield - Java Edition.</TT> To install JPython, you need to open the command line to the directory in which you have placed the <TT clasS="monofont">JPython11.class</TT> file. Note that if you have downloaded the <Tt claSS="monofont">JPythonONLY11.class</TT> file, you must first rename it to <tt clASS="monofont">JPython11.class.</Tt>
+				</p>
+
+				<pre>
+					
+ren JPythonONLY11.class JPython11.class
+
+				</pre>
+
+				<p>Then, type the following command to start the installation process.</p>
+
+				<pre>
+					
+&lt;java interpreter&gt; JPython11
+
+				</pre>
+
+				<p>Depending on your system, you have to type one of the following options. Note that you don't have to include the <tt cLasS="monofont">.class</tt> on the end of the filename.</p>
+
+				<Pre>
+					
+java JPython11
+jre JPython11
+jview JPython11
+
+				</prE>
+
+				<p>In case you don't have a GUI, you need to add the following argument to the previous command: <tt CLASs="monofont">-o dir_to_install_to.</tt> JPython will install to the specified directory without activating the graphical installer.</p>
+
+				<P>After initiating the installation process, you will be prompted to accept the terms of the license (see <A HRef="245#1.html">Figure 18.1</a>). Read it and say yes to continue with the process.</p>
+
+				<CENTer>
+					<h5>
+<a NAME="1"></a>Figure 18.1. When you accept the terms of the license, JPython is installed on your system.</h5>
+					
+						
+							<img border="0" width="500" heigHt="381" sRc="graphics/18fig01.gif" alT="graphics/18fig01.gif">
+						
+					
+				</centEr>
+
+				<p>Remember to check the Installation Notes after completing the installation.</p>
+
+				<P>Now, you should be able to run JPython by typing the following command:</P>
+
+				<PRe>
+					
+jpython
+
+				</pre>
+
+				<P>If you are using a Windows system, you can have access to JPython by double-clicking on its icon.</P>
+
+				
+					<H4>
+
+
+Downloading the CPython Library</H4>
+					<p>As of now, JPython comes with support for only a small set of the standard Python modules. For those who will concentrate on development using Java packages, the modules provided by JPython should be fine, but note that CPython has a wide variety of useful modules.</p>
+
+					<p>If you already have CPython 1.5.1, 1.5.2, or a later version installed on your computer, you can use its library. If you don't have CPython installed, you can get its libraries from the JPython Web site. For example, the libraries for version 1.5.2 are stored in the following file:</p>
+
+					<P>
+						<A TArget="_blank" HREF="http://www.jpython.org/pylib152e.jar">http://www.jpython.org/pylib152e.jar</a>
+						<a name="idx1073750633"></a>
+						<a name="idx1073750634"></a>
+						<a name="idx1073750635"></a>
+						<a NamE="idx1073750636"></a>
+						<a nAme="idx1073750637"></a>
+						<a Name="idx1073750638"></A>
+						<A NAme="idx1073750639"></a>
+					</p>
+
+					<P>To install the standard Python libraries, use the following command:</P>
+
+					<PRe>
+						
+jpython -jar pylib152e.jar
+
+					</pre>
+
+					<P>Besides the regular distribution download page, the latest snapshots of the JPython source code are always available via CVS too.<A NAme="idx1073750640"></a>
+						<a NAME="idx1073750641"></a>
+						<a name="idx1073750642"></a>
+					</p>
+
+				
+				
+					<h4>
+Licensing</h4>
+					<p>Starting with version 1.1 beta 1, JPython has two separate distributions. This is because JPython uses a third-party library for handling regular expressions—the standard <tt class="monofont">re</tt> module is implemented using <A naMe="idx1073750643"></a>
+						<a Name="idx1073750644"></a>
+						<Tt clASS="monofont">OROMatcher,</Tt> which is a regular expression library by <tt cLASS="monofont">ORO, Inc.</tt>
+					</p>
+
+					<p>Because <TT CLass="monofont">OROMatcher</tT> has a different kind of license, the JPython distribution that uses it requires a specific license as well because <TT Class="monofont">OROMatcher</tt> is not completely free software. (It doesn't allow you to have access to its source code.)</p>
+
+					<p>Currently, at the ORO Web site, you can find a note saying that the company plans to open source their software, releasing it under the Apache license, so the restrictions on using <tt class="monofont">OROMatcher</tt> might be lifted. You should keep an eye on that.</p>
+
+					<p>However, JPython provides another distribution that comes without the library, which makes the regular expression capability not available. This distribution is a completely open source version of JPython. Note that if later you decide to use <tT clAss="monofont">OROMatcher,</tT> you can accept its licensing agreement, and integrate it with the free distribution of JPython that you already have. Check out the OROMatcher site at</p>
+
+					<p>
+						<a tArgeT="_blank" HREf="http://www.savarese.org/oro/">http://www.savarese.org/oro/</a>
+						<a nAME="idx1073750645"></A>
+						<a namE="idx1073750646"></A>
+						<A Name="idx1073750647"></a>
+						<A NAMe="idx1073750648"></a>
+						<a name="idx1073750649"></a>
+					</p>
+
+				
+				
+					<h4>
+
+
+JVMs That Support JPython</h4>
+					<p>As of now, JPython should run successfully on any bug-free fully 1.1 or 1.2 compliant Java Virtual Machine (JVM). Next, you have a list of Operating System specific JVMs. Even if your platform is not listed here, it doesn't mean that it doesn't have a JVM.</p>
+
+					
+						<h5>
+Linux</h5>
+						<p>JDK 1.1.x and 1.2.x from blackdown.org—It is suggested that you use either the 1.1.7 JVM or 1.2 JVM.</p>
+
+						<p>
+							<a tArgEt="_blank" hrEf="http://www.blackdown.org/java-linux.html">http://www.blackdown.org/java-linux.html</a>
+						</p>
+
+						<p>IBM Developer Kit and Runtime Environment for Linux—This is IBM's new JVM for Linux.</P>
+
+						<p>
+							<a tARGEt="_blank" hreF="http://www.ibm.com/java/jdk/118/linux/index.html">http://www.ibm.com/java/jdk/118/linux/index.html</A>
+						</P>
+
+						<P>Sun's J2SE (1.2.2 JVM) for Linux—This is Sun's JVM ported to Linux. You need a free login to access the Sun Developer Connection.</p>
+
+						<p>
+							<a tARGEt="_blank" hreF="http://developer.java.sun.com/">http://developer.java.sun.com/</A>
+						</P>
+
+					
+					
+						<H5>
+Win32 (Windows NT, 95, and 98)</h5>
+						<p>JView from Microsoft—This JVM is installed when you install Microsoft Internet Explorer 4.0 or 5.0. Currently, this is the fastest JVM on which to run JPython.</p>
+
+						<p>
+							<a target="_blank" href="http://www.microsoft.com/java/">http://www.microsoft.com/java/</a>
+						</p>
+
+						<p>Sun's JVM for Windows—Sun provides 1.2 (Java 2) and 1.1 Virtual Machines for the Windows platform. This is certainly the most compatible VM with the official Java specification.</p>
+
+						<p>
+							<A taRget="_blank" Href="http://www.javasoft.com/products/">http://www.javasoft.com/products/</a>
+							<A namE="idx1073750650"></A>
+							<A Name="idx1073750651"></a>
+							<A NAMe="idx1073750652"></a>
+							<a nAME="idx1073750653"></A>
+							<a namE="idx1073750654"></A>
+							<A Name="idx1073750655"></a>
+							<a name="idx1073750656"></a>
+							<a name="idx1073750657"></a>
+						</p>
+
+					
+					
+						<h5>
+Solaris</h5>
+						<p>Although Solaris 2.6 comes with JDK 1.1.3, Solaris users will probably want to upgrade to either the JRE 1.1.7 or JRE 1.2.1 at least.</P>
+
+						<blOckqUote>
+<p>
+								<P>JRE 1.1.7 from Sun</p>
+
+							</p>
+<p>
+								<P>
+									<A TArget="_blank" HREF="http://www.javasoft.com/products/jdk/1.1/jre/index.html">http://www.javasoft.com/products/jdk/1.1/jre/index.html</a>
+								</p>
+
+							</p>
+<p>
+								<P>JRE 1.2.1 from Sun</P>
+
+							</P>
+<P>
+								<p>
+									<a taRGET="_blank" href="http://www.javasoft.com/products/jdk/1.2/">http://www.javasoft.com/products/jdk/1.2/</a>
+								</p>
+
+							</p>
+</blockquote>
+					
+					
+						<h5>
+Irix</h5>
+						<p>Here, you can get version 3.1 of the Java Development Environment from SGI, which is based on the 1.1.3 JVM.</P>
+
+						<p>
+							<a TargEt="_blank" hreF="http://www.sgi.com/developers/devtools/languages/java.html">http://www.sgi.com/developers/devtools/languages/java.html</a>
+						</p>
+
+					
+					
+						<h5>
+Macintosh</H5>
+						<P>
+							<A Name="idx1073750658"></a>Mizutori Tetsuya has made available an application called <A NAMe="idx1073750659"></a>
+							<a nAME="idx1073750660"></A>
+							<a namE="idx1073750661"></A>
+							<A Name="idx1073750662"></a>
+							<tt class="monofont">JPython Runner</tt> to make it easier to use JPython on Macintoshes.</p>
+
+						<p>
+							<a targEt="_blank" hRef="http://www.bekkoame.ne.jp/~mizutori/java/index.html#jpythonrunner">http://www.bekkoame.ne.jp/~mizutori/java/index.html#jpythonrunner</a>
+						</P>
+
+						<p>See also the document "How to Run JPython on Macintosh."
+						</p>
+
+						<p>
+							<a TargET="_blank" HRef="http://www.bekkoame.ne.jp/~mizutori/java/index.html#howtojpython">http://www.bekkoame.ne.jp/~mizutori/java/index.html#howtojpython</a>
+							<a NAME="idx1073750663"></a>
+							<a naME="idx1073750664"></A>
+							<A name="idx1073750665"></A>
+							<A NAme="idx1073750666"></a>
+							<a name="idx1073750667"></a>
+							<a name="idx1073750668"></a>
+							<a name="idx1073750669"></A>
+						</p>
+
+					
+				
+			</fOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="244.html" title="Java Integration"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=245" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="245.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="246.html" title="The Interpreter"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750660">JPython Runner</a><BR>
+CPython library<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750638">downloading</a> <a href="#idx1073750641">2nd</a><BR>
+downloading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750637">CPython library</a> <a href="#idx1073750640">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750635">JPython</a> <a href="#idx1073750647">2nd</a> <a href="#idx1073750652">3rd</a> <a href="#idx1073750665">4th</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750636">JPython</a> <a href="#idx1073750648">2nd</a> <a href="#idx1073750653">3rd</a> <a href="#idx1073750666">4th</a><BR>
+Java Virtual Machine (JVM)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750654">support, JPython</a> <a href="#idx1073750667">2nd</a><BR>
+JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750633">downloading and installing</a> <a href="#idx1073750645">2nd</a> <a href="#idx1073750650">3rd</a> <a href="#idx1073750663">4th</a><BR>
+ <a href="#idx1073750659">JPython Runner</a><BR>
+JVM (Java Virtual Machine)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750655">support, JPython</a> <a href="#idx1073750668">2nd</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750639">downloading</a> <a href="#idx1073750642">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750632">OROMatcher regular expression</a> <a href="#idx1073750644">2nd</a><BR>
+licensing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750649">JPython</a><BR>
+ <a href="#idx1073750631">OROMatcher regular expression library</a> <a href="#idx1073750643">2nd</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750634">downloading and installing</a> <a href="#idx1073750646">2nd</a> <a href="#idx1073750651">3rd</a> <a href="#idx1073750664">4th</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750661">JPython Runner</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750662">JPython Runner</a><BR>
+support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750656">Java Virtual Machine (JVM), JPython</a> <a href="#idx1073750669">2nd</a><BR>
+ <a href="#idx1073750658">Tetsuya, Mizutori</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750657">Java Virtual Machine (JVM) support, JPython</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

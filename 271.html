@@ -1,0 +1,163 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python on MacOS Systems</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="268.html" class="navtitle">B. Running Python on Specific Platforms</a> &gt; <span class="nonavtitle">Python on MacOS Systems</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="270.html" title="Python on Win32 Systems"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=271" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="271.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="272.html" title="Python on UNIX Systems"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A31%3A33+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222219254161021189179187196</font><a href="read6.asp?bookname=0672319942&snode=271&now=6%2F1%2F2002+6%3A31%3A33+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Python on MacOS Systems</h3>
+				<p>It is no big surprise that Python has a standard port for Macintoshes because Python itself was created on a Macintosh. This port is called MacPython and is maintained by Jack Jansen. MacPython applies to MacOS up to version 9. Installing Python on MacOS X (10) systems will be much more like a standard UNIX installation.</p>
+
+				<P>Python runs great on Apple Macintoshes, iMacs, iBooks, and so forth. Note that you can decide whether you want to install Python under the MacOS (using the MacPython distribution), under a Linux installation (in case you are using a distribution such as the Yellow Dog), or even under Java (using JPython, the Python interpreter written in Java). If you have Linux installed on your Mac, it is best for you to look at the UNIX section.</P>
+
+				<P>At this moment, the current stable distribution is 1.5.2. For this release, the installer is available in two forms: <Tt claSS="monofont">MacBinary</TT> format and <tt clASS="monofont">BinHex</Tt> format. It is suggested that  the latter option should be used in case your browser mistreats <tt class="monofont">MacBinary</tt> files. The installer can also install some optional extensions for you, including Tkinter, the Numerical, and Imaging modules.</p>
+
+				<p>Also included in the distribution (and optionally installed by the installer) is an integrated development environment written by Just van Rossum (Guido's brother), which includes an editor, debugger, and class browser.</p>
+
+				<p>The MacPython distribution contains the same set of extension modules that is available for almost every platform (<tt clasS="monofont">sys,</tt>
+					<Tt clAss="monofont">string,</tt>
+					<Tt clASS="monofont">time,</Tt> and so on). Besides that, it contains a set of modules that provide interfaces to specific MacOS services, including access to QuickTime and QuickDraw.</p>
+
+				<p>In order to download Python for Macintosh, the source code, and all the available documentation, check out Jack Jansen's MacPython Web page at</p>
+
+				<P><A TArget="_blank" HREF="http://www.cwi.nl/~jack/macpython.html">http://www.cwi.nl/~jack/macpython.html</a></p>
+
+				<p>The most noticeable differences between MacPython and the UNIX/Windows distributions are the following:</p>
+
+				<UL>
+<LI><p>It doesn't provide access to the standard POSIX features (pipes, forking, access to command-line interfaces, and so on). In particular, looking at the Mac module, you'll see what functions you can expect in the <tt class="monofont">os</tt> module. If you compare this to the posix or winnt module, you'll see what is missing: Options like <tt class="monofont">posix.fork</tt> are not available on the Mac.</p>
+</Li>
+<lI><p>The threading mechanism <a nAme="idx1073751368"></a><a Name="idx1073751369"></A>is just starting to show up now (with Python 2.0), as the most recent versions of the GUSI development environment for MacOS support POSIX threads. Note that threading support using the user-space GNU <TT Class="monofont">pth</TT> library was also added to the language in the release 2.0. Consequently, now you have the option to run programs on Macintosh that are able to use Python's POSIX threading support.</P>
+</Li>
+<li><p>Tkinter works, but not as smoothly as it could. It is expected that when 1.6 binaries come out, things should be much better.<A NAMe="idx1073751370"></a><a nAME="idx1073751371"></A></p>
+</li>
+<li><p>Support for C extension modules is based on patches because most of them are written for UNIX or Windows.</p>
+</li>
+<li><p>Porting a Python application from other systems to MacPython works fine, assuming it has been written in a cross-platform way.</p>
+
+					</li>
+</ul>
+				<p>Precise details on the differences in the standard distribution can be found in the Python Documentation—if a module or feature is not compatible with the Mac distribution, it will say so there. For more technical details, you might want to join the PythonMac SIG, which has discussions on Macintosh-specific aspects of Python. Check out</p>
+
+				<p><A taRget="_blank" Href="http://www.python.org/sigs/pythonmac-sig/">http://www.python.org/sigs/pythonmac-sig/</a></P>
+
+				<p>The official documentation for the Macintosh specific modules available in the MacPython distribution is located at</p>
+
+				<p><A TARget="_blank" hREF="http://www.python.org/doc/current/mac/mac.html">http://www.python.org/doc/current/mac/mac.html</A></p>
+
+				<p>Next, I list the description of those modules.</p>
+
+				<bLOCKquotE>
+<P><P><Tt class="monofont">mac</tt>— 
+    
+							This module implements the operating system dependent functionality provided by the standard module <tt class="monofont">os.</tt> Note that it is best used when accessed through the <tt cLasS="monofont">os</tt> module.</p>
+</P>
+<p><p><tt ClasS="monofont">macpath</TT>— 
+    
+							This module is the Macintosh implementation of the <Tt claSS="monofont">os.path</TT> module.
+						</p>
+</p>
+</blOCKQuote>
+				<DIV Class="note"><p class="notetitle"><b>Caution</b></p><p>
+
+					<p>You shouldn't try to use the previous two modules directly. Instead, use the <tt claSs="monofont">os</tT>  module.</p>
+
+				</p></dIv>
+<br>
+<bR>
+
+				<bloCKQUote>
+<p><P><TT Class="monofont">ctb</TT>— 
+    
+							This module provides a partial interface to the Macintosh Communications Toolbox. Currently, only Connection Manager tools are supported. It might not be available in all MacPython versions.</P>
+</P>
+<p><p><tt CLASs="monofont">macconsole</tt>— 
+    
+							This module is available on the Macintosh, provided Python has been built using the Think C compiler. It provides an interface to the Think console package, with which basic text windows can be created.</p>
+</p>
+<p><p><tt class="monofont">macdnr</tt>— 
+    
+							This module provides an interface to the Macintosh Domain Name Resolver. It is usually used in conjunction with the <tt clAss="monofont">mactcp</Tt> module, to map hostnames to IP addresses. It might not be available in all MacPython versions.<a nAme="idx1073751372"></a><a Name="idx1073751373"></A></P>
+</P>
+<P><p><tt cLASS="monofont">macfs</tt>— 
+    
+							This module provides support for Macintosh FSSpec handling, the Alias Manager, finder aliases, and the Standard File package.</p>
+</p>
+<P><P><TT clasS="monofont">ic</TT>— 
+    
+							This module provides access to Macintosh Internet Config package, which stores preferences for Internet programs such as mail address, default homepage, and so on. Also, Internet Config contains an elaborate set of mappings from Macintosh creator/type codes to foreign filename extensions plus information on how to transfer files (binary, ascii, and so on).</P>
+</p>
+<p><p><tt class="monofont">MacOS</tt>— 
+    
+							This module provides access to MacOS specific interpreter features, such as how the interpreter eventloop functions and the like. It is suggested that you use this module with care.</p>
+</p>
+<p><p><tt clAss="monofont">macostools</Tt>— 
+    
+							This module contains some convenience routines for file manipulation on the Macintosh.</p>
+</p>
+<P><p><tt cLass="monofont">findertools</TT>— 
+    
+							This module provides wrapper routines around the finder's Apple Events interface.</P>
+</P>
+<p><p><tt CLASs="monofont">mactcp</tt>— 
+    
+							This module provides an interface to the Macintosh TCP/IP driver (MacTCP). There is an accompanying module, <tT CLAss="monofont">macdnr,</tt> which provides an interface to the name server (allowing you to translate hostnames to IP addresses), and a module <TT CLass="monofont">MACTCPconst</tt> that has symbolic names for constants used by <tt class="monofont">MacTCP.</tt> Note that because the built-in module <tt clasS="monofont">socket</tt> is also available on the Macintosh, it is usually easier to use sockets instead of the Macintosh-specific <Tt clAss="monofont">MacTCP</tt> API.</P>
+</p>
+<p><p><TT CLass="monofont">macspeech</tT>— 
+    
+							This module provides an interface to the Macintosh Speech Manager, allowing you to let the Macintosh utter phrases. You need a version of the Speech Manager extension (version 1 and 2 have been tested) in your Extensions folder for this to work. The module does not provide full access to all features of the Speech Manager yet. It might not be available in all MacPython versions.<A NAme="idx1073751374"></a><a NAME="idx1073751375"></a></p>
+</p>
+<p><P><TT Class="monofont">EasyDialogs</tt>— 
+    
+							The <tt class="monofont">EasyDialogs</tt> module contains some basic dialogs for the Macintosh, modeled after the <tt claSs="monofont">stdwin</tT> dialogs with similar names.</p>
+</p>
+<p><P><tt clAss="monofont">FrameWork</tT>— 
+    
+							The <TT Class="monofont">FrameWork</TT> module contains classes that together provide a framework for an interactive Macintosh application. The programmer builds an application by creating subclasses that override various methods of the bases classes, thereby implementing the functionality wanted. Overriding functionality can often be done on various different levels. For instance, to handle clicks in a single dialog window in a non-standard way, it is not necessary to override the complete event handling.</P>
+</P>
+<p><p><tt CLASs="monofont">MiniAEFrame</tt>— 
+    
+							The module <tT CLAss="monofont">MiniAEFrame</tt> provides a framework for an application that can function as an Open Scripting Architecture (OSA) server, that is receive and process AppleEvents. It can be used in conjunction with <tt class="monofont">FrameWork</tt> or standalone. This module is temporary; it will eventually be replaced by a module that handles argument names better and possibly automates making your application scriptable.
+						</p>
+</p>
+</blockQuoTe>
+				<p>This Open Directory page provides many links for materials about MacPython available on the Web:</p>
+
+				<P><a tarGet="_blank" hREF="http://dmoz.org/Computers/Systems/Macintosh/Development/Languages/Python/">http://dmoz.org/Computers/Systems/Macintosh/Development/Languages/Python/</A><a namE="idx1073751376"></A><A Name="idx1073751377"></a></P>
+
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="270.html" title="Python on Win32 Systems"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=271" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="271.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="272.html" title="Python on UNIX Systems"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+Macintosh<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751370">running Python</a> <a href="#idx1073751372">2nd</a> <a href="#idx1073751374">3rd</a> <a href="#idx1073751376">4th</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751371">Macintosh</a> <a href="#idx1073751373">2nd</a> <a href="#idx1073751375">3rd</a> <a href="#idx1073751377">4th</a><BR>
+ <a href="#idx1073751368">threading mechanisms</a><BR>
+threads<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751369">threading mechanisms</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

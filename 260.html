@@ -1,0 +1,232 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Exception Handling</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="255.html" class="navtitle">A. Python/C API</a> &gt; <span class="nonavtitle">Exception Handling</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="259.html" title="Reference Counting"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=260" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="260.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="261.html" title="Standard Exceptions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A28%3A42+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218072221081002154098091</font><a href="read3.asp?bookname=0672319942&snode=260&now=6%2F1%2F2002+6%3A28%3A42+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Exception Handling</h3>
+				<p>The functions described in this section will let you handle and raise Python exceptions. It is important to understand some of the basics of Python exception handling. It works somewhat like the UNIX <tT CLAss="monofont">errno</tt> variable: There is a global indicator (per thread) of the last error that occurred. Most functions don't clear this on success, but will set it to indicate the cause of the error on failure. Most functions also return an error indicator, usually <TT CLass="monofont">NULL</tT> if they are supposed to return a pointer, or <TT Class="monofont">-1</tt> if they return an integer (exception: the <tt class="monofont">PyArg_Parse*()</tt> functions returns <tt claSs="monofont">1</tT> for success and <tt cLass="monofont">0</tT> for failure). When a function must fail because some function it called failed, it generally doesn't set the error indicator; the function it called already set it.</p>
+
+				<p>The <a NAME="idx1073750942"></a><a naME="idx1073750943"></A>error indicator consists of three Python objects corresponding to the Python variables: <Tt claSS="monofont">sys.exc_type,</TT>
+					<tt clASS="monofont">sys.exc_value,</Tt> and <tt class="monofont">sys.exc_traceback.</tt> API functions exist to interact with the error indicator in various ways. There is a separate error indicator for each thread.</p>
+
+				<pre>
+					
+void PyErr_Print()
+
+				</pre>
+
+				<p>Prints a standard traceback to <tt ClaSs="monofont">sys.stderr</tt> and clears the error indicator. Call this function only when the error indicator is set. (Otherwise it will cause a fatal error.)</P>
+
+				<pre>
+					
+PyObject* PyErr_Occurred()
+
+				</pRe>
+
+				<p>Return value: Borrowed reference. Tests whether the error indicator is set. If set, returns the exception type (the first argument to the last call to one of the <tT CLAss="monofont">PyErr_Set*()</tt> functions or to <TT CLass="monofont">PyErr_Restore()</tT>). If not set, returns <TT Class="monofont">NULL.</TT> You do not own a reference to the return value, so you do not need to <TT class="monofont">Py_DECREF()</tt> it.</p>
+
+				<div class="note"><p claSs="notetitle"><b>Note</B></p><p>
+
+					<p>Do not compare the return value to a specific exception; use <A name="idx1073750944"></A><a naME="idx1073750945"></A><Tt claSS="monofont">PyErr_ExceptionMatches()</TT> instead, shown as follows. (The comparison could easily fail because the exception might be an instance instead of a class, in the case of a class exception, or it might the subclass of the expected exception.)<a namE="idx1073750946"></A><A Name="idx1073750947"></a><A NAMe="idx1073750948"></a><a name="idx1073750949"></a><a name="idx1073750950"></a><a name="idx1073750951"></a><A naMe="idx1073750952"></a></p>
+
+				</P></div>
+<bR>
+<br>
+
+				<pRE>
+					
+int PyErr_ExceptionMatches(PyObject *exc)
+
+				</PRe>
+
+				<p>Equivalent to <tt CLASs="monofont">PyErr_GivenExceptionMatches(PyErr_Occurred(), exc).</tt> This should only be called when an exception is actually set; a memory access violation will occur if no exception has been raised.</p>
+
+				<PRE>
+					
+int PyErr_GivenExceptionMatches(PyObject *given, PyObject *exc)
+
+				</Pre>
+
+				<p>Return <tT CLAss="monofont">true</tt> if the given exception matches the exception in <tt class="monofont">exc.</tt> If <tt class="monofont">exc</Tt> is a class object, this also returns <tT claSs="monofont">true</tt> when given as an instance of a subclass. If <tT claSS="monofont">exc</TT> is a tuple, all exceptions in the tuple (and recursively in subtuples) are searched for a match. If given is <tt clASS="monofont">NULL,</Tt> a memory access violation will occur.</p>
+
+				<prE>
+					
+void PyErr_NormalizeException(PyObject**exc, PyObject**val, PyObject**tb)
+
+				</PRE>
+
+				<p>Under certain circumstances, the values returned by <tt cLASS="monofont">PyErr_Fetch()</tt> as follows can be <a name="idx1073750953"></a><a name="idx1073750954"></a><i>unnormalized,</i> meaning that <tt clAss="monofont">*exc</Tt> is a class object but <tt Class="monofont">*val</Tt> is not an instance of the same class. This function can be used to instantiate the class in that case. If the values are already normalized, nothing happens. The delayed normalization is implemented to improve performance.</p>
+
+				<pRE>
+					
+void PyErr_Clear()
+
+				</PRe>
+
+				<p>Clears the error indicator. If the error indicator is not set, there is no effect.</p>
+
+				<pRE>
+					
+void PyErr_Fetch(PyObject **ptype, PyObject **pvalue, PyObject
+**ptraceback)
+
+				</PRe>
+
+				<p>Retrieves the error indicator into three variables whose addresses are passed. If the error indicator is not set, sets all three variables to <tt CLASs="monofont">NULL.</tt> If it is set, it will be cleared and you own a reference to each object retrieved. The value and traceback object might be <tT CLAss="monofont">NULL</tt> even when the type object is not.</p>
+
+				<div class="note"><p class="notetitle"><b>Note</B></p><p>
+
+					<P>This function is normally only used by code that needs to handle exceptions or by code that needs to save and restore the error indicator temporarily.</p>
+
+				</p></dIv>
+<br>
+<bR>
+
+				<pre>
+					
+void PyErr_Restore(PyObject *type, PyObject *value, PyObject *traceback)
+
+				</PRE>
+
+				<P>Sets the error indicator from the three objects. If the error indicator is already set, it is cleared first. If the objects are <tt clASS="monofont">NULL,</Tt> the error indicator is cleared. Do not pass a <tt cLASS="monofont">NULL</tt> type and non-<tt CLASs="monofont">NULL</tt> value or traceback. The exception type should be a string or class; if it is a class, the value should be an instance of that class. Do not pass an invalid exception type or value. (Violating these rules will cause subtle problems later.) This call takes away a reference to each object; that is, you must own a reference to each object before the call and after the call you no longer own these references. (Warning: If you don't understand this, don't use this function.)<a name="idx1073750955"></a><a name="idx1073750956"></a><a name="idx1073750957"></A><a nAme="idx1073750958"></a><A name="idx1073750959"></A><a naME="idx1073750960"></A><A name="idx1073750961"></A></P>
+
+				<DIv claSS="note"><P Class="notetitle"><B>Note</B></P><P>
+
+					<p>This function is normally only used by code that needs to save and restore the error indicator temporarily.</p>
+
+				</p></div>
+<br>
+<br>
+
+				<pre>
+					
+void PyErr_SetString(PyObject *type, char *message)
+
+				</pre>
+
+				<p>This is the most common way to set the error indicator. The first argument specifies the exception type; it is normally one of the standard exceptions, for example, <tt cLasS="monofont">PyExc_RuntimeError.</tt> You need not increment its reference count. The second argument is an error message; it is converted to a string object.</p>
+
+				<Pre>
+					
+void PyErr_SetObject(PyObject *type, PyObject *value)
+
+				</prE>
+
+				<p>This function is similar to <tt CLASs="monofont">PyErr_SetString()</tt> but lets you specify an arbitrary Python object for the value of the exception. You need not increment its reference count.</p>
+
+				<PRE>
+					
+void PyErr_SetNone(PyObject *type)
+
+				</Pre>
+
+				<p>This is a shorthand for <tT CLAss="monofont">PyErr_SetObject(type, Py_None).</tt></P>
+
+				<PRE>
+					
+int PyErr_BadArgument()
+
+				</pre>
+
+				<p>This is a shorthand for <tt class="monofont">PyErr_SetString(PyExc_TypeError, message),</tt> where message indicates that a built-in operation was invoked with an illegal argument. It is mostly for internal use.</p>
+
+				<pre>
+					
+PyObject* PyErr_NoMemory()
+				</pre>
+
+				<P>Return value: Borrowed reference. This is a shorthand for <tt ClasS="monofont">PyErr_SetNone(PyExc_MemoryError)</tt>; it returns <tt ClasS="monofont">NULL</TT> so that an object allocation function can write <Tt claSS="monofont">return PyErr_NoMemory();</TT> when it runs out of memory.</p>
+
+				<pre>
+					
+PyObject* PyErr_SetFromErrno(PyObject *type)
+
+				</PRE>
+
+				<P>This is a convenience function to raise an exception when a C library function has returned an error and set the C variable <tt clASS="monofont">errno.</Tt> It constructs a tuple object whose first item is the integer <tt class="monofont">errno</tt> value and whose second item is the corresponding error message (gotten from <tt class="monofont">strerror()</tt>), and then calls <tT clAss="monofont">PyErr_SetObject(type, object).</tT> On UNIX, when the <tt clAss="monofont">errno</tT> value is <TT Class="monofont">EINTR,</TT> indicating an interrupted system call, this calls <TT clasS="monofont">PyErr_CheckSignals(),</TT> and if that sets the error indicator, it is left set to that. The function always returns <Tt claSS="monofont">NULL,</TT> so a wrapper function around a system call can write <tt class="monofont">return PyErr_SetFromErrno();</tt> when the system call returns an error.</p>
+
+				<pre>
+					
+void PyErr_BadInternalCall()
+
+				</pre>
+
+				<p>This is a shorthand for <tt cLasS="monofont">PyErr_SetString(PyExc_TypeError, message),</tt> where a message indicates that an internal operation (for example, a Python/C API function) was invoked with an illegal argument. It is mostly for internal use.</p>
+
+				<Pre>
+					
+int PyErr_CheckSignals()
+
+				</prE>
+
+				<p>This function interacts with Python's signal handling. It checks whether a signal has been sent to the processes and if so, invokes the corresponding signal handler. If the signal module is supported, this can invoke a signal handler written in Python. In all cases, the default effect for <tt CLASs="monofont">SIGINT</tt> is to raise the KeyboardInterrupt exception. If an exception is raised, the error indicator is set and the function returns <tT CLAss="monofont">1</tt>; otherwise the function returns <TT CLass="monofont">0.</tT> The error indicator might or might not be cleared if it was previously set.</P>
+
+				<PRe>
+					
+void PyErr_SetInterrupt()
+
+				</pre>
+
+				<p>This function is obsolete. It simulates the effect of a <tt class="monofont">SIGINT</tt> signal arriving—the next time <tt clasS="monofont">PyErr_CheckSignals()</tt> is called, KeyboardInterrupt will be raised. It can be called without holding the interpreter lock.</P>
+
+				<pre>
+					
+PyObject* PyErr_NewException(char *name, PyObject *base, PyObject *dict)
+
+				</Pre>
+
+				<p>Return value: New reference. This utility function creates and returns a new exception object. The name argument must be the name of the new exception, a C string of the form <tT claSS="monofont">module.class.</TT> The base and dict arguments are normally <tt clASS="monofont">NULL.</Tt> Normally, this creates a class object derived from the root for all exceptions, the built-in name Exception (accessible in C as <tt cLASS="monofont">PyExc_Exception</tt>). In this case the <tt CLASs="monofont">__module__</tt> attribute of the new class is set to the first part (up to the last dot) of the name argument, and the class name is set to the last part (after the last dot). When the user has specified the <tt class="monofont">-X</tt> command line option to use string exceptions, for backward compatibility, or when the base argument is not a class object (and not <tt class="monofont">NULL</tT>), a string object created from the entire name argument is returned. The base argument can be used to specify an alternate base class. The dict argument can be used to specify a dictionary of class variables and methods. <a nAme="idx1073750962"></a><A name="idx1073750963"></A><a naME="idx1073750964"></A><A name="idx1073750965"></A><A NAme="idx1073750966"></a><a NAME="idx1073750967"></a><a naME="idx1073750968"></A></P>
+
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="259.html" title="Reference Counting"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=260" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="260.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="261.html" title="Standard Exceptions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750947">handling and raising exceptions</a> <a href="#idx1073750956">2nd</a> <a href="#idx1073750963">3rd</a><BR>
+ <a href="#idx1073750942">error indicator</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750950">handling and raising, Python/C Applications Programmers Interface (API)</a> <a href="#idx1073750959">2nd</a> <a href="#idx1073750966">3rd</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750952">handling and raising exceptions</a> <a href="#idx1073750961">2nd</a> <a href="#idx1073750968">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750945">PyErr_ExceptionMatches()</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750949">exceptions, Python/C Application Programmers Interface (API)</a> <a href="#idx1073750958">2nd</a> <a href="#idx1073750965">3rd</a><BR>
+indicators<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750943">error</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750948">handling and raising exceptions</a> <a href="#idx1073750957">2nd</a> <a href="#idx1073750964">3rd</a><BR>
+ <a href="#idx1073750944">PyErr_ExceptionMatches() function</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750946">handling and raising exceptions</a> <a href="#idx1073750955">2nd</a> <a href="#idx1073750962">3rd</a><BR>
+raising<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750951">exceptions, Python/C Application Programmers Interface (API)</a> <a href="#idx1073750960">2nd</a> <a href="#idx1073750967">3rd</a><BR>
+ <a href="#idx1073750953">unnormalized values</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750954">unnormalized</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

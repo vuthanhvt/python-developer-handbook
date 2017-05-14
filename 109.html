@@ -1,0 +1,213 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Inheritance</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Inheritance</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="108.html" title="Special Methods"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=109" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="109.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="110.html" title="Polymorphism"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A33%3A42+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147039203224235124168114</font><a href="read7.asp?bookname=0672319942&snode=109&now=5%2F31%2F2002+4%3A33%3A42+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Inheritance</h3>
+				<p>A <a NAME="idx1073743453"></a>subclass is a class that inherits attribute names and methods from another class—the operation is called <a naME="idx1073743454"></A><I>subclassing.</i></p>
+
+				<p>A <a NAME="idx1073743455"></a><a name="idx1073743456"></a>base class (<a name="idx1073743457"></a>superclass) is defined as a class that another class inherits attributes from. Base classes are listed in parentheses in a subclass header. You have to separate base classes by putting commas between them, within the parentheses.</p>
+
+				<p>When you <a name="idx1073743458"></A><a nAme="idx1073743459"></a>create a subclass, you can add or overwrite any methods of its base classes.</P>
+
+				<p>Python classes can be created:</p>
+
+				<ul>
+<Li><p>From scratch</p>
+
+						<PRE>
+							
+&gt;&gt;&gt; class A:
+…    pass
+…
+
+						</Pre>
+
+					</li>
+<LI><P>By using single inheritance</P>
+
+						<pre>
+							
+&gt;&gt;&gt; class B(A):
+…     pass
+…
+
+						</pRE>
+
+					</LI>
+<li><p>By using multiple inheritance</p>
+
+						<PRE>
+							
+&gt;&gt;&gt; class D(B,C):
+…     pass
+…
+
+						</Pre>
+
+					</li>
+</ul>
+				<p>For a conceptual standpoint, take a look at the following example</p>
+
+				<p>Where,</p>
+
+				<blockquote>
+<P><p>Base class = <tT claSs="monofont">writing tools</tt></p>
+</P>
+<p><p>subclass = <tT CLAss="monofont">pen</tt></P>
+</P>
+<P><P>subclass = <tt clASS="monofont">chalk</Tt></p>
+<p>Both subclasses <tT CLAss="monofont">pen</tt> and <tt class="monofont">chalk</tt> inherit characteristics of the base class <tt class="monofont">writing tools.</Tt></p>
+
+					</P>
+</bloCkquoTe>
+				<p>The subsequent class defines a complex class called <tT CLAss="monofont">Employee.</tt><A NAMe="idx1073743460"></a><a nAME="idx1073743461"></A><a namE="idx1073743462"></A><A Name="idx1073743463"></a><a name="idx1073743464"></a></p>
+
+				<pre>
+					
+class Employee:
+    def __init__(self,name,salary=0):
+        self.name = name
+        self.salary = salary
+        self.family = []
+    def raisesalary(self, percent):
+        self.salary = self.salary + (self.salary * percent)
+    def work (self):
+        print self.name, "writes computer code."
+    def hasfamily(self):
+        return len(self.family) == 0         # returns a boolean result
+    def addmember(self, x):
+        self.family.append(x)
+    def removemember(self, x):
+        if len(self.family) &gt; 0:
+            x = self.family[-1]
+            del self.family[-1]
+            return x
+
+				</pre>
+
+				<p>The next class is a subclass of the <tt ClaSs="monofont">Employee</tt> class.</P>
+
+				<pre>
+					
+class Person(Employee):
+    "this is the class Person"
+    def __init__ (self, name):
+        Employee.__init__ (self, name, 50000)
+    def work (self):
+        print self.name, "works like any other employee."
+
+				</pRe>
+
+				<p>Inherited methods of base classes aren't automatically called. It is necessary to call them explicitly. That's why, in the previous example, the <tT CLAss="monofont">Person.__init__</tt> method had to call the <TT CLass="monofont">Employee.__init__</tT> method.</P>
+
+				<P>It is always necessary to pass the <Tt claSS="monofont">self</TT> argument because base classes don't know what instance is being used. The previous example passes three parameters to the base class's <tt class="monofont">__init__</tt> method (the <tt class="monofont">self</tt> reference, an argument, and a default value for the other argument).</p>
+
+				<p><A naMe="idx1073743465"></a>Multiple inheritance is defined by entering multiple classes in the header of a new class. The order used for informing the base classes really does matter. The precedence order, for a search in the base classes, starts at the classes located at the left side.</p>
+
+				<Pre>
+					
+class A:
+    pass
+class B(A):
+    pass
+class C:
+    pass
+class D(B,C):
+    pass
+
+				</prE>
+
+				<p>The precedence order for class D inheritance is: B, A, C.</p>
+
+				<dIV CLass="note"><p CLASs="notetitle"><b>Tip</b></p><P>
+
+					<P>You always have to use fully qualified names when calling a superclass's method (if it has been overridden) because if the class has multiple base classes containing the same symbol, the first one found is used.<A Name="idx1073743466"></a><A NAMe="idx1073743467"></a><a name="idx1073743468"></a><a name="idx1073743469"></a><a name="idx1073743470"></a></P>
+
+				</p></dIv>
+<br>
+<Br>
+
+				<pre>
+					
+&gt;&gt;&gt; class A:
+…def __init__(self, name):
+…    self.name = name
+…def printname(self):
+…    print 'The name %s belongs to class A!'% self.name
+…
+&gt;&gt;&gt; class B(A):
+…__baseclass=A
+…def __init__(self, name):
+…    self.__ baseclass.__init__(self,name)
+…def printname(self):
+…    print 'The name %s belongs to class B!'% self.name
+…    self.__ baseclass.printname(self)
+…
+&gt;&gt;&gt; class C(B):
+…__baseclass=B
+…def __init__(self, name):
+…    self.__ baseclass.__init__(self,name)
+…def printname(self):
+…    print 'The name %s belongs to class C!'% self.name
+…    self.__ baseclass.printname(self)
+…
+&gt;&gt;&gt; A("monkey").printname()
+The name monkey belongs to class A!
+&gt;&gt;&gt; B("parrot").printname()
+The name parrot belongs to class B!
+The name parrot belongs to class A!
+&gt;&gt;&gt; C("ant").printname()
+The name ant belongs to class C!
+The name ant belongs to class B!
+The name ant belongs to class A! 
+
+				</Pre>
+
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="108.html" title="Special Methods"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=109" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="109.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="110.html" title="Polymorphism"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073743455">base class</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743456">base</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743458">subclasses</a> <a href="#idx1073743463">2nd</a> <a href="#idx1073743469">3rd</a><BR>
+ <a href="#idx1073743462">inheritance</a> <a href="#idx1073743468">2nd</a><BR>
+ <a href="#idx1073743465">multiple inheritance</a><BR>
+object-oriented programming (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743460">inheritance</a> <a href="#idx1073743466">2nd</a><BR>
+programming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object-oriented (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743461">inheritance</a> <a href="#idx1073743467">2nd</a><BR>
+ <a href="#idx1073743453">subclass</a><BR>
+ <a href="#idx1073743454">superclassing</a><BR>
+superclassÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743457">Ò</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743459">subclasses</a> <a href="#idx1073743464">2nd</a> <a href="#idx1073743470">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

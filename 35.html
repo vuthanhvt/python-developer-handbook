@@ -1,0 +1,390 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; File Handling</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">File Handling</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="34.html" title="Input and Output"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=35" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="35.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="36.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A20%3A28+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146122163093009182053228</font><a href="read0.asp?bookname=0672319942&snode=35&now=5%2F31%2F2002+4%3A20%3A28+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			File Handling</h3>
+				<p>Python's core language supports all the basic functions that are necessary to manipulate files. It isn't necessary to import any modules to use them. Whenever you use the open function to get access to a file, Python creates a file object that supports all the built-in methods that apply to this new object.</p>
+
+				
+					<H4>
+				
+				Opening a File</H4>
+					<P>
+						<A name="idx1073742614"></A>basic syntax: <TT Class="monofont">file = open (</TT>
+						<I>
+							<Tt class="monofont">filename[, mode[, buffersize]]</tt>
+						</i>
+						<tt class="monofont">)</tt>
+					</p>
+
+					<p>The mode can be <Tt cLass="monofont">r,</Tt>
+						<a naMe="idx1073742615"></a>
+						<a NAME="idx1073742616"></a>
+						<a naME="idx1073742617"></A>
+						<Tt claSS="monofont">w,</TT> or <a namE="idx1073742618"></A>
+						<A Name="idx1073742619"></a>
+						<a name="idx1073742620"></a>
+						<tt class="monofont">a</tt> (<tT clAss="monofont">read, write,</tT> and <tt clAss="monofont">append,</tT> respectively). If none of them are mentioned, <A NAme="idx1073742621"></a>
+						<a NAME="idx1073742622"></a>
+						<a naME="idx1073742623"></A>
+						<Tt claSS="monofont">read</TT> mode is assumed.</p>
+
+					<p>If you are working with a binary file, add the letter <tt class="monofont">b</tt> to the mode indicator (for example, <tt class="monofont">rb</tt> or <Tt cLass="monofont">wb</Tt>). The <a naMe="idx1073742624"></a>
+						<a NAME="idx1073742625"></a>
+						<a naME="idx1073742626"></A>
+						<Tt claSS="monofont">b</TT> stands for binary mode (<a namE="idx1073742627"></A>
+						<A Name="idx1073742628"></a>text translation mode).</p>
+
+					<p>You can also place a <a name="idx1073742629"></a>
+						<a name="idx1073742630"></a>
+						<a nAme="idx1073742631"></A>
+						<tt cLass="monofont">+</tT> sign to the mode letter to indicate a <tt cLASS="monofont">read/write open</tt> (for example, <tt CLASs="monofont">r+</tt> or <tT CLAss="monofont">w+</tt>)—it is useful when you need to perform both operations (read and write) in the file. Remember that if you use <TT CLass="monofont">w+,</tt> it will first truncate the file length to zero.</p>
+
+					<p>The last argument in the <tt class="monofont">open</tt> syntax is the <a namE="idx1073742632"></a>
+						<a Name="idx1073742633"></A>
+						<a namE="idx1073742634"></a>
+						<tt CLASs="monofont">buffersize</tt> clause, which means</p>
+
+					<UL>
+<LI>
+							<p>
+								<tt cLASS="monofont">0 = unbuffered</tt>
+							</p>
+
+						</lI>
+<LI>
+							<P>
+								<tt class="monofont">1 = line buffered</tt>
+							</p>
+
+						</li>
+<li>
+							<p>If buffersize is greater than 1, its value is equal to the buffer size, in bytes.</p>
+
+						</li>
+<li>
+							<P>If negative, the buffer size is the system default(default behavior).</p>
+
+						</lI>
+</ul>
+					<p>Here's an example:</P>
+
+					<pre>
+						
+file = open("foo.txt", "r")
+line = file.readline()
+line = line[:-1]        #chop off the newline character
+while line:
+    print line
+    line = file.readline()
+    line = line[:-1]
+file.close()
+				
+					</pRe>
+
+				
+				
+					<h4>
+				Supported Methods</h4>
+					<P>The following <A NAme="idx1073742635"></a>methods are supported by all file objects.</p>
+
+					
+						<H5>
+							<TT Class="monofont">read()</TT>
+						</H5>
+						<P>It reads up to <tt clASS="monofont">n bytes.</Tt> But, if you don't provide any argument, <tt class="monofont">read()</tt> reads all available data from the file.<a name="idx1073742636"></a>
+							<a namE="idx1073742637"></a>
+						</p>
+
+						<P>
+							<a naMe="idx1073742638"></a>basic syntax: <tt ClasS="monofont">file.read(</TT>
+							<I>
+								<tt clASS="monofont">[nbytes]</Tt>
+							</i>
+							<tt CLASs="monofont">)</tt>
+						</p>
+
+						<PRE>
+							
+&gt;&gt;&gt; file = open("foo.txt").read()
+
+						</Pre>
+
+						<p>If you say <tt class="monofont">file = open("foo.txt").read(100),</tt> Python will read the file up to its first 100 bytes.</p>
+
+					
+					
+						<h5>
+							<tt clasS="monofont">readline()</tt>
+						</H5>
+						<p>It reads only one line at a time (until, and including, the <tt Class="monofont">newline</Tt> character).</p>
+
+						<p>
+							<A NAMe="idx1073742639"></a>basic syntax: <tt CLASs="monofont">file.readline()</tt>
+						</p>
+
+						<PRE>
+							
+&gt;&gt;&gt; file=open("test.txt","r")
+&gt;&gt;&gt; while 1:
+…       line = file.readline()
+…       if not line:
+…           break
+…
+
+						</Pre>
+
+						<p>Both <tT CLAss="monofont">read()</tt> and <tt class="monofont">readline()</tt> functions return an empty string for EOF.</p>
+
+					
+					
+						<h5>
+							<tt claSs="monofont">readlines()</tT>
+						</h5>
+						<p>It reads the entire file into a list of strings.</p>
+
+						<P>
+							<a namE="idx1073742640"></a>basic syntax: <tt CLASs="monofont">file.readlines()</tt>
+						</p>
+
+						<PRE>
+							
+&gt;&gt;&gt; file=open("test.txt","r")
+&gt;&gt;&gt; for line in file.readlines():
+…       print line
+…
+
+						</Pre>
+
+					
+					
+						<h5>
+							<tT CLAss="monofont">write()</tt>
+						</H5>
+						<P>It writes a string to a file.</P>
+
+						<A name="idx1073742641"></a>
+						<p>basic syntax: <tt class="monofont">file.write(</tt><i><tt clAss="monofont">string</Tt></i><tT clasS="monofont">)</tt></p>
+
+						<PRE>
+							
+&gt;&gt;&gt; file.write('Spam')
+
+						</Pre>
+
+					
+					
+						<h5>
+							<tT CLAss="monofont">writelines()</tt>
+						</H5>
+						<P>It writes a list of strings to a file.<A Name="idx1073742642"></a>
+							<A NAMe="idx1073742643"></a>
+							<a name="idx1073742644"></a>
+						</p>
+
+						<p>
+							<a name="idx1073742645"></a>basic syntax: <tt clAss="monofont">file.writelines(</Tt><i><tT clasS="monofont">list</tt></i><TT CLass="monofont">)</tT></P>
+
+						<PRe>
+							
+&gt;&gt;&gt; file.writelines(["We are the knights who say …","ni!"])
+
+						</pre>
+
+					
+					
+						<H5>
+							<TT Class="monofont">seek()</TT>
+						</H5>
+						<P>It goes to a new file <tt class="monofont">position.</tt> If <tt class="monofont">how=0,</tt> it starts from the beginning of the file; if <tt ClaSs="monofont">how=1,</tt> the position is relative to the current position; if <Tt claSs="monofont">how=2,</tt> the position is relative to the end of the file. The default value for <TT CLass="monofont">how</tT> is 0.</P>
+
+						<P>
+							<A name="idx1073742646"></A>basic syntax: <TT Class="monofont">file.seek(</TT>
+							<I>
+								<Tt class="monofont">position[, how]</tt>
+							</i>
+							<tt class="monofont">)</tt>
+						</p>
+
+					
+					
+						<h5>
+							<Tt cLass="monofont">tell()</Tt>
+						</h5>
+						<p>It returns the current file pointer.</p>
+
+						<P>
+							<a naME="idx1073742647"></A>basic syntax: <Tt claSS="monofont">file.tell()</TT>
+						</p>
+
+					
+					
+						<h5>
+							<tt CLASs="monofont">Fileno()</tt>
+						</h5>
+						<P>It returns an integer file descriptor.</P>
+
+						<P>
+							<A name="idx1073742648"></a>basic syntax: <tt class="monofont">file.fileno()</tt>
+						</p>
+
+					
+					
+						<h5>
+							<tt clAss="monofont">flush()</Tt>
+						</h5>
+						<p>It flushes the internal buffer.</P>
+
+						<p>
+							<a naMe="idx1073742649"></a>basic syntax: <tT CLAss="monofont">file.flush()</tt>
+						</P>
+
+					
+					
+						<H5>
+							<TT clasS="monofont">close()</TT>
+						</H5>
+						<p>It closes the file.</p>
+
+						<p>
+							<a NAME="idx1073742650"></a>basic syntax: <tt class="monofont">file.close()</tt>
+						</p>
+
+					
+					
+						<h5>
+							<tt class="monofont">truncate()</tT>
+						</h5>
+						<p>It truncates the file.</P>
+
+						<p>
+							<a nAme="idx1073742651"></a>basic syntax: <tT claSS="monofont">file.truncate(</TT>
+							<i>
+								<tt cLASS="monofont">[size]</tt>
+							</i>
+							<tT CLAss="monofont">)</tt>
+						</P>
+
+						<P>Now, let's mix two distinct concepts. The next line of code takes the filename and the file extension from two variables, and combines them to create the name of a file that should be opened.</P>
+
+						<Pre>
+							
+&gt;&gt;&gt; file=open ("%s.%s" % (file_name, file_extension)).read()
+
+						</pre>
+
+						<p>Remember that you need to <a name="idx1073742652"></a>
+							<a name="idx1073742653"></a>
+							<a nAme="idx1073742654"></A>escape your backslashes to prevent them from being interpreted as beginning a character code. See the next example.</p>
+
+						<prE>
+							
+&gt;&gt;&gt; file=open('C:\Autoexec.bat')       # wrong way
+&gt;&gt;&gt; file=open('C:\\Autoexec.bat')      # right way
+
+						</pre>
+
+						<p>The functions that you saw in this chapter are perfect for handling strings. <A hreF="137.html">Chapter 8, "Working with Databases,"
+							</A>  explains how to use other file handling functions to save entire objects into a file.<A Name="idx1073742655"></a>
+						</P>
+
+					
+				
+				
+					<H4>
+				
+				File Object Attributes</H4>
+					<P>Some special attributes for files are as follows:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; file.closed # returns 0 if the file is closed; 1 otherwise
+&gt;&gt;&gt; file.mode   # returns the I/O mode for the file
+&gt;&gt;&gt; file.name   # returns the name of the file
+				
+					</PRE>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="34.html" title="Input and Output"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=35" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="35.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="36.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742629">+ (addition) sign</a><BR>
+\ (backslash)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742654">escaping</a><BR>
+ <a href="#idx1073742620">a (append) mode</a><BR>
+ <a href="#idx1073742630">addition (+) sign</a><BR>
+ <a href="#idx1073742618">append (a) mode</a><BR>
+ <a href="#idx1073742626">b (binary) mode</a><BR>
+backslash (\)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742653">escaping</a><BR>
+ <a href="#idx1073742624">binary (b) mode</a><BR>
+ <a href="#idx1073742632">buffersize statement</a><BR>
+clausesÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742634">Ò</a><BR>
+escaping<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742652">backslashes (\)</a><BR>
+ <a href="#idx1073742636">file handling</a> <a href="#idx1073742642">2nd</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742644">handling files</a> <a href="#idx1073742655">2nd</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742637">files</a> <a href="#idx1073742643">2nd</a><BR>
+methodsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742635">Ò</a><BR>
+modes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742619">append (a)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742625">binary (b)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742622">read (r)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text translationÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742628">Ò</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742616">write (w)</a><BR>
+ <a href="#idx1073742631">plus (+) sign</a><BR>
+ <a href="#idx1073742623">r (read) mode</a><BR>
+ <a href="#idx1073742621">read (r) mode</a><BR>
+statement<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742633">buffersize</a><BR>
+ <a href="#idx1073742646">syntax</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742650">close() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742648">Fileno() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742649">flush() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742614">opening files</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742638">read() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742639">readline() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742640">readlines() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742647">tell() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742651">truncate() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742641">write() function</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742645">writelines() function</a><BR>
+text translation modeÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742627">Ò</a><BR>
+ <a href="#idx1073742617">w (write) mode</a><BR>
+ <a href="#idx1073742615">write (w) mode</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

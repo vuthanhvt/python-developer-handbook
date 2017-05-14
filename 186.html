@@ -1,0 +1,77 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="179.html" class="navtitle">12. Scripting Programming</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="185.html" title="Python Active Scripting"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=186" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="186.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="188.html" title="13. Data Manipulation"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A45%3A29+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148041040022213144158173</font><a href="read1.asp?bookname=0672319942&snode=186&now=5%2F31%2F2002+4%3A45%3A29+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Summary</h3>
+				<p>This chapter provides information about how to use Python as a CGI scripting language. Python is suitable for CGI
+programming on Windows, Mac, and UNIX platforms, allowing the creation of programs that provide services over the
+Internet.</p>
+
+				<P>Python uses the <TT Class="monofont">cgi</TT> module to implement CGI scripts and to process form handling in Web
+applications that are invoked by an HTTP server. This module accepts <TT clasS="monofont">sys.stdin</TT> and environment variables
+set by the server as input sources. The output is sent directly to <Tt class="monofont">sys.stdout</tt> carrying an HTTP header and the
+data itself.</p>
+
+				<p>Every CGI script must send a header (the <tt class="monofont">Content-type</tt> tag) describing the contents of the document.
+The common values for this tag are <tT clAss="monofont">text/html,</tT>
+					<tt clAss="monofont">text/plain,</tT>
+					<TT Class="monofont">image/gif,</TT> and <TT clasS="monofont">image/jpeg.</TT> A blank line is used to indicate the end of this header.</P>
+
+				<p>You have to watch out when passing Form fields to the OS shell. Never pass any string received from the client direct
+to a shell command. Before putting your CGI scripts online, you need to be sure that they are working fine.</p>
+
+				<p>If you need to correlate requests from the same user, you must generate and assign a session key on the first contact
+of the user, and incorporate this session key in the next forms, or in the URLs.</p>
+
+				<P>In order to handle cookies in Python, you can use a module called <TT Class="monofont">Cookie.py,</tt> which is able to write
+<tt class="monofont">Set-Cookie</tt> headers and parse the <tt claSs="monofont">HTTP_COOKIE</tT> environment variable.</p>
+
+				<p>Python CGI scripts allow you to output not only text, but also graphics.</p>
+
+				<P>In order to separate Python code from HTML code, many developers have adopted the concept of template files. The
+HTML template can be mixed with Python code using either formatting substitution or Python's regular expression.</p>
+
+				<p>Sometimes, it is necessary to receive files from users through the Web. The properties provided by the
+<tt ClasS="monofont">cgi</TT> module offer means to send a file across an HTTP connection using an HTML page, and also to read
+files sent from a Web page.</P>
+
+				<p>Environmental variables are one of the methods that Web servers use to pass information to a CGI script. They are
+created and assigned appropriate values within the environment that the server produces for the CGI script.</p>
+
+				<p>Active Scripting is a COM-based technology developed by Microsoft that allows scripting languages to be embedded
+inside the HTML code. It works by providing a specific language's object model to the user. In our case, after you specify that
+the scripting language is Python, you acquire access to the interface exposed by the Python object model.</p>
+
+				<P>Active Server Pages, commonly referred to as ASP, is Microsoft's solution to server-side scripting
+applications.</P>
+
+				<P>Python Server Pages is a server-side scripting engine designed along the lines of Microsoft's Active Server Pages and
+Sun's Java Server Pages specification.</P>
+
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="185.html" title="Python Active Scripting"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=186" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="186.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="188.html" title="13. Data Manipulation"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,131 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Java Integration</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">Java Integration</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="243.html" title="Welcome to JPython"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=244" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="244.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="245.html" title="Downloading and Installing JPython"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A24%3A21+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218068074151075047228074</font><a href="read3.asp?bookname=0672319942&snode=244&now=6%2F1%2F2002+6%3A24%3A21+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+Java Integration</h3>
+				<p>If you want to use the Python language and Java integration, you can find in JPython a compatible and complementary couple for Java. Because JPython's interpreter is written in Java itself, you might think why you shouldn't go directly to the point, and use pure Java instead of using JPython. My advice is to go for JPython first because soon you will see how simple it is to do a lot of tasks using JPython's facilities (such as running a piece of Java code without the need for defining a single class). JPython has all the teaching principles on its background, which makes it a language of easy learning.</p>
+
+				<P>The full object-oriented programming model provided by the Python language (since its inception) brings power and clearness to the programmer world. This transparency when handling objects makes Python a natural choice for interoperating with Java's object-oriented design, and to be Java's scripting language. Other languages try, even though they were not created to be OO. Object-oriented programming became part of Perl programmer's life in version 5, and Tcl developers can only use OO through an extension called (itcl). It could be argued that Python evolved from the non-object oriented <I>
+						<TT clasS="monofont">ABC</TT>
+					</I> the same way that Perl 5 evolved from Perl 4 and <i>incr tcl</i> from <i>tcl,</i> but Python had its evolutionary process carefully driven—almost a totally new development effort.</P>
+
+				<P>Of course, other scripting languages can be used along with Java and its JVM, but none of them beat JPython in portability and performance, mainly for two reasons: JPython's 100% Java certification, and JPython's capability to translate Python source code directly into optimized Java bytecodes, respectively.</P>
+
+				<P>Both Perl and Tcl offer scripting solutions, but none of the solutions offer a more significant value than the JPython solution.<a name="idx1073750622"></a>
+					<a name="idx1073750623"></a>
+					<a name="idx1073750624"></a>
+					<a nAme="idx1073750625"></A>
+				</p>
+
+				<ul>
+<Li>
+						<p>
+							<tt ClasS="monofont">Jacl</TT> is a 100% Java re-design of the Tcl interpreter, which is considered to be much slower than JPython.</P>
+
+					</li>
+<li>
+						<P>
+							<TT Class="monofont">Tcl Blend</TT> and <TT clasS="monofont">JPL</TT> (for Perl) are other scripting solutions (not 100% Java) that expose some portability problems.</P>
+
+					</li>
+</ul>
+				<p>Of course, in both of these cases, it is probably easier to port the Tcl or Perl runtimes than to port the java virtual machine.</p>
+
+				<p>For more details about the Java language, you can check out <a target="_blank" href="http://www.javasoft.com/">http://www.javasoft.com/</a>.</p>
+
+				
+					<H4>Java Certification</h4>
+					<p>On July 13, 1998, it was announced that <A namE="idx1073750626"></a>KeyLabs had completed testing JPython to certify that it is 100% pure Java.</p>
+
+					<blOckqUOTE>
+						<p>The 100% Pure Java Certification Program is part of Sun Microsystems initiative to promote the development of portable applications, applets, beans, class libraries, and servlets written using the Java Programming language. Certification consists of code analysis and testing by an independent test facility (in this case, KeyLabs) to identify compiled code that meets the 100% Pure Java Requirements. The 100% Pure Java certification standards and branding program is intended to give customers confidence in products that display the brand.</p>
+					</blOCKQuote>
+					<P>Even though JPython has got this certification, you cannot use the 100% Java brand for your own JPython programs. You need to make sure that your product passes the 100% Pure Java certification tests in order to have the rights to use the exclusive 100% Pure Java logo on your packing. For details about this process, read the Certification Guide located at</P>
+
+					<P>
+						<A targET="_blank" HRef="http://www.javasoft.com/100percent/">http://www.javasoft.com/100percent/</a>
+					</p>
+
+				
+				
+					<h4>Java Links</h4>
+					<p>If you want to use JPython, but you don't know Java yet, or need a quick review, check out the following Java Web sites:</p>
+
+					<blockquote>
+<p>
+							<p>The Java Community</P>
+
+						</p>
+<p>
+							<P>At this Web site, you can join ongoing forums on a variety of Java topics, chat with Java experts, and access community resources, among other things.</p>
+
+						</p>
+<p>
+							<P>
+								<a tarGet="_blank" hREF="http://developer.java.sun.com/developer/community">http://developer.java.sun.com/developer/community</A>
+							</p>
+
+						</p>
+<p>
+							<p>The Java Tutorial—a practical guide for programmers</P>
+
+						</P>
+<P>
+							<P>
+								<a tarGET="_blank" Href="http://java.sun.com/docs/books/tutorial">http://java.sun.com/docs/books/tutorial</a>
+								<A NAMe="idx1073750627"></a>
+								<a name="idx1073750628"></a>
+								<a name="idx1073750629"></a>
+								<a name="idx1073750630"></a>
+							</P>
+
+						</p>
+</bLockQuote>
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="243.html" title="Welcome to JPython"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=244" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="244.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="245.html" title="Downloading and Installing JPython"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+integrating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750624">JPython</a> <a href="#idx1073750629">2nd</a><BR>
+Java<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integrating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750625">JPython</a> <a href="#idx1073750630">2nd</a><BR>
+JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750622">integrating Java</a> <a href="#idx1073750627">2nd</a><BR>
+ <a href="#idx1073750626">KeyLabs</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750623">integrating Java</a> <a href="#idx1073750628">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

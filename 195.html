@@ -1,0 +1,606 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Generic Conversion Functions</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="187.html" class="navtitle">13. Data Manipulation</a> &gt; <span class="nonavtitle">Generic Conversion Functions</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="194.html" title="MIME Parsing and Manipulation"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=195" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="195.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="196.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A46%3A54+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148042031161037244079029</font><a href="read2.asp?bookname=0672319942&snode=195&now=5%2F31%2F2002+4%3A46%3A54+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+
+Generic Conversion Functions</h3>
+				<p>The next couple of modules are used for general data
+conversions.</p>
+
+				
+					<H4>
+						<TT Class="monofont">netrc</TT></H4>
+					<P>The <tt clASS="monofont">netrc</Tt> module parses, processes, and
+  encapsulates the <tt class="monofont">.netrc</tt> configuration file format used by
+  <tt class="monofont">UNIX FTP</tt> program and other <tT clAss="monofont">FTP</tT>
+  clients.</p>
+
+					<pre>
+						
+import netrc
+netrc_filename  = "/usr/local/myconfig.netrc"
+netrccfg = netrc.netrc(netrc_filename)
+l, a, p = netrccfg.authenticators("connection.msg")
+print "My Login = %s" % (l)
+print "My Password = %s" % (p)
+print "My Account= %s" % (a)
+</Pre>
+
+				
+				
+					<h4><TT CLass="monofont"><a NAME="idx1073748008"></a>
+							<a naME="idx1073748009"></A>mhlib</Tt></h4>
+					<p>The <tT CLAss="monofont">mhlib</tt> module provides a Python interface to access MH folders/mailboxes and their contents. This module contains three basic classes:</p>
+
+					<blockquote>
+<p><a namE="idx1073748010"></a><a Name="idx1073748011"></A><a namE="idx1073748012"></a><p><tT CLAss="monofont">MH ([</tt><I><TT Class="monofont">path[,
+profile]]</TT></I><Tt claSS="monofont">)</TT>— 
+    
+								Represents a particular collection of MH folders.</p>
+</p>
+<p><a name="idx1073748013"></a><a name="idx1073748014"></a>
+							<p><tt clAss="monofont">Folder (</Tt><i><tT clasS="monofont">mh, name</tt></i><TT CLass="monofont">)</tT>— 
+    
+								Represents a single folder and its messages.</P>
+</P>
+<P><a namE="idx1073748015"></A>
+							<A Name="idx1073748016"></a>
+							<P><TT Class="monofont">Message (</tt><i><tt class="monofont">folder, number[,
+name]</tt></i><tt cLasS="monofont">)</tt>— 
+    
+								Represents individual messages in a folder. The <tT clasS="monofont">Message</tt> class is derived from <tT CLAss="monofont">mimetools.Message.</tt></P>
+
+						</P>
+</BLockqUOTE>
+				<h4>
+						<tt cLASS="monofont">MH</tt>Objects</h4>
+					<p><tt class="monofont">MH</tt> instances have the following methods:</p>
+
+					<blockqUotE>
+<p>
+							<a nAme="idx1073748017"></a>
+							<a Name="idx1073748018"></A>
+							<P><TT clasS="monofont">error(</TT><I><tt clASS="monofont">format[, ...]</Tt></i><tt CLASs="monofont">)</tt>— 
+    
+								Prints an error message: can be overridden.</p>
+</p>
+<p><a name="idx1073748019"></a>
+							<a name="idx1073748020"></a><p><tT clAss="monofont">getprofile(</tT><i><tt cLass="monofont">key</TT></I><Tt claSS="monofont">)</TT>— 
+    
+								Returns a profile entry (<tt clASS="monofont">None</Tt> if not set).</p>
+
+						</p>
+<p><A NAMe="idx1073748021"></a><a name="idx1073748022"></a>
+							<p><tt class="monofont">getpath()</tt>— 
+    
+								Returns the mailbox pathname.</p>
+
+						</p>
+<P><a nAme="idx1073748023"></a>
+							<A name="idx1073748024"></A><p><tt CLASs="monofont">getcontext()</tt>— 
+    
+								Return the current folder name.</p>
+
+						</P>
+<P><A Name="idx1073748025"></a><A NAMe="idx1073748026"></a>
+							<p><tT CLAss="monofont">setcontext</tt><i><tt class="monofont">(name)</tt></i>— 
+    
+								Sets the current folder name.</p>
+</p>
+<p><a nAme="idx1073748027"></A><a naMe="idx1073748028"></a>
+							<p><tT claSS="monofont">listfolders()</TT>— 
+    
+								Returns a list of top-level folders.</p>
+</p>
+<p><a NAME="idx1073748029"></a><a naME="idx1073748030"></A>
+							<P><tt clASS="monofont">listallfolders()</Tt>— 
+    
+								Returns a list of all folders.</p>
+</p>
+<p><a name="idx1073748031"></a><a name="idx1073748032"></a>
+							<p><tt cLasS="monofont">listsubfolders(</tt><i><Tt claSs="monofont">name</tt></I><TT Class="monofont">)</TT>— 
+    
+								Returns a list of direct subfolders of the given folder.</P>
+
+						</P>
+<p><a naME="idx1073748033"></A><A name="idx1073748034"></A>
+							<P><TT class="monofont">listallsubfolders(</tt><i><tt class="monofont">name</tt></i><tt ClaSs="monofont">)</tt>— 
+    
+								Returns a list of all subfolders of the given folder.</P>
+</p>
+<p>
+							<a nAme="idx1073748035"></a><A NAMe="idx1073748036"></a>
+							<p><tT CLAss="monofont">makefolder</tt><I><TT Class="monofont">name</TT></I><Tt class="monofont">)</tt>— 
+    
+								Creates a new folder.</p>
+
+						</p>
+<p><a name="idx1073748037"></a>
+							<a naMe="idx1073748038"></a>
+							<P><tt cLass="monofont">deletefolder(</tT><i><tt CLASs="monofont">name</tt></i><TT CLass="monofont">)</tT>— 
+    
+								Deletes a folder: must have no subfolders.</P>
+
+						</P>
+<P><a namE="idx1073748039"></A>
+							<A Name="idx1073748040"></a>
+							<p><tt class="monofont">openfolder(</tt><i><tt claSs="monofont">name</tT></i><tt Class="monofont">)</Tt>— 
+    
+								Returns a new open folder object.<a nAME="idx1073748041"></A><a namE="idx1073748042"></A><A Name="idx1073748043"></a><A NAMe="idx1073748044"></a><a nAME="idx1073748045"></A><a name="idx1073748046"></a><a name="idx1073748047"></a><a name="idx1073748048"></a><a nAme="idx1073748049"></A><a naMe="idx1073748050"></a>
+									<a nAme="idx1073748051"></a></P>
+</P>
+</BLockqUOTE>
+				
+				<h4>Folder Objects</h4>
+					<p>Folder instances represent open folders and have the following methods:</p>
+
+					<BLOCkquoTE>
+<P>
+							<A name="idx1073748052"></a>
+							<a name="idx1073748053"></a>
+							<p><tt class="monofont">error(</tT><i><tT claSs="monofont">format[, ...]</tt></i><Tt clASS="monofont">)</Tt>— 
+    
+								Prints an error message; can be overridden.</p>
+</p>
+<p><A NAMe="idx1073748054"></a>
+							<a nAME="idx1073748055"></A><p><tt cLASS="monofont">getfullname()</tt>— 
+    
+								Returns the folder's full pathname.</p>
+</p>
+<p><a name="idx1073748056"></a>
+							<a name="idx1073748057"></a>
+							<p><tt ClaSs="monofont">getsequencesfilename()</tt>— 
+    
+								Returns the full pathname of the folder's sequences file.</P>
+
+						</p>
+<p>
+							<a nAme="idx1073748058"></a>
+							<A NAMe="idx1073748059"></a>
+							<p><tT CLAss="monofont">getmessagefilename(</tt><I><TT Class="monofont">n</TT></I><Tt class="monofont">)</tt>— 
+    
+								Returns the full pathname of message <tt class="monofont">n</tt> of the folder.</p>
+</p>
+<p>
+							<A naMe="idx1073748060"></a>
+							<a Name="idx1073748061"></a>
+							<P><tt cLASS="monofont">listmessages()</tt>— 
+    
+								Returns a list of messages in the folder (as numbers).</p>
+
+						</p>
+<P>
+							<A NAme="idx1073748062"></a>
+							<a NAME="idx1073748063"></a>
+							<p><tt CLASs="monofont">getcurrent()</tt>— 
+    
+								Returns the current message number.</p>
+</p>
+<p>
+							<a name="idx1073748064"></a>
+							<a name="idx1073748065"></a>
+							<p><tT clAss="monofont">setcurrent(</tT><i><tt cLass="monofont">n</TT></I><Tt claSS="monofont">)</TT>— 
+    
+								Sets the current message number to <tt clASS="monofont">n.</Tt></p>
+</p>
+<p>
+							<A NAMe="idx1073748066"></a>
+							<a name="idx1073748067"></a>
+							<p><tt class="monofont">parsesequence(</tt><i><tT clAss="monofont">seq</tT></i><tt cLass="monofont">)</TT>— 
+    
+								Parses <TT clasS="monofont">msgs</TT> syntax into a list of messages.</P>
+
+						</p>
+<p>
+							<a nAME="idx1073748068"></A><a namE="idx1073748069"></A>
+							<P><Tt class="monofont">getlast()</tt>— 
+    
+								Gets last message, or <tt class="monofont">0</tt> if no messages are in the folder.
+<a naMe="idx1073748070"></a>
+									<A namE="idx1073748071"></a>
+									<a naMe="idx1073748072"></a>
+									<a NAME="idx1073748073"></a>
+									<a naME="idx1073748074"></A>
+									<A name="idx1073748075"></A>
+									<A NAme="idx1073748076"></a>
+									<a NAME="idx1073748077"></a>
+									<a name="idx1073748078"></a>
+									<a name="idx1073748079"></a>
+									<a name="idx1073748080"></a></p>
+</P>
+<p><a Name="idx1073748081"></A>
+							<a namE="idx1073748082"></a>
+							<p><tT CLAss="monofont">setlast(</tt><I><TT Class="monofont">n</TT></I><Tt claSS="monofont">)</TT>— 
+    
+								Sets last message (internal use only).</p>
+</p>
+<p><a name="idx1073748083"></a><a name="idx1073748084"></a>
+							<p><tt clAss="monofont">getsequences()</Tt>— 
+    
+								Returns dictionary of sequences in folder. The sequence names are used as keys, and the values are the lists of message numbers in the sequences.</p>
+
+						</p>
+<P><a namE="idx1073748085"></a>
+							<a nAME="idx1073748086"></A><p><tt cLASS="monofont">putsequences(</tt><i><tT CLAss="monofont">dict</tt></I><TT Class="monofont">)</tt>— 
+    
+								Returns dictionary of sequences in folder name: list.</p>
+
+						</p>
+<p><a name="idx1073748087"></a>
+							<a name="idx1073748088"></A>
+							<p><tT claSs="monofont">removemessages(</tt><i><Tt clASS="monofont">list</Tt></i><tt CLASs="monofont">)</tt>— 
+    
+								Removes messages in list from folder.</p>
+</P>
+<P><A Name="idx1073748089"></a>
+							<A NAMe="idx1073748090"></a>
+							<p><tt class="monofont">refilemessages(</tt><i><tt class="monofont">list, tofolder</Tt></i><Tt clAss="monofont">)</tt>— 
+    
+								Moves messages in list to other folder.</P>
+
+						</p>
+<p><a NAME="idx1073748091"></a><a naME="idx1073748092"></A>
+							<P><tt clASS="monofont">movemessage(</Tt><i><tt CLASs="monofont">n, tofolder, ton</tt></i><tt class="monofont">)</tt>— 
+    
+								Moves one message to a given destination in another folder.</p>
+
+						</p>
+<p><a namE="idx1073748093"></a>
+							<a Name="idx1073748094"></A>
+							<p><tt cLass="monofont">copymessage(</TT><I><Tt claSS="monofont">n, tofolder, ton</TT></i><tt cLASS="monofont">)</tt>— 
+    
+								Copies one message to a given destination in another folder.</p>
+
+						</p>
+</BLOCkquote>
+				
+				
+					<h4>
+						<tt class="monofont">Message</tt> Objects</h4>
+					<p>
+						<a nAme="idx1073748095"></A>
+						<a naMe="idx1073748096"></a><tt ClasS="monofont">openmessage(n)</TT> returns a new open
+  <Tt claSS="monofont">message</TT> object (costs a file descriptor).
+  <a namE="idx1073748097"></A>
+						<A Name="idx1073748098"></a></P>
+
+					
+						<H5>
+							<TT class="monofont">binhex</tt></h5>
+						<p>The <tt class="monofont">binhex</tt> module encodes and decodes files in <tt ClaSs="monofont">binhex4</tt> format. This format is commonly used to represent files on <Tt claSs="monofont">Macintosh </tt> systems.</P>
+
+						<PRE>
+							
+import binhex, sys
+infile = "filename.jpg"
+binhex.binhex(infile, sys.stdout)
+
+						</pre>
+
+						<p><A NAMe="idx1073748099"></a><a nAME="idx1073748100"></A>
+							<a namE="idx1073748101"></A><TT class="monofont">binhex(</tt><i><tt class="monofont">inputfile, outputfile</tt></i>) converts a binary file (<i><tT clAss="monofont">inputfile</tT></i>) to a binhex file(<i><tt ClasS="monofont">outputfile</TT></I>).</p>
+
+						<p>
+							<a nAME="idx1073748102"></A>
+							<a namE="idx1073748103"></A><TT clasS="monofont">hexbin(</TT><I><tt class="monofont">inputfile [, outputfile]</tt></i><tt class="monofont">)</tt>
+ converts a binhex file (<i><Tt cLass="monofont">inputfile</Tt></i>) back to a regular binary
+ file (<i><tT claSS="monofont">outputfile</TT></i>). When the output name is omitted, the
+ interpreter uses the same one provided in the first argument.
+ <a naME="idx1073748104"></A>
+							<A name="idx1073748105"></A>
+							<A NAme="idx1073748106"></a>
+							<a NAME="idx1073748107"></a>
+							<a name="idx1073748108"></a>
+							<a name="idx1073748109"></a>
+							<a name="idx1073748110"></a>
+							<a NamE="idx1073748111"></a></p>
+
+					
+					
+						<h5>
+							<Tt claSs="monofont">uu</tt></H5>
+						<P>The <TT clasS="monofont">uu</TT> module encodes and decodes files in
+ uuencode format. This module does its job by transferring binary data over an
+ ASCII-only connection. Wherever a file argument is expected, the methods accept
+ a file-like object. For backwards compatibility, a string containing a pathname
+ is also accepted, and the corresponding file will be opened for reading and
+ writing; the 
+ <A name="idx1073748112"></A>
+							<A NAme="idx1073748113"></a>pathname <tT CLAss="monofont">-</tt> is understood to mean the
+ standard input or output. However, this interface is deprecated; it's better
+ for the caller to open the file itself, and be sure that, when required, the
+ mode is 
+ <a name="idx1073748114"></a>
+							<a name="idx1073748115"></a><tt clAss="monofont">rb</Tt> or 
+ <a nAme="idx1073748116"></a>
+							<a Name="idx1073748117"></A><TT Class="monofont">wb</TT> on Windows or DOS.</P>
+
+						<P>The code of this module was contributed by 
+ <a namE="idx1073748118"></A>Lance Ellinghouse and modified by 
+ <A Name="idx1073748119"></a>Jack Jansen.</P>
+
+						<P>The <TT class="monofont">uu</tt> module defines the following 
+ <a name="idx1073748120"></a>functions:</p>
+
+						<blockqUotE>
+<p><a nAme="idx1073748121"></a><a Name="idx1073748122"></A>
+								<P><TT clasS="monofont">encode (</TT><I><tt clASS="monofont">in_file, out_file[, name[,   mode]]</Tt></i><tt CLASs="monofont">)</tt>— 
+    
+									This function uuencodes file in_file into file out_file. The uuencoded file will have the header specifying name and mode as the defaults for the results of decoding the file. The default defaults are taken from in_file, or <tt class="monofont">-</tt> and 0666, respectively.</p>
+</p>
+<p><a name="idx1073748123"></A><a nAme="idx1073748124"></a>
+								<P><tt clAss="monofont">decode (</tT><I><TT clasS="monofont">in_file[, out_file[, mode]]</TT></I><tt clASS="monofont">)</Tt>— 
+    
+									This call decodes uuencoded file in_file placing the result on file out_file. If out_file is a pathname, the mode is also set. Defaults for out_file and mode are taken from the uuencode header.</p>
+</p>
+</bLOCKquote>
+						<p>Note that in the previous functions, both arguments can be either
+ filenames or file objects.</p>
+
+						<p>This format used to be popular on the Usenet, but nowadays, it is being superceded by base64 encoding.<a name="idx1073748125"></a><a name="idx1073748126"></a><A naMe="idx1073748127"></a><a Name="idx1073748128"></a><A namE="idx1073748129"></A>
+							<A Name="idx1073748130"></a></P>
+
+						<P>Each encoded data stream starts with a <TT clasS="monofont">begin</TT> line, which also includes the file privileges, the filename, and ends with an
+ <Tt claSS="monofont">end</TT> line, as you can see in the following example:</p>
+
+						<pre>
+							
+begin 755 executeprog.py
+KF_EF_#JFJ! …
+end
+
+						</pre>
+
+					
+					
+						<h5>
+							<tt class="monofont">binascii</tt></h5>
+						<p>The <tT clAss="monofont">binascii</tT> module implements methods to convert data between binary and various <tt clAss="monofont">ASCII-encoded</tT> binary representations, including <TT Class="monofont">binhex,</TT><TT clasS="monofont">uu,</TT> and <Tt claSS="monofont">base64.</TT> Note that normally, you would just use the <tt class="monofont">binhex,</tt><tt class="monofont">uu,</tt> or <tt ClaSs="monofont">base64</tt> modules rather than <Tt claSs="monofont">binascii.</tt></P>
+
+						<P>This module implements two exceptions: <TT clasS="monofont">Error</TT>
+ (raised on errors), and <Tt claSS="monofont">Incomplete</TT> (raised on incomplete
+ data). The following 
+ <a namE="idx1073748131"></A>methods are implemented by this module:</P>
+
+						<Blockquote>
+<p><a name="idx1073748132"></a><a namE="idx1073748133"></a>
+								<p><Tt clAss="monofont">binascii.b2a_base64(</tt><I><tt cLASS="monofont">binarydata</tt></i><tT CLAss="monofont">)</tt>— 
+    
+									Converts a string of binary data to a string of base64-encoded characters.</P>
+</P>
+<P><A name="idx1073748134"></A><A NAme="idx1073748135"></a>
+								<p><tt class="monofont">binascii.a2b_base64(</tt><i><tt clasS="monofont">string</tt></I><tt cLass="monofont">)</tT>— 
+    
+									Converts a string of base64-encoded data to binary.</p>
+
+							</p>
+<p><A NAMe="idx1073748136"></a>
+								<a nAME="idx1073748137"></A>
+								<p><tt cLASS="monofont">binascii.b2a_uu(</tt><i><tT CLAss="monofont">binarydata</tt></i><tt class="monofont">)</tt>— 
+    
+									Converts a string of binary data to a string of uuencoded characters.</p>
+
+							</p>
+<p><a naMe="idx1073748138"></a><A namE="idx1073748139"></a>
+								<p><tt ClasS="monofont">binascii.a2b_uu(</TT><I><tt clASS="monofont">string</Tt></i><tt CLASs="monofont">)</tt>— 
+    
+									Converts a string of uuencoded data to binary.</p>
+
+							</P>
+<P><A Name="idx1073748140"></a><a name="idx1073748141"></a>
+								<p><tt class="monofont">binascii.b2a_hqx(</tt><I><tt ClasS="monofont">binarydata</tt></i><tT claSS="monofont">)</TT>— 
+    
+									Converts  a string of binary data to a string of binhex4-encoded characters.</p>
+</p>
+<p><a NAME="idx1073748142"></a><a naME="idx1073748143"></A>
+								<P><tt clASS="monofont">binascii.a2b_hqx(</Tt><i><tt class="monofont">string</tt></i><tt class="monofont">)</tT>— 
+    
+									Converts a string of binhex4-encoded data to binary.</p>
+
+							</p>
+<P><a naMe="idx1073748144"></a><a nAme="idx1073748145"></a>
+								<P><TT Class="monofont">binascii.rledecode_hqx(</TT><I><Tt claSS="monofont">binarydata</TT></i><tt cLASS="monofont">)</tt>— 
+    
+									Decompresses the binary data using the <i>RLE (Run-Length Encoding)</i> method. If the binary data is incomplete, an Incomplete exception is
+raised.</p>
+</p>
+<p><a name="idx1073748146"></a><a name="idx1073748147"></a>
+								<p><Tt cLass="monofont">binascii.rleecode_hqx(</Tt><i><tt ClasS="monofont">binarydata</TT></I><tt clASS="monofont">)</Tt>— 
+    
+									Compresses the binary data according to the RLE method.</p>
+
+							</p>
+<p><A NAMe="idx1073748148"></a>
+								<a nAME="idx1073748149"></A>
+								<p><tt class="monofont">binascii.crc_hqx(</tt><i><tt class="monofont">binarydata, crc</tt></I><tt ClasS="monofont">)</tt>— 
+    
+									Returns the checksum of a given binhex4-binary data. The argument <tt ClasS="monofont">crc</TT> indicates the checksum's starting value.<A name="idx1073748150"></A><A NAme="idx1073748151"></a>
+										<a NAME="idx1073748152"></a>
+										<a naME="idx1073748153"></A>
+										<A name="idx1073748154"></a>
+										<a name="idx1073748155"></a>
+										<a name="idx1073748156"></a>
+										<a naMe="idx1073748157"></a>
+										<A namE="idx1073748158"></a></p>
+
+							</p>
+</bLockQUOTe>
+						<p>Note that starting <a nAME="idx1073748159"></A><a namE="idx1073748160"></A><A Name="idx1073748161"></a> with Python 2.0, there are two more functions to include in the list provided by the <TT CLass="monofont">binascii</tt> module. They are called <tt class="monofont">b2a_hex</tt> and <tt clasS="monofont">a2b_hex.</tt> They <A namE="idx1073748162"></a><a naMe="idx1073748163"></a>
+							<a NAME="idx1073748164"></a><a naME="idx1073748165"></A>are used to convert between binary data and its
+ hexadecimal representation.</P>
+
+					
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="194.html" title="MIME Parsing and Manipulation"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=195" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="195.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="196.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073748113">- pathname</a><BR>
+ <a href="#idx1073748164">a2b_hex function</a><BR>
+ <a href="#idx1073748162">b2a_hex function</a><BR>
+ <a href="#idx1073748156">binascii module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748159">functions</a><BR>
+ <a href="#idx1073748135">binascii.a2b_base64(string) method</a><BR>
+ <a href="#idx1073748143">binascii.a2b_hqx(string) method</a><BR>
+ <a href="#idx1073748139">binascii.a2b_uu(string) method</a><BR>
+ <a href="#idx1073748133">binascii.b2a_base64(binarydata) method</a><BR>
+ <a href="#idx1073748141">binascii.b2a_hqx(binarydata) method</a><BR>
+ <a href="#idx1073748137">binascii.b2a_uu(binarydata) method</a><BR>
+ <a href="#idx1073748149">binascii.crc_hqz(binarydata, crc) method</a><BR>
+ <a href="#idx1073748145">binascii.rledecode_hqx(binarydata) method</a><BR>
+ <a href="#idx1073748147">binascii.rleecode_hqx(binarydata) method</a><BR>
+ <a href="#idx1073748110">binhex module</a><BR>
+ <a href="#idx1073748100">binhex(inputfile, outputfile) function</a><BR>
+ <a href="#idx1073748094">copymessage method</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748041">generic conversion functions</a> <a href="#idx1073748070">2nd</a> <a href="#idx1073748104">3rd</a> <a href="#idx1073748125">4th</a> <a href="#idx1073748150">5th</a><BR>
+ <a href="#idx1073748124">decode (in_file[, out_file[, mode]])function</a><BR>
+ <a href="#idx1073748038">deletefolder(name) method</a><BR>
+ <a href="#idx1073748118">Ellinghouse, Lance</a><BR>
+ <a href="#idx1073748122">encode (in_file, out_file[, name[, mode]])function</a><BR>
+ <a href="#idx1073748018">error(format[, ...]) method</a> <a href="#idx1073748053">2nd</a><BR>
+ <a href="#idx1073748014">Folder (mh, name) method</a><BR>
+ <a href="#idx1073748079">folder objects</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748165">a2b_hex</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748163">b2a_hex</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748161">binascii module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748099">binhex module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748101">binhex(inputfile, outputfile)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748123">decode (in_file[, out_file[, mode]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748121">encode (in_file, out_file[, name[, mode]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748046">generic conversion</a> <a href="#idx1073748075">2nd</a> <a href="#idx1073748109">3rd</a> <a href="#idx1073748130">4th</a> <a href="#idx1073748155">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748103">hexbin(inputfile [, outputfile])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748120">uu module</a><BR>
+ <a href="#idx1073748045">generic conversion functions</a> <a href="#idx1073748074">2nd</a> <a href="#idx1073748108">3rd</a> <a href="#idx1073748129">4th</a> <a href="#idx1073748154">5th</a><BR>
+ <a href="#idx1073748043">generic conversion functions parsing and</a> <a href="#idx1073748072">2nd</a> <a href="#idx1073748106">3rd</a> <a href="#idx1073748127">4th</a> <a href="#idx1073748152">5th</a><BR>
+ <a href="#idx1073748024">getcontext() method</a><BR>
+ <a href="#idx1073748063">getcurrent() method</a><BR>
+ <a href="#idx1073748055">getfullname() method</a><BR>
+ <a href="#idx1073748069">getlast() method</a><BR>
+ <a href="#idx1073748059">getmessagefilename(n) method</a><BR>
+ <a href="#idx1073748022">getpath() method</a><BR>
+ <a href="#idx1073748020">getprofile(key) method</a><BR>
+ <a href="#idx1073748084">getsequences() method</a><BR>
+ <a href="#idx1073748057">getsequencesfilename() method</a><BR>
+ <a href="#idx1073748102">hexbin(inputfile [, outputfile]) function</a><BR>
+ <a href="#idx1073748119">Jansen, Jack</a><BR>
+ <a href="#idx1073748030">listallfolders() method</a><BR>
+ <a href="#idx1073748034">listallsubfolders(name) method</a><BR>
+ <a href="#idx1073748028">listfolders() method</a><BR>
+ <a href="#idx1073748061">listmessages() method</a><BR>
+ <a href="#idx1073748032">listsubfolders(name) method</a><BR>
+ <a href="#idx1073748036">makefolder(name) method</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748042">generic conversion functions</a> <a href="#idx1073748071">2nd</a> <a href="#idx1073748105">3rd</a> <a href="#idx1073748126">4th</a> <a href="#idx1073748151">5th</a><BR>
+ <a href="#idx1073748016">Message (folder, number[, name]) method</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748131">binascii module</a> <a href="#idx1073748158">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748134">binascii.a2b_base64(string)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748142">binascii.a2b_hqx(string)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748138">binascii.a2b_uu(string)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748132">binascii.b2a_base64(binarydata)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748140">binascii.b2a_hqx(binarydata)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748136">binascii.b2a_uu(binarydata)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748148">binascii.crc_hqz(binarydata, crc)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748144">binascii.rledecode_hqx(binarydata)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748146">binascii.rleecode_hqx(binarydata)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748093">copymessage(n, tofolder, ton)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748037">deletefolder(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748017">error(format[, ...])</a> <a href="#idx1073748052">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748013">Folder (mh, name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748078">folder objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748023">getcontext()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748062">getcurrent()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748054">getfullname()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748068">getlast()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748058">getmessagefilename(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748021">getpath()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748019">getprofile(key)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748083">getsequences()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748056">getsequencesfilename()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748029">listallfolders()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748033">listallsubfolders(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748027">listfolders()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748060">listmessages()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748031">listsubfolders(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748035">makefolder(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748015">Message (folder, number[, name])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748011">MH ([path[, profile]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748049">MH objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748010">mhlib module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748091">movemessage(n, tofolder, ton)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748039">openfolder(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748095">openmessage(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748066">parsesequence(seq)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748085">putsequences(dict)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748089">refilemessages(list, tofolder)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748087">removemessages(list)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748025">setcontext(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748064">setcurrent(n)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748081">setlast(n)</a><BR>
+ <a href="#idx1073748012">MH ([path[, profile]]) method</a><BR>
+ <a href="#idx1073748050">MH objects</a><BR>
+ <a href="#idx1073748008">mhlib module</a> <a href="#idx1073748047">2nd</a> <a href="#idx1073748076">3rd</a> <a href="#idx1073748097">4th</a><BR>
+modes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748115">rb</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748117">wb</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748157">binascii</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748160">functions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748111">binhex</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748009">mhlib</a> <a href="#idx1073748048">2nd</a> <a href="#idx1073748077">3rd</a> <a href="#idx1073748098">4th</a><BR>
+ <a href="#idx1073748092">movemessage(n, tofolder, ton) method</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748080">folder</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748051">MH</a><BR>
+ <a href="#idx1073748040">openfolder(name) method</a><BR>
+ <a href="#idx1073748096">openmessage(n) method</a><BR>
+ <a href="#idx1073748067">parsesequence(seq) method</a><BR>
+parsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748044">generic conversion functions</a> <a href="#idx1073748073">2nd</a> <a href="#idx1073748107">3rd</a> <a href="#idx1073748128">4th</a> <a href="#idx1073748153">5th</a><BR>
+pathnames<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748112">-</a><BR>
+ <a href="#idx1073748086">putsequences(dict) method</a><BR>
+ <a href="#idx1073748114">rb mode</a><BR>
+ <a href="#idx1073748090">refilemessages(list, tofolder) method</a><BR>
+ <a href="#idx1073748088">removemessages(list) method</a><BR>
+ <a href="#idx1073748026">setcontext(name) method</a><BR>
+ <a href="#idx1073748065">setcurrent(n) method</a><BR>
+ <a href="#idx1073748082">setlast(n) method</a><BR>
+ <a href="#idx1073748116">wb mode</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

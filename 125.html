@@ -1,0 +1,327 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Embedding</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="117.html" class="navtitle">6. Extending and Embedding Python</a> &gt; <span class="nonavtitle">Embedding</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="124.html" title="Other Wrappers"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=125" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="125.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="126.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A36%3A07+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147034164216207026027225</font><a href="read7.asp?bookname=0672319942&snode=125&now=5%2F31%2F2002+4%3A36%3A07+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Embedding</h3>
+				<p>We will now talk about how to embed Python inside other programs. Python offers a clean interface that allows embedding to occur.</p>
+
+				<P>You might be asking yourself why would you want to do it. Well, the answer is quite simple; as a scripting language, Python can wire its interpreter into other programs to enable you to make calls to specific Python functions and execute particular Python statements from them.</P>
+
+				<P>Those programs will have the capability to load Python scripts and execute Python services that belong to specific Python modules. You can also call Python functions directly from your C code and access the Python objects that are returned by them.</P>
+
+				<p>In order to embed Python inside a program, you just need to use the Python API—the Python <tt cLASS="monofont">EXE</tt> is not necessary.<a nAME="idx1073744114"></A><a name="idx1073744115"></a><a name="idx1073744116"></a><a name="idx1073744117"></a><a nAme="idx1073744118"></A><a naMe="idx1073744119"></a><a nAme="idx1073744120"></a><A NAMe="idx1073744121"></a><a nAME="idx1073744122"></A><a namE="idx1073744123"></A><A Name="idx1073744124"></a><A NAMe="idx1073744125"></a></p>
+
+				<h4>Implementing Callback Functions</h4>
+					<p>Embedding Python allows you to access and use the Python interpreter from inside your application. But what happens if you need to call back your application functions from inside Python?</p>
+
+					<p>For this reason, it is a good practice to provide a module written in C that exposes an API related to the application. Therefore, when embedding Python within your routines, you can make your application communicate both ways with your Python program by accessing the Python extension modules.<a name="idx1073744126"></a><a name="idx1073744127"></a><A naMe="idx1073744128"></a></p>
+
+				
+				<H4>Embedding the Python Interpreter</h4>
+					<p>The next example adds Python functionality to a C program.</p>
+
+					<pRe>
+						
+// File: embedding.c
+
+#include &lt;stdio.h&gt;
+#include &lt;Python.h&gt;
+int main(int argc, char **argv)
+{
+  Py_Initialize();
+  PyRun_SimpleString("print 'Hello Python World'");
+  printf("You are my visitor number %i", args);
+  Py_Finalize();
+  return(0);
+}
+
+					</prE>
+
+					<P>Python provides a set of function calls that provide an interface to the Python interpreter. The most important ones are</P>
+
+					<Ul>
+<li><p><TT CLass="monofont">Py_Initialize—</tT> 
+    Initializes and allocates the internal resources of the interpreter in order to start using the API.</P>
+</LI>
+<li><p><tT CLAss="monofont">PyRun_SimpleString—</tt> 
+    Executes Python code strings in the context of the <tt class="monofont">__main__</tt> module. Each string must be a complete Python command. This high-level function reads from a character buffer and returns <tt class="monofont">0</Tt> for success and <tT claSs="monofont">-1</tt> when exceptions occur. Another function called <a Name="idx1073744129"></A><A NAme="idx1073744130"></a><tT CLAss="monofont">PyRun_String</tt> provides more control of the code execution. The source code of this function is available in your installation in the <TT CLass="monofont">Python/pythonrun.c</tT> file.</P>
+</LI>
+</ul>
+					<div class="note"><p class="notetitle"><b>Tip</b></p><p>
+
+						<P>Remember that you need to inform the new line character at the end of each command line to make sure that the interpreter validates the command.<a nAme="idx1073744131"></a><A name="idx1073744132"></A><a naME="idx1073744133"></A><A name="idx1073744134"></A><A NAme="idx1073744135"></a><a NAME="idx1073744136"></a><a naME="idx1073744137"></A><A name="idx1073744138"></a><a name="idx1073744139"></a><a name="idx1073744140"></a><a naMe="idx1073744141"></a><A namE="idx1073744142"></a><a naMe="idx1073744143"></a><a NAME="idx1073744144"></a></p>
+
+					</p></dIV>
+<BR>
+<br>
+
+					<blOCKQuote>
+<P><P><TT class="monofont">Py_Finalize—</tt> 
+    Releases the internal resources and shuts down the interpreter. You should always call this function before leaving the program.</p>
+</p>
+<p><p><tt class="monofont">PyRun_SimpleFile—</tt> 
+    Executes Python commands that are stored in a file. This function reads from a <Tt cLass="monofont">FILE</Tt> pointer.</p>
+</p>
+</bLockQUOTe>
+					<p>Check out this other example:</p>
+
+					<pRE>
+						
+// File: embedding2.c
+
+#include "Python.h"
+main(int argc, char **argv)
+{
+   Py_Initialize();
+   PySys_SetArgv(int argc, char **argv);
+   PyRun_SimpleString("print 'Hello Python World'\n");
+   PyRun_SimpleString("print sys.argv\n");
+   PyFinalize();
+   Py_Exit(0);
+}
+
+					</PRe>
+
+					<ul>
+<lI><P><TT clasS="monofont">PySys_SetArgv—</TT> 
+    This function sets the values for the <Tt class="monofont">sys.argv</tt> list.</p>
+</li>
+</ul>
+					<p>You can <a name="idx1073744145"></a><A naMe="idx1073744146"></a>access a module written in Python from C by getting a pointer to the module object as follows:</p>
+
+					<Pre>
+						
+module = PyImport_ImportModule("&lt;modulename&gt;");
+
+					</prE>
+
+					<p>If the module hasn't been imported yet (that is, it isn't yet present in sys.modules), this function initializes the module; otherwise it simply returns the value of <tt CLASs="monofont">sys.modules["&lt;modulename&gt;"].</tt><a NAME="idx1073744147"></a><a naME="idx1073744148"></A><A name="idx1073744149"></A><A NAme="idx1073744150"></a><a name="idx1073744151"></a><a name="idx1073744152"></a><a name="idx1073744153"></A><a nAme="idx1073744154"></a><A name="idx1073744155"></A><a naME="idx1073744156"></A><A name="idx1073744157"></A><A NAme="idx1073744158"></a></p>
+
+					<P>It doesn't enter the module into any namespace—it only ensures that it has been initialized and it is stored in <TT Class="monofont">sys.modules.</TT></P>
+
+					<P>You can then <a name="idx1073744159"></a><a name="idx1073744160"></a><a name="idx1073744161"></a>access the module's attributes (that is, any name defined in the module) using <tt ClaSs="monofont">PyObject_GetAttrString()</tt> as follows:</P>
+
+					<pre>
+						
+attr = PyObject_GetAttrString(module, "&lt;attrname&gt;");
+
+					</pRe>
+
+					<p>It is also possible to <a NAME="idx1073744162"></a><a naME="idx1073744163"></A><A name="idx1073744164"></A>assign values to variables in the module using the <TT Class="monofont">PyObject_SetAttrString()</TT> function.</P>
+
+					<P>There is a very straightforward example of embedding Python in a C program in the file <tt class="monofont">/Demo/embed/demo.c,</tt> which is part of your Python distribution source code.<a name="idx1073744165"></a><a name="idx1073744166"></A></p>
+
+					<h5>Embedding on UNIX</H5>
+						<p>On UNIX, you must link your C application against the Python interpreter library, which is called <tt Class="monofont">libpython1.5a.</Tt></p>
+
+						<p>When compiling the <TT CLass="monofont">yourprogram.c</tT> into a object file (<TT Class="monofont">yourprogram.o</TT>), you need to specify the directory of the Python distribution.</P>
+
+						<P>For example,</p>
+
+						<pre>
+							
+gcc -g -c yourprogram.c
+
+						</PRE>
+
+						<Div class="note"><p class="notetitle"><b>Note</b></p><p>
+
+							<p>You need to make sure that the header files required by your program are correctly installed on your system.</p>
+
+						</p></Div>
+<Br>
+<br>
+
+						<P>When compiling the object file into an executable file, you need to include the libraries and references for any extension modules embedded into the Python interpreter itself.<a namE="idx1073744167"></a><a nAME="idx1073744168"></A><a namE="idx1073744169"></A><A Name="idx1073744170"></a><A NAMe="idx1073744171"></a><a nAME="idx1073744172"></A><a name="idx1073744173"></a><a name="idx1073744174"></a><a name="idx1073744175"></a><a nAme="idx1073744176"></A><a naMe="idx1073744177"></a><a nAme="idx1073744178"></a><A NAMe="idx1073744179"></a><a nAME="idx1073744180"></A><a namE="idx1073744181"></A></P>
+
+						<P>Check the <a namE="idx1073744182"></A><A Name="idx1073744183"></a><tt class="monofont">Makefile</tt> file of the Python interpreter to know the files that must be mentioned.</p>
+
+						<pre>
+							
+Listing 6.1  File: Makefile…
+VERSION= 1.5
+
+LIBPYTHON= $(blddir)/libpython$(VERSION).a
+
+LIBS= -lreadline -ltermcap -lcurses -lgdbm -ltk8.0 -ltcl8.0 -lX11 -ldl
+SYSLIBS= -lm
+MODLIBS= -L/usr/X11R6/lib -I/usr/local/pgsql/include
+-L/usr/local/pgsql/lib -lcrypt
+ALLLIBS= $(LIBPYTHON) $(MODLIBS) $(LIBS) $(SYSLIBS)
+…
+
+						</pre>
+
+						<P>All the libraries found in the <tt ClasS="monofont">Makefile</tt> file are used as arguments to the function that compiles the object file, as you can see next.</p>
+
+						<pRe>
+							
+gcc yourprogram.o /usr/local/contrib/Python-1.5.2/libpython1.5.a
+-L/usr/X11R6/lib -I/usr/local/pgsql/include -L/usr/local/pgsql/lib
+-lcrypt -lreadline -ltermcap -lcurses -lgdbm -ltk8.0 -ltcl8.0 -lX11
+-ld1 -lm -o yourprogram
+
+						</prE>
+
+						<P>The last step is to type <TT clasS="monofont">make</TT> to build the application.</P>
+
+						<div cLASS="note"><p claSS="notetitle"><B>Note</B></p><p>
+
+							<p>In order to <a name="idx1073744184"></a><a name="idx1073744185"></a><a name="idx1073744186"></A>compile an extension module for use with the embedded python interpreter, you just need to compile the module into the executable and make sure that you call the <a nAme="idx1073744187"></a><A name="idx1073744188"></A><tt cLASS="monofont">init</tt> function for the module after initializing the interpreter.<a nAME="idx1073744189"></A><a namE="idx1073744190"></A><A Name="idx1073744191"></a><A NAMe="idx1073744192"></a><a name="idx1073744193"></a><a name="idx1073744194"></a><a name="idx1073744195"></a><A naMe="idx1073744196"></a><a Name="idx1073744197"></a><A namE="idx1073744198"></A><A Name="idx1073744199"></a><A NAMe="idx1073744200"></a><a nAME="idx1073744201"></A><a namE="idx1073744202"></A><A Name="idx1073744203"></a></p>
+
+						</p></div>
+<br>
+<br>
+
+					
+				
+				<h4>Embedding Python in C++</h4>
+					<p>You don't have to recompile your interpreter. You just need to write your main program in C++ and use a C++ compiler to compile and link your program.</p>
+
+				
+				<h4>Embedding Python in Other Applications</h4>
+					<p>On Windows, Python itself is implemented in a <Tt cLass="monofont">DLL</Tt> called <a naMe="idx1073744204"></a><a NAME="idx1073744205"></a><tt cLASS="monofont">Python15.dll.</tt> Note that the file <tt CLASs="monofont">Python.exe</tt> is a small program that calls all the routines stored in the <tT CLAss="monofont">DLL.</tt> This is a good example showing that it must be easy to embed Python because it already embeds itself.</p>
+
+					<p>Besides all this talk about embedding Python in C and C++ applications, Python can also be embedded in other applications, such as Delphi. However, note that implicitly, the embedding process is at the C level too.</p>
+
+					<p>Dr. <a name="idx1073744206"></a>Dietmar Budelsky and <a name="idx1073744207"></a>Morgan Martinet merged their two separate projects and created The Python for Delphi project. The purpose of this project is to provide an interface to the Python language in Delphi.</P>
+
+					<p>This project consists of a set of components that wrap the <tT claSs="monofont">Python15.dll</tt> into Delphi. These components let you easily execute Python scripts, create new Python modules and new Python types. You can create Python extensions as DLLs and much more. Currently, it supports Delphi versions 3, 4, and 5.</p>
+
+					<BlocKQUOte>
+<p><p>The Python for Delphi project:</P>
+</P>
+<P><P><a tarGET="_blank" Href="http://www.multimania.com/marat/delphi/python.htm">http://www.multimania.com/marat/delphi/python.htm</a></P>
+</P>
+</BLockquote>
+					<h5>NSAPI/NSAPY</h5>
+						<p>A real-life example of how Python can be used by other applications is in the case of embedding Python under Netscape HTTP Servers that support the NSAPI module protocol.<a name="idx1073744208"></a><a naMe="idx1073744209"></a><A namE="idx1073744210"></a><a naMe="idx1073744211"></a><a NAME="idx1073744212"></a><a naME="idx1073744213"></A><A name="idx1073744214"></A><A NAme="idx1073744215"></a><a NAME="idx1073744216"></a><a name="idx1073744217"></a><a name="idx1073744218"></a><a name="idx1073744219"></a><a NamE="idx1073744220"></a><a nAme="idx1073744221"></a><a Name="idx1073744222"></A></P>
+
+						<P>This marriage brings several add-ons to the Netscape Server mostly because of the general scripting capabilities acquired from the Python language.</P>
+
+						<p>In order to do this embedding, it is necessary to use the <tt cLASS="monofont">Nsapy,</tt> which is an extension that works by embedding the interpreter within Netscape HTTP Servers that use NSAPI.</p>
+
+						<bLOCKquotE>
+<P><P>NSAPI—The Netscape Server API:</P>
+</p>
+<p><p><a target="_blank" href="http://oradb1.jinr.ru/netscape/nsapi/">http://oradb1.jinr.ru/netscape/NSAPI/</a></p>
+</p>
+<p><p>"Nsapy," by Gregory Trubetskoy:</p>
+</P>
+<p><p><A tarGet="_blank" hrEf="http://www.ispol.com/home/grisha/nsapy/nsapy.html">http://www.ispol.com/home/grisha/nsapy/nsapy.html</a></p>
+</P>
+<P><P>Example of embedding Python under a Netscape Commerce server:</P>
+</p>
+<p><p><a TARGet="_blank" hrEF="http://starship.python.net/crew/aaron_watters/embed/">http://starship.python.net/crew/aaron_watters/embed/</A><A name="idx1073744223"></A><A NAme="idx1073744224"></a><a name="idx1073744225"></a><a name="idx1073744226"></a><a name="idx1073744227"></A><a nAme="idx1073744228"></a><A name="idx1073744229"></A><a naME="idx1073744230"></A><A name="idx1073744231"></A><A NAme="idx1073744232"></a><a NAME="idx1073744233"></a><a naME="idx1073744234"></A><A name="idx1073744235"></a><a name="idx1073744236"></a><a name="idx1073744237"></a></p>
+</p>
+</bLocKquoTe>
+					
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="124.html" title="Other Wrappers"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=125" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="125.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="126.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744159">module attributes</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744145">modules</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744119">embedding Python objects in</a> <a href="#idx1073744136">2nd</a> <a href="#idx1073744152">3rd</a> <a href="#idx1073744172">4th</a> <a href="#idx1073744194">5th</a> <a href="#idx1073744213">6th</a> <a href="#idx1073744228">7th</a><BR>
+assigning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744162">values to variables, modules</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744161">accessing</a><BR>
+ <a href="#idx1073744206">Budelsky, Dietmar</a><BR>
+C programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744122">extending and embedding Python</a> <a href="#idx1073744139">2nd</a> <a href="#idx1073744155">3rd</a> <a href="#idx1073744175">4th</a> <a href="#idx1073744197">5th</a> <a href="#idx1073744216">6th</a> <a href="#idx1073744231">7th</a><BR>
+C++ programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744124">extending and embedding Python</a> <a href="#idx1073744141">2nd</a> <a href="#idx1073744157">3rd</a> <a href="#idx1073744177">4th</a> <a href="#idx1073744199">5th</a> <a href="#idx1073744218">6th</a> <a href="#idx1073744233">7th</a><BR>
+callback functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744128">implementing</a><BR>
+compiling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744184">extension modules</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744114">Python extension modules</a> <a href="#idx1073744131">2nd</a> <a href="#idx1073744147">3rd</a> <a href="#idx1073744167">4th</a> <a href="#idx1073744189">5th</a> <a href="#idx1073744208">6th</a> <a href="#idx1073744223">7th</a><BR>
+embedding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744143">interpreters</a> <a href="#idx1073744165">2nd</a> <a href="#idx1073744179">3rd</a> <a href="#idx1073744201">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744115">Python objects</a> <a href="#idx1073744132">2nd</a> <a href="#idx1073744148">3rd</a> <a href="#idx1073744168">4th</a> <a href="#idx1073744190">5th</a> <a href="#idx1073744209">6th</a> <a href="#idx1073744224">7th</a><BR>
+extension modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744185">compiling</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744116">creating</a> <a href="#idx1073744133">2nd</a> <a href="#idx1073744149">3rd</a> <a href="#idx1073744169">4th</a> <a href="#idx1073744191">5th</a> <a href="#idx1073744210">6th</a> <a href="#idx1073744225">7th</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744183">Makefile</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callback<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744127">implementing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744188">init()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744130">PyRun_String()</a><BR>
+implementing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744126">callback functions</a><BR>
+ <a href="#idx1073744187">init() function</a><BR>
+interpreters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744144">embedding</a> <a href="#idx1073744166">2nd</a> <a href="#idx1073744180">3rd</a> <a href="#idx1073744202">4th</a><BR>
+ <a href="#idx1073744182">Makefile file</a><BR>
+ <a href="#idx1073744207">Martinet, Morgan</a><BR>
+module attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744160">accessing</a><BR>
+module protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744221">NSAPI/NSAPY</a> <a href="#idx1073744236">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744146">accessing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744186">compiling</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744117">creating</a> <a href="#idx1073744134">2nd</a> <a href="#idx1073744150">3rd</a> <a href="#idx1073744170">4th</a> <a href="#idx1073744192">5th</a> <a href="#idx1073744211">6th</a> <a href="#idx1073744226">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744205">Python15.dll</a><BR>
+ <a href="#idx1073744220">NSAPI/NSAPY module protocol</a> <a href="#idx1073744235">2nd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744118">embedding in non-Python applications</a> <a href="#idx1073744135">2nd</a> <a href="#idx1073744151">3rd</a> <a href="#idx1073744171">4th</a> <a href="#idx1073744193">5th</a> <a href="#idx1073744212">6th</a> <a href="#idx1073744227">7th</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744123">extending and embedding Python</a> <a href="#idx1073744140">2nd</a> <a href="#idx1073744156">3rd</a> <a href="#idx1073744176">4th</a> <a href="#idx1073744198">5th</a> <a href="#idx1073744217">6th</a> <a href="#idx1073744232">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744125">extending and embedding Python</a> <a href="#idx1073744142">2nd</a> <a href="#idx1073744158">3rd</a> <a href="#idx1073744178">4th</a> <a href="#idx1073744200">5th</a> <a href="#idx1073744219">6th</a> <a href="#idx1073744234">7th</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744120">embedding Python objects in</a> <a href="#idx1073744137">2nd</a> <a href="#idx1073744153">3rd</a> <a href="#idx1073744173">4th</a> <a href="#idx1073744195">5th</a> <a href="#idx1073744214">6th</a> <a href="#idx1073744229">7th</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744222">NSAPI/NSAPY</a> <a href="#idx1073744237">2nd</a><BR>
+ <a href="#idx1073744129">PyRun_String() function</a><BR>
+ <a href="#idx1073744204">Python15.dll module</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744121">embedding Python objects in</a> <a href="#idx1073744138">2nd</a> <a href="#idx1073744154">3rd</a> <a href="#idx1073744174">4th</a> <a href="#idx1073744196">5th</a> <a href="#idx1073744215">6th</a> <a href="#idx1073744230">7th</a><BR>
+UNIX<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744181">embedding interpreters</a> <a href="#idx1073744203">2nd</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744163">assigning to variables, modules</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744164">assigning values to</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

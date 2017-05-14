@@ -1,0 +1,153 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Methods Handling</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Methods Handling</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="106.html" title="Python Classes and Instances"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=107" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="107.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="108.html" title="Special Methods"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A33%3A25+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147039203230084227186105</font><a href="read0.asp?bookname=0672319942&snode=107&now=5%2F31%2F2002+4%3A33%3A25+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Methods Handling</h3>
+				<p>Whenever you have to write methods in your classes, always keep in mind that the namespace searching order for attributes and methods is instance, class, and base classes; and don't forget that <tT CLAss="monofont">self</tt> is always the first or only argument to be used in method headers.</P>
+
+				<H4>Accessing Unbounded Methods</H4>
+					<P>The next example shows what you should do in order to unbind a class method and use it outside the class definition.</p>
+
+					<pre>
+						
+1: obj = classname()
+2: umethod = classname.methodname()
+3: umethod(obj, args)
+
+					</PRE>
+
+					<P>Line 1: Creates a class instance object.</p>
+
+					<p>Line 2: Creates an object that references the class method. The method is still unattached to the object at this stage.</p>
+
+					<p>Line 3: Executes the class method by transporting the instance reference (<tt class="monofont">obj</tt>) and the list of arguments (<tt class="monofont">args</Tt>).</p>
+
+					<P>Note that the first argument to an unbound method must be an instance of the correct class, or an exception will be thrown.<a naMe="idx1073743383"></a><a nAme="idx1073743384"></a><A NAMe="idx1073743385"></a><a nAME="idx1073743386"></A><a namE="idx1073743387"></A><A Name="idx1073743388"></a><A NAMe="idx1073743389"></a></p>
+
+				
+				<h4>Handling Global Class Variables</h4>
+					<p>The next example defines a function that prints a class variable. Every time a new instance is created, <tt class="monofont">Globalcount</tt> increases.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; def printGlobalcount():
+…     print Globalcount.n
+…
+&gt;&gt;&gt; class Couting:
+…     n = 0
+…     def __init__(self):
+…         Globalcount.n = Globalcount.n + 1
+…
+&gt;&gt;&gt; inc = Couting()
+&gt;&gt;&gt; inc = Couting()
+&gt;&gt;&gt; printGlobalcount()
+2
+
+					</pRe>
+
+					<p>The next code overwrites the class variable <Tt clAss="monofont">x</tt> when subclassing the <Tt clASS="monofont">baseclass</Tt> class.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; class baseclass:
+…     x = 5
+…     def multiply(self, a):
+…         return a * (self.__class__.x)
+…
+&gt;&gt;&gt; class inherited(baseclass):
+…     x = 9
+…
+&gt;&gt;&gt; x = inherited()
+&gt;&gt;&gt; x.multiply(2)
+18
+
+					</PRE>
+
+					<p>After a method is defined, it uses the variable values that are associated to the current namespace.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; class A:
+…     n = 1
+…     def printn(self):
+…         print self.n
+…
+&gt;&gt;&gt; class B(A):
+…     n = 2
+…
+&gt;&gt;&gt; class C(B):
+…     n = 3
+…
+&gt;&gt;&gt; obj1 = C()
+&gt;&gt;&gt; obj1.printn()
+3
+&gt;&gt;&gt; obj2 = B()
+&gt;&gt;&gt; obj2.printn()
+2
+
+					</PRE>
+
+				
+				<h4>Calling Methods from Other Methods</h4>
+					<p>The next code exposes how simple it is to create a method to call another method.</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; class c:
+…     def funcx(self):
+…         self.funcy()
+…     def funcy(self):
+…         print "Ni!"
+…
+&gt;&gt;&gt; obj = c()
+&gt;&gt;&gt; obj.funcx()
+Ni! 
+
+					</Pre>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="106.html" title="Python Classes and Instances"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=107" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="107.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="108.html" title="Special Methods"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743387">unbounded method</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743386">methods</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743385">handling</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unbounded<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743388">accessing</a><BR>
+object-oriented programming (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743383">handling methods</a><BR>
+programming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object-oriented (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743384">handling methods</a><BR>
+unbounded methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743389">accessing</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

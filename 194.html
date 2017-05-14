@@ -1,0 +1,1538 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; MIME Parsing and Manipulation</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="187.html" class="navtitle">13. Data Manipulation</a> &gt; <span class="nonavtitle">MIME Parsing and Manipulation</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="193.html" title="Handling Other Markup Languages"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=194" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="194.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="195.html" title="Generic Conversion Functions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A46%3A43+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148042031160006072026019</font><a href="read4.asp?bookname=0672319942&snode=194&now=5%2F31%2F2002+4%3A46%3A43+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+
+
+MIME Parsing and Manipulation</h3>
+				<p><i>MIME (Multipurpose Internet Mail Extensions)</I> is
+a standard for sending multipart multimedia data through Internet mail. This
+standard exposes mechanisms for specifying and describing the format of
+Internet message bodies.</P>
+
+				<P>A 
+<A name="idx1073747743"></A>
+					<A NAme="idx1073747744"></a>MIME-encoded message looks similar to the following:</p>
+
+				<PRE>
+					
+Content-Type: multipart/mixed;  boundary="====_238659232=="
+Date: Mon, 03 Apr 2000 18:30:23 -0400
+From: Andre Lessa &lt;alessa@lessaworld.com&gt;
+To: Renata Lessa &lt;rlessa@lessaworld.com&gt;
+Subject: Python Book
+
+—====_238659232==
+Content-Type: text/plain; charset="us-ascii"
+
+Sorry Honey, I am late for dinner. I am still writing Chapter 13. Meanwhile,
+take a look at the following Cooking material that you've asked me to find in
+the Internet.
+
+—====_238659232==
+Content-Type: application/msword;  name="cookmasters.doc"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment, filename=" cookmasters.doc"
+
+GgjEPgkwIr4G29m1Lawr7GgjEPgkwIr4G29m14tifkAb3qPgGgjEPgkwIr4G29m1La29m14tifkAb
+3qPgGgjEPgkwIr4G29m1Law29m14tifkAb3qPgGgjEPgkwIr4G29m1Lawr629m14tifkAb3qPgIr4
+G29m1Lawr2GgjEPgkwIr4G29m1Lawr29m14tifkAb3qPg29m14tifkAb3qPgGgjEPgkwIr4G29m1L
+awr8Ab3qPgGgjEPgkwIr4G29m1GgjEPgkwIr4G29m1Lawr7GgjEPgkwIr4G29m1Hawr0==
+—====_238659232==—
+				</Pre>
+
+				<p>Note that the message is broken into parts, and each part is
+delimited by a boundary. The boundary itself works like a separator, and its
+value is defined in the first line of the message, right next to the first
+<tt class="monofont">content-type.</tt></p>
+
+				<p>Every part starts with a boundary mark, and then it is followed by a
+set of RFC822 headers telling you what is the content-type and the encoding
+format of the data for that part, and next, separated by a blank line, we have
+the data itself.</p>
+
+				<p>Check out the last line of the message. Do you see the trailing
+<tt clAss="monofont">—</Tt> after the boundary? That's how the message
+identifies the final boundary.</p>
+
+				<p>The next couple of modules are tools for mail and news message
+processing that use MIME messages. For more information, check out</P>
+
+				<p><i>RFC 1521</i></p>
+
+				<P>
+					<a taRGET="_blank" href="http://info.internet.isi.edu/in-notes/rfc/files/rfc1521.txt">http://info.internet.isi.edu/in-notes/rfc/files/rfc1521.txt</A>
+					<A NAme="idx1073747745"></a>
+					<a NAME="idx1073747746"></a></p>
+
+				
+					<h4><tT CLAss="monofont">
+							<a name="idx1073747747"></a>
+							<a name="idx1073747748"></a>rfc822</tt></h4>
+					<p>The <tt ClaSs="monofont">rfc822</tt> module parses mail headers that are
+  defined by the Internet standard RFC 822. This standard specifies the syntax
+  for text messages that are sent among computer users, within the framework of
+  electronic mail. These headers are used in a number of contexts including mail
+  handling and in the HTTP protocol. For more information, check out</P>
+
+					<blocKquoTE>
+<P>
+							<P>Internet standards—Standard for ARPA Internet Text
+Messages</p>
+
+						</p>
+<p>
+							<p>
+								<A TARget="_blank" hREF="http://info.internet.isi.edu/in-notes/rfc/files/rfc822.txt">http://info.internet.isi.edu/in-notes/rfc/files/rfc822.txt</A>
+								<a namE="idx1073747749"></A>
+								<A Name="idx1073747750"></a>
+								<a name="idx1073747751"></a>
+								<a name="idx1073747752"></a>
+								<a namE="idx1073747753"></a>
+								<a Name="idx1073747754"></A>
+								<a namE="idx1073747755"></a></p>
+
+						</p>
+</BLOCkquoTE>
+					<P>This module defines a class, 
+  <A name="idx1073747756"></A>
+						<A NAme="idx1073747757"></a><tT CLAss="monofont">Message,</tt> which represents a collection
+  of email headers. It is used in various contexts, usually to read such headers
+  from a file. This module also defines a helper class 
+  <a name="idx1073747758"></a>
+						<a name="idx1073747759"></a><tt clAss="monofont">AddressList</Tt> for parsing RFC822
+  addresses. A dictionary-like object represents the 
+  <a nAme="idx1073747760"></a>
+						<a Name="idx1073747761"></A><TT Class="monofont">Message</TT> object, where the message
+  headers are the dictionary keys.
+  <A Name="idx1073747762"></a>
+						<A NAMe="idx1073747763"></a></p>
+
+				
+				
+					<h4>
+						<TT CLass="monofont">mimetools</tt></h4>
+					<p>The <tt class="monofont">mimetools</tt> module provides utility tools for
+  parsing and manipulation of MIME multipart and encoded messages. This module
+  contains a special dictionary-like object called <tt clAss="monofont">Message</Tt>
+  that collects some information about MIME encoded messages.
+  <tt Class="monofont">mime-version,</Tt><tt CLASs="monofont">content-type,</tt><tT CLAss="monofont">charset,</tt><TT CLass="monofont">to,</tT><TT Class="monofont">date,</tt><tt class="monofont">from,</tt>
+  and <tt claSs="monofont">subject</tT> are some examples of dictionary keys that the
+  object possesses. This module also implements some utility functions. The
+  <tt cLass="monofont">choose_boundary()</tT> function creates a unique boundary
+  string.</p>
+
+					<p>The next two functions encode and decode file objects based on the
+  encoding format, which can be "quoted-printable",
+  "base64", or "uuencode".</p>
+
+					<UL>
+<LI>
+							<p>
+								<a naME="idx1073747764"></A>
+								<A name="idx1073747765"></A>
+								<A NAme="idx1073747766"></a><tT CLAss="monofont">decode(inputfileobject, outputfileobject,
+encoding)</tt></p>
+
+						</li>
+<li>
+							<p>
+								<a name="idx1073747767"></a>
+								<a namE="idx1073747768"></a><tT claSs="monofont">encode(inputfileobject, outputfileobject,
+encoding)</tt></p>
+
+						</Li>
+</ul>
+					<P>The functions <TT Class="monofont">copyliteral(input, output)</TT> and
+  <TT clasS="monofont">copybinary(input, output)</TT> read the input file (until EOF)
+  and write them to the output file object. Note that the objects must be
+  opened.</P>
+
+					<p>Take a look at the <tt cLASS="monofont">message =
+  mimetools.Message(fileobject)</tt> function. This function returns a
+  <tt class="monofont">Message</tt> object derived from the
+  <tt class="monofont">rfc822.Message</tt> class. Therefore, it supports all the 
+  <A naMe="idx1073747769"></a>methods supported by <tT clasS="monofont">rfc822.Message,</tt>
+  plus the following ones:</p>
+
+					<BLOCkquoTE>
+<P>
+							<A name="idx1073747770"></A>
+							<A NAme="idx1073747771"></a>
+							<p>
+								<TT CLass="monofont">message.gettype()</tt>— 
+    
+								Returns the type/subtype from the content-type header. The
+  default value is <tt class="monofont">text/plain.</tt>
+							</p>
+
+						</p>
+<p>
+							<a naMe="idx1073747772"></a>
+							<A namE="idx1073747773"></a>
+							<p>
+								<tt ClasS="monofont">message.getencoding()</TT>— 
+    
+								Returns the message encoding method. The default value is
+  <Tt claSS="monofont">7bit.</TT>
+							</p>
+
+						</p>
+<p>
+							<a NAME="idx1073747774"></a>
+							<a naME="idx1073747775"></A>
+							<P>
+								<tt class="monofont">message.getplist()</tt>— 
+    
+								Returns the list of parameters from the content-type
+  header.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747776"></a>
+							<a nAme="idx1073747777"></A>
+							<p>
+								<tt Class="monofont">message.getmaintype()</Tt>— 
+    
+								Returns the main type of the content-type header. The default
+  value is <tt CLASs="monofont">text.</tt>
+							</p>
+
+						</P>
+<P>
+							<A Name="idx1073747778"></a>
+							<A NAMe="idx1073747779"></a>
+							<p>
+								<tT CLAss="monofont">message.getsubtype()</tt>— 
+    
+								Returns the subtype of the content-type header. The default
+  value is <tt class="monofont">plain.</tt>
+							</p>
+
+						</p>
+<p>
+							<a namE="idx1073747780"></a>
+							<a Name="idx1073747781"></A>
+							<p>
+								<tt cLass="monofont">message.getparam(name)</TT>— 
+    
+								Returns the value of the first <TT clasS="monofont">name</TT>
+  parameter found in the content-type header.
+							</P>
+
+						</p>
+</bloCKQUote>
+				
+				
+					<h4>
+						<TT CLass="monofont">MimeWriter</tt></h4>
+					<p>The <tt class="monofont">MimeWriter</tt> module implements a generic
+  file-writing class, also called <tt clAss="monofont">MimeWriter,</Tt> that is used to
+  create MIME encoded multipart files (messages).</p>
+
+					<pRe>
+						
+message =
+ MimeWriter.MimeWriter(fileobject_forwriting) 
+					</pre>
+
+					<P>The following function adds a header line <tt cLASS="monofont">("key:
+  value")</tt> to the MIME message.</p>
+
+					<pRE>
+						
+message.addheader(key, value
+ [,prefix = 0]) 
+					</PRe>
+
+					<p>If <tt CLASs="monofont">prefix = 0,</tt> the header line is appended to
+  the end; if it is <tT CLAss="monofont">1,</tt> the line is inserted at the
+  start.</p>
+
+					<p>Next, you have some 
+  <a name="idx1073747782"></a>
+						<a name="idx1073747783"></a>
+						<a nAme="idx1073747784"></A>methods that are exposed by the <tt cLass="monofont">message</tT>
+  object.</p>
+
+					<blOCKQuote>
+<P>
+							<A NAme="idx1073747785"></a>
+							<a NAME="idx1073747786"></a>
+							<p>
+								<tt CLASs="monofont">message.flushheaders()</tt>— 
+    
+								Writes all headers to the file.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747787"></a>
+							<a name="idx1073747788"></a>
+							<p>
+								<tT clAss="monofont">message.startbody(ctype [,plist [,prefix =
+  1]])</tT>— 
+    
+								Specifies the content-type, and a list of additional
+  parameters to be included in the message body. It returns a file-like object
+  that must be used to write to the message body.
+							</p>
+
+						</p>
+<p>
+							<a Name="idx1073747789"></A>
+							<A NAme="idx1073747790"></a>
+							<p>
+								<TT CLass="monofont">message.startmultipartbody(subtype [,boundary
+  [,plist [,prefix = 1]]])</tT>— 
+    
+								Specifies the multipart subtype, a possible user-defined
+  boundary, and a list of additional parameters to be included in the multipart
+  message subtype. It returns a file-like object that must be used to write to
+  the message body.
+							</P>
+
+						</P>
+<P>
+							<a namE="idx1073747791"></A>
+							<A Name="idx1073747792"></a>
+							<p>
+								<tt class="monofont">message.nextpart()</tt>— 
+    
+								Creates a new part in a multipart message. The
+  <tt clasS="monofont">startbody</tt> method must be called before calling this
+  one.
+							</P>
+
+						</p>
+<p>
+							<a Name="idx1073747793"></a>
+							<A namE="idx1073747794"></A>
+							<P>
+								<Tt claSS="monofont">message.lastpart()</TT>— 
+    
+								Indicates the last part of a multipart message.
+  <a namE="idx1073747795"></A>
+									<A Name="idx1073747796"></a>
+									<A NAMe="idx1073747797"></a>
+							</p>
+
+						</p>
+</blockquote>
+					<p>The next code introduces the basic usage of the MimeWriter module,
+  along with other supporting modules.
+  <a name="idx1073747798"></A>
+						<a nAme="idx1073747799"></a>
+						<A name="idx1073747800"></A>
+						<a naME="idx1073747801"></A>
+						<A name="idx1073747802"></A>
+						<A NAme="idx1073747803"></a>
+						<a NAME="idx1073747804"></a>
+						<a naME="idx1073747805"></A>
+						<A name="idx1073747806"></a></p>
+
+					<pre>
+						
+import MimeWriter
+import quopri, base64
+
+msgtext = "This message has 3 images as attachments."
+files = ["sun.jpg", "rain.jpg", "beach.jpg"]
+mimefile = "mymessage.msg"
+
+mimemsg = MimeWriter.MimeWriter(sys.stdout)
+mimemsg.addheader("Mime-Version","1.0")
+mimemsg.startmultipartbody("mixed")
+
+msgpart = mimemsg.nextpart()
+msgpart.addheader("Content-Transfer-Encoding", "quoted-printable")
+msgpart.startbody("text/plain")
+quopri.encode(StringIO.StringIO(msgtext), mimefile, 0)
+
+for file in files:
+    msgpart = mimemsg.nextpart()
+    msgpart.addheader("Content-Transfer-Encoding", "base64")
+    msgpart.startbody("text/jpeg")
+    base64.encode(open(file, "rb"), mimefile)
+
+mimemsg.lastpart()
+
+					</pre>
+
+				
+				
+					<h4><tt class="monofont">
+							<A naMe="idx1073747807"></a>
+							<a Name="idx1073747808"></a>multifile</Tt></h4>
+					<p>The <TT CLass="monofont">multifile</tT> module enables you to treat
+  distinct parts of a text file as file-like input objects. Usually, it uses text
+  files that are found in <TT Class="monofont">MIME</TT> encoded messages. This module
+  works by splitting a file into logical blocks that are delimited by a unique
+  boundary string. Next, you will be exposed to the class implemented by this
+  module: <TT clasS="monofont">MultiFile.</TT></P>
+
+				
+				
+					<h4>
+						<tt class="monofont">MultiFile (fp[, seekable])</tt></h4>
+					<p>Create a multifile. You must instantiate this class with an input
+  object argument for the <tt class="monofont">MultiFile</tT> instance to get lines
+  from, such as a file object returned by 
+  <a nAme="idx1073747809"></a>
+						<A name="idx1073747810"></A><tt cLASS="monofont">open().</tt><tt CLASs="monofont">MultiFile</tt> only
+  looks at the input object's 
+  <a NAME="idx1073747811"></a>
+						<a naME="idx1073747812"></A><Tt class="monofont">readline(),</tt>
+						<a name="idx1073747813"></a>
+						<a name="idx1073747814"></a><Tt cLass="monofont">seek(),</Tt> and 
+  <a naMe="idx1073747815"></a>
+						<a NAME="idx1073747816"></a><tt cLASS="monofont">tell()</tt> methods, and the latter two are
+  only needed if you want random access to the individual MIME parts. To use
+  <tt CLASs="monofont">MultiFile</tt> on a non-seekable stream object, set the optional
+  seekable argument to false; this will prevent using the input object's
+  <tT CLAss="monofont">seek()</tt> and <tt class="monofont">tell()</tt> methods.</p>
+
+					<p>It will be useful to know that in <tt claSs="monofont">MultiFile</tT>'s
+  view of the world, text is composed of three kinds of lines: data,
+  section-dividers, and end-markers. <tt cLass="monofont">MultiFile</tT> is designed to
+  support parsing of messages that might have multiple nested message parts, each
+  with its own pattern for section-divider and end-marker lines.</p>
+
+					<p>A <tT CLAss="monofont">MultiFile</tt> instance has the following 
+  <A NAMe="idx1073747817"></a>methods:
+  <a nAME="idx1073747818"></A>
+						<a namE="idx1073747819"></A>
+						<A Name="idx1073747820"></a>
+						<a name="idx1073747821"></a>
+						<a name="idx1073747822"></a>
+						<a namE="idx1073747823"></a>
+						<a Name="idx1073747824"></A>
+						<a namE="idx1073747825"></a>
+						<a nAME="idx1073747826"></A>
+						<a namE="idx1073747827"></A>
+						<A Name="idx1073747828"></a>
+						<A NAMe="idx1073747829"></a></p>
+
+					<bLOCKquote>
+<p><a name="idx1073747830"></a><a name="idx1073747831"></a>
+							<p><tT clAss="monofont">push(</tT><i><tt cLass="monofont">str</TT></I><Tt claSS="monofont">)</TT>— 
+    
+								Pushes a boundary string. When an appropriately decorated version of this boundary is found as an input line, it will be interpreted as a section-divider or end-marker. All
+subsequent reads will return the empty string to indicate end-of-file, until a call to <tt clASS="monofont">pop()</Tt> removes the boundary or a <tt cLASS="monofont">next()</tt> call re-enables it.</p>
+
+							<p>It is possible to push more than one boundary. Encountering the most-recently-pushed boundary will return EOF; encountering any other boundary
+will raise an error.</p>
+
+							<a name="idx1073747832"></a>
+							<a name="idx1073747833"></a>
+							<p><tt ClaSs="monofont">readline(</tt><I><tt clAss="monofont">str</tT></I><TT clasS="monofont">)</TT>— 
+    
+								Reads a line. If the line is data (not a section-divider, end-marker, or real EOF), return it. If the line matches the most-recently-stacked boundary, return
+<Tt claSS="monofont">''</TT> and set <tt clASS="monofont">self.last</Tt> to
+<tt class="monofont">1</tt> or <tt class="monofont">0</tt> according to if the match is or is
+not an end-marker. If the line matches any other stacked boundary, raise an
+error. On encountering end-of-file on the underlying stream object, the method
+raises Error unless all boundaries have been popped.</p>
+
+						</P>
+<p>
+							<a Name="idx1073747834"></A>
+							<a namE="idx1073747835"></a>
+							<p><tT CLAss="monofont">readlines(</tt><I><TT Class="monofont">str</TT></I><Tt claSS="monofont">)</TT>— 
+    
+								Returns all lines remaining in this part as a list of strings.</p>
+
+						</p>
+<p>
+							<a name="idx1073747836"></a>
+							<a name="idx1073747837"></a>
+							<p><tt clAss="monofont">read()</Tt>— 
+    
+								Reads all lines, up to the next section. Returns them as a single (multiline) string. Note that this doesn't take a size argument.</p>
+
+						</p>
+<P>
+							<a namE="idx1073747838"></a>
+							<a nAME="idx1073747839"></A>
+							<p><tt cLASS="monofont">next()</tt>— 
+    
+								Skips lines to the next section (that is, reads lines until a section-divider or end-marker has been consumed). Returns true if there is such a section, false if an end-marker is seen. Re-enables the most-recently-pushed boundary.</p>
+
+						</p>
+<P>
+							<A NAme="idx1073747840"></a>
+							<a NAME="idx1073747841"></a>
+							<p><tt class="monofont">pop()</tt>— 
+    
+								Pops a section boundary. This boundary will no longer be interpreted as EOF.</p>
+
+						</p>
+<p>
+							<a name="idx1073747842"></a>
+							<A naMe="idx1073747843"></a>
+							<p><Tt claSs="monofont">seek(pos[, whence])</tt>— 
+    
+								Seeks. Seek indices are relative to the start of the current section. The
+<TT CLass="monofont">pos</tT> and <TT Class="monofont">whence</TT> arguments are interpreted
+as if for a file seek.</P>
+
+						</P>
+<p>
+							<a naME="idx1073747844"></A>
+							<A name="idx1073747845"></a>
+							<p><tt class="monofont">tell()</tt>— 
+    
+								Returns the file position relative to the start of the current section.</p>
+
+						</p>
+<p>
+							<a nAme="idx1073747846"></A>
+							<a naMe="idx1073747847"></a>
+							<p><tT claSS="monofont">is_data(str)</TT>— 
+    
+								Returns true if <tt clASS="monofont">str</Tt> is data and false if it might be a section boundary. As written, it tests for a prefix other than <tt cLASS="monofont">-</tt> at the start of a line (which all MIME boundaries have), but it is declared so that it can be
+overridden in derived classes.</p>
+
+						</p>
+</BLOCkquote>
+					<div class="note"><p class="notetitle"><B>Note</b></p><P>
+
+						<p>Note that this test is intended as a fast guard for the real
+ boundary tests; if it always returns false, it will merely slow processing, not
+ cause it to fail.</p>
+
+					</p></Div>
+<br>
+<Br>
+
+					<blOCKQuote>
+<P><A NAme="idx1073747848"></a>
+							<a NAME="idx1073747849"></a>
+							<p><tt CLASs="monofont">section_divider(</tt><i>str</i><tt class="monofont">)</tt>— 
+    
+								Turns a boundary into a section-divider line. By default, this method prepends
+<tt clasS="monofont">-</tt> (which MIME section boundaries have), but it is declared
+so that it can be overridden in derived classes. This method needs not append
+LF or CR-LF because a comparison with the result ignores trailing
+whitespace.</P>
+
+						</p>
+<p>
+							<a Name="idx1073747850"></a>
+							<A namE="idx1073747851"></A>
+							<P><Tt claSS="monofont">end_marker(</TT><i>str</i><tt CLASs="monofont">)</tt>— 
+    
+								Turns a boundary string into an end-marker line. By default, this method prepends
+<tT CLAss="monofont">-</tt> and appends <tt class="monofont">-</tt> (similar to a
+MIME-multipart end-of-message marker), but it is declared so that it can be
+overridden in derived classes. This method need not append LF or CR-LF, because
+a comparison with the result ignores trailing whitespace.</p>
+
+							<a name="idx1073747852"></a>
+						</P>
+</blOckqUote>
+					<p>Finally, MultiFile instances have two public instance 
+  <A namE="idx1073747853"></A>variables:</P>
+
+					<BlockQUOTe>
+<p>
+							<a nAME="idx1073747854"></A>
+							<a namE="idx1073747855"></A>
+							<P><Tt class="monofont">level</tt>— 
+    
+								This is the nesting depth of the current part.</p>
+
+						</p>
+<p>
+							<a name="idx1073747856"></a>
+							<a naMe="idx1073747857"></a>
+							<P><tt cLass="monofont">last</tT>— 
+    
+								True if the last end-of-file was for an end-of-message marker.</p>
+
+						</p>
+</bLOCKquotE>
+					<P>The following code exemplifies the <TT clasS="monofont">multifile</TT>
+  module.</P>
+
+					<pre>
+						
+1: import multifile
+2: import rfc822, cgi
+3:
+4: multipart = "multipart/"
+5: filename=open("mymail.msg")
+6: msg = rfc822.Message(filename)
+7:
+8: msgtype, args = cgi.parse_header(msg["content-type"])
+9:
+10: if msgtype[:10] ==  multipart:
+11:     multifilehandle = multifile.MultiFile(filename)
+12:     multifilehandle.push(args["boundary"])
+13:     while multifilehandle.next():
+14:         msg = rfc822.Message(multifilehandle)
+15:         print msg.read()
+16:     multifilehandle.pop()
+17: else:
+18:     print "This is not a multi-part message!"
+19:     print "---------------------------------"
+20:     print filename.read()
+
+					</pRE>
+
+					<P>Line 6: <Tt class="monofont">msg</tt> is a dictionary-like object. You can
+  apply dictionary methods to this object, such as
+  <tt class="monofont">msg.keys(),</tt><tt cLasS="monofont">msg.values(),</tt> and
+  <tT clasS="monofont">msg.items().</tt></p>
+
+					<P>Line 8: Parses the <TT Class="monofont">content-type</TT> header.</P>
+
+					<P>Lines 11-16: Handles the multipart message.</p>
+
+					<p>Line 15: Prints the multipart message.</p>
+
+					<p>Line 20: Prints the plain message, when necessary.
+  <A NAMe="idx1073747858"></a>
+						<a nAME="idx1073747859"></A>
+						<a name="idx1073747860"></a>
+						<a name="idx1073747861"></a>
+						<a name="idx1073747862"></a></p>
+
+				
+				
+					<h4>
+						<Tt cLass="monofont">mailcap</Tt></h4>
+					<p>The <tT claSS="monofont">mailcap</TT> module is used to read
+  <tt clASS="monofont">mailcap</Tt> files and to configure how
+  <tt cLASS="monofont">MIME-aware</tt> applications react to files with different
+  <tt CLASs="monofont">MIME</tt> types.</p>
+
+					<div class="note"><p class="notetitle"><b>Note</b></P><p>
+
+						<p><Tt clAss="monofont">Mailcap</tt> files are used to inform applications,
+ including mail readers and Web browsers, how to process files with different
+ <Tt clASS="monofont">MIME</Tt> types. A small section of a mailcap file looks like
+ this:</p>
+
+						<prE>
+							
+image/jpeg; imageviewer %s
+
+application/zip; gzip %s
+
+						</PRE>
+
+					</p></div>
+<BR>
+<BR>
+
+					<p>The next code demonstrates the usage of the mailcap module.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; import mailcap
+&gt;&gt;&gt; capsdict = mailcap.getcaps()
+&gt;&gt;&gt; command, rawentry = mailcap.findmatch(capsdict, "image/jpeg", \
+                           filename="/usr/local/uid213")
+ &gt;&gt;&gt; print command
+imageviewer /usr/local/uid213
+&gt;&gt;&gt; print  rawentry
+image/jpeg; imageviewer %s
+
+					</PRE>
+
+					<p>The 
+  <a name="idx1073747863"></a>
+						<a name="idx1073747864"></a><tt class="monofont">getcaps()</Tt> function reads the mailcap
+  file and returns a dictionary mapping MIME types to mailcap entries; and the 
+  <a Name="idx1073747865"></A>
+						<a namE="idx1073747866"></a><tt CLASs="monofont">findmatch()</tt> function searches the
+  dictionary for a specific MIME entry, returning a command line ready to be
+  executed along with the raw mailcap entry.
+  <a NAME="idx1073747867"></a>
+						<a naME="idx1073747868"></A></P>
+
+				
+				
+					<h4>
+						<tt cLASS="monofont">mimetypes</tt></h4>
+					<p>The <tt class="monofont">mimetypes</tt> module supports conversions
+  between a filename or <tt class="monofont">URL</Tt> and the <tT claSs="monofont">MIME</tt>
+  type associated with the filename extension. Essentially, it is used to guess
+  the <tT claSS="monofont">MIME</TT> type associated with a file, based on its extension.</p>
+
+					<p>For example,</p>
+
+					<p><TABLe borDER="1" CellsPACIng="0" cellpadding="1" width="100%">
+<coLgrOup aLign="left" sPan="2">
+<tR VALign="top">
+<tH>
+<FONt sizE="2">Filename extension</FONt></th>
+<tH>
+<FONt size="2">MIME type associated(Main type/Sub type)</font></th>
+</tr>
+<tr valigN="top">
+<td>
+<Font Size="2">.html</fOnt></tD>
+<TD>
+<Font sIZE="2">text/html</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<font size="2">.gif</font></td>
+<td>
+<fonT siZe="2">image/gif</foNt></td>
+</tR>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">.xml</fONT></Td>
+<td>
+<fONT Size="2">application/xml</font></td>
+</tr>
+</colgroup>
+</tAblE></p>
+
+					<p>A complete list of extensions and their associated MIME types can
+  be found by typing</p>
+
+					<Pre>
+						
+import mimetypes
+for EXTENSION in mimetypes.types_map.keys():
+    print EXTENSION, " = ", mimetypes.types_map[EXTENSION]
+
+					</prE>
+
+					<p>Next, you have a list of <a nAME="idx1073747869"></A>functions exposed by the <tt clASS="monofont">mimetypes</Tt>
+  module.</p>
+
+					<blOCKQuote>
+<P>
+							<A NAme="idx1073747870"></a>
+							<a name="idx1073747871"></a>
+							<p><tt class="monofont">mimetypes.guess_type(url_or_filename)</tt>— 
+    
+								Returns a tuple (type, encoding), such as <tT clAss="monofont">('image/jpeg', None)</tT> and <tt clAss="monofont">('application/zip', None).</tT></P>
+
+						</P>
+<P>
+							<a namE="idx1073747872"></A>
+							<A Name="idx1073747873"></a>
+							<P><TT Class="monofont">mimetypes.guess_extension(type)</TT>— 
+    
+								Tries to guess the file extension based on a MIME type.</P>
+
+						</P>
+<p>
+							<a name="idx1073747874"></a>
+							<a name="idx1073747875"></a>
+							<p><tt clasS="monofont">mimetypes.init([files])</tt>— 
+    
+								Initializes the module after reading a file stored in the following format:</P>
+
+							<pre>
+								
+type/subtype:  extension1, extension2, …
+…
+
+							</Pre>
+
+						</p>
+<p>
+							<A namE="idx1073747876"></A>
+							<A Name="idx1073747877"></a>
+							<P><TT Class="monofont">mimetypes.read_mime_types(filename)</TT>— 
+    
+								Reads a file and returns a dictionary mapping MIME types and the filename extensions associated to that type.</P>
+
+						</P>
+</blocKQUOte>
+					<p>The following 
+  <a name="idx1073747878"></a>dictionaries are also exposed by the
+  <tt class="monofont">mimetypes</tt> module.</p>
+
+					<bLocKquoTe>
+<p><p><tT claSS="monofont">mimetypes.suffix_map</TT>— 
+    
+								Dictionary that maps suffixes to suffixes.</p>
+
+						</p>
+<p>
+							<p><TT CLass="monofont">mimetypes.encodings_map</tT>— 
+    
+								Dictionary that maps encoding types to filename extensions.</P>
+
+						</P>
+<P>
+							<p><tt cLASS="monofont">mimetypes.types_map</tt>— 
+    
+								Dictionary that maps MIME types to filename extensions.
+<a name="idx1073747879"></a><a name="idx1073747880"></a>
+							</p>
+
+						</p>
+</blocKquOte>
+				
+				
+					<h4>
+						<Tt claSs="monofont">base64</tt></H4>
+					<P>The <TT clasS="monofont">base64</TT> module performs
+  <Tt claSS="monofont">base64</TT> encoding and decoding of arbitrary binary strings
+  into text string that can be safely emailed or posted. This module is commonly
+  used to encode binary data in mail attachments.</p>
+
+					<p>The arguments of the next functions can be either filenames or file
+  objects. The first argument is open for reading:</p>
+
+					<pRE>
+						
+base64.encode(messagefilehandle, outputfilehandle)
+ 
+					</PRe>
+
+					<p>The second argument is open for writing:</p>
+
+					<pre>
+						
+base64.decode(encodedfilehandle, outputfilehandle)
+ 
+					</pre>
+
+					<p>This module also implements the functions <i><tt class="monofont">encodestring(stringtoencode)</tt></I> and <i><tT claSs="monofont">decodestring(encodedstring),</tt></i> which are built on top of the <Tt clASS="monofont">encode</Tt> and <tt cLASS="monofont">decode</tt> function. Both internally use the <tt CLASs="monofont">StringIO</tt> module in order to enable the use of the <tT CLAss="monofont">base64</tt> module to encode and decode strings. Note that the <i><tt class="monofont">decodestring()</tt></i> function returns a string that contains the decoded binary data.</p>
+
+				
+				
+					<h4>
+						<tt cLasS="monofont">quopri</tt></h4>
+					<P>The <tt clAss="monofont">quopri</tT> module performs quoted-printable
+  transport encoding and decoding of MIME quoted-printable data, as defined in
+  RFC 1521: "MIME (Multipurpose Internet Mail Extensions) Part One".
+  The quoted-printable encoding is designed for data in which there are
+  relatively few nonprintable characters; the base64 encoding scheme available
+  via the base64 module is more compact if there are many such characters, as
+  when sending a graphics file. This format is primarily used to encode text
+  files.</P>
+
+					<P>
+						<A name="idx1073747881"></A>
+						<A NAme="idx1073747882"></a>
+						<a NAME="idx1073747883"></a><tt cLASS="monofont">decode(input, output)</tt> decodes the
+  contents of the input file and writes the resulting decoded binary data to the
+  output file. <tt class="monofont">input</tt> and <tt class="monofont">output</tt> must either
+  be file objects or objects that mimic the file object interface.
+  <Tt cLass="monofont">input</Tt> will be read until <tt cLass="monofont">input.read()</TT>
+  returns an empty string.
+  <A Name="idx1073747884"></a>
+						<A NAMe="idx1073747885"></a>
+						<a nAME="idx1073747886"></A>
+						<a namE="idx1073747887"></A>
+						<A Name="idx1073747888"></a>
+						<a name="idx1073747889"></a>
+						<a name="idx1073747890"></a>
+						<a namE="idx1073747891"></a>
+						<a Name="idx1073747892"></A></p>
+
+					<p>
+						<a nAme="idx1073747893"></a>
+						<A NAMe="idx1073747894"></a><tt CLASs="monofont">encode(input, output, quotetabs)</tt> encodes
+  the contents of the input file and writes the resulting quoted-printable data
+  to the output file. <tT CLAss="monofont">input</tt> and <TT CLass="monofont">output</tt> must
+  either be file objects or objects that mimic the file object interface.
+  <tt class="monofont">input</tt> will be read until <tt clasS="monofont">input.read()</tt>
+  returns an empty string.
+  <A namE="idx1073747895"></a></p>
+
+					<p>This module only supports file-to-file conversions. If you need to
+  handle string objects, you need to convert them using the <tT claSS="monofont">StringIO</TT> module.</p>
+
+					<pre>
+						
+import quopri
+quopri.encode(infile, outfile, tabs=0)
+quopri.decode(infile, outfile) 
+
+					</PRE>
+
+					<P>This module is purely based on plain U.S. ASCII text. Non-U.S.
+  characters are mapped to an <tt clASS="monofont">=</Tt> followed by two hexadecimal
+  digits. The <tt cLASS="monofont">=</tt> character resembles <tt class="monofont">=3D,</tt>
+  and whitespaces at the end of lines are represented by <tt class="monofont">=20.</tt>
+						<A naMe="idx1073747896"></a>
+						<a Name="idx1073747897"></a></P>
+
+				
+				
+					<h4>
+						<tt CLASs="monofont">mailbox</tt></h4>
+					<P>The <TT Class="monofont">mailbox</TT> module implements classes that allow
+  easy and uniform access to read various mailbox formats in a UNIX
+  system.</P>
+
+					<Pre>
+						
+import mailbox
+
+mailboxname = "/tmp/mymailbox"
+mbox = mailbox.UnixMailbox(open(mailboxname)) 
+
+msgcounter = 0
+while 1:
+    mailmsg = mbox.next() 
+    if not mailmsg:
+        break
+    msgcounter = msgcounter + 1
+    messagebody = mailmsg.fp.read()
+    print messagebody
+print
+print "The message counter is %d" % (msgcounter)
+
+					</prE>
+
+				
+				
+					<H4><TT class="monofont">
+							<a name="idx1073747898"></a>
+							<a name="idx1073747899"></a>mimify</tt></h4>
+					<P>The <tt ClasS="monofont">mimify</tt> module has functions to convert and
+  process simple and multi-part mail messages to/from MIME format—messages
+  are converted to plain text. This module can be used either as a command line
+  tool, or as a regular Python module.</p>
+
+					<p>To encode, you need to type:</P>
+
+					<pre>
+						
+$mimify.py -e raw_message mime_message
+
+					</PRE>
+
+					<P>or</p>
+
+					<pre>
+						
+import mimify, StringIO, sys
+msgfilename = "msgfilename.msg" 
+filename = StringIO.StringIO()
+mimify.unmimify(msgfilename, filename, 1)
+file.seek(0)
+mimify.mimify(filename, sys.stdout)
+
+					</PRE>
+
+					<P>To decode, type</p>
+
+					<pre>
+						
+$mimify.py -f mime_message raw_message
+
+					</PRE>
+
+					<P>or</p>
+
+					<pre>
+						
+import mimify, sys
+mimify.unmimify(messagefilename, sys.stdout, 1) 
+
+					</PRE>
+
+					<P><tt class="monofont">
+							<a name="idx1073747900"></a>
+							<a name="idx1073747901"></a>Message(file[, seekable])</tT></p>
+
+					<p>A <Tt clAss="monofont">Message</tt> instance is instantiated with an input
+  object as parameter. <Tt clASS="monofont">Message</Tt> relies only on the input object
+  having a 
+  <a naME="idx1073747902"></A>
+						<A name="idx1073747903"></A><TT Class="monofont">readline()</TT> method; in particular,
+  ordinary file objects qualify. Instantiation reads headers from the input
+  object up to a delimiter line (normally a blank line) and stores them in the
+  instance.</P>
+
+					<P>This class can work with any input object that supports a 
+  <a name="idx1073747904"></a>
+						<a name="idx1073747905"></a><tt class="monofont">readline()</tT> method. If the input object
+  has seek and tell capability, the 
+  <a nAme="idx1073747906"></a>
+						<A name="idx1073747907"></A><tt cLASS="monofont">rewindbody()</tt> method will work; also,
+  illegal lines will be pushed back onto the input stream. If the input object
+  lacks seek and tell capability but has an 
+  <a nAME="idx1073747908"></A>
+						<a namE="idx1073747909"></A><TT clasS="monofont">unread()</TT> method that can push back a
+  line of input, <Tt class="monofont">Message</tt> will use that to push back illegal
+  lines. Thus, this class can be used to parse messages coming from a buffered
+  stream.</p>
+
+					<p>The optional seekable argument is provided as a workaround for
+  certain studio libraries in which 
+  <a name="idx1073747910"></a>
+						<a namE="idx1073747911"></a><tT claSs="monofont">tell()</tt> discards buffered data before
+  discovering that the 
+  <a Name="idx1073747912"></A>
+						<A NAme="idx1073747913"></a><tT CLAss="monofont">lseek()</tt> system call doesn't work. For
+  maximum portability, you should set the seekable argument to zero to prevent
+  that initial <TT CLass="monofont">tell()</tT> when passing in an unseekable object
+  such as a file object created from a socket object.</P>
+
+					<P>Input lines as read from the file might either be terminated by
+  CR-LF or by a single linefeed; a terminating CR-LF is replaced by a single
+  linefeed before the line is stored.</P>
+
+					<p>All header matching is done independent of upper- or lowercase; for
+  example, <tt class="monofont">m['From'],</tt><tt class="monofont">m['from'],</tt> and
+  <tT clAss="monofont">m['FROM']</tT> all yield the same result.</p>
+
+					<bloCkquOTE>
+<P><a namE="idx1073747914"></A>
+							<A Name="idx1073747915"></a>
+							<P><TT Class="monofont">AddressList(field)</TT>— 
+    
+								You can instantiate the <TT class="monofont">AddressList</tt> helper class using a single
+string parameter, a comma-separated list of RFC 822 addresses to be parsed.
+(The parameter None yields an empty list.)</p>
+
+						</p>
+<p><a name="idx1073747916"></a>
+							<a namE="idx1073747917"></a>
+							<p><Tt clAss="monofont">parsedate(date)</tt>— 
+    
+								attempts to parse a date according to the rules in RFC 822. However, some mailers don't follow that format as specified, so <Tt clASS="monofont">parsedate()</Tt> tries to
+guess correctly in such cases. <tt cLASS="monofont">date</tt> is a string containing
+an RFC 822 date, such as <tt CLASs="monofont">'Mon, 20 Nov 1995 19:12:08 -0500'.</tt>
+If it succeeds in parsing the date, <tT CLAss="monofont">parsedate()</tt> returns a
+9-tuple that can be passed directly to <tt class="monofont">time.mktime()</tt>;
+otherwise None will be returned.
+<a name="idx1073747918"></a>
+									<a NamE="idx1073747919"></a>
+									<a nAme="idx1073747920"></a>
+									<a Name="idx1073747921"></A>
+									<A NAme="idx1073747922"></a>
+									<a NAME="idx1073747923"></a>
+									<a naME="idx1073747924"></A>
+									<A name="idx1073747925"></A>
+									<A NAme="idx1073747926"></a>
+									<a name="idx1073747927"></a>
+									<a name="idx1073747928"></a></p>
+
+						</p>
+<p>
+							<a nAme="idx1073747929"></A>
+							<a naMe="idx1073747930"></a>
+							<p><tT claSS="monofont">parsedate_tz(date)</TT>— 
+    
+								performs the same function as <tt clASS="monofont">parsedate(),</Tt> but returns either None or a 10-tuple; the first nine elements make up a tuple that can be passed directly
+to <tt cLASS="monofont">time.mktime(),</tt> and the tenth is the offset of the date's
+timezone from UTC (which is the official term for Greenwich Mean Time). (Note
+that the sign of the timezone offset is the opposite of the sign of the
+<tt CLASs="monofont">time.timezone</tt> variable for the same timezone; the latter
+variable follows the POSIX standard, whereas this module follows RFC 822.) If
+the input string has no timezone, the last element of the tuple returned is
+None.</p>
+
+						</p>
+<p>
+							<a name="idx1073747931"></a>
+							<a name="idx1073747932"></a>
+							<p><tT clAss="monofont">mktime_tz(tuple)</tT>— 
+    
+								Turn a 10-tuple as returned by <tt clAss="monofont">parsedate_tz()</tT> into a UTC timestamp. It the timezone item in the tuple is None, assume local time. Minor deficiency: this first interprets the first eight elements as a local time and then
+compensates for the timezone difference; this might yield a slight error around
+daylight savings time switch dates. It is not enough to worry about for common
+use.<A NAme="idx1073747933"></a>
+									<a NAME="idx1073747934"></a></p>
+
+						</p>
+</bLOCKquotE>
+				
+				
+					<H4>
+  
+  Message Objects</H4>
+					<P>A message object behavior is very similar to a dictionary. A
+  <tt class="monofont">Message</tt> instance has also the following methods:</p>
+
+					<blockquote>
+<P>
+							<a nAme="idx1073747935"></a>
+							<A name="idx1073747936"></A>
+							<a naME="idx1073747937"></A>
+							<P><tt clASS="monofont">rewindbody()</Tt>— 
+    
+								Seeks to the start of the message body. This only works if the file object is
+seekable.</p>
+</p>
+<p><A NAMe="idx1073747938"></a>
+							<a nAME="idx1073747939"></A>
+							<p><tt class="monofont">isheader(</tt><i><tt class="monofont">line</tt></I><tt ClasS="monofont">)</tt>— 
+    
+								Returns a line's canonicalized fieldname (the dictionary key that will be used to index it) if the line is a legal RFC822 header; otherwise returns None (implying that
+parsing should stop here and the line be pushed back on the input stream). It
+is sometimes useful to override this method in a subclass.
+<a nAme="idx1073747940"></a>
+									<A NAMe="idx1073747941"></a>
+									<a nAME="idx1073747942"></A>
+									<a namE="idx1073747943"></A>
+									<A Name="idx1073747944"></a>
+									<A NAMe="idx1073747945"></a>
+									<a name="idx1073747946"></a>
+									<a name="idx1073747947"></a>
+									<a name="idx1073747948"></a>
+									<A naMe="idx1073747949"></a>
+									<a Name="idx1073747950"></a>
+									<A namE="idx1073747951"></A></P>
+
+						</P>
+<p>
+							<a naME="idx1073747952"></A>
+							<A name="idx1073747953"></A>
+							<P><TT clasS="monofont">islast(</TT><I><tt class="monofont">line</tt></i><tt class="monofont">)</tt>— 
+    
+								Returns true if the given line is a delimiter on which Message should stop. The delimiter line is consumed, and the file object's read location is positioned immediately
+after it. By default, this method just checks that the line is blank, but you
+can override it in a subclass.</p>
+
+						</P>
+<p>
+							<a Name="idx1073747954"></A>
+							<a namE="idx1073747955"></a>
+							<p><tT CLAss="monofont">iscomment(</tt><I><TT Class="monofont">line</TT></I><Tt claSS="monofont">)</TT>— 
+    
+								Returns true if the given line should be ignored entirely, just skipped. By default, this is a stub that always returns false, but you can override it in a subclass.</p>
+
+						</p>
+<p>
+							<a name="idx1073747956"></a>
+							<a name="idx1073747957"></a>
+							<p><tt clAss="monofont">getallmatchingheaders(</Tt><i><tT clasS="monofont">name</tt></i><TT CLass="monofont">)</tT>— 
+    
+								Returns a list of lines consisting of all headers matching <TT Class="monofont">name,</TT> if any. Each physical line, whether it is a continuation line or not, is a
+separate list item. Returns the empty list if no header matches <TT clasS="monofont">name.</TT></P>
+</p>
+<p><a name="idx1073747958"></a>
+							<a name="idx1073747959"></a>
+							<p><tt claSs="monofont">getfirstmatchingheader(</tT><i><tt Class="monofont">name</Tt></i><tT CLAss="monofont">)</tt>— 
+    
+								Returns a list of lines comprising the first header matching <TT CLass="monofont">name,</tT> and its continuation line(s), if any. Returns <TT Class="monofont">None</TT> if no
+header matches <TT class="monofont">name.</tt></p>
+
+						</p>
+<p><a name="idx1073747960"></a>
+							<a namE="idx1073747961"></a>
+							<p><Tt clAss="monofont">getrawheader(</tt><I><tt cLASS="monofont">name</tt></i><tT CLAss="monofont">)</tt>— 
+    
+								Returns a single string consisting of the text after the colon in the first header
+matching <TT CLass="monofont">name.</tT> This includes leading whitespace, the
+trailing linefeed, and internal linefeeds and whitespace if any continuation
+line(s) were present. Returns <TT Class="monofont">None</tt> if no header matches
+<tt class="monofont">name.</tt></p>
+
+						</p>
+<p><a nAme="idx1073747962"></A>
+							<a naMe="idx1073747963"></a>
+							<p><tT claSS="monofont">getheader(</TT><i><tt cLASS="monofont">name[, default]</tt></i><tT CLAss="monofont">)</tt>— 
+    
+								Similar to <TT CLass="monofont">getrawheader(name),</tt> but strips leading and trailing whitespace. Internal whitespace is not stripped. The optional default argument can be used to specify a different default to be returned when there is no header matching <tt class="monofont">name.</tt></p>
+
+						</p>
+<p>
+							<a naMe="idx1073747964"></a>
+							<A namE="idx1073747965"></a>
+							<p><tt ClasS="monofont">get(</TT><I><tt clASS="monofont">name[, default</Tt></i><tt CLASs="monofont">])</tt>— 
+    
+								An alias for <tT CLAss="monofont">getheader(),</tt> to make the interface more compatible with regular dictionaries.</p>
+
+						</p>
+<p>
+							<a name="idx1073747966"></a>
+							<a name="idx1073747967"></a>
+							<p><Tt cLass="monofont">getaddr(</Tt><i><tt ClasS="monofont">name</TT></I><tt clASS="monofont">)</Tt>— 
+    
+								Returns a pair (full name, email address) parsed from the string returned by
+<tt cLASS="monofont">getheader(name).</tt> If no header matching <tt CLASs="monofont">name</tt> exists, returns <tt class="monofont">(None, None)</tt>; otherwise both the full name and the address are (possibly empty) strings.
+<a name="idx1073747968"></a>
+									<a nAme="idx1073747969"></A>
+									<a naMe="idx1073747970"></a>
+									<a nAme="idx1073747971"></a>
+									<A NAMe="idx1073747972"></a>
+									<a nAME="idx1073747973"></A>
+									<a namE="idx1073747974"></A>
+									<A Name="idx1073747975"></a>
+									<A NAMe="idx1073747976"></a>
+									<a name="idx1073747977"></a>
+									<a name="idx1073747978"></a>
+									<a name="idx1073747979"></a></P>
+
+							<p>Example: If m's first From header contains the string
+<tT claSs="monofont">'alessa@lessaworld.com (Andre Lessa)',</tt>
+m.getaddr('From') will yield the pair (<tT claSS="monofont">'Andre Lessa',
+'alessa@lessaworld.com'</TT>). If the header contained <tt clASS="monofont">'Andre
+Lessa &lt;alessa@lessaworld.com&gt;'</Tt> instead, it would yield the
+exact same result.</p>
+</p>
+<p><A NAMe="idx1073747980"></a><a nAME="idx1073747981"></A>
+							<p><tt class="monofont">getaddrlist(</tt><i><tt class="monofont">name</tt></I><tt ClasS="monofont">)</tt>— 
+    
+								Similar to <tt ClasS="monofont">getaddr(list),</TT> but parses a header containing a list of email addresses (for example, a To header) and returns a list of (full name,
+email address) pairs (even if there was only one address in the header). If no
+header matches <Tt claSS="monofont">name,</TT> returns an empty list.</p>
+
+						</p>
+<p><p>If multiple headers exist that match the named header (for
+example, if there are several CC headers), all are parsed for addresses. Any
+continuation lines that the named headers contain are also parsed.</P>
+
+						</P>
+<P>
+							<P>Note that the current version of this function is not really
+correct. It yields bogus results if a full name contains a comma.</p>
+
+						</p>
+<p>
+							<a NAME="idx1073747982"></a>
+							<a name="idx1073747983"></a>
+							<p><tt class="monofont">getdate(</tt><i><tt ClaSs="monofont">name</tt></I><tt clAss="monofont">)</tT>— 
+    
+								Retrieves a header using <TT Class="monofont">getheader()</TT> and parses it into a 9-tuple compatible with <TT clasS="monofont">time.mktime().</TT> If no header matches name, or
+it is unparsable, returns <Tt claSS="monofont">None.</TT></p>
+
+						</p>
+<p><p>Date parsing appears to be a black art, and not all mailers
+adhere to the standard. Although it has been tested and found correct on a
+large collection of email from many sources, it is still possible that this
+function might occasionally yield an incorrect result.</p>
+
+						</p>
+<p><a name="idx1073747984"></a>
+							<a name="idx1073747985"></a>
+							<p><Tt cLass="monofont">getdate_tz</Tt><i><tt ClasS="monofont">name</TT></I><tt clASS="monofont">)</Tt>— 
+    
+								Retrieves a header using <tt cLASS="monofont">getheader()</tt> and parses it into a 10-tuple; the first nine elements will make a tuple compatible with <tt CLASs="monofont">time.mktime(),</tt> and the 10th is a number giving the offset of the date's timezone from UTC. Similar to <tt class="monofont">getdate(),</tt> if no header matches name, or it is unparsable, it returns <tt class="monofont">None.</tT>
+									<a nAme="idx1073747986"></a></P>
+
+						</p>
+</bloCkquOTE>
+					<P><tt clASS="monofont">Message</Tt> instances also support a read-only
+  mapping interface. In particular: <tt cLASS="monofont">m[name]</tt> is similar to
+  <tt CLASs="monofont">m.getheader(name),</tt> but raises KeyError if there is no
+  matching header; and
+  <tt class="monofont">len(m),</tt><tt class="monofont">m.has_key(name),</tT><tt ClasS="monofont">m.keys(),</tt><tt ClasS="monofont">m.values(),</TT>
+  and <Tt claSS="monofont">m.items()</TT> act as expected (and consistently).</p>
+
+					<p>Finally, <tt CLASs="monofont">Message</tt> instances have two public
+  instance 
+  <a NAME="idx1073747987"></a>variables:</p>
+
+					<ul>
+<li>
+							<p>
+								<a name="idx1073747988"></a>
+								<a name="idx1073747989"></a><tT clAss="monofont">headers</tT>—A list containing the
+entire set of header lines, in the order in which they were read (except that
+<tt clAss="monofont">setitem</tT> calls can disturb this order). Each line contains a
+trailing newline. The blank line terminating the headers is not contained in
+the list.</P>
+
+						</LI>
+<li>
+							<p>
+								<a NAME="idx1073747990"></a>
+								<a naME="idx1073747991"></A><Tt claSS="monofont">fp</TT>—The file object passed at instantiation time.
+<a name="idx1073747992"></a>
+								<a name="idx1073747993"></a></p>
+
+						</li>
+</ul>
+				
+				
+					<h4>
+						<tt ClaSs="monofont">AddressList</tt>Objects</H4>
+					<p>An <tt cLass="monofont">AddressList</TT> instance has the following 
+  <A Name="idx1073747994"></a>methods:</P>
+
+					<BLOckquOTE>
+<P>
+							<a namE="idx1073747995"></A>
+							<A Name="idx1073747996"></a>
+							<p><tt class="monofont">__len__(</tt><i><tt claSs="monofont">name</tT></i><tt Class="monofont">)</Tt>— 
+    
+								Returns the number of addresses in the address list.</p>
+</p>
+<P><A NAme="idx1073747997"></a>
+							<a NAME="idx1073747998"></a><p><tt CLASs="monofont">__str__(</tt><i><TT CLass="monofont">name</tt></i><tt class="monofont">)</tt>— 
+    
+								Returns a string representation of the address list. Addresses are rendered in
+<tt claSs="monofont">"name"</tT><tt cLass="monofont">&lt;host@domain&gt;</tT> form, comma separated.</p>
+</p>
+<p><A NAMe="idx1073747999"></a>
+							<a nAME="idx1073748000"></A>
+							<p><tt cLASS="monofont">__add__(</tt><i><tT CLAss="monofont">name</tt></i><tt class="monofont">)</tt>— 
+    
+								Returns an <tt clasS="monofont">AddressList</tt> instance that contains all addresses in both <Tt clAss="monofont">AddressList</tt> operands, with duplicates removed (set union).</P>
+</p>
+<p><a NAME="idx1073748001"></a>
+							<a naME="idx1073748002"></A>
+							<P><tt clASS="monofont">__sub__(</Tt><i><tt CLASs="monofont">name</tt></i><tt class="monofont">)</tt>— 
+    
+								Returns an <tt class="monofont">AddressList</Tt> instance that contains every address in the left-hand <tT claSs="monofont">AddressList</tt> operand that is not present in the
+right-hand address operand (set difference).</p>
+</P>
+</bloCKQUote>
+					<p>Finally, <TT CLass="monofont">AddressList</tT> instances have one public instance 
+<A NAme="idx1073748003"></a>
+variable: 
+  <a NAME="idx1073748004"></a>
+						<a name="idx1073748005"></a><tt class="monofont">addresslist,</tt> which is a list of tuple
+  string pairs, one per address. In each member, the first is the canonicalized
+  name part of the address, the second is the route-address (@-separated
+  host-domain pair).</p>
+
+					<p>The following example demonstrates the use of the 
+  <a nAme="idx1073748006"></A>
+						<a naMe="idx1073748007"></a>rfc822 module:</p>
+
+					<pRe>
+						
+import rfc822
+mailbox_filename = "mymailbox.msg"
+
+file_handle = open("mailbox_filename")
+messagedic = rfc822.Message(file_handle)
+
+content_type = messagedic["content-type"]
+from_field = messagedic["From"]
+to_field = messagedic.getaddr("To")
+subject_field = messagedic["Subject"]
+
+file_handle.close()
+print content_type, from_field, to_field, subject_field
+
+					</prE>
+
+				
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="193.html" title="Handling Other Markup Languages"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=194" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="194.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="195.html" title="Generic Conversion Functions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073747814">2nd</a> <a href="#idx1073747843">3rd</a> <a href="#idx1073748000">__add__(name) method</a><BR>
+ <a href="#idx1073747996">__len__(name) method</a><BR>
+ <a href="#idx1073747998">__str__(name) method</a><BR>
+ <a href="#idx1073748002">__sub__(name) method</a><BR>
+ <a href="#idx1073747758">AddressList class</a><BR>
+ <a href="#idx1073748005">addresslist variable</a><BR>
+ <a href="#idx1073747915">AddressList(field) method</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747759">AddressList</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747757">Message</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747901">Message(file[,</a> <a href="#idx1073747928">2nd</a> <a href="#idx1073747934">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747828">MultiFile (fp[,</a> <a href="#idx1073747861">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747829">multifile module</a> <a href="#idx1073747862">2nd</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747749">Multipurpose Internet Mail Extension (MIME) parsing and</a> <a href="#idx1073747798">2nd</a> <a href="#idx1073747818">3rd</a> <a href="#idx1073747884">4th</a> <a href="#idx1073747918">5th</a> <a href="#idx1073747940">6th</a> <a href="#idx1073747968">7th</a><BR>
+ <a href="#idx1073747881">decode(input, output) function</a><BR>
+ <a href="#idx1073747766">decode(inputfileobject, outputfileobject, encoding) function</a><BR>
+dictionaries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747878">mimetypes module</a><BR>
+ <a href="#idx1073747893">encode(input, output, quotetabs) function</a><BR>
+ <a href="#idx1073747768">encode(inputfileobject, outputfileobject, encoding) function</a><BR>
+encoded messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747744">Multipurpose Internet Mail Extension (MIME)</a> <a href="#idx1073747746">2nd</a><BR>
+ <a href="#idx1073747851">end_marker(str) method</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747755">Multipurpose Internet Mail (MIME)</a> <a href="#idx1073747804">2nd</a> <a href="#idx1073747824">3rd</a> <a href="#idx1073747890">4th</a> <a href="#idx1073747924">5th</a> <a href="#idx1073747946">6th</a> <a href="#idx1073747974">7th</a><BR>
+ <a href="#idx1073747865">findmatch() function</a><BR>
+ <a href="#idx1073747991">fp instance</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747882">decode(input, output)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747765">decode(inputfileobject, outputfileobject, encoding)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747894">encode(input, output, quotetabs)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747767">encode(inputfileobject, outputfileobject, encoding)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747866">findmatch()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747864">getcaps()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747764">mimetools module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747869">mimetypes module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747872">mimetypes.guess_extension(type)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747870">mimetypes.guess_type(url_or_filename)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747874">mimetypes.init([files])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747876">mimetypes.read_mime_types(filename)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747883">quopri module</a> <a href="#idx1073747895">2nd</a><BR>
+ <a href="#idx1073747965">get(name[, default]) method</a><BR>
+ <a href="#idx1073747967">getaddr(name) method</a><BR>
+ <a href="#idx1073747981">getaddrlist(name) method</a><BR>
+ <a href="#idx1073747957">getallmatchingheaders(name) method</a><BR>
+ <a href="#idx1073747863">getcaps() function</a><BR>
+ <a href="#idx1073747985">getdate tz(name) method</a><BR>
+ <a href="#idx1073747983">getdate(name) method</a><BR>
+ <a href="#idx1073747959">getfirstmatchingheader(name) method</a><BR>
+ <a href="#idx1073747963">getheader(name[, default]) method</a><BR>
+ <a href="#idx1073747961">getrawheader(name) method</a><BR>
+ <a href="#idx1073747989">headers instance</a><BR>
+instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747990">fp</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747988">headers</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747987">Message objects</a><BR>
+ <a href="#idx1073747847">is_data(str) method</a><BR>
+ <a href="#idx1073747955">iscomment(line) method</a><BR>
+ <a href="#idx1073747939">isheader(line) method</a><BR>
+ <a href="#idx1073747953">islast(line) method</a><BR>
+ <a href="#idx1073747913">l</a><BR>
+ <a href="#idx1073747856">last variable</a><BR>
+ <a href="#idx1073747854">level variable</a><BR>
+ <a href="#idx1073747867">mailcap module</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747750">Multipurpose Internet Mail Extension (MIME)</a> <a href="#idx1073747799">2nd</a> <a href="#idx1073747819">3rd</a> <a href="#idx1073747885">4th</a> <a href="#idx1073747919">5th</a> <a href="#idx1073747941">6th</a> <a href="#idx1073747969">7th</a><BR>
+ <a href="#idx1073747756">Message class</a><BR>
+ <a href="#idx1073747760">Message object</a><BR>
+message object<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747783">methods exposed by</a> <a href="#idx1073747796">2nd</a><BR>
+ <a href="#idx1073747950">message objects</a> <a href="#idx1073747978">2nd</a> <a href="#idx1073747992">3rd</a><BR>
+ <a href="#idx1073747900">Message(file[,</a> <a href="#idx1073747927">2nd</a> <a href="#idx1073747933">3rd</a><BR>
+ <a href="#idx1073747786">message.flushheaders() method</a><BR>
+ <a href="#idx1073747773">message.getencoding() method</a><BR>
+ <a href="#idx1073747777">message.getmaintype() method</a><BR>
+ <a href="#idx1073747781">message.getparam(name) method</a><BR>
+ <a href="#idx1073747775">message.getplist() method</a><BR>
+ <a href="#idx1073747779">message.getsubtype() method</a><BR>
+ <a href="#idx1073747771">message.gettype() method</a><BR>
+ <a href="#idx1073747794">message.lastpart() method</a><BR>
+ <a href="#idx1073747792">message.nextpart() method</a><BR>
+ <a href="#idx1073747788">message.startbody(ctype, [,plist [,prefix = 1]]) method</a><BR>
+ <a href="#idx1073747790">message.startmultipartbody(subtype [,boundary [,plist [,prefix = 1]]]) method</a><BR>
+messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747743">MIME-encoded</a> <a href="#idx1073747745">2nd</a><BR>
+ <a href="#idx1073747813">methods</a> <a href="#idx1073747842">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747999">__add__(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747995">__len__(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747997">__str__(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748001">__sub__(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747994">AddressList objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747914">AddressList(field)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747850">end_marker(str)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747782">exposed by message object</a> <a href="#idx1073747795">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747964">get(name[, default])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747966">getaddr(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747980">getaddrlist(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747956">getallmatchingheaders(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747984">getdate tz(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747982">getdate(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747958">getfirstmatchingheader(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747962">getheader(name[, default])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747960">getrawheader(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747846">is_data(str)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747954">iscomment(line)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747938">isheader(line)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747952">islast(line)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747912">l</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747935">message objects</a> <a href="#idx1073747949">2nd</a> <a href="#idx1073747977">3rd</a> <a href="#idx1073747986">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747785">message.flushheaders()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747772">message.getencoding()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747776">message.getmaintype()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747780">message.getparam(name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747774">message.getplist()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747778">message.getsubtype()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747770">message.gettype()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747793">message.lastpart()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747791">message.nextpart()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747787">message.startbody(ctype, [,plist [,prefix = 1]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747789">message.startmultipartbody(subtype [,boundary [,plist [,prefix = 1]]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747769">mimetools module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747931">mktime tz(tuple)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747817">MultiFile (fp[,</a> <a href="#idx1073747852">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747838">next</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747809">open()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747929">parsedate tz(date)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747916">parsedate(date)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747840">pop</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747830">push(str)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747836">read</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747811">readline()</a> <a href="#idx1073747902">2nd</a> <a href="#idx1073747904">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747832">readline(str)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747834">readlines(str)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747906">rewindbody()</a> <a href="#idx1073747937">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747848">section_divider(str)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747815">tell()</a> <a href="#idx1073747844">2nd</a> <a href="#idx1073747910">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747908">unread()</a><BR>
+ <a href="#idx1073747754">MIME (Multipurpose Internet Mail Extension)</a> <a href="#idx1073747803">2nd</a> <a href="#idx1073747823">3rd</a> <a href="#idx1073747889">4th</a> <a href="#idx1073747923">5th</a> <a href="#idx1073747945">6th</a> <a href="#idx1073747973">7th</a><BR>
+ <a href="#idx1073747879">mimetypes module</a><BR>
+ <a href="#idx1073747873">mimetypes.guess_extension(type) function</a><BR>
+ <a href="#idx1073747871">mimetypes.guess_type(url_or_filename) function</a><BR>
+ <a href="#idx1073747875">mimetypes.init([files]) function</a><BR>
+ <a href="#idx1073747877">mimetypes.read_mime_types(filename) function</a><BR>
+ <a href="#idx1073747805">MimeWriter module</a><BR>
+ <a href="#idx1073747898">mimify module</a> <a href="#idx1073747925">2nd</a> <a href="#idx1073747947">3rd</a> <a href="#idx1073747975">4th</a><BR>
+ <a href="#idx1073747932">mktime tz(tuple) method</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747868">mailcap</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747880">mimetypes</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747806">MimeWriter</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747899">mimify</a> <a href="#idx1073747926">2nd</a> <a href="#idx1073747948">3rd</a> <a href="#idx1073747976">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747808">multifile</a> <a href="#idx1073747826">2nd</a> <a href="#idx1073747859">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747892">quopri</a> <a href="#idx1073747897">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747748">rfc822</a> <a href="#idx1073747763">2nd</a> <a href="#idx1073748007">3rd</a><BR>
+ <a href="#idx1073747827">MultiFile (fp[,</a> <a href="#idx1073747860">2nd</a><BR>
+ <a href="#idx1073747807">multifile module</a> <a href="#idx1073747825">2nd</a> <a href="#idx1073747858">3rd</a><BR>
+ <a href="#idx1073747753">Multipurpose Internet Mail Extension (MIME)</a> <a href="#idx1073747802">2nd</a> <a href="#idx1073747822">3rd</a> <a href="#idx1073747888">4th</a> <a href="#idx1073747922">5th</a> <a href="#idx1073747944">6th</a> <a href="#idx1073747972">7th</a><BR>
+ <a href="#idx1073747751">Multipurpose Internet Mail Extension (MIME) parsing and</a> <a href="#idx1073747800">2nd</a> <a href="#idx1073747820">3rd</a> <a href="#idx1073747886">4th</a> <a href="#idx1073747920">5th</a> <a href="#idx1073747942">6th</a> <a href="#idx1073747970">7th</a><BR>
+ <a href="#idx1073747839">next method</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747761">Message</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747951">message</a> <a href="#idx1073747979">2nd</a> <a href="#idx1073747993">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747784">methods exposed by</a> <a href="#idx1073747797">2nd</a><BR>
+ <a href="#idx1073747810">open() method</a><BR>
+ <a href="#idx1073747930">parsedate tz(date) method</a><BR>
+ <a href="#idx1073747917">parsedate(date) method</a><BR>
+parsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747752">Multipurpose Internet Mail Extension (MIME)</a> <a href="#idx1073747801">2nd</a> <a href="#idx1073747821">3rd</a> <a href="#idx1073747887">4th</a> <a href="#idx1073747921">5th</a> <a href="#idx1073747943">6th</a> <a href="#idx1073747971">7th</a><BR>
+ <a href="#idx1073747841">pop method</a><BR>
+ <a href="#idx1073747831">push(str) method</a><BR>
+ <a href="#idx1073747891">quopri module</a> <a href="#idx1073747896">2nd</a><BR>
+ <a href="#idx1073747837">read method</a><BR>
+ <a href="#idx1073747812">readline() method</a> <a href="#idx1073747903">2nd</a> <a href="#idx1073747905">3rd</a><BR>
+ <a href="#idx1073747833">readline(str) method</a><BR>
+ <a href="#idx1073747835">readlines(str) method</a><BR>
+ <a href="#idx1073747907">rewindbody() method</a> <a href="#idx1073747936">2nd</a><BR>
+ <a href="#idx1073747747">rfc822 module</a> <a href="#idx1073747762">2nd</a> <a href="#idx1073748006">3rd</a><BR>
+ <a href="#idx1073747849">section_divider(str) method</a><BR>
+ <a href="#idx1073747816">tell() method</a> <a href="#idx1073747845">2nd</a> <a href="#idx1073747911">3rd</a><BR>
+ <a href="#idx1073747909">unread() method</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748004">addresslist</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748003">AddressList objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747857">last</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747855">level</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747853">MultiFile (fp[,</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

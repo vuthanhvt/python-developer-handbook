@@ -1,0 +1,116 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Creating User-defined Exceptions</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="91.html" class="navtitle">4. Exception Handling</a> &gt; <span class="nonavtitle">Creating User-defined Exceptions</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="97.html" title="try/finally "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=98" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="98.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="99.html" title="The Standard Exception Hierarchy"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A32%3A21+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147038000014099175001108</font><a href="read1.asp?bookname=0672319942&snode=98&now=5%2F31%2F2002+4%3A32%3A21+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Creating User-defined Exceptions</h3>
+				<p>Python allows you to create your own exceptions by <a NAME="idx1073743222"></a><a naME="idx1073743223"></A>subclassing any standard Python exception.</P>
+
+				<div cLASS="note"><p class="notetitle"><b>Note</b></p><p>
+
+					<p>Take a look at <a href="102.html">Chapter 5, "Object-Oriented Programming,"</a>  for more details about working with classes.</p>
+
+				</p></dIv>
+<bR>
+<br>
+
+				<pRe>
+					
+&gt;&gt;&gt; import exceptions
+&gt;&gt;&gt; class ConfigError (exceptions.Exception):
+…       def __init__(self, arg=None):
+…           self.args = arg
+…
+&gt;&gt;&gt; try:
+…       raise ConfigError("Bad hostname")
+…   except ConfigError, e:
+…       print e.args
+…
+Bad hostname
+
+				</pre>
+
+				<P>The <a naME="idx1073743224"></A><A name="idx1073743225"></A><TT Class="monofont">import</TT> statement from the previous example isn't really necessary because the <TT clasS="monofont">exceptions</TT> module contents are  automatically imported by the interpreter. Remember that you can't use the prefix <Tt class="monofont">"exceptions"</tt> because the <tt class="monofont">exceptions</tt> module is not available in the <tt cLasS="monofont">__main__</tt> namespace until you import it.<a Name="idx1073743226"></a><A namE="idx1073743227"></A><A Name="idx1073743228"></a><A NAMe="idx1073743229"></a><a nAME="idx1073743230"></A></p>
+
+				<p>The next example uses the class created in the previous example as a base class to create a new class.</p>
+
+				<pRE>
+					
+&gt;&gt;&gt; class TimeoutError(ConfigError):
+
+…       def printargs(self):
+…           print self.args
+…
+&gt;&gt;&gt; try:
+…       raise TimeoutError, "Timeout"
+…   except TimeoutError, e:
+
+…       e.printargs()
+…
+Timeout
+
+				</PRe>
+
+				<p>As you could see, just by overriding the <tt class="monofont">__init__</tt> method, you are able to create your own exception classes.</p>
+
+				<p>You can also change the output of a traceback message by overwriting the <tt class="monofont">__str__</Tt> method.</p>
+
+				<Pre>
+					
+&gt;&gt;&gt; class ConfigError(Exception):
+…       def __init__(self, args=None):
+…           self.args = args
+
+…         def __str__(self):
+…           return "\ nError in the module configuration\ n" + }
+…                  `self.args` + "\ n"…
+&gt;&gt;&gt; raise ConfigError, "bad hostname"
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+__main__.ConfigError
+Error in the module configuration
+bad hostname
+
+				</pRe>
+
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="97.html" title="try/finally "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=98" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="98.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="99.html" title="The Standard Exception Hierarchy"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743228">user-defined exceptions</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743223">subclassing</a> <a href="#idx1073743230">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743226">user-defined, creating</a><BR>
+ <a href="#idx1073743224">import statement</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743225">import</a><BR>
+subclassing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743222">exceptions</a> <a href="#idx1073743229">2nd</a><BR>
+user-defined exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743227">creating</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

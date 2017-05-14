@@ -1,0 +1,170 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Code Examples</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="91.html" class="navtitle">4. Exception Handling</a> &gt; <span class="nonavtitle">Code Examples</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="100.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=101" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="101.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="103.html" title="5. Object-Oriented Programming"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A32%3A43+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147038000008098125033022</font><a href="read4.asp?bookname=0672319942&snode=101&now=5%2F31%2F2002+4%3A32%3A43+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Code Examples</h3>
+				<p>This first example returns the square root of a given input value. If the input value is negative or if it is a character, two traceback messages are displayed.</p>
+
+				
+					<H5>
+Listing 4.1 Square root (File squareroot.py)</H5>
+					<PRe claSS="monofont">
+ 1: ###
+ 2: # Program: Square root
+ 3: # Author: Andre S Lessa
+ 4: ###
+ 5:
+ 6: ### import modules
+ 7:
+ 8: import sys, traceback, math
+ 9:
+10: try:
+11:     n = float(raw_input("Please, enter a number: "))
+12:     print "The sqrt of %f is %f" % (n, math.sqrt(n))
+13:
+14: except (ValueError, TypeError, OverflowError):
+15:     print "-----------------------------------------"
+16:     print "This is the standard traceback message:"
+17:     print ""
+18:     traceback.print_exc()
+19:
+20:     print "-----------------------------------------"
+21:     print "This is the customized traceback message:"
+22:     print ""
+23:     info = sys.exc_info()
+24:     exc_type = info[0]
+25:     exc_value = info[1]
+26:     exc_traceback = info[2]
+27:
+28:     trace = traceback.extract_tb(sys.exc_traceback)
+29:     print "Exception Type:  ", exc_type
+30:     print "Error Message:   ", exc_value
+31:     print "File name:       ", trace[0][0]
+32:     print "Error message:   ", trace[0][1]
+33:     print "Line:            ", trace[0][2]
+34:     print "Function:        ", trace[0][3]
+35: else:
+36:     print "Everything went just fine."
+</PRe>
+				
+				<p>The <tt CLASs="monofont">except</tt> clause in line 14 covers <tt class="monofont">ValueError, OverflowError,</tt> and <tt class="monofont">TypeError</tT> exceptions.</p>
+
+				<p>The <Tt clAss="monofont">else</tt> clause in line 35 is only executed when no exception is raised.</P>
+
+				<p>The next lines show the two traceback messages that are displayed by this program: Python standard traceback message and a customized version.</p>
+
+				<pRE>
+					
+C:\python&gt; s:\python\squareroot.py
+Please, enter a number: i
+-----------------------------------------
+This is the standard traceback message:
+
+Traceback (innermost last):
+  File "s:\python\squareroot.py", line 11, in ?
+   n = float(raw_input("Please, enter a number: "))
+ValueError: invalid literal for float(): i
+-----------------------------------------
+This is the customized traceback message:
+
+Exception Type:   exceptions.ValueError
+Error Message:    invalid literal for float(): i
+File name:        s:\python\squareroot.py
+Error message:    11
+Line:             ?
+Function:         n = float(raw_input("Please, enter a number: "))
+
+				</PRe>
+
+				<p>This example uses multiple <tt CLASs="monofont">except</tt> clauses (lines 17 and 20). It also takes advantage of the <tT CLAss="monofont">assert</tt> command to raise a debug exception (line 15).</P>
+
+				
+					<H5>
+Listing 4.2 Internet country codes (File countrycode.py)</H5>
+					<Pre class="monofont">
+ 1: ###
+ 2: # Program: Country code
+ 3: # Author: Andre S Lessa
+ 4: ###
+ 5:
+ 6: ### import modules
+ 7:
+ 8: import sys, string
+ 9:
+10: matrix = { "brazil":"br","france":"fr","argentina":"ar","usa":"us"}
+11:
+12: def getcode(country):
+13:      try:
+14:          data = matrix[string.lower(country)]
+15:          assert data != "br", "You cannot select this country " + }
+                                  "for this action!"
+16:          return data
+17:      except KeyError:
+18:          print sys.exc_type, ":", "%s is not in the list." % }
+                   sys.exc_value
+19:          print
+20:      except AssertionError, b:
+21:          print b
+22:          print
+23:
+24: while 1:
+25:     country = raw_input("Enter the country name or press x to exit: ")
+26:     if country == "x":
+27:         break
+28:     code = getcode(country)
+29:     if code != None:
+30:         print "%s's country code is %s" % (country, code)
+31:         print
+</pre>
+				
+				<p>The following <i>screen dump</i> shows the execution of this program. Note that the program doesn't end after an exception has been raised.</p>
+
+				<pre>
+					
+C:\&gt;python s:\python\ countrycode.py
+Enter the country name or press x to exit: Mexico
+exceptions.KeyError : mexico is not in the list.
+
+Enter the country name or press x to exit: USA
+USA's country code is us
+
+Enter the country name or press x to exit: Brazil
+You cannot select this country for this action!
+
+Enter the country name or press x to exit: Argentina
+Argentina's country code is ar
+
+Enter the country name or press x to exit: x
+
+C:\Python&gt;
+
+				</pre>
+
+				<P>See more <i>exception handling</i> cases in the final section of the next chapter.</P>
+
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="100.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=101" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="101.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="103.html" title="5. Object-Oriented Programming"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

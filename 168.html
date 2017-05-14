@@ -1,0 +1,229 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; SMTP/POP3/IMAP</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="161.html" class="navtitle">10. Basic Network Background</a> &gt; <span class="nonavtitle">SMTP/POP3/IMAP</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="167.html" title="FTP"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=168" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="168.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="169.html" title="Newsgroups—Telnet and Gopher"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A42%3A36+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148046198037136137134103</font><a href="read2.asp?bookname=0672319942&snode=168&now=5%2F31%2F2002+4%3A42%3A36+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			SMTP/POP3/IMAP</h3>
+				<p>SMTP and POP3 are the protocols used most in the Internet because they provide the necessary services to handle electronic mails (<i>emails</I>).</P>
+
+				<P>The <I>Simple Mail Transfer Protocol (SMTP)</i> is the official way to transfer mail over the Internet. This protocol is an Internet standard, specified in RFC-821. It defines how programs exchange email on the Internet.</p>
+
+				<p>The SMTP protocol is responsible for putting the email in mailboxes, and when it comes to removing the messages from there, it is necessary to use the POP3 protocol. The <i>Post Office Protocol (POP)</I> is used by mail readers that work on network clients and are connected to designated mail servers to send and receive mail. The purpose of this protocol is to allow remote access to a mailbox that is hosted by an external server. For your information, SMTP is also used to send the messages across the Internet.</P>
+
+				<P>Anyone who writes a POP client can communicate with a POP server because this protocol abstracts the details of the email to a system-independent level. This protocol was designed so that users could access their mail from machines that weren't configured for receiving mail. Also, all systems on the Internet mail system agree to use SMTP to handle mail. Storage of mail can vary on different systems, although this is not an OS issue, but an application issue.</P>
+
+				<p>
+					<a naME="idx1073746066"></A>
+					<A name="idx1073746067"></a>
+					<a name="idx1073746068"></a>
+					<i>IMAP (Internet Message Access Protocol)</i> is another protocol that is being used for mail reading. It is a method of accessing electronic mail or bulletin board messages that are kept on a (possibly shared) mail server. In other words, it permits a client email program to access remote message stores as if they were local.<a name="idx1073746069"></a>
+					<a NamE="idx1073746070"></a>
+					<a nAme="idx1073746071"></a>
+					<a Name="idx1073746072"></A>
+					<A NAme="idx1073746073"></a>
+					<a NAME="idx1073746074"></a>
+					<a naME="idx1073746075"></A>
+					<A name="idx1073746076"></A>
+					<A NAme="idx1073746077"></a>
+					<a name="idx1073746078"></a>
+				</p>
+
+				
+					<h4>
+				
+				
+				Handling Email Services</h4>
+					<p>The <a name="idx1073746079"></a>
+						<a NamE="idx1073746080"></a>
+						<tt Class="monofont">smtplib</Tt> module provides a low-level client interface to the SMTP protocol that can be used to send emails to any machine in the Internet that has an SMTP or ESMTP listener <tt CLASs="monofont">daemon.</tt> An example of this is as follows:</p>
+
+					<PRE>
+						
+import smtplib
+import string
+host = "localhost"
+fromclause = "alessa@bebemania.com.br"
+toclause = "rtaveira@bebemania.com.br, jp@alugueaqui.com.br"
+toclause = string.splitfields(toclause, ",")
+msgbody = """
+This email brings good news for you!!
+Best Regards
+"""
+SMTPServer = smtplib.SMTP(host)
+SMTPServer.sendmail(fromclause, toclause, msgbody)
+SMTPServer.quit()
+
+					</Pre>
+
+					<p>The <a NAME="idx1073746081"></a>
+						<a naME="idx1073746082"></A>
+						<Tt class="monofont">poplib</tt> module provides a low-level <tt class="monofont">POP3</tt> client-side interface for connecting to a <tt cLasS="monofont">POP3</tt> server using a client protocol, as defined in <tT clasS="monofont">RFC 1725.</tt> This module is shown in the following:</p>
+
+					<PRE>
+						
+import poplib, string
+PopServerName = "mail.lessaworld.com"
+PopServer = poplib.POP3(PopServerName)
+print PopServer.getwelcome()
+PopServer.user('AndreLessa')
+PopServer.pass_('qwerty0987')
+r, items, octets = PopServer.list()
+msgid, size = string.split(items[-1])
+r, msg, octets = PopServer.retr(msgid)
+msg = string.join(msg, "\ n")
+print msg
+
+					</Pre>
+
+					<p>See <a HREF="187.html">Chapter 13, "Data Manipulation,"
+						</a>  for details about using the module <tt cLASS="monofont">rfc822</tt>  to parse the header lines and the modules <tt CLASs="monofont">mimetools</tt>  and <tt class="monofont">mimify</tt>  to process the data attached to the message.</p>
+
+					<p>The <a name="idx1073746083"></a>
+						<A naMe="idx1073746084"></a>
+						<tT clasS="monofont">imaplib</tt> module provides a low-level IMAP client-side interface for connecting to an <tT CLAss="monofont">IMAP4</tt> mail server using the <TT CLass="monofont">IMAP4rev1</tT> client protocol, as defined in <TT Class="monofont">RFC 2060.</TT> This module is shown in the following:<A Name="idx1073746085"></a>
+						<a name="idx1073746086"></a>
+						<a name="idx1073746087"></a>
+						<a namE="idx1073746088"></a>
+						<a Name="idx1073746089"></A>
+						<a namE="idx1073746090"></a>
+						<a nAME="idx1073746091"></A>
+						<a namE="idx1073746092"></A>
+						<A Name="idx1073746093"></a>
+						<A NAMe="idx1073746094"></a>
+						<a nAME="idx1073746095"></A>
+						<a name="idx1073746096"></a>
+						<a name="idx1073746097"></a>
+					</p>
+
+					<pre>
+						
+ 1: import imaplib, getpass, string
+ 2: host = "imap.lessaworld.com"
+ 3: user = "AndreLessa"
+ 4: pwd = getpass.getpass()
+ 5: msgserver = imaplib.IMAP4(host)
+ 6: msgserver.login(user, pwd)
+ 7: msgserver.select()
+ 8: msgtyp, msgitems = msgserver.search(None, "ALL")
+ 9: for idx in string.split(msgitems[0]):
+10:     msgtyp, msgitems = msgserver.fetch(idx, "(RFC822)")
+11:     print "Message %s\ n" % num
+12:     print "---------------\ n"
+13:     print "Content: %s" % msgitems[0][1]
+14: msgserver.logout()
+
+					</pre>
+
+					<p>The <A naMe="idx1073746098"></a>
+						<a Name="idx1073746099"></a>
+						<Tt clASS="monofont">search</Tt> method (line 8) lists all the message items available at the IMAP server.</p>
+
+					<p>For more details about IMAP, check out the IMAP Connection Web site:</p>
+
+					<P>
+						<A TArget="_blank" HREF="http://www.imap.org/">http://www.imap.org/</a>
+					</p>
+
+					<p>If you want to have more control over your emails, and you are willing to have it filtered, take a look at <a NAME="idx1073746100"></a>
+						<a name="idx1073746101"></a>
+						<a name="idx1073746102"></a>
+						<a name="idx1073746103"></a>
+						<i>SpamWall,</I> by <a nAme="idx1073746104"></a>Sam Rushing.</P>
+
+					<p>This program is a simple, powerful framework for building custom SPAM filters. SpamWall is a filtering proxy daemon that sits between your site's SMTP server and the outside world. It is modular and extensible. Included are two sample filters—a regular-expression based filter (like procmail) and a blacklist filter. For more information, check out</p>
+
+					<p>
+						<a TargET="_blank" HRef="http://www.nightmare.com/software.html">http://www.nightmare.com/software.html</a>
+						<a NAME="idx1073746105"></a>
+						<a naME="idx1073746106"></A>
+						<A name="idx1073746107"></A>
+						<A NAme="idx1073746108"></a>
+						<a name="idx1073746109"></a>
+						<a name="idx1073746110"></a>
+						<a name="idx1073746111"></A>
+						<a nAme="idx1073746112"></a>
+						<A name="idx1073746113"></A>
+						<a naME="idx1073746114"></A>
+						<A name="idx1073746115"></A>
+						<A NAme="idx1073746116"></a>
+						<a NAME="idx1073746117"></a>
+					</p>
+
+				
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="167.html" title="FTP"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=168" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="168.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="169.html" title="Newsgroups—Telnet and Gopher"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746101">SpamWall</a><BR>
+email services<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746096">handling</a> <a href="#idx1073746116">2nd</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746095">email services</a> <a href="#idx1073746115">2nd</a><BR>
+ <a href="#idx1073746066">IMAP (Internet Message Access Protocol)</a> <a href="#idx1073746077">2nd</a> <a href="#idx1073746093">3rd</a> <a href="#idx1073746113">4th</a><BR>
+ <a href="#idx1073746083">imaplib module</a><BR>
+ <a href="#idx1073746068">Internet Message Access Protocol (IMAP)</a> <a href="#idx1073746076">2nd</a> <a href="#idx1073746092">3rd</a> <a href="#idx1073746112">4th</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746099">search</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746084">imaplib</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746082">poplib</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746080">smtplib</a><BR>
+networking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746069">protocols</a> <a href="#idx1073746085">2nd</a> <a href="#idx1073746105">3rd</a><BR>
+ <a href="#idx1073746074">POP (Post Office Protocol)</a> <a href="#idx1073746090">2nd</a> <a href="#idx1073746110">3rd</a><BR>
+ <a href="#idx1073746081">poplib module</a><BR>
+ <a href="#idx1073746073">Post Office Protocol (POP)</a> <a href="#idx1073746089">2nd</a> <a href="#idx1073746109">3rd</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746102">SpamWall</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746067">Internet Message Access (IMAP)</a> <a href="#idx1073746078">2nd</a> <a href="#idx1073746094">3rd</a> <a href="#idx1073746114">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746075">Post Office (POP)</a> <a href="#idx1073746091">2nd</a> <a href="#idx1073746111">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746072">Simple Mail Transfer (SMTP)</a> <a href="#idx1073746088">2nd</a> <a href="#idx1073746108">3rd</a><BR>
+ <a href="#idx1073746104">Rushing, Sam</a><BR>
+ <a href="#idx1073746098">search method</a><BR>
+services<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746097">handling</a> <a href="#idx1073746117">2nd</a><BR>
+ <a href="#idx1073746070">Simple Mail Transfer Protocol (SMTP)</a> <a href="#idx1073746086">2nd</a> <a href="#idx1073746106">3rd</a><BR>
+ <a href="#idx1073746071">SMTP (Simple Mail Transfer Protocol)</a> <a href="#idx1073746087">2nd</a> <a href="#idx1073746107">3rd</a><BR>
+ <a href="#idx1073746079">smtplib module</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746103">SpamWall</a><BR>
+ <a href="#idx1073746100">SpamWall</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

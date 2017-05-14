@@ -1,0 +1,779 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,FOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="main.asp?cat=8" class="navtitle">Web Development</a> &gt; <span class="nonavtitle">Python Developer's Handbook</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<blockquote><p><font size=3><a href="index.html" class=ATitle>Python Developer's Handbook</a></font></p>
+[<A HREF="rindex1.html">Symbol</a>][<A HREF="rindex1.html#Ai">A</a>][<A HREF="rindex2.html">B</a>][<A HREF="rindex3.html">C</a>][<A HREF="rindex4.html">D</a>][<A HREF="rindex5.html">E</a>][<A HREF="rindex6.html">F</a>][<A HREF="rindex7.html">G</a>][<A HREF="rindex8.html">H</a>][<A HREF="rindex9.html">I</a>][<A HREF="rindex10.html">J</a>][<A HREF="rindex11.html">K</a>][<A HREF="rindex12.html">L</a>][<A HREF="rindex13.html">M</a>][<A HREF="rindex14.html">N</a>][<A HREF="rindex14.html">Symbol</a>][<A HREF="rindex15.html">O</a>][<A HREF="rindex16.html">P</a>][<A HREF="rindex17.html">Q</a>][<A HREF="rindex18.html">R</a>][<A HREF="rindex19.html">S</a>][<A HREF="rindex20.html">T</a>][<A HREF="rindex21.html">U</a>][<A HREF="rindex22.html">V</a>][<A HREF="rindex23.html">W</a>][<A HREF="rindex24.html">X</a>][<A HREF="rindex25.html">Y</a>][<A HREF="194.html#idx1073747843">2nd</a>
+&nbsp;,&nbsp;<a href="212.html#idx1073749069">3rd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750330">! (exclamation points)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="222.html#idx1073749518"># (pound sign)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747089">#PCDATA</a></FONT></DL>
+<DL>$ (dollar sign)<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742151">identifier names</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745495">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750232">$PYTHONSTARTUP directory</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="28.html#idx1073742255">% (modulo) operator</a></FONT></DL>
+<DL>% (percent sign)<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742153">identifier names</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742598">%% formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742597">%c formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742585">%d formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742592">%e formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742593">%E formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742591">%f formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742594">%g formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742595">%G formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742586">%i formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742588">%o formatting operator</a></FONT></DL>
+<DL>%r format string<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742609">comparing with %s format string</a></FONT></DL>
+</DL>
+<DL>%s format string<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742612">comparing with %r format string</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742596">%s formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742587">%u formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742589">%x formatting operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742590">%X formatting operator</a></FONT></DL>
+<DL>&amp;<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746725">(ampersands)</a></FONT></DL>
+</DL>
+<DL>&lt;<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746887">!-- # INSERT HERE # --</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747090">!ATTLIST definition tag</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747077">!ELEMENT definition tag</a></FONT></DL>
+<DL>&lt;<DL>&nbsp;<FONT size=2><a href="28.html#idx1073742258">operator</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="251.html#idx1073750749">APPLET tag</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748504">B1-Motion event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748502">Button-1 event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748506">ButtonRelease-1 event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748582">Configure method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748526">Control-Up event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748508">Double-Button-1 event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748498">Enter event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748520">Key event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748500">Leave event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="120.html#idx1073743543">Python.h header file</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748528">Return event</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746716">($PATH) variable</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746718">($PYTHONPATH) variable</a></FONT></DL>
+<DL>(&lt;<DL>Ó<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748496">Button-1Ó) event</a></FONT>
+</DL></DL>
+</DL>
+<DL>() (parenthesis)<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745738">tuples</a></FONT></DL>
+</DL>
+<DL>()_(parenthesis)<DL>&nbsp;<FONT size=2><a href="31.html#idx1073742424">1st append</a></FONT></DL>
+</DL>
+<DL>(?<DL>str)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745530">re module</a></FONT>
+</DL></DL>
+</DL>
+<DL>(?!str)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745531">re module</a></FONT></DL>
+</DL>
+<DL>(?#str)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745534">re module</a></FONT></DL>
+</DL>
+<DL>(?=.str)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745533">re module</a></FONT></DL>
+</DL>
+<DL>(?=str)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745532">re module</a></FONT></DL>
+</DL>
+<DL>(?P&lt;<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745535">name</a></FONT></DL>
+</DL>
+<DL>(?P=name)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745536">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747081">(CONTENTS) argument</a></FONT></DL>
+<DL>(from Tkinter import *) module<DL>&nbsp;<FONT size=2><a href="209.html#idx1073748362">loading</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747079">(NAME) argument</a></FONT></DL>
+<DL>(re)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745516">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="32.html#idx1073742510">identifying number of arguments, functions</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745497">re module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742604">replacing numbers with</a></FONT></DL>
+</DL>
+<DL>**<DL>&nbsp;<FONT size=2><a href="32.html#idx1073742512">identifying number of arguments, functions</a></FONT></DL>
+</DL>
+<DL>*?<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745504">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="122.html#idx1073743912">*shared* flag</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="122.html#idx1073743910">*static* flag</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="35.html#idx1073742629">+ (addition) sign</a></FONT></DL>
+<DL>+ (plus sign)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745499">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746730">+ (plus symbols)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747084">+ (plus) sign</a></FONT></DL>
+<DL>+?<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745505">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="195.html#idx1073748113">- pathname</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750222">-U command line option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="28.html#idx1073742252">. (dot) operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="169.html#idx1073746123">. (dots)</a></FONT></DL>
+<DL>. (period)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745489">re module</a></FONT></DL>
+</DL>
+<DL>.*<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745537">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750333">.pdbrc file</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="33.html#idx1073742519">.py extension</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="209.html#idx1073748352">.pyw extension</a></FONT></DL>
+<DL>/ (slash literal)<DL>&nbsp;<FONT size=2><a href="27.html#idx1073742229">creating strings</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747092">/ (slash)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="230.html#idx1073749926">/PCbuild directory</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="230.html#idx1073749950">/usr/local directory</a></FONT></DL>
+<DL>; (semicolon)<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742097">separating statements on same line</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750332">;;</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="222.html#idx1073749516">= (equal sign)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746728">= (equal signs)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="28.html#idx1073742272">= (equal) sign</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="28.html#idx1073742275">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745503">re module</a></FONT></DL>
+</DL>
+<DL>??<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745506">re module</a></FONT></DL>
+</DL>
+<DL>@ (at sign)<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742155">identifier names</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742122">[ ] element</a></FONT></DL>
+<DL>[^list]<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745515">re module</a></FONT></DL>
+</DL>
+<DL>[É<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742134">] entries</a></FONT></DL>
+</DL>
+<DL>[list]<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745514">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="246.html#idx1073750677">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="224.html#idx1073749631">[nd]c argument</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750216">[nd]c cmd option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750206">[nd]d option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="246.html#idx1073750673">[nd]Dprop=value option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="224.html#idx1073749629">[nd]e argument</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="246.html#idx1073750676">[nd]file option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742083">[nd]i argument</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750207">[nd]i option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="246.html#idx1073750670">[nd]I option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="246.html#idx1073750674">[nd]jar jar option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="222.html#idx1073749429">[nd]O command-line option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750208">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750209">[nd]OO option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="246.html#idx1073750671">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750211">[nd]t option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="174.html#idx1073746242">[nd]u flag</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750212">[nd]u option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750213">[nd]v option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="95.html#idx1073743183">[nd]X option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750214">[nd]x option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750215">[nd]X option</a></FONT></DL>
+<DL>\ (backslash)<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742105">adding line breaks</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="35.html#idx1073742654">escaping</a></FONT></DL>
+</DL>
+<DL>\\<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745529">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="27.html#idx1073742205">\\ escape code</a></FONT></DL>
+<DL>\A<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745527">re module</a></FONT></DL>
+</DL>
+<DL>\b<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745522">re module</a></FONT></DL>
+</DL>
+<DL>\B<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745523">re module</a></FONT></DL>
+</DL>
+<DL>\d<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745520">re module</a></FONT></DL>
+</DL>
+<DL>\D<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745521">re module</a></FONT></DL>
+</DL>
+<DL>\Demos directory<DL>&nbsp;<FONT size=2><a href="232.html#idx1073750070">scripts stored in</a></FONT></DL>
+</DL>
+<DL>\number<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745526">re module</a></FONT></DL>
+</DL>
+<DL>\Ó<DL>&nbsp;<FONT size=2><a href="27.html#idx1073742207">escape code</a></FONT></DL>
+</DL>
+<DL>\Õ<DL>&nbsp;<FONT size=2><a href="27.html#idx1073742206">escape code</a></FONT></DL>
+</DL>
+<DL>\s<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745524">re module</a></FONT></DL>
+</DL>
+<DL>\S<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745525">re module</a></FONT></DL>
+</DL>
+<DL>\Tools directory<DL>&nbsp;<FONT size=2><a href="232.html#idx1073750069">scripts stored in</a></FONT></DL>
+</DL>
+<DL>\W<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745519">re module</a></FONT></DL>
+</DL>
+<DL>\Z<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745528">re module</a></FONT></DL>
+</DL>
+<DL>^ (carat)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745493">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="194.html#idx1073748000">__add__(name) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="257.html#idx1073750894">__builtin__ module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743415">__call__(self) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743409">__cmp__(self,other) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743407">__del__(self) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743405">__delattr__(self, name) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743401">__getattr__(self, name) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743425">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743411">__hash__(self) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743391">__init__(self) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="194.html#idx1073747996">__len__(name) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743427">__len__(self) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="257.html#idx1073750896">__main__ module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743413">__nonzero__(self) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743399">__repr__(self) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743403">__setattr__(self, name, value) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="194.html#idx1073747998">__str__(name) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743393">__str__(self) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="194.html#idx1073748002">__sub__(name) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744577">_public_attrs() attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744575">_public_methods() attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744579">_readonly_attrs() attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="209.html#idx1073748339">_tkinter module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="89.html#idx1073743075">_winreg module</a></FONT></DL>
+<DL>` (back quotes)<DL>&nbsp;<FONT size=2><a href="27.html#idx1073742236">strings</a></FONT></DL>
+</DL>
+<DL>`` (backticks)<DL>&nbsp;<FONT size=2><a href="27.html#idx1073742233">strings</a></FONT></DL>
+</DL>
+<DL>{m, n}<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745507">re module</a></FONT></DL>
+</DL>
+<DL>{m, n}?<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745513">re module</a></FONT></DL>
+</DL>
+<DL>| (pipe)<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745501">re module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="146.html#idx1073745132">0 variable</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747644">1</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="146.html#idx1073745134">1 variable</a></FONT></DL>
+<DL>1.5.2 release (Python)<DL>&nbsp;<FONT size=2><a href="16.html#idx1073741912">tutorials</a></FONT></DL>
+</DL>
+<DL>1st.append<DL>&nbsp;<FONT size=2><a href="31.html#idx1073742423">() (parenthesis)</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="146.html#idx1073745136">2 variable</a></FONT></DL>
+<DL>2.0 release (Python)<DL>&nbsp;<FONT size=2><a href="16.html#idx1073741915">manuals</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="146.html#idx1073745138">3 variable</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747240">4DOM</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747247">4XSLT</a></FONT></DL>
+<BR><B><A NAME="Ai">A</A></B><DL>&nbsp;<FONT size=2><a href="193.html#idx1073747645">A</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747646">a</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="35.html#idx1073742620">a (append) mode</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748522">a event</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750385">a(rgs) command</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="195.html#idx1073748164">a2b_hex function</a></FONT></DL>
+<DL>abbreviations<DL>&nbsp;<FONT size=2><a href="32.html#idx1073742467">def, functions</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="236.html#idx1073750495">sorting keys</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="13.html#idx1073741839">ABC scripting language</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="263.html#idx1073751024">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="248.html#idx1073750717">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="203.html#idx1073748297">Abstract Windowing Toolkit (AWT) module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747684">AbstractFormatter(writer) class</a></FONT></DL>
+<DL>abstraction<DL>&nbsp;<FONT size=2><a href="32.html#idx1073742491">procedural</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747731">AbstractWriter() class</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748948">accelerator option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745777">accept() method</a></FONT></DL>
+<DL>acceptable input<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746800">testing for</a></FONT></DL>
+</DL>
+<DL>accessing<DL>&nbsp;<FONT size=2><a href="25.html#idx1073742031">command line interpreter</a></FONT></DL>
+<DL>databases<DL>&nbsp;<FONT size=2><a href="146.html#idx1073745150">connection objects</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="146.html#idx1073745157">2nd</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="257.html#idx1073750873">exception states</a></FONT></DL>
+<DL>methods and properties<DL>&nbsp;<FONT size=2><a href="132.html#idx1073744319">objects</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="125.html#idx1073744159">module attributes</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="125.html#idx1073744145">modules</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="111.html#idx1073743488">private attributes</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="248.html#idx1073750720">swing components</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="107.html#idx1073743387">unbounded method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="166.html#idx1073746017">uniform resource locators (URLs)</a></FONT></DL>
+<DL>variables<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743368">instances</a></FONT>
+</DL></DL>
+</DL>
+<DL>activating<DL>&nbsp;<FONT size=2><a href="225.html#idx1073749874">debuggers, Pythonwin</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="185.html#idx1073747000">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="185.html#idx1073747022">ActiveX scripting</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748744">activebackground property</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748746">activeforeground property</a></FONT></DL>
+<DL>ActiveX<DL>&nbsp;<FONT size=2><a href="185.html#idx1073747024">scripting</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="132.html#idx1073744379">ActiveX control</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="132.html#idx1073744371">2nd</a>
+&nbsp;,&nbsp;<a href="144.html#idx1073745048">3rd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748663">actual(options) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="236.html#idx1073750464">add(filename, ...) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748931">add(type, options) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748927">add_cascade(options) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748925">add_checkbutton(options) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748921">add_command(options) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747628">add_flowing_data(data) attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747626">add_hor_rule(*args, **kw) attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747632">add_label_data(format, counter) attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747624">add_line_break() attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747630">add_literal_data(data) attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748923">add_radiobutton(options) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748929">add_separator(options) method</a></FONT></DL>
+<DL>adding<DL>&nbsp;<FONT size=2><a href="225.html#idx1073749879">break-point connections, Pythonwin</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749102">Button widgets inside text</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="222.html#idx1073749535">comments to code</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742106">line breaks</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="120.html#idx1073743542">Python/C Application Programmers Interface (API)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="225.html#idx1073749875">watch variables, Pythonwin</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="35.html#idx1073742630">addition (+) sign</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="132.html#idx1073744298">AddRef() method</a></FONT></DL>
+<DL>addresses<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745677">IP</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745682">networks</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745675">socket</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="194.html#idx1073747758">AddressList class</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="194.html#idx1073748005">addresslist variable</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="194.html#idx1073747915">AddressList(field) method</a></FONT></DL>
+<DL>admin rights<DL>&nbsp;<FONT size=2><a href="270.html#idx1073751366">installations</a></FONT></DL>
+</DL>
+<DL>administrator privileges<DL>&nbsp;<FONT size=2><a href="270.html#idx1073751361">installations</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745757">AF_INET value</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745755">AF_UNIX value</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748557">after(milliseconds [, callback [, arguments]]) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748559">after_cancel(identifier) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748561">after_idle(callback, arguments) method</a></FONT></DL>
+<DL>aggregate functions<DL>&nbsp;<FONT size=2><a href="145.html#idx1073745087">relational databases</a></FONT></DL>
+</DL>
+<DL>agreements<DL>CNRI License Agreement<DL>&nbsp;<FONT size=2><a href="277.html#idx1073751422">downloading</a></FONT>
+</DL></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="152.html#idx1073745373">AIFC (Audio Interchange File Format)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="152.html#idx1073745377">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="152.html#idx1073745375">aifc.writeframes() method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="202.html#idx1073748179">Ajuba</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="272.html#idx1073751383">al module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="272.html#idx1073751385">AL module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="185.html#idx1073746995">alert() function</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750391">alias [name [command]] command</a></FONT></DL>
+<DL>aliasas<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750335">.pdbrc file</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750331">aliases</a></FONT></DL>
+<DL>alibration<DL>&nbsp;<FONT size=2><a href="236.html#idx1073750534">profiler class</a></FONT></DL>
+</DL>
+<DL>aligning<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748874">colored buttons, frames</a></FONT></DL>
+</DL>
+<DL>allocators<DL>&nbsp;<FONT size=2><a href="266.html#idx1073751294">raw memory</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="13.html#idx1073741843">Amoeba Project</a></FONT></DL>
+<DL>ampersands (&amp;<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746726">)</a></FONT></DL>
+</DL>
+<DL>analyzing<DL>&nbsp;<FONT size=2><a href="236.html#idx1073750448">profiles, pstats module</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748455">anchor argument</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748816">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747573">anchor_bgn(href, name, type) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747575">anchor_end() method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="28.html#idx1073742263">AND operator</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="167.html#idx1073746046">anonymous FTP servers</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="14.html#idx1073741863">ANSI C language, portable</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="141.html#idx1073744934">2nd</a>
+</FONT></DL>
+<DL>Anystring<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745517">re module</a></FONT></DL>
+</DL>
+<DL>AOLserver Web server<DL>&nbsp;<FONT size=2><a href="174.html#idx1073746218">configuring Web servers for Python/CGI scripts</a></FONT></DL>
+</DL>
+<DL>Apache<DL>&nbsp;<FONT size=2><a href="174.html#idx1073746162">configuring Web servers for Python/CGI scripts</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="146.html#idx1073745124">apilevel variable</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="35.html#idx1073742618">append (a) mode</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="250.html#idx1073750741">creating</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="251.html#idx1073750762">JPython, running</a></FONT></DL>
+</DL>
+<DL>application program interfaces (APIs)<DL>&nbsp;<FONT size=2><a href="132.html#idx1073744268">Common Object Model (COM)</a></FONT></DL>
+</DL>
+<DL>Application Program Interfaces (APIs)<DL>&nbsp;<FONT size=2><a href="146.html#idx1073745116">Python DB</a></FONT></DL>
+</DL>
+<DL>application program interfaces (APIs)<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745689">Winsock</a></FONT></DL>
+</DL>
+<DL>Application Programmers Interface (API)<DL>Python/C<DL>&nbsp;<FONT size=2><a href="261.html#idx1073750970">variables, exceptions</a></FONT>
+</DL></DL>
+</DL>
+<DL>applications<DL>AOLserver Web server<DL>&nbsp;<FONT size=2><a href="174.html#idx1073746219">configuring Web servers for Python/CGI scripts</a></FONT>
+</DL></DL>
+<DL>Apache<DL>&nbsp;<FONT size=2><a href="174.html#idx1073746163">configuring Web servers for Python/CGI scripts</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="174.html#idx1073746175">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="174.html#idx1073746186">3rd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="174.html#idx1073746200">4th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="174.html#idx1073746206">5th</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="176.html#idx1073746393">BSCW (Basic Support for Cooperative Work)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750250">BuildApplet</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750254">BuildApplication</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="143.html#idx1073745034">calldll</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744674">Common Object Request Broker Architecture (COBRA)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750267">debugging</a></FONT></DL>
+<DL>designing<DL>&nbsp;<FONT size=2><a href="213.html#idx1073749345">Tkinter module</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="213.html#idx1073749356">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="213.html#idx1073749376">3rd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="213.html#idx1073749384">4th</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744691">Distributed Common Object Model (DCOM)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="237.html#idx1073750571">distributing</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="154.html#idx1073745458">Distutils</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746511">DocumentTemplate</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750192">EditPythonPrefs</a></FONT></DL>
+<DL>Emacs<DL>&nbsp;<FONT size=2><a href="231.html#idx1073750005">editing source code</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="231.html#idx1073750021">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="231.html#idx1073750046">3rd</a>
+</FONT>
+</DL></DL>
+<DL>Excel<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744441">opening and manipulating from Python</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744460">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744484">3rd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744507">4th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744547">5th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744563">6th</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746548">FastCGI</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744683">Fnorb</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="174.html#idx1073746223">Front Page Personal Web Server</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="175.html#idx1073746269">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744704">Hector</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="25.html#idx1073742041">hello world</a></FONT></DL>
+<DL>Hello World<DL>&nbsp;<FONT size=2><a href="209.html#idx1073748376">Tkinter</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="209.html#idx1073748391">2nd</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746479">httpd_log</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="132.html#idx1073744335">improving performance</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744664">Inter-Language Unification (ILU) system</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="175.html#idx1073746264">Internet, third-party</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744715">islscan</a></FONT></DL>
+<DL>Java<DL>&nbsp;<FONT size=2><a href="249.html#idx1073750729">embedding JPython in</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="231.html#idx1073749980">JED</a></FONT></DL>
+<DL>JPython<DL>&nbsp;<FONT size=2><a href="280.html#idx1073751459">copyright notices (licenses)</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="280.html#idx1073751472">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="281.html#idx1073751485">3rd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="281.html#idx1073751494">4th</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="245.html#idx1073750660">JPython Runner</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="234.html#idx1073750243">launching</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="176.html#idx1073746401">LDAP (Lightweight Directory Access Protocol)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746492">Linbot</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745844">M2Crypto</a></FONT></DL>
+<DL>MacPython<DL>&nbsp;<FONT size=2><a href="156.html#idx1073745606">thread support</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="175.html#idx1073746318">Mailman</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="175.html#idx1073746369">Medusa Internet Server</a></FONT></DL>
+<DL>Microsoft IIS Server<DL>&nbsp;<FONT size=2><a href="174.html#idx1073746234">configuring Web servers for Python/CGI scripts</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="174.html#idx1073746252">2nd</a>
+</FONT>
+</DL></DL>
+<DL>multithreaded<DL>&nbsp;<FONT size=2><a href="265.html#idx1073751268">support</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="265.html#idx1073751290">2nd</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="143.html#idx1073745025">mxDateTime</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="143.html#idx1073745020">mxODBC</a></FONT></DL>
+<DL>non-Python<DL>&nbsp;<FONT size=2><a href="124.html#idx1073744107">embedding Python objects in;wrappers</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744699">Object Management Facility (OMF)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744669">Object Request Broker (ORB)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744679">OmniORBpy</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742080">opening interpreters after executing</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="222.html#idx1073749442">optimizing performance</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744687">ORBit-python project</a></FONT></DL>
+<DL>OROMatcher<DL>&nbsp;<FONT size=2><a href="280.html#idx1073751463">copyright notice (license)</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="280.html#idx1073751476">2nd</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="166.html#idx1073745990">parsing Web pages</a></FONT></DL>
+<DL>Personal Web Server (PWS)<DL>&nbsp;<FONT size=2><a href="174.html#idx1073746238">configuring Web servers for Python/CGI scripts</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="174.html#idx1073746256">2nd</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="231.html#idx1073749971">Pico</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="236.html#idx1073750443">profiling</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="153.html#idx1073745407">protection environments</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746453">PyDAV</a></FONT></DL>
+<DL>Python<DL>&nbsp;<FONT size=2><a href="275.html#idx1073751413">copyright notices (licenses)</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="276.html#idx1073751418">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="277.html#idx1073751427">3rd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="277.html#idx1073751432">4th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="278.html#idx1073751437">5th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="279.html#idx1073751442">6th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="280.html#idx1073751455">7th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="280.html#idx1073751468">8th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="281.html#idx1073751481">9th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="281.html#idx1073751490">10th</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="134.html#idx1073744719">python-stubber</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746460">site management tools</a></FONT></DL>
+<DL>source code<DL>&nbsp;<FONT size=2><a href="231.html#idx1073749986">editing</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="231.html#idx1073749998">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="231.html#idx1073750014">3rd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="231.html#idx1073750039">4th</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="168.html#idx1073746101">SpamWall</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="232.html#idx1073750072">stored in \Tools and \Demos directories</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744421">transferring data between</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="231.html#idx1073749975">Vi (visual editor)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="185.html#idx1073747038">Visual Interdev</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746535">Webchecker</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746466">WebDAV (World Wide Web Distributed Authoring and Versioning)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="176.html#idx1073746446">WebLog</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744390">win32all</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744386">win32com</a></FONT></DL>
+<DL>Word<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744438">opening and manipulating from Python</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744457">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744481">3rd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744504">4th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744544">5th</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="133.html#idx1073744560">6th</a>
+</FONT>
+</DL></DL>
+<DL>XEmacs<DL>&nbsp;<FONT size=2><a href="231.html#idx1073750009">editing source code</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="231.html#idx1073750025">2nd</a>
+</FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="231.html#idx1073750050">3rd</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="181.html#idx1073746582">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="177.html#idx1073746471">Zebra</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="175.html#idx1073746288">ZSQLMethod</a></FONT></DL>
+</DL>
+<DL>applying<DL>&nbsp;<FONT size=2><a href="31.html#idx1073742454">operations to dictionaries</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748776">arc() method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="121.html#idx1073743574">args argument</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="95.html#idx1073743156">args attribute</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="246.html#idx1073750678">args option</a></FONT></DL>
+<DL>argument<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747082">(CONTENTS)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747080">(NAME)</a></FONT></DL>
+</DL>
+<DL>arguments<DL>&nbsp;<FONT size=2><a href="224.html#idx1073749632">[nd]c</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="224.html#idx1073749630">[nd]e</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742084">[nd]i</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748456">anchor</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="121.html#idx1073743575">args</a></FONT></DL>
+<DL>base<DL>&nbsp;<FONT size=2><a href="29.html#idx1073742372">functions</a></FONT>
+</DL></DL>
+<DL>bitwise<DL>&nbsp;<FONT size=2><a href="152.html#idx1073745279">PlaySound function</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="152.html#idx1073745289">2nd</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748458">bordermode</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="32.html#idx1073742474">calling functions without</a></FONT></DL>
+<DL>command-line<DL>&nbsp;<FONT size=2><a href="225.html#idx1073749909">Pythonwin</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="32.html#idx1073742500">functions</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748460">height</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748464">in (in )</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="246.html#idx1073750680">JPython interpreter</a></FONT></DL>
+<DL>Ó<DL>&nbsp;<FONT size=2><a href="236.html#idx1073750486">timeÓ</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748452">place() and place_configure() methods</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745712">protocol</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="31.html#idx1073742428">range() function</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748466">relheight</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748468">relwidth</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748470">relx</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748472">rely</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="41.html#idx1073742668">return code</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="121.html#idx1073743573">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="235.html#idx1073750389">whatis</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748462">width</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748474">x</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="210.html#idx1073748476">y</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="74.html#idx1073742831">methods</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="154.html#idx1073745427">array objects</a></FONT></DL>
+<DL>arrays<DL>&nbsp;<FONT size=2><a href="264.html#idx1073751104">buffer interface support</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="154.html#idx1073745419">one-dimensional</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="192.html#idx1073747369">packing methods</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="154.html#idx1073745421">two-dimensional</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="74.html#idx1073742829">ArrayType object</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="151.html#idx1073745272">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="185.html#idx1073747023">ActiveX scripting</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749130">aspect(minNumer, minDenom, maxNumer, maxDenom) method</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="95.html#idx1073743190">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747678">assert_line_data([flag = 1]) method</a></FONT></DL>
+<DL>assigning<DL>&nbsp;<FONT size=2><a href="32.html#idx1073742475">functions to variables</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="27.html#idx1073742160">null values to variables</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742110">objects to variables</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="27.html#idx1073742197">values to substrings</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="125.html#idx1073744162">values to variables, modules</a></FONT></DL>
+</DL>
+<DL>assignment operators<DL>&nbsp;<FONT size=2><a href="286.html#idx1073751520">Python 2.0</a></FONT></DL>
+</DL>
+<DL>associating<DL>&nbsp;<FONT size=2><a href="209.html#idx1073748365">widgets with toplevels</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="32.html#idx1073742511">identifying number of arguments, functions</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745496">re module</a></FONT></DL>
+</DL>
+<DL>asterisks (*)<DL>&nbsp;<FONT size=2><a href="34.html#idx1073742605">replacing numbers with</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745821">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="164.html#idx1073745827">Asynchronous Sockets Library</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745955">2nd</a>
+</FONT></DL>
+<DL>at sign (@)<DL>&nbsp;<FONT size=2><a href="26.html#idx1073742156">identifier names</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="89.html#idx1073743037">atexit module</a></FONT></DL>
+<DL>attributes<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744578">_public_attrs()</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744576">_public_methods()</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744580">_readonly_attrs()</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747629">add_flowing_data(data)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747627">add_hor_rule(*args, **kw)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747633">add_label_data(format, counter)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747625">add_line_break()</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747631">add_literal_data(data)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="95.html#idx1073743157">args</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745904">BaseHTTPRequestHandler class</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745948">CGIHTTPRequestHandler class</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748543">char</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748829">Checkbutton widget</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="105.html#idx1073743252">classes</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743350">classname.__bases</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743338">classname.__dict</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743340">classname.__doc</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743348">classname.__module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743342">classname.__name</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="209.html#idx1073748380">command</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749229">data</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745860">DatagramRequestHandler class</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="146.html#idx1073745212">description</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747623">end_paragraph(blanklines)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748556">events</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749231">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746904">filename</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747619">formatter objects</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746633">fs.disposition</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746635">fs.disposition_option</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746627">fs.file</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746625">fs.filename</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746637">fs.headers</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746621">fs.name</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746629">fs.type</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746631">fs.type_options</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746623">fs.value</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="166.html#idx1073746000">headers</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749233">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="151.html#idx1073745256">im.mode</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748842">indicatoron</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="105.html#idx1073743259">instance</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748545">keysym</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745588">MatchObject</a></FONT></DL>
+<DL>modules<DL>&nbsp;<FONT size=2><a href="125.html#idx1073744161">accessing</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="184.html#idx1073746761">name</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748549">num</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743379">obj.__class__</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743377">obj.__dict__</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="106.html#idx1073743381">obj.__methods__</a></FONT></DL>
+<DL>objects<DL>&nbsp;<FONT size=2><a href="111.html#idx1073743505">changing</a></FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748833">offvalue</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748831">onvalue</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749227">PhotoImage subclass</a></FONT></DL>
+<DL>private<DL>&nbsp;<FONT size=2><a href="111.html#idx1073743490">accessing</a></FONT>
+&nbsp;<FONT size=2>,&nbsp;<a href="111.html#idx1073743493">2nd</a>
+</FONT>
+</DL></DL>
+<DL>&nbsp;<FONT size=2><a href="155.html#idx1073745585">RegExpObject</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745933">SimpleHTTPRequestHandler class</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745936">SimpleHTTPRequestHandler.extensions_map</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745934">SimpleHTTPRequestHandler.server_version</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745878">SocketServer module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749057">state</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="166.html#idx1073745997">stream object</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="165.html#idx1073745859">StreamRequestHandler class</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749059">tabs</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749048">Text widget</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073748864">textvariable</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="166.html#idx1073745998">url</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="183.html#idx1073746648">value</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748551">widget</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="212.html#idx1073749235">width</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="193.html#idx1073747621">writer</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748553">x</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="211.html#idx1073748555">x_root</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="105.html#idx1073743302">attributes property</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="190.html#idx1073747123">attributes variable</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="152.html#idx1073745299">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="152.html#idx1073745371">Audio Interchange File Format (AIFC)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="152.html#idx1073745381">audiodev module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="108.html#idx1073743440">overriding</a></FONT></DL>
+</DL>
+<DL>&nbsp;<FONT size=2><a href="224.html#idx1073749783">2nd</a>
+</FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="133.html#idx1073744554">AutoFit() function</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="181.html#idx1073746576">autogenerated pages</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="132.html#idx1073744314">automation objects</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="248.html#idx1073750716">AWT (Abstract Windowing Toolkit)</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="203.html#idx1073748299">AWT (Abstract Windowing Toolkit) module</a></FONT></DL>
+<DL>&nbsp;<FONT size=2><a href="248.html#idx1073750706">AWT Abstract Windowing Toolkit</a></FONT></DL>
+</blockquote><P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

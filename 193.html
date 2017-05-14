@@ -1,0 +1,1598 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Handling Other Markup Languages</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="187.html" class="navtitle">13. Data Manipulation</a> &gt; <span class="nonavtitle">Handling Other Markup Languages</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="192.html" title="XDR Data Exchange Format"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=193" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="193.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="194.html" title="MIME Parsing and Manipulation"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A46%3A24+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148042031166102142021009</font><a href="read3.asp?bookname=0672319942&snode=193&now=5%2F31%2F2002+4%3A46%3A24+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Handling Other Markup Languages</h3>
+				<p>The initial part of this chapter covers XML, which is, undoubtedly, a
+future promise for the Internet.</p>
+
+				<P>The next pages of this section describe additional modules that
+support other data format standards commonly used on the internet, SGML and
+HTML.</P>
+
+				
+					<H4>
+						<Tt claSS="monofont">sgmllib</TT></h4>
+					<p>The <tt CLASs="monofont">sgmllib</tt> module is an SGML parser subset.
+  Although it has a simple implementation, it is powerful enough to build the
+  HTML parser.</p>
+
+					<p>This module implements the 
+  <a name="idx1073747467"></a><tt class="monofont">SGMLParser()</tt> class.</P>
+
+					<a nAme="idx1073747468"></a>
+					<A name="idx1073747469"></A>
+					<p><tt CLASs="monofont">SGMLParser()</tt></p>
+
+					<P>The <TT Class="monofont">SGMLParser</TT> class is instantiated without
+  arguments. The parser is hardcoded to recognize the following
+  constructs:</P>
+
+					<Ol typE="a">
+<LI>
+
+							<P>Opening and closing tags of the form <tt class="monofont">&lt;tag
+attr="value …&gt;</tt> and <tt class="monofont">&lt;/tag&gt;,</tt>
+respectively.</p>
+
+						</lI>
+<li>
+
+							<P>Numeric character references of the form
+<tt cLass="monofont">&amp;#name;.</tT></p>
+
+						</li>
+<LI>
+
+							<P>Entity references of the form
+<Tt claSS="monofont">&amp;name;.</TT></p>
+
+						</li>
+<lI>
+
+							<P>SGML comments of the form
+<TT clasS="monofont">&lt;!--text--&gt;.</TT> Note that spaces, tabs, and newlines are
+allowed between the trailing <Tt class="monofont">&gt;</tt> and the immediately
+preceding <tt class="monofont">-.</tt></p>
+
+						</li>
+</Ol>
+
+					<p><Tt clAss="monofont">SGMLParser</tt> instances have the following
+  interface 
+  <A namE="idx1073747470"></A>methods (note that the interface is similar to the xmllib
+  one):</P>
+
+					<BlockQUOTe>
+<p>
+							<a nAME="idx1073747471"></A>
+							<a namE="idx1073747472"></A>
+							<P>
+								<Tt class="monofont">reset()</tt>— 
+    
+								Resets the instance. Loses all unprocessed data. This is
+  called implicitly at instantiation time.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747473"></a>
+							<a naMe="idx1073747474"></a>
+							<P>
+								<tt cLass="monofont">setnomoretags()</tT>— 
+    
+								Stops processing tags. Treat all following input as literal
+  input (CDATA). (This is only provided so that the HTML tag
+  <tt cLASS="monofont">&lt;PLAINTEXT&gt;</tt> can be implemented.)
+  <a nAME="idx1073747475"></A>
+									<a namE="idx1073747476"></A>
+									<A Name="idx1073747477"></a>
+									<A NAMe="idx1073747478"></a>
+									<a name="idx1073747479"></a>
+									<a name="idx1073747480"></a>
+									<a name="idx1073747481"></a>
+									<A naMe="idx1073747482"></a>
+							</p>
+
+						</P>
+<p>
+							<a naMe="idx1073747483"></a>
+							<a NAME="idx1073747484"></a>
+							<p>
+								<tt CLASs="monofont">setliteral()</tt>— 
+    
+								Enters literal mode (CDATA mode).
+							</p>
+
+						</P>
+<P>
+							<A Name="idx1073747485"></a>
+							<A NAMe="idx1073747486"></a>
+							<p>
+								<tt class="monofont">feed(data)</tt>— 
+    
+								Feeds some text to the parser. It is processed insofar as it
+  consists of complete elements; incomplete data is buffered until more data is
+  fed or <tt class="monofont">close()</tT> is called.
+							</p>
+
+						</p>
+<P>
+							<a naMe="idx1073747487"></a>
+							<a nAme="idx1073747488"></a>
+							<P>
+								<TT Class="monofont">close()</TT>— 
+    
+								Force processing of all buffered data as if it were followed
+  by an end-of-file mark. This method can be redefined by a derived class to
+  define additional processing at the end of the input, but the redefined version
+  should always call <TT clasS="monofont">close().</TT>
+							</P>
+
+						</p>
+<p>
+							<a nAME="idx1073747489"></A>
+							<a name="idx1073747490"></a>
+							<p>
+								<tt class="monofont">handle_starttag</tt>(<i>tag, method,
+  attributes</i>)— 
+    
+								This method is called to handle start tags for which either a
+  <tt ClaSs="monofont">start_tag()</tt> or <Tt claSs="monofont">do_tag()</tt> method has been
+  defined. The tag argument is the name of the tag converted to lowercase, and
+  the method argument is the bound method that should be used to support semantic
+  interpretation of the start tag. The attributes argument is a list of (name,
+  value) pairs containing the attributes found inside the tag's
+  <TT CLass="monofont">&lt;&gt;</tT> brackets. The name has been translated to
+  lowercase, and double quotes and backslashes in the value have been
+  interpreted. For instance, for the tag <TT Class="monofont">&lt;A HREF=</TT>
+									<A TargeT="_blank" HREf="http://www.cwi.nl/">http://www.cwi.nl/</a>, this
+  method would be called as <tt class="monofont">unknown_starttag('a', [('href', 
+  <a target="_blank" href="http://www.cwi.nl/">http://www.cwi.nl/</A>)]).</tt> The base
+  implementation simply calls a method with attributes as the only
+  argument.
+							</P>
+
+						</p>
+<p>
+							<a Name="idx1073747491"></a>
+							<A namE="idx1073747492"></A>
+							<P>
+								<Tt claSS="monofont">handle_endtag</TT>(<i>tag,
+  method</i>)— 
+    
+								This method is called to handle endtags for which an
+  <tt CLASs="monofont">end_tag()</tt> method has been defined. The tag argument is the
+  name of the tag converted to lowercase, and the method argument is the bound
+  method that should be used to support semantic interpretation of the end tag.
+  If no <tT CLAss="monofont">end_tag()</tt> method is defined for the closing element,
+  this handler is not called. The base implementation simply calls method.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747493"></a>
+							<a name="idx1073747494"></a>
+							<p>
+								<Tt cLass="monofont">handle_data</Tt>(<i>data</i>)— 
+    
+								This method is called to process arbitrary data. It is
+  intended to be overridden by a derived class; the base class implementation
+  does nothing.
+							</p>
+
+						</P>
+<p>
+							<a nAME="idx1073747495"></A>
+							<a namE="idx1073747496"></A>
+							<P>
+								<Tt claSS="monofont">handle_charref</TT>(<i>ref</i>)— 
+    
+								This method is called to process a character reference of the
+  form <tt CLASs="monofont">&amp;#ref;.</tt> In the base implementation,
+  <tt class="monofont">ref</tt> must be a decimal number in the range 0–255. It
+  translates the character to ASCII and calls the method
+  <tt class="monofont">handle_data()</tT> with the character as argument. If
+  <tt ClasS="monofont">ref</tt> is invalid or out of range, the method
+  <tt ClasS="monofont">unknown_charref</TT>(<I>ref</i>) is called to
+  handle the error. A subclass must override this method to provide support for
+  named character entities.
+  <a naME="idx1073747497"></A>
+									<A name="idx1073747498"></A>
+									<A NAme="idx1073747499"></a>
+									<a NAME="idx1073747500"></a>
+									<a name="idx1073747501"></a>
+									<a name="idx1073747502"></a>
+									<a name="idx1073747503"></a>
+									<a NamE="idx1073747504"></a>
+							</p>
+
+						</p>
+<P>
+							<a namE="idx1073747505"></a>
+							<a nAME="idx1073747506"></A>
+							<p>
+								<tt cLASS="monofont">handle_entityref</tt>(<i>ref</i>)— 
+    
+								This method is called to process a general entity reference
+  of the form <TT CLass="monofont">&amp;ref;,</tT> where <TT Class="monofont">ref</tt> is an
+  general entity reference. It looks for <tt class="monofont">ref</tt> in the instance
+  (or class) variable entitydefs that should be a mapping from entity names to
+  corresponding translations. If a translation is found, it calls the method
+  <tt claSs="monofont">handle_data()</tT> with the translation; otherwise, it calls the
+  method <tt cLass="monofont">unknown_entityref</tT>(<i>ref</i>). The
+  default entitydefs defines translations for
+  <tT CLAss="monofont">&amp;amp;,</tt><TT CLass="monofont">&amp;apos,</tT><TT Class="monofont">&amp;gt;,</TT><TT class="monofont">&amp;lt;,</tt>
+  and <tt class="monofont">&amp;quot;.</tt>
+							</p>
+
+						</p>
+<p>
+							<a NamE="idx1073747507"></a>
+							<a nAme="idx1073747508"></a>
+							<p>
+								<Tt clASS="monofont">handle_comment</Tt>(<i>comment</i>)— 
+    
+								This method is called when a comment is encountered. The
+  comment argument is a string containing the text between the
+  <tT CLAss="monofont">&lt;!-</tt> and <TT CLass="monofont">-&gt;</tT> delimiters, but not the
+  delimiters themselves. For example, the comment
+  <TT Class="monofont">&lt;!-text-&gt;</tt> will cause this method to be called with the
+  argument <tt class="monofont">text.</tt> The default method does nothing.
+							</p>
+
+						</p>
+<p>
+							<a nAme="idx1073747509"></A>
+							<a naMe="idx1073747510"></a>
+							<p>
+								<tT claSS="monofont">report_unbalanced</TT>(<i>tag</i>)— 
+    
+								This method is called when an end tag is found that does not
+  correspond to any open element.
+							</p>
+
+						</p>
+</BLOCkquoTE>
+					<DIv claSS="note"><P Class="notetitle"><b>Tip</b></p><p>
+
+						<p>In order to 
+ <a name="idx1073747511"></a>
+							<a name="idx1073747512"></A>handle all tags in your code, you need to overload the
+ following two methods: <tt ClasS="monofont">unknown_starttag</tt> and
+ <tt ClasS="monofont">unknown_endtag.</TT></P>
+
+					</p></div>
+<BR>
+<BR>
+
+					<blocKQUOte>
+<p>
+							<a NAME="idx1073747513"></a>
+							<a name="idx1073747514"></a>
+							<p>
+								<tt class="monofont">unknown_starttag</tt>(<i>tag,
+  attributes</i>)— 
+    
+								This method is called to process an unknown start tag. It is
+  intended to be overridden by a derived class; the base class implementation
+  does nothing.
+							</p>
+
+						</P>
+<p>
+							<a Name="idx1073747515"></A>
+							<a namE="idx1073747516"></a>
+							<p>
+								<tT CLAss="monofont">unknown_endtag</tt>(<I>tag</I>)— 
+    
+								This method is called to process an unknown end tag. It is
+  intended to be overridden by a derived class; the base class implementation
+  does nothing.
+  <A Name="idx1073747517"></a>
+									<A NAMe="idx1073747518"></a>
+									<a nAME="idx1073747519"></A>
+									<a name="idx1073747520"></a>
+									<a name="idx1073747521"></a>
+									<a name="idx1073747522"></a>
+									<a nAme="idx1073747523"></A>
+									<a naMe="idx1073747524"></a>
+							</p>
+
+						</p>
+<P>
+							<a naME="idx1073747525"></A>
+							<A name="idx1073747526"></A>
+							<P>
+								<TT clasS="monofont">unknown_charref</TT>(<I>ref</i>)— 
+    
+								This method is called to process unresolvable numeric
+  character references. Refer to <tt cLASS="monofont">handle_charref()</tt> to determine
+  what is handled by default. It is intended to be overridden by a derived class;
+  the base class implementation does nothing.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747527"></a>
+							<a name="idx1073747528"></a>
+							<p>
+								<tt ClaSs="monofont">unknown_entityref</tt>(<I>ref</i>)— 
+    
+								This method is called to process an unknown entity reference.
+  It is intended to be overridden by a derived class; the base class
+  implementation does nothing.
+							</p>
+
+						</p>
+</bLockQUOTe>
+					<p>Apart from overriding or extending the methods listed previously,
+  derived classes can also define methods of the following form to define
+  processing of specific tags. Tag names in the input stream are case
+  independent; the tag occurring in method names must be in lowercase:</p>
+
+					<bLOCKquotE>
+<P>
+							<A Name="idx1073747529"></a>
+							<A NAMe="idx1073747530"></a>
+							<p>
+								<tt class="monofont">start_tag(attributes)</tt>— 
+    
+								This method is called to process an opening tag. It has
+  precedence over <tt class="monofont">do_tag().</tT> The attributes argument has the
+  same meaning as described for <tt ClasS="monofont">handle_starttag()</tt>
+  previously.
+							</p>
+
+						</p>
+<P>
+							<a naME="idx1073747531"></A>
+							<A name="idx1073747532"></A>
+							<P>
+								<TT clasS="monofont">do_tag(attributes)</TT>— 
+    
+								This method is called to process an opening tag that does not
+  come with a matching closing tag. The attributes argument has the same meaning
+  as described for <Tt claSS="monofont">handle_starttag()</TT> previously.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747533"></a>
+							<a name="idx1073747534"></a>
+							<p>
+								<tt clAss="monofont">end_tag()</Tt>— 
+    
+								This method is called to process a closing tag.
+  <a nAme="idx1073747535"></a>
+							</p>
+
+						</P>
+</bloCKQUote>
+					<p>Note that the parser maintains a stack of open elements for which
+  no end tag has been found yet. Only tags processed by
+  <TT CLass="monofont">start_tag()</tT> are pushed on this stack. Definition of an
+  <TT Class="monofont">end_tag()</TT> method is optional for these tags. For tags
+  processed by <TT class="monofont">do_tag()</tt> or by
+  <tt class="monofont">unknown_tag(),</tt> no <tt clAss="monofont">end_tag()</Tt> method must
+  be defined; if defined, it will not be used. If both
+  <tt Class="monofont">start_tag()</Tt> and <tt CLASs="monofont">do_tag()</tt> methods exist
+  for a tag, the <tT CLAss="monofont">start_tag()</tt> method takes precedence.</P>
+
+					<P>The following example 
+  <A Name="idx1073747536"></a>
+						<A NAMe="idx1073747537"></a>
+						<a name="idx1073747538"></a>opens an SGML file and collects the information regarding
+  the 
+  <a name="idx1073747539"></a>
+						<a name="idx1073747540"></a>
+						<A naMe="idx1073747541"></a>page title.</p>
+
+					<Pre>
+						
+import sgmllib 
+import string
+
+
+filename = "index.html"
+class CleanExit(Exception):
+    pass
+
+class Titlefinder(sgmllib.SGMLParser):
+    def __init__(self, verbose=0):
+        sgmllib.SGMLParser.__init__(self, verbose)
+        self.title = self.data = None
+    def start_title(self, attributes):
+        self.data = []
+    def end_title(self):
+        self.title = string.join(self.data, "")
+        raise CleanExit
+    def handle_data(self, data):
+            if self.data is not None:
+                  self.data.append(data)
+    def get_title(filehandle):
+        Parser = Titlefinder()
+        try:
+            while 1:
+                sgmldata = filehandle.read(1024)
+                if not sgmldata:
+                    break
+                Parser.feed(sgmldata)
+            Parser.close()
+        except CleanExit:
+            return Parser.title
+        return None
+
+filehandle = open(filename)
+title = get_title(filehandle)
+
+print "The page's title is: %s" % (title) 
+
+					</prE>
+
+				
+				
+					<h4><tt CLASs="monofont">
+							<a naME="idx1073747542"></A>
+							<A name="idx1073747543"></A>
+							<A NAme="idx1073747544"></a>
+							<a NAME="idx1073747545"></a>htmllib</tt></h4>
+					<p>This module defines a parser class that can serve as a base for
+  parsing text files formatted in the <i>Hypertext Markup Language
+  (HTML).</i> The class is not directly concerned with I/O—it must
+  be provided with input in string form via a method, and makes calls to methods
+  of a formatter object in order to produce output. The 
+  <a name="idx1073747546"></a>
+						<a name="idx1073747547"></a><tT clAss="monofont">HTMLParser</tT> class is designed to be used
+  as a base class for other classes in order to add functionality, and allows
+  most of its methods to be extended or overridden. In turn, this class is
+  derived from and extends the 
+  <a namE="idx1073747548"></a>
+						<a nAME="idx1073747549"></A><tt clASS="monofont">SGMLParser</Tt> class defined in module
+  <tt cLASS="monofont">sgmllib.</tt> The <tt CLASs="monofont">HTMLParser</tt> implementation
+  supports the HTML 2.0 language as described in RFC 1866. Two implementations of
+  formatter objects are provided in the <tt class="monofont">formatter</tt>
+  module.</p>
+
+					<p>The following is a summary of the 
+  <a name="idx1073747550"></a>
+						<A naMe="idx1073747551"></a>interface defined by
+  <tT clasS="monofont">sgmllib.SGMLParser</tt>:</p>
+
+					<OL TYpe="a">
+<li>
+
+							<P>a. The interface to feed data to an instance is through the 
+<A NAme="idx1073747552"></a>
+								<a NAME="idx1073747553"></a><tt cLASS="monofont">feed()</tt> method, which takes a string
+argument. This can be called with as little or as much text at a time as
+desired; <tt class="monofont">"p.feed(a); p.feed(b)"</tt> has the same effect as
+<tt class="monofont">"p.feed(a+b)".</tt> When the data contains complete HTML tags,
+these are processed immediately; incomplete elements are saved in a buffer. To
+force processing of all unprocessed data, call the 
+<A naMe="idx1073747554"></a>
+								<a Name="idx1073747555"></a><Tt clASS="monofont">close()</Tt> method.
+<a naME="idx1073747556"></A>
+								<A name="idx1073747557"></A>
+								<A NAme="idx1073747558"></a>
+								<a NAME="idx1073747559"></a></p>
+
+						</li>
+<li>
+
+							<p>For example, to parse the entire contents of a file, use</p>
+
+							<pre>
+								
+parser.feed(open('myfile.html').read())
+  parser.close() 
+							</pre>
+
+						</li>
+<li>
+
+							<p>b. The interface to define semantics for HTML tags is very
+simple: derive a class and define methods called 
+<a NamE="idx1073747560"></a>
+								<a nAme="idx1073747561"></a><tT claSS="monofont">start_tag(),</TT>
+								<a namE="idx1073747562"></A>
+								<A Name="idx1073747563"></a><TT CLass="monofont">end_tag(),</tT> or 
+<A NAme="idx1073747564"></a>
+								<a name="idx1073747565"></a><tt class="monofont">do_tag().</tt> The parser will call these
+at appropriate moments: <tt ClaSs="monofont">start_tag</tt> or
+<Tt claSs="monofont">do_tag()</tt> is called when an opening tag of the form
+<TT CLass="monofont">&lt;tag ...&gt;</tT> is encountered; <TT Class="monofont">end_tag()</TT>
+is called when a closing tag of the form <TT clasS="monofont">&lt;tag&gt;</TT> is
+encountered. If an opening tag requires a corresponding closing tag, such as
+<Tt class="monofont">&lt;H1&gt;... &lt;/H1&gt;,</tt> the class should define the
+<tt class="monofont">start_tag()</tt> method; if a tag requires no closing tag, such
+as <tt cLasS="monofont">&lt;P&gt;,</tt> the class should define the
+<tT clasS="monofont">do_tag()</tt> method. 
+<a NAME="idx1073747566"></a>
+								<a naME="idx1073747567"></A></P>
+
+						</li>
+</ol>
+
+					<P>This module defines a single class:
+  <TT Class="monofont">HTMLParser(formatter).</TT> This is the basic HTML parser class.
+  It supports all entity names required by the HTML 2.0 specification (RFC 1866).
+  It also defines handlers for all HTML 2.0 and many HTML 3.0 and 3.2 elements.
+  In addition to tag methods, the <TT class="monofont">HTMLParser</tt> class provides
+  some additional methods and instance variables for use within tag methods. They
+  are as follows:</p>
+
+					<blockquote>
+<p>
+							<a NamE="idx1073747568"></a>
+							<a nAme="idx1073747569"></a>
+							<p>
+								<Tt clASS="monofont">formatter</Tt>— 
+    
+								This is the formatter instance associated with the
+  parser.
+							</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073747570"></a>
+							<a nAME="idx1073747571"></A>
+							<p>
+								<tt cLASS="monofont">nofill</tt>— 
+    
+								This Boolean flag should be true when whitespace should not
+  be collapsed, or false when it should be. In general, this should only be true
+  when character data is to be treated as "preformatted" text, as
+  within a <tt class="monofont">&lt;PRE&gt;</tt> element. The default value is false.
+  This affects the operation of <tt class="monofont">handle_data()</tt> and
+  <Tt cLass="monofont">save_end().</Tt>
+							</p>
+
+						</p>
+<p>
+							<A namE="idx1073747572"></A>
+							<A Name="idx1073747573"></a>
+							<P>
+								<TT Class="monofont">anchor_bgn(href, name,
+  type)</TT>— 
+    
+								This method is called at the start of an anchor region. The
+  arguments correspond to the attributes of the <TT clasS="monofont">&lt;A&gt;</TT> tag
+  with the same names. The default implementation maintains a list of hyperlinks
+  (defined by the <Tt class="monofont">href</tt> attribute) within the document. The
+  list of hyperlinks is available as the data attribute
+  <tt class="monofont">anchorlist.</tt>
+							</p>
+
+						</p>
+<p>
+							<A naMe="idx1073747574"></a>
+							<a Name="idx1073747575"></a>
+							<P>
+								<tt cLASS="monofont">anchor_end()</tt>— 
+    
+								This method is called at the end of an anchor region. The
+  default implementation adds a textual footnote marker using an index into the
+  list of hyperlinks created by <tt CLASs="monofont">anchor_bgn().</tt>
+							</p>
+
+						</P>
+<P>
+							<A Name="idx1073747576"></a>
+							<A NAMe="idx1073747577"></a>
+							<p>
+								<tt class="monofont">handle_image(source, alt[, ismap[, align[, width[,
+  height]]]])</tt>— 
+    
+								This method is called to handle images. The default
+  implementation simply passes the alt value to the
+  <tt class="monofont">handle_data()</tT> method.
+  <a nAme="idx1073747578"></a>
+									<A name="idx1073747579"></A>
+									<a naME="idx1073747580"></A>
+									<A name="idx1073747581"></A>
+							</P>
+
+						</P>
+<P>
+							<a namE="idx1073747582"></A>
+							<A Name="idx1073747583"></a>
+							<P>
+								<TT Class="monofont">save_bgn()</tt>— 
+    
+								Begins saving character data in a buffer instead of sending
+  it to the formatter object. Retrieve the stored data via
+  <tt class="monofont">save_end().</tt> Use of the
+  <tt claSs="monofont">save_bgn()</tT>/<tt cLass="monofont">save_end()</tT> pair cannot be
+  nested.
+							</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073747584"></a>
+							<a nAME="idx1073747585"></A>
+							<p>
+								<tt cLASS="monofont">save_end()</tt>— 
+    
+								Ends buffering character data and returns all data saved
+  since the preceding call to <tt CLASs="monofont">save_bgn().</tt> If the nofill flag
+  is false, whitespace is collapsed to single spaces. A call to this method
+  without a preceding call to <tt class="monofont">save_bgn()</tt> will raise a
+  <tt class="monofont">TypeError</tT> exception.
+							</p>
+
+						</p>
+</BlocKquotE>
+					<p>The following example is a 
+  <a nAME="idx1073747586"></A>
+						<a namE="idx1073747587"></A>
+						<A Name="idx1073747588"></a>
+						<A NAMe="idx1073747589"></a>
+						<a nAME="idx1073747590"></A>
+						<a name="idx1073747591"></a>
+						<a name="idx1073747592"></a>
+						<a name="idx1073747593"></a>CGI script that outputs to a Web page the Web links found
+  in a given HTML file.</p>
+
+					<pRe>
+						
+import htmllib
+import formatter, string, cgi
+
+form = cgi.FieldStorage()
+
+try:
+    myfile = form["filename"].value
+except:
+    myfile = "index.html"
+
+class ParserClass(htmllib.HTMLParser):
+    def __init__(self, verbose=0):
+         self.anchors = {}
+         fmt = formatter.NullFormatter()
+         htmllib.HTMLParser.__init__(self, fmt, verbose)
+    def anchor_bgn(self, href, name, type):
+        self.save_bgn()
+        self.anchor = href
+    def anchor_end(self):
+        tagtext = string.strip(self.save_end())
+        if self.anchor and tagtext:
+            self.anchors[tagtext] = self.anchors.get(tagtext, []) + \
+                                      [self.anchor]
+filename = open(myfile)
+htmldata = filename.read()
+filename.close()
+parserobj = ParserClass()
+parserobj.feed(htmldata)
+parserobj.close()
+
+print "Content-type: text/html\n"
+
+for key in p.anchors.keys():
+    print key, p.anchors[key] 
+
+					</pRe>
+
+				
+				
+					<h4><tT clasS="monofont">
+							<a naME="idx1073747594"></A>
+							<A name="idx1073747595"></A>
+							<A NAme="idx1073747596"></a>
+							<a NAME="idx1073747597"></a>htmlentitydefs</tt></h4>
+					<P>The <TT Class="monofont">htmlentitydefs</tt> module contains a dictionary
+  called 
+  <a name="idx1073747598"></a>
+						<a name="idx1073747599"></a><tt ClaSs="monofont">entitydefs</tt> that contains all the
+  definitions for the general entities defined by HTML 2.0, as demonstrated
+  next:</P>
+
+					<pre>
+						
+import htmlentitydefs
+htmlentitydef = htmlentitydefs.entitydefs.keys()
+for key in htmlentitydef:
+    print key, " = ", htmlentitydef[key]
+
+					</pRe>
+
+				
+				
+					<h4><tT CLAss="monofont">
+							<a nAME="idx1073747600"></A>
+							<a namE="idx1073747601"></A>
+							<A Name="idx1073747602"></a>
+							<A NAMe="idx1073747603"></a>formatter</tt></h4>
+					<p>The <tt class="monofont">formatter</tt> module is used for generic output
+  formatting by the 
+  <a name="idx1073747604"></A>
+						<a nAme="idx1073747605"></a><Tt claSs="monofont">HTMLParser</tt> class of the 
+  <A NAMe="idx1073747606"></a>
+						<a nAME="idx1073747607"></A><tt clASS="monofont">htmllib</Tt> module. This module supports two
+  interface definitions, each with multiple implementations: Formatter and
+  Writer.</p>
+
+					<p>
+						<a NAME="idx1073747608"></a>
+						<a name="idx1073747609"></a>Formatter objects transform an abstract flow of formatting
+  events into specific output events on writer objects. Formatters manage several
+  stack structures to allow various properties of a writer object to be changed
+  and restored; writers need not be able to handle relative changes nor any sort
+  of "change back" operation. Specific writer properties which can
+  be controlled via formatter objects are horizontal alignment, font, and left
+  margin indentations. A mechanism is provided that supports providing arbitrary,
+  non-exclusive style settings to a writer as well. Additional interfaces
+  facilitate formatting events that are not reversible, such as paragraph
+  separation. The <i>writer</i> interface is required by the
+  formatter interface.</p>
+
+					<p>
+						<a name="idx1073747610"></a>
+						<a naMe="idx1073747611"></a>Writer objects encapsulate device interfaces. Abstract
+  devices, such as file formats, are supported as well as physical devices. The
+  provided implementations all work with abstract devices. The interface makes
+  available mechanisms for setting the properties that formatter objects manage
+  and inserting data into the output.</P>
+
+				
+				
+					<h4>
+  
+  
+  The Formatter Interface</h4>
+					<p>Interfaces to create formatters are dependent on the specific
+  formatter class being instantiated. The interfaces described as follows are the
+  required interfaces, which all formatters must support once initialized.
+  <A name="idx1073747612"></A>
+						<a naME="idx1073747613"></A>
+						<A name="idx1073747614"></A>
+						<A NAme="idx1073747615"></a>
+						<a NAME="idx1073747616"></a>
+						<a naME="idx1073747617"></A>
+						<A name="idx1073747618"></a></p>
+
+					<p>One data element is defined at the module level:
+  <tt class="monofont">AS_IS.</tt> This value can be used in the font specification
+  passed to the <tt clAss="monofont">push_font()</Tt> method described in the following,
+  or as the new value to any other <tt Class="monofont">push_property()</Tt> method.
+  Pushing the <tt CLASs="monofont">AS_IS</tt> value allows the corresponding
+  <tT CLAss="monofont">pop_property()</tt> method to be called without having to track
+  whether the property was changed.</P>
+
+					<P>The following 
+  <A Name="idx1073747619"></a>attributes are defined for formatter instance
+  objects:</P>
+
+					<BLOckquote>
+<p>
+							<a name="idx1073747620"></a>
+							<a name="idx1073747621"></a>
+							<P>
+								<tt ClasS="monofont">writer</tt>— 
+    
+								Interacts with the formatter.
+							</p>
+
+						</p>
+<P>
+							<a naME="idx1073747622"></A>
+							<A name="idx1073747623"></A>
+							<P>
+								<TT clasS="monofont">end_paragraph(blanklines)</TT>— 
+    
+								Closes any open paragraphs and inserts at least blanklines
+  before the next paragraph.
+							</P>
+
+						</p>
+<p>
+							<a nAME="idx1073747624"></A>
+							<a name="idx1073747625"></a>
+							<p>
+								<tt class="monofont">add_line_break()</tt>— 
+    
+								Adds a hard line break if one does not already exist. This
+  does not break the logical paragraph.
+							</p>
+
+						</p>
+<p>
+							<a NamE="idx1073747626"></a>
+							<a nAme="idx1073747627"></a>
+							<p>
+								<Tt clASS="monofont">add_hor_rule(*args, **kw)</Tt>— 
+    
+								Inserts a horizontal rule in the output. A hard break is
+  inserted if data is in the current paragraph, but the logical paragraph is not
+  broken. The arguments and keywords are passed on to the writer's
+  <tt cLASS="monofont">send_line_break()</tt> method.
+							</p>
+
+						</p>
+<P>
+							<A NAme="idx1073747628"></a>
+							<a NAME="idx1073747629"></a>
+							<p>
+								<tt class="monofont">add_flowing_data(data)</tt>— 
+    
+								Provides data that should be formatted with collapsed
+  whitespaces. Whitespace from preceeding and successive calls to
+  <tt class="monofont">add_flowing_data()</tt> is considered as well when the whitespace
+  collapse is performed. The data that is passed to this method is expected to be
+  word wrapped by the output device. Note that any word wrapping still must be
+  performed by the writer object because of the need to rely on device and font
+  information.
+							</P>
+
+						</p>
+<p>
+							<A namE="idx1073747630"></a>
+							<a naMe="idx1073747631"></a>
+							<p>
+								<TT CLass="monofont">add_literal_data(data)</tT>— 
+    
+								Provides data that should be passed to the writer unchanged.
+  Whitespace, including newline and tab characters, is considered legal in the
+  value of data.
+							</P>
+
+						</P>
+<P>
+							<a namE="idx1073747632"></A>
+							<A Name="idx1073747633"></a>
+							<P>
+								<TT Class="monofont">add_label_data(format,
+  counter)</tt>— 
+    
+								Inserts a label that should be placed to the left of the
+  current left margin. This should be used for constructing bulleted or numbered
+  lists. If the format value is a string, it is interpreted as a format
+  specification for counter, which should be an integer. The result of this
+  formatting becomes the value of the label; if format is not a string, it is
+  used as the label value directly. The label value is passed as the only
+  argument to the writer's <tt class="monofont">send_label_data()</tt> method.
+  Interpretation of nonstring label values is dependent on the associated writer.
+  <a name="idx1073747634"></A>
+									<a nAme="idx1073747635"></a>
+									<A name="idx1073747636"></A>
+									<a naME="idx1073747637"></A>
+									<A name="idx1073747638"></A>
+									<A NAme="idx1073747639"></a>
+									<a NAME="idx1073747640"></a>
+									<a naME="idx1073747641"></A>
+							</P>
+
+						</p>
+</blockquote>
+					<p>Format specifications are strings that, in combination with a 
+  <a name="idx1073747642"></a>
+						<a nAme="idx1073747643"></A>counter value, are used to compute label values. Each
+  character in the format string is copied to the label value, with some
+  characters recognized to indicate a transformation on the counter value.
+  Specifically, the character 
+  <a naMe="idx1073747644"></a><tt ClasS="monofont">1</TT> represents the counter value formatter
+  as an Arabic number, the characters 
+  <A name="idx1073747645"></A><TT Class="monofont">A</TT> and 
+  <A Name="idx1073747646"></a><TT CLass="monofont">a</tt> represent alphabetic representations
+  of the counter value in upper- and lowercase, respectively, and 
+  <a name="idx1073747647"></a><tt class="monofont">I</tt> and 
+  <A naMe="idx1073747648"></a><tT clasS="monofont">i</tt> represent the counter value in Roman
+  numerals, in upper- and lowercase. Note that the alphabetic and roman
+  transformations require that the counter value be greater than zero.</p>
+
+					<BLOCkquoTE>
+<P>
+							<A name="idx1073747649"></A>
+							<A NAme="idx1073747650"></a>
+							<a NAME="idx1073747651"></a>
+							<p>
+								<tt class="monofont">flush_softspace()</tt>— 
+    
+								Sends any pending whitespace buffered from a previous call to
+  <tt class="monofont">add_flowing_data()</tt> to the associated writer object. This
+  should be called before any direct manipulation of the writer object.
+							</P>
+
+						</p>
+<p>
+							<A namE="idx1073747652"></a>
+							<a naMe="idx1073747653"></a>
+							<p>
+								<TT CLass="monofont">push_alignment(align)</tT>— 
+    
+								Pushes a new alignment setting onto the alignment stack. This
+  might be <TT Class="monofont">AS_IS</TT> if no change is desired. If the alignment
+  value is changed from the previous setting, the writer's
+  <TT clasS="monofont">new_alignment()</TT> method is called with the align
+  value.
+							</P>
+
+						</p>
+<p>
+							<a name="idx1073747654"></a>
+							<a name="idx1073747655"></a>
+							<p>
+								<tt claSs="monofont">pop_alignment()</tT>— 
+    
+								Restores the previous alignment.
+							</p>
+
+						</p>
+<p>
+							<A name="idx1073747656"></A>
+							<a naME="idx1073747657"></A>
+							<P>
+								<tt clASS="monofont">push_font((size, italic, bold,
+  teletype))</Tt>— 
+    
+								Changes some or all font properties of the writer object.
+  Properties that are not set to <tt cLASS="monofont">AS_IS</tt> are set to the values
+  passed in, whereas others are maintained at their current settings. The
+  writer's <tt CLASs="monofont">new_font()</tt> method is called with the fully resolved
+  font specification.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747658"></a>
+							<a name="idx1073747659"></a>
+							<p>
+								<tT clAss="monofont">pop_font()</tT>— 
+    
+								Restores the previous font.
+  <a namE="idx1073747660"></a>
+									<a nAME="idx1073747661"></A>
+									<a namE="idx1073747662"></A>
+									<A Name="idx1073747663"></a>
+									<A NAMe="idx1073747664"></a>
+									<a nAME="idx1073747665"></A>
+									<a name="idx1073747666"></a>
+									<a name="idx1073747667"></a>
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747668"></A>
+							<a nAme="idx1073747669"></a>
+							<P>
+								<tt clAss="monofont">push_margin(margin)</tT>— 
+    
+								Increases the number of left margin indentations by one,
+  associating the logical tag margin with the new indentation. The initial margin
+  level is <TT Class="monofont">0.</TT> Changed values of the logical tag must be true
+  values; false values other than <TT clasS="monofont">AS_IS</TT> are not sufficient to
+  change the margin.
+							</P>
+
+						</p>
+<p>
+							<a nAME="idx1073747670"></A>
+							<a name="idx1073747671"></a>
+							<p>
+								<tt class="monofont">pop_margin()</tt>— 
+    
+								Restores the previous margin.
+							</p>
+
+						</p>
+<p>
+							<a NamE="idx1073747672"></a>
+							<a nAme="idx1073747673"></a>
+							<p>
+								<Tt clASS="monofont">push_style(*styles)</Tt>— 
+    
+								Pushes any number of arbitrary style specifications. All
+  styles are pushed onto the styles stack in order. A tuple representing the
+  entire stack, including <tt cLASS="monofont">AS_IS</tt> values, is passed to the
+  writer's <tt CLASs="monofont">new_styles()</tt> method.
+							</p>
+
+						</P>
+<P>
+							<A Name="idx1073747674"></a>
+							<a name="idx1073747675"></a>
+							<p>
+								<tt class="monofont">pop_style([n = 1])</tt>— 
+    
+								Pops the last <Tt cLass="monofont">n</Tt> style specifications
+  passed to <tt cLass="monofont">push_style().</TT> A tuple representing the revised
+  stack, including <TT clasS="monofont">AS_IS</TT> values, is passed to the writer's
+  <Tt claSS="monofont">new_styles()</TT> method.
+							</p>
+
+						</p>
+<p>
+							<a NAME="idx1073747676"></a>
+							<a name="idx1073747677"></a>
+							<p>
+								<tt class="monofont">set_spacing(spacing)</tt>— 
+    
+								Sets the spacing style for the writer.
+							</p>
+
+						</p>
+<p>
+							<A naMe="idx1073747678"></a>
+							<a Name="idx1073747679"></a>
+							<P>
+								<tt cLASS="monofont">assert_line_data([flag =
+  1])</tt>— 
+    
+								Informs the formatter that data has been added to the current
+  paragraph out-of-band. This should be used when the writer has been manipulated
+  directly. The optional flag argument can be set to false if the writer
+  manipulations produced a hard line break at the end of the output.
+  <a nAME="idx1073747680"></A>
+							</p>
+
+						</p>
+</blOCKQuote>
+				
+				
+					<H4>Formatter Implementations</H4>
+					<P>Two implementations of formatter objects are provided by this
+  module. Most applications can use one of these classes without modification or
+  subclassing.</P>
+
+					<blockquote>
+<p>
+							<a name="idx1073747681"></a>
+							<a naMe="idx1073747682"></a>
+							<A namE="idx1073747683"></a>
+							<p>
+								<tt ClasS="monofont">NullFormatter([writer])</TT>— 
+    
+								A formatter that does nothing. If writer is omitted, a
+  NullWriter instance is created. No methods of the writer are called by
+  NullFormatter instances. Implementations should inherit from this class if
+  implementing a writer interface but don't need to inherit any
+  implementation.
+							</P>
+
+						</p>
+<p>
+							<a nAME="idx1073747684"></A>
+							<a namE="idx1073747685"></A>
+							<P>
+								<Tt claSS="monofont">AbstractFormatter(writer)</TT>— 
+    
+								The standard formatter. This implementation has demonstrated
+  wide applicability to many writers, and can be used directly in most
+  circumstances. It has been used to implement a full-featured WWW browser.
+  <a name="idx1073747686"></a>
+									<a name="idx1073747687"></a>
+									<a name="idx1073747688"></a>
+									<a nAme="idx1073747689"></A>
+									<a naMe="idx1073747690"></a>
+									<a nAme="idx1073747691"></a>
+									<A NAMe="idx1073747692"></a>
+									<a nAME="idx1073747693"></A>
+							</p>
+
+						</p>
+</blOCKQuote>
+				
+				
+					<H4>
+  
+  
+  The Writer Interface</H4>
+					<P>Interfaces to create writers are dependent on the specific writer
+  class being instantiated. The interfaces described as follows are the required
+  interfaces that all writers must support once initialized. Although most
+  applications can use the <Tt class="monofont">AbstractFormatter</tt> class as a
+  formatter, the writer must typically be provided by the application.</p>
+
+					<blockquote>
+<p>
+							<A naMe="idx1073747694"></a>
+							<a Name="idx1073747695"></a>
+							<A namE="idx1073747696"></A>
+							<P>
+								<Tt claSS="monofont">flush()</TT>— 
+    
+								Flushes any buffered output or device control events.
+							</p>
+
+						</p>
+<p>
+							<a NAME="idx1073747697"></a>
+							<a naME="idx1073747698"></A>
+							<P>
+								<tt class="monofont">new_alignment(align)</tt>— 
+    
+								Sets the alignment style. The align value can be any object,
+  but by convention is a string or <tt class="monofont">None,</tt> where
+  <tt ClaSs="monofont">None</tt> indicates that the writer's preferred alignment should
+  be used. Conventional align values are
+  <Tt claSs="monofont">left,</tt><TT CLass="monofont">center,</tT><TT Class="monofont">right,</TT> and
+  <TT clasS="monofont">justify.</TT>
+							</P>
+
+						</p>
+<p>
+							<a name="idx1073747699"></a>
+							<a name="idx1073747700"></a>
+							<p>
+								<tt claSs="monofont">new_font(font)</tT>— 
+    
+								Sets the font style. The value of font will be
+  <tt cLass="monofont">None,</tT> indicating that the device's default font should be
+  used, or a tuple of the form (size, italic, bold, teletype). Size will be a
+  string indicating the size of font that should be used; specific strings and
+  their interpretation must be defined by the application. The italic, bold, and
+  teletype values are Boolean indicators specifying which of those font
+  attributes should be used.
+							</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073747701"></a>
+							<a nAME="idx1073747702"></A>
+							<p>
+								<tt cLASS="monofont">new_margin</tt> (<i>margin</i>,
+  <I>level</I>) — 
+    
+								Sets the margin level to the integer level and the logical
+  tag to margin. Interpretation of the logical tag is at the writer's discretion;
+  the only restriction on the value of the logical tag is that it not be a false
+  value for non-zero values of level.
+							</P>
+
+						</P>
+<p>
+							<a name="idx1073747703"></a>
+							<a name="idx1073747704"></a>
+							<p>
+								<tt clasS="monofont">new_spacing</tt>
+  (<I>spacing</i>)— 
+    
+								Sets the spacing style to spacing.
+							</p>
+
+						</p>
+<P>
+							<a namE="idx1073747705"></a>
+							<a nAME="idx1073747706"></A>
+							<p>
+								<tt cLASS="monofont">new_styles</tt>
+  (<i>styles</i>)— 
+    
+								Sets additional styles. The styles value is a tuple of
+  arbitrary values; the value <TT CLass="monofont">AS_IS</tT> should be ignored. The
+  styles tuple can be interpreted either as a set or as a stack depending on the
+  requirements of the application and writer implementation.
+							</P>
+
+						</P>
+<P>
+							<a name="idx1073747707"></a>
+							<a name="idx1073747708"></a>
+							<p>
+								<tt class="monofont">send_line_break()</Tt>— 
+    
+								Breaks the current line.
+  <a Name="idx1073747709"></A>
+									<a namE="idx1073747710"></a>
+									<a nAME="idx1073747711"></A>
+									<a namE="idx1073747712"></A>
+									<A Name="idx1073747713"></a>
+									<A NAMe="idx1073747714"></a>
+									<a nAME="idx1073747715"></A>
+									<a name="idx1073747716"></a>
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747717"></a>
+							<a name="idx1073747718"></A>
+							<p>
+								<tT claSs="monofont">send_paragraph</tt>
+  (<i>number</I>)— 
+    
+								Produces a paragraph separation of at least the given number
+  of blank lines, or the equivalent. The blankline value will be an integer. Note
+  that the implementation will receive a call to
+  <tt cLASS="monofont">send_line_break()</tt> before this call if a line break is
+  needed; this method should not include ending the last line of the paragraph.
+  It is only responsible for vertical spacing between paragraphs.
+							</p>
+
+						</p>
+<P>
+							<A NAme="idx1073747719"></a>
+							<a NAME="idx1073747720"></a>
+							<p>
+								<tt CLASs="monofont">send_hor_rule(*args, **kw)</tt>— 
+    
+								Displays a horizontal rule on the output device. The
+  arguments to this method are entirely application- and writer-specific, and
+  should be interpreted with care. The method implementation can assume that a
+  line break has already been issued via
+  <tt class="monofont">send_line_break().</tt>
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747721"></A>
+							<a nAme="idx1073747722"></a>
+							<P>
+								<tt clAss="monofont">send_flowing_data(data)</tT>— 
+    
+								Outputs character data that might be word wrapped and
+  re-flowed as needed. Within any sequence of calls to this method, the writer
+  can assume that spans of multiple whitespace characters have been collapsed to
+  single space characters.
+							</P>
+
+						</P>
+<P>
+							<a namE="idx1073747723"></A>
+							<A Name="idx1073747724"></a>
+							<P>
+								<TT Class="monofont">send_literal_data(data)</TT>— 
+    
+								Outputs character data that has already been formatted for
+  display. Generally, this should be interpreted to mean that line breaks
+  indicated by newline characters should be preserved and no new line breaks
+  should be introduced. The data can contain embedded newline and tab characters,
+  unlike data provided to the <TT class="monofont">send_formatted_data()</tt>
+  interface.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073747725"></a>
+							<a namE="idx1073747726"></a>
+							<p>
+								<Tt clAss="monofont">send_label_data(data)</tt>— 
+    
+								Sets data to the left of the current left margin, if
+  possible. The value of data is not restricted; treatment of non-string values
+  is entirely application- and writer-dependent. This method will only be called
+  at the beginning of a line.
+  <A namE="idx1073747727"></A>
+							</P>
+
+						</P>
+</blocKQUOte>
+				
+				
+					<h4>Writer Implementations</h4>
+					<P>Three implementations of the writer object interface are provided
+  as examples by this module. Most applications will need to derive new writer
+  classes from the <TT Class="monofont">NullWriter</TT> class.</P>
+
+					<Blockquote>
+<p>
+							<a name="idx1073747728"></a>
+							<a namE="idx1073747729"></a>
+							<a Name="idx1073747730"></A>
+							<p>
+								<tt cLass="monofont">NullWriter()</TT>— 
+    
+								A writer that only provides the interface definition; no
+  actions are taken on any methods. This should be the base class for all writers
+  that do not need to inherit any implementation methods.
+							</P>
+
+						</P>
+<p>
+							<a naME="idx1073747731"></A>
+							<A name="idx1073747732"></A>
+							<P>
+								<TT clasS="monofont">AbstractWriter()</TT>— 
+    
+								A writer that can be used in debugging formatters, but not
+  much else. Each method simply announces itself by printing its name and
+  arguments on standard output.
+							</P>
+
+						</p>
+<p>
+							<a name="idx1073747733"></a>
+							<a name="idx1073747734"></a>
+							<p>
+								<tt claSs="monofont">DumbWriter([file[, maxcol =
+  72]])</tT>— 
+    
+								A simple writer class that writes output on the file object
+  passed in as file or, if file is omitted, on standard output. The output is
+  simply word wrapped to the number of columns specified by maxcol. This class is
+  suitable for reflowing a sequence of paragraphs.
+  <a naMe="idx1073747735"></a>
+									<a nAme="idx1073747736"></a>
+									<A NAMe="idx1073747737"></a>
+									<a nAME="idx1073747738"></A>
+									<a namE="idx1073747739"></A>
+									<A Name="idx1073747740"></a>
+									<A NAMe="idx1073747741"></a>
+									<a name="idx1073747742"></a>
+							</p>
+
+						</p>
+</blockquote>
+				
+				
+					<H4>Using the Formatter Module</h4>
+					<p>The following example removes all tags from an HTML file, leaving only the plain text left.</P>
+
+					<pre>
+						
+1: from htmllib import HTMLParser
+2: from formatter import AbstractFormatter, DumbWriter
+3: htmlfile = open("stuff.html")
+4: parser = HTMLParser(AbstractFormatter(DumbWriter()))
+5: parser.feed(htmlfile.read())
+6: parser.close()
+7: htmlfile.close()
+
+					</Pre>
+
+					<p>The <tT claSS="monofont">DumbWriter</TT> function is used here to dump all the non-tag contents of <tt clASS="monofont">htmlfile</Tt> to the standard
+output.</p>
+
+					<p>Note that the file opened by line 3 can also be a URL. You just need to import and use the <tT CLAss="monofont">urllib.urlopen</tt> function, like
+  this:</P>
+
+					<PRE>
+						
+from urllib import urlopen
+htmlfile = urlopen('http://www.lessaworld.com/') 
+
+					</pre>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="192.html" title="XDR Data Exchange Format"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=193" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="193.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="194.html" title="MIME Parsing and Manipulation"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073747644">1</a><BR>
+ <a href="#idx1073747645">A</a><BR>
+ <a href="#idx1073747646">a</a><BR>
+ <a href="#idx1073747684">AbstractFormatter(writer) class</a><BR>
+ <a href="#idx1073747731">AbstractWriter() class</a><BR>
+ <a href="#idx1073747628">add_flowing_data(data) attribute</a><BR>
+ <a href="#idx1073747626">add_hor_rule(*args, **kw) attribute</a><BR>
+ <a href="#idx1073747632">add_label_data(format, counter) attribute</a><BR>
+ <a href="#idx1073747624">add_line_break() attribute</a><BR>
+ <a href="#idx1073747630">add_literal_data(data) attribute</a><BR>
+ <a href="#idx1073747573">anchor_bgn(href, name, type) method</a><BR>
+ <a href="#idx1073747575">anchor_end() method</a><BR>
+ <a href="#idx1073747678">assert_line_data([flag = 1]) method</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747629">add_flowing_data(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747627">add_hor_rule(*args, **kw)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747633">add_label_data(format, counter)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747625">add_line_break()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747631">add_literal_data(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747623">end_paragraph(blanklines)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747619">formatter objects</a> <a href="#idx1073747641">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747621">writer</a><BR>
+CGI scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747586">outputting links from HTML files to Web pages</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747685">AbstractFormatter(writer)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747732">AbstractWriter()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747734">DumbWriter([file[, maxcol = 72]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747681">formatter objects</a> <a href="#idx1073747693">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747547">HTMLParser</a> <a href="#idx1073747605">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747683">NullFormatter([writer])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747730">NullWriter()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747467">sgmllib module</a> <a href="#idx1073747479">2nd</a> <a href="#idx1073747501">3rd</a> <a href="#idx1073747521">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747469">SGMLParser</a> <a href="#idx1073747481">2nd</a> <a href="#idx1073747503">3rd</a> <a href="#idx1073747523">4th</a> <a href="#idx1073747549">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747728">writer objects</a> <a href="#idx1073747742">2nd</a><BR>
+ <a href="#idx1073747488">close() method</a> <a href="#idx1073747555">2nd</a><BR>
+collecting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747541">page title information</a><BR>
+ <a href="#idx1073747642">counter values</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747600">formatter module</a> <a href="#idx1073747612">2nd</a> <a href="#idx1073747634">3rd</a> <a href="#idx1073747660">4th</a> <a href="#idx1073747686">5th</a> <a href="#idx1073747709">6th</a> <a href="#idx1073747735">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747594">hemlentitydefs module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747542">htmllib module</a> <a href="#idx1073747556">2nd</a> <a href="#idx1073747578">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747475">sgmllib module</a> <a href="#idx1073747497">2nd</a> <a href="#idx1073747517">3rd</a><BR>
+dictionaries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747598">entitydefs</a><BR>
+ <a href="#idx1073747565">do_tag() method</a><BR>
+ <a href="#idx1073747532">do_tag(attributes) method</a><BR>
+ <a href="#idx1073747733">DumbWriter([file[, maxcol = 72]]) class</a><BR>
+ <a href="#idx1073747622">end_paragraph(blanklines) attribute</a><BR>
+ <a href="#idx1073747534">end_tag() method</a> <a href="#idx1073747563">2nd</a><BR>
+ <a href="#idx1073747599">entitydefs dictionary</a><BR>
+ <a href="#idx1073747553">feed() method</a><BR>
+ <a href="#idx1073747486">feed(data) method</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747591">outputting links from to Web pages, CGI scripts</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SGML<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747537">opening</a><BR>
+flag<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747570">nofill</a><BR>
+ <a href="#idx1073747695">flush() method</a><BR>
+ <a href="#idx1073747650">flush_softspace() method</a><BR>
+ <a href="#idx1073747602">formatter module</a> <a href="#idx1073747614">2nd</a> <a href="#idx1073747636">3rd</a> <a href="#idx1073747662">4th</a> <a href="#idx1073747688">5th</a> <a href="#idx1073747711">6th</a> <a href="#idx1073747737">7th</a><BR>
+ <a href="#idx1073747608">formatter objects</a> <a href="#idx1073747616">2nd</a> <a href="#idx1073747638">3rd</a> <a href="#idx1073747664">4th</a> <a href="#idx1073747690">5th</a><BR>
+ <a href="#idx1073747569">formatter variable</a><BR>
+ <a href="#idx1073747496">handle_charref(ref) method</a><BR>
+ <a href="#idx1073747508">handle_comment(comment) method</a><BR>
+ <a href="#idx1073747494">handle_data(data) method</a><BR>
+ <a href="#idx1073747492">handle_endtag(tag, method) method</a><BR>
+ <a href="#idx1073747506">handle_entityref(ref) method</a><BR>
+ <a href="#idx1073747577">handle_image(source, alt[, is map[, align[, width[, height]]]]) method</a><BR>
+ <a href="#idx1073747490">handle_starttag(tag, method, attributes) method</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747511">tags</a><BR>
+ <a href="#idx1073747596">hemlentitydefs module</a><BR>
+HTML files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747590">outputting links from to Web pages, CGI scripts</a><BR>
+ <a href="#idx1073747544">htmllib module</a> <a href="#idx1073747558">2nd</a> <a href="#idx1073747580">3rd</a> <a href="#idx1073747606">4th</a><BR>
+ <a href="#idx1073747546">HTMLParser class</a> <a href="#idx1073747604">2nd</a><BR>
+ <a href="#idx1073747647">I</a><BR>
+ <a href="#idx1073747648">i</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747618">formatter</a> <a href="#idx1073747640">2nd</a> <a href="#idx1073747666">3rd</a> <a href="#idx1073747692">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747550">sgmllib.SGMLParser</a> <a href="#idx1073747566">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747715">writer</a> <a href="#idx1073747741">2nd</a><BR>
+links<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747589">outputting from HTML files to Web pages, CGI scripts</a><BR>
+manipulating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747601">formatter module</a> <a href="#idx1073747613">2nd</a> <a href="#idx1073747635">3rd</a> <a href="#idx1073747661">4th</a> <a href="#idx1073747687">5th</a> <a href="#idx1073747710">6th</a> <a href="#idx1073747736">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747595">hemlentitydefs module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747543">htmllib module</a> <a href="#idx1073747557">2nd</a> <a href="#idx1073747579">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747476">sgmllib module</a> <a href="#idx1073747498">2nd</a> <a href="#idx1073747518">3rd</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747572">anchor_bgn(href, name, type)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747574">anchor_end()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747679">assert_line_data([flag = 1])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747487">close()</a> <a href="#idx1073747554">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747564">do_tag()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747531">do_tag(attributes)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747533">end_tag()</a> <a href="#idx1073747562">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747552">feed()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747485">feed(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747696">flush()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747651">flush_softspace()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747649">formatter objects</a> <a href="#idx1073747667">2nd</a> <a href="#idx1073747680">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747495">handle_charref(ref)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747507">handle_comment(comment)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747493">handle_data(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747491">handle_endtag(tag, method)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747505">handle_entityref(ref)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747576">handle_image(source, alt[, is map[, align[, width[, height]]]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747489">handle_starttag(tag, method, attributes)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747698">new alignment(align)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747700">new_font(font)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747702">new_margin(margin, level)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747704">new_spacing(spacing)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747706">new_styles(styles)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747655">pop_alignment()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747659">pop_font()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747671">pop_margin()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747675">pop_style([n = 1])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747653">push_alignment(align)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747657">push_font((size, italic, bold, teletype))</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747669">push_margin(margin)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747673">push_style(*styles)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747509">report_unbalanced(tag)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747471">reset()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747582">save_bgn()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747584">save_end()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747722">send_flowing_data(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747720">send_hor_rule(*args, **kw)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747726">send_label_data(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747708">send_line_break()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747724">send_literal_data(data)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747718">send_paragraph(number)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747677">set_spacing(spacing)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747483">setliteral()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747473">setnomoretags()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747470">SGMLParser class</a> <a href="#idx1073747482">2nd</a> <a href="#idx1073747504">3rd</a> <a href="#idx1073747524">4th</a> <a href="#idx1073747535">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747560">start_tag()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747529">start_tag(attributes)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747525">unknown_charref(ref)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747515">unknown_endtag(tag)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747527">unknown_entity(ref)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747513">unknown_starttag(tag, attributes)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747694">writer objects</a> <a href="#idx1073747716">2nd</a> <a href="#idx1073747727">3rd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747603">formatter</a> <a href="#idx1073747615">2nd</a> <a href="#idx1073747637">3rd</a> <a href="#idx1073747663">4th</a> <a href="#idx1073747689">5th</a> <a href="#idx1073747712">6th</a> <a href="#idx1073747738">7th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747597">hemlentitydefs</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747545">htmllib</a> <a href="#idx1073747559">2nd</a> <a href="#idx1073747581">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747607">Htmllib</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747478">sgmllib</a> <a href="#idx1073747500">2nd</a> <a href="#idx1073747520">3rd</a><BR>
+ <a href="#idx1073747697">new alignment(align) method</a><BR>
+ <a href="#idx1073747699">new_font(font) method</a><BR>
+ <a href="#idx1073747701">new_margin(margin, level) method</a><BR>
+ <a href="#idx1073747703">new_spacing(spacing) method</a><BR>
+ <a href="#idx1073747705">new_styles(styles) method</a><BR>
+ <a href="#idx1073747571">nofill flag</a><BR>
+ <a href="#idx1073747682">NullFormatter([writer]) class</a><BR>
+ <a href="#idx1073747729">NullWriter() class</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747609">formatter</a> <a href="#idx1073747617">2nd</a> <a href="#idx1073747639">3rd</a> <a href="#idx1073747665">4th</a> <a href="#idx1073747691">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747611">writer</a> <a href="#idx1073747714">2nd</a> <a href="#idx1073747740">3rd</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747536">SGML files</a><BR>
+outputting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747588">links from HTML files to Web pages, CGI scripts</a><BR>
+page titles<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747539">collecting information on</a><BR>
+pages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747593">outputting links from HTML files to, CGI scripts</a><BR>
+ <a href="#idx1073747654">pop_alignment() method</a><BR>
+ <a href="#idx1073747658">pop_font() method</a><BR>
+ <a href="#idx1073747670">pop_margin() method</a><BR>
+ <a href="#idx1073747674">pop_style([n = 1]) method</a><BR>
+ <a href="#idx1073747652">push_alignment(align) method</a><BR>
+ <a href="#idx1073747656">push_font((size, italic, bold, teletype)) method</a><BR>
+ <a href="#idx1073747668">push_margin(margin) method</a><BR>
+ <a href="#idx1073747672">push_style(*styles) method</a><BR>
+ <a href="#idx1073747510">report_unbalanced(tag)method</a><BR>
+ <a href="#idx1073747472">reset() method</a><BR>
+ <a href="#idx1073747583">save_bgn() method</a><BR>
+ <a href="#idx1073747585">save_end() method</a><BR>
+scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CGI<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747587">outputting links from HTML files to Web pages</a><BR>
+ <a href="#idx1073747721">send_flowing_data(data) method</a><BR>
+ <a href="#idx1073747719">send_hor_rule(*args, **kw) method</a><BR>
+ <a href="#idx1073747725">send_label_data(data) method</a><BR>
+ <a href="#idx1073747707">send_line_break() method</a><BR>
+ <a href="#idx1073747723">send_literal_data(data) method</a><BR>
+ <a href="#idx1073747717">send_paragraph(number) method</a><BR>
+ <a href="#idx1073747676">set_spacing(spacing) method</a><BR>
+ <a href="#idx1073747484">setliteral() method</a><BR>
+ <a href="#idx1073747474">setnomoretags() method</a><BR>
+SGML files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747538">opening</a><BR>
+ <a href="#idx1073747477">sgmllib module</a> <a href="#idx1073747499">2nd</a> <a href="#idx1073747519">3rd</a><BR>
+ <a href="#idx1073747551">sgmllib.SGMLParser interface</a> <a href="#idx1073747567">2nd</a><BR>
+ <a href="#idx1073747468">SGMLParser class</a> <a href="#idx1073747480">2nd</a> <a href="#idx1073747502">3rd</a> <a href="#idx1073747522">4th</a> <a href="#idx1073747548">5th</a><BR>
+ <a href="#idx1073747561">start_tag() method</a><BR>
+ <a href="#idx1073747530">start_tag(attributes) method</a><BR>
+tags<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747512">handling</a><BR>
+titles<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747540">collecting information for</a><BR>
+ <a href="#idx1073747526">unknown_charref(ref) method</a><BR>
+ <a href="#idx1073747516">unknown_endtag(tag) method</a><BR>
+ <a href="#idx1073747528">unknown_entity(ref) method</a><BR>
+ <a href="#idx1073747514">unknown_starttag(tag, attributes) method</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747643">counter</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747568">formatter</a><BR>
+Web pages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073747592">outputting links from HTML files to, CGI scripts</a><BR>
+ <a href="#idx1073747620">writer attribute</a><BR>
+ <a href="#idx1073747610">writer objects</a> <a href="#idx1073747713">2nd</a> <a href="#idx1073747739">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

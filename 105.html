@@ -1,0 +1,353 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; An Introduction to Python OOP</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">An Introduction to Python OOP</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="104.html" title="Object-Oriented Programming"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=105" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="105.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="106.html" title="Python Classes and Instances"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A33%3A08+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147039203228119224069233</font><a href="read9.asp?bookname=0672319942&snode=105&now=5%2F31%2F2002+4%3A33%3A08+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>An Introduction to Python OOP</h3>
+				<p>A <a NAME="idx1073743249"></a><i>class</i> defines a category of objects in terms of the data it encapsulates and the operations on the data that are allowed by the interface functions. Essentially, a class is a template from which objects can be created.</p>
+
+				<P>Each object created from a class is an <A NAme="idx1073743250"></a><a NAME="idx1073743251"></a><i>instance</i> of a class. They all look alike and exhibit a similar behavior.</p>
+
+				<p>A class stores object <a name="idx1073743252"></a><i>attributes</i> (also known as data members) and the behavior of objects (mostly known as <i>methods</i>). This behavior can be inherited from other (<i>base</i>) <a naMe="idx1073743253"></a><A namE="idx1073743254"></a>classes. The non-method attributes of the class are usually referred to as <a naMe="idx1073743255"></a><a NAME="idx1073743256"></a><i>class members</i> or <a NAME="idx1073743257"></a><i>class attributes</i> so that they are not confused with <a NAME="idx1073743258"></a><a naME="idx1073743259"></A>instance attributes.<A name="idx1073743260"></a><a name="idx1073743261"></a></p>
+
+				<p>Each class has its own namespace in which all the assignments and function definitions occur.</p>
+
+				<h4>Class Instances</h4>
+					<p>A class instance is a Python object, and similar to every Python object, it has the following properties: <i>identity,</i>
+						<i>object type,</I>
+						<i>attributes,</i>
+						<I>methods,</i> and <i>value.</i></P>
+
+					<p>I will use the following class definition as the basis for the next explanations. First, let's declare the <tt cLass="monofont">c</TT> class, and then we will create an instance of this class called <TT clasS="monofont">obj.</TT></P>
+
+					<pre>
+						
+&gt;&gt;&gt; class c:
+…     def __init__(self, value=None):
+…         self.name = value
+…
+&gt;&gt;&gt; obj = c()
+&gt;&gt;&gt; obj.name = "Andre"
+
+					</pRE>
+
+					<P>The <A name="idx1073743262"></A><A NAme="idx1073743263"></a><i>identity</i> is the memory location allocated for the object. It can be identified by using the <tt class="monofont">id()</tt> function.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; id(obj)
+6623988
+
+					</prE>
+
+					<p>The <a Name="idx1073743264"></A><a namE="idx1073743265"></a><i>object type</i> is the object's internal representation. It defines the supported methods and operation for each object. You can use the <TT CLass="monofont">type()</tT> function in order to find out the type of a specific object.</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; type(obj)
+&lt;type 'ínstance'&gt;
+
+&gt;&gt;&gt; type(obj.name)
+&lt;type 'string'&gt;
+
+					</pre>
+
+					<P>While we're talking about object types, let's take a quick break from the whole class issue and examine the types for Python objects defined in extension modules, which do not necessarily act like classes.</P>
+
+					<P><A href="105#2.html">Table 5.1</A> lists all Python built-in object types defined by the <TT Class="monofont">types</tt> module. Note that almost all the types shown in this table are unrelated to Python classes.<a name="idx1073743266"></a><a name="idx1073743267"></a><a nAme="idx1073743268"></A><a naMe="idx1073743269"></a></p>
+
+					<a Name="2"></A><P><TAble bORDEr="1" celLSPAcing="0" CELLpadding="1" width="100%">
+<caption><h5>Table 5.1.   Built-In Object Types Defined by the <Tt cLass="monofont">types</Tt> Module</h5></caPtioN><COLgrouP ALIgn="left" spAN="2">
+<TR valiGN="top">
+<TH>
+<font size="2"><b>Built-In Object Type</b>
+									</font></th>
+<th>
+<foNt sIze="2"><b>Description</B>
+									</font></Th>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt siZE="2"><A Name="idx1073743270"></a><TT CLass="monofont">NoneType</tt>
+									</font></td>
+<td>
+<font sizE="2">the None (null) object</foNt></td>
+</Tr>
+<tr vAligN="top">
+<TD>
+<Font sIZE="2"><A name="idx1073743271"></A><TT Class="monofont">IntType</TT>
+									</FOnt></td>
+<td>
+<font size="2">integer</font></td>
+</Tr>
+<tR valIgn="top">
+<td>
+<Font SIZE="2"><a namE="idx1073743272"></A><TT clasS="monofont">LongType</TT>
+									</Font></tD>
+<TD>
+<Font size="2">arbitrary precision integer</font></td>
+</tr>
+<tr valIgn="top">
+<Td>
+<foNt sizE="2"><a naME="idx1073743273"></A><Tt claSS="monofont">FloatType</TT>
+									</font></TD>
+<TD>
+<font SIZE="2">floating point</font></td>
+</tr>
+<tr valign="top">
+<td>
+<foNt sIze="2"><a Name="idx1073743274"></a><Tt clASS="monofont">ComplexType</Tt>
+									</fonT></TD>
+<Td>
+<fonT SIZe="2">complex number</fonT></TD>
+</Tr>
+<tr valign="top">
+<td>
+<font size="2"><a NamE="idx1073743275"></a><tt Class="monofont">StringType</Tt>
+									</foNT></TD>
+<td>
+<foNT SIze="2">list of characters</foNT></TD>
+</tr>
+<tr VALIgn="top">
+<td>
+<font size="2"><a name="idx1073743276"></a><tt ClaSs="monofont">ListType</tt>
+									</Font></tD>
+<td>
+<fONT Size="2">list</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt size="2"><a name="idx1073743277"></a><tt class="monofont">TupleType</tt>
+									</FonT></td>
+<tD>
+<font Size="2">tuple</FONT></td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt siZE="2"><A Name="idx1073743278"></a><tt class="monofont">XrangeType</tt>
+									</font></td>
+<tD>
+<foNt siZe="2">returned by xrange()</fonT></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2"><A name="idx1073743279"></A><TT Class="monofont">DictType</tt>
+									</font></td>
+<td>
+<font siZe="2">dictionary</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2"><a namE="idx1073743280"></A><TT clasS="monofont">BuiltinFunctionType</TT>
+									</Font></td>
+<td>
+<font size="2">built-in functions</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2"><a naME="idx1073743281"></A><Tt claSS="monofont">BuiltinMethodType</TT>
+									</font></TD>
+<TD>
+<font size="2">built-in methods</font></td>
+</tr>
+<tr vaLigN="top">
+<td>
+<fOnt siZe="2"><a nAME="idx1073743282"></A><tt clASS="monofont">FuntionType</Tt>
+									</fonT></TD>
+<Td>
+<fonT SIZe="2">user-defined function</font></td>
+</tr>
+<tr valign="top">
+<td>
+<fOnt Size="2"><A name="idx1073743283"></A><tt cLASS="monofont">ClassType</tt>
+									</foNT></TD>
+<td>
+<foNT SIze="2">class object/definition</foNT></TD>
+</tr>
+<tr valign="top">
+<td>
+<font size="2"><A naMe="idx1073743284"></a><tT clasS="monofont">InstanceType</tt>
+									</fONT></Td>
+<td>
+<fONT Size="2">class object instance/class instance</fONT></Td>
+</tr>
+<tR VALign="top">
+<td>
+<font size="2"><a name="idx1073743285"></a><tT clAss="monofont">MethodType</tT>
+									</font></Td>
+<td>
+<FONT size="2">bound class method</FONT></td>
+</tr>
+<TR VAlign="top">
+<TD>
+<FOnt size="2"><a name="idx1073743286"></a><tt class="monofont">UnboundMethodType</tT>
+									</foNt></td>
+<Td>
+<fonT sizE="2">unbound class method</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2"><A name="idx1073743287"></a><tt class="monofont">ModuleType</tt>
+									</font></td>
+<Td>
+<fOnt sIze="2">module</foNt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2"><a namE="idx1073743288"></A><TT class="monofont">FileType</tt>
+									</font></td>
+<td>
+<font sIze="2">file</Font></Td>
+</tr>
+<tR valIGN="top">
+<Td>
+<fonT SIZe="2"><a naME="idx1073743289"></A><Tt claSS="monofont">CodeType</TT>*
+</font></td>
+<td>
+<font size="2">raw byte-compiled code</font></Td>
+</tR>
+<tr vAlign="top">
+<Td>
+<foNT SIze="2"><a nAME="idx1073743290"></A><tt clASS="monofont">FrameType</Tt>*
+</fonT></TD>
+<Td>
+<font size="2">represent execution frame</font></td>
+</tr>
+<tr vAliGn="top">
+<td>
+<Font sIze="2"><a NAME="idx1073743291"></a><tt cLASS="monofont">TracebackType</tt>*
+</foNT></TD>
+<td>
+<foNT SIze="2">stacks the traceback information of an exception</font></td>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2"><a namE="idx1073743292"></a><tt CLASs="monofont">SliceType</tt>*
+</fONT></Td>
+<td>
+<fONT Size="2">generated by extended slices</fONT></Td>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2"><a nAme="idx1073743293"></a><Tt claSs="monofont">EllipsisType</tt>*
+</FONT></td>
+<td>
+<FONT size="2">it is used in extended slices<A NAMe="idx1073743294"></a><a nAME="idx1073743295"></A><a name="idx1073743296"></a><a name="idx1073743297"></a><a name="idx1073743298"></a><a nAme="idx1073743299"></A><a naMe="idx1073743300"></a>
+									</foNt></td>
+</TR>
+<TR valiGN="top">
+<TD colsPAN="2">
+<Font sIZE="2">*<I>The checked types indicate internal Python objects that can be exposed to the user.</i>
+									</font></td>
+</tr>
+</colgroup>
+</tabLe></p>
+
+					<P><a naMe="idx1073743301"></a>The <a nAme="idx1073743302"></a><A NAMe="idx1073743303"></a><i>attributes</i> and <A NAMe="idx1073743304"></a><a nAME="idx1073743305"></A><i>methods</i> of an object are bound properties that must be accessed by putting a dot (<tt CLASs="monofont">.</tt>) after the object name.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; obj.name
+"Andre"
+
+					</pre>
+
+					<p>At last, the <a name="idx1073743306"></a><a naMe="idx1073743307"></a><I>value</i> of an object is better visualized by an example.</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; obj.name = "Andre"
+
+					</pre>
+
+					<P>The string <tt cLASS="monofont">"Andre"</tt> is the value assigned to the <tt CLASs="monofont">name</tt> attribute of the object <tT CLAss="monofont">obj.</tt><A NAMe="idx1073743308"></a><a name="idx1073743309"></a></p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="104.html" title="Object-Oriented Programming"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=105" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="105.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="106.html" title="Python Classes and Instances"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743252">classes</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743259">instance</a><BR>
+ <a href="#idx1073743302">attributes property</a><BR>
+ <a href="#idx1073743254">base classes</a><BR>
+ <a href="#idx1073743280">BuiltinFunctionType object type</a><BR>
+ <a href="#idx1073743281">BuiltinMethodType object type</a><BR>
+ <a href="#idx1073743257">class attributes</a><BR>
+ <a href="#idx1073743250">class instances</a> <a href="#idx1073743268">2nd</a> <a href="#idx1073743297">3rd</a><BR>
+ <a href="#idx1073743255">class members</a><BR>
+ <a href="#idx1073743249">classes</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743253">base</a><BR>
+ <a href="#idx1073743283">ClassType object type</a><BR>
+ <a href="#idx1073743289">CodeType object type</a><BR>
+ <a href="#idx1073743274">ComplexType object type</a><BR>
+ <a href="#idx1073743279">DictType object type</a><BR>
+ <a href="#idx1073743293">EllipsisType object type</a><BR>
+ <a href="#idx1073743288">FileType object type</a><BR>
+ <a href="#idx1073743273">FloatType object type</a><BR>
+ <a href="#idx1073743290">FrameType object type</a><BR>
+ <a href="#idx1073743282">FunctionType object type</a><BR>
+ <a href="#idx1073743262">identity property</a><BR>
+ <a href="#idx1073743258">instance attributes</a><BR>
+instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743251">classes</a> <a href="#idx1073743269">2nd</a> <a href="#idx1073743298">3rd</a><BR>
+ <a href="#idx1073743284">InstanceType object type</a><BR>
+ <a href="#idx1073743271">IntType object type</a><BR>
+ <a href="#idx1073743276">ListType object type</a> <a href="#idx1073743301">2nd</a><BR>
+ <a href="#idx1073743272">LongType object type</a><BR>
+members<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743256">class</a><BR>
+ <a href="#idx1073743304">methods property</a><BR>
+ <a href="#idx1073743285">MethodType object type</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;types<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743295">built-in object types</a><BR>
+ <a href="#idx1073743287">ModuleType object type</a><BR>
+ <a href="#idx1073743270">NoneType object type</a><BR>
+ <a href="#idx1073743264">object type property</a> <a href="#idx1073743299">2nd</a><BR>
+object types<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743296">types module</a><BR>
+ <a href="#idx1073743260">object-oriented programming (OOP)</a> <a href="#idx1073743266">2nd</a> <a href="#idx1073743308">3rd</a><BR>
+programming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743261">object-oriented (OOP)</a> <a href="#idx1073743267">2nd</a> <a href="#idx1073743309">3rd</a><BR>
+properties<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743303">attributes</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743263">identity</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743305">methods</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743265">object type</a> <a href="#idx1073743300">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743307">value</a><BR>
+ <a href="#idx1073743292">SliceType object type</a><BR>
+ <a href="#idx1073743275">StringType object type</a><BR>
+ <a href="#idx1073743291">TracebackType object type</a><BR>
+ <a href="#idx1073743277">TupleType object type</a><BR>
+types module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743294">built-in object types</a><BR>
+ <a href="#idx1073743286">UnboundMethodType object type</a><BR>
+ <a href="#idx1073743306">value property</a><BR>
+ <a href="#idx1073743278">XrangeType object type</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,179 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; FTP</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="161.html" class="navtitle">10. Basic Network Background</a> &gt; <span class="nonavtitle">FTP</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="166.html" title="Accessing URLs"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=167" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="167.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="168.html" title="SMTP/POP3/IMAP"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A42%3A25+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148046198036103125002030</font><a href="read0.asp?bookname=0672319942&snode=167&now=5%2F31%2F2002+4%3A42%3A25+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			FTP</h3>
+				<p>FTP is a popular way to transfer files from machine to machine across a network. It is convenient because there are FTP clients and FTP servers written for all the popular platforms.</p>
+
+				<P>FTP servers can work with both private users and anonymous users. The difference is that a <A NAme="idx1073746043"></a>
+					<a NAME="idx1073746044"></a>private FTP server allows only system users to be able to connect via FTP, whereas an <a naME="idx1073746045"></A>
+					<A name="idx1073746046"></a>anonymous FTP server allows anyone on the network to connect to it and transfer files without having an account. Keep in mind that configuring an anonymous FTP server always exposes the security of your system.</p>
+
+				<p>The <a name="idx1073746047"></a>
+					<a name="idx1073746048"></a>
+					<tT clAss="monofont">ftplib</tT> module implements the client side of the FTP protocol. You can use it for mirroring FTP sites. Usually the <a namE="idx1073746049"></a>
+					<a nAME="idx1073746050"></A>
+					<tt clASS="monofont">urllib</Tt> module is used as an outer interface to <tt cLASS="monofont">ftplib.</tt> For uploads you probably want to use <tt CLASs="monofont">ftplib.</tt>
+				</p>
+
+				<p>The FTP implementation provides one <a name="idx1073746051"></a>
+					<a name="idx1073746052"></a>
+					<i>control</i> port and one <a NamE="idx1073746053"></a>
+					<a nAme="idx1073746054"></a>
+					<i>data</I> port, which means that the actual transmission of data between client and server machines operates over a separate socket on a completely separate port in order to avoid deadlock problems.</p>
+
+				<p>Check out the Python Documentation for more information:</p>
+
+				<PRE>
+					
+<A targET="_blank" HRef="http://www.python.org/doc/lib/module-ftplib.html">http://www.python.org/doc/lib/module-ftplib.html</a>
+				</pRE>
+
+				
+					<H4>
+				
+				
+				
+				Transferring Data</H4>
+					<p>The following example shows how to read data from a FTP site:</p>
+
+					<prE>
+						
+ 1: #!/usr/local/bin/python
+ 2: import ftplib
+ 3: ftp = ftplib.FTP('ftp.lessaworld.com')
+ 4: ftp.login()
+ 5: ftp.cwd('downloads/programs')
+ 6: ftp.retrlines('LIST')
+ 7: file = open('filename.txt', 'w')
+ 8: ftp.retrbinary('RETR filename.txt', file.write, 1024)
+ 9: ftp.quit()
+				
+					</PRE>
+
+					<p>Line 2: Imports the <tt class="monofont">ftplib</tt> module.</p>
+
+					<p>Line 3: Creates the FTP object and connects to a host server.</p>
+
+					<p>Line 4: Establishes an anonymous login.</p>
+
+					<p>Line 5: Uses the <tt clAss="monofont">cwd()</Tt> method to change the directory.</p>
+
+					<p>Line 6: Retrieves the resulting lines of the provided command. In our case, it lists the content of the directory.</P>
+
+					<p>Line 7: Creates a file on your local server.</p>
+
+					<p>Line 8: Retrieves the binary information passed to the FTP server, storing it into the mentioned file object.</p>
+
+					<Div cLASS="note"><p claSS="notetitle"><B>Tip</B></p><p>
+
+						<p>Note that the interface uses FTP commands—such as <tT CLAss="monofont">LIST, STOR,</tt> and <TT CLass="monofont">RETR—</tt>that you need to know. These commands are part of the FTP specification and have nothing to do with Python.</p>
+
+					</p></div>
+<br>
+<br>
+
+					<p>The next example <a name="idx1073746055"></A>
+						<a nAme="idx1073746056"></a>
+						<A name="idx1073746057"></A>uploads a file to the FTP server:</p>
+
+					<prE>
+						
+1: import ftplib
+2: ftp = ftblib.FTP("ftp.lessaworld.com")
+3: ftp.login("username", "password")
+4: filename = "index.html"
+5: ftp.storlines("STOR " + filename, open(filename))
+6: filename = "app.exe "
+7: ftp.storbinary("STOR " + filename, open(filename, "rb"), 1024)
+
+					</PRE>
+
+					<p>Line 3: Provides a username and password to the FTP server in order to establish a connection.</p>
+
+					<p>Line 5: Uploads a TEXT file to the server.</p>
+
+					<P>Line 7: Uploads a binary file to the server.<A NAme="idx1073746058"></a>
+						<a NAME="idx1073746059"></a>
+						<a naME="idx1073746060"></A>
+						<A name="idx1073746061"></a>
+						<a name="idx1073746062"></a>
+						<a name="idx1073746063"></a>
+						<a naMe="idx1073746064"></a>
+						<A namE="idx1073746065"></a>
+					</p>
+
+				
+			</foNt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="166.html" title="Accessing URLs"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=167" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="167.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="168.html" title="SMTP/POP3/IMAP"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073746046">anonymous FTP servers</a><BR>
+ <a href="#idx1073746051">control ports</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transferring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746063">FTP sites</a><BR>
+ <a href="#idx1073746053">data ports</a><BR>
+ <a href="#idx1073746059">File Transfer Protocol (FTP)</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746056">uploading to FTP servers</a><BR>
+ <a href="#idx1073746060">FTP (File Transfer Protocol)</a><BR>
+FTP sites<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746064">transferring data</a><BR>
+ <a href="#idx1073746047">ftplib module</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746048">ftplib</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746050">urllib</a><BR>
+networking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746058">protocols</a><BR>
+ports<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746052">control</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746054">data</a><BR>
+ <a href="#idx1073746044">private FTP servers</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746061">File Transfer (FTP)</a><BR>
+servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746045">anonymous FTP</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FTP<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746057">uploading files</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746043">private FTP</a><BR>
+sites<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FTP<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746065">transferring data</a><BR>
+transferring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746062">FTP sites</a><BR>
+uploading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746055">files to FTP servers</a><BR>
+ <a href="#idx1073746049">urllib module</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

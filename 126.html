@@ -1,0 +1,100 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="117.html" class="navtitle">6. Extending and Embedding Python</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="125.html" title="Embedding"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=126" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="126.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="127.html" title="Code Examples"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A36%3A18+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147034164217144224003099</font><a href="read6.asp?bookname=0672319942&snode=126&now=5%2F31%2F2002+4%3A36%3A18+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Summary</h3>
+				<p>This chapter exposes the extending and embedding functionality that gives Python the credit of possessing the capability to glue applications together.</p>
+
+				<P>Whenever you use Python code to call C code, you are extending Python. On the other hand, if you use C code to call Python code, you are embedding Python.</P>
+
+				<P>Python has a good relationship with C because Python's interpreter is written in C, and since its beginning, the interpreter has been ready to work with extension modules.</P>
+
+				<p>The extension modules are mostly used to add new functionality to Python when there is no other way to interface Python with a particular system or hardware. Sometimes, when Python code is inefficient, extension modules are also used to boost performance.</p>
+
+				<p>If you need to call Python routines from inside your application, you can use the embedding functionality to have them called by your compiled language.</p>
+
+				<P>Python provides an intuitive and clean C Application Programmers Interface (API) that exposes the interface to the Python runtime system. This API provides a great number of functions to manipulate Python objects and built-in types from C and C++.</P>
+
+				<P>In order to use your new extension modules, you can't forget to create the initialization function of the module and the method array that assigns the internal function names with the function names that are exposed in the module's interface.</P>
+
+				<p>The most important functions of an extension module are <tt cLASS="monofont">PyArg_ParseTuple</tt> and <tt class="monofont">Py_BuildValue.</tt> They handle all the interfacing between C and Python. Both functions check the argument's type by looking at a formatting string. <a href="121#5.html">Tables 6.1</a> and <a hrEf="121#6.html">6.2</a> (one for each function) list all the possible formatting strings.</P>
+
+				<p>In addition to methods, you can also export <i>constants</i> back to Python. You just need to bind the constant name to the module namespace dictionary.</P>
+
+				<p>You must indicate errors in your extension module by returning <tt cLass="monofont">NULL</TT> to the interpreter because functions signal errors by returning <TT clasS="monofont">NULL.</TT> You can also use exception functions defined by the Python/C API. New exceptions can be created and stored at extension module as well.</P>
+
+				<p>Python extensions don't benefit from all the safety provided by the Python runtime system. There are a lot of things that you have to be worried about. The main thing is reference counting, which is handled by the <tt cLASS="monofont">Py_INCREF</tt> and <tt CLASs="monofont">Py_DECREF</tt> functions.</p>
+
+				<p>It becomes harder to adjust and compile code as C++ because Python has a C-based interpreter that has some restrictions when it comes to creating extension modules using C++.<a name="idx1073744238"></a><a name="idx1073744239"></a><a naMe="idx1073744240"></a><A namE="idx1073744241"></a><a naMe="idx1073744242"></a><a NAME="idx1073744243"></a><a naME="idx1073744244"></A><A name="idx1073744245"></A><A NAme="idx1073744246"></a><a NAME="idx1073744247"></a><a name="idx1073744248"></a><a name="idx1073744249"></a></p>
+
+				<p>Two options are available for building Python extension modules. The first one compiles and links the module into the interpreter. This option makes the module always available to the interpreter.</p>
+
+				<p>The second option doesn't require that you recompile the interpreter because it dynamically links the modules to the system.</p>
+
+				<p>SWIG is an automated tool create by David Beazley that is used to write interfaces between Python and existing C libraries. These interfaces can contain several single functions. The programmer doesn't have to write any special wrapping functions to provide the glue between the Python scripting language and the C functions. Besides SWIG, other applications (such as SIP and SCXX) are suitable for helping programmers wrap their C code.</p>
+
+				<P>While embedding Python in your programs, you will have the ability to load Python scripts and execute Python services that belong to specific Python modules. You can also call Python functions directly from your C code and access the Python objects that are returned by them. In order to embed Python inside a program, you just need to use the Python API—the Python <tt ClasS="monofont">EXE</tt> isn't necessary. When embedding Python in your C++ code, it isn't necessary to recompile Python itself using C++.</p>
+
+				<p>In order to start the Python API service in your program, it is necessary to call the <Tt clASS="monofont">Py_Initialize</Tt> function. To shutdown the Python interpreter, it is necessary to call the <tt cLASS="monofont">Py_Finalize</tt> function.</p>
+
+				<p>Python can be easily embedded in various languages and applications, such as C++, Delphi and Netscape Servers.<A NAMe="idx1073744250"></a><a nAME="idx1073744251"></A><a name="idx1073744252"></a><a name="idx1073744253"></a><a name="idx1073744254"></a><a nAme="idx1073744255"></A><a naMe="idx1073744256"></a><a nAme="idx1073744257"></a><A NAMe="idx1073744258"></a><a nAME="idx1073744259"></A><a namE="idx1073744260"></A><A Name="idx1073744261"></a></P>
+
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="125.html" title="Embedding"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=126" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="126.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="127.html" title="Code Examples"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744243">embedding Python objects in</a> <a href="#idx1073744255">2nd</a><BR>
+C programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744246">extending and embedding Python</a> <a href="#idx1073744258">2nd</a><BR>
+C++ programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744248">extending and embedding Python</a> <a href="#idx1073744260">2nd</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744238">Python extension modules</a> <a href="#idx1073744250">2nd</a><BR>
+embedding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744239">Python objects</a> <a href="#idx1073744251">2nd</a><BR>
+extension modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744240">creating</a> <a href="#idx1073744252">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extension<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744241">creating</a> <a href="#idx1073744253">2nd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744242">embedding in non-Python applications</a> <a href="#idx1073744254">2nd</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744247">extending and embedding Python</a> <a href="#idx1073744259">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744249">extending and embedding Python</a> <a href="#idx1073744261">2nd</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744244">embedding Python objects in</a> <a href="#idx1073744256">2nd</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;non-Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744245">embedding Python objects in</a> <a href="#idx1073744257">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

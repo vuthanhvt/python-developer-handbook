@@ -1,0 +1,52 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="148.html" class="navtitle">9. Other Advanced Topics</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="156.html" title="Threads"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=157" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="157.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="158.html" title="Code Examples"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A41%3A03+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148045048071115000250083</font><a href="read1.asp?bookname=0672319942&snode=157&now=5%2F31%2F2002+4%3A41%3A03+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Summary</h3>
+				<p>This chapter provides a general overview of some important advanced Python topics that you might need to use on a regular basis. They are image manipulation, sounds, restricted environment, Numeric Python, regular expressions, and threads.</p>
+
+				<P>Python has comprehensive support for handling image files. The foundation of this structure is based on the Python Imaging Library (commonly known as PIL). Its framework is cross-platform, which allows it to perform image manipulation and processing in different systems using the same code. Besides PIL, some other modules (such as <TT Class="monofont">imghdr, GD, WBMP,</TT> and <TT clasS="monofont">PyOpenGL</TT>
+					<I>)</i>can help you manipulate graphic and image files.</p>
+
+				<p>
+					<tt class="monofont">winsound, wave, sndhdr, aifc,</tt> and <tt class="monofont">Audiodev</tT> are some of the Python modules that provide audio support for your programs by allowing you to listen to your favorite audio CDs and read/write audio files (such as <tt ClasS="monofont">.wav, .aifc,</tt> and so on). All these modules are part of the standard distribution. However, there are some great third-party Python audio modules too. The PythonWare Sound Toolkit (PST) reads sound files in different formats, and plays them on a variety of hardware platforms. It is really cool!</p>
+
+				<p>Restricted execution is the basic framework in Python that allows the segregation of trusted and untrusted code. Two modules implement Python support to restricted execution: <Tt clASS="monofont">rexec</Tt> and <tt cLASS="monofont">Bastion.</tt> These modules prevent access to critical operations mostly because a program running in trusted mode can create an execution environment in which untrusted code can be executed with limited privileges. The idea is to use a program that runs in trusted mode to create an execution environment in which you can define limits to be applied on the execution of the untrusted code.</p>
+
+				<p>Python is also extensively used for scientific computing because it enables a rapid prototyping and execution of a number of functions. The Python Numerical Extensions (commonly known as <TT CLass="monofont">NumPy</tT>) provides efficient operations on large multi  dimensional arrays because it adds a fast and compact multidimensional array language facility to Python. <TT Class="monofont">NumPy</tt> has also proven to be the correct powerful choice when talking about scientific computing with Python. Other scientific extensions, such as <tt class="monofont">ScientificPython, Pyfort, RNG, pyclimate, GmatH,</tt> and <tt claSs="monofont">Real</tT> are also part of the constant work of many Python developers who want to turn Python into a more complete scientific language.</p>
+
+				<p>While I'm talking about scientific and school projects, there is a very important project that recommends the idea of teaching Python to young people at schools. The project is titled <a Href="154#14.html">
+						"Computer Programming for Everybody,"
+					</a> and it was created by Guido van Rossum.</P>
+
+				<p>Regular expressions are strings—containing a mix of text and special characters—that let you define complicated pattern matching and replacement rules for other strings. You can, for example, search for a specific pattern of data in a whole text file, and substitute it for other text.</p>
+
+				<p>Python has two threading interfaces: the <TT CLass="monofont">thread</tT> module and the <TT Class="monofont">threading</TT> module. The use of these native threading built-in modules enables the code to be portable across all platforms that support Python. The <TT clasS="monofont">thread</TT> module supports lightweight process threads. It offers a low-level interface for working with multiple threads. On the other hand, the <Tt class="monofont">threading</tt> module provides high-level threading interfaces on top of the <tt class="monofont">thread</tt> module. Besides these two modules, Python also implements the <tt cLasS="monofont">Queue</tt> module, which is a synchronized <i>queue class</I> that is used in thread programming to move Python objects between multiple threads in a safe way. Besides these two implementations, Python developers can use <tt clAss="monofont">microthreads</tT> too. This technology implements threading by tweaking the execution order of Python's virtual machine, rather than by interrupting the processor.</P>
+
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="156.html" title="Threads"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=157" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="157.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="158.html" title="Code Examples"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

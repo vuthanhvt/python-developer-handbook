@@ -1,0 +1,91 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; operator </TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">operator </span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="44.html" title="UserList "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=45" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="45.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="46.html" title="traceback "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A22%3A23+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146120131238196102016122</font><a href="read1.asp?bookname=0672319942&snode=45&now=5%2F31%2F2002+4%3A22%3A23+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3><tt cLASS="monofont">operator</tt></h3>
+				<p>The <TT CLass="monofont">operator</tT> module stores functions that access the built-in standard operators. The main reason for the <TT Class="monofont">operator</tt> module is that <tt class="monofont">operator.add,</tt> for instance, is much faster than <tt claSs="monofont">lambda a,b: a+b.</tT></p>
+
+				<p>For example, the line</p>
+
+				<Pre>
+					
+&gt;&gt;&gt; import operator
+&gt;&gt;&gt; operator.div(6,2)
+3
+
+				</prE>
+
+				<p>provides the same result that the next line does.</p>
+
+				<pRE>
+					
+&gt;&gt;&gt; 6 / 2
+3
+
+				</PRe>
+
+				<p>This module is mostly used when it becomes necessary to pass an operator as the argument of a function. For example</p>
+
+				<pRE>
+					
+1: import sys, glob, operator
+2: sys.argv = reduce(operator.add, map(glob.glob, sys.argv))
+3: print sys.argv
+
+				</PRe>
+
+				<p>To run the previous example, save the code in a file and execute it by switching to your OS prompt and typing:</p>
+
+				<pRE>
+					
+python yourfilename.py *.*
+
+				</PRe>
+
+				<p>The heart of this example is Line 2. Let's interpret it:</p>
+
+				<p>The <A NAMe="idx1073742698"></a><a name="idx1073742699"></a><tt class="monofont">glob.glob()</tt> function is applied for each element of the original <tt cLasS="monofont">sys.argv</tt> list object (by using the <a Name="idx1073742700"></a><A namE="idx1073742701"></A><TT clasS="monofont">map()</TT> function). The result is concatenated and reduced into a single variable <Tt claSS="monofont">sys.argv.</TT> The concatenation operation is performed by the <a namE="idx1073742702"></A><A Name="idx1073742703"></a><tt class="monofont">operator.add()</tt> function.<a name="idx1073742704"></a><a NamE="idx1073742705"></a><a nAme="idx1073742706"></a><a Name="idx1073742707"></A></P>
+
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="44.html" title="UserList "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=45" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="45.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="46.html" title="traceback "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742699">glob.glob()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742701">map()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742703">operator.add()</a><BR>
+ <a href="#idx1073742698">glob.glob() function</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742704">Python Services</a><BR>
+ <a href="#idx1073742700">map() function</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742707">operator</a><BR>
+ <a href="#idx1073742706">operator module</a><BR>
+ <a href="#idx1073742702">operator.add() function</a><BR>
+ <a href="#idx1073742705">Python Services</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

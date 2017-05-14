@@ -1,0 +1,345 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The ODBC Module</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="137.html" class="navtitle">8. Working with Databases</a> &gt; <span class="nonavtitle">The ODBC Module</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="142.html" title="Object Serialization and Persistent Storage"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=143" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="143.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="144.html" title="ADO (ActiveX Data Objects)"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A39%3A05+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147045098084001118189099</font><a href="read1.asp?bookname=0672319942&snode=143&now=5%2F31%2F2002+4%3A39%3A05+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			The ODBC Module</h3>
+				<p>
+					<i>ODBC (Open Database Connectivity)</I> is a standard interface created by Microsoft; hence, it is fully supported by the Windows platform. It provides access to almost every database. Currently, the ODBC implements the ANSI standard SQL3.</P>
+
+				<P>To configure the ODBC settings for a database in your Windows system, you must use the ODBC Data Source Administrator, which is located at the Windows Control Panel.</P>
+
+				<p>The two major advantages of choosing to code an application to the ODBC API are as follows:</p>
+
+				<ul>
+<LI>
+						<P>
+							<B>Portable Data Access Code— </b>
+
+							The ODBC API is available on all major databases.
+						</p>
+
+					</li>
+<LI>
+						<P><B>
+					
+					
+					Dynamic Data Binding— </b>
+
+							This allows the user or the system administrator to easily configure an application to use any ODBC compliant data source. This is perhaps the single biggest advantage of coding an application to the ODBC API. Dynamic binding allows the end user to pick a data source—that is, an SQL Server—and use it for all data applications without having to worry about recompiling the application. The ODBC module implements the Python DB API, so you can get this level of abstraction at the DB API level. Also, you don't explicitly recompile Python code.<a name="idx1073745003"></a>
+								<a name="idx1073745004"></a>
+								<a name="idx1073745005"></a>
+							
+						</p>
+
+					</Li>
+</uL>
+				<p>
+					<a nAme="idx1073745006"></a>EShop kindly donated the <tT claSS="monofont">ODBC</TT> module to the public domain. This module is included in the PythonWin distribution. For more details, check out the site at <a tarGET="_blank" Href="http://www.python.org/windows/win32/odbc.html">http://www.python.org/windows/win32/odbc.html</a>.</P>
+
+				<P>The next example shows how you can <A Name="idx1073745007"></a>
+					<A NAMe="idx1073745008"></a>open a ODBC connection using Python.</p>
+
+				<pre>
+					
+import dbi, odbc
+try:
+        connection = odbc.odbc('DSN=mydatabase;UID=mylogin;
+        PASSWORD=mypassword')
+        cursor = connection.cursor()
+        cursor.execute('select name, email from USERS')
+        while 1:
+                 record = cursor.fetchone()
+                 if not record: break
+                 print record
+        connection.close()
+except NameError,e:
+        print 'NameError: ', e
+
+				</pre>
+
+				<p>Three ways (at least) to access ODBC from Python on the Windows platform are as follows:</p>
+
+				<ul>
+<li>
+						<p>
+							<b>DB API— </b>
+
+							Python Database API
+						</p>
+
+					</lI>
+<li>
+						<P>
+							<b>calldll— </b>
+
+							Sam Rushing's calldll module
+						</p>
+
+					</Li>
+<li>
+						<p>
+							<B>DAO— </b>
+
+							Microsoft Data Access Objects
+						</p>
+
+					</lI>
+</UL>
+				
+					<H4>
+				
+				
+				ODBC Example for Windows Platforms</h4>
+					<p>The first thing you need is to create a DSN for your database in the ODBC Data Source Administrator.</p>
+
+					<p>The PythonWin distribution comes with an <TT CLass="monofont">odbc</tT> module, which by the way is very stable. However, it is no longer going to be improved. This <TT Class="monofont">odbc</TT> module works along with the <A Name="idx1073745009"></a>
+						<a name="idx1073745010"></a>
+						<tt class="monofont">dbi</tt> module. Both files conform to the Version 1.0 of the Python Database API, providing a minimum implementation.</p>
+
+					<P>The whole ODBC functionality is made up of two extension files:</p>
+
+					<uL>
+<li>
+							<p>
+								
+									<Tt claSs="monofont">odbc.pyd—</tt>
+								 
+    
+								The <TT CLass="monofont">odbc</tT> module itself
+							</P>
+
+						</LI>
+<li>
+							<p>
+								
+									<tT CLAss="monofont">dbi.pyd—</tt>
+								 
+    
+								The database independence utilities module
+							</P>
+
+						</LI>
+</Ul>
+					<p>The <tt class="monofont">dbi</tt> module must be imported before you import the <tt class="monofont">odbc</tt> module.<A naMe="idx1073745011"></a>
+						<a Name="idx1073745012"></a>
+						<A namE="idx1073745013"></A>
+						<A Name="idx1073745014"></a>
+						<A NAMe="idx1073745015"></a>
+						<a nAME="idx1073745016"></A>
+						<a namE="idx1073745017"></A>
+						<A Name="idx1073745018"></a>
+					</p>
+
+					<pre>
+						
+import dbi, odbc, pprint
+connection = odbc.odbc('DSN=mydatabase;UID=myuser;PWD=mypassword')
+cursor = connection.cursor()
+cursor.execute('SELECT name, email FROM USERS')
+data = mycursor.fetchall()
+cursor.close()
+connection.close()
+pprint.pprint(data)
+[('andre','andre@bebemania.com.br'), ('renata', None)]
+
+					</pre>
+
+					<p>Let's see some of the functions and attributes exposed by the <tt class="monofont">odbc</tT> connection and cursor objects.</p>
+
+					<pRe>
+						
+fetchall()             # fetches all the rows
+fetchone()           # fetches only one row
+fetchmany(n)      # fetches n number of rows
+mycursor.arraysize# number of rows fetched.
+mycursor.description# structure of the cursor
+
+					</prE>
+
+					<p>
+						<tt cLass="monofont">mycursor.execute()</TT> supports DML and DDL. However, it doesn't support prepared statements.</P>
+
+					<P>The <tt clASS="monofont">dbi</Tt> module handles both date and time formats. All date results are returned as <tt cLASS="monofont">dbi</tt> date objects.</p>
+
+					<pRE>
+						
+&gt;&gt;&gt; pprint.pprint(data)
+ [('col1', &lt;DbiDate object at 12e4b34&gt;)]
+&gt;&gt;&gt; dateobj = data[0][1]
+&gt;&gt;&gt; dateobj
+&lt;DbiDate object at 12e4b34&gt;
+&gt;&gt;&gt; int(dateobj)
+984046200
+&gt;&gt;&gt; str(dateobj)
+'Fri Jun 02 00:00:00 2000'
+				
+					</PRe>
+
+					<p>The next command shows the preferred way to pass <i>date</i> values back to the <tt class="monofont">ODBC</tt> driver because this is the standard <tt class="monofont">ODBC</Tt> syntax for embedding dates in <tT claSs="monofont">SQL</tt> strings.</p>
+
+					<Pre>
+						
+mycursor.execute("UPDATE tablename SET columnname={d '1999-04-15'}")
+				
+					</pRE>
+
+				
+				
+					<H4>
+						<Tt claSS="monofont">
+							<A Name="idx1073745019"></a>
+							<A NAMe="idx1073745020"></a>
+							<a nAME="idx1073745021"></A>
+							<a name="idx1073745022"></a>mxODBC</tt>
+					</h4>
+					<p>
+						<tt class="monofont">mxODBC</tt> is an extension package created by <a NamE="idx1073745023"></a>Marc-André Lemburg that exposes interfaces to ODBC 2.0 database drivers. This package implements the standard Database API. Among other things, it supports more than one database per process and it has preconfigured scripts for MySQL, Oracle, Informix, and more. This package exposes an <tt Class="monofont">odbc</Tt> module for both Windows and UNIX. One of the most important differences between this module and the one that comes in the PythonWin distribution might be that this one supports prepared statements, hence, you can separate the SQL structure from the actual values. The engine parses a statement once, creates a handle for it. After that, you just need to pass the correct parameters that should be used for each interaction.</p>
+
+					<p>This package also possess an enhanced set of date and time types for moving data between both Windows and UNIX systems. You can blame the <A NAMe="idx1073745024"></a>
+						<a nAME="idx1073745025"></A>
+						<a namE="idx1073745026"></A>
+						<A Name="idx1073745027"></a>
+						<TT CLass="monofont">mxDateTime</tt> package for that. The <tt class="monofont">mxDateTime</tt> package might become part of the <tt clasS="monofont">mxODBC</tt> package in the near future. Check it out at</P>
+
+					<p>
+						<a tArget="_blank" Href="http://starship.python.net/crew/lemburg/mxODBC.html">http://starship.python.net/crew/lemburg/mxODBC.html</A>
+						<A NAme="idx1073745028"></a>
+						<a NAME="idx1073745029"></a>
+						<a naME="idx1073745030"></A>
+						<A name="idx1073745031"></A>
+						<A NAme="idx1073745032"></a>
+					</p>
+
+				
+				
+					<h4>
+						<tt class="monofont">
+							<a name="idx1073745033"></a>
+							<a nAme="idx1073745034"></A>
+							<a naMe="idx1073745035"></a>
+							<a nAme="idx1073745036"></a>calldll</TT>
+					</H4>
+					<P>You can also use the <tt clASS="monofont">calldll</Tt> package, developed by <a naME="idx1073745037"></A>Sam Rushing, to call the functions that are part of the Microsoft ODBC DLL. One problem with using this DLL is that it doesn't have any similarity to the Python DB API. Another problem is that if you call the ODBC functions with the wrong arguments, your program might fail. The function calls have a low-level interface that doesn't handle exceptions as nicely as Python does. For more information, check out <A targET="_blank" HRef="http://www.nightmare.com/software.html">http://www.nightmare.com/software.html</a>.</p>
+
+					<div class="note"><p class="notetitle"><b>Caution</b></P><p>
+
+						<p>This is one of the most dangerous ways to <A namE="idx1073745038"></a>
+							<a naMe="idx1073745039"></a>access databases. <tT CLAss="monofont">calldll</tt> removes almost all the safety Python gives you.<A NAMe="idx1073745040"></a>
+							<a nAME="idx1073745041"></A>
+							<a namE="idx1073745042"></A>
+							<A Name="idx1073745043"></a>
+						</p>
+
+					</p></div>
+<br>
+<br>
+
+				
+				
+					<h4>
+						<tt clasS="monofont">unixODBC</tt>
+					</H4>
+					<p>
+						<tt Class="monofont">unixODBC</Tt> is a complete, free/open, ODBC solution for UNIX/Linux. The <tt CLASs="monofont">unixODBC</tt> Project goals are to develop and promote <tT CLAss="monofont">unixODBC</tt> to be the definitive standard for ODBC on the Linux platform. This is to include GUI support for KDE. For more information, check out <A TARget="_blank" hREF="http://www.unixodbc.org">http://www.unixODBC.org</A>.</p>
+
+				
+				
+					<h4>Other Interesting ODBC Web Pages</h4>
+					<p>The next few links introduce some interesting material that you can use to understand and use ODBC techniques.</p>
+
+					<p>
+						<i>ODBC Hints—</i>by John Dell'Aquila</p>
+
+					<p>
+						<a target="_blank" hreF="http://www.python.org/windows/OdbcHints.html">http://www.python.org/windows/OdbcHints.html</a>
+					</p>
+
+					<P>Full ODBC manual</p>
+
+					<p>
+						<a TargeT="_blank" hreF="http://www.solidtech.com/developer/documentation.html">http://www.solidtech.com/developer/documentation.html</A>
+						<A Name="idx1073745044"></a>
+						<A NAMe="idx1073745045"></a>
+						<a nAME="idx1073745046"></A>
+					</p>
+
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="142.html" title="Object Serialization and Persistent Storage"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=143" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="143.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="144.html" title="ADO (ActiveX Data Objects)"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745038">calldll package</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745034">calldll</a> <a href="#idx1073745041">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745025">mxDateTime</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745020">mxODBC</a> <a href="#idx1073745029">2nd</a><BR>
+ <a href="#idx1073745033">calldll</a><BR>
+ <a href="#idx1073745040">calldll package</a><BR>
+connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Open Database Connectivity (ODBC)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745008">opening</a><BR>
+databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745039">calldll package</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745003">Open Database Connectivity (ODBC) module</a> <a href="#idx1073745011">2nd</a> <a href="#idx1073745044">3rd</a><BR>
+ <a href="#idx1073745010">dbi module</a> <a href="#idx1073745018">2nd</a><BR>
+EShop<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745006">Open Database Connectivity (ODBC) module</a><BR>
+ <a href="#idx1073745023">Lemburg, Marc-Andr[as]e</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745009">dbi</a> <a href="#idx1073745017">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745015">odbc</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745005">Open Database Connectivity (ODBC)</a> <a href="#idx1073745013">2nd</a> <a href="#idx1073745046">3rd</a><BR>
+ <a href="#idx1073745024">mxDateTime package</a><BR>
+ <a href="#idx1073745019">mxODBC package</a> <a href="#idx1073745028">2nd</a><BR>
+ <a href="#idx1073745016">odbc module</a><BR>
+ <a href="#idx1073745004">Open Database Connectivity (ODBC) module</a> <a href="#idx1073745012">2nd</a> <a href="#idx1073745045">3rd</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745007">Open Database Connectivity (ODBC)</a><BR>
+packagesÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745032">Ò</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745036">calldll</a> <a href="#idx1073745043">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745027">mxDateTime</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745022">mxODBC</a> <a href="#idx1073745031">2nd</a><BR>
+ <a href="#idx1073745037">Rushing, Sam</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745035">calldll</a> <a href="#idx1073745042">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745026">mxDateTime</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745021">mxODBC</a> <a href="#idx1073745030">2nd</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745014">odbc module</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

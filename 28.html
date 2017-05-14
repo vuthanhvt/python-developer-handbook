@@ -1,0 +1,310 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Operators</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Operators</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="27.html" title="Built-In Data Types"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=28" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="28.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="29.html" title="Expressions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A19%3A05+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145080038239227044008125</font><a href="read1.asp?bookname=0672319942&snode=28&now=5%2F31%2F2002+4%3A19%3A05+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			Operators</h3>
+				<p>Next, I list the available Python operators in their precedence order. I also provide some specific details about some of them.</p>
+
+				<OL TYpe="1">
+<li>
+
+						<P>
+							<TT Class="monofont">(), [], {}</TT>
+						</P>
+
+					</Li>
+<li>
+
+						<p>
+							<tt class="monofont">`object`</tt>
+						</p>
+
+					</li>
+<li>
+
+						<p>
+							<tT clAss="monofont">object[i], object[l:r], object.attribute, function()</tT>
+						</p>
+
+						<p>The <a nAme="idx1073742252"></a>
+							<A NAMe="idx1073742253"></a>
+							<tt CLASs="monofont">.</tt> (dot) operator is used to access attributes and methods of a variable (object). In the following example, the dot enables the object <tT CLAss="monofont">t</tt> to access its method <TT CLass="monofont">append.</tt>
+						</p>
+
+						<pre>
+							
+&gt;&gt;&gt; t = ["p","a","r","r","o"]
+&gt;&gt;&gt; t.append("t")
+&gt;&gt;&gt; t
+["p","a","r","r","o","t"]
+
+						</pre>
+
+					</li>
+<li>
+
+						<p>
+							<tt cLasS="monofont">+x, -x, ~x</tt>
+						</p>
+
+						<P>These are <a namE="idx1073742254"></a>bitwise operators.</p>
+
+					</lI>
+<LI>
+
+						<P>
+							<tt clASS="monofont">x**y</Tt>
+						</p>
+
+					</li>
+<LI>
+
+						<P>
+							<Tt claSS="monofont">x*y, x/y, x%y</TT>
+						</p>
+
+						<p>The <a name="idx1073742255"></a>
+							<a name="idx1073742256"></a>
+							<tt clasS="monofont">%</tt> (modulo) operator lets you know whether a number is divisible by another number. For example, if <Tt clAss="monofont">a % b == 0, a</tt> is divisible by <Tt clASS="monofont">b.</Tt>
+						</p>
+
+					</li>
+<LI>
+
+						<P>
+							<Tt claSS="monofont">x+y, x-y</TT>
+						</p>
+
+					</li>
+<lI>
+
+						<P>
+							<TT class="monofont">x&lt;&lt;y, x&gt;&gt;y</tt>
+						</p>
+
+						<p>These operators provide <a name="idx1073742257"></a>shifting operations. The <a name="idx1073742258"></A>
+							<tt ClasS="monofont">&lt;&lt;</tt> operator ensures <a nAme="idx1073742259"></a>left shifting (at bit level), and the <A NAMe="idx1073742260"></a>
+							<tt CLASs="monofont">&gt;&gt;</tt> operator ensures <a NAME="idx1073742261"></a>right shifting (at bit level).<a naME="idx1073742262"></A>
+						</P>
+
+						<pre>
+							
+&gt;&gt;&gt; x = 2        # the binary representation is 0010
+&gt;&gt;&gt; x &lt;&lt; 1       # the binary representation will be 0100
+4
+
+						</pre>
+
+					</li>
+<li>
+
+						<p>
+							<tt class="monofont">x &amp; y</tt>
+						</P>
+
+						<p>The bitwise <a Name="idx1073742263"></A>
+							<tt clAss="monofont">AND</tT> operator</P>
+
+					</LI>
+<li>
+
+						<p>
+							<tT CLAss="monofont">x ^ y</tt>
+						</P>
+
+						<P>The bitwise <A Name="idx1073742264"></a>
+							<A NAMe="idx1073742265"></a>
+							<tt class="monofont">XOR</tt> (exclusive <tt class="monofont">OR</tt>) operator</P>
+
+					</li>
+<Li>
+
+						<p>
+							<tT clasS="monofont">x | y</tt>
+						</p>
+
+						<P>The bitwise <A NAme="idx1073742266"></a>
+							<tT CLAss="monofont">OR</tt> operator<A NAMe="idx1073742267"></a>
+						</p>
+
+					</lI>
+<LI>
+
+						<P>
+							<tt class="monofont">&lt;, &lt;=, &gt;, &gt;=, ==, !=, &lt;&gt;, is, is not, in, not in</tt>
+						</p>
+
+						<p>The operators <a name="idx1073742268"></a>
+							<tt cLasS="monofont">in</tt> and <a Name="idx1073742269"></a>
+							<Tt clASS="monofont">not in</Tt> work only with lists. Another aspect of this group is that there's an important difference between the <a naME="idx1073742270"></A>
+							<Tt claSS="monofont">==</TT> operator and the <a namE="idx1073742271"></A>
+							<A Name="idx1073742272"></a>
+							<tt class="monofont">=</tt> assigning symbol.</p>
+
+						<p>
+							<a name="idx1073742273"></A>
+							<tt ClasS="monofont">is</tt> checks whether two variables refer to the same object. On the other hand, <a nAme="idx1073742274"></a>
+							<TT CLass="monofont">is not</tT> checks whether two variables don't refer to the same object.</P>
+
+						<P>The <A name="idx1073742275"></A>
+							<TT Class="monofont">==</TT> operator ensures equality testing, whereas <TT class="monofont">=</tt> assigns a value to a variable.</p>
+
+					</li>
+</ol>
+
+				<div class="note"><P clAss="notetitle"><b>Tip</B></p><p>
+
+					<p>Keep in mind that <tT claSS="monofont">x = y</TT> doesn't create a new <a namE="idx1073742276"></A>
+						<A Name="idx1073742277"></a>
+						<A NAMe="idx1073742278"></a>copy of <tt CLASs="monofont">y.</tt> Instead, it makes a reference to it. However, if later you define <tt class="monofont">x=x+1,</tt> a new reference for <tt class="monofont">x</tT> is created, and then they become different because the operator has created a new object.</p>
+
+					<p>Note that <Tt clAss="monofont">x.append(5)</tt> doesn't create a new reference to <Tt clASS="monofont">x</Tt> because <tt cLASS="monofont">x</tt> changes itself without using a <tt CLASs="monofont">=</tt> operator.</p>
+
+				</P></DIV>
+<br>
+<br>
+
+				<ol type="1" start="13">
+<li>
+
+						<p>
+							<tt ClaSs="monofont">not</tt>
+						</P>
+
+					</li>
+<li>
+
+						<P>
+							<tt cLASS="monofont">and</tt>
+						</p>
+
+					</lI>
+<LI>
+
+						<P>
+							<tt clASS="monofont">or, lambda args:expr</Tt>
+						</p>
+
+					</li>
+</OL>
+
+				<P>As a good programmer, you need to know that logical operations can also be emulated by using <A name="idx1073742279"></a>
+					<a name="idx1073742280"></a>
+					<tt class="monofont">if</tt> statements. Note that the return values are not limited to zeros and ones.</P>
+
+				<p>The operation <tT claSs="monofont">a and b</tt> can be written as the following:</p>
+
+				<Pre>
+					
+&gt;&gt;&gt; def newand(a,b):
+…     if not a:         #If a is false
+…         return a
+…     else:
+…         return b
+…
+
+				</pRE>
+
+				<P>The operation <Tt claSS="monofont">a or b</TT> can be written as the following:</p>
+
+				<pre>
+					
+&gt;&gt;&gt; def newor(a,b):
+…     if a:             #If a is true
+…         return a
+…     else:
+…         return b
+…
+
+				</PRE>
+
+				<P>The operation <tt clASS="monofont">not a</Tt> can be written as the following:</p>
+
+				<pre>
+					
+&gt;&gt;&gt; def newnot(a):
+…     if not a:    #If a is false
+…         return 0
+…     else:
+…         return 1
+…
+			
+				</pre>
+
+				
+					<h4>Augmented Assignment</h4>
+					<p>Starting with Python 2.0, the <a name="idx1073742281"></a>
+						<a naMe="idx1073742282"></a>language also implements a full set of augmented assignment operators. That includes:  <Tt clAss="monofont">+=, -=, *=, /=, %=, **=, &amp;=, |=, ^=, »=, and «=</tt>
+					</P>
+
+					<p>For example, instead of saying <tt CLASs="monofont">x = x+1,</tt> you can choose to say <tT CLAss="monofont">x += 1</tt>
+					</P>
+
+				
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="27.html" title="Built-In Data Types"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=28" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="28.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="29.html" title="Expressions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742255">% (modulo) operator</a><BR>
+&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742258">operator</a><BR>
+ <a href="#idx1073742252">. (dot) operator</a><BR>
+ <a href="#idx1073742272">= (equal) sign</a><BR>
+ <a href="#idx1073742270">== operator</a> <a href="#idx1073742275">2nd</a><BR>
+ <a href="#idx1073742263">AND operator</a><BR>
+ <a href="#idx1073742281">augmented assignment operators</a><BR>
+ <a href="#idx1073742254">bitwise operators</a> <a href="#idx1073742267">2nd</a><BR>
+copying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742276">objects</a><BR>
+ <a href="#idx1073742253">dot (.) operator</a><BR>
+duplicating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742278">objects</a><BR>
+ <a href="#idx1073742271">equal (=) sign</a><BR>
+ <a href="#idx1073742265">exclusive OR (XOR) operator</a><BR>
+ <a href="#idx1073742279">if statements</a><BR>
+ <a href="#idx1073742268">in operator</a><BR>
+ <a href="#idx1073742274">is not operator</a><BR>
+ <a href="#idx1073742273">is operator</a><BR>
+ <a href="#idx1073742259">left shifting</a><BR>
+ <a href="#idx1073742256">modulo (%) operator</a><BR>
+ <a href="#idx1073742269">not in operator</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742277">copying</a><BR>
+ <a href="#idx1073742260">operator</a><BR>
+ <a href="#idx1073742262">operators</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742282">augmented assignment</a><BR>
+ <a href="#idx1073742266">OR operator</a><BR>
+ <a href="#idx1073742261">right shifting</a><BR>
+ <a href="#idx1073742257">shifting</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742280">if</a><BR>
+ <a href="#idx1073742264">XOR (exclusive OR) operator</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

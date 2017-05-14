@@ -1,0 +1,238 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Control Statements</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Control Statements</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="29.html" title="Expressions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=30" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="30.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="31.html" title="Data Structures"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A19%3A29+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145080038237082193198183</font><a href="read0.asp?bookname=0672319942&snode=30&now=5%2F31%2F2002+4%3A19%3A29+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			Control Statements</h3>
+				<p>Python implements all the necessary types of control statements that your program might require. The syntax provided by Python's <tT CLAss="monofont">if, for,</tt> and <TT CLass="monofont">while</tT> statements should be enough for your needs.</P>
+
+				<DIv class="note"><p class="notetitle"><b>Tip</b></p><p>
+
+					<p>Remember to type a colon at the end of each line where you enter a statement declaration.</p>
+
+				</p></dIv>
+<bR>
+<br>
+
+				
+					<h4>
+						<Tt claSs="monofont">if/elif/else</tt>
+					</H4>
+					<P>The general <A Name="idx1073742398"></a>syntax for the <TT CLass="monofont">if/elif/else</tT> statement is as follows:</P>
+
+					<PRe>
+						
+1: if &lt;<i>condition</i>&gt;:
+2:     &lt;<i>statements</I>&gt;
+3: [elif &lt;<I>condition</I>&gt;:
+4:     &lt;<I>statements</i>&gt;]
+5: [elif &lt;<i>condition</i>&gt;:
+6:     pass]
+7: …
+8: [else:
+9:     &lt;<i>statements</i>&gt;]
+
+					</pre>
+
+					<p>Note that both <tt class="monofont">elif</tt> and <tt ClaSs="monofont">else</tt> clauses are optional. As you can see in lines 3 through 7, it is only necessary to use <Tt claSs="monofont">elif</tt> when you need to handle multiple cases. That is exactly how you implement the <TT CLass="monofont">switch/case</tT> statements from other languages.<A NAme="idx1073742399"></a>
+						<a NAME="idx1073742400"></a>
+					</p>
+
+					<p>Line 6 introduces you to an empty clause that does nothing. It is called <tT CLAss="monofont">pass.</tt>
+						<a name="idx1073742401"></a>
+						<a name="idx1073742402"></a>
+					</p>
+
+				
+				
+					<h4>
+						<tt ClaSs="monofont">for</tt>
+					</H4>
+					<p>The <tt cLass="monofont">for</TT> statement implements loops within a <I>
+							<Tt claSS="monofont">sequence</TT>
+						</i> (list). Each element in the <i>
+							<tt CLASs="monofont">sequence</tt>
+						</i> assigns its value to <I>
+							<TT Class="monofont">variable</tt>
+						</i> on its turn. The general <a name="idx1073742403"></a>syntax is as follows:</p>
+
+					<pre>
+						
+for &lt;<i>variable</i>&gt; in &lt;<i>sequence</I>&gt;:
+    &lt;<i>statements</i>&gt;
+[else:
+    &lt;<I>statements</i>&gt;]
+
+					</prE>
+
+					<p>The <a naMe="idx1073742404"></a>
+						<a NAME="idx1073742405"></a>
+						<tt cLASS="monofont">else</tt> clause is only executed when the <tt CLASs="monofont">for</tt> statement isn't executed at all, or after the last loop has been executed. In other words, the <tT CLAss="monofont">else</tt> statement is always executed unless the <tt class="monofont">break</tt> statement is executed inside the loop.</p>
+
+					<p>Let's see some examples:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; for n in [1,2,3,4,5]:
+…       print n,
+…
+1, 2, 3, 4, 5
+&gt;&gt;&gt; t = [(1,2),(2,4),(3,6)]
+&gt;&gt;&gt; for t1, t2 in t:
+…       print t1, t2
+…
+1 2
+2 4
+3 6
+				
+					</pRe>
+
+				
+				
+					<h4>
+						<Tt clAss="monofont">while</tt>
+					</H4>
+					<p>The <tt CLASs="monofont">while</tt> statement implements a loop that executes the <i>
+							<TT CLass="monofont">statements</tT>
+						</I> while the <I>
+							<Tt claSS="monofont">condition</TT>
+						</i> returns <tt class="monofont">true.</tt>
+					</p>
+
+					<pre>
+						
+while &lt;<i>condition</i>&gt;:
+     &lt;<i>statements</i>&gt;
+[else:
+     &lt;<i>statements</i>&gt;
+
+					</Pre>
+
+					<P>The <a naMe="idx1073742406"></a>
+						<a nAme="idx1073742407"></a>
+						<TT CLass="monofont">else</tT> clause is only executed when the <TT Class="monofont">while</TT> statement isn't executed at all, or after the last loop has been executed. In other words, the <TT clasS="monofont">else</TT> statement is always executed unless the <Tt class="monofont">break</tt> statement is executed inside the loop.<a name="idx1073742408"></a>
+						<a name="idx1073742409"></a>
+						<A naMe="idx1073742410"></a>
+						<a Name="idx1073742411"></a>
+					</P>
+
+					<p>The following example demonstrates the use of the <tt CLASs="monofont">while</tt> statement:</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; x = 5
+&gt;&gt;&gt; while x &gt; 0:
+…       print x,
+…       x = x-1
+…
+5 4 3 2 1
+
+					</Pre>
+
+					<p>The next example implements an infinite loop because the <a NAME="idx1073742412"></a>
+						<a naME="idx1073742413"></A>
+						<Tt class="monofont">pass</tt> statement does nothing and the condition will always be <tt class="monofont">true.</tt>
+					</p>
+
+					<prE>
+						
+&gt;&gt;&gt; while 1:
+…       pass
+				
+					</prE>
+
+				
+				
+					<h4>
+						<tt Class="monofont">break/continue</Tt>
+					</h4>
+					<p>Next are two commands that can be used inside <TT CLass="monofont">for</tT> and <TT Class="monofont">while</TT> types of loop.</P>
+
+					
+						<H5>
+							<tt clASS="monofont">break</Tt>
+						</h5>
+						<p>The <tt class="monofont">break</tt> clause exits a loop statement without executing the <tt class="monofont">else</tT> clause.</p>
+
+						<pRe>
+							
+&gt;&gt;&gt; for n in [1, 2, 3]:
+…     print n,
+…     if n == 2:
+…         break
+… else:
+…     print "done"
+…
+1 2
+
+						</prE>
+
+					
+					
+						<h5>
+							<tt cLass="monofont">continue</TT>
+						</H5>
+						<P>The <tt clASS="monofont">continue</Tt> clause skips the rest of the loop block, jumping all the way back to the loop top.</p>
+
+						<prE>
+							
+&gt;&gt;&gt; x = 5
+&gt;&gt;&gt; while x &gt; 0:
+…       x = x - 1
+…       if x == 3:
+…           continue
+…       print x,
+…
+4 2 1 0
+					
+						</PRE>
+
+					
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="29.html" title="Expressions"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=30" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="30.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="31.html" title="Data Structures"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742399">control statements</a> <a href="#idx1073742408">2nd</a><BR>
+ <a href="#idx1073742404">else statement</a> <a href="#idx1073742406">2nd</a><BR>
+ <a href="#idx1073742401">if/elif/else statement</a><BR>
+ <a href="#idx1073742412">pass statement</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742400">control</a> <a href="#idx1073742409">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742405">else</a> <a href="#idx1073742407">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742402">if/elif/else</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742413">pass</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742411">while</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742403">for</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742398">if/elif/else</a><BR>
+ <a href="#idx1073742410">while statement</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

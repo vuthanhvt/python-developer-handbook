@@ -1,0 +1,363 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Code Examples</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Code Examples</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="113.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=114" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="114.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="116.html" title="II: Advanced Programming"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A34%3A25+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147032037053063250095198</font><a href="read4.asp?bookname=0672319942&snode=114&now=5%2F31%2F2002+4%3A34%3A25+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Code Examples</h3>
+				<p>This application subclasses an exception class and executes the commands stored in a file. The filename is asked by the application.</p>
+
+				
+					<H5>
+Listing 5.1 Configuration File (File configfile.py)</H5>
+					<PRe claSS="monofont">
+ 1: ###
+ 2: # Program: Configuration File
+ 3: # Author:  Andre S Lessa
+ 4: ###
+ 5:
+ 6: ### import modules
+ 7:
+ 8: import exceptions, sys
+ 9:
+10: configfile = raw_input("Configuration File: ")
+11:
+12: class ConfigError (exceptions.Exception):
+13:     def __init__(self, arg=None):
+14:         self.args = arg
+15:
+16: try:
+17:     try:
+18:         file = open(configfile)
+19:         lines = file.readlines()
+20:     finally:
+21:         file.close()
+22: except:
+23:     print "Error. Invalid file name."
+24:     sys.exit()
+25:
+26: lines[0] = lines[0][:-1]
+27:
+28: if lines[0] != "CFG2000":
+29:     raise ConfigError, "Invalid header."
+30:
+31: lines = lines[1:]
+32:
+33: for line in lines:
+34:     try:
+35:         exec line
+36:     except LookupError, b:
+37:         if b.args[0] == "list index out of range":
+38:             print "Error. Invalid index entry"
+39:         else:
+40:             print "Error. Generic LookupError entry"
+41:     except SystemExit:
+42:         print "Error. sys.exit() cannot be used."
+</PRe>
+				
+				<p>Lines 12-14: The class <tt CLASs="monofont">ConfigError</tt> is created. It inherits all the attributes from the <tt class="monofont">exceptions.Exception</tt> class.</p>
+
+				<p>Line 29: Raises our new exception class.</p>
+
+				<p>In order to test this program, we have to create a file called <tt clAss="monofont">config.txt</Tt> that contains the following lines:</p>
+
+				<pRe>
+					
+CFG2000
+print
+print "Configuration File"
+print "------------------"
+server = "SRV001"
+port = 80
+print "Server: ", server
+print "Port:   ", port
+
+				</pre>
+
+				<P>The next interaction shows how to call the program. It also shows the results provided by the program when no exception is raised.</p>
+
+				<prE>
+					
+C:\  Python&gt;python configfile.py
+Configuration File: config.txt
+
+Configuration File
+------------------
+Server:  SRV001
+Port:    80
+
+C:\ Program Files\ Python&gt;
+
+				</PRE>
+
+				<p>This simple program creates a class structure that stores and prints a list of groceries.</p>
+
+				
+					<h5>
+Listing 5.2 Groceries List (File groceries.py)</h5>
+					<PRE Class="monofont">
+ 1: ###
+ 2: # Program: Groceries List
+ 3: # Author:  Andre S Lessa
+ 4: ###
+ 5:
+ 6: ### import modules
+ 7:
+ 8:
+ 9: class grocery:
+10:     "Items that you need to buy at the grocery store."
+11:     def __init__(self, name, quantity=1):
+12:         self.name = name
+13:         self.quantity = quantity
+14:
+15: items = { }
+16: print "Type ENTER when you are done."
+17: while 1:
+18:     name = raw_input("Grocery name: ")
+19:     if name == "":
+20:         break
+21:     quantity = raw_input("%s quantity: " % (name))
+22:     if quantity == "":
+23:         items[name] = grocery(name)
+24:     else:
+25:         items[name] = grocery(name,quantity)
+26:
+27: print "------------------------\ nList of groceries to buy"
+28: print "------------------------"
+29:
+30: for item in items.keys():
+31:     print "Grocery : ", items[item].name,
+32:     print "\ tQuantity: ", items[item].quantity
+33:
+34: print "---------"
+</PRE>
+				
+				<P>Line 9: Declares the <tt clASS="monofont">grocery</Tt> class.</p>
+
+				<p>Line 10: The class's documentation text.</p>
+
+				<p>Line 11: A default value is defined for the <tt class="monofont">quantity</tt> argument.</p>
+
+				<p>Lines 22-25: Uses a different interface to initialize the object, depending on the information provided.</p>
+
+				<p>Lines 31-32: Provides access to the object attributes.</p>
+
+				<p>The next interaction shows how the program works.</P>
+
+				<prE>
+					
+C:\ Python&gt;python groceries.py
+Type ENTER when you are done.
+Grocery name: bananas
+bananas quantity: 12
+Grocery name: apples
+apples quantity: 6
+Grocery name: pears
+pears quantity: 8
+Grocery name: pineapple
+pineapple quantity:
+Grocery name:
+------------------------
+List of groceries to buy
+------------------------
+Grocery :  pineapple    Quantity:  1
+Grocery :  pears        Quantity:  8
+Grocery :  apples       Quantity:  6
+Grocery :  bananas      Quantity:  12
+---------
+
+C:\ Python&gt;
+
+				</pre>
+
+				<P>This file introduces two classes and one function that extensively manipulate class methods and attributes.</p>
+
+				
+					<h5>
+Listing 5.3 Company employees (File company.py)</h5>
+					<pRe clASS="monofont">
+ 1: ###
+ 2: # Program: Company employees
+ 3: # Author:  Andre S Lessa
+ 4: ###
+ 5:
+ 6: ### import modules
+ 7:
+ 8: import types
+ 9:
+10: class Employee:
+11:     "Generic class for all company employees"
+12:
+13:     __employees = 0
+14:
+15:     def __init__(self,name,salary=500.00):
+16:         self.name = name
+17:         self.salary = salary
+18:         self.family = []
+19:         Employee.__employees = Employee.__employees + 1
+20:
+21:     def __str__(self):
+22:         return "employee: %s" % self.name
+23:
+24:     def raisesalary(self, percent):
+25:         self.salary = self.salary + (self.salary * (1.0/percent))
+26:
+27:     def job(self):
+28:         print self.name, "writes Python code."
+29:
+30:     def hasfamily(self):
+31:         return len(self.family) &gt; 0
+32:
+33:     def addmember(self, name):
+34:         self.family.append(name)
+35:
+36:     def removemember(self, arg):
+37:         if len(self.family) &gt; 0:
+38:             if type(arg) == type(1):
+39:                 self.removemember_int(arg)
+40:             elif isinstance(arg, types.StringType):
+41:                 self.removemember_str(arg)
+42:
+43:     def removemember_int(self, index):
+44:         member = self.family[index]
+45:         del self.family[index]
+46:         return member
+47:
+48:     def removemember_str(self, name):
+49:         for member in self.family:
+50:             if member == name:
+51:                 del self.family[self.family.index(member)]
+52:                 return member
+53:
+54:     def __getitem__(self, index):
+55:         member = self.family[index]
+56:         return member
+57:
+58: class Leader(Employee):
+59:     "Company's Leader of the employees"
+60:     def __init__ (self, name):
+61:         Employee.__init__ (self, name, 1500.00)
+62:     def job(self):
+63:         print self.name, "supervises who writes Python code."
+64:
+65: def totalemployee():
+66:     return  Employee._employee_employees
+</Pre>
+				
+				<p>Line 10: Defines the <tT CLAss="monofont">Employee</tt> class.</P>
+
+				<P>Line 13: Class variable <TT clasS="monofont">__employees.</TT></P>
+
+				<p>Line 19: Increments the number of employees.</p>
+
+				<p>Line 31: Returns a logical value (<tt class="monofont">0</tt> or <tt class="monofont">1</tT>).</p>
+
+				<p>Lines 36-41: Implements polymorphism by enabling the user to enter both string and integer values.</P>
+
+				<p>Lines 43-52: Helper methods for the polymorphism implementation.</p>
+
+				<p>Line 54: Enables the slicing of employees instances.<A name="idx1073743522"></A><a naME="idx1073743523"></A><A name="idx1073743524"></A><A NAme="idx1073743525"></a><a NAME="idx1073743526"></a></p>
+
+				<p>Line 58: Defines a subclass Leader that inherits attributes from the <tT CLAss="monofont">Employee</tt> class.</p>
+
+				<p>Lines 60-63: The <tt class="monofont">__init__()</tt> and the <tt claSs="monofont">job()</tT> methods are overwritten.</p>
+
+				<p>Line 65: Provides a function that returns the total number of employees who are currently part of the class.</p>
+
+				<P>The following interaction shows how the classes must be used.</p>
+
+				<pre>
+					
+&gt;&gt;&gt; import company
+&gt;&gt;&gt; andre = company.employee("Andre") # Creates an employee instance
+&gt;&gt;&gt; print andre
+employee: Andre
+&gt;&gt;&gt; print andre.salary
+500
+&gt;&gt;&gt; andre.raisesalary(10) # Raises his salary in 10 percent
+&gt;&gt;&gt; andre.salary
+550.0
+&gt;&gt;&gt; andre.job()                                   # Shows his job description
+Andre writes Python code.
+&gt;&gt;&gt; andre.hasfamily()
+0
+&gt;&gt;&gt; andre.addmember("Renata")                    # Add a member to his family
+&gt;&gt;&gt; andre.addmember("Joao Pedro")                # Add a member to his family
+&gt;&gt;&gt; andre.addmember("Rebecca")                   # Add a member to his family
+&gt;&gt;&gt; andre.hasfamily()                 	           # Returns 1 or 0
+1
+&gt;&gt;&gt; andre.family
+['Renata', 'Joao Pedro', 'Rebecca']
+&gt;&gt;&gt; andre.removemember("Joao Pedro")  # Remove string member from list
+&gt;&gt;&gt; andre.family
+['Renata', 'Rebecca']
+&gt;&gt;&gt; andre.removemember("Renata
+&gt;&gt;&gt; andre.family
+['Rebecca']
+&gt;&gt;&gt; andre.removemember(0) # Remove index member from list
+&gt;&gt;&gt; andre.family
+[]
+&gt;&gt;&gt; andre.addmember("Joao Pedro")
+&gt;&gt;&gt; andre.addmember("Renata")
+&gt;&gt;&gt; andre.addmember("Rebecca")
+&gt;&gt;&gt; andre[0]
+'Joao Pedro'
+&gt;&gt;&gt; andre[1
+'Renata'
+&gt;&gt;&gt; andre[2]
+'Rebecca'
+&gt;&gt;&gt; company.totalemployee()# Shows the total number of employees
+1
+&gt;&gt;&gt; renata = company.employee("Renata")
+&gt;&gt;&gt; company.totalemployee()
+2
+&gt;&gt;&gt; Joao = company.Leader("Joao Pedro")   # Creates a leader instance
+&gt;&gt;&gt; Joao.salary
+1500.0
+&gt;&gt;&gt; Joao.job()
+Joao Pedro makes food
+&gt;&gt;&gt; company.totalemployee()
+3
+&gt;&gt;&gt;
+
+				</Pre>
+
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="113.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=114" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="114.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="116.html" title="II: Advanced Programming"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743522">company employees</a><BR>
+company employees<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743524">source code</a><BR>
+employees<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743525">source code</a><BR>
+lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;company employees<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743526">source code</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743523">company employees</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,84 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; copy </TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">copy </span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="51.html" title="shelve "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=52" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="52.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="53.html" title="marshal "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A23%3A48+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146121241243114186239102</font><a href="read6.asp?bookname=0672319942&snode=52&now=5%2F31%2F2002+4%3A23%3A48+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3><tt cLASS="monofont">copy</tt></h3>
+				<p>The <TT CLass="monofont">copy</tT> module provides shallow and deep object copying operations for lists, tuples, dictionaries, and class instances.</P>
+
+				<H4><Tt class="monofont">copy.copy()</tt></h4>
+					<p>This function creates a shallow copy of the <tt class="monofont">x</tt> object.</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; import copy
+&gt;&gt;&gt; x = [1, 2, 3, [4, 5, 6]]
+&gt;&gt;&gt; y = copy.copy(x)
+&gt;&gt;&gt; print y
+[1, 2, 3, [4, 5, 6]]
+&gt;&gt;&gt; id(y) == id(x)
+0
+
+					</Pre>
+
+					<p>As you can see at the end of the previous example, the new list is not the old one.</P>
+
+					<p>As you can see, this function provides the same result that <tt cLass="monofont">y=x[:]</TT> does. It creates a new object that references the old one. If the original object is a mutable object and has its value changed, the new object will change too.</P>
+
+				
+				<H4><tt clASS="monofont">copy.deepcopy()</Tt></h4>
+					<p>It recursively copies the entire object. It really creates a new object without any link to the original structure.</p>
+
+					<P><A NAme="idx1073742716"></a>basic syntax: <tT CLAss="monofont">variable = copy.deepcopy(</tt><i><tt class="monofont">object</tt></i><tt claSs="monofont">)<a Name="idx1073742717"></A><a namE="idx1073742718"></a></tt></P>
+
+					<PRE>
+						
+&gt;&gt;&gt; import copy
+&gt;&gt;&gt; listone = [{ "name":"Andre"} , 3, 2]
+&gt;&gt;&gt; listtwo = copy.copy(listone)
+&gt;&gt;&gt; listthree = copy.deepcopy(listone)
+&gt;&gt;&gt; listone[0]["name"] = "Renata"
+&gt;&gt;&gt; listone.append("Python")
+&gt;&gt;&gt; print listone, listtwo, listthree
+[{ "name":"Renata"} , 3, 2, "Python"]
+[{ "name":"Renata"} , 3, 2]
+[{ "name":"Andre} , 3, 2] 
+
+					</pre>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="51.html" title="shelve "><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=52" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="52.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="53.html" title="marshal "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742717">Python Services</a><BR>
+ <a href="#idx1073742718">Python Services</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742716">copy.deepcopy()</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

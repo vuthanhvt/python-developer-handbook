@@ -1,0 +1,260 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Distributing Python Applications</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="227.html" class="navtitle">17. Development Tools</a> &gt; <span class="nonavtitle">Distributing Python Applications</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="236.html" title="Profiling Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=237" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="237.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="238.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A23%3A02+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218067026199146066159195</font><a href="read7.asp?bookname=0672319942&snode=237&now=6%2F1%2F2002+6%3A23%3A02+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+Distributing Python Applications</h3>
+				<p>You have more than one way to pack your Python files and distribute your application. It depends only on the kind of goal that you are trying to reach. Probably your greatest concern is about how to hide the source code of your application. Well… Some suggest the use of encryption algorithms, others the distribution of Python bytecode files. All these sound like good solutions, but they have their individual problems. If you are really worried about opening your code to the public, I suggest that you convert your Python application to C, and distribute a compiled executable. Ask yourself if it is really a benefit to hide the source to your program. It is just as bad to illegally distribute a program that comes with source, and could potentially increase the value to the client.</p>
+
+				<P>When <A NAme="idx1073750563"></a>
+					<a NAME="idx1073750564"></a>creating your distribution package, it is important to keep in mind the directory location where you are saving your files. Python must know where to look. Python requires module files to be available in one or more directories listed in the <a naME="idx1073750565"></A>
+					<Tt class="monofont">sys.path</tt>. To see the current Python modules search path, start Python and type:</p>
+
+				<pre>
+					
+import sys
+print sys.path
+
+				</pre>
+
+				<p>You can also allow your program to find a specific module placed somewhere else on the disk. For that, you just need to add one more entry in the <tt clAss="monofont">sys.path</Tt> list. In the next example, we intend to have a module called <a nAme="idx1073750566"></a>
+					<a Name="idx1073750567"></A>
+					<TT Class="monofont">mymodule</TT> stored in a directory called <TT clasS="monofont">/usr/users/andre,</TT> which is not part of the <Tt claSS="monofont">sys.path</TT> yet.</p>
+
+				<pre>
+					
+#!usr/local/bin/python
+import sys
+sys.path.insert(0,"/usr/users/andre")
+import mymodule
+mymodule.main()
+
+				</pre>
+
+				<p>If you are using Python on a Windows platform, you can try the following approach to <a name="idx1073750568"></a>
+					<a name="idx1073750569"></a>pack all files on a single structure:</P>
+
+				<ol Type="1">
+<Li>
+
+						<p>Create a root directory.</p>
+
+					</lI>
+<li>
+
+						<p>Put the following files on this directory: <TT CLass="monofont">python.exe,</tT>
+							<TT Class="monofont">pythonw.exe,</TT>
+							<TT clasS="monofont">_tkinter.pyd,</TT>
+							<Tt class="monofont">python15.dll,</tt>
+							<tt class="monofont">tcl80.dll,</tt>
+							<tt cLasS="monofont">tk80.dll,</tt> and any other specific libraries that your application might need.</p>
+
+					</Li>
+<li>
+
+						<p>Create three directories under the root: \ LIB, \ TCL, and \ TK, and copy all the necessary files to these subdirectories.<A namE="idx1073750570"></A>
+							<A Name="idx1073750571"></a>
+							<A NAMe="idx1073750572"></a>
+							<a nAME="idx1073750573"></A>
+						</p>
+
+					</li>
+<lI>
+
+						<P>Now, create a batch file where you set the value of the following variables: <TT class="monofont">PYTHONPATH,</tt>
+							<tt class="monofont">TCL_LIBRARY,</tt> and <tt clAss="monofont">TK_LIBRARY</Tt> and create a call to your application in the file. Note that if you want to avoid opening the interpreter, you need to open your application using the <tt Class="monofont">pythonw</Tt> application.<a nAME="idx1073750574"></A>
+							<a namE="idx1073750575"></A>
+							<A Name="idx1073750576"></a>
+							<A NAMe="idx1073750577"></a>
+						</p>
+
+					</lI>
+</OL>
+
+				<P>You can zip this entire structure and freely distribute it. The person who receives the package just has to execute the batch file to execute your application. If you want, you can change your program to use that previous technique of dynamically informing the path where your modules are located. Therefore, you don't need to configure the <tt class="monofont">PYTHONPATH</tt> environment variable.</p>
+
+				<p>The Python distribution contains a tool that saves much time when you are dealing with distribution issues. This tool is called <a name="idx1073750578"></a>
+					<a naMe="idx1073750579"></a>
+					<A namE="idx1073750580"></a>
+					<tt cLass="monofont">Freeze.</TT>
+				</P>
+
+				<P>This tool is able to <i>freeze</i> a Python script into an executable in order to let you ship arbitrary Python programs to people who don't have Python. Note that in order to freeze programs that use Tkinter, Tcl/Tk must be installed on the target system.</p>
+
+				<p>
+					<TT CLass="monofont">Freeze</tT> works by converting all the Python code of your application to a stream of Python bytecodes that can be later executed by the Python interpreter. For each module that is opened, <TT Class="monofont">Freeze</TT> looks for other necessary modules too. After all modules are converted to bytecode format, <TT class="monofont">Freeze</tt> glues them all, and creates a Makefile file that can be used by calling the make command. Note that the resulting executable contains all your code plus the Python interpreter and the necessary library modules. Therefore, you should expect a big file.</p>
+
+				<p>
+					<tt class="monofont">Freeze</tt> is a great option for the cases in which you don't want your users to see and copy your source code. Remember that the resulting file is an executable just like the ones created by regular compiled applications.</p>
+
+				<p>In order to use <Tt cLass="monofont">Freeze,</Tt> you just need to perform a simple call, such as</p>
+
+				<prE>
+					
+python freeze.py hello.py
+
+				</pre>
+
+				<P>
+					<TT Class="monofont">Freeze</TT> creates a number of files: <TT clasS="monofont">frozen.c,</TT>
+					<Tt claSS="monofont">config.c,</TT> and <tt class="monofont">Makefile,</tt> plus one file for each Python module that gets included named <tt class="monofont">M_&lt;module&gt;.c.</tt> To produce the frozen version of your program, you can simply type <b><tT clAss="monofont">"make".</tT></b> This should produce a binary file. If the filename argument to <tt cLass="monofont">Freeze</TT> was <TT clasS="monofont">hello.py,</TT> the binary will be called <Tt claSS="monofont">hello.</TT>
+				</p>
+
+				<p>Details for usage under Win32 systems can be found on your own script at your local installation.</p>
+
+				<p>If you built Python with some required modules as shared libraries (DLLs), the frozen program will still require these extra files. If this is a problem (and it probably is if you are considering the freeze tool), you should recompile Python (using the previous instructions) with the required modules linked into the Python executable.</P>
+
+				<P>Note that you are not tied to the <TT class="monofont">Freeze</tt> utility. There are a couple of other options available too. Check them out.<a name="idx1073750581"></a>
+					<a name="idx1073750582"></a>
+					<a NamE="idx1073750583"></a>
+				</p>
+
+				
+					<h4>
+
+
+SqueezeTool</H4>
+					<p>This is a program, written by <a naMe="idx1073750584"></a>Fredrik Lundh, that is able to squeeze a Python Application and all its support modules into a single, compressed package of bytecode files. Whenever it becomes necessary, a special script is used to open the package and run the bytecode files.</p>
+
+					<P><A TArget="_blank" HREF="http://starship.python.net/crew/fredrik/ipa/squeeze.htm">http://starship.python.net/crew/fredrik/ipa/squeeze.htm</a></p>
+
+				
+				
+					<h4>
+
+
+Python2C—The Python to C Translator</h4>
+					<P>Python2C is a Python to C translator, written by <A NAme="idx1073750585"></a>Bill Tutt and <a NAME="idx1073750586"></a>Greg Stein, that attempts to speed up Python code by removing a significant fraction of the Python interpreter overhead.</p>
+
+					<p><a target="_blank" href="http://lima.mudlib.org/~rassilon/p2c/">http://lima.mudlib.org/~rassilon/p2c/</a></p>
+
+				
+				
+					<h4>
+
+
+Small Python</h4>
+					<p>This tool was written by <a NamE="idx1073750587"></a>Greg Stein in order to create minimal Python distributions. Note that although it is built for Windows, the concept and source code can be useful for other Python platforms, as well.</p>
+
+					<p><A targEt="_blank" hrEF="http://www.lyra.org/greg/small/">http://www.lyra.org/greg/small/</A></P>
+
+				
+				
+					<h4>
+
+
+Gordon McMillan's Installer</h4>
+					<p>
+						<a NAME="idx1073750588"></a>Gordon McMillan wrote this tool by taking Fredrik's Squeeze idea and Greg Stein's Small distribution, and combining them. The result is cross-platform, small (the python Standard Library fits in a 500K archive) and fast (much less I/O for an import) distribution installer for Python.</p>
+
+					<p><a TARGet="_blank" hrEF="http://www.mcmillan-inc.com/install1.html">http://www.mcmillan-inc.com/install1.html</A>
+						<A name="idx1073750589"></a>
+						<a name="idx1073750590"></a>
+						<a name="idx1073750591"></a>
+						<a naMe="idx1073750592"></a></P>
+
+				
+				<a naMe="5"></a>
+					<h4>Distutils</h4>
+					<P>Python 2.0 contains a<a naME="idx1073750593"></A>
+						<A name="idx1073750594"></A>
+						<A NAme="idx1073750595"></a> brand-new distribution package as part of its Standard Library. This package is called <tT CLAss="monofont">distutils</tt>, and is totally documented in a new set of manuals that also join the official Python documentation. This package is able to create source and binary distributions.</P>
+
+					<P>The logic used by this package, automatically detects the platform, recognizes the compiler, compiles the C extension modules, and installs the distribution into the proper directory.</P>
+
+					<P>In order to install a script using this package, you need to run a <tt class="monofont">setup.py</tt> script with the <tt class="monofont">install</tt> command.</p>
+
+					<pRe>
+						
+python setup.py install
+
+					</pRe>
+
+					<p>Note that you need to write the <tT clasS="monofont">setup.py</tt> script in order to execute the package. This file can be very simple when you are using only <tT CLAss="monofont">.py</tt> files, such as in the next example.</P>
+
+					<PRE>
+						
+from distutils.core import setup
+setup (name = "myapp", version = "1.0", py_modules = ["bikes",
+ "cars"])
+
+					</pre>
+
+					<p>It is important to know that you are not tied to use only <TT CLass="monofont">.py</tT> files; you can also use packages and C extensions. Check the official documentation for more details.</P>
+
+					<P>The <Tt class="monofont">sdist</tt> command, which can be passed to <tt class="monofont">python setup.py sdist,</tt> builds a source distribution such as <tt cLasS="monofont">myapp-1.0.tar.gz.</tt>
+					</p>
+
+					<P>You can also add you own commands—that isn't difficult at all. Bundled with the package, there are some contributed commands already written for you, such as <tt clAss="monofont">bdist_rpm</tT> and <TT Class="monofont">bdist_wininst,</TT> which create an RPM distribution and a Windows installer,<A Name="idx1073750596"></a>
+						<A NAMe="idx1073750597"></a>
+						<a nAME="idx1073750598"></A> respectively.</p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="236.html" title="Profiling Python"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=237" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="237.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="238.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750571">distributing</a> <a href="#idx1073750590">2nd</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750563">application distribution packages</a> <a href="#idx1073750574">2nd</a><BR>
+distributing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750570">applications</a> <a href="#idx1073750589">2nd</a><BR>
+ <a href="#idx1073750593">distutils package</a> <a href="#idx1073750596">2nd</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750569">packing</a> <a href="#idx1073750577">2nd</a><BR>
+ <a href="#idx1073750578">Freeze tool</a> <a href="#idx1073750581">2nd</a><BR>
+ <a href="#idx1073750584">Lundh, Fredrik</a><BR>
+ <a href="#idx1073750588">McMillan, Gordon</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750567">mymodule</a><BR>
+ <a href="#idx1073750566">mymodule</a><BR>
+packages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application distribution<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750564">creating</a> <a href="#idx1073750575">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750594">distutils</a> <a href="#idx1073750597">2nd</a><BR>
+packing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750568">files</a> <a href="#idx1073750576">2nd</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750573">distributing</a> <a href="#idx1073750592">2nd</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750572">distributing</a> <a href="#idx1073750591">2nd</a><BR>
+Standard Library<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750595">distutils package</a> <a href="#idx1073750598">2nd</a><BR>
+ <a href="#idx1073750586">Stein, Greg</a> <a href="#idx1073750587">2nd</a><BR>
+ <a href="#idx1073750565">sys.path</a><BR>
+tools<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750579">Freeze</a> <a href="#idx1073750582">2nd</a><BR>
+ <a href="#idx1073750585">Tutt, Bill</a><BR>
+utilities<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750580">Freeze</a> <a href="#idx1073750583">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

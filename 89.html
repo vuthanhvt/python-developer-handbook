@@ -1,0 +1,258 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Undocumented Modules</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">Undocumented Modules</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="88.html" title="Macintosh Specific"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=89" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="89.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="90.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A31%3A13+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147037129064192252024235</font><a href="read8.asp?bookname=0672319942&snode=89&now=5%2F31%2F2002+4%3A31%3A13+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Undocumented Modules</h3>
+				<p>Currently, the modules listed in this section don't have any official documentation. However, you might find some information about them in this book, by browsing an updated version of the online library reference, or by checking some other Web site.</p>
+
+				<H4>Frameworks</H4>
+					<P>The next modules represent some Python frameworks that don't have any official documentation yet.</P>
+
+					<blocKQUOte>
+<p><p><TT CLass="monofont">Tkinter</tt>— 
+    This module allows you to create GUIs (graphical user interfaces) because it implements an interface to the Tcl/Tk windowing libraries (see <a href="206.html">Chapter 15, "Tkinter,"</a>  for details).</p>
+</p>
+<p><p><tt claSs="monofont">Tkdnd</tT>— 
+    This module provides drag-and-drop support for <tt cLass="monofont">Tkinter.</tT></p>
+</p>
+<p><P><TT Class="monofont">test</TT>— 
+    This package is responsible for the regression-testing framework.</P>
+</P>
+</blocKQUOte>
+				
+				<h4>Miscellaneous Useful Utilities</h4>
+					<P>At this time this book went to press, the following modules didn't have any official documentation.<A NAme="idx1073743032"></a><a name="idx1073743033"></a><a name="idx1073743034"></a></p>
+
+					<h5><tt cLasS="monofont">dircmp</tt></h5>
+						<P>This module defines a class on which to build directory comparison tools.</p>
+
+					
+					<h5><tt ClasS="monofont">tzparse</TT></H5>
+						<p>This module is an unfinished work to parse a time zone specification.</p>
+
+					
+					<h5><tT CLAss="monofont">ihooks</tt></H5>
+						<P>The <TT clasS="monofont">ihooks</TT> module is a framework that manages the co-existence of different import routines.</P>
+
+					
+				
+				<h4>Platform Specific Modules</h4>
+					<p>These are implementation details of the <tt class="monofont">os</tt> module.</p>
+
+					<p><tt clasS="monofont">dospath,</tt>
+						<Tt clAss="monofont">macpath,</tt>
+						<Tt clASS="monofont">posixpath,</Tt>
+						<tt cLASS="monofont">ntpath</tt></p>
+
+					<p>These modules are for their platforms what the <TT CLass="monofont">os.path</tT> module is for the UNIX platform. They can all be used by any platform in order to handle pathnames of different platforms.</P>
+
+				
+				<H4>Multimedia</H4>
+					<p>At the time this book went to press, the following modules didn't have any official documentation.</p>
+
+					<pre>
+						
+audiodev, sunaudio, toaiff
+
+					</pre>
+
+				
+				<h4>Obsolete</h4>
+					<p>The following modules became <a name="idx1073743035"></a><a naMe="idx1073743036"></a>obsolete as of release 1.6:</P>
+
+					<p>stdwin, soundex, cml, cmpcache, dircache, dump, find, grep, packmail, poly, zmod, strop, util, and whatsound.</p>
+
+					<p>Note that release 2.0 hasn't made any module obsolete. All modules that were replaced were moved to the <Tt claSs="monofont">lib-old</tt> subdirectory of the distribution. That list, includes: cmp, cmpcache, dircmp, dump, find, grep, packmail, poly, util, whatsound, zmod.</P>
+
+					<H5><TT clasS="monofont">ni</TT></H5>
+						<p>Before version 1.5a4, the <tt cLASS="monofont">ni</tt> module was used to support <tt CLASs="monofont">import package</tt> statements.</p>
+
+					
+					<h5><tt class="monofont">dump</tt></h5>
+						<p>The <tt clAss="monofont">dump</Tt> module prints the definition of a variable. Note that this module can be substituted for the <tt Class="monofont">pickle</Tt> module.</p>
+
+						<pRE>
+							
+&gt;&gt;&gt; import dump
+&gt;&gt;&gt; var = (10, 20, 30, 40)
+&gt;&gt;&gt; dump.dumpvar("newvar", var)
+newvar = (10, 20, 30, 40) 
+
+						</PRe>
+
+					
+				
+				<h4>Extension Modules</h4>
+					<p>The following modules are obsolete tools to support GUI implementations.</P>
+
+					<BLOckquOTE>
+<P><p><tt cLASS="monofont">stdwin</tt>— 
+    This module provides an interface to the obsolete <tt class="monofont">STDWIN.</tt>
+									<tt class="monofont">STDWIN</tt> is an unsupported platform-independent GUI interface that was replaced by <Tt cLass="monofont">Tkinter.</Tt></p>
+</p>
+<p><P><tt cLASS="monofont">stdwinevents</tt>— 
+    Interacts with the <tt CLASs="monofont">stdwin</tt> module by providing <tT CLAss="monofont">piping</tt> services.</P>
+
+						</P>
+</BLockquote>
+				
+				<h4>New Modules on Python 2.0</h4>
+					<p>Next, you a have a list of new modules that were introduced to Python recently. As always, I suggest you take a look at the 2.0 documentation for details about any given module.</p>
+
+					<blockquoTe>
+<p><P><b>atexit— </b>
+Registers <a Name="idx1073743037"></a><A namE="idx1073743038"></A>functions to be called when Python exits. If you already use the function <TT clasS="monofont">sys.exitfunc(),</TT> you should change your code to import <Tt claSS="monofont">atexit,</TT> and call the function <tt clASS="monofont">atexit.register(),</Tt> passing as an argument the function that you want to call on exit.</p>
+</p>
+<p><p><b>codecs— </b>
+Provides<a name="idx1073743039"></a><a name="idx1073743040"></a> support (base classes) for Unicode encoders and decoders, and provides access to Python's codec registry. You can use the functions provided by this module to search for existing encodings, or to register new ones. Most frequently, you will adhere to the function <tT clAss="monofont">codecs.lookup(encoding),</tT> which returns a 4-function tuple: (encoder, decoder, stream_reader, stream_writer). This module along with the unicodedata module was added as part of the new Unicode support to Python 2.0. The <tt clAss="monofont">condec</tT> class defines the interface for stateless encoders and decoders. The following functions and classes are also available in this module.</P>
+</P>
+<P><p><tt cLASS="monofont">codec.encode()</tt>— 
+    Takes a Unicode string, and returns a 2-tuple (8-bit-string, length). The length part of the tuple shows how much of the Unicode string was converted.</p>
+</p>
+<P><P><TT clasS="monofont">codec.decode()</TT>— 
+    Takes an 8-bit string, and returns a 2-tuple (ustring, length). The length part of the tuple shows how much of the 8-bit string was consumed.</P>
+</p>
+<p><p><tt class="monofont">codecs.stream_reader(file_object)</tt>— 
+    This is a class that supports decoding input from a stream. Objects created with this class carry the <tt class="monofont">read(),</tT>
+									<tt ClasS="monofont">readline(),</tt> and <tt ClasS="monofont">readlines()</TT> methods, which allow you to take the given encoding of the object, and read as a Unicode string.</P>
+</p>
+<p><p><tT CLAss="monofont">codecs.stream_writer(file_object)</tt>— 
+    This is a class that supports encoding output to a stream. Objects created with this class carry the <TT CLass="monofont">write()</tT> and <TT Class="monofont">writelines()</tt> methods, which allow you to pass Unicode string to the object, and let the object translate them to the given<a name="idx1073743041"></a><a name="idx1073743042"></a> encoding on output.</p>
+</p>
+<P><p><b>unicodedata— </B>
+This<a naMe="idx1073743043"></a><a nAme="idx1073743044"></a> module provides access to the Unicode 3.0 database of character properties. The following functions are available:</P>
+
+							<P><TT clasS="monofont">unicodedata.category(u'P')</TT> returns the 2-character string 'Lu', the 'L'denoting it's a letter, and 'u'meaning that it's uppercase.</P>
+
+							<p><tt cLASS="monofont">unicodedata.bidirectional(u'\ x0660')</tt> returns 'AN', meaning that U+0660 is an Arabic number.</p>
+</p>
+<P><P><B>encodings— </B>
+This<a name="idx1073743045"></a><a name="idx1073743046"></a> is a package that supplies a wide collection of standard codecs. Currently, only the new Unicode support is provided.</p>
+</p>
+<p><p><b>distutils— </b>
+Package<a nAme="idx1073743047"></A><a naMe="idx1073743048"></a> of tools for distributing Python modules.</p>
+</p>
+<P><p><b>filecmp— </b>
+This <A NAMe="idx1073743049"></a><a nAME="idx1073743050"></A>module comes into place of both the <tt clASS="monofont">cmp.py,</Tt> the <tt cLASS="monofont">cmpcache.py</tt> and <tt class="monofont">dircmp.py</tt> modules.</p>
+</p>
+<p><p><b>gettext— </b>
+Provides<a naMe="idx1073743051"></a><A namE="idx1073743052"></a> an interface to the GNU gettext message catalog library in order to supply internationalization (I18N) and localization (L10N) support for Python programs.</p>
+</p>
+<p><P><b>imputil— </b>
+This<a NAME="idx1073743053"></a><a naME="idx1073743054"></A> module is an alternative API for writing customized import hooks in a simpler way. It is similar to the existing ihooks module.</P>
+</p>
+<p><p><b>linuxaudiodev— </B>
+Provides <A NAme="idx1073743055"></a><a NAME="idx1073743056"></a>audio for any platform that supports the Open Sound System (OSS). Most often, it is used to support the <tt class="monofont">/dev/audio</tt> device on Linux boxes. This module is identical to the already existing <tt class="monofont">sunaudiodev</tt> module.</p>
+</P>
+<p><p><B>mmap— </b>
+This <a nAme="idx1073743057"></a><a Name="idx1073743058"></A>module works on both Windows and Unix to treat a file as a memory buffer, making it possible to map a file directly into memory, and make it behave like a mutable string.</P>
+</P>
+<P><p><b>pyexpat— </b>
+This<a NAME="idx1073743059"></a><a naME="idx1073743060"></A> module is an interface to the Expat XML parser.</P>
+</p>
+<p><p><b>robotparser— </B>
+Initially <A NAme="idx1073743061"></a><a name="idx1073743062"></a>at <tt class="monofont">Tools/webchecker/,</tt> this module parses a <tt ClaSs="monofont">robots.txt</tt> file, which is used for writing web spiders.</P>
+</p>
+<p><p><b>sre— </B>
+This<a naME="idx1073743063"></A><A name="idx1073743064"></A> module is a new implementation for handling regular expressions. Although it is still very raw, its features include: faster mechanism, and support to unicode. The idea of the development team is to reimplement the re module using sre (without making changes to the re API).</P>
+</P>
+<P><p><b>tabnanny— </b>
+Originally <a NAME="idx1073743065"></a><a naME="idx1073743066"></A>at <Tt class="monofont">Tools/scripts/,</tt> this module checks Python sources for tab-width dependance (ambiguous indentation).</p>
+</p>
+<p><p><b>urllib2— </b>
+This<a name="idx1073743067"></a><A naMe="idx1073743068"></a> module is an experimental version of urllib, which will bring new and enhanced features, but will be incompatible with the current version.</p>
+</P>
+<p><p><b>UserString— </b>
+This<A namE="idx1073743069"></A><A Name="idx1073743070"></a> module exposes a base class for deriving objects from the string type.</P>
+</P>
+<P><P><b>xml— </b>
+This<a nAME="idx1073743071"></A><a namE="idx1073743072"></A> package covers the whole-new XML support and it is organized in three subpackages: xml.dom, xml.sax, and xml.parsers.</P>
+</P>
+<p><p><b>webbrowser— </b>
+A<a name="idx1073743073"></a><a name="idx1073743074"></a> module that provides a platform independent API to launch a web browser on a specific URL.</p>
+</p>
+<p><p><B>_winreg— </b>
+This<a Name="idx1073743075"></A><a namE="idx1073743076"></a> module works as an interface to the Windows registry. It contains an enhanced set of functions that has been part of PythonWin since 1995.</p>
+</p>
+<P><P><TT clasS="monofont">zipfile</TT>— 
+    This<A name="idx1073743077"></A><A NAme="idx1073743078"></a> module reads and writes zip-format archives (the format produced by PKZIP and zip applications. Not the one produced by the gzip program!).</p>
+</P>
+</BLOckquote>
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="88.html" title="Macintosh Specific"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=89" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="89.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="90.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073743075">_winreg module</a><BR>
+ <a href="#idx1073743037">atexit module</a><BR>
+ <a href="#idx1073743039">codecs module</a> <a href="#idx1073743041">2nd</a><BR>
+ <a href="#idx1073743047">disutils module</a><BR>
+ <a href="#idx1073743045">encodings module</a><BR>
+ <a href="#idx1073743049">filecmp module</a><BR>
+ <a href="#idx1073743051">gettext module</a><BR>
+ <a href="#idx1073743053">imputil module</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743032">Undocumented Modules</a><BR>
+ <a href="#idx1073743055">linuxaudiodev module</a><BR>
+ <a href="#idx1073743057">mmap module</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743076">_winreg</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743038">atexit</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743040">codecs</a> <a href="#idx1073743042">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743048">disutils</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743046">encodings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743050">filecmp</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743052">gettext</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743054">imputil</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743056">linuxaudiodev</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743058">mmap</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743035">obsolete</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743060">pyexpat</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743062">robotparser</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743064">sre</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743066">tabnanny</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743034">Undocumented</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743044">unicodedata</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743068">urllib2</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743070">UserString</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743074">webbrowser</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743072">xml</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743078">zipfile</a><BR>
+ <a href="#idx1073743036">obsolete modules</a><BR>
+ <a href="#idx1073743059">pyexpat module</a><BR>
+ <a href="#idx1073743061">robotparser module</a><BR>
+ <a href="#idx1073743063">sre module</a><BR>
+ <a href="#idx1073743065">tabnanny module</a><BR>
+ <a href="#idx1073743033">Undocumented Modules</a><BR>
+ <a href="#idx1073743043">unicodedata module</a><BR>
+ <a href="#idx1073743067">urllib2 module</a><BR>
+ <a href="#idx1073743069">UserSTring module</a><BR>
+ <a href="#idx1073743073">webbrowser module</a><BR>
+ <a href="#idx1073743071">xml module</a><BR>
+ <a href="#idx1073743077">zipfile module</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,498 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Object Serialization and Persistent Storage</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="137.html" class="navtitle">8. Working with Databases</a> &gt; <span class="nonavtitle">Object Serialization and Persistent Storage</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="141.html" title="DBM (Database Managers) Databases"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=142" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="142.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="143.html" title="The ODBC Module"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A38%3A56+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147044209062004077205006</font><a href="read4.asp?bookname=0672319942&snode=142&now=5%2F31%2F2002+4%3A38%3A56+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			
+			Object Serialization and Persistent Storage</h3>
+				<p>These other modules provide persistent storage of arbitrary Python objects. Whenever you need to <a NAME="idx1073744951"></a>
+					<a naME="idx1073744952"></A>
+					<A name="idx1073744953"></A>save objects whose value is not a simple <TT Class="monofont">string</tt> (such as <tt class="monofont">None, integer, long integer, float, complex, tuple, list, dictionary, code object,</tt> and so on), you need to serialize the object before sending it to a file.</p>
+
+				<p>Both <a naMe="idx1073744954"></a>
+					<A namE="idx1073744955"></a>
+					<tt cLass="monofont">pickle</TT> and <A Name="idx1073744956"></a>
+					<A NAMe="idx1073744957"></a>
+					<tt CLASs="monofont">shelve</tt> modules save serializable objects to a file.</p>
+
+				<P>By using these persistent storage modules, Python objects can be stored in relational database systems. These modules abstract and hide the underlying database interfaces, such as the Sybase module and the Python Database API.</P>
+
+				<P>Included in the standard Python distribution, the <Tt class="monofont">pickle</tt> module can convert Python objects to and from a string representation.</p>
+
+				<p>The <a name="idx1073744958"></a>
+					<a namE="idx1073744959"></a>
+					<tT claSs="monofont">cPickle</tt> module is a faster implementation of the <tT claSS="monofont">pickle</TT> module.</p>
+
+				<p>The <a nAME="idx1073744960"></A>
+					<a namE="idx1073744961"></A>
+					<TT clasS="monofont">copy_reg</TT> module extends the capabilities of the <Tt class="monofont">pickle</tt> and <tt class="monofont">cpickle</tt> modules by registering support functions.</p>
+
+				<p>The <a NamE="idx1073744962"></a>
+					<a nAme="idx1073744963"></a>
+					<tT claSS="monofont">marshal</TT> module is an alternate method to implement Python object serialization. It allows you to read/write information in a platform independent binary format and convert data to/from character strings (the module only supports the simple built-in types). Basically, it is just another way to do <tt clASS="monofont">byte stream</Tt> conversions by using serialized Python objects. This module is used to serialize the compiled bytecode for Python modules.</p>
+
+				<p>This module should be used for simple objects only. Use the <tT CLAss="monofont">pickle</tt> module to implement persistent objects in general.</P>
+
+				<P>
+					<I>
+						<A name="idx1073744964"></a>
+					</i>
+					<i>Persistent Storage of Python Objects in Relational Databases</i> is a paper by <a name="idx1073744965"></a>Joel Shprentz presented at the Sixth Python Conference. For more information, check out <a targeT="_blank" hrEf="http://www.python.org/workshops/1997-10/proceedings/shprentz.html">http://www.python.org/workshops/1997-10/proceedings/shprentz.html</a>.</p>
+
+				
+					<H4>
+						<tt clAss="monofont">
+							<a NAME="idx1073744966"></a>
+							<a naME="idx1073744967"></A>pickle</Tt> Module</h4>
+					<p>The <tT CLAss="monofont">pickle</tt> module serializes the contents of an object into a stream of bytes. Optionally, it can save the serialized object into a file object. It is slower than the <A NAMe="idx1073744968"></a>
+						<a name="idx1073744969"></a>
+						<tt class="monofont">marshal</tt> module.<a naMe="idx1073744970"></a>
+						<A namE="idx1073744971"></a>
+						<a naMe="idx1073744972"></a>
+						<a NAME="idx1073744973"></a>
+						<a naME="idx1073744974"></A>
+						<A name="idx1073744975"></A>
+						<A NAme="idx1073744976"></a>
+						<a NAME="idx1073744977"></a>
+						<a name="idx1073744978"></a>
+						<a name="idx1073744979"></a>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import pickle
+&gt;&gt;&gt; listobj = [1,2,3,4]
+&gt;&gt;&gt; filehandle = open(filename, 'w')
+&gt;&gt;&gt; pickle.dump(filehandle, listobj)
+&gt;&gt;&gt; filehandle = open(filename, 'r')
+&gt;&gt;&gt; listobj = pickle.load(filehandle)
+
+					</pre>
+
+					<P>The next functions are the ones implemented by the pickle module.</p>
+
+					<pRe>
+						
+pickle.dump(<i>object, filename</i> [,<I>bin]</i>)
+
+					</pre>
+
+					<P>This function serializes and saves an object into a file. The <tt cLASS="monofont">bin</tt> argument specifies that the information must be saved as <i>binary</i> data. This function is the same as the following:</P>
+
+					<PRE>
+						
+p = pickle.Pickler(filename)
+p.dump(object)
+
+					</pre>
+
+					<p>If an unsupported object type is serialized, a <TT CLass="monofont">PicklingException</tT> is raised.</P>
+
+					<PRe>
+						
+pickle.dumps(<i>object</i> [,<i>bin]</i>)
+
+					</pre>
+
+					<p>This function has the same behavior of <tt class="monofont">dump.</tt> The difference is that this one returns the serialized object.</p>
+
+					<pRe>
+						
+pickle.load(<i>file</I>)
+
+					</pre>
+
+					<P>Restores a serialized object from a file. This function is the same as the following:</p>
+
+					<pre>
+						
+object = pickle.Unpickler(file).load()
+
+					</Pre>
+
+					<p>The next example serializes the information and converts it back again.</P>
+
+					<PRE>
+						
+&gt;&gt;&gt; import pickle
+&gt;&gt;&gt; value = ("parrot", (1,2,3))
+&gt;&gt;&gt; data = pickle.dumps(value)
+&gt;&gt;&gt; print pickle.loads(data)
+("parrot", (1,2,3)) 
+				
+					</pre>
+
+				
+				
+					<h4>
+						<TT CLass="monofont">
+							<a NAME="idx1073744980"></a>
+							<a naME="idx1073744981"></A>cPickle</Tt> Module</h4>
+					<p>This module implements the same functions that the <tt class="monofont">pickle</tt> module does. The difference is that <tt class="monofont">cPickle</tT> is much faster because it doesn't support subclassing of the <tt ClasS="monofont">Pickler</tt> and <tt ClasS="monofont">Unpickler</TT> objects. See the next example code. It uses the fastest pickle module available on the system.</P>
+
+					<pre>
+						
+try:
+     import cPickle
+     pickle = cPickle
+except ImportError:
+     import pickle
+				
+					</pRE>
+
+				
+				
+					<H4>
+						<Tt claSS="monofont">copy_reg</TT> Module</h4>
+					<p>This module registers new types to be used with the <tt CLASs="monofont">pickle</tt> module. It extends the capabilities of the <tt class="monofont">pickle</tt> and <tt class="monofont">cPickle</tT> modules by supporting the serialization of new object types defined in C extension modules.</p>
+
+					<p>The next example corrects the fact that the standard <Tt clAss="monofont">pickle</tt> implementation cannot handle Python code objects. It registers a code object handler by using two functions:</P>
+
+					<ul>
+<lI>
+							<P>
+								
+									<TT clasS="monofont">dumpdata—</TT>
+								 
+    
+								Takes the code object and returns a tuple that can only contain simple data types.
+							</P>
+
+						</li>
+<li>
+							<P>
+								
+									<TT Class="monofont">loaddata—</TT>
+								 
+    
+								Processes the tuple.
+							</P>
+
+						</Li>
+</ul>
+					<pre>
+						
+import copy_reg, pickle, marshal, types
+
+def loaddata(data):
+    return marshal.loads(data)
+
+def dumpdata(code):
+    return loaddata, (marshal.dumps(code),)
+
+copy_reg.pickle(types.CodeType, dumpdata, loaddata)
+
+script = """
+x = 1
+while x &lt; 10:
+   print x
+   x = x - 1
+"""
+
+code = compile(script, "&lt;string&gt;", "exec")
+codeobj = pickle.dumps(code)
+
+exec pickle.loads(codeobj)
+				
+					</pre>
+
+					<div class="note"><p clAss="notetitle"><B>Note</b></p><p>
+
+						<P>Note that starting at Python 2.0, the <tt clAss="monofont">copy-reg</tT> module<A NAme="idx1073744982"></a>
+							<a NAME="idx1073744983"></a>
+							<a naME="idx1073744984"></A> can't be used to register pickle support for classes anymore. It can only be used to register pickle support for extension types. You will get a <Tt claSS="monofont">TypeError</TT> exception from the <tt class="monofont">pickle()</tt> function whenever you try to pass a class to the function.</p>
+
+					</p></div>
+<br>
+<br>
+
+				
+				
+					<h4>
+						<tT clAss="monofont">marshal</tT> Module</h4>
+					<p>This module is only used to serialize simple data objects because class instances and recursive references in lists, tuples, and dictionaries are not supported. It works similar to <tt ClasS="monofont">pickle</TT> and <Tt claSS="monofont">shelve.</TT>
+					</p>
+
+					<p>This module implements the following functions:</p>
+
+					<pRE>
+						
+marshal.dump(<I>value, filename</I>)
+
+					</pre>
+
+					<p>Writes the value in the opened filename.</P>
+
+					<PRE>
+						
+marshal.load(<i>filename</i>)
+
+					</pre>
+
+					<p>Returns the next readable value from file.</p>
+
+					<pre>
+						
+marshal.dumps(<i>value</i>)
+
+					</pre>
+
+					<p>Only returns the string.</p>
+
+					<pre>
+						
+marshal.loads(<I>string</i>)
+
+					</pRe>
+
+					<p>Returns the next readable value from <tT clasS="monofont">string.</tt>
+					</p>
+
+					<P>Errors in the value manipulation will raise a <TT Class="monofont">ValueError</TT> exception.</P>
+
+					<Pre>
+						
+&gt;&gt;&gt; import marshal
+&gt;&gt;&gt; value = ("spam", [1,2,3,4])
+&gt;&gt;&gt; data = marshal.dumps(value)
+&gt;&gt;&gt; print repr(data)
+'(\002\000\000\000s\004\000\000\000spam[\004\000\000\000i\001\000\000\000i\002\0
+00\000\000i\003\000\000\000i\004\000\000\000'
+&gt;&gt;&gt; print marshal.loads(data)
+("spam", [1,2,3,4])
+
+					</prE>
+
+					<P>The next example handles code objects by storing precompiled Python code.</P>
+
+					<Pre>
+						
+import marshal
+script = """
+x = 1
+while x &lt; 10:
+   print x
+   x = x - 1
+"""
+
+code = compile(script, "&lt;script&gt;", "exec")
+codeobj = marshal.dumps(code)
+
+exec marshal.loads(codeobj)
+				
+					</prE>
+
+				
+				
+					<H4>
+						<TT class="monofont">
+							<a name="idx1073744985"></a>
+							<a name="idx1073744986"></a>shelve</tt> Module</h4>
+					<P>The <tt ClasS="monofont">shelve</tt> module is also part of the standard Python distribution. Built on top of the <tt ClasS="monofont">pickle</TT> and <Tt claSS="monofont">anydbm</TT> modules, it behaves similar to a persistent dictionary whose values can be arbitrary Python objects.</p>
+
+					<p>The <tt CLASs="monofont">shelve</tt> module offers persistent object storage capability to Python by using <i>dictionary</I> objects. Both keys and values can use any data type, as long as the <TT Class="monofont">pickle</tt> module can handle it.</p>
+
+					<pre>
+						
+import shelve
+key = raw_input("key: ")
+data = raw_input("value: ")
+dbhandle = shelve.open("DATABASE","w")
+while not(dbhandle.has_key(key)):
+    dbhandle[key]=data
+    key = raw_input("key: ")
+    data = raw_input("value: ")
+dbhandle.close()
+
+					</pre>
+
+					<p>The <tt clasS="monofont">shelve</tt> module implements a shelf object which supports persistent objects that must be serializable using the pickle module. In other words, a shelf is a dbm (or gdbm) file that stores pickled Python objects. It stores dictionary structures (pickled objects) on disks. For that purpose, it uses dbm-like databases, such as dbm or gdbm. The file it produces is, consequently, a BINARY file. Therefore, the file's format is specific to the database manager used in the process.</P>
+
+					<p>To <a nAme="idx1073744987"></a>
+						<a Name="idx1073744988"></A>
+						<A NAme="idx1073744989"></a>open a shelve file, the following function is available:</p>
+
+					<PRE>
+						
+shelve.open(<I>filename</i>)
+
+					</pre>
+
+					<P>The file is created when the filename does not exist. The following methods and operations are also supported:</P>
+
+					<PRe>
+						
+dbhandle[key] = value    # Set the value of a given key entry
+value = dbhandle[key]    # Get the value of a given key entry
+dbhandle.has_key(key)    # Test whether a key exists
+dbhandle.keys()          # Returns a list of the current keys available
+del dbhandle[key]        # Delete a key
+dbhandle.close()         # Close the file
+
+					</pre>
+
+					<P>Next, I present a simple example of the <TT Class="monofont">shelve</tt> module using the following:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import shelve
+&gt;&gt;&gt; dbhandle = shelve.open("datafile", "c")
+&gt;&gt;&gt; dbhandle["animal"] = "parrot"
+&gt;&gt;&gt; dbhandle["country"] = "Spain"
+&gt;&gt;&gt; dbhandle["weekdays"] = 5
+&gt;&gt;&gt; dbhandle.close()
+&gt;&gt;&gt;
+&gt;&gt;&gt; dbhandle = shelve.open("datafile ", "r")
+&gt;&gt;&gt; for key in dbhandle.keys():
+        print dbhandle[key]
+parrot
+Spain
+5
+&gt;&gt;&gt; db.close()
+				
+					</pre>
+
+					
+						<h5>
+					
+					
+					Locking</h5>
+						<p>As a matter of fact, even though modules such as <tt clAss="monofont">gdbm</Tt> and <tt Class="monofont">bsddb</Tt> perform locking, shelves don't implement locking facilities. This means that many users can read the files at the same time. However, only one user can update the file at a given moment. An easy way to handle the situation is by locking the file while writing to it. A routine like this must be implemented because it is not part of the standard distribution.<a nAME="idx1073744990"></A>
+							<a namE="idx1073744991"></A>
+							<A Name="idx1073744992"></a>
+						</P>
+
+					
+				
+				
+					<H4>More Sources of Information</H4>
+					
+						<H5>
+					
+					PyVersant</h5>
+						<p>
+							<i>PyVersant</i> is a simple Python wrapper for the Versant commercial OODBMS. By using PyVersant in the Python command prompt, you can interactively find objects, look at their values, change those values, and write the object back to the database, among other things. More information is provided at the following site:</P>
+
+						<P>
+							<A Target="_blank" href="http://starship.python.net/crew/jmenzel/">http://starship.python.net/crew/jmenzel/</a>
+						</p>
+
+						<p>Details about Versant OODBMS are shown at the following site:</p>
+
+						<p>
+							<a targeT="_blank" hrEf="http://www.versant.com/">http://www.versant.com/</a>
+						</p>
+
+					
+					
+						<H5>
+					
+					
+					ZODB</h5>
+						<p>The <i>Zope Object Database</i> is a persistent-object system that provides transparent transactional object persistence to Python applications. For more information, check out the following site:</P>
+
+						<p>
+							<a tARGEt="_blank" hreF="http://www.zope.org/Members/michel/HowTos/ZODB-How-To">http://www.zope.org/Members/michel/HowTos/ZODB-How-To</A>
+						</P>
+
+						<P>ZODB is a powerful object database system that can be used with or without Zope. As a database, it offers many features. Note that ZODB uses other database libraries for the actual storage.</p>
+
+						<p>More information about Zope can be found in <a hREF="171.html">Chapter 11, "Web Development."
+							</A>
+							<a namE="idx1073744993"></A>
+							<A Name="idx1073744994"></a>
+							<a name="idx1073744995"></a>
+							<a name="idx1073744996"></a>
+							<a namE="idx1073744997"></a>
+							<a Name="idx1073744998"></A>
+							<a namE="idx1073744999"></a>
+							<a nAME="idx1073745000"></A>
+							<a namE="idx1073745001"></A>
+							<A Name="idx1073745002"></a>
+						</P>
+
+					
+				
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="141.html" title="DBM (Database Managers) Databases"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=142" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="142.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="143.html" title="The ODBC Module"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+copy reg module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pickle support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744982">registering</a><BR>
+ <a href="#idx1073744960">copy_reg module</a><BR>
+ <a href="#idx1073744958">cPickle module</a> <a href="#idx1073744980">2nd</a><BR>
+databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744970">object serialization</a> <a href="#idx1073744993">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745001">Zope Object (ZODB)</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;shelve<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744989">opening</a><BR>
+locking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744990">shelves</a><BR>
+ <a href="#idx1073744962">marshal module</a> <a href="#idx1073744968">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;copy reg<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744983">pickle support</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744961">copy_reg</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744959">cPickle</a> <a href="#idx1073744981">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744963">marshal</a> <a href="#idx1073744969">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744955">pickle</a> <a href="#idx1073744967">2nd</a> <a href="#idx1073744979">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744957">shelve</a> <a href="#idx1073744986">2nd</a> <a href="#idx1073744992">3rd</a><BR>
+object serialization<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744971">databases</a> <a href="#idx1073744994">2nd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744952">serializable, saving</a> <a href="#idx1073744976">2nd</a> <a href="#idx1073744999">3rd</a><BR>
+opening<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744987">shelve files</a><BR>
+persistent storage<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744973">databases</a> <a href="#idx1073744996">2nd</a><BR>
+ <a href="#idx1073744964">Persistent Storage of Python Objects in Relational Databases</a><BR>
+ <a href="#idx1073744954">pickle module</a> <a href="#idx1073744966">2nd</a> <a href="#idx1073744978">3rd</a><BR>
+pickle support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744984">copy reg module</a><BR>
+saving<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744951">serializable objects</a> <a href="#idx1073744975">2nd</a> <a href="#idx1073744998">3rd</a><BR>
+serializable objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744953">saving</a> <a href="#idx1073744977">2nd</a> <a href="#idx1073745000">3rd</a><BR>
+serilization<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744972">databases</a> <a href="#idx1073744995">2nd</a><BR>
+shelve files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744988">opening</a><BR>
+ <a href="#idx1073744956">shelve module</a> <a href="#idx1073744985">2nd</a> <a href="#idx1073744991">3rd</a><BR>
+ <a href="#idx1073744965">Shprentz, Joel</a><BR>
+storage<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;persistent<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744974">databases</a> <a href="#idx1073744997">2nd</a><BR>
+ <a href="#idx1073745002">Zope Object Database (ZODB)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

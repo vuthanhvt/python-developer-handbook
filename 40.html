@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python Libraries</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">Python Libraries</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="39.html" title="3. Python Libraries"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=40" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="40.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="41.html" title="Python Services"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A21%3A21+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162146123188003082091048148</font><a href="read8.asp?bookname=0672319942&snode=40&now=5%2F31%2F2002+4%3A21%3A21+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Python Libraries</h3>
+				<p>The first chapter has given you a good introduction about the Python core language. Everything you have successfully learned will be applied from now on. All the topics covered in the previous chapters are the building blocks for your Python mastering.</p>
+
+				<P>Now we will concentrate on this chapter. Python's standard distribution is shipped with a rich set of libraries. These libraries intend to offer flexibility to the programmers.</P>
+
+				<P>The libraries (also known as modules) cover many topics, such as the following:</P>
+
+				<blocKQUOte>
+<p><p><B>Python core services— </B>
+A group of modules, such as <TT class="monofont">sys</tt> and <tt class="monofont">os,</tt> that enable you to interact with what is behind the interpreter.</p>
+</p>
+<p><p><B>Network and Internet services— </b>
+Python has modules for almost everything that is Internet related. You have many network client protocol implementations that handle the most used Internet services, such as HTTP and FTP. Python also provides support for parsing mark-up languages, like XML and HTML.</p>
+</P>
+<p><p><b>Regular expressions— </B>
+The <tt clAss="monofont">re</tT> module is a very comprehensive choice for text manipulation because it provides Perl 5 style patterns and matching rules.</P>
+
+					</P>
+</BlockQUOTe>
+				<p>These are just some of the features implemented by the modules that are reviewed by this chapter.<a nAME="idx1073742661"></A></p>
+
+				<h4>The Library Reference</h4>
+					<p>The robustness of Python's library is something amazing. Many users have contributed to the development of these modules during the last few years.</P>
+
+					<P>Some modules were written in C and are built into the interpreter. Others are written in Python and can be loaded by using the <TT class="monofont">import</tt> command.</p>
+
+					<p>Keep in mind that some of the interfaces may change slightly (for instance, bug fixes) with the next release. Therefore, I suggest that you visit Python's Web site once in a while, and keep yourself up-to-date. You can always browse the latest version of the Python Library Reference at</p>
+
+					<p><a target="_blank" hrEf="http://www.python.org/doc/lib">http://www.python.org/doc/lib</a>
+					</P>
+
+					<p>I encourage you to use this chapter in order to get a quick overview about the existing Python libraries. After you have exhausted all the material provided by this book, check out the online Python Library Reference to see the minor details about each one of these Python module interfaces.</p>
+
+					<p>This chapter introduces you to the practical side of several modules'utilization. The next pages show what main functions each module exposes, and, whenever possible, some examples are listed.</P>
+
+					<p>Some of the modules—such as <tt cLass="monofont">debugger(pdb),</TT>
+						<TT clasS="monofont">profiler,</TT>
+						<Tt claSS="monofont">Tkinter</TT> (the standard Python GUI API) and <tt clASS="monofont">re</Tt>—aren't deeply studied here because they are presented in detail in other chapters of this book. Whenever this happens, the chapter number is mentioned next to the module name. <a name="idx1073742662"></a><a name="idx1073742663"></a></p>
+
+				
+				<h4>The Standard Library of Modules</h4>
+					<p>This book covers the latest version of the Standard Library of Modules that is available at the time of this writing. The modules are presented in the same order as they are shown in Python's official documentation. This was done to make the work of cross-referencing easier for you.</p>
+
+					<p>The following topics are the group names that organize the modules you will find.</p>
+
+					<BloCkquOte>
+<p><p>Python Services</P>
+</p>
+<p><p>String</P>
+</P>
+<P><P>Miscellaneous</p>
+</p>
+<p><p>Generic Operational System</P>
+</P>
+<P><P>Optional Operational System</p>
+</p>
+<p><p>Debugger</P>
+</P>
+<P><P>Profiler</p>
+</p>
+<p><p>Internet Protocol and Support</P>
+</P>
+<P><P>Internet Data Handling</p>
+</p>
+<p><p>Restricted Execution</p>
+</p>
+<p><p>Multimedia</p>
+</p>
+<p><p>Cryptographic</p>
+</p>
+<p><p>UNIX Specific</p>
+</p>
+<p><p>SGI IRIX Specific</P>
+</p>
+<p><P>Sun OS Specific</p>
+</p>
+<p><P>MS Windows Specific</p>
+</p>
+<p><p>Macintosh Specific</P>
+</p>
+<p><p>Undocumented Modules<A NAMe="idx1073742664"></a><a nAME="idx1073742665"></A></p>
+
+						</p>
+</blOCKQuote>
+				
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="39.html" title="3. Python Libraries"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=40" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="40.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="41.html" title="Python Services"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073742661">libraries</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742663">Python Library Reference</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742665">Standard Library of Modules</a><BR>
+ <a href="#idx1073742662">Python Library Reference</a><BR>
+ <a href="#idx1073742664">Standard Library of Modules</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

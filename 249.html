@@ -1,0 +1,150 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Embedding</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">Embedding</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="248.html" title="Creating Graphical Interfaces"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=249" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="249.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="250.html" title="jpythonc "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A26%3A20+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218070220042023220130103</font><a href="read6.asp?bookname=0672319942&snode=249&now=6%2F1%2F2002+6%3A26%3A20+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+Embedding</h3>
+				<p>As JPython and Java are extremely close to each other, it is not difficult to believe that you can embed JPython code inside a Java application, as well as embed Java code directly into your JPython applications. Both types of implementation are easily supported and coded. By extension, you could create new independent Python interpreters from <tT CLAss="monofont">jpython</tt> very easily, as well.</P>
+
+				
+					<H4>
+
+
+
+JPython in a Java Application</H4>
+					<P>If you really need to embed JPython in a Java application, you have two main choices to choose from. The first option is to use the utility <tt clASS="monofont">jpythonc</Tt> to pick a JPython class and generate a Java <tt class="monofont">.class</tt> file that can be called directly from inside your Java code, in a very straightforward away. See the next section of this chapter to learn how to use this utility.</p>
+
+					<p>The second option that you have is to import the <tt class="monofont">PythonInterpreter</tT> object class into your Java code. This class allows you to have control of the Python interpreter from Java. The following example demonstrates how the code would be:</p>
+
+					<pRe>
+						
+import org.python.util.PythonInterpreter;
+import org.python.core.*;
+
+public class GenNextYear {
+    public static void main(String []args)
+    throws PyException
+    {
+        PythonInterpreter interp = new PythonInterpreter();
+        System.out.println("Hello Python World");
+        interp.set("year", new PyInteger(2000));
+        interp.exec("print 'This is year %d'% (age)");
+        interp.exec("nextyear = year + 1");
+        PyObject nyear = interp.get("nextyear");
+        System.out.println("Next year is gonna be "+nyear);
+    }
+}
+
+					</prE>
+
+					<p>Note that we are able to set/access values to/from the interpreter besides executing commands at the interpreter prompt line.</p>
+
+					<p>Check the JavaDoc documentation located at the following address. It is all about <tT claSS="monofont">org.python.util.PythonInterpreter.</TT>
+					</p>
+
+					<p>
+						<a tARGEt="_blank" hreF="http://www.jpython.org/docs/api/org.python.util.PythonInterpreter.html">http://www.jpython.org/docs/api/org.python.util.PythonInterpreter.html</A>
+					</P>
+
+				
+				
+					<H4>Java in a JPython Application</h4>
+					<p>Accessing Java from JPython is no big deal. You can normally work with Java libraries as if you were working with JPython libraries. The process is fully transparent to you. Remember that one of JPython's primary goals is to provide easy support to Java libraries.</p>
+
+					<p>JPython offers you access to all Java functionality available, which includes</P>
+
+					<UL>
+<Li>
+							<p>Support to JavaBean Properties. The use of JavaBeans is seen by JPython as a solution to simplify the task of talking to most other Java classes.</p>
+
+						</li>
+<li>
+							<p>If you need to handle Java Arrays in JPython, you need to use the <tt class="monofont">Jarray</tt> object. Remember that some Java methods demand argument objects to be in Java array format.</p>
+
+						</li>
+</Ul>
+					<p>Also good to remember is you can create Python classes that subclass Java classes. This is a helpful option when you need to pass information back and forth between both implementations (Python and Java). Note that you need to create a Python class with the same name of the module that carries class.</P>
+
+					<p>The following example shows how a user can instantiate a Java random number class and then interact with that instance:</p>
+
+					<pRe>
+						
+C:\ jpython&gt;jpython
+&gt;&gt;&gt; from java.util import Random
+&gt;&gt;&gt; number = Random()
+&gt;&gt;&gt; number.nextInt()
+-857296727
+&gt;&gt;&gt; print number.nextDouble()
+0.5334538483666526
+&gt;&gt;&gt; number.nextInt()
+-356857265
+
+					</pre>
+
+					<P>Note that we are establishing direct access to the Java library without using any kind of wrappers.</p>
+
+					<p>The following site is part of the original documentation showing how to use JPython along with Java:</p>
+
+					<P>
+						<A TArget="_blank" HREF="http://www.jpython.com/docs/usejava.html">http://www.jpython.com/docs/usejava.html</a>
+						<a naME="idx1073750725"></A>
+						<A name="idx1073750726"></A>
+						<A NAme="idx1073750727"></a>
+						<a name="idx1073750728"></a>
+						<a name="idx1073750729"></a>
+						<a name="idx1073750730"></A>
+						<a nAme="idx1073750731"></a>
+					</P>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="248.html" title="Creating Graphical Interfaces"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=249" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="249.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="250.html" title="jpythonc "><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750729">embedding JPython in</a><BR>
+embedding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750727">JPython</a><BR>
+Java<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750728">embedding JPython in</a><BR>
+JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750725">embedding</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JPython<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750726">embedding</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750730">embedding JPython in</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750731">embedding JPython in</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

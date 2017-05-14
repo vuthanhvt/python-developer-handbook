@@ -1,0 +1,699 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Built-In Data Types</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="22.html" class="navtitle">2. Language Review</a> &gt; <span class="nonavtitle">Built-In Data Types</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="26.html" title="Programs"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=27" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="27.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="28.html" title="Operators"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A18%3A51+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162145081058105061222103253</font><a href="read4.asp?bookname=0672319942&snode=27&now=5%2F31%2F2002+4%3A18%3A51+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Built-In Data Types</h3>
+				<p>Built-in data types are types that are already built into the interpreter. They are divided into two groups:</p>
+
+				
+					<H4>
+				
+				Immutable Data Types</H4>
+					<P>These objects cannot have their values altered (for example, strings, numbers, and tuples).</P>
+
+				
+				
+					<h4>
+				
+				Mutable Data Types</h4>
+					<p>These objects can have their values manipulated (for example, lists and dictionaries).</p>
+
+					<P>Sometimes, it becomes necessary to <A NAme="idx1073742160"></a>
+						<a NAME="idx1073742161"></a>
+						<a name="idx1073742162"></a>assign a <tt class="monofont">null</tt> value to a variable using the special data type known as <a namE="idx1073742163"></a>
+						<a Name="idx1073742164"></A>
+						<tt clAss="monofont">None:</tT>
+					</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; x = 1
+&gt;&gt;&gt; x
+1
+&gt;&gt;&gt; print x
+1
+&gt;&gt;&gt; x = None
+&gt;&gt;&gt; x
+&gt;&gt;&gt;
+
+					</pre>
+
+					<P>As you could see, nothing was returned. However, if you try to print this value, the <A NAme="idx1073742165"></a>
+						<a NAME="idx1073742166"></a>
+						<tt cLASS="monofont">print</tt> method of the object will specially handle the <tt class="monofont">None</tt> value by returning a <tt class="monofont">None</tt> result. This is shown in the following:</P>
+
+					<prE>
+						
+&gt;&gt;&gt; print x
+None
+				
+					</pre>
+
+				
+				
+					<H4>
+				
+				Numbers</h4>
+					<p>Python provides the following numeric data types: <a nAme="idx1073742167"></a>integer, <A NAMe="idx1073742168"></a>floating-point, hexadecimal (base 16), and octal (base 8). Some examples of these data types are <tt CLASs="monofont">43, 1.5, 0xB3,</tt> and <tT CLAss="monofont">045,</tt> respectively.</P>
+
+					<DIV class="note"><p class="notetitle"><b>Tip</b></p><p>
+
+						<p>
+							<a namE="idx1073742169"></a>Hexadecimal numbers must always be preceded by <tT claSs="monofont">0x,</tt> and <a Name="idx1073742170"></A>octal numbers must be preceded by <TT Class="monofont">0.</TT>
+						</P>
+
+					</P></div>
+<bR>
+<BR>
+
+					<P>Python can do a lot of things with numbers:</p>
+
+					<p>It can write <a nAME="idx1073742171"></A>equations:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; 3*(3.0/34)
+0.264705882353
+
+					</pre>
+
+					<p>It can use <a name="idx1073742172"></a>functions:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; round(12.32,1)
+12.3
+
+					</prE>
+
+					<p>It can make <a Name="idx1073742173"></A>comparisons:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; x = 2
+&gt;&gt;&gt; 0&lt;x&lt;5
+1
+
+					</Pre>
+
+					<p>It can make <A NAMe="idx1073742174"></a>
+						<a nAME="idx1073742175"></A>binary operations, such as <a namE="idx1073742176"></A>
+						<TT clasS="monofont">shifting</TT> and <A name="idx1073742177"></a>
+						<tt class="monofont">masking:</tt>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; 16&lt;&lt;2
+64
+&gt;&gt;&gt; 40&amp;0xab
+40
+&gt;&gt;&gt; 2|1
+3
+&gt;&gt;&gt; ~2
+-3
+&gt;&gt;&gt; 3^4
+7
+
+					</prE>
+
+					<p>A very important detail is the fact that Python <a Name="idx1073742178"></A>
+						<a namE="idx1073742179"></a>truncates <tt CLASs="monofont">integer</tt> divisions:</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; 3/2
+1
+
+					</Pre>
+
+					<p>If you really want the <a NAME="idx1073742180"></a>decimals, you have two options. Either you pass a converted number to the division function, or you put a decimal point in your number, as illustrated here:</p>
+
+					<prE>
+						
+&gt;&gt;&gt; x = 3
+&gt;&gt;&gt; float(x)/2
+1.5
+&gt;&gt;&gt; x
+3
+&gt;&gt;&gt; 3.0/2
+1.5
+
+					</PRE>
+
+					<p>Python supports long integers—with unlimited size. To let Python know that it should <a name="idx1073742181"></a>
+						<a name="idx1073742182"></a>
+						<a name="idx1073742183"></a>handle an integer as a long integer, you need to put an <tT clAss="monofont">L</tT> at the end of the number:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; 2L**100
+<I>1267650600228229401496703205376L</i>
+				
+					</prE>
+
+					<P>Otherwise you get an <A Name="idx1073742184"></a>
+						<A NAMe="idx1073742185"></a>error message:</p>
+
+					<pRE>
+						
+&gt;&gt;&gt; 2**100
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+OverflowError: integer pow()
+				
+					</PRe>
+
+					<p>
+						<a hREF="91.html">Chapter 4, "Exception Handling,"
+						</A>  teaches you how to interpret this exception message.</p>
+
+					<p>Python also <a name="idx1073742186"></a>
+						<a name="idx1073742187"></a>handles complex numbers in the format (<tt clasS="monofont">real part + imaginary part</tt>):</P>
+
+					<pre>
+						
+&gt;&gt;&gt; 2j**2
+(-4+0j)
+				
+					</Pre>
+
+				
+				
+					<h4>
+				Strings</h4>
+					<P>Python considers a string as a sequence of <a naME="idx1073742188"></A>
+						<A name="idx1073742189"></A>characters. Therefore, every time you use, for example, the string <TT Class="monofont">"Parrot",</TT> internally Python handles it as the sequence <TT clasS="monofont">["P", "a", "r", "r", "o", "t"].</TT> The first <A name="idx1073742190"></a>
+						<a name="idx1073742191"></a>indexer value is always the number zero. Hence, to have access to the letter <tt class="monofont">P,</tt> you need to say <Tt cLass="monofont">"Parrot"[0]</Tt> and to access the letter <tt cLass="monofont">a,</TT> you need to say <TT clasS="monofont">"Parrot"[1].</TT> Using the same concept, we can get access to all the other elements.</P>
+
+					<p>The following is an example of string operators:</p>
+
+					<prE>
+						
+&gt;&gt;&gt; "dead parrot " + "sketch"  # concatenation
+"dead parrot sketch"
+&gt;&gt;&gt; "parrot " * 2              # repetition
+"parrot parrot"
+&gt;&gt;&gt; "parrot"[1]                # indexing
+"a"
+&gt;&gt;&gt; "parrot"[-1]               # indexing backward
+"t"
+&gt;&gt;&gt; "parrot"[1:3]              # slicing (*)
+"ar"
+
+					</PRE>
+
+					<p>When <a naME="idx1073742192"></A>slicing, it isn't necessary to include both first and last elements. Whenever you omit one of the elements, it is assumed that you want everything in that direction. Note that the second argument is always a positional reference.<A name="idx1073742193"></a>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; "parrot"[1:]
+"arrot"
+&gt;&gt;&gt; "parrot"[:3]
+"par"
+
+					</pre>
+
+					<p>Always remember that assigning <tt class="monofont">z = x</Tt> doesn't make a copy of the object <tT claSs="monofont">x.</tt> Instead, it creates a new reference for that object (as you already saw in the earlier <tT claSS="monofont">round</TT> example). If you have to create a <a namE="idx1073742194"></A>
+						<A Name="idx1073742195"></a>
+						<A NAMe="idx1073742196"></a>copy of a sequence named <tt CLASs="monofont">x,</tt> you need to type:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; z = x[:]
+
+					</pre>
+
+					<p>The variable <tt class="monofont">z</tt> will identify the middle of the variable <Tt cLass="monofont">x,</Tt> and it will be initialized with everything from the left direction plus everything from the right direction. Note that since Python 1.5, <tt cLass="monofont">id(s) == id(s[:])</TT> for strings because of string interning.</P>
+
+					<P>Strings cannot be modified after creation. It isn't possible to <a namE="idx1073742197"></A>
+						<A Name="idx1073742198"></a>
+						<A NAMe="idx1073742199"></a>assign a value to a substring because strings are <a nAME="idx1073742200"></A>
+						<a name="idx1073742201"></a>immutable. See the <a name="idx1073742202"></a>
+						<a name="idx1073742203"></a>error message in the next example:</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; t = "pxrrot"
+&gt;&gt;&gt; t[1:2] = "a"
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+TypeError: object doesn't support slice assignment
+
+					</pRe>
+
+					<p>In cases like this, the usual solution is a little trick:</p>
+
+					<Pre>
+						
+s = s[:left_element] + new_substring + s[right_element:]
+
+					</prE>
+
+					<p>For example</p>
+
+					<pRE>
+						
+&gt;&gt;&gt; t = "pxrrot"
+&gt;&gt;&gt; t = t[:1] + "a" + t[2:]
+&gt;&gt;&gt; t
+"parrot"
+
+					</PRe>
+
+					<p>Let me show you other useful operations that you can do with strings:<a nAME="idx1073742204"></A>
+					</p>
+
+					<pre>
+						
+&gt;&gt;&gt; len("parrot")         # Get its length
+6
+&gt;&gt;&gt; "parrot" &lt; "sketch"   # Compare one string against another.
+1
+&gt;&gt;&gt; "t" in "parrot"       # This logical test needs a char left operand
+1
+&gt;&gt;&gt; "\n, \0, \x"          # Use escape codes
+"\012, \000, \\x"
+
+					</PRE>
+
+					<P>
+						<a hreF="27#5.html">Table 2.1</A> lists the escape codes supported by Python strings.</P>
+
+					<A name="5"></a><p><table border="1" celLspAcinG="0" cellPaddING="1" Width="100%">
+<CAPTion><h5>Table 2.1. 
+					
+					  Escape Codes Supported by Python Strings</H5></CAPtion><COLGroup align="left" span="2">
+<tr valigN="top">
+<th>
+<Font Size="2">Escape Code</fOnt></tH>
+<TH>
+<Font sIZE="2">Description</Font></tH>
+</TR>
+<Tr valIGN="top">
+<Td>
+<font size="2">
+										<a name="idx1073742205"></a>\\</font></tD>
+<td>
+<Font Size="2">backslash</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+										<a naME="idx1073742206"></A>\'</Font></td>
+<td>
+<font size="2">single quote</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2">
+										<a naME="idx1073742207"></A>\"</Font></tD>
+<TD>
+<Font sIZE="2">double quote</Font></td>
+</tr>
+<tr valign="top">
+<td>
+<fonT siZe="2">
+										<a nAme="idx1073742208"></a>\b</fOnt></tD>
+<TD>
+<Font sIZE="2">backspace</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<font size="2">
+										<a name="idx1073742209"></a>\e</font></tD>
+<td>
+<Font Size="2">escape</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+										<a naME="idx1073742210"></A>\0</Font></td>
+<td>
+<font size="2">null</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2">
+										<a naME="idx1073742211"></A>\n</Font></tD>
+<TD>
+<Font sIZE="2">linefeed, also known as \012</Font></td>
+</tr>
+<tr valign="top">
+<td>
+<fonT siZe="2">
+										<a nAme="idx1073742212"></a>\v</fOnt></tD>
+<TD>
+<Font sIZE="2">vertical tab</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<font size="2">
+										<a name="idx1073742213"></a>\t</font></tD>
+<td>
+<Font Size="2">horizontal tab</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">
+										<a naME="idx1073742214"></A>\r</Font></td>
+<td>
+<font size="2">carriage return</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2">
+										<a naME="idx1073742215"></A>\f</Font></tD>
+<TD>
+<Font sIZE="2">form feed</Font></td>
+</tr>
+<tr valign="top">
+<td>
+<fonT siZe="2">
+										<a nAme="idx1073742216"></a>\0nn</fOnt></tD>
+<TD>
+<Font sIZE="2">octal value, the <Tt claSS="monofont">nn</TT> domain is: 0..7</font></TD>
+</TR>
+<tr valign="top">
+<td>
+<font size="2">
+										<a nAme="idx1073742217"></A>\xnn</fonT></td>
+<td>
+<Font SIZE="2">hexa value, the nn domain is: 0..9, A..F, a..f</font></TD>
+</TR>
+</colgROUP>
+</tablE></P>
+
+					<P>Next is an example of escape code:</P>
+
+					<pre>
+						
+&gt;&gt;&gt; print "I am a lumberjack\ nand I am OK"
+I am a lumberjack
+and I am OK
+
+					</pre>
+
+					<p>You can use either <a name="idx1073742218"></a>
+						<a name="idx1073742219"></a>
+						<a NamE="idx1073742220"></a>single quotes or <a nAme="idx1073742221"></a>
+						<a Name="idx1073742222"></A>double quotes. They are both interpreted the  same way.</P>
+
+					<P>Both strings <Tt claSS="monofont">'Spam'</TT> and <tt clASS="monofont">"Spam"</Tt> are basically the same thing.</p>
+
+					<p>Python also accepts <a NAME="idx1073742223"></a>
+						<a name="idx1073742224"></a>triple quotes for remarks that span across several lines:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; t = """I am a lumberjack
+… and I am OK"""
+&gt;&gt;&gt; print t
+I am a lumberjack
+and I am OK
+&gt;&gt;&gt; t
+"I am a lumberjack\ 012and I am OK"
+
+					</pre>
+
+					<p>Note that the escape code <tt claSs="monofont">\012</tT> becomes part of the string. <a naMe="idx1073742225"></a>
+						<a nAme="idx1073742226"></a>
+						<A NAMe="idx1073742227"></a>
+					</p>
+
+					<p>If you need to <A NAMe="idx1073742228"></a>
+						<a nAME="idx1073742229"></A>
+						<a namE="idx1073742230"></A>create strings with the <TT class="monofont">/</tt> (slash literal), you must use <a name="idx1073742231"></a>raw strings. Raw strings are identified by the letter <tt class="monofont">r</Tt> right before the first quote, as shown in the following:</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; print r"\n, \f, \x"
+\n, \f, \x
+
+					</pRe>
+
+					<p>There is one more thing that I think you should know about strings. The enclosing <a nAme="idx1073742232"></a>
+						<A NAMe="idx1073742233"></a>backticks <tt CLASs="monofont">``</tt> tell the interpreter to understand that the enclosed object is of string data type:</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; n = 123
+&gt;&gt;&gt; print `n` + " Parrot"
+123 Parrot
+
+					</Pre>
+
+					<diV CLAss="note"><p class="notetitle"><b>Note</b></p><p>
+
+						<p>Python doesn't treat the contents of <a name="idx1073742234"></a>
+							<a NamE="idx1073742235"></a>
+							<a nAme="idx1073742236"></a>back quotes as commands to execute, as do Perl and <tT claSS="monofont">sh.</TT>
+							<a namE="idx1073742237"></A>
+						</P>
+
+					</P></div>
+<bR>
+<BR>
+
+					<P>Prior to version 2.0, you had to rely on the <a namE="idx1073742238"></A>
+						<A Name="idx1073742239"></a>
+						<tt class="monofont">string</tt> module to manipulate your string objects because the string-manipulation functionality was in the <tt class="monofont">string</Tt> module. With this new release, the methods were pushed to the string type. Note that old <tT claSs="monofont">string</tt> module was not removed from the distribution because it is still necessary for backwards compatibility.</p>
+
+					<P>The following example shows how to <a naME="idx1073742240"></A>
+						<A name="idx1073742241"></A>
+						<A NAme="idx1073742242"></a>
+						<a NAME="idx1073742243"></a>call a method from a string object.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; 'Python '.join('World')
+Python World
+
+					</PRE>
+
+					<p>Note that <tt class="monofont">'Python '.join('World')</tt> is equivalent to the old string module: <tt class="monofont">string.join("World", "Python ")</tt>
+					</p>
+
+					<P>Besides the methods that were inherited from the <tt ClasS="monofont">string</tt> module, two new methods were added:<a nAme="idx1073742244"></a>
+						<A NAMe="idx1073742245"></a>
+						<tt CLASs="monofont">startswith()</tt>
+						<a NAME="idx1073742246"></a>
+						<a naME="idx1073742247"></A>and <Tt class="monofont">endswith().</tt>
+					</p>
+
+					<pre>
+						
+s.startswith(t) is equivalent to s[:len(t)] == t
+
+					</pre>
+
+					<p>and</p>
+
+					<pre>
+						
+s.endswith(t) is equivalent to s[-len(t):] == t.
+
+					</Pre>
+
+					
+						<H5>Unicode Support</h5>
+						<p>Unicode is a<a Name="idx1073742248"></a>
+							<A namE="idx1073742249"></A> new immutable string data type supported by Python 2.0. Basically, it can represent characters using 16-bit numbers, instead of the 8-bit numbers used by the ASCII standard, which means that Unicode strings can support up to 65,536 distinct characters. Note that when combining an 8-bit string and an Unicode string, the resulting string is an Unicode string.</P>
+
+						<P>In order to write a Unicode string in Python, you need to use the notation <tt clASS="monofont">u"string".</Tt> If you need to write arbitrary Unicode characters, you can use the new escape sequence, <tt cLASS="monofont">\uHHHH,</tt> where <tt CLASs="monofont">HHHH</tt> is a 4-digit hexadecimal number from <tt class="monofont">0000</tt> to <tt class="monofont">FFFF.</tT> Note that you can also use the existing <tt ClasS="monofont">\xHHHH</tt> escape sequence. Another option is to use octal escapes whenever<a nAme="idx1073742250"></a>
+							<A NAMe="idx1073742251"></a> you need to write characters up to <tt CLASs="monofont">U+01FF</tt> (represented by <tT CLAss="monofont">\777</tt>).</P>
+
+					
+				
+				
+					<H4>
+				
+				
+				
+				
+				True and False Logical Values</H4>
+					<P>Falsity is represented by zeros, empty structures, or the value <tt class="monofont">None</tt> (for example, <tt class="monofont">0, [], {}, (), None</tt>).</p>
+
+					<p>Logical Truth is represented by results different from zero and non-empty structures (for example, <Tt cLass="monofont">1, [2], (1,2,3), "abc"</Tt>). The following <tt cLass="monofont">if</TT> statement checks whether the variable <TT clasS="monofont">t</TT> has any value; in this case, the statement returns true, allowing the block contents to be executed:</P>
+
+					<pre>
+						
+&gt;&gt;&gt; t = "Parrot"
+&gt;&gt;&gt;     if t:
+…         print "Parrot"
+…
+Parrot
+
+					</pRE>
+
+				
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="26.html" title="Programs"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=27" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="27.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="28.html" title="Operators"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+/ (slash literal)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742229">creating strings</a><BR>
+ <a href="#idx1073742205">\\ escape code</a><BR>
+\Ó<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742207">escape code</a><BR>
+\Õ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742206">escape code</a><BR>
+` (back quotes)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742236">strings</a><BR>
+`` (backticks)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742233">strings</a><BR>
+assigning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742160">null values to variables</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742197">values to substrings</a><BR>
+back quotes (`)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742235">strings</a><BR>
+backticks (``)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742232">strings</a><BR>
+binary operations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742174">numbers in</a><BR>
+calling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742241">from string objects</a><BR>
+charactersÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742189">Ò</a><BR>
+codes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742227">escape</a><BR>
+comparisons<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742173">numbers</a><BR>
+complex numbers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742187">handling</a><BR>
+copying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742194">objects</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742228">strings, slash literal (/)</a><BR>
+data types<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742201">immutable</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742164">None</a><BR>
+ <a href="#idx1073742180">decimals in numbers</a><BR>
+double quotes (Ò<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742221">strings</a><BR>
+duplicating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742196">objects</a><BR>
+ <a href="#idx1073742246">endswith() method</a><BR>
+equations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742171">numbers in</a><BR>
+error messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742202">assigning values to substrings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742184">handling long integers</a><BR>
+ <a href="#idx1073742208">escape code</a> <a href="#idx1073742209">2nd</a> <a href="#idx1073742210">3rd</a> <a href="#idx1073742211">4th</a> <a href="#idx1073742212">5th</a> <a href="#idx1073742213">6th</a> <a href="#idx1073742214">7th</a> <a href="#idx1073742215">8th</a> <a href="#idx1073742216">9th</a> <a href="#idx1073742217">10th</a><BR>
+ <a href="#idx1073742226">escape codes</a><BR>
+ <a href="#idx1073742168">floating-point numbers</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742172">numbers in</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742186">complex numbers</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742181">long integers</a><BR>
+ <a href="#idx1073742169">hexadecimal numbers</a><BR>
+ <a href="#idx1073742200">immutable data types</a><BR>
+indexer values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742190">strings</a><BR>
+ <a href="#idx1073742167">integers</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742179">division of, truncations</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;long<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742183">handling</a><BR>
+long integers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742182">handling</a><BR>
+masking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742177">numbers in</a><BR>
+messages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742203">assigning values to substrings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742185">handling long integers</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742240">calling from string objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742247">endswith()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742166">print</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742245">startswith()</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742239">string</a><BR>
+ <a href="#idx1073742163">None data types</a><BR>
+null value<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742161">assigning to variables</a><BR>
+Ó<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(double quotes)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742222">strings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ó<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742224">Ó (triple quotes);strings</a><BR>
+Õ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(single quote)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742219">strings</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742195">copying</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742243">calling methods</a><BR>
+ <a href="#idx1073742170">octal numbers</a><BR>
+operations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742175">numbers in</a><BR>
+ <a href="#idx1073742165">print method</a><BR>
+quotes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742220">strings</a> <a href="#idx1073742234">2nd</a><BR>
+raw strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742231">creating strings with slash literal (/)</a><BR>
+shifting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742176">numbers in</a><BR>
+single quotes (Ô<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742218">strings</a><BR>
+slash literal (/)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742230">creating strings</a><BR>
+slicing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742192">strings</a><BR>
+ <a href="#idx1073742244">startswith() method</a><BR>
+ <a href="#idx1073742238">string modules</a><BR>
+string objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742242">calling</a><BR>
+ <a href="#idx1073742193">strings</a> <a href="#idx1073742204">2nd</a> <a href="#idx1073742225">3rd</a> <a href="#idx1073742237">4th</a><BR>
+stringsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742188">Ò</a><BR>
+substrings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742199">assigning values</a><BR>
+support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742249">Unicode</a> <a href="#idx1073742251">2nd</a><BR>
+triple quotes (Ò<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ó<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742223">Ó)strings</a><BR>
+truncations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742178">division of integers</a><BR>
+ <a href="#idx1073742248">Unicode support</a> <a href="#idx1073742250">2nd</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742198">assigning to substrings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;indexer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742191">strings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;null<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742162">assigning to variables</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

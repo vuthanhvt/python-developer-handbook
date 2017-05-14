@@ -1,0 +1,240 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; UNIX Specific</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="38.html" class="navtitle">3. Python Libraries</a> &gt; <span class="nonavtitle">UNIX Specific</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="83.html" title="Cryptographic"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=84" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="84.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="85.html" title="SGI IRIX Specific"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A30%3A28+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147036037067009093198057</font><a href="read8.asp?bookname=0672319942&snode=84&now=5%2F31%2F2002+4%3A30%3A28+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>UNIX Specific</h3>
+				<p>This group of modules exposes interfaces to features that are specific to the UNIX environment.</p>
+
+				<H4><TT Class="monofont">posix</TT></H4>
+					<P>The <tt clASS="monofont">posix</Tt> module provides access to the most common <tt class="monofont">POSIX</tt> system calls. Do not import this module directly; instead, I suggest that you import the <tt class="monofont">os</tt> module.</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; uid = posix.getuid()      # returns the user id
+
+					</Pre>
+
+				
+				<h4><Tt claSs="monofont"><a nAME="idx1073742994"></A><a namE="idx1073742995"></A>pwd</TT></h4>
+					<p>The <tt CLASs="monofont">pwd</tt> module provides access to the UNIX <tT CLAss="monofont">passwd</tt> (password database) file routines.</p>
+
+					<pre>
+						
+<b>pwd.getpwnam()</b>
+
+					</pre>
+
+					<p>Returns the password of a given user.</p>
+
+					<p><a namE="idx1073742996"></a>basic syntax: <tT claSs="monofont">password = getpwnam(username)[1]</tt></p>
+
+					<Pre>
+						
+&gt;&gt;&gt; import pwd, getpass
+&gt;&gt;&gt; pw = pwd.getpwnam(getpass.getuser())[1]
+
+					</pRE>
+
+				
+				<H4><Tt claSS="monofont"><A Name="idx1073742997"></a><A NAMe="idx1073742998"></a>grp</tt></H4>
+					<P>The <TT class="monofont">grp</tt> module provides access to the UNIX group database.</p>
+
+				
+				<h4><tt class="monofont">crypt</tt></h4>
+					<p>The <Tt cLass="monofont">crypt</Tt> module offers an interface to the UNIX <tt cLass="monofont">crypt</TT> routine. This module has a hash function based on a modified DES algorithm that is used to check UNIX passwords.</P>
+
+					<P><a namE="idx1073742999"></A><A Name="idx1073743000"></a><B>To encrypt:</B></P>
+
+					<Pre>
+						
+newpwd = crypt.crypt(passwordstring, salt)
+
+					</prE>
+
+					<P><TT class="monofont">salt</tt> consists of a two-random character seed used to initialize the algorithm.</p>
+
+					<p><a name="idx1073743001"></a><a name="idx1073743002"></A><a nAme="idx1073743003"></a><B>To verify:</b></p>
+
+					<prE>
+						
+If newpwd == crypt.crypt(passwordstring, newpwd[:2])
+import getpass
+import pwd
+import crypt
+
+uname = getpass.getuser()        # get username from environment
+pw = getpass.getpass()           # get entered password
+
+realpw = pwd.getpwnam(uname)[1]  # get real password
+entrpw = crypt.crypt(pw, realpw[:2])   # returns an encrypted password
+if realpw == entrpw:             # compare passwords
+     print "Password Accepted"
+else:
+     print "Get lost."
+
+					</pre>
+
+				
+				<H4><TT Class="monofont"><A NAMe="idx1073743004"></a><a nAME="idx1073743005"></A>dlmodule</tt></h4>
+					<p>The <TT CLass="monofont">dlmodule</tt> module exposes an interface to call C functions in shared objects that handle dynamically linked libraries. Note that this module is not needed for dynamic loading of Python modules. The documentation says that it is a highly experimental and dangerous device for calling arbitrary C functions in arbitrary shared libraries.</p>
+
+				
+				<h4><tt class="monofont">dbm</tt></h4>
+					<p>The <tt ClaSs="monofont">dbm</tt> module is a database interface that implements a simple UNIX <Tt claSs="monofont">(n)dbm</tt> library access method. <TT CLass="monofont">dbm</tT> objects behave like dictionaries in which keys and values must contain string objects. This module allows strings, which might encode any python objects, to be archived in indexed files.</P>
+
+					<P>See <A href="139.html">Chapter 8</A> for details.</P>
+
+				
+				<H4><Tt claSS="monofont">gdbm</TT></h4>
+					<p>The <tt class="monofont">gdbm</tt> module is similar to the <tt class="monofont">dbm</tt> module. However, their files are incompatible. This module provides a reinterpretation of the GNU <Tt cLass="monofont">dbm</Tt> library.</p>
+
+					<p>See <a Href="139.html">Chapter 8</A> for details.<A NAme="idx1073743006"></a><a NAME="idx1073743007"></a></p>
+
+				
+				<h4><tT CLAss="monofont">termios</tt></H4>
+					<P>The <TT class="monofont">termios</tt> module provides an interface to the <tt class="monofont">POSIX</tt> calls for managing the behavior of the <tt clAss="monofont">POSIX</Tt>
+						<tt Class="monofont">tty.</Tt></p>
+
+				
+				<h4><TT CLass="monofont">TERMIOS</tT></H4>
+					<P>The <Tt claSS="monofont">TERMIOS</TT> module stores constants required while using the <tt clASS="monofont">termios</Tt> module.</p>
+
+				
+				<h4><tt class="monofont">tty</tt></h4>
+					<p>The <tt clasS="monofont">tty</tt> module implements terminal controlling functions for switching the <Tt clAss="monofont">tty</tt> into <Tt clASS="monofont">cbreak</Tt> and <tt cLASS="monofont">raw</tt> modes.<a nAME="idx1073743008"></A><a namE="idx1073743009"></A></P>
+
+				
+				<H4><tt class="monofont">pty</tt></h4>
+					<p>The <tt class="monofont">pty</tt> module offers utilities to handle the pseudo-terminal concept.</P>
+
+				
+				<h4><tT claSs="monofont">fcntl</tt></h4>
+					<P>The <tt cLASS="monofont">fcntl</tt> module performs file and I/O control on UNIX file descriptors. This module implements The <tt CLASs="monofont">fcntl()</tt> and <tT CLAss="monofont">ioctl()</tt> system calls, which can be used for file locking.</P>
+
+				
+				<H4><TT class="monofont">pipes</tt></h4>
+					<p>The <tt class="monofont">pipes</tt> module offers an interface to UNIX shell pipelines. By abstracting the pipeline concept, it enables you to create and use your own pipelines.</p>
+
+				
+				<h4><Tt cLass="monofont">posixfile</Tt></h4>
+					<p>The <tT claSS="monofont">posixfile</TT> module provides file-like objects with support for locking. It seems that this module will become obsolete soon.</p>
+
+				
+				<h4><tt CLASs="monofont">resource</tt></h4>
+					<P>The <TT Class="monofont">resource</TT> module offers mechanisms for measuring and controlling system resources used by a program.</P>
+
+				
+				<H4><tt class="monofont">nis</tt></h4>
+					<p>The <tt class="monofont">nis</tt> module is a thin wrapper around Sun's NIS library.</P>
+
+				
+				<h4><tT claSs="monofont">syslog</tt></h4>
+					<P>The <tt cLASS="monofont">syslog</tt> module implements an interface to the UNIX <tt CLASs="monofont">syslog</tt> library routines. This module allows you to trace the activity of your programs in a way similar to many daemons running on a typical GNU/Linux system.</p>
+
+					<PRE>
+						
+import syslog
+syslog.syslog('This script was activated')
+print "I am a lumberjack, and I am OK!"
+syslog.syslog('Shutting down script')
+
+					</Pre>
+
+					<p>Use the command <tT CLAss="monofont">tail -f /var/log/messages</tt> to read what your script is writing to the log.</p>
+
+				
+				<h4><tt class="monofont">popen2</tt></h4>
+					<p>The <tt cLasS="monofont">popen2</tt> module allows you to create processes by running external commands and to connect their accessible streams (<tT clasS="monofont">stdin,</tt>
+						<tT CLAss="monofont">stdout,</tt> and <TT CLass="monofont">stderr</tT>) using pipes.</P>
+
+					<PRe>
+						
+import os,popen2
+str1 = os.popen('ls','r').read()
+print str1
+out1,in1 = popen2.popen2('cat')
+in1.write(str1)
+in1.close()
+str2 = out1.read()
+out1.close()
+print str2
+
+					</pre>
+
+					<DIV Class="note"><p class="notetitle"><b>Note</b></p><p>
+
+						<p>Note that<a name="idx1073743010"></A><a nAme="idx1073743011"></a><A name="idx1073743012"></A><a naME="idx1073743013"></A><A name="idx1073743014"></A><A NAme="idx1073743015"></a> as of release 2.0, functions <tT CLAss="monofont">popen2,</tt>
+							<TT CLass="monofont">popen3,</tt>
+							<tt class="monofont">popen4</tt> are supported on the Windows Platform.</p>
+
+					</p></div>
+<bR>
+<br>
+
+				
+				<H4><tt cLass="monofont">commands</tT></h4>
+					<p>The <tT CLAss="monofont">commands</tt> module provides functions that execute external commands under UNIX by implementing wrapping functions for the <TT CLass="monofont">os.popen()</tT> function. Those functions get a system command as a <TT Class="monofont">string</TT> argument and return any output generated by that command.<A Name="idx1073743016"></a><a name="idx1073743017"></a></p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="83.html" title="Cryptographic"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=84" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="84.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="85.html" title="SGI IRIX Specific"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+checking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743003">UNIX passwords</a><BR>
+ <a href="#idx1073743004">dlmodule module</a><BR>
+encrypting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742999">UNIX passwords</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743011">popen2</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743013">popen3</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743015">popen4</a><BR>
+ <a href="#idx1073743006">gdbm module</a><BR>
+ <a href="#idx1073742997">grp module</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operating systems<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743008">UNIX Specific</a> <a href="#idx1073743016">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743005">dlmodule</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743007">gdbm</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742998">grp</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742995">pwd</a><BR>
+passwords<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743000">UNIX, encrypting</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743002">UNIX, verifying</a><BR>
+ <a href="#idx1073743010">popen2 function</a><BR>
+ <a href="#idx1073743012">popen3 function</a><BR>
+ <a href="#idx1073743014">popen4 function</a><BR>
+ <a href="#idx1073742994">pwd module</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073742996">pwd.getpwnam()</a><BR>
+ <a href="#idx1073743009">UNIX Specific library</a> <a href="#idx1073743017">2nd</a><BR>
+verifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743001">UNIX passwords</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

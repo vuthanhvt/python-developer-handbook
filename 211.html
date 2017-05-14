@@ -1,0 +1,602 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Handling Tkinter Events</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="206.html" class="navtitle">15. Tkinter</a> &gt; <span class="nonavtitle">Handling Tkinter Events</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="210.html" title="Geometry Management"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=211" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="211.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="212.html" title="Tkinter Widgets"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A48%3A59+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148036103062149000105224</font><a href="read1.asp?bookname=0672319942&snode=211&now=5%2F31%2F2002+4%3A48%3A59+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+
+Handling Tkinter Events</h3>
+				<p>Usually, when you create a graphical interface for your application, you want to handle all the possible events that happen there, such as reading in each key in the keyboard (including the F1–F12 set, Ctrl, Alt, and Shift keys), tracking the actions upon the mouse button, or even controlling the window redraw events fired by the window manager. Tkinter handles that by allowing you to create bindings for every specific object. Actually, you can <a NAME="idx1073748490"></a>
+					<a naME="idx1073748491"></A>bind events to the widget instance itself, to the widget's Toplevel window, to the widget's class, and to your entire application (such as a global HELP functionality for the F1 function key).</P>
+
+				<p>After binding an event to a widget, you need to specify which function should be called at the time the event occurs. This function (or method) is called a <a naME="idx1073748492"></A>
+					<A name="idx1073748493"></a>
+					<i>callback.</i> You can define callbacks for all kinds of windowing events, as you will see later. The following code demonstrates a simple callback functionality, which is associated to the <a name="idx1073748494"></a>
+					<a name="idx1073748495"></a>
+					<tT clAss="monofont">command</tT> property from a specific widget.</p>
+
+				<pre>
+					
+from Tkinter import *
+import sys
+def close():
+    sys.exit(0)
+
+root = Tk()
+button = Button(root)
+button['text'] = "Close"
+button['command'] = close
+button.pack()
+root.mainloop()
+
+				</Pre>
+
+				<p>The next example binds the mouse-click event <A NAMe="idx1073748496"></a>
+					<a nAME="idx1073748497"></A>(<tt clASS="monofont">"&lt;Button-1&gt;"</Tt>) to a specific function in our program. Note that the event description is just a simple string. The mainloop keeps checking for this event, and when it catches the event, the function (event handler) is called. Note that an object is passed to the callback function carrying some information provided by the event.</p>
+
+				<prE>
+					
+from Tkinter import *
+def ShowPosition(event):
+    Top = Toplevel(root)
+    xlabel = Label(Top)
+    xlabel.pack()
+    xlabel.config(text = "X = " + str(event.x))
+    ylabel = Label(Top)
+    ylabel.pack()
+    ylabel.config(text = "Y = " + str(event.y))
+    Top.mainloop()
+
+root = Tk()
+frame = Frame(root, width=200, height=200)
+frame.bind("&lt;Button-1&gt;", ShowPosition)
+frame.pack()
+root.mainloop()
+
+				</PRE>
+
+				<p>The next sections provided more events that you can use in your programs.</p>
+
+				
+					<h4>
+Mouse Events</h4>
+					<p>When handling mouse event, use 1 for the left button, 2 for the middle button, and 3 for the right button. The following events are based on the left button, and you need to make the necessary changes in order to adapt them for usage with the other buttons. Before starting, you should know that the current position of the mouse pointer, the position relative to the widget, is provided in the x and y options of the event object passed to the callback.</p>
+
+					<p>If you bind to both a single click event and to a double click event, both bindings will be called whenever one of them is activated.</p>
+
+					<blockquote>
+<p>
+							<a NamE="idx1073748498"></a>
+							<a nAme="idx1073748499"></a>
+							<p><Tt clASS="monofont">&lt;Enter&gt;</Tt>— 
+    
+								The mouse pointer entered the widget.</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073748500"></a>
+							<a nAME="idx1073748501"></A>
+							<p><tt cLASS="monofont">&lt;Leave&gt;</tt>— 
+    
+								The mouse pointer left the widget.</p>
+
+						</p>
+<p>
+							<a name="idx1073748502"></a>
+							<a name="idx1073748503"></a>
+							<p><tt ClaSs="monofont">&lt;Button-1&gt;,</tt>
+									<Tt claSs="monofont">&lt;ButtonPress-1&gt;,</tt> or 
+
+<TT CLass="monofont">&lt;1&gt;</tT>— 
+    
+								A mouse button is pressed over the widget.</P>
+
+						</P>
+<P>
+							<a namE="idx1073748504"></A>
+							<A Name="idx1073748505"></a>
+							<P><TT Class="monofont">&lt;B1-Motion&gt;</tt>— 
+    
+								The mouse is moved, with mouse button 1 being held down.</p>
+
+						</p>
+<p>
+							<a name="idx1073748506"></a>
+							<a name="idx1073748507"></A>
+							<p><tT claSs="monofont">&lt;ButtonRelease-1&gt;</tt>— 
+    
+								Button 1 was released.</p>
+
+						</P>
+<p>
+							<a nAME="idx1073748508"></A>
+							<a namE="idx1073748509"></A>
+							<P><Tt claSS="monofont">&lt;Double-Button-1&gt;</TT>— 
+    
+								Button 1 was double-clicked.<a namE="idx1073748510"></A>
+									<A Name="idx1073748511"></a>
+									<a name="idx1073748512"></a>
+									<a name="idx1073748513"></a>
+									<a namE="idx1073748514"></a>
+									<a Name="idx1073748515"></A>
+									<a namE="idx1073748516"></a>
+									<a nAME="idx1073748517"></A>
+									<a namE="idx1073748518"></A>
+									<A Name="idx1073748519"></a>
+								
+							</P>
+
+						</P>
+</BLockqUOTE>
+				
+				
+					<h4>
+Keyboard Events</h4>
+					<p>The following events are exposed by the keyboard interface:</p>
+
+					<blockquote>
+<p>
+							<a name="idx1073748520"></A>
+							<a nAme="idx1073748521"></a>
+							<P><tt clAss="monofont">&lt;Key&gt;</tT>— 
+    
+								The user has pressed any key. The instance object originated by the callback function carries an attribute called <I>char</I> that can be used to identify which key was pressed.
+							</P>
+
+						</p>
+<p>
+							<a nAME="idx1073748522"></A>
+							<a namE="idx1073748523"></A>
+							<P><Tt claSS="monofont">a</TT>— 
+    The user typed the letter a.</p>
+
+						</p>
+<p>
+							<a name="idx1073748524"></a>
+							<a name="idx1073748525"></a>
+							<p><tt clAss="monofont">b</Tt>— 
+    
+								The user typed the letter b.
+							</p>
+
+						</p>
+</BlockQuotE>
+					<P>The same concept can be applied for all the other printable characters.</P>
+
+					<BlockQUOTe>
+<p>
+							<a nAME="idx1073748526"></A>
+							<a namE="idx1073748527"></A>
+							<P><Tt class="monofont">&lt;Control-Up&gt;</tt>— 
+    
+								The user pressed the Control key, while pressing the Up arrow. This type of structure also allows you to use the keyword suffixes Up, Down, Left, and Right, and the keyword prefixes Control, Alt, and Shift.
+							</p>
+
+						</p>
+<p>
+							<a name="idx1073748528"></a>
+							<a naMe="idx1073748529"></a>
+							<P><tt cLass="monofont">&lt;Return&gt;</tT>— 
+    The user pressed the Enter key.</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073748530"></a>
+							<a nAME="idx1073748531"></A>
+							<p><tt cLASS="monofont">&lt;Escape&gt;</tt>— 
+    The user pressed the Esc key.
+							</p>
+
+						</p>
+</BLOCkquote>
+					<p>The same concept can also be applied for all the other special keys found in the keyboard, including: F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, Num_Lock, Scroll_Lock, Caps_Lock, Print, Insert, Delete, Pause, Prior <i>(Page Up)</i>, Next <i>(Page Down),</i> BackSpace, Tab, Cancel <i>(Break)</i>, Control_L (any Control key), Alt_L (any Alt key), Shift_L (any Shift key), End, Home, Up, Down, Left, and Right.<a name="idx1073748532"></a>
+						<a NamE="idx1073748533"></a>
+						<a nAme="idx1073748534"></a>
+						<a Name="idx1073748535"></A>
+						<A NAme="idx1073748536"></a>
+						<a NAME="idx1073748537"></a>
+						<a naME="idx1073748538"></A>
+						<A name="idx1073748539"></A>
+						<A NAme="idx1073748540"></a>
+						<a name="idx1073748541"></a>
+					</p>
+
+				
+				
+					<h4>
+Event Attributes</h4>
+					<p>Next, I list all the attributes that are exposed by the instance objects originated by the callback functions:</p>
+
+					<blockqUotE>
+<p>
+							<a nAme="idx1073748542"></a>
+							<a Name="idx1073748543"></A>
+							<P><TT clasS="monofont">char</TT>— 
+    Character code associated with a pressed key.</P>
+
+						</p>
+<p>
+							<p>
+								<tT CLAss="monofont">keycode</tt>— 
+    Key code associated with a pressed key.</P>
+
+						</P>
+<P>
+							<A name="idx1073748544"></a>
+							<a name="idx1073748545"></a>
+							<p><tt class="monofont">keysym</tT>— 
+    Key symbol associated with a pressed key.</p>
+
+						</p>
+<P>
+							<a naMe="idx1073748546"></a>
+							<a nAme="idx1073748547"></a>
+							<P><TT Class="monofont">height,</TT>
+									<TT clasS="monofont">width</TT>— 
+    New size, in pixels, of a widget.</P>
+
+						</p>
+<p>
+							<a nAME="idx1073748548"></A>
+							<a name="idx1073748549"></a>
+							<p><tt class="monofont">num</tt>— 
+    This attribute contains the mouse's button number associated with an event.</p>
+
+						</p>
+<p>
+							<a NamE="idx1073748550"></a>
+							<a nAme="idx1073748551"></a>
+							<p><Tt clASS="monofont">widget</Tt>— 
+    Widget instance of the widget that has generated the event.</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073748552"></a>
+							<a nAME="idx1073748553"></A>
+							<p><tt cLASS="monofont">x,</tt>
+									<tt class="monofont">y</tt>— 
+    Current position, in pixels, of the mouse.</p>
+
+						</p>
+<p>
+							<a name="idx1073748554"></a>
+							<A naMe="idx1073748555"></a>
+							<p><Tt claSs="monofont">x_root,</tt>
+									<TT CLass="monofont">y_root</tT>— 
+    These attributes identify the current position of the mouse, in pixels, relative to the upper left corner of the screen.</P>
+
+						</P>
+<P>
+							<p>
+								<tt cLASS="monofont">type</tt>— 
+    
+								Shows the event type.<a nAME="idx1073748556"></A>
+								
+							</p>
+
+						</p>
+</blockquote>
+				
+				
+					<h4>
+
+Event Callbacks</h4>
+					<p>The following methods are used to handle event callbacks by binding a Python function or method to an action that can be applied to a widget. You will also find some callback methods that handle alarm callbacks as well.</p>
+
+					<blocKquOte>
+<p>
+							<A name="idx1073748557"></A>
+							<a naME="idx1073748558"></A>
+							<P><tt clASS="monofont">after(milliseconds [, callback [, arguments]])</Tt>— 
+    Registers an alarm callback that accepts optional arguments. This callback is called after the given number of milliseconds. The returned value of this method is an identifier that can be used along with the <tt cLASS="monofont">after_cancel</tt> method in order to cancel the callback. If you call the <tt CLASs="monofont">after</tt> method using just the first argument, the application will block the event loop and wait for the given number of milliseconds.</p>
+
+						</p>
+<p>
+							<a name="idx1073748559"></a>
+							<a name="idx1073748560"></a>
+							<p><tT clAss="monofont">after_cancel(identifier)</tT>— 
+    Cancels the alarm callback that possesses the given identifier.</p>
+
+						</p>
+<p>
+							<a Name="idx1073748561"></A>
+							<A NAme="idx1073748562"></a>
+							<p><TT CLass="monofont">after_idle(callback, arguments)</tT>— 
+    Registers a callback that is called whenever the system is idle, without anything going on in the mainloop.</P>
+
+						</P>
+<P>
+							<a namE="idx1073748563"></A>
+							<A Name="idx1073748564"></a>
+							<p><tt class="monofont">bindtags()</tt>— 
+    Returns the binding search order used by the widget. The returned value is in a tuple format, and it lists the namespaces used to search for the bindings. You can modify this order by calling this method with the altered order as an argument.<a name="idx1073748565"></a>
+									<A naMe="idx1073748566"></a>
+									<a Name="idx1073748567"></a>
+									<A namE="idx1073748568"></A>
+									<A Name="idx1073748569"></a>
+									<A NAMe="idx1073748570"></a>
+									<a nAME="idx1073748571"></A>
+									<a namE="idx1073748572"></A>
+									<A Name="idx1073748573"></a>
+									<a name="idx1073748574"></a>
+									<a name="idx1073748575"></a>
+								</p>
+
+						</p>
+<p>
+							<a NamE="idx1073748576"></a>
+							<a nAme="idx1073748577"></a>
+							<p><Tt clASS="monofont">bind(event, callback)</Tt>— 
+    Defines the function or method (<tt cLASS="monofont">callback</tt>) that must be associated to the given <tt CLASs="monofont">event.</tt> Use the form <tT CLAss="monofont">bind(event, callback, "+")</tt> to handle multiple callbacks within the same binding.</p>
+
+						</p>
+<p>
+							<a name="idx1073748578"></a>
+							<a name="idx1073748579"></a>
+							<p><Tt cLass="monofont">bind_all(event, callback)</Tt>— 
+    Defines the function or method (<tt cLass="monofont">callback</TT>) that must be associated to the given <TT clasS="monofont">event</TT> at the application level. Use the form <Tt claSS="monofont">bind_all(event, callback, "+")</TT> to handle multiple callbacks within the same binding. As an example, this can be used to set global accelerator/shortcut keys.</p>
+
+						</p>
+<p>
+							<a NAME="idx1073748580"></a>
+							<a name="idx1073748581"></a>
+							<p><tt class="monofont">bind_class(widgetclass, event, callback)</tt>— 
+    
+								Defines the function or method (<tt cLasS="monofont">callback</tt>) that must be associated to the given <tT clasS="monofont">event</tt> at the given widget class.  Use the form <tT CLAss="monofont">bind_class(widgetclass, event, callback, "+")</tt> to handle multiple callbacks within the same binding.
+							</P>
+
+						</P>
+<P>
+							<A name="idx1073748582"></A>
+							<A NAme="idx1073748583"></a>
+							<p><TT CLass="monofont">&lt;Configure&gt;</tt>— 
+    Indicates that the widget was resized or moved to a new location. The instance object originated by the callback function carries two attributes that can be used to identify the new size of the widget: <tt class="monofont">height</tt> and <tt clasS="monofont">width.</tt> Note that the name comes from the fact that the <Tt clAss="monofont">configure</tt> event is emitted in X11 when a window is mapped or resized.</P>
+
+						</p>
+<p>
+							<a NAME="idx1073748584"></a>
+							<a naME="idx1073748585"></A>
+							<P><tt clASS="monofont">unbind(event)</Tt>— 
+    Removes the bindings for the given event.</p>
+
+						</p>
+<p>
+							<A NAMe="idx1073748586"></a>
+							<a name="idx1073748587"></a>
+							<p><tt class="monofont">unbind_all(event)</tt>— 
+    Removes the bindings for the given event at the application level.</p>
+
+						</p>
+<P>
+							<a nAme="idx1073748588"></a>
+							<A name="idx1073748589"></A>
+							<p><tt CLASs="monofont">unbind_class(class, event)</tt>— 
+    
+								Removes the bindings for the given event at the given widget class.<a NAME="idx1073748590"></a>
+									<a naME="idx1073748591"></A>
+									<A name="idx1073748592"></A>
+									<A NAme="idx1073748593"></a>
+									<a name="idx1073748594"></a>
+									<a name="idx1073748595"></a>
+									<a name="idx1073748596"></A>
+									<a nAme="idx1073748597"></a>
+									<A name="idx1073748598"></A>
+									<a naME="idx1073748599"></A>
+									<A name="idx1073748600"></A>
+								
+							</P>
+
+						</P>
+</BlockQUOTe>
+				
+				
+					<h4>
+Protocols</h4>
+					<p>The mechanism called <I>protocol handler</I> is responsible for the communication between the window manager and your application. Handling these protocols, you can intercept the messages provided by the system, and define exactly what you want to happen.</P>
+
+					<P>Usually, the protocols <tt class="monofont">WM_DELETE_WINDOW,</tt>
+						<tt class="monofont">WM_TAKE_FOCUS,</tt> and <tt ClaSs="monofont">WM_SAVE_YOURSELF</tt> are the ones mostly used. For details about the other supported protocols,  see the  <A name="idx1073748601"></A>
+						<a naME="idx1073748602"></A>
+						<I>Inter-Client Communication Conventions Manual (ICCCM)</i> at</p>
+
+					<p><a TARGet="_blank" hrEF="http://tronche.com/gui/x/icccm/">http://tronche.com/gui/x/icccm/</A></P>
+
+					<p>Although this convention was established for the X systems, the Tk library handles it on all platforms. These protocols are X specific. If you are running an X server on Windows or MacOS and have Tk compiled for X, it will do the same as on UNIX. That's because Tk ports map these calls to the equivalent actions on the other systems.</p>
+
+					<p>The necessary syntax to <a NAME="idx1073748603"></a>
+						<a name="idx1073748604"></a>bind a handler to a protocol is</p>
+
+					<pre>
+						
+widget.protocol(protocol, function_handler)
+
+					</pre>
+
+					<p>Note that the widget must be a Toplevel widget. The following example demonstrates the use of the <tt claSs="monofont">WM_DELETE_WINDOW</tT> protocol. The window manager generates this protocol when the user tries to close a window. Here, we are intercepting this protocol.</p>
+
+					<prE>
+						
+from Tkinter import *
+import tkMessageBox
+def protocolhandler():
+    if tkMessageBox.askokcancel("Exit", "Wanna leave?"):
+        if tkMessageBox.askokcancel("Exit", "Are you sure?"):
+            if tkMessageBox.askokcancel("Exit", "Really?"):
+                root.destroy()
+
+root = Tk()
+root.protocol("WM_DELETE_WINDOW", protocolhandler)
+root.mainloop()
+
+					</pre>
+
+					<p>Just to let you know, the <A namE="idx1073748605"></A>
+						<A Name="idx1073748606"></a>
+						<TT CLass="monofont">WM_SAVE_YOURSELF</tT> protocol is called by X window managers when the application should save a snapshot of its working set, and the <A NAme="idx1073748607"></a>
+						<a NAME="idx1073748608"></a>
+						<tt class="monofont">WM_TAKE_FOCUS</tt> protocol is called by X window managers when the application gets the focus.<a name="idx1073748609"></a>
+						<a namE="idx1073748610"></a>
+						<a Name="idx1073748611"></A>
+						<a namE="idx1073748612"></a>
+						<a nAME="idx1073748613"></A>
+						<a namE="idx1073748614"></A>
+						<A Name="idx1073748615"></a>
+						<A NAMe="idx1073748616"></a>
+						<a nAME="idx1073748617"></A>
+						<a name="idx1073748618"></a>
+					</p>
+
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="210.html" title="Geometry Management"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=211" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="211.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="212.html" title="Tkinter Widgets"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748504">B1-Motion event</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748502">Button-1 event</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748506">ButtonRelease-1 event</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748582">Configure method</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748526">Control-Up event</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748508">Double-Button-1 event</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748498">Enter event</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748520">Key event</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748500">Leave event</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748528">Return event</a><BR>
+(&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ó<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748496">Button-1Ó) event</a><BR>
+ <a href="#idx1073748522">a event</a><BR>
+ <a href="#idx1073748557">after(milliseconds [, callback [, arguments]]) method</a><BR>
+ <a href="#idx1073748559">after_cancel(identifier) method</a><BR>
+ <a href="#idx1073748561">after_idle(callback, arguments) method</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748543">char</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748556">events</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748547">height</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748545">keysym</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748549">num</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748551">widget</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748553">x</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748555">x_root</a><BR>
+ <a href="#idx1073748524">b event</a><BR>
+ <a href="#idx1073748576">bind(event, callback) method</a><BR>
+ <a href="#idx1073748578">bind_all(event, callback) method</a><BR>
+ <a href="#idx1073748580">bind_class(widgetclass, event, callback) method</a><BR>
+binding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;events<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748490">widgets</a> <a href="#idx1073748517">2nd</a> <a href="#idx1073748538">3rd</a> <a href="#idx1073748571">4th</a> <a href="#idx1073748596">5th</a> <a href="#idx1073748615">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748603">handlers, protocols</a><BR>
+ <a href="#idx1073748563">bindtags() method</a><BR>
+ <a href="#idx1073748492">callback function</a><BR>
+callbacks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;events<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748575">methods</a> <a href="#idx1073748600">2nd</a><BR>
+ <a href="#idx1073748542">char attribute</a><BR>
+ <a href="#idx1073748494">command property</a><BR>
+ <a href="#idx1073748531">events</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748505">B1-Motion</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748503">Button-1</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748507">ButtonRelease-1</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748527">Control-Up</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748509">Double-Button-1</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748499">Enter</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748521">Key</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748501">Leave</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748529">Return</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748497">ÓButton-1Ó)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748523">a</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748525">b</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748518">widgets</a> <a href="#idx1073748539">2nd</a> <a href="#idx1073748572">3rd</a> <a href="#idx1073748597">4th</a> <a href="#idx1073748616">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748515">Tkinter module</a> <a href="#idx1073748537">2nd</a> <a href="#idx1073748570">3rd</a> <a href="#idx1073748595">4th</a> <a href="#idx1073748614">5th</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748493">callback</a><BR>
+graphical user interfaces (GUIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tkinter<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748511">handling events</a> <a href="#idx1073748533">2nd</a> <a href="#idx1073748566">3rd</a> <a href="#idx1073748591">4th</a> <a href="#idx1073748610">5th</a><BR>
+handlers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748604">binding, protocols</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;events<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748514">Tkinter module</a> <a href="#idx1073748536">2nd</a> <a href="#idx1073748569">3rd</a> <a href="#idx1073748594">4th</a> <a href="#idx1073748613">5th</a><BR>
+ <a href="#idx1073748546">height attribute</a><BR>
+ <a href="#idx1073748602">ICCCM (Inter-Client Communication Conventions Manual)</a><BR>
+ <a href="#idx1073748601">Inter-Client Communication Conventions Manual (ICCCM)</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graphical user (GUI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748512">Tkinter</a> <a href="#idx1073748534">2nd</a> <a href="#idx1073748567">3rd</a> <a href="#idx1073748592">4th</a> <a href="#idx1073748611">5th</a><BR>
+keyboard events<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748541">handling</a><BR>
+ <a href="#idx1073748544">keysym attribute</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748583">Configure</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748558">after(milliseconds [, callback [, arguments]])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748560">after_cancel(identifier)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748562">after_idle(callback, arguments)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748577">bind(event, callback)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748579">bind_all(event, callback)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748581">bind_class(widgetclass, event, callback)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748564">bindtags()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748574">event callbacks</a> <a href="#idx1073748599">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748585">unbind(event)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748587">unbind_all(event)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748589">unbind_class(class, event)</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tkinter<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748513">handling events</a> <a href="#idx1073748535">2nd</a> <a href="#idx1073748568">3rd</a> <a href="#idx1073748593">4th</a> <a href="#idx1073748612">5th</a><BR>
+mouse events<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748516">handling</a><BR>
+ <a href="#idx1073748548">num attribute</a><BR>
+properties<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748495">command</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748618">Tkinter</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748605">WM_SAVE_YOURSELF</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748607">WM_TAKE_FOCUS</a><BR>
+Tkinter module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748510">handling events</a> <a href="#idx1073748532">2nd</a> <a href="#idx1073748565">3rd</a> <a href="#idx1073748590">4th</a> <a href="#idx1073748609">5th</a><BR>
+ <a href="#idx1073748584">unbind(event) method</a><BR>
+ <a href="#idx1073748586">unbind_all(event) method</a><BR>
+ <a href="#idx1073748588">unbind_class(class, event) method</a><BR>
+ <a href="#idx1073748550">widget attribute</a><BR>
+widgets<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073748491">binding events</a> <a href="#idx1073748519">2nd</a> <a href="#idx1073748540">3rd</a> <a href="#idx1073748573">4th</a> <a href="#idx1073748598">5th</a> <a href="#idx1073748617">6th</a><BR>
+ <a href="#idx1073748606">WM_SAVE_YOURSELF protocol</a><BR>
+ <a href="#idx1073748608">WM_TAKE_FOCUS protocol</a><BR>
+ <a href="#idx1073748552">x attribute</a><BR>
+ <a href="#idx1073748554">x_root attribute</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

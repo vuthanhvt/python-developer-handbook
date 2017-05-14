@@ -1,0 +1,1019 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Implementing COM Objects in Python</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="128.html" class="navtitle">7. Objects Interfacing and Distribution</a> &gt; <span class="nonavtitle">Implementing COM Objects in Python</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="132.html" title="Introduction to COM Objects"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=133" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="133.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="134.html" title="Distributing Objects with Python"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A37%3A13+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147035189205032045199079</font><a href="read8.asp?bookname=0672319942&snode=133&now=5%2F31%2F2002+4%3A37%3A13+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Implementing COM Objects in Python</h3>
+				<p>In order to implement COM objects in the Python version of Windows, you need a set of extensions developed by <a NAME="idx1073744383"></a>Mark Hammond and <a naME="idx1073744384"></A>Greg Stein. Part of the <A name="idx1073744385"></A><A NAme="idx1073744386"></a><a name="idx1073744387"></a><a name="idx1073744388"></a><tt claSs="monofont">win32com</tT> package, these extensions enable you to do everything that is COM-related, including writing COM clients and COM servers.</p>
+
+				<p>The following link takes you to the download page of these extensions:</p>
+
+				<P><a tarGet="_blank" hREF="http://www.python.org/download/download_windows.html">http://www.python.org/download/download_windows.html</A></p>
+
+				<p>All the Win32 extensions (including the COM extensions) are part of the <a nAME="idx1073744389"></A><a namE="idx1073744390"></A><A Name="idx1073744391"></a><A NAMe="idx1073744392"></a><tt class="monofont">win32all</tt> installation package. This package also installs the <tt class="monofont">PythonWin</tt> IDE in your machine.</P>
+
+				<p>The latest version of this whole package is located at the win32all home page. Search for the <tT claSs="monofont">win32all.exe</tt> file:</p>
+
+				<P><a taRGET="_blank" href="http://www.python.org/windows/win32all/">http://www.python.org/windows/win32all/</A></P>
+
+				<P>You can also go directly to Mark Hammond's starship home page, which might have more recent beta releases of this package:</P>
+
+				<p><a taRGET="_blank" href="http://starship.python.net/crew/mhammond/">http://starship.python.net/crew/mhammond/</A></P>
+
+				<P>After installing the package in your machine, take a look at the <Tt class="monofont">readme.htm</tt> file, which is stored at the <tt class="monofont">win32com</tt> directory.</p>
+
+				<p>COM support for Python is compounded of the core PythonCOM module, which supports the C++ code, and the other modules that implement helper code in Python. The whole package is known as <tT clAss="monofont">win32com.</tT></p>
+
+				<h4>The <tt ClasS="monofont">win32com</TT> Package</H4>
+					<p>The <tt cLASS="monofont">win32com</tt> support is standalone, as it does not require PythonWin. The <tt CLASs="monofont">win32com</tt> package itself does not provide any functionality. Some of the <a NAME="idx1073744393"></a><a name="idx1073744394"></a>modules contained in this package are</p>
+
+					<blockquote>
+<p><p><B>win32com.pythoncom— </b>
+Provides core C++ support for COM objects and exposes COM object methods, such as <tT claSs="monofont">QueryInterface()</tt> and <tT claSS="monofont">Invoke(),</TT> just as the C++ API does. Note that all the reference counting is automatically done for you. Programmers rarely access this module directly. Instead, they usually use the <tt clASS="monofont">win32com</Tt> wrapper classes and functions written in Python to provide a nice, programmable interface.<a naME="idx1073744395"></A><A name="idx1073744396"></A><A NAme="idx1073744397"></a><a name="idx1073744398"></a><a name="idx1073744399"></a><a name="idx1073744400"></A><a nAme="idx1073744401"></a><A name="idx1073744402"></A><a naME="idx1073744403"></A><A name="idx1073744404"></A></P>
+</P>
+<P><p><b>win32com.client— </b>
+Provides support for COM clients (for example, using Python to start Microsoft Excel and create a spreadsheet). The COM client support enables Python to manipulate other COM objects via their exposed interfaces. All client-side <tT CLAss="monofont">IUnknown</tt>-derived objects, including <TT CLass="monofont">IDispatch,</tt> are supported.</p>
+</p>
+<p><p><b>win32com.server— </b>
+Provides support for COM servers (for example, creating and registering a COM server object in Python and using a language such as Visual Basic or Delphi to access the Python objects). The COM server support enables Python to create COM servers, which can be manipulated by another COM client. All server-side <tt class="monofont">IUnknown</tt>-derived objects are supported.</P>
+</p>
+<p><P><b>win32com.axscript— </b>
+This is the ActiveX Scripting implementation for Python.</p>
+</P>
+<p><p><b>win32com.axdebug— </b>
+This is the Active Debugging implementation for Python.</P>
+</p>
+<p><p><B>win32com.mapi— </B>
+Provides utilities for working with MAPI and the Microsoft Exchange Server.<A Name="idx1073744405"></a><A NAMe="idx1073744406"></a><a nAME="idx1073744407"></A><a namE="idx1073744408"></A><A Name="idx1073744409"></a><a name="idx1073744410"></a><a name="idx1073744411"></a><a namE="idx1073744412"></a><a Name="idx1073744413"></A><a namE="idx1073744414"></a></p>
+
+						</p>
+</BLOCkquoTE>
+				
+				<H4>Talking to Windows Applications</H4>
+					<p>The COM technology has been part of the Windows world for a long time. The COM genealogy can be traced back to DDE (Dynamic Data Exchange). DDE was the first device for transferring data between various applications in a multi-tasking computer. After some time, DDE was expanded to Object Linking and Embedding (OLE)—note that COM was invented as part of OLE. The creation of the Visual Basic Extensions (VBXs) enhanced the OLE technology for visual components, originating a new standard called OLE2, which was based on top of COM. Soon, the OLE2 technology became more integrated with COM, which is a general-purpose mechanism. Nowadays, COM is mostly known, in part, because of the ActiveX technology.</p>
+
+					<p>Professional applications such as Microsoft Office and the Netscape browser enable you to control their objects using COM. Therefore, programs written in Python can be easily used to control those applications.</p>
+
+					<P>COM passes string objects as Unicode characters. Before using these objects in Python, it's necessary to convert them to strings. The Python-2.0 Unicode string type is not the same as the string type, but it is easy to convert between the two.</P>
+
+					<P>PythonWin comes with a basic COM browser (Python Object browser). This program helps you to identify the current objects in your system that implement COM interfaces.</P>
+
+					<p>To run the browser, select it from the PythonWin Tools menu, or double-click on the file <tt cLASS="monofont">win32com\client\combrowse.py.</tt></p>
+
+					<p>Note that there are other COM browsers available, such as the one that comes with the Microsoft Visual C++.</p>
+
+					<p>If you study the file <tt class="monofont">\python\win32com\servers\interp.py,</tt> which is installed as part of your PythonWin distribution, you will learn how to implement a very simple COM server. This server exposes the Python interpreter by providing a COM object that handles both the <tt claSs="monofont">exec</tT> and <tt cLass="monofont">eval</tT> methods. Before using this object, register it by running the module from Python.exe. Then, from Visual Basic, use CreateObject('Python.Interpreter') to initialize the object, and you can start calling the methods.<a naME="idx1073744415"></A><A name="idx1073744416"></A><A NAme="idx1073744417"></a><a NAME="idx1073744418"></a><a naME="idx1073744419"></A><A name="idx1073744420"></a><a name="idx1073744421"></a><a name="idx1073744422"></a><a naMe="idx1073744423"></a><A namE="idx1073744424"></a><a naMe="idx1073744425"></a><a NAME="idx1073744426"></a></p>
+
+				
+				<h4>Word and Excel</h4>
+					<P>Let's quit talking and get to some practicing. Our objective here is to open and manipulate Microsoft applications from Python.</P>
+
+					<P>The first thing that you need to do is to <A name="idx1073744427"></A><A NAme="idx1073744428"></a>import the COM client and dispatch the right object. In the next example, a variable is assigned a reference to an Excel application:</p>
+
+					<PRE>
+						
+&gt;&gt;&gt; import win32com.client
+&gt;&gt;&gt; xl = win32com.client.Dispatch("Excel.Application")
+
+					</Pre>
+
+					<p>The following does the same thing, but this time the reference is to a Word application.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; wd = win32com.client.Dispatch("Word.Application")
+
+					</pre>
+
+					<p><tt class="monofont">Excel.Application</tt> and <Tt cLass="monofont">Word.Application</Tt> are the Program IDs (progid), which are the names of the objects for which you want to create an instance. Internally, these objects have a Class ID (clsid) that uniquely registers them in the Windows Registry. The matching table between progids and clsids is stored in the Windows Registry and the matching is performed by the COM mechanism.</p>
+
+					<p>It is not an easy job to identify an application progid, or to find out object methods and attributes. You can use COM browsers to see what applications have COM interfaces in your system.</p>
+
+					<P>For the Microsoft Products, you can take a look at the documentation; it is a good source of information.</p>
+
+					<p>Not necessarily every COM object implements the same interface. However, there are similarities.</p>
+
+					<P>For example, if the previous assignments have just created the objects and you want to make them visible, you have to type</P>
+
+					<PRe>
+						
+&gt;&gt;&gt; xl.Visible = 1  # Sets the visible property for the Excel application
+&gt;&gt;&gt; wd.Visible = 1  # Sets the visible property for the Word application
+
+					</pre>
+
+					<P>To <A NAme="idx1073744429"></a><a NAME="idx1073744430"></a><a naME="idx1073744431"></A>close both programs and release the memory, you need to say</P>
+
+					<pre>
+						
+&gt;&gt;&gt; xl = None
+&gt;&gt;&gt; wd = None
+
+					</pre>
+
+					<p>or, you could use<a name="idx1073744432"></a><a name="idx1073744433"></a><a NamE="idx1073744434"></a><a nAme="idx1073744435"></a><a Name="idx1073744436"></A><A NAme="idx1073744437"></a><a NAME="idx1073744438"></a><a naME="idx1073744439"></A><A name="idx1073744440"></A><A NAme="idx1073744441"></a><a name="idx1073744442"></a><a name="idx1073744443"></a><a name="idx1073744444"></A><a nAme="idx1073744445"></a></P>
+
+					<pre>
+						
+&gt;&gt;&gt; del xl, wd
+
+					</pRe>
+
+					<p>These were simple examples of implementing COM clients in Python. Next, we will see how to <a NAME="idx1073744446"></a><a naME="idx1073744447"></A><A name="idx1073744448"></A><A NAme="idx1073744449"></a><a NAME="idx1073744450"></a>implement a Python COM server by creating a Python interface that exposes an object. The next block of code registers the interface in the Windows Registry.</p>
+
+					<p>Note that every new COM object that you create must have a unique clsid, but you don't have to worry about it. The complex algorithm that works behind the scenes is ready to generate a unique identification, as shown here:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import pythoncom
+&gt;&gt;&gt; print pythoncom.CreateGuid()
+
+					</pre>
+
+					<p>Your COM server is defined next. You have to execute the program in order to make the COM object available in the system. Store it on a file, and double-click on it.</p>
+
+					<pre>
+						
+ 1: class TaxApplication:
+ 2:     _public_methods_ = ['PAtax']
+ 3:     _reg_progid_ = "Tax.Application"
+ 4:     _reg_clsid_ = "{D2DEB6E1-3C6D-11D4-804E-0050041A5111}"
+ 5:
+ 6:     def PAtax(self, amount, tax=0.07):
+ 7:         return amount + (amount * tax)
+ 8:
+ 9: if __name__=='__main__':
+10:     print "Registering COM server"
+11:     import win32com.server.register
+12:     win32com.server.register.UseCommandLine(TaxApplication)
+
+					</pre>
+
+					<p>Line 2: Exposes the method to be exported.</p>
+
+					<P>Line 3: Defines the name that the COM client application must use to connect to the object.</p>
+
+					<p>Line 4: Defines the unique Class ID (<Tt clAss="monofont">clsid</tt>) used by the object.<A namE="idx1073744451"></A><A Name="idx1073744452"></a><A NAMe="idx1073744453"></a><a nAME="idx1073744454"></A><a namE="idx1073744455"></A><A Name="idx1073744456"></a><a name="idx1073744457"></a><a name="idx1073744458"></a><a namE="idx1073744459"></a><a Name="idx1073744460"></A><a namE="idx1073744461"></a><a nAME="idx1073744462"></A><a namE="idx1073744463"></A><A Name="idx1073744464"></a><A NAMe="idx1073744465"></a><a nAME="idx1073744466"></A><a name="idx1073744467"></a><a name="idx1073744468"></a><a name="idx1073744469"></a></p>
+
+					<p>Line 12: Registers the <Tt cLass="monofont">TaxApplication</Tt> class.</p>
+
+					<p>In order to <a Name="idx1073744470"></A>test the program, we need to have an external COM client. Let's use the Visual Basic for Applications Editor, which is present in both Excel and Word.</P>
+
+					<P>Open your Microsoft application, type <B><tt clASS="monofont">ALT+F8</Tt></b> in the Macro dialog box, and select the option that creates a macro. Now, you need to type the following block of code:</p>
+
+					<pRE>
+						
+Sub Tax()
+
+    Set TaxApplication = CreateObject("Tax.Application")
+    newamount = TaxApplication.PAtax(100)
+    MsgBox newamount
+    Set TaxApplication = Nothing
+
+End Sub
+
+					</PRe>
+
+					<p>Now, if you press F5, Visual Basic should display a message box showing the result of our simple tax operation, which, in our case, is <i>107.</i><A NAMe="idx1073744471"></a></p>
+
+					<p>To <a name="idx1073744472"></a><a name="idx1073744473"></a><a namE="idx1073744474"></a>unregister your COM object you can either pass the argument <tT claSs="monofont">--unregister</tt> when calling your script, or you can use the following line of code inside your Python program:</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; win32com.server.register.UnregisterClasses(TaxApplication)
+
+					</pRE>
+
+					<P>A very comprehensive example of using Microsoft Word and Excel is stored in the <Tt claSS="monofont">testMSOffice.py</TT> file, which is part of your PythonWin distribution. It's worth checking out!!!<a namE="idx1073744475"></A><A Name="idx1073744476"></a><A NAMe="idx1073744477"></a><a name="idx1073744478"></a><a name="idx1073744479"></a><a name="idx1073744480"></a><A naMe="idx1073744481"></a><a Name="idx1073744482"></a><A namE="idx1073744483"></A><A Name="idx1073744484"></a><A NAMe="idx1073744485"></a><a nAME="idx1073744486"></A><a namE="idx1073744487"></A><A Name="idx1073744488"></a></p>
+
+					<h5>Word</h5>
+						<p>The following code implements a <a name="idx1073744489"></a><a name="idx1073744490"></a>simple wrapper for the Microsoft Word Application. To <A naMe="idx1073744491"></a>test it you need to create a Word document and replace its path in the code. The program will open this file, replace the first occurrence of the string <tT clasS="monofont">"#name#"</tt> within the file, add a small bit of text to the end of the line, and print the file.</p>
+
+						<PRE>
+							
+import win32com.client
+False = 0
+True = -1
+wdLine = 5
+
+class WordApp:
+    def __init__(self):
+        self.app = win32com.client.Dispatch("Word.Application")
+    def open(self, document_file):
+        self.app.Documents.Open(document_file)
+    def replace(self, source_selection, new_text):
+        self.app.Selection.HomeKey(Unit=wdLine)
+        self.app.Selection.Find.Text = source_selection
+        self.app.Selection.Find.Execute()
+        self.app.Selection.TypeText(Text=new_text)
+    def addtext(self, new_text):
+        self.app.Selection.EndKey(Unit=wdLine)
+        self.app.Selection.TypeText(Text=new_text)
+    def printdoc(self):
+        self.app.Application.PrintOut()
+    def close(self):
+        self.app.ActiveDocument.Close(SaveChanges =False)
+
+worddoc = WordApp()
+worddoc.open(r"s:\ template.doc")
+worddoc.replace("#name#", "Andre Lessa")
+worddoc.addtext(" What do you want to learn ?")
+worddoc.printdoc()
+worddoc.close
+
+						</Pre>
+
+						<p>If you type in the name of the object's attribute that accesses the <a NAME="idx1073744492"></a><a naME="idx1073744493"></A><Tt claSS="monofont">Dispatch</TT> method, you get as a result, the COM object name:</p>
+
+						<pre>
+							
+&gt;&gt;&gt; worddoc.app
+&lt;<i>COMObject Word.Application.</i>&gt;
+
+						</pre>
+
+						<p>This object is an example of a <a name="idx1073744494"></a><a namE="idx1073744495"></a><i>dynamic dispatch</I> object. The provided name indicates that the object is a generic COM object, and affirms that Python doesn't know anything about it, except the name that you used to create it. All the information about this object is built dynamically.</p>
+
+						<p>Besides dynamic dispatches, you can also use <a Name="idx1073744496"></a><A namE="idx1073744497"></A><I>static dispatches,</I> which involve the generation of a <tt clASS="monofont">.py</Tt> file that contains support for the specific COM object. In CORBA speak, this is called stub generation, or IDL compilation.</p>
+
+						<p>In order to generate the Python files that support a specific COM object, you need to execute <tT CLAss="monofont">win32com\client\makepy.py.</tt> A list of Type Libraries will be displayed. Select one (for example, 'Microsoft Word 8.0 Object Library') and click OK. You can also call the makepy.py program directly from the command prompt by typing <B><TT Class="monofont">makepy.py "Microsoft Word 8.0 Object Library".</tt></b><a name="idx1073744498"></a><a name="idx1073744499"></a><a NamE="idx1073744500"></a><a nAme="idx1073744501"></a><a Name="idx1073744502"></A><A NAme="idx1073744503"></a><a NAME="idx1073744504"></a><a naME="idx1073744505"></A><A name="idx1073744506"></A><A NAme="idx1073744507"></a><a name="idx1073744508"></a><a name="idx1073744509"></a><a name="idx1073744510"></A><a nAme="idx1073744511"></a><A name="idx1073744512"></A><a naME="idx1073744513"></A></P>
+
+						<p>Now, Python knows exactly how to handle the interfaces before invoking the COM object. Although, you can't see any differences, you can check that Python really knows something else now by querying the COM object:</p>
+
+						<prE>
+							
+&gt;&gt;&gt; import win32com.client
+&gt;&gt;&gt; wd=win32com.client.Dispatch("Word.Application")
+&gt;&gt;&gt; wd
+&lt;win32com.gen_py.Microsoft Word 8.0 Object Library._Application&gt;
+
+						</PRE>
+
+						<p>Note that Python knows the explicit type of the object now.</p>
+
+						<p>All the compiled information is stored in a file in the <tT CLAss="monofont">win32com/gen_py</tt> directory. You probably won't understand the filename because it is encoded. Actually, you don't need to use this file at all. All the interface information is made available via <TT CLass="monofont">win32com.client.Dispatch</tt> and <tt class="monofont">win32com.client.constants.</tt></p>
+
+						<p>If you really need to <a namE="idx1073744514"></a><a Name="idx1073744515"></A><a namE="idx1073744516"></a><a nAME="idx1073744517"></A><a namE="idx1073744518"></A>identify the name of the module that was generated, you can use the <A Name="idx1073744519"></a><A NAMe="idx1073744520"></a><tt CLASs="monofont">win32com.client.gencache</tt> module. This module has two functions: <tt class="monofont">GetModuleForCLSID</tt> and <tt class="monofont">GetModuleForProgID</tT> that return Python module objects you can use in your code.</p>
+
+						<p><A namE="idx1073744521"></a><a naMe="idx1073744522"></a><tT CLAss="monofont">makepy.py</tt> also automatically installs all generated constants from a library of types in an object called <TT CLass="monofont">win32com.clients.constants.</tT> After creating the object, all the constants become available to you.</P>
+
+						<P>In the previous example, we had to initialize the constant <Tt claSS="monofont">wdLine,</TT> because the constants were not available. Now, after running <tt class="monofont">makepy.py,</tt> you can replace the line</p>
+
+						<pre>
+							
+self.app.Selection.EndKey(Unit=wdLine)
+
+						</pre>
+
+						<p>with</p>
+
+						<prE>
+							
+self.app.Selection.EndKey(Unit=win32com.clients.constants.wdLine)
+
+						</prE>
+
+						<p>and remove the initialization line</p>
+
+						<pRe>
+							
+wdLine = 5
+
+						</pre>
+
+						<P>The next example uses the <tt cLASS="monofont">wdWindowStateMaximize</tt> constant to maximize Microsoft Word:</p>
+
+						<pRE>
+							
+&gt;&gt;&gt; w.WindowState = win32com.client.constants.wdWindowStateMaximize
+
+						</PRe>
+
+					
+					<h5>Excel</h5>
+						<p>Next, we'll see how to <A NAMe="idx1073744523"></a><a nAME="idx1073744524"></A>create COM clients using Microsoft Excel. The principle is very simple. Actually, it is the same one used previously for wrapping Microsoft Word, as it is demonstrated in the following example.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; import win32com.client
+&gt;&gt;&gt; excelapp = win32com.client.Dispatch("Excel.Application")
+&gt;&gt;&gt; excelapp.Visible = 1
+
+						</pre>
+
+						<p>Note that we have to <a name="idx1073744525"></a><a name="idx1073744526"></a><A naMe="idx1073744527"></a><a Name="idx1073744528"></a><A namE="idx1073744529"></A>change the <TT clasS="monofont">Visible</TT> property in order to see the Excel application. The default behavior is to hide the application window because it saves processor cycles. However, the object is available to any COM client that asks for it.</P>
+
+						<p>As you can see in the example, Excel's progid is <tt cLASS="monofont">Excel.Application.</tt></p>
+
+						<p>After you create the Excel object, you are able to call its methods and set its properties. Keep in mind that the Excel Object Model has the following hierarchy: Application, WorkBook, Sheet, Range, and Cell.</P>
+
+						<P>Let's play a little with Excel. The following statements write to the workbook:</P>
+
+						<Pre>
+							
+&gt;&gt;&gt; excelapp.Range("A1:C1").Value = "Hello", "Python", "World"
+&gt;&gt;&gt; excelapp.Range("A2:A2").Value = 'SPAM! SPAM! SPAM!'
+
+						</pre>
+
+						<p>Note that you can also use <a name="idx1073744530"></a><a name="idx1073744531"></a><a nAme="idx1073744532"></A>tuples to transport values:</p>
+
+						<prE>
+							
+&gt;&gt;&gt; excelapp.Range("A1:C1").Value = ('Hello', 'Python', 'World')
+
+						</pre>
+
+						<p>To print a selected area, you need to use the <A namE="idx1073744533"></A><A Name="idx1073744534"></a><TT CLass="monofont">PrintOut()</tT> method:</P>
+
+						<PRe>
+							
+&gt;&gt;&gt; excelapp.Range("A1:C1").PrintOut()
+
+						</pre>
+
+						<P>What about entering date and time information? The following examples will show you how to <A NAme="idx1073744535"></a><a name="idx1073744536"></a><a name="idx1073744537"></a>set the Date/Time format for Excel cells.<a name="idx1073744538"></A><a nAme="idx1073744539"></a><A name="idx1073744540"></A><a naME="idx1073744541"></A><A name="idx1073744542"></A><A NAme="idx1073744543"></a><a NAME="idx1073744544"></a><a naME="idx1073744545"></A><A name="idx1073744546"></a><a name="idx1073744547"></a><a name="idx1073744548"></a><a naMe="idx1073744549"></a><A namE="idx1073744550"></a><a naMe="idx1073744551"></a><a NAME="idx1073744552"></a><a naME="idx1073744553"></A></P>
+
+						<p>First, call Excel's time function:</p>
+
+						<prE>
+							
+&gt;&gt;&gt; excelapp.Cells(4,3).Value = "=Now()"
+&gt;&gt;&gt; excelapp.Columns("C").EntireColumn.AutoFit()
+
+						</PRE>
+
+						<p>The <a naME="idx1073744554"></A><A name="idx1073744555"></a><tt class="monofont">AutoFit()</tt> function is required in order to display the information, instead of showing <tt clasS="monofont">"#######".</tt></P>
+
+						<p>Now, use Python to set the time you want:</p>
+
+						<pRe>
+							
+&gt;&gt;&gt; import time, pythoncom
+&gt;&gt;&gt; excelapp.Cells(4,1).Value = pythoncom.MakeTime(time.time())
+&gt;&gt;&gt; excelapp.Range("A4:A4").NumberFormat = "d/mm/yy h:mm"
+&gt;&gt;&gt; excelapp.Columns("A:C").EntireColumn.AutoFit()
+
+						</pre>
+
+						<P>Note that the <a naME="idx1073744556"></A><A name="idx1073744557"></A><TT Class="monofont">Cells()</TT> structure works like a numeric array. That means that instead of using Excel's notation of letters and numbers, you need to think of the spreadsheet as a numeric matrix.<A Name="idx1073744558"></a><A NAMe="idx1073744559"></a><a name="idx1073744560"></a><a name="idx1073744561"></a><a name="idx1073744562"></a><A naMe="idx1073744563"></a><a Name="idx1073744564"></a><A namE="idx1073744565"></A><A Name="idx1073744566"></a><A NAMe="idx1073744567"></a><a nAME="idx1073744568"></A><a namE="idx1073744569"></A><A Name="idx1073744570"></a><a name="idx1073744571"></a><a name="idx1073744572"></a></p>
+
+					
+				
+				<h4>Visual Basic</h4>
+					<p>In order to implement a COM object using Python you need to implement a Python class that exposes the functionality to be exported. It is also necessary to assign two special attributes to this class, as required by the Python COM implementation.</P>
+
+					<p>The first attribute is the Class ID (<tT claSs="monofont">_reg_clsid_</tt>). This attribute must contain a UUID, which can be generated by calling the <a Name="idx1073744573"></A><A NAme="idx1073744574"></a><tT CLAss="monofont">pythoncom.CreateGuid()</tt> function. The other attribute is a friendly string that you will use to call the COM object (<TT CLass="monofont">_reg_progid_</tT>), as follows:</P>
+
+					<PRe>
+						
+class COMCalcServer:
+    _reg_clsid_ = '{ C76BEA61-3B39-11D4-8A7C-444553546170} '
+    _reg_progid_ = 'COMCALCSERVER.VERSION1'
+    _public_methods_ = ['mul','div','add','sub']
+    …
+
+					</pre>
+
+					<p>Other interesting attributes are</p>
+
+					<ul>
+<li><p><a name="idx1073744575"></a><a naMe="idx1073744576"></a><Tt clAss="monofont">_public_methods</tt>—A list of all method names that you want to publicly expose to remote COM clients.</P>
+</li>
+<lI><P><A Name="idx1073744577"></a><A NAMe="idx1073744578"></a><tt CLASs="monofont">_public_attrs</tt>—A list of all attribute names to be exposed to remote COM clients.</p>
+</LI>
+<LI><p><a name="idx1073744579"></a><a name="idx1073744580"></a><tt class="monofont">_readonly_attrs</Tt>—A list of all attributes that can be accessed, but not set. This list should be a subset of the list exposed by <tT claSs="monofont">_public_attrs.</tt></p>
+
+						</Li>
+</ul>
+					<P>After creating the class, you need to register your COM object. The general technique is to run the module that implements the COM object as a script, in order to register the object:</P>
+
+					<PRe>
+						
+if __name__ == '__main__':
+    import win32com.server.register
+    win32com.server.register.UseCommandLine(COMCalcServer)
+
+					</pre>
+
+					<P>Notice that you need to inform the class object, and not a class instance. After the <TT Class="monofont">UseCommandLine()</TT> function has been successfully executed, the following message is returned by the Python interpreter:</P>
+
+					<Pre>
+						
+Registered: COMCALCSERVER.VERSION1
+
+					</prE>
+
+					<P>When you have your COM object up and running, any automation-capable language, such as Python, Visual Basic, Delphi, or Perl, can use it.</P>
+
+					<P>The following example is a complete program that implements a <a name="idx1073744581"></a><a name="idx1073744582"></a><a name="idx1073744583"></a><a nAme="idx1073744584"></A>calculator. First, you need to collect the unique IDs for your class:</p>
+
+					<prE>
+						
+Python 1.5.2 (#0, Apr 13 1999, 10:51:12) [MSC 32 bit (Intel)] on win32
+Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam
+&gt;&gt;&gt; import pythoncom
+&gt;&gt;&gt; print pythoncom.CreateGuid()
+&lt;iid:{C76BEA60-3B39-11D4-8A7C-444553546170}&gt;
+
+					</pre>
+
+					<p>After informing the new <Tt clASS="monofont">clsid</Tt> value to the <tt cLASS="monofont">_reg_clsid_</tt> attribute, we have the following program:<a nAME="idx1073744585"></A><a namE="idx1073744586"></A><A Name="idx1073744587"></a><a name="idx1073744588"></a><a name="idx1073744589"></a><a namE="idx1073744590"></a><a Name="idx1073744591"></A><a namE="idx1073744592"></a><a nAME="idx1073744593"></A><a namE="idx1073744594"></A><A Name="idx1073744595"></a><A NAMe="idx1073744596"></a></p>
+
+					<pRE>
+						
+# File: comcalcserver.py
+
+class COMCalcServer:
+    _reg_clsid_ = '{C76BEA61-3B39-11D4-8A7C-444553546170}'
+    _reg_progid_ = 'COMCALCSERVER.VERSION1'
+    _public_methods_ = ['mul','div','add','sub']
+    def mul(self, arg1, arg2):
+        return arg1 * arg2
+    def div(self, arg1, arg2):
+        return arg1 / arg2
+    def add(self, arg1, arg2):
+        return arg1 + arg2
+    def sub(self, arg1, arg2):
+        return arg1 - arg2
+
+if __name__ == '__main__':
+    import win32com.server.register
+    win32com.server.register.UseCommandLine(COMCalcServer)
+
+					</PRe>
+
+					<p>Make sure that all methods are included in the <tt class="monofont">_public_methods_.</tt> Otherwise, the program will fail. Now, go to the DOS prompt and execute the program to register the COM object:</p>
+
+					<pre>
+						
+C:\python&gt;c:\progra~1\python\python comcalcserver.py
+Registered: COMCALCSERVER.VERSION1
+
+					</pre>
+
+					<p>To create the Visual Basic COM client, you need to create a Visual Basic Form that contains all the implementation details (see <a HreF="133#7.html">Figure 7.1</a>).</p>
+
+					<cEnter>
+						<H5>
+<a naME="7"></A>Figure 7.1. A design for creating the Visual Basic Form.</H5><img bORDEr="0" widTH="500" HEight="375" SRC="graphics/07fig01.gif" Alt="graphics/07fig01.gif"></center>
+
+					<p>Most of the time, the initialization steps are stored in the Form_Load section in order to be executed when the application starts:</p>
+
+					<pre>
+						
+Dim COMCalcServer as Object
+Set COMCalcServer = CreateObject("COMCALCSERVER.VERSION1")
+
+					</pre>
+
+					<p>Remember to always deallocate the objects before exiting the application. It's good practice to do it in the Form_Unload section:<a naMe="idx1073744597"></a><A namE="idx1073744598"></a><a naMe="idx1073744599"></a><a NAME="idx1073744600"></a><a naME="idx1073744601"></A><A name="idx1073744602"></A><A NAme="idx1073744603"></a><a NAME="idx1073744604"></a><a name="idx1073744605"></a><a name="idx1073744606"></a><a name="idx1073744607"></a><a NamE="idx1073744608"></a></p>
+
+					<pRe>
+						
+Set COMCalcServer = Nothing
+
+Public COMCalcServer As Object
+Private Sub Form_Unload(Cancel As Integer)
+    Set COMCalcServer = Nothing
+End Sub
+
+Sub InitCOMCalcServer()
+    Set COMCalcServer = CreateObject("COMCALCSERVER.VERSION1")
+    Exit Sub
+End Sub
+
+Private Sub Command1_Click()
+    Dim result As Double
+    result = COMCalcServer.Mul(Val(Text1), Val(Text2))
+    MsgBox Text1 &amp; "*" &amp; Text2 &amp; "=" &amp; Str(result)
+End Sub
+Private Sub Command2_Click()
+    Dim result As Double
+    result = COMCalcServer.Div(Val(Text1), Val(Text2))
+    MsgBox Text1 &amp; "/" &amp; Text2 &amp; "=" &amp; Str(result)
+End Sub
+Private Sub Command3_Click()
+    Dim result As Double
+    result = COMCalcServer.Add(Val(Text1), Val(Text2))
+    MsgBox Text1 &amp; "+" &amp; Text2 &amp; "=" &amp; Str(result)
+End Sub
+Private Sub Command4_Click()
+    Dim result As Double
+    result = COMCalcServer.Sub(Val(Text1), Val(Text2))
+    MsgBox Text1 &amp; "-" &amp; Text2 &amp; "=" &amp; Str(result)
+End Sub
+
+Private Sub Form_Load()
+    Text1 = 0
+    Text2 = 0
+    Command1.Caption = "Mul"
+    Command2.Caption = "Div"
+    Command3.Caption = "Add"
+    Command4.Caption = "Sub"
+    InitCOMCalcServer
+End Sub
+
+					</pre>
+
+					<P>While executing the application (see <a hrEF="133#8.html">Figure 7.2</A>), your Visual Basic application will be talking to the Python COM object behind the scenes.</P>
+
+					<centER>
+						<H5>
+<A name="8"></A>Figure 7.2. A Visual Basic executable running.</H5><IMg borDER="0" Width="329" height="279" src="graphics/07fig02.gif" alt="graphics/07fig02.gif"></centEr>
+
+					<p>The next example is based on the previous one. This one implements a callback function. The VB program calls a Python function that clearly manipulates the Visual Basic Form object.</P>
+
+					<p>You need to add or replace the following functions in the Visual Basic code:</p>
+
+					<pRe>
+						
+Sub InitCOMCalcServer()
+    Set COMCalcServer = CreateObject("COMCALCSERVER.VERSION2")
+    Exit Sub
+End Sub
+
+
+Private Sub Form_Load()
+    Text1 = 0
+    Text2 = 0
+    Command1.Caption = "Mul"
+    Command2.Caption = "Div"
+    Command3.Caption = "Add"
+    Command4.Caption = "Sub"
+    InitCOMCalcServer
+    COMCalcServer.updatecaption Me
+End Sub
+
+					</pre>
+
+					<P>The following new function must be created in the Python code, too. The <i>VB function call</i> uses the keyword <tT CLAss="monofont">Me</tt> to send a reference of the <TT CLass="monofont">Form</tT> object to Python's <TT Class="monofont">updatecaption()</TT> method:</P>
+
+					<Pre>
+						
+def updatecaption(self, object):
+    Form = win32com.client.Dispatch(object)
+    Form.Caption = "Python COM Routine is Active"
+
+					</pre>
+
+					<p>The following code is a full replacement to be used with this example. Remember to create a new <tt class="monofont">_reg_clsid_</tt> for this new example.<a name="idx1073744609"></A><a nAme="idx1073744610"></a><A name="idx1073744611"></A><a naME="idx1073744612"></A><A name="idx1073744613"></A><A NAme="idx1073744614"></a><a NAME="idx1073744615"></a><a naME="idx1073744616"></A><A name="idx1073744617"></a><a name="idx1073744618"></a><a name="idx1073744619"></a><a naMe="idx1073744620"></a></P>
+
+					<pre>
+						
+# File: comcalcserver2.py
+
+class COMCalcServer:
+    _reg_clsid_ = '{ C76BEA64-3B39-11D4-8A7C-444553546170} '
+    _reg_progid_ = 'COMCALCSERVER.VERSION2'
+    _public_methods_ = ['mul','div','add','sub', 'updatecaption']
+    def mul(self, arg1, arg2):
+        return arg1 * arg2
+    def div(self, arg1, arg2):
+        return arg1 / arg2
+    def add(self, arg1, arg2):
+        return arg1 + arg2
+    def sub(self, arg1, arg2):
+        return arg1 - arg2
+    def updatecaption(self, object):
+        import win32com.client
+        Form = win32com.client.Dispatch(object)
+        Form.Caption = "Python COM Routine is Active"
+
+if __name__ == '__main__':
+    import win32com.server.register
+    win32com.server.register.UseCommandLine(COMCalcServer)
+
+					</Pre>
+
+					<p>The result of running this example is shown in <a Href="133#9.html">Figure 7.3</A>.</P>
+
+					<CEnter>
+						<H5>
+<A NAme="9"></a>Figure 7.3. Python/Visual Basic callback implementation.</h5><IMG BordeR="0" WIDth="326" height="240" src="graphics/07fig03.gif" alt="graphics/07fig03.gif"></center>
+
+					<P>Every script that defines a COM class can be used to unregister the class, too. Python automatically knows that, when you pass the argument <tt ClasS="monofont">--unregister</tt> to the script, you want to remove all the references to this class from the Windows Registry.</p>
+
+					<pRe>
+						
+C:\python&gt;python comcalcserver2.py --unregister
+Unregistered: COMCALCSERVER.VERSION2
+
+					</prE>
+
+					<H5>Handling Numbers and Strings</H5>
+						<P>Whenever you have a Python method as part of a COM server interface that returns a number or a string, as shown in the next few lines of code:</p>
+
+						<pre>
+							
+def GetNumber(self):
+    return 25
+
+def GetString(self, name):
+    return 'Your name is %s'% name
+
+						</PRE>
+
+						<P>The COM client written in Visual Basic must handle the methods as follows<a namE="idx1073744621"></A><A Name="idx1073744622"></a><A NAMe="idx1073744623"></a><a name="idx1073744624"></a><a name="idx1073744625"></a><a name="idx1073744626"></a><A naMe="idx1073744627"></a><a Name="idx1073744628"></a><A namE="idx1073744629"></A><A Name="idx1073744630"></a><A NAMe="idx1073744631"></a><a nAME="idx1073744632"></A></p>
+
+						<pre>
+							
+Dim num as Variant
+num = Server.GetNumber
+Dim str as Variant
+str = Server.GetString("Andre")
+MsgBox str
+
+						</PRE>
+
+						<P>Python and Unicode do not really work well together in the current version of Python. All strings that come from COM will actually be Unicode objects rather than string objects. In order to make the previous code work in a COM environment, the last line of the <tt class="monofont">GetString()</tt> method must become</p>
+
+						<pre>
+							
+return 'Your name is %s'% str(name)
+
+						</pre>
+
+						<p>The conversion of the "<tt cLasS="monofont">name</tt>" to "<tT clasS="monofont">str(name)</tt>" forces the Unicode object into a native Python string object. In Python-2.0, if the win32com stuff starts using native Python Unicode strings, the <tT CLAss="monofont">str()</tt> call will cause the Unicode string to be reencoded in UTF8.<A NAMe="idx1073744633"></a><a nAME="idx1073744634"></A><a namE="idx1073744635"></A><A Name="idx1073744636"></a></p>
+
+					
+					<h5>Handling Lists and Tuples</h5>
+						<p>When you have a Python method as part of a COM server interface that returns a list or a tuple, as illustrated in the next example:</p>
+
+						<pre>
+							
+def GetList(self):
+    return [1,2,3,4]
+
+						</pre>
+
+						<p>The COM client written in Visual Basic must handle the method as follows:</p>
+
+						<pre>
+							
+Dim arry as Variant
+arry = Server.GetList
+Debug.Print UBound(arry)
+For Each item in arry
+Debug.Print item
+Next
+
+						</Pre>
+
+					
+				
+				<H4>Delphi</h4>
+					<p>Using Delphi to implement a COM client is very similar to using Visual Basic. First, you need to register the COM class. The following code is similar to the one used for the Visual Basic example.<a Name="idx1073744637"></a><A namE="idx1073744638"></A><A Name="idx1073744639"></a><A NAMe="idx1073744640"></a><a nAME="idx1073744641"></A><a namE="idx1073744642"></A><A Name="idx1073744643"></a><a name="idx1073744644"></a><a name="idx1073744645"></a><a namE="idx1073744646"></a><a Name="idx1073744647"></A><a namE="idx1073744648"></a><a nAME="idx1073744649"></A><a namE="idx1073744650"></A></P>
+
+					<Pre>
+						
+# File: comcalcserver.py
+
+class COMCalcServer:
+    _reg_clsid_ = '{ C76BEA61-3B39-11D4-8A7C-444553546170} '
+    _reg_progid_ = 'COMCALCSERVER.VERSION1'
+    _public_methods_ = ['mul','div','add','sub']
+    def mul(self, arg1, arg2):
+        return arg1 * arg2
+    def div(self, arg1, arg2):
+        return arg1 / arg2
+    def add(self, arg1, arg2):
+        return arg1 + arg2
+    def sub(self, arg1, arg2):
+        return arg1 - arg2
+
+if __name__ == '__main__':
+    import win32com.server.register
+    win32com.server.register.UseCommandLine(COMCalcServer)
+
+					</prE>
+
+					<P>Now, you need to create a Delphi form to support all the COM client activities (see <A Href="133#13.html">Figure 7.4</a>).</P>
+
+					<CENter>
+						<h5>
+<a name="13"></a>Figure 7.4. Delphi design: A form with three Edit boxes and four buttons.</h5><img border="0" WidTh="435" heIght="300" sRc="graphics/07fig04.gif" alT="graphics/07fig04.gif"></CENter>
+
+					<pRE>
+						
+unit Calcform;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, OLEAuto;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    {  Private declarations }
+  public
+    {  Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  COMCalcServer: Variant;
+implementation
+
+{ $R *.DFM}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+   try
+      COMCalcServer := CreateOleObject('COMCALCSERVER.VERSION1');
+      Form1.Caption := 'Python COM Routine is Active';
+      Edit1.text := '';
+      Edit2.text := '';
+      Edit3.text := '';
+      Button1.Name := 'mul';
+      Button2.Name := 'div';
+      Button3.Name := 'add';
+      Button4.Name := 'sub';
+
+  except
+      MessageDlg('An error has happened!', mtError, [mbOk],0);
+      Application.Terminate;
+   end;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var tmp1float, tmp2float : Real;
+    tmp3string : String;
+begin
+     tmp1float := StrToFloat(Edit1.text);
+     tmp2float := StrToFloat(Edit2.text);
+     tmp3string := FloatToStr(COMCalcServer.mul(tmp1float, tmp2float));
+     Edit3.text := tmp3string;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+var tmp1float, tmp2float : Real;
+    tmp3string : String;
+begin
+     tmp1float := StrToFloat(Edit1.text);
+     tmp2float := StrToFloat(Edit2.text);
+     tmp3string := FloatToStr(COMCalcServer.div(tmp1float, tmp2float));
+     Edit3.text := tmp3string;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+var tmp1float, tmp2float : Real;
+    tmp3string : String;
+begin
+     tmp1float := StrToFloat(Edit1.text);
+     tmp2float := StrToFloat(Edit2.text);
+     tmp3string := FloatToStr(COMCalcServer.add(tmp1float, tmp2float));
+     Edit3.text := tmp3string;
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+var tmp1float, tmp2float : Real;
+    tmp3string : String;
+begin
+     tmp1float := StrToFloat(Edit1.text);
+     tmp2float := StrToFloat(Edit2.text);
+     tmp3string := FloatToStr(COMCalcServer.sub(tmp1float, tmp2float));
+     Edit3.text := tmp3string;
+end;
+
+end.
+
+					</PRe>
+
+					<p>After compiling and running the application, you should see the interface shown in <a hREF="133#14.html">Figure 7.5</A>.<a namE="idx1073744651"></A><A Name="idx1073744652"></a><a name="idx1073744653"></a><a name="idx1073744654"></a><a namE="idx1073744655"></a><a Name="idx1073744656"></A><a namE="idx1073744657"></a><a nAME="idx1073744658"></A><a namE="idx1073744659"></A><A Name="idx1073744660"></a><A NAMe="idx1073744661"></a><a nAME="idx1073744662"></A></p>
+
+					<center>
+						<h5>
+<a name="14"></a>Figure 7.5. Delphi Calculator Application.</h5><img boRdeR="0" widTh="435" heiGht="300" sRC="graphics/07fig05.gif" ALt="graphics/07fig05.gif"></cenTER>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="132.html" title="Introduction to COM Objects"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=133" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="133.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="134.html" title="Distributing Objects with Python"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073744577">_public_attrs() attribute</a><BR>
+ <a href="#idx1073744575">_public_methods() attribute</a><BR>
+ <a href="#idx1073744579">_readonly_attrs() attribute</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excel<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744441">opening and manipulating from Python</a> <a href="#idx1073744460">2nd</a> <a href="#idx1073744484">3rd</a> <a href="#idx1073744507">4th</a> <a href="#idx1073744547">5th</a> <a href="#idx1073744563">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744421">transferring data between</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744390">win32all</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744386">win32com</a> <a href="#idx1073744400">2nd</a> <a href="#idx1073744410">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744438">opening and manipulating from Python</a> <a href="#idx1073744457">2nd</a> <a href="#idx1073744481">3rd</a> <a href="#idx1073744504">4th</a> <a href="#idx1073744544">5th</a> <a href="#idx1073744560">6th</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744578">_public_attrs()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744576">_public_methods()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744580">_readonly_attrs()</a><BR>
+ <a href="#idx1073744554">AutoFit() function</a><BR>
+calculator object<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744583">source code</a> <a href="#idx1073744593">2nd</a> <a href="#idx1073744605">3rd</a> <a href="#idx1073744617">4th</a> <a href="#idx1073744647">5th</a> <a href="#idx1073744659">6th</a><BR>
+ <a href="#idx1073744556">Cells() function</a><BR>
+changing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744525">Visible property</a><BR>
+clients<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Object Model (COM)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744524">creating clients, Excel</a> <a href="#idx1073744551">2nd</a> <a href="#idx1073744567">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744428">importing</a><BR>
+closing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744429">Excel and Word</a><BR>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744581">calculator object</a> <a href="#idx1073744591">2nd</a> <a href="#idx1073744603">3rd</a> <a href="#idx1073744615">4th</a> <a href="#idx1073744645">5th</a> <a href="#idx1073744657">6th</a><BR>
+ <a href="#idx1073744403">Common Object Model (COM)</a> <a href="#idx1073744413">2nd</a> <a href="#idx1073744425">3rd</a> <a href="#idx1073744444">4th</a> <a href="#idx1073744468">5th</a> <a href="#idx1073744487">6th</a> <a href="#idx1073744512">7th</a> <a href="#idx1073744552">8th</a> <a href="#idx1073744571">9th</a> <a href="#idx1073744595">10th</a> <a href="#idx1073744607">11th</a> <a href="#idx1073744619">12th</a> <a href="#idx1073744631">13th</a> <a href="#idx1073744649">14th</a> <a href="#idx1073744661">15th</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Object Model (COM) clients<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744523">Excel</a> <a href="#idx1073744550">2nd</a> <a href="#idx1073744566">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744448">Python interfaces to expose objects</a> <a href="#idx1073744465">2nd</a><BR>
+data<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744419">transferring between applications</a><BR>
+Date/Time format<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744537">setting</a> <a href="#idx1073744570">2nd</a><BR>
+Delphi programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744643">implementing Common Object Model (COM) objects</a> <a href="#idx1073744655">2nd</a><BR>
+disabling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registration<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744473">Common Object Model (COM) objects</a><BR>
+ <a href="#idx1073744492">Dispatch method</a><BR>
+dispatches<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744497">static</a><BR>
+distributing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744396">Common Object Model (COM)</a> <a href="#idx1073744406">2nd</a> <a href="#idx1073744416">3rd</a> <a href="#idx1073744433">4th</a> <a href="#idx1073744452">5th</a> <a href="#idx1073744476">6th</a> <a href="#idx1073744499">7th</a> <a href="#idx1073744539">8th</a> <a href="#idx1073744586">9th</a> <a href="#idx1073744598">10th</a> <a href="#idx1073744610">11th</a> <a href="#idx1073744622">12th</a> <a href="#idx1073744638">13th</a> <a href="#idx1073744652">14th</a><BR>
+ <a href="#idx1073744495">dynamic dispatch object</a><BR>
+editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744529">Visible property</a><BR>
+Excel<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744437">opening and manipulating from Python</a> <a href="#idx1073744456">2nd</a> <a href="#idx1073744480">3rd</a> <a href="#idx1073744503">4th</a> <a href="#idx1073744543">5th</a> <a href="#idx1073744559">6th</a><BR>
+exiting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744430">Excel and Word</a><BR>
+exposing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744450">objects, creating Python interfaces</a> <a href="#idx1073744467">2nd</a><BR>
+finding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744517">generated modules</a><BR>
+formats<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date/Time<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744536">setting</a> <a href="#idx1073744569">2nd</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744555">AutoFit()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744557">Cells()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744574">Pythoncom.CreateGuid()</a><BR>
+generating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744515">identifying</a><BR>
+ <a href="#idx1073744383">Hammond, Mark</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744627">numbers</a> <a href="#idx1073744633">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744629">strings</a> <a href="#idx1073744635">2nd</a><BR>
+identifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744514">generated modules</a><BR>
+implementing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744398">Common Object Model (COM)</a> <a href="#idx1073744408">2nd</a> <a href="#idx1073744418">3rd</a> <a href="#idx1073744435">4th</a> <a href="#idx1073744454">5th</a> <a href="#idx1073744478">6th</a> <a href="#idx1073744501">7th</a> <a href="#idx1073744541">8th</a> <a href="#idx1073744588">9th</a> <a href="#idx1073744600">10th</a> <a href="#idx1073744612">11th</a> <a href="#idx1073744624">12th</a> <a href="#idx1073744640">13th</a> <a href="#idx1073744654">14th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744446">Python Common Object Model (COM) server</a> <a href="#idx1073744463">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wrappers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744489">Word</a> <a href="#idx1073744510">2nd</a><BR>
+importing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744427">Common Object Model (COM) client</a><BR>
+interfacing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744395">Common Object Model (COM)</a> <a href="#idx1073744405">2nd</a> <a href="#idx1073744415">3rd</a> <a href="#idx1073744432">4th</a> <a href="#idx1073744451">5th</a> <a href="#idx1073744475">6th</a> <a href="#idx1073744498">7th</a> <a href="#idx1073744538">8th</a> <a href="#idx1073744585">9th</a> <a href="#idx1073744597">10th</a> <a href="#idx1073744609">11th</a> <a href="#idx1073744621">12th</a> <a href="#idx1073744637">13th</a> <a href="#idx1073744651">14th</a><BR>
+librariesÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744393">Ò</a><BR>
+ <a href="#idx1073744521">makepy.py module</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744493">Dispatch</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744534">PrintOut()</a><BR>
+models<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744404">Common Object (COM)</a> <a href="#idx1073744414">2nd</a> <a href="#idx1073744426">3rd</a> <a href="#idx1073744445">4th</a> <a href="#idx1073744469">5th</a> <a href="#idx1073744488">6th</a> <a href="#idx1073744513">7th</a> <a href="#idx1073744553">8th</a> <a href="#idx1073744572">9th</a> <a href="#idx1073744596">10th</a> <a href="#idx1073744608">11th</a> <a href="#idx1073744620">12th</a> <a href="#idx1073744632">13th</a> <a href="#idx1073744650">14th</a> <a href="#idx1073744662">15th</a><BR>
+modifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744528">Visible property</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;generated<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744516">identifying</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744522">makepy.py</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744520">win32.com.client.gencache</a><BR>
+modulesÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744394">Ò</a><BR>
+numbers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744628">handling</a> <a href="#idx1073744634">2nd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calculator<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744584">source code</a> <a href="#idx1073744594">2nd</a> <a href="#idx1073744606">3rd</a> <a href="#idx1073744618">4th</a> <a href="#idx1073744648">5th</a> <a href="#idx1073744660">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744494">dynamic dispatch</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744449">exposing, creating Python interfaces</a> <a href="#idx1073744466">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interfacing and distributing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744397">Common Object Model (COM)</a> <a href="#idx1073744407">2nd</a> <a href="#idx1073744417">3rd</a> <a href="#idx1073744434">4th</a> <a href="#idx1073744453">5th</a> <a href="#idx1073744477">6th</a> <a href="#idx1073744500">7th</a> <a href="#idx1073744540">8th</a> <a href="#idx1073744587">9th</a> <a href="#idx1073744599">10th</a> <a href="#idx1073744611">11th</a> <a href="#idx1073744623">12th</a> <a href="#idx1073744639">13th</a> <a href="#idx1073744653">14th</a><BR>
+ <a href="#idx1073744533">PrintOut() method</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delphi<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744644">implementing Common Object Model (COM) objects</a> <a href="#idx1073744656">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visual Basic (VB)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744590">implementing Common Object Model (COM) objects</a> <a href="#idx1073744602">2nd</a> <a href="#idx1073744614">3rd</a> <a href="#idx1073744626">4th</a> <a href="#idx1073744642">5th</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excel<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744442">opening and manipulating from Python</a> <a href="#idx1073744461">2nd</a> <a href="#idx1073744485">3rd</a> <a href="#idx1073744508">4th</a> <a href="#idx1073744548">5th</a> <a href="#idx1073744564">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744422">transferring data between</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744391">win32all</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744387">win32com</a> <a href="#idx1073744401">2nd</a> <a href="#idx1073744411">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744439">opening and manipulating from Python</a> <a href="#idx1073744458">2nd</a> <a href="#idx1073744482">3rd</a> <a href="#idx1073744505">4th</a> <a href="#idx1073744545">5th</a> <a href="#idx1073744561">6th</a><BR>
+properties<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Visible<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744527">changing</a><BR>
+ <a href="#idx1073744573">Pythoncom.CreateGuid() function</a><BR>
+quitting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744431">Excel and Word</a><BR>
+searching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744518">generated modules</a><BR>
+servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python Common Object Model (COM)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744447">implementing</a> <a href="#idx1073744464">2nd</a><BR>
+setting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744535">Data/Time format</a> <a href="#idx1073744568">2nd</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Excel<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744443">opening and manipulating from Python</a> <a href="#idx1073744462">2nd</a> <a href="#idx1073744486">3rd</a> <a href="#idx1073744509">4th</a> <a href="#idx1073744549">5th</a> <a href="#idx1073744565">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744423">transferring data between</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744392">win32all</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744388">win32com</a> <a href="#idx1073744402">2nd</a> <a href="#idx1073744412">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744440">opening and manipulating from Python</a> <a href="#idx1073744459">2nd</a> <a href="#idx1073744483">3rd</a> <a href="#idx1073744506">4th</a> <a href="#idx1073744546">5th</a> <a href="#idx1073744562">6th</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744582">calculator object</a> <a href="#idx1073744592">2nd</a> <a href="#idx1073744604">3rd</a> <a href="#idx1073744616">4th</a> <a href="#idx1073744646">5th</a> <a href="#idx1073744658">6th</a><BR>
+ <a href="#idx1073744496">static dispatches</a><BR>
+ <a href="#idx1073744384">Stein, Greg</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744630">handling</a> <a href="#idx1073744636">2nd</a><BR>
+testing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744470">Python interfaces</a> <a href="#idx1073744471">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wrappers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744491">Word</a><BR>
+transferring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744420">data between applications</a><BR>
+transporting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744532">tuples</a><BR>
+tuples<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744530">transporting values</a><BR>
+turning off<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registration<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744474">Common Object Model (COM) objects</a><BR>
+unregistering<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744472">Common Object Model (COM) objects</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;transporting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744531">tuples</a><BR>
+Visible property<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744526">changing</a><BR>
+Visual Basic (VB) programming language<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744589">implementing Common Object Model (COM) objects</a> <a href="#idx1073744601">2nd</a> <a href="#idx1073744613">3rd</a> <a href="#idx1073744625">4th</a> <a href="#idx1073744641">5th</a><BR>
+ <a href="#idx1073744519">win32.com.client.gencache module</a><BR>
+ <a href="#idx1073744389">win32all package</a><BR>
+ <a href="#idx1073744385">win32com package</a> <a href="#idx1073744399">2nd</a> <a href="#idx1073744409">3rd</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744424">transferring data between applications</a><BR>
+Word<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744436">opening and manipulating from Python</a> <a href="#idx1073744455">2nd</a> <a href="#idx1073744479">3rd</a> <a href="#idx1073744502">4th</a> <a href="#idx1073744542">5th</a> <a href="#idx1073744558">6th</a><BR>
+wrappers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Word<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744490">implementing</a> <a href="#idx1073744511">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

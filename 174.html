@@ -1,0 +1,398 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Configuring Web Servers for Python/CGI Scripts</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="171.html" class="navtitle">11. Web Development</a> &gt; <span class="nonavtitle">Configuring Web Servers for Python/CGI Scripts</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="173.html" title="Web Development"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=174" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="174.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="175.html" title="Third-Party Internet Applications"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A43%3A25+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148047091217051046165216</font><a href="read0.asp?bookname=0672319942&snode=174&now=5%2F31%2F2002+4%3A43%3A25+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Configuring Web Servers for Python/CGI Scripts</h3>
+				<p>The next topics show you how to configure the most used Web servers in the market. Mostly you will see how to handle Python CGI scripts within Apache and Microsoft IIS Web servers.</p>
+
+				
+					<H4>Python in Apache</H4>
+					<P>First, let's see how Apache handles requests.</P>
+
+					<p>When a file is called, Apache executes an action, which internally is known as <a naME="idx1073746154"></A><I>handler.</i> These handlers are usually implicitly related to the files, based on the file type. However, new Apache releases are able to assign handles to filename extensions or file locations, instead of only work with the file type.<a naME="idx1073746155"></A><A name="idx1073746156"></a><a name="idx1073746157"></a><a name="idx1073746158"></a><a naMe="idx1073746159"></a><A namE="idx1073746160"></a><a naMe="idx1073746161"></a><a NAME="idx1073746162"></a><a naME="idx1073746163"></A><A name="idx1073746164"></A><A NAme="idx1073746165"></a></p>
+
+					<P>Python script files are handled in exactly the same way as other CGI scripts. Once a request is received, Apache calls the Python interpreter asking it to run the specific script. Depending on the Apache configuration, there are several actions to be performed when receiving a request (for instance, user authentication and file transfer).</P>
+
+					<P>Apache comes with a predefined set of handlers for basic routine tasks. However, there are several third-party handler applications that can be very useful as well, such as the <Tt class="monofont">mod_python</tt> and <tt class="monofont">mod_pyapache modules.</tt> Using these modules is not strictly necessary, but it reduces the overhead of your server and increases the speed of your application. Both of these reasons occur because the Python interpreter is not called for every single connection anymore. You can create Apache Handlers by building them into the Web Server, adding them to the Action directive, or implementing a module. <a naMe="idx1073746166"></a></P>
+
+					<p>The Apache official Web site is as follows:</p>
+
+					<p>
+						<A targEt="_blank" hrEF="http://www.apache.org/">http://www.apache.org/</A></P>
+
+					
+						<h5>Configuring Apache for Python</h5>
+						<p>The following guidelines will help you configure your Apache installation to run Python in both Windows and UNIX systems. Steps 1–8 are specific for Win32 configurations.</p>
+
+						
+							<P>
+							<P>
+							<P>
+							<P>
+							<p>
+							<p>
+							<p>
+							<p>
+							<P>
+							<P>
+							<P>
+							<P>
+							<p>
+							<p>
+							<p>
+							<p>
+						<DL>
+<DD>
+<b>Step 1. </b>
+<p>Installing Python in the C:\ Python directory is a more convenient way to handle environment paths.</p>
+</dd>
+<dd>
+<b>Step 2. </b>
+<p>It is convenient if you have your CGI files in the same drive as the WINNT system files.</p>
+</dd>
+<dd>
+<b>Step 3. </b>
+<p>Verify if you have a system variable called PATH that contains the Python interpreter's (<tT clAss="monofont">python.exe</tT>) directory (if necessary, create it).<a namE="idx1073746167"></a><a nAME="idx1073746168"></A><a namE="idx1073746169"></A><A Name="idx1073746170"></a><A NAMe="idx1073746171"></a><a nAME="idx1073746172"></A><a name="idx1073746173"></a><a name="idx1073746174"></a><a name="idx1073746175"></a><a nAme="idx1073746176"></A><a naMe="idx1073746177"></a></p>
+</dD>
+<dd>
+<b>Step 4. </B>
+<P>Create a system variable called PYTHONPATH. It must contain the list of directories to be used when searching for Python files.</P>
+</Dd>
+<dd>
+<b>Step 5. </B>
+<P>Use <TT clasS="monofont">ASSOC</TT> to setup a file extension for Python.</P>
+
+								<pre>
+									
+ASSOC .py=PythonScript
+
+								</pRE>
+
+							</DD>
+<dd>
+<b>Step 6. </b>
+<p>Use <tt class="monofont">FTYPE</tt> to associate the previous setting to the Python executable.</p>
+
+								<pre>
+									
+FTYPE PythonScript=python.exe %1 %*
+
+								</prE>
+
+							</dd>
+<Dd>
+<b>Step 7. </b>
+<P>Add the extension <tt clAss="monofont">.py</tT> to the system environment variable <TT Class="monofont">PATHEXT.</TT> This variable stores the list of executable extensions (for example, <TT clasS="monofont">PATHEXT=.EXE;.COM;.BAT;.CMD;.py</TT>).</P>
+</dd>
+<dd>
+<B>Step 8. </B>
+<P>Install Apache on your system's root drive, that is, "c:\ Apache". Installing Apache in this directory helps you during the whole configuration process.</P>
+</dd>
+<dd>
+<b>Step 9. </b>
+Edit your <tt class="monofont">C:\WINNT\system32\drivers\etc\hosts</tt> ile, adding the IP address of your machine. This file is the NT equivalent to UNIX <tt claSs="monofont">/etc/hosts</tT> table file.
+								<p>The following steps tell you how to configure the Apache Web Server. Note that nowadays, the whole Apache configuration can be set using one unique file: <tt Class="monofont">httpd.conf.</Tt></p>
+</dD>
+<DD>
+<B>Step 10. </b>
+<p>In the <tt CLASs="monofont">access.conf</tt> file, make the following changes:</p>
+
+								<PRE>
+									
+&lt;Directory /apache/htdocs&gt;
+Options Indexes ExecCGI for Python/CGI scripts&gt;
+
+								</Pre>
+
+							</dd>
+<DD>
+<B>Step 11. </B>
+<p>In the <tt class="monofont">httpd.conf</tt> file, make the following changes:</p>
+
+								<pre>
+									
+ServerRoot /apache
+
+								</pre>
+
+							</dd>
+<dD>
+<b>Step 12. </b>
+<P>In the <tt cLass="monofont">srm.conf</tT> file, make the following changes. You also have the option to set <tt cLASS="monofont">PYTHONPATH</tt> here using the command <tt CLASs="monofont">SetEnv,</tt> instead of defining it as a system environment variable. Note that there are two <tT CLAss="monofont">AddHandler</tt> settings. The former identifies the extension to be associated with CGI scripts, and the latter allows you to use the <TT CLass="monofont">.cgi</tt> extension in your files, in order to hide from crackers, the language used to implement your site. Of utmost importance is to make certain that you're using Python in unbuffered mode (SetEnv <tt class="monofont">PYTHONUNBUFFERED</tt> 1) and to set (or pass) <tt clasS="monofont">PYTHONPATH</tt> as a system environment variable. Forgetting to set either of these parameters is the most common reason for "premature end of header" errors.</P>
+
+								<pre>
+									
+DocumentRoot /apache/htdocs
+ScriptAlias /cgi-bin/ /apache/cgi-bin/
+PassEnv PYTHONPATH
+SetEnv PYTHONUNBUFFERED 1
+AddHandler cgi-script .py
+AddHandler cgi-script .cgi
+
+								</Pre>
+
+							</dd>
+<Dd>
+<b>Step 13. </b>
+<P>Place your scripts in your <TT Class="monofont">cgi-bin</TT> directory.</P>
+</Dd>
+<dd>
+<b>Step 14. </B>
+<P>If you are using an UNIX system, make sure that the first line of your script contain a <I>shebang</I> to identify the location of the Python interpreter.</p>
+</dd>
+<dD>
+<B>Step 15. </B>
+Optionally, you can configure the server to run scripts <I>only</i> from the <tt class="monofont">cgi-bin</tt> directory by replacing the following line in the <tt class="monofont">access.conf</tt> file:
+								<pRe>
+									
+&lt;Directory /path/to/your/httpd/cgi-bin&gt; Options Indexes FollowSymLinks
+ &lt;/Directory&gt;
+
+								</pRe>
+
+								with
+								<prE>
+									
+&lt;Directory /path/to/your/httpd/cgi-bin&gt; Options FollowSymLinks ExecCGI
+ &lt;/Directory&gt;
+
+								</pre>
+
+								<p>If you want to run your scripts from any directory, comment the previous setting and add the following one:</P>
+
+								<pre>
+									
+&lt;Directory /path/to/your/httpd/htdocs&gt; Options All &lt;/Directory&gt;
+
+								</PRE>
+
+							</Dd>
+<dd>
+<b>Step 16. </B>
+<P>Set the read and execute permissions of your script. If you are using an UNIX system, you should type <TT clasS="monofont">chmod 755 yourscript.py.</TT><A name="idx1073746178"></A><A NAme="idx1073746179"></a><a name="idx1073746180"></a><a name="idx1073746181"></a><a name="idx1073746182"></A><a nAme="idx1073746183"></a><A name="idx1073746184"></A><a naME="idx1073746185"></A><A name="idx1073746186"></A><A NAme="idx1073746187"></a><a NAME="idx1073746188"></a></p>
+
+							</dd>
+</DL>
+
+						<P>At this time, you should be ready to launch your Web browser and to access your CGI script by typing its URL.</P>
+
+						<p>For UNIX, if Apache and Python are set up correctly, all you need to do is place the Python scripts in the <tt class="monofont">cgi-bin</tt> directory and set their permissions correctly.</p>
+
+						<p>More information about this topic can be found at the newsgroup for discussions about running Apache under Windows at <tt class="monofont">comp.infosystems.www.servers.ms-windows.</tT></p>
+
+					
+					
+						<h5><Tt clAss="monofont">mod_python</tt></H5>
+						<p><tt CLASs="monofont">mod_python</tt> is a module created by <a NAME="idx1073746189"></a>Gregory Trubetskoy that embeds the Python language interpreter within the Apache server, allowing Apache handlers to be written in Python. It provides nearly every possible handler to Apache.</p>
+
+						<p><tT CLAss="monofont">mod_python</tt> brings a considerable boost in performance over the traditional CGI approach, and adds flexibility in designing Web-based applications. In order to run it, you must have at least <TT CLass="monofont">Python 1.5.2</tt> and <tt class="monofont">Apache 1.3.</tt></p>
+
+						<p><tt clAss="monofont">mod_python</Tt> handlers by default do not perform any function, unless specifically told so by a configuration directive. These directives begin with Python, end with Handler (for example, <tt Class="monofont">PythonAuthenHandler</Tt>), and associate a handler with a Python function. Therefore, the main function of <tt CLASs="monofont">mod_python</tt> is to act as a dispatcher between Apache handlers and python functions written by developers.</p>
+
+						<P>The most commonly used one is <A NAme="idx1073746190"></a><a NAME="idx1073746191"></a><tt cLASS="monofont">PythonHandler.</tt> It is for a handler that has no specialized purpose, such as authentication. The default Apache action for this handler would be to read the file and send it to the client. Most applications you write will use this one handler. For more information, check out these sites:<a name="idx1073746192"></a><a name="idx1073746193"></a><a name="idx1073746194"></a><A naMe="idx1073746195"></a><a Name="idx1073746196"></a><A namE="idx1073746197"></A><A Name="idx1073746198"></a><A NAMe="idx1073746199"></a><a nAME="idx1073746200"></A><a namE="idx1073746201"></A><A Name="idx1073746202"></a></p>
+
+						<blockquote>
+<p><p><tt cLasS="monofont">mod_python</tt> Web site</p>
+</P>
+<p><p><a tArgeT="_blank" HREf="http://www.modpython.org/">http://www.modpython.org/</a></p>
+</p>
+<P><P><TT clasS="monofont">mod_python</TT> installation procedures</P>
+</p>
+<p><p><a TARGet="_blank" href="http://www.modpython.org/live/mod_python-2.4/doc/installation.html">http://www.modpython.org/live/mod_python-2.4/doc/installation.html</a><a name="idx1073746203"></a><a name="idx1073746204"></a></p>
+
+							</P>
+</blOckqUote>
+					
+					
+						<h5><Tt clASS="monofont">mod_pyapache</Tt></h5>
+						<p>This module will speed up the execution of your CGI scripts written in the Python Language. It handles CGI scripts faster than other normal CGI scripts because the server embeds the Python Interpreter. Therefore, the performance penalty of executing an external one is eliminated.</p>
+
+						<P>This module has the advantage of being CGI compatible—it works well when CGI scripts are simple and trusted and it provides total CGI control to your Python application. However, this module currently has some limitations, including the fact that it doesn't avoid database connections delay. Check out the following Web site for more information:</P>
+
+						<P><A targET="_blank" HRef="http://www.msg.com.mx/pyapache/">http://www.msg.com.mx/pyapache/</a></p>
+
+						<P>You will find the latest version of the module in the <A TArget="_blank" href="ftp://www.bel-epa.com/pub/misc/">ftp://www.bel-epa.com/pub/misc/</a> directory, where you will see a gzipped tar file named something like <tt class="monofont">PyApache-x.yy.tar.gz.</tt><a nAme="idx1073746205"></A><a naMe="idx1073746206"></a><a nAme="idx1073746207"></a><A NAMe="idx1073746208"></a><a nAME="idx1073746209"></A><a namE="idx1073746210"></A></P>
+
+					
+				
+				
+					<H4>AOLserver Web Server</h4>
+					<p>This is a Web Server created and used by AOL. Note that anyone using AOLserver would be better off learning TCL. For details, see</p>
+
+					<p><A TARget="_blank" href="http://www.aolserver.com">http://www.aolserver.com</a></p>
+
+					<p>The project that embeds Python in the AOLServer Web Server, is now semi-stable for simple CGI-style operations, and provides a 4-5x speedup over the straight CGI.</p>
+
+					<p>Check it out at <a target="_blank" hRef="http://pywx.sourceforge.net">http://pywx.sourceforge.net</A>.<a naMe="idx1073746211"></a><a nAme="idx1073746212"></a><A NAMe="idx1073746213"></a><a nAME="idx1073746214"></A><a namE="idx1073746215"></A><A Name="idx1073746216"></a><A NAMe="idx1073746217"></a><a name="idx1073746218"></a><a name="idx1073746219"></a><a name="idx1073746220"></a><A naMe="idx1073746221"></a></p>
+
+				
+				
+					<H4>Microsoft IIS and PWS</h4>
+					<p>You can set up both Microsoft IIS Server and Personal Web Server (PWS) to call the Python interpreter to handle Python CGI scripts.</p>
+
+					<dIv clASS="note"><P clasS="notetitle"><B>Tip</B></P><p>
+
+						<p>PWS is Microsoft's free basic Web server for the Windows 95 platform.</p>
+
+					</p></DIV>
+<Br>
+<br>
+
+					<p>You need to pay close attention when using the PWS server because a version of PWS is part of the <A NAMe="idx1073746222"></a><a name="idx1073746223"></a><a name="idx1073746224"></a><a name="idx1073746225"></a>Front Page Personal Web Server, which doesn't run files from executable directories. Instead, it returns an error message. If you slide your mouse over the PWS icon in the taskbar, and it says <Tt cLass="monofont">Personal Web Server,</Tt> you have the proper version.</p>
+
+					<p>Now, let's demonstrate how to configure IIS and PWS for Python/CGI scripting. I assume that you have already installed Python on your system.</p>
+
+					<P>On the Microsoft IIS server or on the Win95 MS Personal Web Server, you need to set up Python in the same way that you would set up any other scripting engine:<a naME="idx1073746226"></A><A name="idx1073746227"></A><A NAme="idx1073746228"></a><a NAME="idx1073746229"></a><a naME="idx1073746230"></A><A name="idx1073746231"></a><a name="idx1073746232"></a><a name="idx1073746233"></a><a naMe="idx1073746234"></a><A namE="idx1073746235"></a><a naMe="idx1073746236"></a><a NAME="idx1073746237"></a><a naME="idx1073746238"></A><A name="idx1073746239"></A><A NAme="idx1073746240"></a><a NAME="idx1073746241"></a></p>
+
+					<ol type="1">
+<li>
+<p>Run REGEDIT.EXE</p>
+</li>
+<li>
+<p>Find the following key:</p>
+
+							<prE>
+								
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\W3SVC\Parameters\
+ScriptMap
+
+							</prE>
+
+						</li>
+<lI>
+<p>Once there, select the menu selection EDIT, New, String Value, and enter the following line (using the correct path):</p>
+
+							<prE>
+								
+.py :REG_SZ: c:\ path\ to\ python.exe -u %s %s
+
+							</pre>
+
+						</LI>
+</OL>
+
+					<p>Now, you are ready to call your scripts. Make sure that they are stored in an executable directory in the Web server.</p>
+
+					<p>The <a NAME="idx1073746242"></a><a naME="idx1073746243"></A><Tt claSS="monofont">-u</TT> flag specifies unbuffered and binary mode for <tt class="monofont">stdin,</tt> which is needed when working with binary data. This flag prevents <tt class="monofont">cr-nl</tt> from being converted to newline combinations.</p>
+
+					<p>Most developers agree that exposing the language behind your script works similar to saying "Welcome" to crackers around the world. Therefore, it is suggested to hide these details by using another extension, for example, <Tt cLass="monofont">.cgi,</Tt> for your CGI scripts. You don't need to change the extension of all your files, just the ones that will be exposed by your site's Web interface. The other modules can continue to have the <tt cLass="monofont">.py</TT> extension. The line in the registry would resemble the following:</P>
+
+					<Pre>
+						
+.cgi :REG_SZ: c:\ path\ to\ python.exe -u %s %s
+
+					</prE>
+
+					<DIV clasS="note"><P CLass="notetitle"><b>Note</B></P><P>
+
+						<P>Of course, this is no substitute for actually making sure that your scripts are secure.</p>
+
+					</p></div>
+<br>
+<br>
+
+					<p>After restarting your computer, everything gets set up, and every script (with the proper extension) located at an executable directory is sent to the Python interpreter.<a name="idx1073746244"></a><a namE="idx1073746245"></a><a Name="idx1073746246"></A><a namE="idx1073746247"></a><a nAME="idx1073746248"></A><a namE="idx1073746249"></A><A Name="idx1073746250"></a><A NAMe="idx1073746251"></a><a nAME="idx1073746252"></A><a name="idx1073746253"></a><a name="idx1073746254"></a><a name="idx1073746255"></a><a nAme="idx1073746256"></A><a naMe="idx1073746257"></a><a nAme="idx1073746258"></a><A NAMe="idx1073746259"></a></p>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="173.html" title="Web Development"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=174" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="174.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="175.html" title="Third-Party Internet Applications"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073746242">[nd]u flag</a><BR>
+AOLserver Web server<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746218">configuring Web servers for Python/CGI scripts</a><BR>
+Apache<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746162">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746174">2nd</a> <a href="#idx1073746185">3rd</a> <a href="#idx1073746199">4th</a> <a href="#idx1073746205">5th</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AOLserver Web server<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746219">configuring Web servers for Python/CGI scripts</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apache<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746163">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746175">2nd</a> <a href="#idx1073746186">3rd</a> <a href="#idx1073746200">4th</a> <a href="#idx1073746206">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746223">Front Page Personal Web Server</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft IIS Server<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746234">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746252">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Personal Web Server (PWS)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746238">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746256">2nd</a><BR>
+CGI scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746160">configuring servers for</a> <a href="#idx1073746172">2nd</a> <a href="#idx1073746183">3rd</a> <a href="#idx1073746197">4th</a> <a href="#idx1073746216">5th</a> <a href="#idx1073746231">6th</a> <a href="#idx1073746249">7th</a><BR>
+configuring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746159">servers for Python/CGI scripts</a> <a href="#idx1073746171">2nd</a> <a href="#idx1073746182">3rd</a> <a href="#idx1073746196">4th</a> <a href="#idx1073746215">5th</a> <a href="#idx1073746230">6th</a> <a href="#idx1073746248">7th</a><BR>
+development<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746157">configuring servers for Python/CGI scripts</a> <a href="#idx1073746169">2nd</a> <a href="#idx1073746180">3rd</a> <a href="#idx1073746194">4th</a> <a href="#idx1073746213">5th</a> <a href="#idx1073746228">6th</a> <a href="#idx1073746246">7th</a><BR>
+flags<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746243">[nd]u</a><BR>
+ <a href="#idx1073746222">Front Page Personal Web Server</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746191">PythonHandler</a><BR>
+ <a href="#idx1073746154">handlers, Apache</a> <a href="#idx1073746166">2nd</a><BR>
+Internet<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development for<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746156">configuring servers for Python/CGI scripts</a> <a href="#idx1073746168">2nd</a> <a href="#idx1073746179">3rd</a> <a href="#idx1073746193">4th</a> <a href="#idx1073746212">5th</a> <a href="#idx1073746227">6th</a> <a href="#idx1073746245">7th</a><BR>
+Microsoft IIS Server<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746233">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746251">2nd</a><BR>
+ <a href="#idx1073746209">mod_pyapache module</a><BR>
+ <a href="#idx1073746203">mod_python module</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746210">mod_pyapache</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746204">mod_python</a><BR>
+Personal Web Server (PWS)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746237">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746255">2nd</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AOLserver Web server<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746220">configuring Web servers for Python/CGI scripts</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apache<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746164">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746176">2nd</a> <a href="#idx1073746187">3rd</a> <a href="#idx1073746201">4th</a> <a href="#idx1073746207">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746224">Front Page Personal Web Server</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft IIS Server<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746235">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746253">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Personal Web Server (PWS)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746239">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746257">2nd</a><BR>
+ <a href="#idx1073746241">PWS (Personal Web Server)</a> <a href="#idx1073746259">2nd</a><BR>
+ <a href="#idx1073746190">PythonHandler function</a><BR>
+scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CGI<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746161">configuring servers for</a> <a href="#idx1073746173">2nd</a> <a href="#idx1073746184">3rd</a> <a href="#idx1073746198">4th</a> <a href="#idx1073746217">5th</a> <a href="#idx1073746232">6th</a> <a href="#idx1073746250">7th</a><BR>
+servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746158">configuring for Python/CGI scripts</a> <a href="#idx1073746170">2nd</a> <a href="#idx1073746181">3rd</a> <a href="#idx1073746195">4th</a> <a href="#idx1073746214">5th</a> <a href="#idx1073746229">6th</a> <a href="#idx1073746247">7th</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AOLserver Web server<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746221">configuring Web servers for Python/CGI scripts</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apache<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746165">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746177">2nd</a> <a href="#idx1073746188">3rd</a> <a href="#idx1073746202">4th</a> <a href="#idx1073746208">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746225">Front Page Personal Web Server</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Microsoft IIS Server<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746236">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746254">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Personal Web Server (PWS)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746240">configuring Web servers for Python/CGI scripts</a> <a href="#idx1073746258">2nd</a><BR>
+ <a href="#idx1073746189">Trubetskoy, Gregory</a><BR>
+World Wide Web<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development for<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746155">configuring servers for Python/CGI scripts</a> <a href="#idx1073746167">2nd</a> <a href="#idx1073746178">3rd</a> <a href="#idx1073746192">4th</a> <a href="#idx1073746211">5th</a> <a href="#idx1073746226">6th</a> <a href="#idx1073746244">7th</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

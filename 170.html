@@ -1,0 +1,126 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="161.html" class="navtitle">10. Basic Network Background</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="169.html" title="Newsgroups—Telnet and Gopher"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=170" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="170.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="172.html" title="11. Web Development"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A42%3A57+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148046198035066238124116</font><a href="read6.asp?bookname=0672319942&snode=170&now=5%2F31%2F2002+4%3A42%3A57+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Summary</h3>
+				<p>Networking is the word behind all new technology that arrives in the market these days. Networking systems are well defined by the <i>OSI/ISO</I>(<I>Open Systems Interconnection/International Standards Organization</I>) seven-layer model, which suggests the following levels of networking process: Physical, Data Link, Network, Transport, Session, Presentation, and Application.</P>
+
+				<p>Network connections can be of two types: connection-oriented (such as TCP) or packet-oriented (such as UDP).</p>
+
+				<p>The network layer of the TCP/IP stack is provided by the Internet Protocol (commonly known as IP). The IP address defines the addressing and routing of information around the network, uniquely identifying a network interface. <a NAME="idx1073746138"></a>
+				</p>
+
+				<p>The transport layer is provided by the TCP, which is the main form of communication over the Internet because it provides a reliable, session-based service for the delivery of sequenced packets.</p>
+
+				<P>UDP is a connectionless transport protocol that does not guarantee delivery or packet sequence. This protocol provides an unreliable but fast datagram service.</P>
+
+				<P>The most commonly used application protocols (such as HTTP, FTP, Gopher, Telnet, POP3, IMAP, SMTP, and NNTP) are built on top of TCP/IP infrastructures. Actually, they don't have to know any details about TCP nor about IP because there is a thin layer called "
+						<A href="164#4.html">
+							<tt class="monofont">sockets</tt>
+						</a>
+					" between TCP/IP and them.</p>
+
+				<p>A port is an entry point to an application/service that resides on a server.</p>
+
+				<p>Sockets are objects that allow programs to accept and make connections, such as to send and receive data. They are mostly used for TCP and UDP connections. The <tt ClaSs="monofont">socket</tt> module is a very simple object-based interface that provides access to a low-level BSD socket-style network.</P>
+
+				<p>The <tt cLass="monofont">asyncore</TT> module provides the basic infrastructure for writing and handling asynchronous socket service clients and servers that are result of a series of events dispatched by an event loop.</P>
+
+				<P>The <tt clASS="monofont">select</Tt> module is used to implement polling and to multiplex processing across multiple I/O streams without using threads or subprocesses.</p>
+
+				<p>In order to build Internet servers using Python, HTTP modules that you can use are as follows:</p>
+
+				<UL>
+<LI>
+						<p>
+							
+								<tt cLASS="monofont">SocketServer—</tt>
+							 
+    
+							It is a generic socket-based IP server.
+						</p>
+
+					</li>
+<li>
+						<p>
+							
+								<tt class="monofont">BaseHTTPServer—</tt>
+							 
+    
+							It provides the infrastructure required by the next two modules.<a naMe="idx1073746139"></a>
+							
+						</P>
+
+					</li>
+<lI>
+						<p>
+							
+								<tt cLass="monofont">SimpleHTTPServer—</TT>
+							 
+    
+							It allows you to have a simple Web server.
+						</P>
+
+					</Li>
+<li>
+						<p>
+							
+								<TT CLass="monofont">CGIHTTPServer—</tT>
+							 
+    
+							It enables the implementation of a CGI-compliant HTTP server.
+						</P>
+
+					</LI>
+</ul>
+				<p>The <tT CLAss="monofont">httplib</tt> module implements the client side of the <i>HTTP (Hypertext Transfer Protocol)</i> protocol.</p>
+
+				<p>The <tt class="monofont">urllib</tt> and <tt cLasS="monofont">urlparse</tt> modules are useful tools provided by Python to process URLs. The <tT clasS="monofont">urllib</tt> module is a high-level interface to fetch data across the World Wide Web. It is normally used as an outer interface to other modules, such as <tT CLAss="monofont">httplib, ftplib, gopherlib,</tt> and so on. On the other hand, the <TT CLass="monofont">urlparse</tT> module manipulates a <TT Class="monofont">URL</TT> string, parsing it into tuples.</P>
+
+				<P>The <tt class="monofont">ftplib</tt> module implements the client side of the FTP protocol.</p>
+
+				<p>The <tt class="monofont">smtplib</tt> module provides a low-level client interface to the <Tt cLass="monofont">SMTP</Tt> protocol that can be used to send emails in the Internet.</p>
+
+				<p>The <tT claSS="monofont">poplib</TT> module provides a low-level <tt clASS="monofont">POP3</Tt> client-side interface for connecting to a <tt cLASS="monofont">POP3</tt> server using a client protocol.</p>
+
+				<p>The <TT CLass="monofont">imaplib</tt> module provides a low-level IMAP client-side interface for connecting to an <tt class="monofont">IMAP4</tt> mail server using the <tt clasS="monofont">IMAP4rev1</tt> client protocol.</P>
+
+				<p>The <tt Class="monofont">nntplib</Tt> module implements a low-level interface to the client side of the <i>NNTP (Network News Transfer Protocol)</i> protocol—a service mostly known for providing <I>newsgroups.</I> This protocol is also used to exchange Usenet news articles between servers.</P>
+
+				<P>The <tt clASS="monofont">telnetlib</Tt> module implements a client for the telnet protocol. This protocol is used to connect to remote computers. After you have established your telnet connection, you can execute UNIX commands remotely on that computer through your telnet interface.</p>
+
+				<p>The <tT CLAss="monofont">gopherlib</tt> module is a minimal client-side implementation of the <TT CLass="monofont">Gopher</tt> protocol.<a name="idx1073746140"></a>
+				</p>
+
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="169.html" title="Newsgroups—Telnet and Gopher"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=170" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="170.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="172.html" title="11. Web Development"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073746138">networking</a> <a href="#idx1073746139">2nd</a> <a href="#idx1073746140">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

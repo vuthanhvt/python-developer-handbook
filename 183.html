@@ -1,0 +1,328 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The cgi Module</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="179.html" class="navtitle">12. Scripting Programming</a> &gt; <span class="nonavtitle">The cgi Module</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="182.html" title="An Introduction to CGI"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=183" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="183.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="184.html" title="Creating, Installing, and Running Your Script"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A44%3A47+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148040135189253149095235</font><a href="read3.asp?bookname=0672319942&snode=183&now=5%2F31%2F2002+4%3A44%3A47+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+
+The <tt cLASS="monofont">cgi</tt> Module</h3>
+				<p>The <TT CLass="monofont">cgi</tT> module accepts <TT Class="monofont">sys.stdin</tt> and environment variables set by the server as
+input sources. The output is sent directly to <tt class="monofont">sys.stdout,</tt> carrying an <tt claSs="monofont">HTTP</tT> header and the
+data itself.</p>
+
+				<p>A very simple <a Name="idx1073746617"></a>
+					<A namE="idx1073746618"></A>header example would be</P>
+
+				<Pre>
+					
+print "Content-type: text/html"
+print
+
+				</prE>
+
+				<P>Note that it is necessary to have a new line at the end of the header information. In most cases, the previous line is all
+you will use in your scripts.</P>
+
+				<P>The <a namE="idx1073746619"></A>
+					<A Name="idx1073746620"></a>
+					<TT CLass="monofont">FieldStorage</tt> class, which is implemented by this module, is able to read both the standard input (for
+<tt class="monofont">POST</tt> calls) and the query string (for <tt clasS="monofont">GET</tt> calls). In order to parse the contents of an HTML
+Form, you need to create an instance of this class.</P>
+
+				<p>This instance carries the following attributes:</p>
+
+				<uL>
+<li><p><a Name="idx1073746621"></A>
+							<A NAme="idx1073746622"></a>
+							<tT CLAss="monofont">fs.name—</tt>
+This is the field's name.</P>
+
+					</LI>
+<Li><p>
+							<a nAME="idx1073746623"></A>
+							<a name="idx1073746624"></a>
+							<tt class="monofont">fs.value—</tt>This is the field's value.</p>
+
+					</li>
+<li><P>
+							<a nAme="idx1073746625"></a>
+							<A name="idx1073746626"></A>
+							<tt cLASS="monofont">fs.filename—</tt>This client-side filename is used in uploads.</p>
+
+					</lI>
+<LI><P>
+							<a namE="idx1073746627"></A>
+							<A Name="idx1073746628"></a>
+							<TT CLass="monofont">fs.file—</tt>This is a file-like object from which data can be read.</p>
+
+					</li>
+<li><p>
+							<a name="idx1073746629"></a>
+							<a naMe="idx1073746630"></a>
+							<Tt clAss="monofont">fs.type—</tt>This is the content type.</P>
+
+					</li>
+<lI><P>
+							<A Name="idx1073746631"></a>
+							<A NAMe="idx1073746632"></a>
+							<tt CLASs="monofont">fs.type_options—</tt>This dictionary of options is specified on the content-type line of the HTTP request.</p>
+
+					</LI>
+<LI><p>
+							<a name="idx1073746633"></a>
+							<a name="idx1073746634"></a>
+							<tt class="monofont">fs.disposition—</Tt>This is the "content-disposition" field, <tT claSs="monofont">None</tt> if not specified.</p>
+
+					</Li>
+<li><P>
+							<A NAme="idx1073746635"></a>
+							<a NAME="idx1073746636"></a>
+							<tt cLASS="monofont">fs.disposition_option—</tt>This is the dictionary of disposition options.</p>
+
+					</lI>
+<LI><P>
+							<a name="idx1073746637"></a>
+							<a name="idx1073746638"></a>
+							<tt class="monofont">fs.headers—</tT>This is a dictionary-like object containing all HTTP headers contents.<a nAme="idx1073746639"></a>
+							<A name="idx1073746640"></A>
+							<a naME="idx1073746641"></A>
+							<A name="idx1073746642"></A>
+							<A NAme="idx1073746643"></a>
+						</p>
+
+					</LI>
+</UL>
+				<p>Each individual form field is defined as an instance of the <a naME="idx1073746644"></A>
+					<A name="idx1073746645"></a>
+					<tt class="monofont">MiniFieldStorage</tt> class, whereas on the contrary, multipart data (such as uploaded files) is defined as an
+instance of the <a name="idx1073746646"></a>
+					<A naMe="idx1073746647"></a>
+					<tT clasS="monofont">FieldStorage</tt> class itself. Each instance is accessed as a dictionary whose keys are the Form's field names,
+and the <tT CLAss="monofont">values</tt> are their contents. These dictionaries also implement methods such as
+<TT CLass="monofont">.keys()</tT> and <TT Class="monofont">.has_key().</TT> If a specific form field has multiple values (for example, a selection
+list), a list of multiple <TT class="monofont">MiniFieldStorage</tt> instances is generated and assigned to the appropriate key value in
+the dictionary. The use of <tt class="monofont">MiniFieldStorage</tt> is pretty much transparent when using CGI, thus, you don't have
+to worry about these implementation details.</p>
+
+				<p>Note that uploaded files are read directly to the memory by accessing the<a nAme="idx1073746648"></A>
+					<a naMe="idx1073746649"></a>
+					<tt ClasS="monofont">value</TT> attribute of the class instance.</P>
+
+				<p>Also note that Python 2.0 provides a new method called <tt cLASS="monofont">getvalue()</tt>
+					<a nAME="idx1073746650"></A>
+					<a namE="idx1073746651"></A> to the objects of the <TT class="monofont">FieldStorage</tt> class, that implements the same functionality of a
+dictionary's <tt class="monofont">get()</tt> method<a namE="idx1073746652"></a>
+					<a Name="idx1073746653"></A> by returning the value attribute of the given object.</p>
+
+				
+					<h4>
+Functions</h4>
+					<p>The following list shows some general functions exposed by the <Tt clASS="monofont">cgi</Tt> module.</p>
+
+					<blOCKQuote>
+<P><P>
+								<A Name="idx1073746654"></a>
+								<A NAMe="idx1073746655"></a>
+								<tt class="monofont">cgi.escape(string [,quote])—</tt>
+Translates <tt class="monofont">"&lt;",</tt>
+								<Tt cLass="monofont">"&amp;",</Tt>
+								<tt cLass="monofont">"&gt;"</TT> to <TT clasS="monofont">"&amp;lt;",</TT>
+								<Tt claSS="monofont">"&amp;amp;",</TT>
+								<tt clASS="monofont">"&amp;gt;".</Tt> If you want to convert the double-quote character, you must set the <tt class="monofont">quote</tt> flag
+to true.</p>
+
+						</p>
+<p>
+							<p><a name="idx1073746656"></a>
+								<A naMe="idx1073746657"></a>
+								<tT clasS="monofont">cgi.parse_qs(string, keep_blank_values=0)—</tt>Parses a query string such as <tT CLAss="monofont">"country=USA&amp;state=PA"</tt> to a dictionary-like format, for example,
+<TT CLass="monofont">{"country": ["USA"], "state": ["PA"],…}</tT>
+							</P>
+
+						</P>
+<P>
+							<p><a naME="idx1073746658"></A>
+								<A name="idx1073746659"></a>
+								<tt class="monofont">cgi.parse([file], …)—</tt>Parses query strings from default file locations (such as, multiple file objects) from which data can be read, and
+generates a dictionary. The default behavior is to map the input to <tt clasS="monofont">stdin.</tt>
+								<A namE="idx1073746660"></a>
+								<a naMe="idx1073746661"></a>
+								<a NAME="idx1073746662"></a>
+								<a naME="idx1073746663"></A>
+								<A name="idx1073746664"></A>
+							</P>
+
+						</P>
+</BlockQUOTe>
+					<p>For CGI <a name="idx1073746665"></a>debugging, the following functions are available:</p>
+
+					<blockquote>
+<p>
+							<P>
+								<a nAme="idx1073746666"></a>
+								<A name="idx1073746667"></A>
+								<tt cLASS="monofont">cgi.print_environ()—</tt>Formats the shell environment in HTML.</p>
+
+						</p>
+<P>
+							<P><A Name="idx1073746668"></a>
+								<A NAMe="idx1073746669"></a>
+								<tt CLASs="monofont">cgi.print_environ_usage()—</tt>Prints a list of environment variables, used by CGI, in HTML.</p>
+
+						</p>
+<p>
+							<p><a name="idx1073746670"></a>
+								<a name="idx1073746671"></a>
+								<tT clAss="monofont">cgi.print_form(form)—</tT>Formats a form in HTML.</p>
+
+						</p>
+<p>
+							<p><A namE="idx1073746672"></A>
+								<A Name="idx1073746673"></a>
+								<TT CLass="monofont">cgi.print_directory()—</tT>
+Formats the current directory in HTML.</P>
+
+						</P>
+<P>
+							<p><a naME="idx1073746674"></A>
+								<A name="idx1073746675"></a>
+								<tt class="monofont">cgi.test()—</tt>
+Tests CGI script. It writes minimal HTTP headers and formats all information provided to the script in HTML
+form.</p>
+
+						</p>
+</blocKquOte>
+					<p>The following functions are not part of the CGI module, but they are very useful for CGI processing too.</P>
+
+					<blocKquoTE>
+<P>
+							<P>
+								<a namE="idx1073746676"></A>
+								<A Name="idx1073746677"></a>
+								<A NAMe="idx1073746678"></a>
+								<a nAME="idx1073746679"></A>
+								<tt class="monofont">urllib.quote(string),</tt>
+								<tt class="monofont">urllib.unquote(string)—</tt>These functions do and undo convertions between literals (that are used in CGI applications) and their special
+translation codes, which are required when transporting the literals to URL format (for example, becomes "
+									<tt ClaSs="monofont">%20</tt>
+								").</P>
+
+						</p>
+<p>
+							<p><a Name="idx1073746680"></A>
+								<A NAme="idx1073746681"></a>
+								<tT CLAss="monofont">urllib.urlencode(dictionary)—</tt>Converts a dictionary <TT CLass="monofont">{ "country":"USA", "state":"PA",…}</tT> to query string format (for example,
+<TT Class="monofont">"country=USA&amp;state=PA"</tt>). Note that this function has the opposite functionality of the
+<tt class="monofont">cgi.parse_qs()</tt> function.<a name="idx1073746682"></A>
+								<a nAme="idx1073746683"></a>
+								<A name="idx1073746684"></A>
+								<a naME="idx1073746685"></A>
+								<A name="idx1073746686"></A>
+							</P>
+
+						</P>
+</BlockQUOTe>
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="182.html" title="An Introduction to CGI"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=183" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="183.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="184.html" title="Creating, Installing, and Running Your Script"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746633">fs.disposition</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746635">fs.disposition_option</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746627">fs.file</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746625">fs.filename</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746637">fs.headers</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746621">fs.name</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746629">fs.type</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746631">fs.type_options</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746623">fs.value</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746648">value</a><BR>
+CGI (Common Gateway Interface) scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746641">cgi module</a> <a href="#idx1073746662">2nd</a> <a href="#idx1073746684">3rd</a><BR>
+ <a href="#idx1073746642">cgi module</a> <a href="#idx1073746663">2nd</a> <a href="#idx1073746685">3rd</a><BR>
+ <a href="#idx1073746655">cgi.escape(string [,quote]) method</a><BR>
+ <a href="#idx1073746659">cgi.parse([file], …) method</a><BR>
+ <a href="#idx1073746657">cgi.parse_qs(string, keep blank values=0) method</a><BR>
+ <a href="#idx1073746673">cgi.print_directory() method</a><BR>
+ <a href="#idx1073746667">cgi.print_environ() method</a><BR>
+ <a href="#idx1073746669">cgi.print_environ_usage() method</a><BR>
+ <a href="#idx1073746671">cgi.print_form(form) method</a><BR>
+ <a href="#idx1073746675">cgi.test() method</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746647">FieldStorage</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746645">MiniFieldStorage</a><BR>
+classs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746620">FieldStorage</a><BR>
+Common Gateway Interface (CGI) scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746640">cgi module</a> <a href="#idx1073746661">2nd</a> <a href="#idx1073746683">3rd</a><BR>
+debugging<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746665">CGI scripts, functions</a><BR>
+ <a href="#idx1073746619">FieldStorage class</a> <a href="#idx1073746646">2nd</a><BR>
+ <a href="#idx1073746634">fs.disposition attribute</a><BR>
+ <a href="#idx1073746636">fs.disposition_option attribute</a><BR>
+ <a href="#idx1073746628">fs.file attribute</a><BR>
+ <a href="#idx1073746626">fs.filename attribute</a><BR>
+ <a href="#idx1073746638">fs.headers attribute</a><BR>
+ <a href="#idx1073746622">fs.name attribute</a><BR>
+ <a href="#idx1073746630">fs.type attribute</a><BR>
+ <a href="#idx1073746632">fs.type_options attribute</a><BR>
+ <a href="#idx1073746624">fs.value attribute</a><BR>
+ <a href="#idx1073746652">get() method</a><BR>
+ <a href="#idx1073746650">getvalue() method</a><BR>
+headers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746617">HTTP</a><BR>
+ <a href="#idx1073746618">HTTP headers</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746654">cgi.escape(string [,quote])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746658">cgi.parse([file], …)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746656">cgi.parse_qs(string, keep blank values=0)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746672">cgi.print_directory()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746666">cgi.print_environ()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746668">cgi.print_environ_usage()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746670">cgi.print_form(form)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746674">cgi.test()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746653">get()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746651">getvalue()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746676">urllib.quote(string)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746678">urllib.unquote(string)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746680">urllib.urlencode(dictionary)</a><BR>
+ <a href="#idx1073746644">MiniFieldStorage class</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746643">cgi</a> <a href="#idx1073746664">2nd</a> <a href="#idx1073746686">3rd</a><BR>
+scripts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Common Gateway Interface (CGI)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746639">cgi module</a> <a href="#idx1073746660">2nd</a> <a href="#idx1073746682">3rd</a><BR>
+ <a href="#idx1073746677">urllib.quote(string) method</a><BR>
+ <a href="#idx1073746679">urllib.unquote(string) method</a><BR>
+ <a href="#idx1073746681">urllib.urlencode(dictionary) method</a><BR>
+ <a href="#idx1073746649">value attribute</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

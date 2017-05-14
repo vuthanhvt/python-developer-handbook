@@ -1,0 +1,505 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Initialization, Finalization, and Threads</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="255.html" class="navtitle">A. Python/C API</a> &gt; <span class="nonavtitle">Initialization, Finalization, and Threads</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="264.html" title="Concrete Objects Layer"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=265" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="265.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="266.html" title="Memory Management"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A30%3A18+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222219255189226192197177127</font><a href="read9.asp?bookname=0672319942&snode=265&now=6%2F1%2F2002+6%3A30%3A18+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Initialization, Finalization, and Threads</h3><prE>
+					
+void Py_Initialize()
+
+				</PRE>
+
+				<p>Initialize the Python interpreter. In an application embedding Python, this should be called before using any other Python/C API functions; with the exception of <tt cLASS="monofont">Py_SetProgramName(),</tt>
+					<tt CLASs="monofont">PyEval_InitThreads(),</tt>
+					<tt class="monofont">PyEval_ReleaseLock(),</tt> and <tt class="monofont">PyEval_AcquireLock().</tT> This initializes the table of loaded modules (<tt ClasS="monofont">sys.modules</tt>), and creates the fundamental modules <tt ClasS="monofont">__builtin__,</TT>
+					<Tt claSS="monofont">__main__,</TT> and <tt clASS="monofont">sys.</Tt> It also initializes the module search path (<tt cLASS="monofont">sys.path</tt>). It does not set <tt class="monofont">sys.argv</tt>; it uses <tt class="monofont">PySys_SetArgv()</tt> for that. This is a no-operation when called for a second time (without calling <Tt cLass="monofont">Py_Finalize()</Tt> first). There is no return value; it is a fatal error if the initialization fails.</p>
+
+				<prE>
+					
+int Py_IsInitialized()
+
+				</pre>
+
+				<P>Returns <TT Class="monofont">true</TT> (nonzero) when the Python interpreter has been initialized, <TT clasS="monofont">false</TT> (zero) if not. After <Tt claSS="monofont">Py_Finalize()</TT> is called, this returns <tt class="monofont">false</tt> until <tt class="monofont">Py_Initialize()</tt> is called again.</p>
+
+				<pRe>
+					
+void Py_Finalize()
+
+				</pRe>
+
+				<p>Undoes all initializations made by <tT clasS="monofont">Py_Initialize()</tt> and subsequent uses of Python/C API functions, and destroys all sub-interpreters (see <tT CLAss="monofont">Py_NewInterpreter()</tt> in the following) that were created and not yet destroyed since the last call to <TT CLass="monofont">Py_Initialize().</tT> Ideally, this frees all memory allocated by the Python interpreter. This is a no-op when called for a second time (without calling <TT Class="monofont">Py_Initialize()</TT> again first). There is no return value; errors during finalization are ignored.</P>
+
+				<P>This function is provided for a number of reasons. An embedding application might want to restart Python without having to restart the application itself. An application that has loaded the Python interpreter from a dynamic link library (or DLL) might want to free all memory allocated by Python before unloading the DLL. During a hunt for memory leaks in an application, a developer might want to free all memory allocated by Python before exiting from the application.</p>
+
+				<p>Bugs and caveats include: The destruction of modules and objects in modules is done in random order; this can cause destructors (<tt class="monofont">__del__() methods</tt>) to fail when they depend on other objects (even functions) or modules. Dynamically loaded extension modules loaded by Python are not unloaded. Small amounts of memory allocated by the Python interpreter might not be freed (if you find a leak, please report it to the development team). Memory tied up in circular references between objects is not freed. Some memory allocated by extension modules might not be freed. Some extension might not work properly if their initialization routine is called more than once; this can happen if an application calls <tt class="monofont">Py_Initialize()</tt> and <Tt cLass="monofont">Py_Finalize()</Tt> more than once. <a naMe="idx1073751237"></a><a NAME="idx1073751238"></a></p>
+
+				<prE>
+					
+PyThreadState* Py_NewInterpreter()
+
+				</PRE>
+
+				<p>Creates a new sub-interpreter. This is an (almost) totally separate environment for the execution of Python code. In particular, the new interpreter has separate, independent versions of all imported modules, including the fundamental modules <tt cLASS="monofont">__builtin__,</tt>
+					<tt CLASs="monofont">__main__,</tt> and <tt class="monofont">sys.</tt> The table of loaded modules (<tt class="monofont">sys.modules</tT>) and the module search path (<tt ClasS="monofont">sys.path</tt>) are also separate. The new environment has no <tt ClasS="monofont">sys.argv</TT> variable. It has new standard I/O stream file objects <Tt claSS="monofont">sys.stdin,</TT>
+					<tt clASS="monofont">sys.stdout,</Tt> and <tt cLASS="monofont">sys.stderr</tt> (however, these refer to the same underlying FILE structures in the C library).<a name="idx1073751239"></a><a name="idx1073751240"></a><a name="idx1073751241"></a><A naMe="idx1073751242"></a><a Name="idx1073751243"></a><A namE="idx1073751244"></A><A Name="idx1073751245"></a></P>
+
+				<P>The return value points to the first thread state created in the new sub-interpreter. This thread state is made the current thread state. Note that no actual thread is created; see the discussion of thread states later. If the creation of the new interpreter is unsuccessful, <TT clasS="monofont">NULL</TT> is returned; no exception is set because the exception state is stored in the current thread state and there might not be a current thread state. (Like all other Python/C API functions, the global interpreter lock must be held before calling this function and is still held when it returns; however, unlike most other Python/C API functions, there needn't be a current thread state on entry.)</P>
+
+				<p>Extension modules are shared between (sub-)interpreters as follows: the first time a particular extension is imported, it is initialized normally, and a (shallow) copy of its module's dictionary is squirreled away. When the same extension is imported by another (sub-)interpreter, a new module is initialized and filled with the contents of this copy; the extension's <tt cLASS="monofont">init</tt> function is not called. Note that this is different from what happens when an extension is imported after the interpreter has been completely re-initialized by calling <tt class="monofont">Py_Finalize()</tt> and <tt class="monofont">Py_Initialize()</tt>; in that case, the extension's <Tt cLass="monofont">initmodule</Tt> function is called again.</p>
+
+				<p>Bugs and caveats include: Because sub-interpreters (and the main interpreter) are part of the same process, the insulation between them isn't perfect—for example, using low-level file operations like <tT claSS="monofont">os.close(),</TT> they can (accidentally or maliciously) affect each other's open files. Because of the way extensions are shared between (sub-)interpreters, some extensions might not work properly; this is especially likely when the extension makes use of (static) global variables, or when the extension manipulates its module's dictionary after its initialization. It is possible to insert objects created in one sub-interpreter into a namespace of another sub-interpreter; this should be done with great care to avoid sharing user-defined functions, methods, instances or classes between sub-interpreters because import operations executed by such objects might affect the wrong (sub-)interpreter's dictionary of loaded modules.</p>
+
+				<div CLASs="note"><p clASS="notetitle"><B>Note</b></p><p>
+
+					<p>This is a hard-to-fix bug that will be addressed in a future release.<A NAMe="idx1073751246"></a><a name="idx1073751247"></a><a name="idx1073751248"></a><a name="idx1073751249"></a><A naMe="idx1073751250"></a><a Name="idx1073751251"></a><A namE="idx1073751252"></A><A Name="idx1073751253"></a><A NAMe="idx1073751254"></a></p>
+
+				</p></DIV>
+<Br>
+<br>
+
+				<pRE>
+					
+void Py_EndInterpreter(PyThreadState *tstate)
+
+				</PRe>
+
+				<p>Destroys the (sub-)interpreter represented by the given thread state. The given thread state must be the current thread state. See the discussion of thread states later. When the call returns, the current thread state is <tt class="monofont">NULL.</tt> All thread states associated with this interpreter are destroyed. (The global interpreter lock must be held before calling  this function and is still held when it returns.) <tt class="monofont">Py_Finalize()</tt> will destroy all sub- interpreters that haven't been explicitly destroyed at that point.</P>
+
+				<prE>
+					
+void Py_SetProgramName(char *name)
+
+				</pre>
+
+				<P>This function should be called before <tt clAss="monofont">Py_Initialize()</tT> is called for the first time, if it is called at all. It tells the interpreter the value of the <TT Class="monofont">argv[0]</TT> argument to the <TT clasS="monofont">main()</TT> function of the program. This is used by <Tt claSS="monofont">Py_GetPath()</TT> and some other following functions to find the Python runtime libraries relative to the interpreter executable. The default value is <tt class="monofont">python.</tt> The argument should point to a zero-terminated character string in static storage whose contents will not change for the duration of the program's execution. No code in the Python interpreter will change the contents of this storage.</p>
+
+				<pre>
+					
+char* Py_GetProgramName()
+
+				</pre>
+
+				<p>Returns the program name set with <tt cLasS="monofont">Py_SetProgramName(),</tt> or the default. The returned string points into static storage; the caller should not modify its value.</p>
+
+				<Pre>
+					
+char* Py_GetPrefix()
+
+				</prE>
+
+				<p>Returns the prefix for installed platform-independent files. This is derived through a number of complicated rules from the program name set with <tt CLASs="monofont">Py_SetProgramName()</tt> and some environment variables; for example, if the program name is <tT CLAss="monofont">"/usr/local/bin/python",</tt> the prefix is <TT CLass="monofont">"/usr/local".</tT> The returned string points into static storage; the caller should not modify its value. This corresponds to the prefix variable in the top-level Makefile and the <TT Class="monofont">--prefix</tt> argument to the configure script at build time. The value is available to Python code as <tt class="monofont">sys.prefix.</tt> It is only useful on UNIX. See also the next function.<a name="idx1073751255"></A><a nAme="idx1073751256"></a><A name="idx1073751257"></A><a naME="idx1073751258"></A><A name="idx1073751259"></A><A NAme="idx1073751260"></a><a NAME="idx1073751261"></a></p>
+
+				<prE>
+					
+char* Py_GetExecPrefix()
+
+				</PRE>
+
+				<p>Returns the exec-prefix for installed platform-dependent files. This is derived through a number of complicated rules from the program name set with <tt class="monofont">Py_SetProgramName()</tt> and some environment variables; for example, if the program name is <tt class="monofont">"/usr/local/bin/python",</tt> the exec-prefix is <tT clAss="monofont">"/usr/local".</tT> The returned string points into static storage; the caller should not modify its value. This corresponds to the <tt clAss="monofont">exec_prefix</tT> variable in the top-level Makefile and the <TT Class="monofont">--exec_prefix</TT> argument to  the configure script at build time. The value is available to Python code as <TT clasS="monofont">sys.exec_prefix.</TT> It is only useful on UNIX.</P>
+
+				<p>The background is the exec-prefix differs from the prefix when platform dependent files (such as executables and shared libraries) are installed in a different directory tree. In a typical installation, platform dependent files can be installed in the <tt cLASS="monofont">"/usr/local/plat"</tt> subtree whereas platform independent files can be installed in <tt class="monofont">"/usr/local".</tt></p>
+
+				<p>Generally speaking, a platform is a combination of hardware and software families, for example, Sparc machines running the Solaris 2.x operating system are considered the same platform, but Intel machines running Solaris 2.x are another platform, and Intel machines running Linux are yet another platform. Different major revisions of the same operating system generally also form different platforms. Non-UNIX operating systems are a different story; the installation strategies on those systems are so different that the prefix and exec-prefix are meaningless, and set to the empty string. Note that compiled Python bytecode files are platform independent (but not independent from the Python version by which they were compiled).</p>
+
+				<p>System administrators will know how to configure the mount or automount programs to share <tt claSs="monofont">"/usr/local"</tT> between platforms while having <tt cLass="monofont">"/usr/local/plat"</tT> be a different filesystem for each platform.<a naME="idx1073751262"></A><A name="idx1073751263"></A></P>
+
+				<PRe>
+					
+char* Py_GetProgramFullPath()
+
+				</pre>
+
+				<P>Returns the full program name of the Python executable; this is computed as a side-effect of deriving the default module search path from the program name (set by <TT Class="monofont">Py_SetProgramName()</TT> earlier). The returned string points into static storage; the caller should not modify its value. The value is available to Python code as <TT class="monofont">sys.executable.</tt></p>
+
+				<pre>
+					
+char* Py_GetPath()
+
+				</pre>
+
+				<p>Returns the default module search path; this is computed from the program name (set by <tt claSs="monofont">Py_SetProgramName()</tT> earlier) and some environment variables. The returned string consists of a series of directory names separated by a platform dependent delimiter character. The delimiter character is <tt cLass="monofont">:</tT> on UNIX, <tt cLASS="monofont">;</tt> on DOS/Windows, and <tt CLASs="monofont">\ n</tt> (the ASCII newline character) on Macintosh. The returned string points into static storage; the caller should not modify its value. The value is available to Python code as the list <tT CLAss="monofont">sys.path,</tt> which can be modified to change the future search path for loaded modules.</P>
+
+				<PRE>
+					
+const char* Py_GetVersion()
+
+				</pre>
+
+				<p>Returns the version of this Python interpreter. This is a string that looks something like</p>
+
+				<pre>
+					
+"1.5 (#67, Dec 31 1997, 22:34:28) [GCC 2.7.2.2]"
+
+				</pre>
+
+				<p>The first word (up to the first space character) is the current Python version; the first three characters are the major and minor version separated by a period. The returned string points into static storage; the caller should not modify its value. The value is available to Python code as the list <tt class="monofont">sys.version.</tT><a nAme="idx1073751264"></a><A name="idx1073751265"></A></p>
+
+				<prE>
+					
+const char* Py_GetPlatform()
+
+				</PRE>
+
+				<p>Returns the platform identifier for the current platform. On UNIX, this is formed from the official name of the operating system, converted to lowercase, followed by the major revision number; for example, for Solaris 2.x, which is also known as SunOS 5.x, the value is <tt cLASS="monofont">sunos5.</tt> On Macintosh, it is <tt CLASs="monofont">mac.</tt> On Windows, it is <tT CLAss="monofont">win.</tt> The returned string points into static storage; the caller should not modify its value. The value is available to Python code as <tt class="monofont">sys.platform.</tt></p>
+
+				<pre>
+					
+const char* Py_GetCopyright()
+
+				</pre>
+
+				<P>Returns the official copyright string for the current Python version; for example</p>
+
+				<pRe>
+					
+"Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam"
+
+				</prE>
+
+				<p>The returned string points into static storage; the caller should not modify its value. The value is available to Python code as the list <tt cLass="monofont">sys.copyright.</TT></P>
+
+				<Pre>
+					
+const char* Py_GetCompiler()
+
+				</prE>
+
+				<P>Returns an indication of the compiler used to build the current Python version, in square brackets; for example</P>
+
+				<Pre>
+					
+"[GCC 2.7.2.2]"
+
+				</prE>
+
+				<P>The returned string points into static storage; the caller should not modify its value. The value is available to Python code as part of the variable <TT clasS="monofont">sys.version.</TT></P>
+
+				<pre>
+					
+const char* Py_GetBuildInfo()
+
+				</pre>
+
+				<p>Return information about the sequence number and build date and time of the current Python interpreter instance; for example</p>
+
+				<pre>
+					
+"#67, Aug 1 1997, 22:34:28"
+
+				</pre>
+
+				<p>The returned string points into static storage; the caller should not modify its value. The value is available to Python code as part of the variable <tt claSs="monofont">sys.version.</tT></p>
+
+				<prE>
+					
+int PySys_SetArgv(int argc, char **argv)
+
+				</pre>
+
+				<p>Sets <Tt clASS="monofont">sys.argv</Tt> based on <tt cLASS="monofont">argc</tt> and <tt CLASs="monofont">argv.</tt> These parameters are similar to those passed to the program's <tT CLAss="monofont">main()</tt> function with the difference that the first entry should refer to the script file to be executed rather than the executable hosting the Python interpreter. If there isn't a script that will be run, the first entry in <tt class="monofont">argv</tt> can be an empty string. If this function fails to initialize <tt class="monofont">sys.argv,</Tt> a fatal condition is signaled using <tT claSs="monofont">Py_FatalError().</tt></p>
+
+				<H4>Thread State and the Global Interpreter Lock</h4>
+					<p>The Python interpreter is not fully thread safe. In order to <a NAME="idx1073751266"></a><a naME="idx1073751267"></A><A name="idx1073751268"></A><A NAme="idx1073751269"></a><a NAME="idx1073751270"></a>support multithreaded Python programs, a global lock must be held by the current thread before it can safely access Python objects. Without the lock, even the simplest operations could cause problems in a multithreaded program: for example, when two threads simultaneously increment the reference count of the same object, the reference count could end up being incremented only once instead of twice.</p>
+
+					<p>Therefore, the rule exists that only the thread that has acquired the global interpreter lock can operate on Python objects or call Python/C API functions. In order to support multithreaded Python programs, the interpreter regularly releases and reacquires the lock—by default, every ten bytecode instructions (this can be changed with <tt class="monofont">sys.setcheckinterval()</tt>). The lock is also released and reacquired around potentially blocking I/O operations such as reading or writing a file, so other threads can run while the thread that requests the I/O is waiting for the I/O operation to complete.</p>
+
+					<p>The Python interpreter needs to keep some bookkeeping information separate per thread—for this it uses a data structure called PyThreadState. This is new in Python 1.5; in earlier versions, such a state was stored in global variables, and switching threads could cause problems. In particular, exception handling is now thread safe when the application uses <a name="idx1073751271"></a><A naMe="idx1073751272"></a><tT clasS="monofont">sys.exc_info()</tt> to access the exception last raised in the current thread.</p>
+
+					<P>There's one global variable left, however: the pointer to the current PyThreadState structure. Although most thread packages have a way to store per-thread global data, Python's internal platform independent thread abstraction doesn't support this yet. Therefore, the current thread state must be manipulated explicitly.</P>
+
+					<P>This is easy enough in most cases. Most code manipulating the global interpreter lock has the following simple structure:</P>
+
+					<pre>
+						
+Save the thread state in a local variable.
+Release the interpreter lock.
+...Do some blocking I/O operation...
+Reacquire the interpreter lock.
+Restore the thread state from the local variable.
+
+					</pRE>
+
+					<P>This is so common that a pair of macros exists to simplify it:</P>
+
+					<pre>
+						
+Py_BEGIN_ALLOW_THREADS
+...Do some blocking I/O operation...
+Py_END_ALLOW_THREADS
+
+					</pRE>
+
+					<P>The <Tt claSS="monofont">Py_BEGIN_ALLOW_THREADS</TT> macro opens a new block and declares a hidden local variable; the <tt class="monofont">Py_END_ALLOW_THREADS</tt> macro closes the block. Another advantage of using these two macros is that when Python is compiled without thread support, they are defined empty, thus saving the thread state and lock manipulations.</p>
+
+					<p>When thread support is enabled, the previous block expands to the following code:</p>
+
+					<pre>
+						
+PyThreadState *_save;
+_save = PyEval_SaveThread();
+...Do some blocking I/O operation...
+    PyEval_RestoreThread(_save);
+
+					</pre>
+
+					<p>Using even lower level primitives, we can get roughly the same effect as follows:</p>
+
+					<Pre>
+						
+PyThreadState *_save;
+_save = PyThreadState_Swap(NULL);
+PyEval_ReleaseLock();
+...Do some blocking I/O operation...
+PyEval_AcquireLock();
+PyThreadState_Swap(_save);
+
+					</Pre>
+
+					<p>There are some subtle differences; in particular, <Tt claSs="monofont">PyEval_RestoreThread()</tt> saves and restores the value of the global variable <TT CLass="monofont">errno</tT> because the lock manipulation does not guarantee that <TT Class="monofont">errno</TT> is left alone. Also, when thread support is disabled, <TT clasS="monofont">PyEval_SaveThread()</TT> and <Tt class="monofont">PyEval_RestoreThread()</tt> don't manipulate the lock; in this case, <tt class="monofont">PyEval_ReleaseLock()</tt> and <tt cLasS="monofont">PyEval_AcquireLock()</tt> are not available. This is done so that dynamically loaded extensions compiled with thread support enabled can be loaded by an interpreter that was compiled with disabled thread support.</p>
+
+					<P>The global interpreter lock is used to protect the pointer to the current thread state. When releasing the lock and saving the thread state, the current thread state pointer must be retrieved before the lock is released because another thread could immediately acquire the lock and store its own thread state in the global variable. Conversely, when acquiring the lock and restoring the thread state, the lock must be acquired before storing the thread state pointer.</p>
+
+					<p>Why so much detail about this? Because when threads are created from C, they don't have the global interpreter lock, nor is there a thread state data structure for them. Such threads must bootstrap themselves into existence, by first creating a thread state data structure, acquiring the lock, and finally storing their thread state pointer, before they can start using the Python/C API. When they are done, they should reset the thread state pointer, release the lock, and finally free their thread state data structure.</p>
+
+					<p>When <A namE="idx1073751273"></A><A Name="idx1073751274"></a><A NAMe="idx1073751275"></a><a nAME="idx1073751276"></A>creating a thread data structure, you need to provide an interpreter state data structure. The interpreter state data structure holds global data that is shared by all threads in an interpreter, for example the module administration (<tt clASS="monofont">sys.modules</Tt>). Depending on your needs, you can either create a new interpreter state data structure, or share the interpreter state data structure used by the Python main thread (to access the latter, you must obtain the thread state and access its interp member; this must be done by a thread that is created by Python or by the main thread after Python is initialized).</p>
+
+					<pre>
+						
+PyInterpreterState
+
+					</pre>
+
+					<p>This data structure represents the state shared by a number of cooperating threads. Threads belonging to the same interpreter share their module administration and a few other internal items. There are no public members in this structure.</p>
+
+					<p>Threads belonging to different interpreters initially share nothing, except process state like available memory, open file descriptors and such. The global interpreter lock is also shared by all threads, regardless of to which interpreter they belong.</p>
+
+					<pre>
+						
+PyThreadState
+
+					</pre>
+
+					<p>This data structure represents the state of a single thread. The only public data member is PyInterpreterState *interp, which points to this thread's interpreter state.</p>
+
+					<Pre>
+						
+void PyEval_InitThreads()
+
+					</Pre>
+
+					<p>Initialize and acquire the global interpreter lock. It should be called in the main thread before creating a second thread or engaging in any other thread operations such as <Tt claSs="monofont">PyEval_ReleaseLock()</tt> or <TT CLass="monofont">PyEval_ReleaseThread(tstate).</tT> It is not needed before calling <TT Class="monofont">PyEval_SaveThread()</TT> or <TT clasS="monofont">PyEval_RestoreThread().</TT></P>
+
+					<p>This is a no-op when called for a second time. It is safe to call this function before calling <tt class="monofont">Py_Initialize().</tt></p>
+
+					<p>When only the main thread exists, no lock operations are needed. This is a common situation (most Python programs do not use threads), and the lock operations slow the interpreter down a bit. Therefore, the lock is not created initially. This situation is equivalent to having acquired the lock: When there is only a single thread, all object accesses are safe. Therefore, when this function initializes the lock, it also acquires it. Before the Python thread module creates a new thread, knowing that either it has the lock or the lock hasn't been created yet, it calls <tt class="monofont">PyEval_InitThreads().</tT> When this call returns, it is guaranteed that the lock has been created and that it has acquired it.</p>
+
+					<p>It is not safe to call this function when it is unknown which thread (if any) currently has the global interpreter lock.</P>
+
+					<p>This function is not available when thread support is disabled at compile time.</p>
+
+					<pRe>
+						
+void PyEval_AcquireLock()
+
+					</pre>
+
+					<P>Acquires the global interpreter lock. The lock must have been created earlier. If this thread already has the lock, a deadlock ensues. This function is not available when thread support is disabled at compile time.</p>
+
+					<prE>
+						
+void PyEval_ReleaseLock()
+
+					</PRE>
+
+					<p>Releases the global interpreter lock. The lock must have been created earlier. This function is not available when thread support is disabled at compile time.</p>
+
+					<prE>
+						
+void PyEval_AcquireThread(PyThreadState *tstate)
+
+					</PRE>
+
+					<p>Acquires the global interpreter lock and then sets the current thread state to <tt cLASS="monofont">tstate,</tt> which should not be <tt CLASs="monofont">NULL.</tt> The lock must have been created earlier. If this thread already has the lock, deadlock ensues. This function is not available when thread support is disabled at compile time.</p>
+
+					<pre>
+						
+void PyEval_ReleaseThread(PyThreadState *tstate)
+
+					</pre>
+
+					<p>Resets the current thread state to <tt class="monofont">NULL</tt> and releases the global interpreter lock. The lock must have been created earlier and must be held by the current thread. The <Tt cLass="monofont">tstate</Tt> argument, which must not be <tt cLass="monofont">NULL,</TT> is only used to check that it represents the current thread state—if it isn't, a fatal error is reported. This function is not available when thread support is disabled at compile time.</P>
+
+					<Pre>
+						
+PyThreadState* PyEval_SaveThread()
+
+					</prE>
+
+					<P>Releases the interpreter lock (if it has been created and thread support is enabled) and resets the thread state to <TT clasS="monofont">NULL,</TT> returning the previous thread state (which is not <Tt claSS="monofont">NULL</TT>). If the lock has been created, the current thread must have acquired it. (This function is available even when thread support is disabled at compile time.)</p>
+
+					<pre>
+						
+void PyEval_RestoreThread(PyThreadState *tstate)
+
+					</pre>
+
+					<p>Acquires the interpreter lock (if it has been created and thread support is enabled) and sets the thread state to <tt class="monofont">tstate,</tt> which must not be <tt cLasS="monofont">NULL.</tt> If the lock has been created, the current thread must not have acquired it, otherwise deadlock ensues. (This function is available even when thread support is disabled at compile time.)</p>
+
+					<P>The following macros are normally used without a trailing semicolon; look for example usage in the Python source distribution.</p>
+
+					<pre>
+						
+Py_BEGIN_ALLOW_THREADS
+
+					</Pre>
+
+					<p>This macro expands to <TT CLass="monofont">"{  PyThreadState *_save; _save = PyEval_SaveThread();".</tT> Note that it contains an opening brace; it must be matched with the following <TT Class="monofont">Py_END_ALLOW_THREADS</TT> macro. It is a no-op when thread support is disabled at compile time.</P>
+
+					<Pre>
+						
+Py_END_ALLOW_THREADS
+
+					</prE>
+
+					<P>This macro expands to <TT class="monofont">"PyEval_RestoreThread(_save); } ".</tt> Note that it contains a closing brace; it must be matched with an earlier <tt class="monofont">Py_BEGIN_ALLOW_THREADS</tt> macro. See earlier section for further discussion of this macro. It is a no-op when thread support is disabled at compile time.</p>
+
+					<pre>
+						
+Py_BEGIN_BLOCK_THREADS
+
+					</Pre>
+
+					<P>This macro expands to <tt cLass="monofont">"PyEval_RestoreThread(_save);"</tT> that is, it is equivalent to <tt cLASS="monofont">Py_END_ALLOW_THREADS</tt> without the closing brace. It is a no-op when thread support is disabled at compile time.</p>
+
+					<pRE>
+						
+Py_BEGIN_UNBLOCK_THREADS
+
+					</PRe>
+
+					<p>This macro expands to <tt CLASs="monofont">"_save = PyEval_SaveThread();"</tt> that is, it is equivalent to <tT CLAss="monofont">Py_BEGIN_ALLOW_THREADS</tt> without the opening brace and variable declaration. It is a no-op when thread support is disabled at compile time.</p>
+
+					<p>All the following functions are only available when thread support is enabled at compile time, and must be called only when the interpreter lock has been created.</p>
+
+					<pre>
+						
+PyInterpreterState* PyInterpreterState_New()
+
+					</pre>
+
+					<p>Creates a new interpreter state object. The interpreter lock need not be held, but can be held if it is necessary to serialize calls to this function.</p>
+
+					<blockQuoTe>
+<p><p><Tt claSs="monofont">void PyInterpreterState_Clear(PyInterpreterState *interp)</tt>— 
+    
+								Resets all information in an interpreter state object. The interpreter lock must be held.</P>
+</P>
+<P><P><tt clASS="monofont">void PyInterpreterState_Delete(PyInterpreterState *interp)</Tt>— 
+    
+								Destroys an interpreter state object. The interpreter lock need not be held. The interpreter state must have been reset with a previous call to <tt cLASS="monofont">PyInterpreterState_Clear().</tt></p>
+</p>
+<P><P><TT class="monofont">PyThreadState* PyThreadState_New(PyInterpreterState *interp)</tt>— 
+    
+								Creates a new thread state object belonging to the given interpreter object. The interpreter lock need not be held, but might be held if it is necessary to serialize calls to this function.</p>
+</p>
+<p><p><tt class="monofont">void PyThreadState_Clear(PyThreadState *tstate)</tt>— 
+    
+								Resets all information in a thread state object. The interpreter lock must be held.</P>
+</p>
+<p><P><tt cLass="monofont">void PyThreadState_Delete(PyThreadState *tstate)</tT>— 
+    
+								Destroys a thread state object. The interpreter lock need not be held. The thread state must have been reset with a previous call to <tt cLASS="monofont">PyThreadState_Clear().</tt></p>
+</p>
+<P><P><TT clasS="monofont">PyThreadState* PyThreadState_Get()</TT>— 
+    
+								Returns the current thread state. The interpreter lock must be held. When the current thread state is <Tt claSS="monofont">NULL,</TT> this issues a fatal error (so that the caller needn't check for <tt class="monofont">NULL</tt>).</p>
+</p>
+<p><p><tt class="monofont">PyThreadState* PyThreadState_Swap(PyThreadState *tstate)</Tt>— 
+    
+								Swaps the current thread state with the thread state given by the argument <tT claSs="monofont">tstate,</tt> which might be <tT claSS="monofont">NULL.</TT> The interpreter lock must be held.<a namE="idx1073751277"></A><A Name="idx1073751278"></a><A NAMe="idx1073751279"></a><a nAME="idx1073751280"></A><a name="idx1073751281"></a><a name="idx1073751282"></a><a name="idx1073751283"></a><a nAme="idx1073751284"></A><a naMe="idx1073751285"></a><a nAme="idx1073751286"></a><A NAMe="idx1073751287"></a><a nAME="idx1073751288"></A><a namE="idx1073751289"></A><A Name="idx1073751290"></a><A NAMe="idx1073751291"></a><a name="idx1073751292"></a>
+							</p>
+</p>
+</blockquote>
+				
+			</FonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="264.html" title="Concrete Objects Layer"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=265" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="265.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="266.html" title="Memory Management"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751240">initialization, finalization, and threads</a> <a href="#idx1073751247">2nd</a> <a href="#idx1073751256">3rd</a> <a href="#idx1073751278">4th</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multithreaded<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751268">support</a> <a href="#idx1073751290">2nd</a><BR>
+ <a href="#idx1073751262">char* Py_GetExecPrefix() function</a><BR>
+ <a href="#idx1073751264">const char* Py_GetVersion() function</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751273">thread data structures</a><BR>
+ <a href="#idx1073751243">finalization, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751250">2nd</a> <a href="#idx1073751259">3rd</a> <a href="#idx1073751281">4th</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751263">char* Py_GetExecPrefix()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751265">const char* Py_GetVersion()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751245">initialization, finalization, and threads</a> <a href="#idx1073751252">2nd</a> <a href="#idx1073751261">3rd</a> <a href="#idx1073751283">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751254">PyThreadState* Py_NewInterpreter()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751272">sys.exec_info()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751238">void Py_Finalize()</a><BR>
+ <a href="#idx1073751285">global locks, thread state</a><BR>
+ <a href="#idx1073751242">initialization, Python/C Application Programmers Interface (API)</a> <a href="#idx1073751249">2nd</a> <a href="#idx1073751258">3rd</a> <a href="#idx1073751280">4th</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751241">initialization, finalization, and threads</a> <a href="#idx1073751248">2nd</a> <a href="#idx1073751257">3rd</a> <a href="#idx1073751279">4th</a><BR>
+interpreters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751287">global locks, thread state</a><BR>
+locks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751286">global interpreter, thread state</a><BR>
+multithreaded programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751267">support</a> <a href="#idx1073751289">2nd</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multithreaded<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751269">support</a> <a href="#idx1073751291">2nd</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751239">initialization, finalization, and threads</a> <a href="#idx1073751246">2nd</a> <a href="#idx1073751255">3rd</a> <a href="#idx1073751277">4th</a><BR>
+ <a href="#idx1073751253">PyThreadState* Py_NewInterpreter() function</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multithreaded<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751270">support</a> <a href="#idx1073751292">2nd</a><BR>
+state<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751284">threads, global locks</a><BR>
+structures<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751275">thread data, creating</a><BR>
+support<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751266">multithreaded programs</a> <a href="#idx1073751288">2nd</a><BR>
+ <a href="#idx1073751271">sys.exec_info() function</a><BR>
+ <a href="#idx1073751276">thread data structures, creating</a><BR>
+threads<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751244">Python/C Application Programmers Interface (API)</a> <a href="#idx1073751251">2nd</a> <a href="#idx1073751260">3rd</a> <a href="#idx1073751282">4th</a><BR>
+ <a href="#idx1073751237">void Py_Finalize() function</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751274">thread data structures</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,1294 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; IDLE</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="219.html" class="navtitle">16. Development Environment</a> &gt; <span class="nonavtitle">IDLE</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="223.html" title="Integrated Development Environments"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=224" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="224.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="225.html" title="Pythonwin"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A17%3A46+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222217075242194030120015090</font><a href="read9.asp?bookname=0672319942&snode=224&now=6%2F1%2F2002+6%3A17%3A46+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+IDLE</h3>
+				<p>IDLE is written in Python and it uses Tkinter for the GUI interface. IDLE is portable and available for all Python platforms that support Tkinter, which includes UNIX, Windows, and Macintosh. Because it is written in Python, you can extend it in Python as well. <a NAME="idx1073749608"></a>Guido van Rossum, along with many others including <a naME="idx1073749609"></A>Jeremy Hylton, <A name="idx1073749610"></A>Tim Peters, <A NAme="idx1073749611"></a>Moshe Zadka, and <a name="idx1073749612"></a>Mark Hammond are some of the people behind the development effort of the IDLE project. IDLE can be considered to be a fresh product because it was first released with version 1.5.2 of Python.</p>
+
+				<div class="note"><p cLasS="notetitle"><b>Tip</b></p><P>
+
+					<p>Some say that the name IDLE really comes from the surname of one of the actors who was part of the British troupe. Well, I don't know whether it is true or not.</p>
+
+				</p></dIv>
+<br>
+<BR>
+
+				<P>The IDLE environment consists of several distinct modules, and each one of them is responsible for a very specific functionality within the whole environment. There are modules to handle the undo engine, the colorizer, the automatic indentation, the class browser, the debugger, and many other features.</P>
+
+				<p>The <a naME="idx1073749613"></A>
+					<A name="idx1073749614"></A>undo engine dynamically intercepts all buffer-changing operations, stacking the inverse of the commands. This engine also supports grouping options, which is used by some high-level commands in order to undo/redo multiple operations simultaneously. It also tracks changes made in open files in order to ask you to save them before effectively letting you close them.</P>
+
+				<P>The <A name="idx1073749615"></A>colorizer highlights Python syntax, and it works while IDLE is unoccupied. When you resume working, the colorizer stops.</P>
+
+				<P>IDLE implements a powerful <A name="idx1073749616"></a>
+					<a name="idx1073749617"></a>editor window, which gets subclassed when an instance of the interactive shell window is created to provide you access to the Python interactive mode. This subclass is able to handle the execution of commands, including the command history management.</p>
+
+				<p>The editor window provides a set of functionality that allows you to create new files or browse through and edit existing Python scripts. Two other important <a name="idx1073749618"></a>
+					<a NamE="idx1073749619"></a>browsing engines are also part of the IDLE environment: the <a nAme="idx1073749620"></a>
+					<a Name="idx1073749621"></A>Path Browser and the Class Browser. The former is used for searching modules through the directories listed in the <TT Class="monofont">sys.path</TT> variable, whereas the latter implements a simple Class Browser for finding the methods of classes.<A Name="idx1073749622"></a>
+					<A NAMe="idx1073749623"></a>
+					<a nAME="idx1073749624"></A>
+				</p>
+
+				<p>IDLE also has a flexible search capability through its Find in Files dialog that lets you search through your files or the system files to find occurrences of identifiers or any other text fragments.</p>
+
+				<p>A debugging implementation, which can be configured using the Debug Control Panel, is also offered by IDLE. Keep in mind that this Debug is still in the process of development and tuning.</p>
+
+				<p>Among the features included in the latest release (version 0.5) of IDLE, I highlight the following ones:</p>
+
+				<ul>
+<li>
+						<p>New functionality in the Shell window that displays <i>call tips</i> for functions that know the <i>documentation string.</i>
+						</p>
+
+					</li>
+<lI>
+						<p>New implementation for both the Path Browser and the Class Browser that is based on the tree widget navigation model. The Class and Path browsers now use a new version of the <tT claSs="monofont">pyclbr.py</tt> module, which is used to parse a Python file to recognize class and method definitions and to find out the superclasses of a class.</p>
+
+					</Li>
+<li>
+						<P>Better auto-indent capabilities. It is now possible to set the indent width and toggle between the use of tabs in the indentation. Now, the auto-indent functionality knows how to indent the blocks inside multiline statements.</P>
+
+					</LI>
+<li>
+						<p>You can now import files as modules and run them as scripts from the File Editor.</p>
+
+					</LI>
+<LI>
+						<p>You can call IDLE with command-line arguments just as you normally do with the Python interpreter.</p>
+
+					</li>
+<LI>
+						<P>A status bar was created to display the current line and column.</P>
+
+					</li>
+<li>
+						<P>The Comment out region feature now inserts two hashes (<TT Class="monofont">##</tt>) in order to be more distinguishing.</p>
+
+					</li>
+</ul>
+				<p>For more information, check out the following:</p>
+
+				<blockquOte>
+<P>
+						<p>IDLE</p>
+
+						<p><A targEt="_blank" hrEF="http://www.python.org/idle/">http://www.python.org/idle/</A>
+						</P>
+
+					</p>
+<p>
+						<p>IDLE-dev Mailing List</p>
+
+						<P><A TArget="_blank" HREF="http://www.python.org/mailman/listinfo/idle-dev">http://www.python.org/mailman/listinfo/idle-dev</a>
+						</p>
+
+					</p>
+</bLOCKquote>
+				
+					<h4>
+
+Installing and Configuring IDLE</h4>
+					<p>Previously, IDLE version 0.4 used to be automatically installed when you installed Python 1.5.2. The version 0.5, which is now available, can be downloaded from the IDLE page in the Python Web site. To install it, you just need to save the files in the <tt class="monofont">idle</tt> subdirectory of your current Python installation. Note that you can still keep your prior version by renaming it to something like <tt cLasS="monofont">idle 4.</tt>
+						<a Name="idx1073749625"></a>
+						<A namE="idx1073749626"></A>
+						<A Name="idx1073749627"></a>
+					</P>
+
+					<P>In order to start IDLE on a Windows machine, you need to either access the IDLE icon on the Python Program's folder or double-click the file <TT clasS="monofont">idle.pyw,</TT> which is located in the idle subdirectory of your installation. Note that you need to have Tkinter perfectly installed on your system in order to use IDLE, which means that in order to use IDLE you need to have one installation of Tcl/Tk running on your system. (Multiple Tcl/Tk installations might confuse Python.)</P>
+
+					<p>In order to run IDLE on a UNIX machine, first you need to obtain the source code, which usually is available along with the latest Python source code in the CVS tree—a <a naME="idx1073749628"></A>
+						<I>tarball</i> can also be downloaded from the IDLE homepage without any need to use CVS. Note that IDLE is part of most Python Distributions. Second, you just need to type <tt class="monofont">idle</tt> to open IDLE's Python Shell Window. For more information, check out</p>
+
+					<blockquotE>
+<p>
+							<p>Python CVS Page</P>
+
+							<p><a tArget="_blank" Href="http://www.python.org/download/cvs.html">http://www.python.org/download/cvs.html</A>
+							</P>
+
+						</P>
+</BlockQUOTe>
+				
+				
+					<h4>
+
+Command Line Usage</h4>
+					<p>The IDLE environment offers the following useful command-line arguments for your usage:</P>
+
+					<PRE>
+						
+idle.py [-c command] [-d] [-e] [-s] [-t title] [args ...]
+    -c command  run this command (see text below)
+    -d          enable the debugger
+    -e          edit mode (see text below)
+    -s          run $IDLESTARTUP or $PYTHONSTARTUP first
+
+    -t title    defines the title of the shell window
+    args        arguments to be used
+
+					</pre>
+
+					<p>If <A NAMe="idx1073749629"></a>
+						<a name="idx1073749630"></a>
+						<tt class="monofont">-e</tt> is used, the arguments should be the files to be opened for editing. <tt cLasS="monofont">sys.argv</tt> receives the arguments passed to IDLE itself.</p>
+
+					<P>If <a namE="idx1073749631"></a>
+						<a nAME="idx1073749632"></A>
+						<tt clASS="monofont">-c</Tt> is used, all arguments are placed in <tt cLASS="monofont">sys.argv[1:...],</tt> with <tt CLASs="monofont">sys.argv[0]</tt>  set to <tt class="monofont">'-c'.</tt>
+					</p>
+
+					<p>if neither <tt clasS="monofont">-e</tt> nor <Tt clAss="monofont">-c</tt> is used, the first argument is a script that is executed with the remaining arguments in <Tt clASS="monofont">sys.argv[1:...]</Tt> and <tt cLASS="monofont">sys.argv[0]</tt> set to the script name. If the script name is <tt CLASs="monofont">'-',</tt> no script is executed, but an interactive Python session is started; the arguments are still available in <tT CLAss="monofont">sys.argv.</tt>
+						<a name="idx1073749633"></a>
+						<a name="idx1073749634"></a>
+						<a namE="idx1073749635"></a>
+						<a Name="idx1073749636"></A>
+						<a namE="idx1073749637"></a>
+						<a nAME="idx1073749638"></A>
+						<a namE="idx1073749639"></A>
+					</P>
+
+				
+				
+					<H4>
+
+Python Shell</h4>
+					<p>After calling the IDLE environment, the Python Shell Window pops up on the screen showing Python's interactive mode interface. As you can see, although you have the <a nAME="idx1073749640"></A>primary prompt <tt clASS="monofont">&gt;&gt;&gt;,</Tt> no secondary prompt (<tt class="monofont">...</tt>) is displayed. Sometimes, you might feel like, "Where is the prompt?" Or, the interpreter might appear to have stopped working in such a way that you cannot get a new prompt. The primary solution for these problems is to press CTRL+C in order to <a name="idx1073749641"></a>
+						<a namE="idx1073749642"></a>
+						<a Name="idx1073749643"></A>interrupt any running command, establish a keyboard interruption, and get back to the prompt. If you need to quickly get out of the <a namE="idx1073749644"></a>interpreter environment and close the Pythonwin window, press CTRL+D at the primary prompt.</p>
+
+					<p>IDLE <A NAMe="idx1073749645"></a>
+						<a nAME="idx1073749646"></A>colorizes the shell elements according to their logical meanings and syntax definitions. Note that while you are typing the code, definitions become blue, strings become green, keywords become orange, comments become red, the interpreter's standard output becomes blue, and the standard input becomes black. When you execute the code, the console outputs are displayed in brown and the standard error messages are in dark green (see <a hreF="224#4.html">Figure 16.1</A>. Observe that this figure, as all other figures shown in this book are not in color). This process happens in a background thread, and you can change the color scheme anytime you want just by editing the <TT clasS="monofont">ColorPrefs</TT> class in <Tt class="monofont">IdlePrefs.py</tt> file.</p>
+
+					<center>
+						<h5>
+<a namE="4"></a>Figure 16.1. Note how IDLE uses colors to easily identify the various elements of the interface, such as the traceback messages.</h5>
+						
+							
+								<Img bOrder="0" WidtH="500" HEIght="206" sRC="graphics/16fig01.gif" ALt="graphics/16fig01.gif">
+							
+						
+					</cenTER>
+
+					<P>IDLE provides automatic support for indentation, which is fired when you press the ENTER key after a block-opening statement. Pressing the BACKSPACE key moves you back to one level of the indentation structure. Note that this automatically happens when you insert a return, continue, break, pass, or raise statement.<a namE="idx1073749647"></A>
+						<A Name="idx1073749648"></a>
+						<a name="idx1073749649"></a>
+						<a name="idx1073749650"></a>
+						<a namE="idx1073749651"></a>
+					</p>
+
+					<P>
+						<a naMe="idx1073749652"></a>
+						<a nAme="idx1073749653"></a>Indentation options, including the indent level, can be fully configured, depending on your own choice. The default value of the indent level sets the tabulation to be equivalent to four spaces. An interesting feature is that it is possible to select a specific region and indent or dedent it (these options are available on the edit menu).</P>
+
+					<P>
+						<A Name="idx1073749654"></a>
+						<A NAMe="idx1073749655"></a>Tip boxes are a new sensation in this latest version of IDLE. They are displayed when you type the opening parenthesis of functions (regular or built-in) and method calls (including class constructors) from the Python Standard Library. Their contents usually show a tip that lists the expected arguments. This feature is not limited to the functions defined by the Python environment. You can also use it while coding your own functions to automatically display their list of expected arguments. In addition to the list of arguments, you can also include an additional string to your tip box by adding a <a nAME="idx1073749656"></A>
+						<a namE="idx1073749657"></A>
+						<I>documentation string</I> to your function/method definition. To close the tip window, you need to press ESC or click somewhere else in the window.</p>
+
+					<p>Another new feature introduced in this version is the <a name="idx1073749658"></a>word completion mechanism. Based on the list of the latest words introduced to the program, you can successively press ALT+/ to toggle between them in order to expand and complete the word that you have just started typing.</p>
+
+					<p>Something very interesting, but actually not new because it came from the previous version, is the <a name="idx1073749659"></a>command history mechanism. It works when you move the cursor to the end of a specific line, or block, and press ENTER. This action copies the whole line (or block) to the primary prompt. Alternatively, you can use the keys ALT+p and ALT+n to toggle between the latest commands matching what you have typed. When you find the one you want to use, press ENTER and the command is retrieved.</p>
+
+					<p>Note that you can freely edit the commands before really executing them (see <a hRef="224#5.html">Figure 16.2</A>).<a naMe="idx1073749660"></a>
+						<a nAme="idx1073749661"></a>
+						<A NAMe="idx1073749662"></a>
+						<a nAME="idx1073749663"></A>
+						<a namE="idx1073749664"></A>
+					</P>
+
+					<CenteR>
+						<H5>
+<A Name="5"></a>Figure 16.2. This example demonstrates how IDLE handles indentation, the word completion mechanism, and the call tips functionality.</h5>
+						
+							
+								<img border="0" width="500" hEigHt="210" srC="graphics/16fig02.gif" alt="graphics/16fig02.gif">
+							
+						
+					</cEnteR>
+
+					<P>In case you want to <A Name="idx1073749665"></a>
+						<A NAMe="idx1073749666"></a>
+						<a nAME="idx1073749667"></A>
+						<a namE="idx1073749668"></A>
+						<A Name="idx1073749669"></a>change the current font used on windows, you just need to open the <tt class="monofont">EditorWindow.py</tt> file and define a new tuple value for the <tt class="monofont">font</Tt> entry in the <tT claSs="monofont">text</tt> dictionary, such as</p>
+
+					<Pre>
+						
+text['font'] = ("times", 12)
+
+					</pRE>
+
+				
+				
+					<H4>
+
+Keyboard Commands</H4>
+					<p>Moving around in the IDLE buffer is fairly easy. For basic editing and navigation controls, you can use the following key bindings:</p>
+
+					<ul>
+<LI>
+							<P>Backspace deletes to the left of the cursor.</P>
+
+						</li>
+<li>
+							<P>DEL deletes to the right of the cursor.</P>
+
+						</LI>
+<li>
+							<p>Arrow keys and Page Up/Down are used to move around the buffer.</p>
+
+						</LI>
+<LI>
+							<p>Home goes to the beginning of the line.</p>
+
+						</li>
+<li>
+							<p>End goes to the end of the line.</p>
+
+						</li>
+<li>
+							<p>CTRL+Home goes to the beginning of the file.</p>
+
+						</li>
+<li>
+							<p>CTRL+End goes to the end of the file.</p>
+
+						</Li>
+</uL>
+					<p>IDLE offers you the chance to modify some of the keyboard binding settings. Check out the <tt Class="monofont">Bindings.py</Tt> file for details.<a nAME="idx1073749670"></A>
+						<a namE="idx1073749671"></A>
+						<A Name="idx1073749672"></a>
+						<A NAMe="idx1073749673"></a>
+					</p>
+
+				
+				
+					<h4>
+File Menu</H4>
+					<P>IDLE's File Editor allows you to create new scripts or browse and edit existing Python source files. The File Editor might also be brought up from the Path Browser or when you are using the Debugger. In all cases, a new File Editor window will be opened with the name of the file and the path to it as its title (or called Untitled if it is a new unsaved file).<A Name="idx1073749674"></a>
+						<a name="idx1073749675"></a>
+						<a name="idx1073749676"></a>
+						<a namE="idx1073749677"></a>
+					</p>
+
+					<Div cLass="note"><p ClasS="notetitle"><B>Tip</B></P><p>
+
+						<p>A nice feature is almost hidden in the shell environment. If you click on the dotted line at the top of a menu, a new window is created containing the menu itself.</p>
+
+					</p></DIV>
+<Br>
+<br>
+
+					<p>The following <A NAMe="idx1073749678"></a>
+						<a nAME="idx1073749679"></A>
+						<a name="idx1073749680"></a>options are menu items located in the File menu:</p>
+
+					<blockquote>
+<p>
+							<p>
+								<a NamE="idx1073749681"></a>New window—Creates and opens a new editing window for when you want to create a new Python source file.</p>
+
+						</p>
+<P>
+							<p>
+								<a naMe="idx1073749682"></a>Open...—Opens a dialog box that allows you to locate and open any Python source file on your local system.</p>
+
+						</P>
+<P>
+							<P>
+								<A name="idx1073749683"></A>Open module...—Asks you to enter the name of a module, and then it searches through all the directories listed in the <TT Class="monofont">sys.path.</TT> The module is opened after it has been found.</P>
+
+						</P>
+<p>
+							<p>
+								<a nAME="idx1073749684"></A>Class browser—Opens a small utility that shows the classes and methods stored in the current open file.</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073749685"></a>Path browser—Uses the <tt class="monofont">sys.path</tt> variable as a startup helper for letting you browse directories, modules, classes, and methods.</p>
+
+						</P>
+<p>
+							<p>
+								<A namE="idx1073749686"></a>Save—Saves the current window. If the title of the window is delimited by <tt cLass="monofont">*</TT> literals, it indicates that the window has changed since the last time you saved it.</P>
+
+						</P>
+<p>
+							<p>
+								<a nAME="idx1073749687"></A>Save As...—Saves the current window using the given filename.</p>
+
+						</p>
+<p>
+							<p>
+								<A NAMe="idx1073749688"></a>Save Copy As...—Saves the current window using the given filename. The difference when comparing this to the previous option, is that this one doesn't rename the current window as the name of the new file.</p>
+
+						</p>
+<P>
+							<P>
+								<A Name="idx1073749689"></a>Close—Closes the current window.</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073749690"></a>Exit—Used to leave IDLE. It closes all windows and quits.<a name="idx1073749691"></a>
+								<A naMe="idx1073749692"></a>
+								<a Name="idx1073749693"></a>
+							</P>
+
+						</p>
+</blOCKQuote>
+					<P>The following table lists some <A NAme="idx1073749694"></a>
+						<a NAME="idx1073749695"></a>Emacs and Windows bindings for the previous set of Menu Options.<a naME="idx1073749696"></A>
+						<A name="idx1073749697"></a>
+						<a name="idx1073749698"></a>
+					</p>
+
+					<p><table boRdeR="1" celLspacIng="0" cELLPaddiNG="1" WIdth="100%">
+<cAPTIon><h5>Table 16.1. 
+
+
+
+ Keyboard Bindings for the File Menu</h5></CAPTion><colgroup align="left" span="3">
+<Tr vAligN="top">
+<th>
+<foNt siZE="2">
+										<B>Menu Option</B>
+									</font></TH>
+<TH>
+<font SIZE="2">
+										<b>Emacs Style Binding</b>
+									</foNT></TH>
+<th>
+<font size="2">
+										<b>Windows Binding</b>
+									</font></th>
+</tr>
+<Tr vAligN="top">
+<td>
+<foNt siZE="2">New</FOnt></td>
+<TD>
+<FOnt siZE="2">CTRL+x CTRL+n</FOnt></td>
+<TD>
+<FOnt size="2">CTRL+n</font></td>
+</tr>
+<tr valiGn="top">
+<tD>
+<fonT size="2">Open</Font></TD>
+<TD>
+<font SIZE="2">CTRL+x CTRL+f</font></TD>
+<TD>
+<font SIZE="2">CTRL+o</font></td>
+</tr>
+<tr valign="top">
+<td>
+<foNt sIze="2">Open Module</fOnt></td>
+<Td>
+<foNT SIze="2">CTRL+x CTRL+m</foNT></TD>
+<td>
+<foNT SIze="2">CTRL+m</foNT></TD>
+</tr>
+<tr valign="top">
+<td>
+<font size="2">Save</FonT></td>
+<tD>
+<font Size="2">CTRL+x CTRL+s</FONT></td>
+<td>
+<FONT size="2">CTRL+s</FONT></td>
+</tr>
+<TR VAlign="top">
+<td>
+<font size="2">Save As</font></td>
+<Td>
+<fOnt sIze="2">CTRL+x CTRL+w</foNt></td>
+<TD>
+<FOnt siZE="2">ALT+s</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font size="2">Save Copy As</font></td>
+<td>
+<font SizE="2">CTRL+x w</fonT></td>
+<td>
+<Font SIZE="2">ALT+SHIFT+s<a namE="idx1073749699"></A>
+										<A Name="idx1073749700"></a>
+										<A NAMe="idx1073749701"></a>
+										<a nAME="idx1073749702"></A>
+										<a name="idx1073749703"></a>
+										<a name="idx1073749704"></a>
+										<a name="idx1073749705"></a>
+									</foNt></tD>
+</tr>
+</cOlgroUp>
+</taBLE></P>
+
+				
+				
+					<h4>
+
+The Class and the Path Browsers</h4>
+					<p>The Class Browser function is implemented in the <tT CLAss="monofont">ClassBrowser.py</tt> file. You can launch this browser by pressing ALT+C or by selecting the Class browser option of the File menu. Note that you need to have already opened a file in order to use this function (see <A HREf="224#10.html">Figure 16.3</a>).</p>
+
+					<cENTEr>
+						<h5>
+<a name="10"></a>Figure 16.3. Class Browser.</h5>
+						
+							
+								<img border="0" wiDth="443" HeigHt="413" src="graphics/16fig03.gif" Alt="graphics/16fig03.gif">
+							
+						
+					</cENTEr>
+
+					<p>The Path Browser is implemented in the <tt CLASs="monofont">PathBrowser.py</tt> file. This option creates a tree object that provides the following hierarchy structure:</p>
+
+					<PRE>
+						
+Directory
+    Python source file
+       Class
+          Class method
+
+					</Pre>
+
+					<p>This structure is used to allow you to navigate through the directories listed in the Python <tT CLAss="monofont">sys.path</tt> variable. You just need to double-click on the upper level in order to expand all the sublevels. If you double-click on any of the sublevels of this tree, IDLE opens the associated object in a File Editor window for you. You can avoid that if you are just interested in browsing through the directories. Using the <tt class="monofont">+</tt> and <tt class="monofont">-</Tt> marks on the left side of the tree allows you to expand and shrink the tree without opening the File Editor.</p>
+
+					<P>Because of some internal problems, this version of IDLE has a cosmetic error that lists some directories more than once in the tree (see <a hrEf="224#11.html">Figure 16.4</a>).</p>
+
+					<cEnteR>
+						<H5>
+<A Name="11"></a>Figure 16.4. Path Browser.</H5>
+						
+							
+								<IMG bordER="0" WIdth="292" hEIGHt="307" src="graphics/16fig04.gif" alt="graphics/16fig04.gif">
+							
+						
+					</center>
+
+				
+				
+					<h4>
+
+Edit Menu</h4>
+					<p>The following menu <a namE="idx1073749706"></a>
+						<a Name="idx1073749707"></A>
+						<a namE="idx1073749708"></a>options are found in the Edit menu:</p>
+
+					<bLOCKquotE>
+<P>
+							<P>
+								<A name="idx1073749709"></A>Undo—Used to undo the last change made to the current window. Note that IDLE supports up to 1000 changes to be undone.</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073749710"></A>Redo—Redoes last change.</P>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073749711"></a>Cut—Copies and deletes the current selection.</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073749712"></a>Copy—Copies selection.</p>
+
+						</P>
+<p>
+							<p>
+								<A namE="idx1073749713"></a>Paste—Inserts the buffer value into the desired location.</p>
+
+						</p>
+<p>
+							<P>
+								<a naME="idx1073749714"></A>Select All—Selects all contents of the edit buffer.</P>
+
+						</p>
+<p>
+							<p>
+								<a NAME="idx1073749715"></a>Find...—Allows you to search specific text patterns. You can even use regular expressions.</p>
+
+						</p>
+<p>
+							<P>
+								<A NAme="idx1073749716"></a>Find again—Finds previous search again.</p>
+
+						</P>
+<P>
+							<P>
+								<A name="idx1073749717"></a>Find selection—Searches for a given string within the selected area.<a name="idx1073749718"></a>
+								<a name="idx1073749719"></a>
+								<a naMe="idx1073749720"></a>
+								<A namE="idx1073749721"></a>
+								<a naMe="idx1073749722"></a>
+								<a NAME="idx1073749723"></a>
+								<a naME="idx1073749724"></A>
+								<A name="idx1073749725"></A>
+							</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073749726"></A>Find in Files—Allows you to search for a specific string inside files stored in your system.</P>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073749727"></a>Replace—Allows you to search and replace specific entries.</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073749728"></a>Go to line—Opens a dialog box where you have to type a line number. Then, it moves you to that line.</p>
+
+						</P>
+<p>
+							<p>
+								<A namE="idx1073749729"></a>Indent region—Moves selected lines one tab (4 spaces) to the right.</p>
+
+						</p>
+<p>
+							<P>
+								<a naME="idx1073749730"></A>Dedent region—Moves selected lines one tab (4 spaces) to the left.</P>
+
+						</p>
+<p>
+							<p>
+								<a NAME="idx1073749731"></a>Comment out region—Comments a block of lines by inserting <tt cLASS="monofont">##</tt> in front of them.</p>
+
+						</p>
+<P>
+							<P>
+								<A Name="idx1073749732"></a>Uncomment region—Gets rid of the leading <tt class="monofont">#</tt> and <tt class="monofont">##</Tt> from the selected region.</p>
+
+						</P>
+<p>
+							<p>
+								<a Name="idx1073749733"></a>Tabify region—Converts leading spaces in a selection to tabs.</P>
+
+						</p>
+<p>
+							<p>
+								<A NAMe="idx1073749734"></a>Untabify region—Converts all tabs in a selection to the correct number of spaces.</p>
+
+						</p>
+<P>
+							<P>
+								<A Name="idx1073749735"></a>Toggle Tabs—Sets the type of the automatic indents. If you turn Tabs On, the indentation uses tabs and spaces. On the other hand, if you turn Tabs Off (default), the indentation uses only spaces.</P>
+
+						</P>
+<P>
+							<P>
+								<a namE="idx1073749736"></A>New Indent width—Changes the width of the automatic indents.</P>
+
+						</P>
+<p>
+							<p>
+								<a name="idx1073749737"></a>Expand word—Expands the word you have entered to match another word that you have previously typed in the same buffer.</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073749738"></a>Format Paragraph—Formats the current selection as a paragraph.</p>
+
+						</p>
+<P>
+							<p>
+								<a Name="idx1073749739"></A>Import module—Imports or reloads the module you are working on, adds the module name to the <tt clAss="monofont">__main__</tT> namespace, and opens the Shell window, if necessary.</P>
+
+						</P>
+<P>
+							<p>
+								<a naME="idx1073749740"></A>Run script—Runs the script stored in the <Tt claSS="monofont">__main__</TT> namespace, and adds the script name to the <tt clASS="monofont">sys.argvp[]</Tt> variable.<a name="idx1073749741"></a>
+								<a name="idx1073749742"></a>
+								<a name="idx1073749743"></a>
+								<a NamE="idx1073749744"></a>
+								<a nAme="idx1073749745"></a>
+								<a Name="idx1073749746"></A>
+								<A NAme="idx1073749747"></a>
+								<a NAME="idx1073749748"></a>
+							</p>
+
+						</p>
+</bLOCKquotE>
+					<P>The following table lists some <A Name="idx1073749749"></a>
+						<a name="idx1073749750"></a>
+						<a name="idx1073749751"></a>Emacs and Windows bindings for the previous set of Menu Options.</p>
+
+					<p><taBle BordEr="1" celLspaCING="0" cellPADDing="1" wIDTH="100%">
+<captION><H5>Table 16.2. Keyboard Bindings for the Edit Menu</h5></caption><colgroup aligN="left" spAn="3">
+<tr ValigN="top">
+<th>
+<fONT Size="2">
+										<b>Menu Options</B>
+									</FONt></th>
+<tH>
+<FONt sizE="2">
+										<B>Emacs Style Bindings</B>
+									</Font></th>
+<th>
+<font size="2">
+										<b>Windows Bindings</b>
+									</fonT></th>
+</Tr>
+<tr ValigN="top">
+<td>
+<fONT Size="2">Cut</fONT></Td>
+<td>
+<fONT Size="2">CTRL+w</fONT></Td>
+<td>
+<font size="2">CTRL+x</font></td>
+</tr>
+<tR vaLign="top">
+<Td>
+<fonT sizE="2">Paste</FONt></td>
+<tD>
+<FONt sizE="2">CTRL+y</FONt></td>
+<tD>
+<FONt size="2">CTRL+v</font></td>
+</tr>
+<tr valigN="top">
+<td>
+<Font Size="2">Copy</fOnt></tD>
+<TD>
+<Font sIZE="2">ALT+w, ESC+w</Font></tD>
+<TD>
+<Font sIZE="2">CTRL+c</Font></td>
+</tr>
+<tr valign="top">
+<td>
+<fonT siZe="2">Select All</foNt></td>
+<tD>
+<fonT SIZe="2">ALT+a, ESC+a</fonT></TD>
+<Td>
+<fonT SIZe="2">ALT+a</fonT></TD>
+</Tr>
+<tr valign="top">
+<td>
+<font size="2">Replace</fOnt></Td>
+<td>
+<Font sIze="2">CTRL+r</fONT></Td>
+<td>
+<fONT Size="2">CTRL+h</fONT></Td>
+</tr>
+<tR VALign="top">
+<td>
+<font size="2">Undo</font></td>
+<tD>
+<foNt siZe="2">CTRL+z</fonT></td>
+<tD>
+<FONt sizE="2">CTRL+z</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font size="2">Redo</font></td>
+<td>
+<font sIze="2">ALT+z, ESC+z</Font></Td>
+<td>
+<fOnt sIZE="2">CTRL+y</Font></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">Find</font></td>
+<td>
+<font size="2">CTRL+u CTRL+s</fonT></td>
+<Td>
+<foNt sizE="2">CTRL+f</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">Find again</fONT></Td>
+<td>
+<font size="2">CTRL+u CTRL+s</font></td>
+<td>
+<fOnt Size="2">CTRL+g, F3</Font></tD>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2">Find selection</FONt></td>
+<tD>
+<FONt size="2">CTRL+s</font></td>
+<td>
+<font sizE="2">CTRL+F3</foNt></td>
+</Tr>
+<tr vAligN="top">
+<TD>
+<Font sIZE="2">Go to line</Font></tD>
+<TD>
+<Font sIZE="2">ALT+g, ESC+g</Font></td>
+<td>
+<font size="2">ALT+g</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2">Indent Region</fonT></TD>
+<Td>
+<fonT SIZe="2">CTRL+]</fonT></TD>
+<Td>
+<font size="2">CTRL+]</font></td>
+</tr>
+<tr vAliGn="top">
+<td>
+<Font sIze="2">Dedent region</fONT></Td>
+<td>
+<fONT Size="2">CTRL+[</fONT></Td>
+<td>
+<fONT Size="2">CTRL+[</font></td>
+</tr>
+<tr valign="top">
+<tD>
+<foNt siZe="2">Comment out region</fonT></td>
+<tD>
+<FONt sizE="2">ALT+3</FONt></td>
+<tD>
+<FONt sizE="2">ALT+3</FONt></td>
+</tr>
+<tr valign="top">
+<td>
+<font sIze="2">Uncomment region</Font></Td>
+<td>
+<fOnt sIZE="2">ALT+4</Font></tD>
+<TD>
+<Font sIZE="2">ALT+4</Font></tD>
+</TR>
+<Tr valign="top">
+<td>
+<font size="2">Tabify region</fonT></td>
+<Td>
+<foNt sizE="2">ALT+5</fonT></TD>
+<Td>
+<fonT SIZe="2">ALT+5</fonT></TD>
+</Tr>
+<tr vALIGn="top">
+<td>
+<font size="2">Untabify region</font></td>
+<td>
+<fOnt Size="2">ALT+6</Font></tD>
+<td>
+<fONT Size="2">ALT+6</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt size="2">Format Paragraph</font></td>
+<td>
+<font sizE="2">ALT+q</foNt></td>
+<Td>
+<fonT sizE="2">ALT+q</FONt></td>
+</tR>
+<TR ValigN="top">
+<TD>
+<Font sIZE="2">Expand word</Font></td>
+<td>
+<font size="2">ALT+/</font></tD>
+<td>
+<Font Size="2">ALT+/</fOnt></tD>
+</TR>
+<Tr valIGN="top">
+<Td>
+<fonT SIZe="2">Toggle Tabs</fonT></TD>
+<Td>
+<font size="2">ALT+t</font></td>
+<td>
+<fonT siZe="2">ALT+t</foNt></td>
+</tR>
+<tr vALIGn="top">
+<td>
+<fONT Size="2">New indent width</fONT></Td>
+<td>
+<fONT Size="2">ALT+u</font></td>
+<td>
+<font size="2">ALT+u</fOnt></Td>
+</tr>
+<Tr valIgn="top">
+<tD>
+<FONt sizE="2">Import module</FONt></td>
+<tD>
+<FONt sizE="2">F5</FONt></td>
+<td>
+<font size="2">F5</font></td>
+</tR>
+<tr ValiGn="top">
+<td>
+<fOnt sIZE="2">Run script</Font></tD>
+<TD>
+<Font sIZE="2">CTRL+F5</Font></tD>
+<TD>
+<Font size="2">CTRL+F5<a name="idx1073749752"></a>
+										<a name="idx1073749753"></a>
+										<a NamE="idx1073749754"></a>
+										<a nAme="idx1073749755"></a>
+										<a Name="idx1073749756"></A>
+									</FONt></td>
+</tR>
+</COLgrouP>
+</TABle></p>
+
+				
+				
+					<h4>
+
+Windows Menu</H4>
+					<P>This menu only provides the <A Name="idx1073749757"></a>
+						<tt class="monofont">Zoom Height</tt> option, which is used to toggle the window between normal size (24x80) and the maximum allowed height.<a name="idx1073749758"></a>
+						<a NamE="idx1073749759"></a>
+						<a nAme="idx1073749760"></a>
+					</p>
+
+					<P>The Windows menu is also used to list the name of all open windows. After you select a window from the list, the window pops up in the front of your screen (unless it is minimized and you have to click on the icon to maximize it).</p>
+
+				
+				
+					<h4>
+
+Debug Menu</h4>
+					<P>The debugging mechanism offers the following menu <A NAme="idx1073749761"></a>
+						<a NAME="idx1073749762"></a>
+						<a naME="idx1073749763"></A>options.</P>
+
+					
+						<h5>
+Go to file/line</h5>
+						<p>This option looks around the insert point for a filename and line number, opens the file, and shows the line. It is useful when you get a traceback message, and you want to go to the line that has caused the error. You just need to put the cursor somewhere in the line that displays the filename and the line number, and select the Go to File/Line option on the menu.</p>
+
+					
+					
+						<H5>
+Stack Viewer</H5>
+						<P>This option opens a tree widget that shows the stack traceback of the last exception. Note that it can be used separately from the debug mechanism.</P>
+
+					
+					
+						<h5>
+Debugger</h5>
+						<p>Opens the <a name="idx1073749764"></a>Debug Control Panel, which allows you to run commands in the shell under the debugger mechanism. In order to close the Panel, you can toggle the option off in the menu.</p>
+
+					
+					
+						<h5>
+Auto-open Stack Viewer</h5>
+						<p>Once set, this option automatically opens the stack viewer when a traceback message occurs.<a name="idx1073749765"></a>
+							<a NamE="idx1073749766"></a>
+							<a nAme="idx1073749767"></a>
+							<a Name="idx1073749768"></A>
+							<A NAme="idx1073749769"></a>
+							<a NAME="idx1073749770"></a>
+							<a naME="idx1073749771"></A>
+							<A name="idx1073749772"></A>
+							<A NAme="idx1073749773"></a>
+						</p>
+
+						<p>The Debug mechanism that IDLE exposes allows you to</p>
+
+						<ul>
+<li>
+								<p>Set breakpoints in a source code window.</p>
+
+							</li>
+<li>
+								<p>Execute a program and step through its statements.</p>
+
+							</li>
+<Li>
+								<p>View the call stack. If necessary, you can right-click in the stack trace, and the debugger will move you to the corresponding section of the source code.</P>
+
+							</li>
+<lI>
+								<p>Check the value of the local and global variables.</p>
+
+							</li>
+<Li>
+								<p>Analyze the source code in the editor window as you step through the program.</p>
+
+							</LI>
+</UL>
+						<p>The debugging process starts when you open a File Editor Window, and creates or imports a module. After you have the code available, you can double-click the lines that you want, and select the Set Breakpoint Here option, which highlights the line. Now, you need to select the Debug Control Panel option on the menu. Notice that although the Panel pops up on the screen, the message [<tt cLASS="monofont">DEBUG ON]</tt> is printed on the Shell Window. After clicking the Go button on the Debug Control Panel, the execution will stop at every breakpoint that it finds.</p>
+
+						<p>You can also debug code that is typed directly into the Shell Window (see <A HREf="224#20.html">Figure 16.5</a>).</p>
+
+						<cENTEr>
+							<h5>
+<a name="20"></a>Figure 16.5. Debugging a user function typed in the Shell Window.</h5>
+							
+								
+									<img border="0" wiDth="500" HeigHt="232" src="graphics/16fig05.gif" Alt="graphics/16fig05.gif">
+								
+							
+						</cENTEr>
+
+						<p>The <a nAME="idx1073749774"></A>Debug Control Panel is made up of five regular control buttons and four checkbuttons (see <a hreF="224#21.html">Figure 16.6</A>).<A Name="idx1073749775"></a>
+							<A NAMe="idx1073749776"></a>
+							<a name="idx1073749777"></a>
+							<a name="idx1073749778"></a>
+							<a name="idx1073749779"></a>
+							<A naMe="idx1073749780"></a>
+							<a Name="idx1073749781"></a>
+							<A namE="idx1073749782"></A>
+							<A Name="idx1073749783"></a>
+						</P>
+
+						<CENter>
+							<h5>
+<A NAMe="21"></a>Figure 16.6. Using the Debug Control Panel to debug the function that we typed in <a hREF="224#20.html">Figure 16.5</A>.</h5>
+							
+								
+									<img border="0" width="420" heighT="521" srC="graphics/16fig06.gif" alt="graphics/16fig06.gif">
+								
+							
+						</CenteR>
+
+						<bloCKQUote>
+<p>
+								<P>
+									<A NAme="idx1073749784"></a>
+									<a NAME="idx1073749785"></a>Go button—Continues the execution of the program starting from the current point until it reaches the end of the program, or finds a break point.</p>
+
+							</p>
+<p>
+								<P>
+									<A NAme="idx1073749786"></a>Step button—Steps into the execution of the next statement.</p>
+
+							</p>
+<p>
+								<p>
+									<a name="idx1073749787"></a>Over button—Fully executes the current statement without requiring you to step through its inner lines.</p>
+
+							</p>
+<p>
+								<p>
+									<a naMe="idx1073749788"></a>Out button—Resumes the execution of the program in order to leave (get out of) the current function.</P>
+
+							</p>
+<p>
+								<p>
+									<A name="idx1073749789"></A>Quit button—Quits the execution of the current program without leaving the debug mode. In order to leave the Debug Control Panel, you either need to toggle the menu option to OFF, or close the window Panel. Notice that when the Panel Window closes, the message <tt cLASS="monofont">[DEBUG OFF]</tt> is printed on the Shell Window.</p>
+
+							</p>
+</BLOCkquoTE>
+						<P>Between the buttons and the stack area, you have the status area. This line lets you know where you are in the script. As you can see in <A href="224#21.html">Figure 16.6</A>, we are in the line number 3 in a function called <TT Class="monofont">ShowAxis().</tt>
+						</p>
+
+						<p>Next to the buttons are some checkbuttons responsible for setting the configuration of the Debug Control Panel area. They define what you want to see and trace.</p>
+
+						<blockquote>
+<p>
+								<P>
+									<a nAme="idx1073749790"></a>
+									<A name="idx1073749791"></A>Stack—Displays the call stack.</p>
+
+							</p>
+<p>
+								<P>
+									<A NAme="idx1073749792"></a>Source—Opens a File Editor Window for every file that is mentioned in the debugging process, highlighting the current line, which is being processed.</p>
+
+							</P>
+<P>
+								<P>
+									<A name="idx1073749793"></A>Locals—Displays the set of local variables (and their values) defined by the program for the current namespace.</P>
+
+							</P>
+<P>
+								<p>
+									<a naME="idx1073749794"></A>Globals—Displays all the global variables (and their values), including the internal variables, defined by the program.<A name="idx1073749795"></a>
+									<a name="idx1073749796"></a>
+									<a name="idx1073749797"></a>
+									<a naMe="idx1073749798"></a>
+									<A namE="idx1073749799"></a>
+									<a naMe="idx1073749800"></a>
+									<a NAME="idx1073749801"></a>
+									<a naME="idx1073749802"></A>
+								</P>
+
+							</p>
+</bloCKQUote>
+					
+				
+				
+					<h4>
+
+
+
+Writing an IDLE Extension</H4>
+					<P>The way that IDLE has been set up allows you to write your own extensions and define new key bindings and menu entries for IDLE edit windows. There is a simple mechanism to load extensions when IDLE starts up and to attach them to each edit window.</P>
+
+					<P>For Guido's instructions on writing these extensions, take a look at the file <tt class="monofont">extend.txt,</tt> which is located on your <tt class="monofont">idle</tt> directory, or grab it online at</p>
+
+					<p>
+						<A taRget="_blank" Href="http://www.python.org/idle/idle-0.5/extend.txt">http://www.python.org/idle/idle-0.5/extend.txt</a>
+						<A namE="idx1073749803"></A>
+						<A Name="idx1073749804"></a>
+						<A NAMe="idx1073749805"></a>
+						<a nAME="idx1073749806"></A>
+						<a namE="idx1073749807"></A>
+						<A Name="idx1073749808"></a>
+						<a name="idx1073749809"></a>
+					</p>
+
+				
+				
+					<h4>Python 2.0 and IDLE</h4>
+					<p>Python 2.0 was released<a name="idx1073749810"></a>
+						<A naMe="idx1073749811"></a> with IDLE 0.6, which includes some additional features and enhancements.</p>
+
+					<P>The main new features are</p>
+
+					<ul>
+<lI>
+							<p>You can install IDLE as a package now.</p>
+
+						</lI>
+<LI>
+							<P>Three new keystroke commands were added: Check module (<tt clASS="monofont">Alt+F5</Tt>), Import module (<tt cLASS="monofont">F5</tt>), and Run script <tt CLASs="monofont">(Ctrl+F5)</tt>.</p>
+
+						</li>
+<li>
+							<p>A bar showing the line and column of the cursor was included at the bottom of the editor window.</p>
+
+						</li>
+<li>
+							<p>A command line was added to IDLE. This command line is very similar to the Python interpreter shell.</p>
+
+						</li>
+<li>
+							<P>You can now use IDLE to call several brands of browsers and triggering documents to open inside the browsers.</p>
+
+						</lI>
+</ul>
+					<p>As for the enhancements, we can list improvements and optimizations to the following main areas:</P>
+
+					<ul>
+<li>
+							<P>User interface.</p>
+
+						</li>
+<LI>
+							<P>Syntax highlighting and auto-indentation.</P>
+
+						</li>
+<li>
+							<P>Class browser, which is now showing more information.</P>
+
+						</LI>
+<li>
+							<p>Ability to set the <i>Tab width</I> as part of the user configuration set of option, which means that IDLE is now able to display the tabulation of a given file according to the user configuration settings.</P>
+
+						</LI>
+<li>
+							<p>Call tips—they are now available in many <a NAME="idx1073749812"></a>
+								<a name="idx1073749813"></a>locations.</p>
+
+						</li>
+</ul>
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="223.html" title="Integrated Development Environments"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=224" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="224.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="225.html" title="Pythonwin"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073749631">[nd]c argument</a><BR>
+ <a href="#idx1073749629">[nd]e argument</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749632">[nd]c</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749630">[nd]e</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;command-line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749639">IDLE</a><BR>
+ <a href="#idx1073749773">Auto-open Stack Viewer option, File Editor</a> <a href="#idx1073749783">2nd</a> <a href="#idx1073749800">3rd</a><BR>
+bindings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyboard<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749749">Edit menu, Edit Editor</a> <a href="#idx1073749752">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749701">File menu, File Editor</a><BR>
+blocks<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749653">indented</a><BR>
+boxes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749655">tip</a><BR>
+ <a href="#idx1073749618">browsing engines</a><BR>
+buttons<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749784">Debug Control Panel</a> <a href="#idx1073749802">2nd</a><BR>
+changing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749665">fonts, windows</a><BR>
+checkbuttons<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749790">Debug Control Panel</a><BR>
+ <a href="#idx1073749621">Class Browser</a><BR>
+ <a href="#idx1073749684">Class browser option, File Editor</a><BR>
+ <a href="#idx1073749689">Close option, File Editor</a><BR>
+closing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749644">interpreters</a><BR>
+ <a href="#idx1073749615">colorizers</a><BR>
+colors<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749645">shell elements</a><BR>
+ <a href="#idx1073749659">command history mechanism</a><BR>
+command-line arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749638">IDLE</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyboard<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749673">IDLE</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749643">running, interrupting</a><BR>
+ <a href="#idx1073749731">Comment out region option, File Editor</a><BR>
+configuring<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749637">IDLE</a><BR>
+ <a href="#idx1073749712">Copy option, File Editor</a><BR>
+creating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749807">IDLE extensions</a><BR>
+ <a href="#idx1073749711">Cut option, File Editor</a><BR>
+ <a href="#idx1073749764">Debug Control Panel</a> <a href="#idx1073749774">2nd</a> <a href="#idx1073749801">3rd</a><BR>
+Debug menu<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749768">File Editor</a> <a href="#idx1073749778">2nd</a> <a href="#idx1073749795">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749763">options, File Editor</a> <a href="#idx1073749772">2nd</a> <a href="#idx1073749782">3rd</a> <a href="#idx1073749799">4th</a><BR>
+ <a href="#idx1073749730">Dedent region option, File Editor</a><BR>
+development environments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749622">IDLE</a> <a href="#idx1073749625">2nd</a> <a href="#idx1073749633">3rd</a> <a href="#idx1073749647">4th</a> <a href="#idx1073749660">5th</a> <a href="#idx1073749674">6th</a> <a href="#idx1073749696">7th</a> <a href="#idx1073749718">8th</a> <a href="#idx1073749741">9th</a> <a href="#idx1073749758">10th</a> <a href="#idx1073749765">11th</a> <a href="#idx1073749775">12th</a> <a href="#idx1073749803">13th</a><BR>
+ <a href="#idx1073749656">documentation strings</a><BR>
+Edit menu<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749721">File Editor</a> <a href="#idx1073749744">2nd</a> <a href="#idx1073749755">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749751">keyboard bindings, Edit Editor</a> <a href="#idx1073749754">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749708">options, Edit Editor</a> <a href="#idx1073749725">2nd</a> <a href="#idx1073749748">3rd</a><BR>
+editing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749667">fonts, windows</a><BR>
+ <a href="#idx1073749616">editor window</a><BR>
+ <a href="#idx1073749694">Emacs bindings, File Editor</a> <a href="#idx1073749704">2nd</a><BR>
+engines<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749619">browsing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749614">undo</a><BR>
+environments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;development<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749623">IDLE</a> <a href="#idx1073749626">2nd</a> <a href="#idx1073749634">3rd</a> <a href="#idx1073749648">4th</a> <a href="#idx1073749661">5th</a> <a href="#idx1073749675">6th</a> <a href="#idx1073749697">7th</a> <a href="#idx1073749719">8th</a> <a href="#idx1073749742">9th</a> <a href="#idx1073749759">10th</a> <a href="#idx1073749766">11th</a> <a href="#idx1073749776">12th</a> <a href="#idx1073749804">13th</a><BR>
+ <a href="#idx1073749690">Exit option, File Editor</a><BR>
+ <a href="#idx1073749737">Expand word option, File Editor</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IDLE<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749809">writing</a><BR>
+ <a href="#idx1073749677">File Editor</a> <a href="#idx1073749699">2nd</a><BR>
+File menu<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749703">keyboard bindings, File Editor</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749680">options, File Editor</a> <a href="#idx1073749693">2nd</a><BR>
+ <a href="#idx1073749716">Find again option, File Editor</a><BR>
+ <a href="#idx1073749726">Find in Files option, File Editor</a><BR>
+ <a href="#idx1073749717">Find selection option, File Editor</a><BR>
+FindÉ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749715">option, File Editor</a><BR>
+fonts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749668">changing, windows</a><BR>
+ <a href="#idx1073749738">Format Paragraph option, File Editor</a><BR>
+ <a href="#idx1073749794">Globals checkbutton, Debug Control Panel</a><BR>
+ <a href="#idx1073749785">Go button, Debug Control Panel</a><BR>
+ <a href="#idx1073749728">Go to line option, File Editor</a><BR>
+ <a href="#idx1073749612">Hammond, Mark</a><BR>
+ <a href="#idx1073749609">Hylton, Jeremy</a><BR>
+ <a href="#idx1073749811">IDLE 0.6</a> <a href="#idx1073749813">2nd</a><BR>
+ <a href="#idx1073749624">IDLE development environment</a> <a href="#idx1073749627">2nd</a> <a href="#idx1073749635">3rd</a> <a href="#idx1073749649">4th</a> <a href="#idx1073749662">5th</a> <a href="#idx1073749676">6th</a> <a href="#idx1073749698">7th</a> <a href="#idx1073749720">8th</a> <a href="#idx1073749743">9th</a> <a href="#idx1073749760">10th</a> <a href="#idx1073749767">11th</a> <a href="#idx1073749777">12th</a> <a href="#idx1073749805">13th</a><BR>
+IDLE extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749808">writing</a><BR>
+ <a href="#idx1073749739">Import module option, File Editor</a><BR>
+ <a href="#idx1073749729">Indent region option, File Editor</a><BR>
+ <a href="#idx1073749652">indented blocks</a><BR>
+installing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749636">IDLE</a><BR>
+ <a href="#idx1073749641">interrupting running commands</a><BR>
+keyboard bindings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749700">File menu, File Editor</a><BR>
+keywboard commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749672">IDLE</a><BR>
+ <a href="#idx1073749793">Locals checkbutton, Debug Control Panel</a><BR>
+menus<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749769">File Editor</a> <a href="#idx1073749779">2nd</a> <a href="#idx1073749796">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749762">options, File Editor</a> <a href="#idx1073749771">2nd</a> <a href="#idx1073749781">3rd</a> <a href="#idx1073749798">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749722">File Editor</a> <a href="#idx1073749745">2nd</a> <a href="#idx1073749756">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749750">keyboard bindings, Edit Editor</a> <a href="#idx1073749753">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749707">options, Edit Editor</a> <a href="#idx1073749724">2nd</a> <a href="#idx1073749747">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749702">keyboard bindings, File Editor</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749679">options, File Editor</a> <a href="#idx1073749692">2nd</a><BR>
+modifying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749666">fonts, windows</a><BR>
+ <a href="#idx1073749736">New Indent width option, File Editor</a><BR>
+ <a href="#idx1073749681">New window option, File Editor</a><BR>
+Open moduleÉ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749683">option, File Editor</a><BR>
+OpenÉ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749682">option, File Editor</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749761">Debug menu, File Editor</a> <a href="#idx1073749770">2nd</a> <a href="#idx1073749780">3rd</a> <a href="#idx1073749797">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749706">Edit menu, Edit Editor</a> <a href="#idx1073749723">2nd</a> <a href="#idx1073749746">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749678">File menu, File Editor</a> <a href="#idx1073749691">2nd</a><BR>
+ <a href="#idx1073749788">Out button, Debug Control Panel</a><BR>
+ <a href="#idx1073749787">Over button, Debug Control Panel</a><BR>
+ <a href="#idx1073749713">Paste option, File Editor</a><BR>
+ <a href="#idx1073749620">Path Browser</a><BR>
+ <a href="#idx1073749685">Path browser option, File Editor</a><BR>
+ <a href="#idx1073749610">Peters, Tim</a><BR>
+prompts<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749640">Python Shell Window</a><BR>
+Python 2.0<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749810">IDLE 0.6</a> <a href="#idx1073749812">2nd</a><BR>
+ <a href="#idx1073749650">Python Shell Window</a> <a href="#idx1073749663">2nd</a> <a href="#idx1073749670">3rd</a><BR>
+ <a href="#idx1073749789">Quit button, Debug Control Panel</a><BR>
+ <a href="#idx1073749710">redo option, File Editor</a><BR>
+ <a href="#idx1073749727">Replace option, File Editor</a><BR>
+ <a href="#idx1073749608">Rossum, Guido van</a><BR>
+ <a href="#idx1073749740">Run script option, File Editor</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749642">commands, interrupting</a><BR>
+Save AsÉ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749687">option, File Editor</a><BR>
+Save Copy AsÉ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749688">option, File Editor</a><BR>
+ <a href="#idx1073749686">Save option, File Editor</a><BR>
+ <a href="#idx1073749714">Select All option, File Editor</a><BR>
+shell elements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749646">colors</a><BR>
+ <a href="#idx1073749792">Source checkbutton, Debug Control Panel</a><BR>
+ <a href="#idx1073749791">Stack checkbutton, Debug Control Panel</a><BR>
+ <a href="#idx1073749786">Step button, Debug Control Panel</a><BR>
+strings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749657">documentation</a><BR>
+ <a href="#idx1073749733">Tablify region option, File Editor</a><BR>
+ <a href="#idx1073749628">tarballs</a><BR>
+ <a href="#idx1073749654">tip boxes</a><BR>
+ <a href="#idx1073749735">Toggle Tabs option, File Editor</a><BR>
+ <a href="#idx1073749732">Uncomment region option, File Editor</a><BR>
+ <a href="#idx1073749613">undo engines</a><BR>
+ <a href="#idx1073749709">Undo option, File Editor</a><BR>
+ <a href="#idx1073749734">Untablify region option, File Editor</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749695">bindings, File Editor</a> <a href="#idx1073749705">2nd</a><BR>
+windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749669">changing fonts</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749617">editor</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749651">Python Shell</a> <a href="#idx1073749664">2nd</a> <a href="#idx1073749671">3rd</a><BR>
+ <a href="#idx1073749658">word completion mechanism</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073749806">IDLE extensions</a><BR>
+ <a href="#idx1073749611">Zadka, Moshe</a><BR>
+ <a href="#idx1073749757">Zoom Height option, File Editor</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,183 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python on Win32 Systems</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="268.html" class="navtitle">B. Running Python on Specific Platforms</a> &gt; <span class="nonavtitle">Python on Win32 Systems</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="269.html" title="B. Running Python on Specific Platforms"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=270" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="270.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="271.html" title="Python on MacOS Systems"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A31%3A21+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222219254161020084105141030</font><a href="read4.asp?bookname=0672319942&snode=270&now=6%2F1%2F2002+6%3A31%3A21+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Python on Win32 Systems</h3>
+				<p>As you might know at this point, Python has an official distribution for Win32 systems (Windows 95, Windows 98, Windows 2000, and Windows NT), called Pythonwin. In order to extend this distribution to its full power, you must get an installation package that contains Python Win32 Extensions. This set of extensions for Python exposes a good part of the Win32 API, along with other Win32 extensions. These extensions are part of the win32all installation package, which is available for download (including the source code) at</p>
+
+				<P><A TArget="_blank" HREF="http://www.python.org/windows/win32/">http://www.python.org/windows/win32/</a></p>
+
+				<p>You can obtain more detailed and up-to-date information at <a NAME="idx1073751340"></a>Mark Hammond starship's page. He is the creator and maintainer of these extensions.</p>
+
+				<p><a target="_blank" href="http://starship.python.net/crew/mhammond/">http://starship.python.net/crew/mhammond/</a></p>
+
+				<p>After you download the latest <a naMe="idx1073751341"></a><A namE="idx1073751342"></a>win32all package, you will have access to the Microsoft Foundation Classes, the ODBC  interface, the Microsoft Common Object Model (COM), and to several Windows NT services.<a naMe="idx1073751343"></a><a NAME="idx1073751344"></a></p>
+
+				<p>For details about the COM interface, see <a HREF="128.html">Chapters 7, "Objects Interfacing and Distribution,"</a>  and <a hrEF="137.html">8, "Working with Databases"</A> , of this book. More information about using COM in a Python environment can be obtained at a COM Tutorial presented by Greg Stein and Mark Hammond, on a presentation given at IPC-6.</P>
+
+				<p><a taRGET="_blank" href="http://www.python.org/windows/win32com/COMTutorial/ppframe.htm">http://www.python.org/windows/win32com/COMTutorial/ppframe.htm</a></p>
+
+				<p>The following list shows the most important <a name="idx1073751345"></a>modules that are provided as part of the win32all package.</p>
+
+				<blockqUotE>
+<p><p><b>pythoncom— </B>
+
+							This module exposes a low-level mechanism that is used by Python to access the COM interface. See <a hreF="128.html">Chapter 7</a> for details.</p>
+</p>
+<P><P><B>win32api— </B>
+
+							This module offers a variety of functions that access the Win32 API. Those functions are capable of performing general tasks such as rebooting the machine and returning the computer and domain name of the local machine.</p>
+</p>
+<p><p><B>win32event— </B>
+
+							This module provides access to the synchronization functions available in the Win32 SDK.</P>
+</P>
+<p><p><b>win32evtlog— </b>
+
+							This module exposes functions that provide access to the Windows NT Event Log.</P>
+</P>
+<P><P><b>win32evtlogutil— </b>
+
+							This module provides additional control for the win32evtlog module.</p>
+</p>
+<P><P><B>win32file— </B>
+
+							This module provides natural file manipulation for reading and writing operations by using native Win32 API I/O functions.</p>
+</p>
+<p><p><b>win32net— </b>
+
+							This module is responsible for automating the administration of a Windows NT Network. Among other things, it controls users, user groups, the resources that are shared by multiple users, and the access to the security database.</p>
+</p>
+<p><p><b>win32pdh— </b>
+
+							This module exposes functions that provide access to the Windows NT Performance Monitor.</p>
+</p>
+<p><p><b>win32pdhutil— </b>
+
+							This module provides additional control for the win32pdh module.</p>
+</p>
+<P><p><b>win32pipe— </B>
+
+							This module works like a pipe between processes, allowing them to communicate with each other. The information that is sent to the pipe by one process can be read by another.</p>
+</p>
+<p><P><b>win32process— </b>
+
+							This module provides access to Win32 API functions that are related to thread and process management.</p>
+</p>
+<P><p><b>win32service— </b>
+
+							This module is responsible for managing services dependency, defining how services should start, and for actually initializing and stopping the services. Everything is done by accessing the Windows NT Service Control Manager.</P>
+</P>
+<P><P><b>win32serviceutil— </b>
+
+							This module provides additional control for the win32service module.<a nAME="idx1073751346"></A><a namE="idx1073751347"></A><A Name="idx1073751348"></a><A NAMe="idx1073751349"></a>
+						</p>
+</p>
+</blockquote>
+				<p>The next couple of paragraphs expose you to third-party programs created to handle specific Windows tasks. Note that many of these tasks can be replicated by writing programs that access the Win32 API.</p>
+
+				<p>The first thing I will discuss is about how to load and use DLL files from Python running under MS Windows. My suggestion for you is to use <a naMe="idx1073751350"></a><A namE="idx1073751351"></a><a naMe="idx1073751352"></a>Sam Rushing's <tT CLAss="monofont">calldll</tt> extension, which allows you to call functions in any DLL. This extension is part of the dynawin package, a completely developed Win32 GUI development environment.</P>
+
+				<P>Also provided, there is a <A Name="idx1073751353"></a><A NAMe="idx1073751354"></a><i>callback</i> generator that lets external functions call back into Python as if it were C, and an ODBC module implemented using <I><TT Class="monofont">calldll</tt></i> (additional code for managing data sources, installing ODBC itself, and creating and maintaining Jet (Microsoft Access) databases is supplied, as well). For more information, check out</p>
+
+				<p><a target="_blank" href="http://www.nightmare.com/~rushing/dynwin/">http://www.nightmare.com/~rushing/dynwin/</A></p>
+
+				<p>By looking at <A tarGet="_blank" hrEf="http://www.nightmare.com/software.html">http://www.nightmare.com/software.html</a>, you can download a good number of Win32-specific software that was also created by Rushing.</p>
+
+				<P>At <A NAme="idx1073751355"></a>Ken Seehof's Python Page, you can find several programs for the Windows platform, such as the Neural Integrator—a visual programming environment for prototyping neural networks and other directed graph-based programming models that can bring AI capabilities to your program. Once there, you can also obtain Wizard applications for the Pythonwin IDE, which can simplify many of your tasks, including the creation of extension modules. Be sure to have Visual C++ and Pythonwin, before trying to use the Wizards. Check out the following site:</p>
+
+				<P><A TArget="_blank" HREF="http://starship.python.net/crew/seehof/">http://starship.python.net/crew/seehof/</a><a naME="idx1073751356"></A><A name="idx1073751357"></a></p>
+
+				<p>Windows programmers sometimes have the requirement to make changes on the Windows Registry. The win32all package contains a very interesting script, which is installed at the subdirectory <tt class="monofont">win32/scripts/regsetup.py</tt> that enables you to edit the Windows Registry.</p>
+
+				<p>Another thing that we are always in need of is <a nAme="idx1073751358"></A><a naMe="idx1073751359"></a>printing. It is your choice whether you use the Win32 API to handle that, or use a third-party module. The one that I mention here is a class developed by <a nAme="idx1073751360"></a>Bill Mailloux to print text to Windows printers. You can download the class at the following address:</P>
+
+				<P><A TargeT="_blank" HREf="http://musingattheruins.homepage.com/printer.html">http://musingattheruins.homepage.com/printer.html</a></p>
+
+				<p>The next example gives you a quick demonstration of how simple it is to use this  module.</P>
+
+				<PRE>
+					
+import printer
+driver = printer.Printer()
+driver.open()
+driver.write("This sentence is going to be printed.")
+driver.close()
+del driver
+
+				</pre>
+
+				<p>If you want to install Python 2.0 on a Windows NT or Windows 2000 machine, you don't necessarily need<A NAMe="idx1073751361"></a><a name="idx1073751362"></a><a name="idx1073751363"></a> to have administrator priviledges. If you have them, great! Python will write its<a name="idx1073751364"></a><A naMe="idx1073751365"></a> registry info under the key <tT clasS="monofont">HKEY_LOCAL_MACHINE.</tt> However, if you don't have<a NAME="idx1073751366"></a><a naME="idx1073751367"></A>
+					<I>admin</i> rights, Python will write its registry info under the key <tt cLASS="monofont">HKEY_CURRENT_USER.</tt> The only difference between both kinds of installations is that the latter option blocks some specific functionalities, such as running Python scripts as NT services. Note that all the core functionality remains available for you in both installations.</p>
+
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="269.html" title="B. Running Python on Specific Platforms"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=270" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="270.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="271.html" title="Python on MacOS Systems"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+admin rights<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751366">installations</a><BR>
+administrator privileges<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751361">installations</a><BR>
+ <a href="#idx1073751353">callback generator</a><BR>
+ <a href="#idx1073751351">calldll extension</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751352">calldll</a><BR>
+generators<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751354">callback</a><BR>
+ <a href="#idx1073751340">Hammond, Mark</a><BR>
+installations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751363">administrator privileges</a><BR>
+ <a href="#idx1073751355">Ken</a><BR>
+ <a href="#idx1073751360">Mailloux, Bill</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751345">win32all package</a><BR>
+packages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751342">win32all</a> <a href="#idx1073751349">2nd</a><BR>
+printing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751358">text, Windows printers</a><BR>
+privileges<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;administrator<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751362">installations</a><BR>
+registries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751364">writing</a><BR>
+rights<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;admin<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751367">installations</a><BR>
+running<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751344">Win32</a> <a href="#idx1073751347">2nd</a> <a href="#idx1073751357">3rd</a><BR>
+ <a href="#idx1073751350">Rushing, Sam</a><BR>
+text<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751359">printing, Windows printers</a><BR>
+Win32<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751343">running Python</a> <a href="#idx1073751346">2nd</a> <a href="#idx1073751356">3rd</a><BR>
+ <a href="#idx1073751341">win32all package</a> <a href="#idx1073751348">2nd</a><BR>
+writing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073751365">registries</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

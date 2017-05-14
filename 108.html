@@ -1,0 +1,348 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Special Methods</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="102.html" class="navtitle">5. Object-Oriented Programming</a> &gt; <span class="nonavtitle">Special Methods</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="107.html" title="Methods Handling"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=108" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="108.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="109.html" title="Inheritance"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A33%3A33+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147039203231208138019083</font><a href="read9.asp?bookname=0672319942&snode=108&now=5%2F31%2F2002+4%3A33%3A33+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Special Methods</h3>
+				<p>Python exposes some special methods that are easily highlighted in the code because they start and end with <tT CLAss="monofont">__</tt> (double underscores). These methods override (inherit) built-in functions of the same name that are provided by Python itself. The next list shows some of the most used special methods.</P>
+
+				<BLOckquOTE>
+<P><p><tt class="monofont"><a name="idx1073743390"></a><a name="idx1073743391"></a>__init__(self)—</Tt> 
+    This is the constructor method, which is called during creation of instances. Usually, this is the place where the instance variables are initialized, among other things.</p>
+</P>
+<p><p><tT clasS="monofont"><a naME="idx1073743392"></A><A name="idx1073743393"></A>__str__(self)—</TT> 
+    This method is called when <Tt claSS="monofont">str()</TT> is called on instances of this type. It specifies how the object must be displayed when it is used as a string (for example, when a <tt clASS="monofont">print</Tt> command is applied to an object).<a name="idx1073743394"></a><a name="idx1073743395"></a><a name="idx1073743396"></a><a NamE="idx1073743397"></a></p>
+</p>
+<P><p><tt cLass="monofont"><A NAMe="idx1073743398"></a><a nAME="idx1073743399"></A>__repr__(self)—</tt> 
+    This method is called when <tt CLASs="monofont">repr()</tt> is called on instances of this type. This method provides a readable representation of the object. Usually, it is possible to re-create an object by using this method. Although not guaranteed, and the standard <tT CLAss="monofont">repr</tt> of an instance can't be executed to re-create the instance.</p>
+</p>
+<p><p><tt class="monofont"><a name="idx1073743400"></A><a nAme="idx1073743401"></a>__getattr__(self, name)—</Tt> 
+    Implement this method to trap or modify the access to nonexisting members, for example, returning the attribute self.name.</p>
+</p>
+<p><P><tt cLASS="monofont"><a namE="idx1073743402"></A><A Name="idx1073743403"></a>__setattr__(self, name, value)—</TT> 
+    This method allows you to control setting of attributes in the instance. It assigns the given value to the self.name instance's attribute. Note that you can also use <TT clasS="monofont">"self.__dict__['attr'] = …"</TT> to set attributes from within <Tt class="monofont">__setattr__ </tt>(if you do it the normal way, you will get infinite recursion).</p>
+</p>
+<p><p><tt class="monofont"><a NamE="idx1073743404"></a><a nAme="idx1073743405"></a>__delattr__(self,name)—</tT> 
+    Implement this method to delete  a specific attribute of an object. It's like saying <tt cLASS="monofont">del self.name.</tt></p>
+</p>
+<P><P><TT clasS="monofont"><A NAme="idx1073743406"></a><a NAME="idx1073743407"></a>__del__(self)—</tt> 
+    The <tt class="monofont">__del__</tt> method covers the deletion of the object. Be careful because sometimes it isn't immediately used when an object is destroyed (JPython behavior). CPython's garbage collector destructs objects as soon as their reference count reaches zero.</p>
+</p>
+<p><p><tt clAss="monofont"><A namE="idx1073743408"></a><a naMe="idx1073743409"></a>__cmp__(self,other)—</tT> 
+    Implement this method to compare and return a negative, zero, or positive number.</P>
+</P>
+<P><p><tt cLASS="monofont"><a namE="idx1073743410"></A><A Name="idx1073743411"></a>__hash__(self)—</TT> 
+    Implement this method to generate a 32-bit hash index.</P>
+</P>
+<p><p><tt class="monofont"><a name="idx1073743412"></a><a name="idx1073743413"></A>__nonzero__(self)—</tt> 
+    Implement this method to return 0 or 1 for truth-value testing.</P>
+</p>
+<p><p><Tt claSs="monofont"><a nAME="idx1073743414"></A><a namE="idx1073743415"></A>__call__(self)—</TT> 
+    Classes that implement the <tt clASS="monofont">__call__</Tt> method are callable, and their instances can be invoked like a function. This is the concept used by the built-in functions. The syntax <tt cLASS="monofont">obj(*args)</tt> is equivalent to <tt class="monofont">obj.__call__(*args).</tt><a name="idx1073743416"></a><a naMe="idx1073743417"></a><A namE="idx1073743418"></a><a naMe="idx1073743419"></a><a NAME="idx1073743420"></a><a naME="idx1073743421"></A></P>
+</p>
+<p><p><tT CLAss="monofont"><a nAME="idx1073743422"></A><a name="idx1073743423"></a>__getitem__(self, index)—</tt> 
+    This method supports list indexing, returning <tt class="monofont">self[index].</tt></p>
+
+						<prE>
+							
+&gt;&gt;&gt; class Seq:
+…     def __getitem__(self, i):
+…        if i &lt; 5:
+…            return i
+…        else:
+…            raise IndexError
+…
+&gt;&gt;&gt; s = Seq()
+&gt;&gt;&gt; for i in s:
+&gt;&gt;&gt;    print i,
+0, 1, 2, 3, 4
+&gt;&gt;&gt; print s[2]
+2
+&gt;&gt;&gt; print s[6]
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+  File "&lt;stdin&gt;", line 6, in __getitem__
+IndexError
+
+						</prE>
+
+					</p>
+</blOckquOte>
+				<p>Next, you have some more special methods that deal with sequence and number-related methods.<A NAMe="idx1073743424"></a><a nAME="idx1073743425"></A></p>
+
+				<bloCKQUote>
+<p><P><A NAme="idx1073743426"></a><a name="idx1073743427"></a><tt class="monofont">__len__(self)—</tt>This method is called to return the length of the instance when <tt ClaSs="monofont">len()</tt> is called on an instance of this type.</P>
+</p>
+<p><p><tT claSS="monofont">__add__ (self, other)—</TT> 
+    Implement this method to return <tt clASS="monofont">self + other.</Tt></p>
+</p>
+<p><P><TT Class="monofont">__sub__ (self, other)—</TT> 
+    Implement this method to return <TT class="monofont">self – other.</tt></p>
+</p>
+<p><p><tt class="monofont">__mul__ (self, other)—</tt> 
+    Implement this method to return <Tt cLass="monofont">self * other.</Tt></p>
+</p>
+<p><P><tt cLASS="monofont">__div__ (self, other)—</tt> 
+    Implement this method to return <tt CLASs="monofont">self / other.</tt></p>
+</P>
+<P><P><Tt claSS="monofont">__mod__ (self, other)—</TT> 
+    Implement this method to return <tt class="monofont">self % other.</tt></p>
+</p>
+<p><p><tt class="monofont">__neg__ (self)—</Tt> 
+    Implement this method to return <tT claSs="monofont">self negated.</tt></p>
+</P>
+<p><p><tT CLAss="monofont">__pos__ (self)—</tt> 
+    Implement this method to return <TT CLass="monofont">self positive.</tT><A NAme="idx1073743428"></a><a NAME="idx1073743429"></a><a name="idx1073743430"></a><a name="idx1073743431"></a><a name="idx1073743432"></a><a NamE="idx1073743433"></a></p>
+</p>
+<P><p><tt cLass="monofont">__abs__ (self)—</TT> 
+    This method is called to return the absolute value of <TT clasS="monofont">self</TT> when <Tt claSS="monofont">abs()</TT> is called on instances of this type.</p>
+</p>
+<p><p><TT CLass="monofont">__inv__ (self)—</tt> 
+    Implement this method to return the inverse of <tt class="monofont">self.</tt></p>
+</p>
+<p><p><tt ClaSs="monofont">__lshift__ (self, other)—</tt> 
+    Implement this method to return <Tt claSs="monofont">self </tt>shifted left by <TT CLass="monofont">other.</tT></P>
+</P>
+<P><p><tt cLASS="monofont">__rshift__ (self, other)—</tt> 
+    Implement this method to return <tt CLASs="monofont">self</tt> shifted right by <tt class="monofont">other.</tt></p>
+</p>
+<p><p><tt clAss="monofont">__and__ (self, other)—</Tt> 
+    Implement this method to return the bitwise and value of <tt Class="monofont">self</Tt> and <tt CLASs="monofont">other.</tt></p>
+</P>
+<P><P><Tt claSS="monofont">__or__ (self, other)—</TT> 
+    Implement this method to return the bitwise or value of <tt clASS="monofont">self</Tt> and <tt class="monofont">other.</tt></p>
+</p>
+<p><p><tt clasS="monofont">__xor__ (self, other)—</tt> 
+    Implement this method to return the bitwise exclusive or value of <Tt clAss="monofont">self</tt> and <Tt clASS="monofont">other.</Tt></p>
+</p>
+<p><P><TT Class="monofont">__not__ (self)—</TT> 
+    Implement this method to return the outcome of <TT clasS="monofont">not self.</TT> (Note that there is no <Tt class="monofont">__not__()</tt> discipline for object instances; only the interpreter core defines this operation.)</p>
+</p>
+<p><p><tt class="monofont">__setitem__ (a, b, c)—</tT> 
+    Implement this method to set the value of <tt ClasS="monofont">a</tt> at  index <tt ClasS="monofont">b</TT> to <Tt claSS="monofont">c.</TT></p>
+</p>
+<p><p><TT CLass="monofont">__delitem__ (a, b)—</tT> 
+    Implement this method to remove the value of <TT Class="monofont">a</tt> at index <tt class="monofont">b.</tt><a name="idx1073743434"></A><a nAme="idx1073743435"></a><A name="idx1073743436"></A><a naME="idx1073743437"></A><A name="idx1073743438"></A><A NAme="idx1073743439"></a></p>
+</P>
+<P><P><Tt claSS="monofont">__getslice__ (a, b, c)—</TT> 
+    Implement this method to return the slice of <tt class="monofont">a</tt> from index <tt class="monofont">b</tt> to index <tt ClaSs="monofont">c–1.</tt></P>
+</p>
+<p><p><tT claSS="monofont">__setslice__ (a, b, c, v)—</TT> 
+    Implement this method to set the slice of <tt clASS="monofont">a</Tt> from index <tt cLASS="monofont">b</tt> to index <tt CLASs="monofont">c</tt>–<tt class="monofont">1</tt> to the sequence <tt class="monofont">v.</tT></p>
+</p>
+<P><p><tt Class="monofont">__delslice__ (a, b, c)—</Tt> 
+    Implement this method to delete the slice of <tt CLASs="monofont">a</tt> from index <tT CLAss="monofont">b</tt> to index <TT CLass="monofont">c</tT>–<TT Class="monofont">1.</tt></p>
+
+					</p>
+</blockquote>
+				<p>The next example has a class definition that overrides some methods. Note that every instance of this class is callable.</p>
+
+				<Pre>
+					
+&gt;&gt;&gt; class Author:
+…def __init__(self, argname):
+…    self.name = argname
+…def __str__(self):
+…    return self.name
+…def __repr__(self):
+…    return `self.name`
+…def __call__(self, other):
+…    return self.name + other
+…
+&gt;&gt;&gt; obj = Author("Andre")
+&gt;&gt;&gt; print obj
+Andre
+&gt;&gt;&gt; obj
+'Andre'
+&gt;&gt;&gt; obj(" Lessa")
+'Andre Lessa'
+
+				</Pre>
+
+				<p>Python 2.0 has added a special set of operators to the language, which are called <I>augmented assignment operators.</i> These<a naMe="idx1073743440"></a><a NAME="idx1073743441"></a><a naME="idx1073743442"></A> operators can be overriden by inserting an '<I>i</i>'in front of the name, for example, <tt cLASS="monofont">__isub__</tt> implements in-place <tt CLASs="monofont">__sub__</tt> (in other words, the <tt class="monofont">-=</tt> operator).</p>
+
+				<p>Also in this new release, you have access to the built-in method <tt clasS="monofont">__contains__,</tt> which gives you access to customize the <Tt clAss="monofont">in</tt> operator.</P>
+
+				<h4>Method Attributes</h4>
+					<p>A method implements some special attributes that can be accessed from within the class that implements it.</P>
+
+					<P>Suppose that you have a method called <TT clasS="monofont">method:</TT></P>
+
+					<blocKQUOte>
+<p><p><TT CLass="monofont">method.__doc__—</tt> 
+    Returns the documentation string of <i><tt class="monofont">method.</tt></i></p>
+</p>
+<p><p><Tt cLass="monofont">method.__name__—</Tt> 
+    Returns the <i><tt ClasS="monofont">method</TT></I> name.</p>
+</p>
+<p><p><TT CLass="monofont">method.im_class—</tT> 
+    Returns the class that has defined <I><TT clasS="monofont">method.</TT></I></p>
+</p>
+<p><p><tt class="monofont">method.im_self—</tt> 
+    Returns the instance associated with <i><tt clasS="monofont">method.</tt></I><a naMe="idx1073743443"></a><a nAme="idx1073743444"></a><A NAMe="idx1073743445"></a><a nAME="idx1073743446"></A></p>
+
+						</p>
+</blOCKQuote>
+					<P>The next example retrieves and prints the <TT Class="monofont">__init__</tt> method's documentation string.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; class c:
+…     def __init__(self):
+…             "This is a method "
+…             print self.__init__.__doc__
+…
+&gt;&gt;&gt; obj = c()
+This is a method
+
+					</pre>
+
+				
+				<h4>Overloading Operators</h4>
+					<p>Python operators are implemented for a class by implementing the equivalent special methods. This feature is called <i>operator overloading.</i></p>
+
+					<p>Extensive support exists for operators overloading via the double-underscored special methods such as <Tt cLass="monofont">__add__</Tt> and <tt cLass="monofont">__init__.</TT></P>
+
+					<P>Note that the following expressions are equivalent:</p>
+
+					<pre>
+						
+a * b = __mul__(a, b)
+
+len(a) = __len__(a)
+
+a + b = __add__(a,b)
+
+					</PRE>
+
+					<P>The following example overrides the <tt clASS="monofont">__add__</Tt> method and returns a tuple of results.<a naME="idx1073743447"></A><A name="idx1073743448"></a><a name="idx1073743449"></a><a name="idx1073743450"></a><a naMe="idx1073743451"></a><A namE="idx1073743452"></a></p>
+
+					<prE>
+						
+&gt;&gt;&gt; class c:
+…     def __init__(self, x, y):
+…         self.x = x
+…         self.y = y
+…     def __add__(self, other):
+…         return (self.x + other.x, self.y + other.y)
+…
+&gt;&gt;&gt; obj1 = c(5,2)
+&gt;&gt;&gt; obj2 = c(10,4)
+&gt;&gt;&gt; print obj1 + obj2
+(15, 6)
+
+					</pre>
+
+					<P>Of course, in real life, you would be more likely to want to return an instance of the class <TT Class="monofont">c,</TT> rather than just a tuple.</P>
+
+					<P>Some others built-in methods you can use or overwrite are as follows:</p>
+
+					<pre>
+						
+__sub__(self, other)
+
+__div__(self, other)
+
+__abs__(self)
+
+__hex__(self)
+
+__int__(self)
+
+					</PRE>
+
+					<P>Another small example</p>
+
+					<pre>
+						
+&gt;&gt;&gt; class C:
+…     def __init__(self, value):
+…         self.value = value
+…     def __sub__(self, other):
+…         return self.value - other.value
+…
+&gt;&gt;&gt; vara = C(5)
+&gt;&gt;&gt; varb = C(3)
+&gt;&gt;&gt; varc = vara - varb
+&gt;&gt;&gt; print varc
+2
+
+					</PRE>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="107.html" title="Methods Handling"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=108" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="108.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="109.html" title="Inheritance"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073743415">__call__(self) method</a><BR>
+ <a href="#idx1073743409">__cmp__(self,other) method</a><BR>
+ <a href="#idx1073743407">__del__(self) method</a><BR>
+ <a href="#idx1073743405">__delattr__(self, name) method</a><BR>
+ <a href="#idx1073743401">__getattr__(self, name) method</a><BR>
+ <a href="#idx1073743423">__getitem__(self, index) method</a> <a href="#idx1073743425">2nd</a><BR>
+ <a href="#idx1073743411">__hash__(self) method</a><BR>
+ <a href="#idx1073743391">__init__(self) method</a><BR>
+ <a href="#idx1073743427">__len__(self) method</a><BR>
+ <a href="#idx1073743413">__nonzero__(self) method</a><BR>
+ <a href="#idx1073743399">__repr__(self) method</a><BR>
+ <a href="#idx1073743403">__setattr__(self, name, value) method</a><BR>
+ <a href="#idx1073743393">__str__(self) method</a><BR>
+augmented assignment operators<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743440">overriding</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743397">methods</a> <a href="#idx1073743419">2nd</a> <a href="#idx1073743431">3rd</a> <a href="#idx1073743437">4th</a> <a href="#idx1073743446">5th</a> <a href="#idx1073743450">6th</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743414">__call__(self)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743408">__cmp__(self,other)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743406">__del__(self)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743404">__delattr__(self, name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743400">__getattr__(self, name)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743422">__getitem__(self, index)</a> <a href="#idx1073743424">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743410">__hash__(self)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743390">__init__(self)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743426">__len__(self)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743412">__nonzero__(self)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743398">__repr__(self)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743402">__setattr__(self, name, value)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743392">__str__(self)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743396">handling</a> <a href="#idx1073743418">2nd</a> <a href="#idx1073743430">3rd</a> <a href="#idx1073743436">4th</a> <a href="#idx1073743445">5th</a> <a href="#idx1073743449">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743421">special</a> <a href="#idx1073743433">2nd</a> <a href="#idx1073743439">3rd</a><BR>
+object-oriented programming (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743394">handling methods</a> <a href="#idx1073743416">2nd</a> <a href="#idx1073743428">3rd</a> <a href="#idx1073743434">4th</a> <a href="#idx1073743443">5th</a> <a href="#idx1073743447">6th</a><BR>
+operators<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;augmented assignment<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743441">overriding</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743451">overloading</a><BR>
+overloading<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743452">operators</a><BR>
+overriding<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743442">augmented assignment operators</a><BR>
+programming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object-oriented (OOP)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743395">handling methods</a> <a href="#idx1073743417">2nd</a> <a href="#idx1073743429">3rd</a> <a href="#idx1073743435">4th</a> <a href="#idx1073743444">5th</a> <a href="#idx1073743448">6th</a><BR>
+ <a href="#idx1073743420">special method</a> <a href="#idx1073743432">2nd</a> <a href="#idx1073743438">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

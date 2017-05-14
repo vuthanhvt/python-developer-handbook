@@ -1,0 +1,220 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The Interpreter</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="241.html" class="navtitle">18. JPython</a> &gt; <span class="nonavtitle">The Interpreter</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="245.html" title="Downloading and Installing JPython"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=246" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="246.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="247.html" title="The JPython Registry"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A25%3A05+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218069155135243164165048</font><a href="read9.asp?bookname=0672319942&snode=246&now=6%2F1%2F2002+6%3A25%3A05+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+The Interpreter</h3>
+				<p>The JPython installation places several files on your system, including a set of modules, some sample programs, an application called <tT CLAss="monofont">jpythonc</tt> (which we will see later), and the JPython interpreter.</P>
+
+				<P>The JPython interpreter looks very similar to the CPython interpreter (see <A Href="246#1.html">Figure 18.2</a>). However, <TT CLass="monofont">jpython</tt> is not a binary file, but a short script (or batch file, depending on your system) that invokes your local JVM, sets the Java property <tt class="monofont">install.path</tt> to an appropriate value, and then runs the Java class file <tt clasS="monofont">org.python.util.jpython.</tt>
+				</P>
+
+				<cenTer>
+					<h5>
+<a Name="1"></A>Figure 18.2. If you glance at this screen, you might be confused whether JPython or CPython is running because both interpreters do look alike.</H5>
+					
+						
+							<IMg borDER="0" Width="500" HEIGht="314" srC="graphics/18fig02.gif" ALT="graphics/18fig02.gif">
+						
+					
+				</center>
+
+				<p>The following syntax shows the possible options that you can pass to JPython when invoking it from the shell. A list of options is shown in <a href="246#2.html">Table 18.1</a>.</p>
+
+				<pre>
+					
+jpython [options] [-jar jar | -c cmd | file | -] [args]
+
+				</pre>
+
+				<A naMe="2"></a><p><Table BordER="1" CEllspACINg="0" celLPADding="1" WIDTh="100%">
+<caption><h5>Table 18.1. 
+
+ List of the Interpreter Options and Arguments</h5></caption><colGroUp alIgn="left" spAn="2">
+<tr VALIgn="top">
+<td>
+<FONT size="2">Option</FONT></td>
+<td>
+<FONT size="2">Description</font></td>
+</tr>
+<tr valign="top">
+<Td>
+<fOnt sIze="2">
+									<a nAme="idx1073750670"></a>
+									<TT CLass="monofont">-i</tT>
+								</FONt></td>
+<tD>
+<FONt sizE="2">Inspects interactively after running script and forces prompts, even if <TT Class="monofont">stdin</tt> does not appear to be a terminal.</font></td>
+</tr>
+<tr valiGn="top">
+<tD>
+<fonT size="2">
+									<A namE="idx1073750671"></A>
+									<TT clasS="monofont">-S</TT>
+								</Font></tD>
+<TD>
+<Font sIZE="2">Doesn't imply import site on initialization.</Font></td>
+</tr>
+<tr valign="top">
+<td>
+<fonT siZe="2">
+									<a nAme="idx1073750672"></a>
+									<tT claSS="monofont">-X</TT>
+								</font></TD>
+<TD valiGN="top">
+<FOnt siZE="2">Disables class based standard exceptions.</FOnt></td>
+</tr>
+<tr valign="top">
+<td>
+<font SizE="2">
+									<a naMe="idx1073750673"></a>
+									<tt ClasS="monofont">-Dprop=value</TT>
+								</Font></tD>
+<TD>
+<Font sIZE="2">Sets the Java property <Tt claSS="monofont">prop</TT> to <tt class="monofont">value.</tt>
+								</font></td>
+</tr>
+<tr vAliGn="top">
+<td>
+<Font sIze="2">
+									<a NAME="idx1073750674"></a>
+									<tt cLASS="monofont">-jar jar</tt>
+								</foNT></TD>
+<td>
+<foNT SIze="2">Runs the program that is read from the <tt class="monofont">__run__.py</tt> file
+in the specified <tt class="monofont">jar</tt> file.</FonT></td>
+</tR>
+<tr vaLign="top">
+<TD>
+<FOnt siZE="2">
+									<A Name="idx1073750675"></a>
+									<TT CLass="monofont">-c cmd</tT>
+								</FONt></td>
+<td>
+<font size="2">Runs the program passed in as the <tt class="monofont">cmd</Tt> string. This option terminates the options list.</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2">
+									<a namE="idx1073750676"></A>
+									<TT clasS="monofont">file</TT>
+								</Font></td>
+<td>
+<font size="2">Runs file as the program script.</font></tD>
+</tr>
+<Tr vaLign="top">
+<tD>
+<fonT SIZe="2">
+									<a naME="idx1073750677"></A>
+									<Tt claSS="monofont">-</TT>
+								</font></TD>
+<TD>
+<font size="2">Reads the program from standard input. This flag allows you to pipe a file into Jpython and have it treated correctly.</font></td>
+</tr>
+<tr vaLigN="top">
+<td>
+<fOnt siZe="2">--<tt CLASs="monofont">help</tt>
+								</fONT></Td>
+<td>
+<fONT Size="2">Prints a usage message and exits.</fONT></Td>
+</tr>
+<tr valign="top">
+<td>
+<font sizE="2">--<tt ClasS="monofont">version</tt>
+								</foNt></td>
+<TD>
+<FOnt siZE="2">Prints JPython version number and exits.</FOnt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font size="2">
+									<a name="idx1073750678"></a>
+									<tt clasS="monofont">args</tt>
+								</Font></Td>
+<td>
+<fOnt sIZE="2">Passes a list of arguments to the program in the <Tt claSS="monofont">sys.argv[1:]</TT> variable.<a namE="idx1073750679"></A>
+									<A Name="idx1073750680"></a>
+								</FONT></td>
+</tr>
+</colgroup>
+</table></p>
+
+				<p>Because <tT clAss="monofont">jpython</tT> is not a binary executable, but a simple script, you have to add the following line to the top of your JPython programs (only if you have a UNIX system), in order to make them executable.</p>
+
+				<pre>
+					
+#! /usr/bin/env jpython
+
+				</Pre>
+
+				<p>Using something like <TT CLass="monofont">#!/usr/bin/jpython/jpython</tT> will not work because this syntax requires <TT Class="monofont">jpython</TT> to be a binary executable (which is not the case).</P>
+
+				<P>You also need to make sure that <tt clASS="monofont">jpython</Tt>'s directory is registered on your <tt class="monofont">PATH</tt> variable.</p>
+
+				<p>Now let's take a look at the following code:</p>
+
+				<pre>
+					
+class jhello:
+   def main(argv):
+        print "Hello Python world!"
+
+myapp=jhello()
+myapp.main()
+
+				</pre>
+
+				<p>After saving this code in a file, called <Tt cLass="monofont">jhello.py,</Tt> you can execute it by typing at your OS prompt:</p>
+
+				<prE>
+					
+jpython jhello.py
+
+				</pre>
+
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="245.html" title="Downloading and Installing JPython"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=246" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="246.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="247.html" title="The JPython Registry"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073750677">[nd] option</a><BR>
+ <a href="#idx1073750675">[nd]c cmd option</a><BR>
+ <a href="#idx1073750673">[nd]Dprop=value option</a><BR>
+ <a href="#idx1073750676">[nd]file option</a><BR>
+ <a href="#idx1073750670">[nd]I option</a><BR>
+ <a href="#idx1073750674">[nd]jar jar option</a><BR>
+ <a href="#idx1073750671">[nd]S option</a><BR>
+ <a href="#idx1073750672">[nd]X option</a><BR>
+ <a href="#idx1073750678">args option</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750680">JPython interpreter</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750679">JPython interpreter</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

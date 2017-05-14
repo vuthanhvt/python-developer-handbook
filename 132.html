@@ -1,0 +1,300 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Introduction to COM Objects</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="128.html" class="navtitle">7. Objects Interfacing and Distribution</a> &gt; <span class="nonavtitle">Introduction to COM Objects</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="131.html" title="Interfacing Objects"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=132" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="132.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="133.html" title="Implementing COM Objects in Python"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A37%3A04+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147035189204015059156047</font><a href="read9.asp?bookname=0672319942&snode=132&now=5%2F31%2F2002+4%3A37%3A04+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Introduction to COM Objects</h3>
+				<p>Let's learn a little about what is behind the Microsoft Common Object Model (COM) technology before seeing how you can use it along with Python.</p>
+
+				<P>COM is the most widely used component software model in the world. It provides a rich set of integrated services, a wide choice of easy-to-use tools, and a large set of available applications. COM underlies a large majority of the new code developed for Windows and Windows NT operating systems, whether created by Microsoft or by others.</P>
+
+				<P>COM consists of a well-defined, mature, stable, and freely available specification, as well as a reference implementation, which has been widely tested and adopted worldwide. It provides the richest set of existing services for applications today, as well as the largest set of development tools available for any component or object model on the market. Of course, Windows is the only Operating System in which you can be assured of finding COM, which makes us think that COM doesn't appear to be a standard because it doesn't provide cross-platform solutions.</P>
+
+				<h4>The COM Specification</h4>
+					<p>COM is a specification and a set of services that enables you to create modular, object-oriented, customizable and upgradable, distributed applications using a number of languages. You can even use components that you already have written in other languages.</p>
+
+					<P>The COM specification describes the standards that you need to follow in order to create interoperable COM components. This standard describes what COM objects should look like and how they should behave. The specification is backed up by a set of services, or <A NAme="idx1073744268"></a><a NAME="idx1073744269"></a>APIs. The COM library provides these services, which are part of the operating system for Win32 platforms, and available as a separate package for other operating systems.</p>
+
+					<p>COM components can be packaged as EXE or DLL files—COM provides the communication mechanism to enable components in different modules to talk to each other. They are true objects in the usual sense—they have identity, state, and behavior. COM components that implement a common interface can be treated polymorphically, enabling easy customization and upgrades of your applications.<a name="idx1073744270"></a><a name="idx1073744271"></a><a name="idx1073744272"></A><a nAme="idx1073744273"></a><A name="idx1073744274"></A></p>
+
+					<p>COM components link with each other dynamically, and COM defines standard ways of locating components and identifying their functionality, so individual components are swappable without having to recompile the entire application.</p>
+
+					<P>COM provides a communication mechanism that enables components to interact across a network. More importantly, COM provides location transparency to applications (if desired) that enables them to be written without regard to the location of their components. The components can be moved without requiring any changes to the application.</P>
+
+					<P>COM is a binary standard. Any language that can cope with the binary standard can create or use COM objects. The number of languages and tools that support COM increases every day. C, C++, Java, JScript, Visual Basic, VBScript, Delphi, and PowerBuilder form just part of that growing list, which means that any one of these languages can easily interoperate with Python. Keep in mind that COM is a standard for interaction between programs—an Object Request Broker service.</P>
+
+					<p>COM is the object model that underlies most of the Microsoft technologies; here are a few of those COM applications:</p>
+
+					<ul>
+<LI><P>ActiveX uses COM to provide controls.</P>
+</li>
+<li><P>OLE uses COM to combine documents.</P>
+</LI>
+<li><p>OLEDB and ADO use COM for data access.</p>
+</LI>
+<LI><p>DirectX uses COM for graphics.</p>
+
+						</li>
+</ul>
+					<p>Any COM-aware program is able to interact with other COM-aware programs. One program can even execute commands of the other. The program that executes the method call is called the <i>COM server,</i> and the program that calls the object method is called the <i>COM client.</i> Because COM is a Microsoft product, most applications for Windows can act as COM servers or clients.</p>
+
+					<p>Python's support for the COM technology is included in the Python for Windows (PythonWin) extensions.<a name="idx1073744275"></a><a NamE="idx1073744276"></a><a nAme="idx1073744277"></a><a Name="idx1073744278"></A><A NAme="idx1073744279"></a></p>
+
+				
+				<H4>COM Interfaces</H4>
+					<P>The COM technology is very broad and complex. Basically, it enables objects to be shared among many applications, without applications knowing the implementation details of the objects. Objects that implement the COM technology can communicate with each other without the need for knowing the others'details.</P>
+
+					<p>COM components do business with interfaces. An interface defines functionality, but not implementation. Objects must handle the implementation. COM objects are small pieces of self-contained software that interact with other applications by exposing well-defined, language-independent interfaces.</p>
+
+					<p>COM is an object model that relies heavily on interfaces. These interfaces are entirely separate from their implementations. Although COM defines the interfaces, its model doesn't provide the interface's implementation. Each object's class has the task of defining the implementations. The interfaces can be standard ones that other objects also expose, or they can be special ones that are particular to that object. A unique ID, called an <a NAME="idx1073744280"></a><a naME="idx1073744281"></A><A name="idx1073744282"></a>IID (Interface ID), identifies each interface. IIDs use <a name="idx1073744283"></a><a name="idx1073744284"></a><a naMe="idx1073744285"></a><I>Universally Unique Identifier</i>s (<i>UUID</i>). UUID is a format used for many COM IDs to allocate a unique identification string for objects. Many tools can generate unique UUIDs. As you will see later in this chapter, Python's pythoncom module has a function called <Tt claSs="monofont">CreateGuid()</tt> that generates UUID strings.</P>
+
+					<P>In order to create an object, COM locates the required class and creates an instance of it. The concept of COM classes is identical to the other Python classes. Additionally, each COM class needs to implement two identifiers: Class ID (<I><Tt claSS="monofont">_reg_clsid_</TT></i>), which is another UUID, and Program ID (<i><tt CLASs="monofont">_reg_progid_</tt></i>), which is a identification string that must be easier to remember than the Class ID. This string is not guaranteed to be unique. In order to create an object, the programmer must specify either the <I><TT Class="monofont">progid,</tt></i> or the <i><tt class="monofont">clsid.</tt></i><a nAme="idx1073744286"></A><a naMe="idx1073744287"></a><a nAme="idx1073744288"></a><A NAMe="idx1073744289"></a><a nAME="idx1073744290"></A><a namE="idx1073744291"></A></P>
+
+					<P>All interfaces are derived from the <a namE="idx1073744292"></A><A Name="idx1073744293"></a><tt class="monofont">IUnknown</tt> interface. Therefore, they support its methods. The <tt class="monofont">IUnknown</Tt> interface is the base of all <tT claSs="monofont">COM</tt> interfaces. This interface contains only three <a Name="idx1073744294"></A><A NAme="idx1073744295"></a><a NAME="idx1073744296"></a>methods:</p>
+
+					<ul>
+<LI><P><A name="idx1073744297"></A><A NAme="idx1073744298"></a><tt class="monofont">AddRef()</tt> and <a name="idx1073744299"></a><a nAme="idx1073744300"></A><tt cLass="monofont">Release()</tT> are used for managing COM lifetimes, which are based on reference counts.</p>
+</li>
+<LI><P><A name="idx1073744301"></A><A NAme="idx1073744302"></a><tT CLAss="monofont">QueryInterface()</tt> is used for obtaining a reference to one of the other interfaces that the object exposes. In other words, interfaces are obtained by using the <TT CLass="monofont">IUnknown::QueryInterface()</tt> method. <a name="idx1073744303"></a><a name="idx1073744304"></a><a naMe="idx1073744305"></a></P>
+
+						</li>
+</uL>
+					<p><a naMe="idx1073744306"></a><a NAME="idx1073744307"></a><tt cLASS="monofont">IStream,</tt>
+						<a nAME="idx1073744308"></A><a namE="idx1073744309"></A><TT class="monofont">IStorage,</tt> and <a name="idx1073744310"></a><a name="idx1073744311"></a><tT clAss="monofont">IPropertyPage</tT> are examples of standard interfaces defined by COM. They define file-like operations, file system-like semantics, and how a control exposes a property page, respectively. Besides the standard interfaces, COM also enables you to define your own custom interfaces by using an Interface Definition Language (IDL).</p>
+
+					<p>The <a nAme="idx1073744312"></a><A NAMe="idx1073744313"></a><tt CLASs="monofont">IDispatch</tt> interface enables any COM objects to be used from a scripting environment. This interface was designed explicitly for languages that cannot use normal COM interfaces. The objects that implement this interface are known as <a NAME="idx1073744314"></a><a naME="idx1073744315"></A><I>automation objects</i> because they expose a programmable interface that can be manipulated by another program. This interface exposes dynamic object models whose methods and properties can be determined at runtime. Basically, this interface is used whenever you are handling an object whose interface is not known at compile time, or if there is no compile time at all.</p>
+
+					<div class="note"><p class="notetitle"><b>Note</b></p><p>
+
+						<P>Note for CORBA programmers: IDispatch is equivalent to the interface repository and dynamic invocation interface that are standard parts of CORBA.</p>
+
+					</p></Div>
+<bR>
+<br>
+
+					<p>To <a Name="idx1073744316"></A><A NAme="idx1073744317"></a><a NAME="idx1073744318"></a><a naME="idx1073744319"></A>access a method or a property of an object, you can use either late or early binding. All the examples that you see in this book use late bindings because the Python interpreter doesn't know what the object interfaces look like. It doesn't know which are the methods and properties that compound the object. It just makes the calls dynamically, according to the function names that you provide.<A name="idx1073744320"></A><A NAme="idx1073744321"></a><a name="idx1073744322"></a><a name="idx1073744323"></a><a name="idx1073744324"></A><a nAme="idx1073744325"></a></P>
+
+					<p><a naMe="idx1073744326"></a><a NAME="idx1073744327"></a>Late bindings use the <tt cLASS="monofont">IDispatch</tt> interface to determine the object model at runtime. Python function <a nAME="idx1073744328"></A><a namE="idx1073744329"></A><TT class="monofont">win32com.client.Dispatch()</tt> provides this runtime facility. Most examples in this chapter use the <tt class="monofont">IDispatch</tt> interface. However, the <tt clAss="monofont">win32com.client.Dispatch()</Tt> function hides many implementation details from us. Internally, Python converts the names into IDs using the internal function <a nAme="idx1073744330"></a><a Name="idx1073744331"></A><TT Class="monofont">GetIDsOfNames().</TT> Then, this ID is passed as an argument to the <TT clasS="monofont">Invoke()</TT> function.<A name="idx1073744332"></A><A NAme="idx1073744333"></a></p>
+
+					<p>You can try to <a name="idx1073744334"></a><a name="idx1073744335"></a><a naMe="idx1073744336"></a><A namE="idx1073744337"></a><a naMe="idx1073744338"></a><a NAME="idx1073744339"></a>improve the performance of your program by calling the <a naME="idx1073744340"></A><A name="idx1073744341"></A><TT Class="monofont">Invoke()</TT> function directly. Usually, the performance gets better when names are not resolved at runtime. Just be careful to provide the right ID. If you implement this way, an early binding operation is executed.</P>
+
+					<P>For the <a name="idx1073744342"></a><a name="idx1073744343"></a>early bindings, we have the concept of <a name="idx1073744344"></a><a nAme="idx1073744345"></A><i>Type Libraries,</i> wherein the object model is exposed at compile time. In this kind of implementation, you don't call the methods and properties directly. The <a Name="idx1073744346"></a><A namE="idx1073744347"></A><TT clasS="monofont">GetIDsOfNames()</TT> method gets an ID for the method or property that you want to use, and the <Tt claSS="monofont">Invoke()</TT> method makes the call.</p>
+
+					<p>For example, a function call would be invoked as</p>
+
+					<pRE>
+						
+id = GetIDsOfNames("YourMethodCall")
+Invoke(id, DISPATCH_METHOD)
+
+					</PRe>
+
+					<p>And a property would be collected as</p>
+
+					<pre>
+						
+id = GetIDsOfNames("ObjectProperty")
+Invoke(id, DISPATCH_PROP_GET)
+
+					</pre>
+
+					<p>Usually, you don't have to worry about this kind of implementation. You just say</p>
+
+					<pre>
+						
+YourObject.YourMethodCall()
+
+					</pre>
+
+					<p>and</p>
+
+					<pRe>
+						
+YourObject.ObjectProperty
+
+					</pRe>
+
+					<p>In order to implicitly call the <tT clasS="monofont">Invoke()</tt> method without causing data type problems, the <tT CLAss="monofont">IDispatch</tt> interface assumes the data type <TT CLass="monofont">VARIANT</tT> for all variables. That's because late bindings do not know the specific types of the parameters, whereas early  bindings do.</P>
+
+					<P><A name="idx1073744348"></A><A NAme="idx1073744349"></a>Late bindings do not know about parameters passed by reference, so no parameters are passed by reference. However, early bindings accept parameters passed by reference, and return them as tuples.</p>
+
+					<p>COM objects can be implemented as <tt class="monofont">InProc</tt> objects, which are implemented as <tt clasS="monofont">DLL</tt>s. These objects are loaded into the calling process providing that best performance because no marshalling is required. Of course, for most objects, some marshaling will be needed to marshal Python parameters into a form that can be passed to the COM object.</P>
+
+					<p>The other option is to implement COM objects as <i>LocalServer/ RemoteServer</i> objects. This kind of object is implemented as a standalone <Tt claSs="monofont">EXE,</tt> which is safer than the first option because of process isolation.</P>
+
+					<P>COM can also be used to decide which implementation should be used. If both types of implementation are available, the caller interface is able to decide which option is the best one to choose.</P>
+
+					<H5>The Windows Registry</h5>
+						<p>All the information concerning a <tt CLASs="monofont">COM</tt> object, such as the mapping between its progid and clsid, is stored in the Windows Registry. The Windows Registry also stores the name of the DLL file of an <a NAME="idx1073744350"></a><a naME="idx1073744351"></A><Tt class="monofont">InProc</tt> object, and the name of the EXE <a name="idx1073744352"></a><a name="idx1073744353"></a><Tt cLass="monofont">LocalServer</Tt> object. Object security, threading models, and many other details are also stored there.</p>
+
+						<p>Check the following link for more details about the COM specification:</p>
+
+						<P><i>Microsoft— Common Object Model</i></p>
+
+						<P><A TArget="_blank" HREF="http://www.microsoft.com/com/resources/specs.asp">http://www.microsoft.com/com/resources/specs.asp</a><a naME="idx1073744354"></A><A name="idx1073744355"></A><A NAme="idx1073744356"></a><a name="idx1073744357"></a><a name="idx1073744358"></a><a name="idx1073744359"></A></p>
+
+					
+				
+				<h4>ADO</H4>
+					<p><i>ActiveX Data Objects</i>
+						<I>(ADO)</i> is an automation-based interface for accessing data. This technology uses the OLE DB interface to access an extensive range of data sources, including but not limited to data provided by the ODBC.<a naMe="idx1073744360"></a><a NAME="idx1073744361"></a><a naME="idx1073744362"></A><A name="idx1073744363"></A><A NAme="idx1073744364"></a><a NAME="idx1073744365"></a><a name="idx1073744366"></a></p>
+
+					<p><a name="idx1073744367"></a><a name="idx1073744368"></A><a nAme="idx1073744369"></a><A name="idx1073744370"></A><i>Microsoft Remote Data Service (RDS)</i> is a component of ADO that provides fast and efficient data frameworks for applications hosted in Microsoft Internet Explorer. RDS uses data-aware ActiveX controls to provide data access programming to Web developers, who need to build distributed, data-intensive applications for use over networks. RDS is based on a client/server, distributed technology that works over HTTP, HTTPS (HTTP over Secure Sockets layer), and DCOM application protocols.<a NAME="idx1073744371"></a><a naME="idx1073744372"></A></P>
+
+				
+				<h4>ActiveX</h4>
+					<p>An <i>ActiveX control</I> is an OLE control that can live inside an HTML page; it can be simple Window objects, such as buttons, text boxes, or scrollbars. It also can be quite complicated, for example, a bar chart graph display can be an ActiveX control. An entire spreadsheet can also be a single control. Each ActiveX control has properties and reacts to external events. Its properties can be modified to change its appearance. For example, its containing program can set color and fonts. External events such as a mouse click or keyboard input can cause a control's event handler to execute. Note that the ActiveX technology is another Windows only thing, and not really any use in a cross platform environment.</P>
+
+					<P>Microsoft's Web browser, <A name="idx1073744373"></A><A NAme="idx1073744374"></a><a name="idx1073744375"></a>Internet Explorer, is ActiveX-aware, meaning that Web application developers can package ActiveX components to create more dynamic content in their Web pages.</p>
+
+					<p>ActiveX controls use COM technologies to provide interoperability with other types of COM components and services. ActiveX controls provide a number of enhancements specifically designed to facilitate distribution of components over high-latency networks and to integrate controls into Web browsers. These enhancements include features such as incremental rendering and code signing, which enables users to identify the authors of controls before allowing them to execute.<a name="idx1073744376"></a><a naMe="idx1073744377"></a><A namE="idx1073744378"></a><a naMe="idx1073744379"></a><a NAME="idx1073744380"></a><a naME="idx1073744381"></A><A name="idx1073744382"></A></P>
+
+				
+			</FOnt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="131.html" title="Interfacing Objects"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=132" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="132.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="133.html" title="Implementing COM Objects in Python"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods and properties<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744319">objects</a><BR>
+ <a href="#idx1073744379">ActiveX control</a><BR>
+ <a href="#idx1073744363">ActiveX Data Objects (ADOs)</a> <a href="#idx1073744371">2nd</a><BR>
+ <a href="#idx1073744298">AddRef() method</a><BR>
+application program interfaces (APIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744268">Common Object Model (COM)</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744335">improving performance</a><BR>
+ <a href="#idx1073744314">automation objects</a><BR>
+bindings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;early<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744342">Type Libraries</a> <a href="#idx1073744343">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744349">late</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744327">IDispatch interface</a><BR>
+browsers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744374">Internet Explorer</a><BR>
+ <a href="#idx1073744273">Common Object Model (COM)</a> <a href="#idx1073744278">2nd</a> <a href="#idx1073744290">3rd</a> <a href="#idx1073744324">4th</a> <a href="#idx1073744358">5th</a> <a href="#idx1073744365">6th</a> <a href="#idx1073744381">7th</a><BR>
+control<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744380">ActiveX</a><BR>
+distributing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744271">Common Object Model (COM)</a> <a href="#idx1073744276">2nd</a> <a href="#idx1073744287">3rd</a> <a href="#idx1073744321">4th</a> <a href="#idx1073744361">5th</a> <a href="#idx1073744377">6th</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744330">GetIDsOfNames()</a> <a href="#idx1073744346">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744340">Invoke()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744328">win32.com.client.Dispatch()</a><BR>
+functionsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744295">Ò</a><BR>
+ <a href="#idx1073744331">GetIDsOfNames() function</a> <a href="#idx1073744347">2nd</a><BR>
+identifiers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744281">Interface (IID)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744284">Universally Unique (UUID)</a><BR>
+ <a href="#idx1073744312">IDispatch interface</a> <a href="#idx1073744332">2nd</a><BR>
+IIDÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744282">Ò</a><BR>
+improving<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744334">performance, programs</a><BR>
+ <a href="#idx1073744350">InProc object</a><BR>
+ <a href="#idx1073744280">Interface Identifiers (IIDs)</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application program (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744269">Common Object Model (COM)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744289">Common Object Model (COM)</a> <a href="#idx1073744323">2nd</a> <a href="#idx1073744354">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744313">IDispatch</a> <a href="#idx1073744333">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744311">IPropertyPage</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744309">IStorage</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744307">IStream</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744293">IUnknown</a> <a href="#idx1073744304">2nd</a><BR>
+interfacing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744270">Common Object Model (COM)</a> <a href="#idx1073744275">2nd</a> <a href="#idx1073744286">3rd</a> <a href="#idx1073744320">4th</a> <a href="#idx1073744360">5th</a> <a href="#idx1073744376">6th</a><BR>
+Internet<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browsers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744375">Internet Explorer</a><BR>
+ <a href="#idx1073744373">Internet Explorer</a><BR>
+ <a href="#idx1073744341">Invoke() function</a><BR>
+ <a href="#idx1073744310">IPropertyPage interface</a><BR>
+ <a href="#idx1073744308">IStorage interface</a><BR>
+ <a href="#idx1073744306">IStream interface</a><BR>
+ <a href="#idx1073744292">IUnknown interface</a> <a href="#idx1073744303">2nd</a><BR>
+ <a href="#idx1073744348">late bindings</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744326">IDispatch interface</a><BR>
+libraries<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744345">Type</a><BR>
+ <a href="#idx1073744352">LocalServer object</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744316">objects</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744297">AddRef()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744294">IUnknown interface</a> <a href="#idx1073744305">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744301">QueryInterface()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744299">Release()</a><BR>
+methodsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744296">Ò</a><BR>
+ <a href="#idx1073744367">Microsoft Remote Data Service (RDS)</a><BR>
+models<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744274">Common Object (COM)</a> <a href="#idx1073744279">2nd</a> <a href="#idx1073744291">3rd</a> <a href="#idx1073744325">4th</a> <a href="#idx1073744359">5th</a> <a href="#idx1073744366">6th</a> <a href="#idx1073744382">7th</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744317">accessing methods and properties</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744364">ActiveX Data (ADO)</a> <a href="#idx1073744372">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744315">automation</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744351">InProc</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interfacing and distributing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744272">Common Object Model (COM)</a> <a href="#idx1073744277">2nd</a> <a href="#idx1073744288">3rd</a> <a href="#idx1073744322">4th</a> <a href="#idx1073744362">5th</a> <a href="#idx1073744378">6th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744353">LocalServer</a><BR>
+performance<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744338">improving</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744336">improving performance</a><BR>
+properties<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744318">objects</a><BR>
+ <a href="#idx1073744302">QueryInterface() method</a><BR>
+RDSÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744370">Ò</a><BR>
+Registry<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744355">Common Object Model (COM) object storage</a><BR>
+ <a href="#idx1073744300">Release() method</a><BR>
+ <a href="#idx1073744368">Remote Data Service (RDS)</a><BR>
+services<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744369">Microsoft Remote Data (RDS)</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744337">improving performance</a><BR>
+speed<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744339">improving</a><BR>
+storage<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744357">Common Object Model (COM) objects, Windows Registry</a><BR>
+ <a href="#idx1073744344">Type Libraries</a><BR>
+ <a href="#idx1073744283">Universally Unique Identifiers (UUIDs)</a><BR>
+UUIDÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744285">Ò</a><BR>
+ <a href="#idx1073744329">win32.com.client.Dispatch() function</a><BR>
+Windows<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Registry<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744356">Common Object Model (COM) object storage</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

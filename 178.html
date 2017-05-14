@@ -1,0 +1,89 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="171.html" class="navtitle">11. Web Development</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="177.html" title="Site Management Tools"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=178" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="178.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="180.html" title="12. Scripting Programming"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A44%3A09+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148040135185021104014041</font><a href="read5.asp?bookname=0672319942&snode=178&now=5%2F31%2F2002+4%3A44%3A09+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Summary</h3>
+				<p>This chapter exposes the reality between Python and the Internet by introducing some complete Web applications that have emerged from the Python community.</p>
+
+				<P>Python's support to HTTP, which is the basic communication protocol underlying the Web, allows it to implement HTTP servers (Web servers) and clients (Web browsers). This chapter shows simple details about the configuration of Apache and Microsoft IIS Server/Personal Web Server (PWS). Another Web server called AOLServer is also introduced to you.</P>
+
+				<P>If you have Apache and you decide not to go through any CGI implementation, you should consider embedding Python in this Web server.</P>
+
+				<p><tt cLASS="monofont">mod_python</tt> is a module that embeds the Python language interpreter within the Apache server, allowing Apache handlers to be written in Python. It brings a considerable boost in performance over the traditional CGI approach.</p>
+
+				<p><TT CLass="monofont">mod_pyapache</tt> is another module that embeds Python within the Apache server. This module also handles CGI scripts faster than other normal CGI scripts.</p>
+
+				<p>Besides Web Servers and Web Clients, Python has some completely developed Web applications, written in Python itself, which are available for general use.</p>
+
+				<p>Grail is a free Web browser written entirely in Python, using the Tkinter GUI. Grail has the capability to manipulate SGML, HTML, URL's, images, and sound. Besides, it is easily extended to offer new functionality. Grail's design tries to provide a plug-in architecture, which allows the browser to easily support applets written in Python. Apart from running applets, Grail is extensible in other areas by writing so-called Grail plug-in modules.</p>
+
+				<p>The Z Object Publishing Environment (Zope) is an open source object publishing system for the Web. Zope is a complete dynamic Website management Web platform used for building high-performance, dynamic Web sites. It is composed of parts that can be deployed standalone with your own Python code support: The Object Request Broker, HTML Templates (DTML), and the Object Database (ZODB, or Z Object Database, which stores Python objects) can all be abstracted from the mix.<a name="idx1073746564"></a><a naMe="idx1073746565"></a><A namE="idx1073746566"></a></p>
+
+				<p>Mailman is a Web integrated mailing list manager that helps managing email discussion lists. Unlike most similar products, Mailman gives each mailing list a Web page, and allows users to subscribe, unsubscribe, and so on, over the Web. All Mailman actions, including subscription requests, list administration, and management reports, can be performed either through a Web interface or more traditional textual commands.</p>
+
+				<P>Medusa is a Web server application that can be embedded into a Python program, offering high-performance for HTTP, FTP, and other IP services. Medusa was entirely written in Python too.</p>
+
+				<p>The following applications and scripts are utilities that might help you with future development efforts with Python.</p>
+
+				<P><TT Class="monofont">BSCW</TT> is a shared Workspace Server for the Web, which is implemented as a collection of Python CGI scripts.</P>
+
+				<P>The <tt clASS="monofont">web2ldap.py</Tt> script (formerly known as <tt cLASS="monofont">ldap-client-cgi.py</tt>) is a full-featured, Web-based LDAP client written in Python.</p>
+
+				<p><tt class="monofont">WebLog</tt> is a group of Python modules containing several class definitions useful for parsing, manipulating, and postprocessing of common Web and Web proxy logfile formats.</p>
+
+				<p>The following Python tools are used to manage Web sites. They implement several functions that simplify the daily tasks performed by Webmasters, such as dead link checking, and object publishing.</p>
+
+				<p><tt cLasS="monofont">WebDAV</tt> (World Wide Web Distributed Authoring and Versioning) is a set of extensions to the HTTP/1.1 protocol, which allows users to collaboratively edit, manage, and update files safely on remote Web servers.</p>
+
+				<P><tt clAss="monofont">Zebra</tT> is an XML-based preprocessing language that offers a compact syntax for expressing common Web design patterns. As Zope, <TT Class="monofont">Zebra</TT> is a templating system that is able to preprocess Python code.</P>
+
+				<P>The HTTPD logfile reporting tool (<tt clASS="monofont">httpd_log</Tt>) is a graphical Web statistics tool that analyzes HTTP log files and generates a page of summary information.<a naME="idx1073746567"></A><A name="idx1073746568"></a><a name="idx1073746569"></a></p>
+
+				<p><tt class="monofont">Linbot</Tt> is a site management tool that analyzes a site and allows the user to view a site map, check for broken internal and external links, missing images, and list other problems that were found.</p>
+
+				<P>The Web site "Python-friendly ISPs" lists Web site providers that support the execution of CGI scripts written in Python. Another option that you have is to install Python on your ISP using the <tt cLass="monofont">mxCGIPython</tT> tool.</p>
+
+				<p><tT CLAss="monofont">HTMLgen</tt> is a module that helps you generate HTML. It contains a class library of objects corresponding to all the HTML 3.2 markup tags. When talking about generating HTML code, it might also be useful to consider <TT CLass="monofont">DocumentTemplate,</tT> which offers clear separation between Python code and HTML code.</P>
+
+				<P><Tt claSS="monofont">Webchecker</TT> is not a CGI application but a Web client application that enables you to check the validity of a site. <tt class="monofont">LinkChecker</tt> is another tool that also allows you to check your HTML documents for broken links.</p>
+
+				<p><tt class="monofont">Persistent CGI</tt> architecture provides a reasonably high-performance, transparent method of publishing objects as long running processes via the World Wide Web.</P>
+
+				<p><tT claSs="monofont">FastCGI</tt> is a fast, open, and secure Web Server interface that solves the performance problems inherent in CGI, without introducing the overhead and complexity of proprietary APIs.<a Name="idx1073746570"></A><A NAme="idx1073746571"></a><a NAME="idx1073746572"></a></p>
+
+			</foNT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="177.html" title="Site Management Tools"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=178" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="178.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="180.html" title="12. Scripting Programming"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+development<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746566">Web</a> <a href="#idx1073746569">2nd</a> <a href="#idx1073746572">3rd</a><BR>
+Internet<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746565">development for</a> <a href="#idx1073746568">2nd</a> <a href="#idx1073746571">3rd</a><BR>
+World Wide Web<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746564">development for</a> <a href="#idx1073746567">2nd</a> <a href="#idx1073746570">3rd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

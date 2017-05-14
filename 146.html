@@ -1,0 +1,1186 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Python DB API</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="137.html" class="navtitle">8. Working with Databases</a> &gt; <span class="nonavtitle">Python DB API</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="145.html" title="Using SQL"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=146" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="146.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="147.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A39%3A30+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147045098087171051091243</font><a href="read9.asp?bookname=0672319942&snode=146&now=5%2F31%2F2002+4%3A39%3A30+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			Python DB API</h3>
+				<p>The quest to provide a standard way to interface to database systems drove a group of people to develop Python Database API. The Python DB API is maintained by the Database Special Interest Group (DB-SIG). For more information, check out their Web site at <a TARGet="_blank" hrEF="http://www.python.org/sigs/db-sig/">http://www.python.org/sigs/db-sig/</A>.</P>
+
+				<p>The following list shows all the database modules that currently implement the Python DB API specification proposed by the DB-SIG. This means that after you understand the API, you will be able to handle, in a similar way, all the databases that are manipulated by the following modules:</p>
+
+				<ul>
+<LI>
+						<P>
+							<B>GadFly— </b>
+
+							A simple relational database system implemented in Python based on the SQL Structured Query Language, including a DB-API compliant interface. Maintained by Aaron Watters.
+						</p>
+
+						<p>
+							<a target="_blank" href="http://www.chordate.com/gadfly.html">http://www.chordate.com/gadfly.html</a>
+						</p>
+
+					</li>
+<li>
+						<P>
+							<b>Informix— </b>
+
+							Currently maintained by Stephen J. Turner.
+						</P>
+
+						<p>
+							<a tArget="_blank" Href="http://starship.python.net/crew/sturner/informixdb.html">http://starship.python.net/crew/sturner/informixdb.html</A>
+						</P>
+
+					</LI>
+<li>
+						<p>
+							<b>Informix (Kinfxdb)— </B>
+
+							A completely new Informix module, called <TT Class="monofont">Kinfxdb.</TT> Maintained by Alexander Kuznetsov.
+						</P>
+
+						<P>
+							<a tarGET="_blank" Href="http://thor.prohosting.com/~alexan/">http://thor.prohosting.com/~alexan/</a>
+						</p>
+
+					</li>
+<li>
+						<p>
+							<b>Interbase (Kinterbasdb)— </b>
+
+							An interface for Interbase 4.0 and 5.0. Maintained by Alexander Kuznetsov.
+						</p>
+
+						<p>
+							<a targeT="_blank" hrEf="http://thor.prohosting.com/~alexan/Kinterbasdb/">http://thor.prohosting.com/~alexan/Kinterbasdb/</a>
+						</p>
+
+					</Li>
+<li>
+						<p>
+							<B>MySQL— </b>
+
+							A <tt CLASs="monofont">MySQL</tt> module that is thread-safe and aims for compatibility with the 2.0 DB-API. It requires a newer version of MySQL, version 3.22.19 or higher.
+						</p>
+
+						<P>
+							<A TArget="_blank" HREF="http://dustman.net/andy/python/MySQLdb/">http://dustman.net/andy/python/MySQLdb/</a>
+							<a naME="idx1073745114"></A>
+							<A name="idx1073745115"></a>
+							<a name="idx1073745116"></a>
+							<a name="idx1073745117"></a>
+						</p>
+
+					</li>
+<Li>
+						<p>
+							<B>mxODBC— </b>
+
+							The <tt Class="monofont">mxODBC</Tt> package provides a nearly 100% Python DB API compliant interface to databases that are accessible via the ODBC API. Many databases include ODBC libraries, so this might be the only module you need. Maintained by M. A. Lemburg.
+						</p>
+
+						<p>
+							<A TARget="_blank" hREF="http://starship.python.net/crew/lemburg/mxODBC.html">http://starship.python.net/crew/lemburg/mxODBC.html</A>
+						</p>
+
+					</li>
+<lI>
+						<P>
+							<B>ODBC— </B>
+
+							This module is currently available in the PythonWin distribution. It's public domain code, but unfortunately has no designated support person(s). The best option for support is to ask questions on comp.lang.python newsgroups, where other PythonWin users can answer them.
+						</p>
+
+						<p>
+							<a tARGEt="_blank" href="http://www.python.org/windows/win32/odbc.html">http://www.python.org/windows/win32/odbc.html</a>
+						</p>
+
+					</li>
+<li>
+						<p>
+							<b>DCOracle— </b>
+
+							An open source interface to Oracle from Digital Creations.
+						</p>
+
+						<p>
+							<a tarGet="_blank" Href="http://www.zope.org/Products/DCOracle/">http://www.zope.org/Products/DCOracle/</A>
+						</p>
+
+					</li>
+<lI>
+						<p>
+							<b>Sybase— </b>
+
+							Maintained by Peter Godman.
+						</P>
+
+						<P>
+							<A TargeT="_blank" HREf="http://starship.python.net/crew/pgodman/">http://starship.python.net/crew/pgodman/</a>
+						</p>
+
+					</lI>
+</UL>
+				<P>This is the information available at the time this book was written. For an updated list of modules, check out <a tarGET="_blank" Href="http://www.python.org/topics/database/modules.html">http://www.python.org/topics/database/modules.html</a>.</p>
+
+				
+					<h4>DB-API Specification v2.0</h4>
+					<p>The following specification is available online at <a target="_blank" href="http://www.python.org/topics/database/DatabaseAPI-2.0.html">http://www.python.org/topics/database/DatabaseAPI-2.0.html</a>.</P>
+
+					<p>Comments and questions about this specification can be directed to the SIG for Database Interfacing with Python at the email address <a Href="mailto:db-sig@python.org">db-sig@python.org</A>.</p>
+
+					<p>For more information on database interfacing with Python and available packages, see the Database Topics Guide at <a tArgeT="_blank" HREf="http://www.python.org">http://www.python.org</a>.</p>
+
+					<p>This document describes the Python Database API Specification 2.0. The previous version 1.0 is still available online at the Python Web site as a reference. Package writers are encouraged to use this version of the specification as the basis for new interfaces.<A NAMe="idx1073745118"></a>
+						<a nAME="idx1073745119"></A>
+						<a namE="idx1073745120"></A>
+						<A Name="idx1073745121"></a>
+					</p>
+
+					<p>This API has been defined to encourage similarity between the Python modules that are used to access databases. By doing this, we hope to achieve a consistency leading to more easily understood modules, code that is generally more portable across databases, and a broader reach of database connectivity from Python.</p>
+
+					<p>The interface specification consists of several sections:</p>
+
+					<ul>
+<li>
+							<p>Module Interface</p>
+
+						</li>
+<li>
+							<p>Connection Objects</P>
+
+						</li>
+<Li>
+							<p>Cursor Objects</p>
+
+						</Li>
+<li>
+							<p>Type Objects and Constructors</P>
+
+						</li>
+<lI>
+							<P>Implementation Hints</P>
+
+						</Li>
+<li>
+							<p>Major Changes from 1.0 to 2.0</P>
+
+						</LI>
+</Ul>
+					
+						<h5>
+					
+					
+					Module Interface</h5>
+						<p>Access to the database is made available through connection objects. The module must provide the following constructor for these:</P>
+
+						<BLOckquOTE>
+<P>
+								<p>
+									<a name="idx1073745122"></a>
+									<a name="idx1073745123"></a>
+									<tt class="monofont">connect(parameters…)—</Tt>This is a constructor for creating a connection to the database. Returns a <i>Connection Object.</I> It takes a number of parameters that are database dependent.<sup>1</Sup>
+								</p>
+
+							</p>
+</BlocKQUOte>
+						<p>These module globals must be defined:</p>
+
+						<BLOCkquoTE>
+<P>
+								<P>
+									<a namE="idx1073745124"></A>
+									<A Name="idx1073745125"></a>
+									<tt class="monofont">apilevel—</tt>This string constant states the supported DB API level. Currently only the strings '1.0' and '2.0' are allowed.</p>
+
+							</p>
+<p>
+								<p>If not given, a Database API 1.0 level interface should be assumed.</p>
+
+							</p>
+<p>
+								<P>
+									<a nAme="idx1073745126"></a>
+									<A name="idx1073745127"></A>
+									<tt cLASS="monofont">threadsafety—</tt>This integer constant states the level of thread safety that the interface supports. Possible values are<a nAME="idx1073745128"></A>
+									<a namE="idx1073745129"></A>
+									<A Name="idx1073745130"></a>
+									<A NAMe="idx1073745131"></a>
+								</p>
+
+							</p>
+<p>
+								<p>
+									<a name="idx1073745132"></a>
+									<a name="idx1073745133"></a>0—Threads cannot share the module.</p>
+
+							</p>
+<P>
+								<p>
+									<a Name="idx1073745134"></A>
+									<a namE="idx1073745135"></a>1—Threads can share the module, but not connections.</p>
+
+							</p>
+<P>
+								<P>
+									<A Name="idx1073745136"></a>
+									<A NAMe="idx1073745137"></a>2—Threads can share the module and connections.</p>
+
+							</p>
+<P>
+								<P>
+									<A Name="idx1073745138"></a>
+									<A NAMe="idx1073745139"></a>3—Threads can share the module, connections, and cursors.</p>
+
+							</p>
+<p>
+								<p>Sharing in the previous context means that two threads can use a resource without wrapping it using a mutex semaphore to implement resource locking. Note that you cannot always make external resources thread safe by managing access using a mutex: The resource might rely on global variables or other external sources that are beyond your control.</p>
+
+							</p>
+<p>
+								<p>
+									<a name="idx1073745140"></a>
+									<a namE="idx1073745141"></a>
+									<tT claSs="monofont">paramstyle—</tt>This string constant states the type of parameter marker formatting expected by the interface. Possible values are as follows:<sUp>2</suP>
+								</P>
+
+								<PRe>
+									
+'qmark'   = Question mark style, e.g. '…WHERE name=?'
+'numeric' = Numeric, positional style, e.g. '…WHERE name=:1'
+'named'   = Named style, e.g. '…WHERE name=:name'
+'format'  = ANSI C printf format codes, e.g. '…WHERE name=%s'
+'pyformat'= Python extended format codes, e.g. '…WHERE name=%(name)s'
+
+								</pre>
+
+							</P>
+</BLOckquOTE>
+						<P>The module should make all error information available through these exceptions or subclasses thereof:</p>
+
+						<bloCKQUote>
+<p>
+								<p><b>
+							
+							
+							Warning— </b>
+
+									This exception is raised for important warnings such as data truncations while inserting, and so on. It must be a subclass of the Python StandardError (defined in the module exceptions).
+								</p>
+
+							</p>
+<p>
+								<p><b>
+							
+							
+							Error— </b>
+
+									This exception is the base class of all other error exceptions. You can use this to catch all errors with one single 'except'statement. Warnings are not considered errors and thus should not use this class as base. It must be a subclass of the Python StandardError (defined in the module exceptions).<a name="idx1073745142"></a>
+										<a NamE="idx1073745143"></a>
+										<a nAme="idx1073745144"></a>
+										<a Name="idx1073745145"></A>
+									
+								</P>
+
+							</P>
+<P>
+								<p><b>
+							
+							
+							InterfaceError— </b>
+
+									This exception is raised for errors that are related to the database interface rather than the database itself. It must be a subclass of Error.
+								</p>
+
+							</P>
+<P>
+								<P><B>
+							
+							
+							DatabaseError— </b>
+
+									This exception is raised for errors that are related to the database. It must be a subclass of Error.
+								</p>
+
+							</p>
+<p>
+								<P><B>
+							
+							
+							DataError— </B>
+
+									This exception is raised for errors that are because of problems with the processed data such as division by zero, numeric value out of range, and so on. It must be a subclass of DatabaseError.
+								</P>
+
+							</p>
+<p>
+								<p><b>
+							
+							
+							OperationalError— </B>
+
+									This exception is raised for errors that are related to the database's operation and not necessarily under the control of the programmer; for example, an unexpected disconnect occurs, the data source name is not found, a transaction could not be processed, a memory allocation error occurred during processing, and so on. It must be a subclass of DatabaseError.
+								</P>
+
+							</P>
+<P>
+								<p><b>
+							
+							
+							IntegrityError— </b>
+
+									This exception is raised when the relational integrity of the database is affected; for example, a foreign key check fails. It must be a subclass of DatabaseError.
+								</p>
+
+							</p>
+<p>
+								<p><b>
+							
+							
+							InternalError— </b>
+
+									This exception is raised when the database encounters an internal error; for example, the cursor is not valid anymore, the transaction is out of sync, and so on. It must be a subclass of DatabaseError.
+								</p>
+
+							</p>
+<p>
+								<p><b>
+							
+							
+							ProgrammingError— </b>
+
+									This exception is raised for programming errors; for example, table not found or already exists, syntax error in the SQL statement, wrong number of parameters specified, and so on. It must be a subclass of DatabaseError.
+								</p>
+
+							</p>
+<p>
+								<p><b>
+							
+							
+							NotSupportedError— </B>
+
+									This exception is raised in case a method or database API was used that is not supported by the database; for example, requesting a <tt ClasS="monofont">.rollback()</tt> on a connection that does not support transaction or has transactions turned off. It must be a subclass of DatabaseError.<a nAme="idx1073745146"></a>
+										<A NAMe="idx1073745147"></a>
+										<a nAME="idx1073745148"></A>
+										<a namE="idx1073745149"></A>
+										<A Name="idx1073745150"></a>
+										<A NAMe="idx1073745151"></a>
+										<a name="idx1073745152"></a>
+									
+								</p>
+
+							</p>
+</blockquote>
+						<P>This is the exception inheritance layout:</p>
+
+						<pRe>
+							
+StandardError
+|__Warning
+|__Error
+   |__InterfaceError
+   |__DatabaseError
+      |__DataError
+      |__OperationalError
+      |__IntegrityError
+      |__InternalError
+      |__ProgrammingError
+      |__NotSupportedError
+
+						</prE>
+
+						<div cLass="note"><P CLAss="notetitle"><b>Note</b></P><P>
+
+							<P>The values of these exceptions are not defined. They should give the user a good idea of what went wrong though.</P>
+
+						</p></div>
+<BR>
+<BR>
+
+					
+					
+						<h5>Connection Objects</h5>
+						<p>Connections Objects should respond to the following methods:</p>
+
+						<BLOCkquote>
+<p>
+								<p>
+										<tt class="monofont">close()—</tt>
+									 
+    
+									It closes the connection now (rather than whenever <tt cLasS="monofont">__del__</tt> is called). The connection will be unusable from this point forward; an <tT clasS="monofont">Error</tt> (or subclass) exception will be raised if any operation is attempted with the connection. The same applies to all cursor objects trying to use the connection.
+								</p>
+
+							</P>
+<P>
+								<P>
+										<Tt claSS="monofont">commit()—</TT>
+									 
+    
+									It commits any pending transaction to the database. If the database supports an autocommit feature, this must be initially off. An interface method might be provided to turn it back on.<a namE="idx1073745153"></A>
+										<A Name="idx1073745154"></a>
+										<A NAMe="idx1073745155"></a>
+										<a name="idx1073745156"></a>
+									
+								</p>
+
+							</p>
+<p>
+								<p>Database modules that do not support transactions should implement this method with void functionality.</p>
+
+							</p>
+<p>
+								<p>
+										<tt clAss="monofont">rollback()—</Tt>
+									 
+    
+									This method is optional because not all databases provide transaction support.<suP>3</sup>
+									
+								</p>
+
+							</P>
+<p>
+								<p>In case a database does provide transactions, this method causes the database to roll back to the start of any pending transaction. Closing a connection without committing the changes first will cause an implicit rollback to be performed.</p>
+
+							</P>
+<P>
+								<P>
+										<Tt claSS="monofont">cursor()—</TT>
+									 
+    
+									It returns a new <i>Cursor Object</i> using the connection. If the database does not provide a direct cursor concept, the module will have to emulate cursors using other means to the extent needed by this specification.<suP>4</SUP>
+										<a namE="idx1073745157"></A>
+										<A Name="idx1073745158"></a>
+										<a name="idx1073745159"></a>
+									
+								</p>
+
+							</p>
+</blockquoTe>
+					
+					
+						<h5>
+					
+					Cursor Objects</H5>
+						<p>These objects represent a database cursor, which is used to manage the context of a fetch operation. They should respond to the following methods and attributes:</p>
+
+						<bLockqUote>
+<P>
+								<P>
+										<TT clasS="monofont">description—</TT>
+									 
+    
+									This read-only attribute is a set of seven-item sequences. Each of these sequences contains information describing one result column: (name, type_code, display_size, internal_size, precision, scale, null_ok). This attribute will be <Tt claSS="monofont">None</TT> for operations that do not return rows or if the cursor has not had an operation invoked via the <tt clASS="monofont">executeXXX()</Tt> method yet.
+								</p>
+
+							</p>
+<p>
+								<p>The type_code can be interpreted by comparing it to the Type Objects specified in the following section.</p>
+
+							</p>
+<p>
+								<p>
+										<tt class="monofont">rowcount—</tt>
+									 
+    
+									This read-only attribute specifies the number of rows that the last <tt ClaSs="monofont">executeXXX()</tt> produced (for DQL statements such as <Tt claSs="monofont">select</tt>) or affected (for DML statements such as <TT CLass="monofont">update</tT> or <TT Class="monofont">insert</TT>).<A Name="idx1073745160"></a>
+										<A NAMe="idx1073745161"></a>
+										<a name="idx1073745162"></a>
+										<a name="idx1073745163"></a>
+										<a name="idx1073745164"></a>
+										<A naMe="idx1073745165"></a>
+									
+								</p>
+
+							</P>
+<p>
+								<p>The attribute is -1 in case no <tt ClasS="monofont">executeXXX()</TT> has been performed on the cursor, or the rowcount of the last operation is not determinable by the interface.<Sup>7</suP>
+								</P>
+
+							</P>
+<P>
+								<p>
+										<tt cLASS="monofont">callproc(procname[,parameters])—</tt>
+									 
+    
+									This method is optional because not all databases provide stored procedures.
+								</p>
+
+							</p>
+<P>
+								<P>It calls a stored database procedure with the given name. The sequence of parameters must contain one entry for each argument that the procedure expects. The result of the call is returned as modified copy of the input sequence. Input parameters are left untouched, and output and input/output parameters are replaced with possibly new values.</P>
+
+							</P>
+</blockquote>
+						<p>The procedure can also provide a resultset as output. This must then be made available through the standard <tt class="monofont">fetchXXX()</tt> methods.</P>
+
+						<blOckqUote>
+<p>
+								<P>
+										<tt cLASS="monofont">close()—</tt>
+									 
+    
+									It closes the cursor now (rather than whenever <tt CLASs="monofont">__del__</tt> is called). The cursor will be unusable from this point forward; an <tT CLAss="monofont">Error</tt> (or subclass) exception will be raised if any operation is attempted with the cursor.
+								</P>
+
+							</P>
+<P>
+								<P>
+										<tt class="monofont">execute(operation[,parameters])—</tt>
+									 
+    
+									It prepares and executes a database operation (query or command). Parameters can be provided as sequence or mapping and will be bound to variables in the operation. Variables are specified in a database-specific notation (see the module's <tt class="monofont">paramstyle</tt> attribute for details).<suP>5</suP>
+									
+								</p>
+
+							</p>
+</bLockqUote>
+						<P>A <A NAme="idx1073745166"></a>
+							<a NAME="idx1073745167"></a>reference to the operation will be retained by the cursor. If the same operation object is passed in again, the cursor can optimize its behavior. This is most effective for algorithms in which the same operation is used, but different parameters are bound to it (many times).</p>
+
+						<p>For maximum efficiency when reusing an operation, it is best to use the <a NAME="idx1073745168"></a>
+							<a naME="idx1073745169"></A>
+							<Tt class="monofont">setinputsizes()</tt> method to specify the parameter types and sizes ahead of time. It is legal for a parameter to not match the predefined information; the implementation should compensate, possibly with a loss of efficiency.</p>
+
+						<p>The parameters can also be specified as list of tuples to insert multiple rows in a single operation, but this kind of usage is depreciated: <tt class="monofont">executemany()</tt> should be used instead.</p>
+
+						<P>Return values are not defined.<a nAme="idx1073745170"></a>
+							<A name="idx1073745171"></A>
+							<a naME="idx1073745172"></A>
+							<A name="idx1073745173"></A>
+							<A NAme="idx1073745174"></a>
+							<a NAME="idx1073745175"></a>
+						</p>
+
+						
+							<h5>
+								<tT CLAss="monofont">executemany(operation,seq_of_parameters</tt>
+							</h5>
+							<p>It prepares a database operation (query or command) and then executes it against all parameter sequences or mappings found in the sequence seq_of_parameters.</p>
+
+							<p>Modules are free to implement this method using multiple calls to the <a name="idx1073745176"></a>
+								<a name="idx1073745177"></a>
+								<Tt cLass="monofont">execute()</Tt> method or by using array operations to have the database process the sequence as a whole in one call.</p>
+
+							<p>The same comments for <tT claSS="monofont">execute()</TT> also apply accordingly to this method.</p>
+
+							<p>Return values are not defined.<a nAME="idx1073745178"></A>
+								<a namE="idx1073745179"></A>
+							</P>
+
+						
+						
+							<H5>
+								<tt clASS="monofont">fetchone()</Tt>
+							</h5>
+							<p>It fetches the next row of a query resultset, returning a single sequence, or <tt class="monofont">None</tt> when no more data is available.<sup>6</sup>
+							</p>
+
+							<p>An <Tt cLass="monofont">Error</Tt> (or subclass) exception is raised if the previous call to <a naMe="idx1073745180"></a>
+								<a NAME="idx1073745181"></a>
+								<tt cLASS="monofont">executeXXX()</tt> did not produce any resultset or no call was issued yet.<a nAME="idx1073745182"></A>
+								<a namE="idx1073745183"></A>
+							</P>
+
+						
+						
+							<H5>
+								<tt class="monofont">fetchmany([size=cursor.arraysize])</tt>
+							</h5>
+							<p>It fetches the next set of rows of a query result, returning a sequence of sequences (for example, a list of tuples). An empty sequence is returned when no more rows are available.</p>
+
+							<p>The number of rows to fetch per call is specified by the parameter. If it is not given, the cursor's <tt class="monofont">arraysize</Tt> determines the number of rows to be fetched. The method should try to fetch as many rows as indicated by the size parameter. If this is not possible because of the specified number of rows not being available, fewer rows can be returned.</p>
+
+							<P>An <tt cLass="monofont">Error</tT> (or subclass) exception is raised if the previous call to <tt cLASS="monofont">executeXXX()</tt> did not produce any resultset or no call was issued yet.</p>
+
+							<p>Performance considerations are involved with the size parameter. For optimal performance, it is usually best to use the <TT CLass="monofont">arraysize</tT> attribute. If the size parameter is used, it is best for it to retain the same value from one <TT Class="monofont">fetchmany()</TT> call to the next.<A Name="idx1073745184"></a>
+								<a name="idx1073745185"></a>
+								<a name="idx1073745186"></a>
+								<a namE="idx1073745187"></a>
+								<a Name="idx1073745188"></A>
+								<a namE="idx1073745189"></a>
+								<a nAME="idx1073745190"></A>
+								<a namE="idx1073745191"></A>
+								<A Name="idx1073745192"></a>
+								<A NAMe="idx1073745193"></a>
+							</p>
+
+						
+						
+							<h5>
+								<TT CLass="monofont">fetchall()</tt>
+							</h5>
+							<p>It fetches all (remaining) rows of a query result, returning them as a set of sequences (for example, a list of tuples). Note that the cursor's <tt class="monofont">arraysize</tt> attribute can affect the performance of this operation.</p>
+
+							<p>An <tt ClaSs="monofont">Error</tt> (or subclass) exception is raised if the previous call to <Tt claSs="monofont">executeXXX()</tt> did not produce any resultset or no call was issued yet.</P>
+
+						
+						
+							<H5>
+								<TT clasS="monofont">nextset()</TT>
+							</H5>
+							<p>This method is optional because not all databases support multiple resultsets.<sup>3</SUP>
+							</P>
+
+							<p>This method will make the cursor skip to the next available set, discarding any remaining rows from the current set.</p>
+
+							<p>If there are no more sets, the method returns <tT CLAss="monofont">None.</tt> Otherwise, it returns a true value and subsequent calls to the fetch methods will return rows from the next resultset.</p>
+
+							<p>An <tt class="monofont">Error</tt> (or subclass) exception is raised if the previous call to <tt claSs="monofont">executeXXX()</tT> did not produce any resultset or no call was issued yet.<a naMe="idx1073745194"></a>
+								<a nAme="idx1073745195"></a>
+							</P>
+
+						
+						
+							<H5>
+								<TT clasS="monofont">arraysize</TT>
+							</H5>
+							<p>This read/write attribute specifies the number of rows to fetch at a time with <tt cLASS="monofont">fetchmany().</tt> It defaults to 1, which means to fetch a single row at a time.</p>
+
+							<p>Implementations must observe this value with respect to the <TT CLass="monofont">fetchmany()</tt> method, but are free to interact with the database a single row at a time. It can also be used in the implementation of <tt class="monofont">executemany().</tt>
+							</p>
+
+						
+						
+							<h5>
+								<tt clAss="monofont">setinputsizes(sizes)</Tt>
+							</h5>
+							<p>This can be used before a call to <Tt claSs="monofont">executeXXX()</tt> to predefine memory areas for the operation's parameters.</P>
+
+							<P>
+								<TT clasS="monofont">sizes</TT> is specified as a sequence—one item for each input parameter. The item should be a Type Object that corresponds to the input that will be used, or it should be an integer specifying the maximum length of a string parameter. If the item is <Tt claSS="monofont">None,</TT> no predefined memory area will be reserved for that column. (This is useful to avoid predefined areas for large inputs.)<a namE="idx1073745196"></A>
+								<A Name="idx1073745197"></a>
+								<a name="idx1073745198"></a>
+								<a name="idx1073745199"></a>
+								<a namE="idx1073745200"></a>
+								<a Name="idx1073745201"></A>
+							</p>
+
+							<p>This method would be used before the <tt ClasS="monofont">executeXXX()</TT> method is invoked. Implementations are free to have this method do nothing, and users are free to not  use it. <A name="idx1073745202"></A>
+								<A NAme="idx1073745203"></a>
+							</p>
+
+						
+						
+							<H5>
+								<TT Class="monofont">setoutputsize(size[,column])</TT>
+							</H5>
+							<P>It sets a column buffer size for fetches of large columns (for example, <tt class="monofont">LONG</tt>s, <tt class="monofont">BLOB</tt>s, and so on). The column is specified as an index into the result sequence. Not specifying the column will set the default size for all large columns in the cursor.</p>
+
+							<p>This method would be used before the <Tt cLass="monofont">executeXXX()</Tt> method is invoked.</p>
+
+							<p>Implementations are free to have this method do nothing, and users are free to not  use it.<a Name="idx1073745204"></A>
+								<A NAme="idx1073745205"></a>
+								<a NAME="idx1073745206"></a>
+								<a naME="idx1073745207"></A>
+							</P>
+
+						
+					
+					
+						<h5>
+					
+					
+					Type Objects and Constructors</h5>
+						<p>Many databases need to have the input in a particular format for binding to an operation's input parameters. For example, if an input is destined for a DATE column, it must be bound to the database in a particular string format. Similar problems exist for Row ID columns or large binary items (for example, <tT CLAss="monofont">BLOB</tt>s or <tt class="monofont">RAW</tt> columns). This presents problems for Python because the parameters to the <a name="idx1073745208"></a>
+							<a NamE="idx1073745209"></a>
+							<a nAme="idx1073745210"></a>
+							<tT claSS="monofont">executeXXX()</TT> method are not typed. When the database module sees a Python string object, it doesn't know if it should be bound as a simple CHAR column, as a raw <tt clASS="monofont">BINARY</Tt> item, or as a <tt cLASS="monofont">DATE.</tt>
+						</p>
+
+						<p>To overcome this problem, a module must provide the constructors defined later to create objects that can hold special values. When passed to the cursor methods, the module can then detect the proper type of the input parameter and bind it accordingly.</P>
+
+						<P>A Cursor Object's <A Name="idx1073745211"></a>
+							<a name="idx1073745212"></a>
+							<tt class="monofont">description</tt> attribute returns information about each of the result columns of a query. The <tT clAss="monofont">type_code</tT> must be <i>equal</i> to one of Type Objects defined in the following. Type Objects can be equal to more than one type code. (For example, <tt ClasS="monofont">DATETIME</TT> could be equal to the type codes for date, time, and timestamp columns; see "
+								<A href="146#14.html">Implementation Hints</A>
+							" for details.)<A NAme="idx1073745213"></a>
+							<a NAME="idx1073745214"></a>
+							<a naME="idx1073745215"></A>
+							<A name="idx1073745216"></a>
+						</p>
+
+						<p>The module exports the following constructors and singletons:</p>
+
+						<blockquote>
+<p>
+								<p><B>
+							
+							
+							Date(year, month, day)— </b>
+
+									This function constructs an object holding a date value.
+								</p>
+
+							</P>
+<p>
+								<p><b>
+							
+							
+							Time(hour, minute, second)— </B>
+
+									This function constructs an object holding a time value.
+								</p>
+
+							</p>
+<p>
+								<p><B>
+							
+							
+							Timestamp(year, month, day, hour, minute, second)— </b>
+
+									This function constructs an object holding a timestamp value.
+								</p>
+
+							</p>
+<P>
+								<P><B>
+							
+							
+							DateFromTicks(ticks)— </B>
+
+									This function constructs an object holding a date value from the given ticks value (number of seconds since the epoch; see the documentation of the standard Python <tt clASS="monofont">time</Tt> module for details).
+								</p>
+
+							</p>
+<p>
+								<P><B>
+							
+							
+							TimeFromTicks(ticks)— </B>
+
+									This function constructs an object holding a time value from the given ticks value (number of seconds since the epoch; see the documentation of the standard Python <Tt claSS="monofont">time</TT> module for details).
+								</p>
+
+							</p>
+<p>
+								<p><b>
+							
+							
+							TimestampFromTicks(ticks)— </b>
+
+									This function constructs an object holding a time stamp value from the given ticks value (number of seconds since the epoch; see the documentation of the standard Python <tt class="monofont">time</tt> module for details).
+								</p>
+
+							</p>
+<p>
+								<p><b>
+							
+							
+							Binary(string)— </B>
+
+									This function constructs an object capable of holding a binary (long) string value.
+								</p>
+
+							</p>
+<P>
+								<p><b>
+							
+							
+							STRING— </b>
+
+									This type object is used to describe columns in a database that are string based (for example, <Tt claSs="monofont">CHAR</tt>).<A NAMe="idx1073745217"></a>
+										<a nAME="idx1073745218"></A>
+										<a namE="idx1073745219"></A>
+										<A Name="idx1073745220"></a>
+										<A NAMe="idx1073745221"></a>
+										<a name="idx1073745222"></a>
+										<a name="idx1073745223"></a>
+									
+								</p>
+
+							</p>
+<p>
+								<p><b>
+							
+							
+							BINARY— </b>
+
+									This type object is used to describe (long) binary columns in a database (for example, <Tt cLass="monofont">LONG, RAW, BLOB</Tt>s).
+								</p>
+
+							</p>
+<p>
+								<P><b>
+							
+							
+							NUMBER— </b>
+
+									This type object is used to describe numeric columns in a database.
+								</p>
+
+							</P>
+<P>
+								<P><B>
+							
+							
+							DATETIME— </b>
+
+									This type object is used to describe date/time columns in a database.
+								</p>
+
+							</p>
+<p>
+								<P><B>
+							
+							
+							ROWID— </B>
+
+									This type object is used to describe the Row ID column in a database.
+								</P>
+
+							</p>
+</bloCKQUote>
+						<p>SQL <A NAMe="idx1073745224"></a>
+							<a name="idx1073745225"></a>
+							<tt class="monofont">NULL</tt> values are represented by the Python <tt cLasS="monofont">None</tt> singleton on input and output.</p>
+
+						<Div clAss="note"><p CLASs="notetitle"><b>Note</b></p><P>
+
+							<P>Usage of UNIX ticks for database interfacing can cause troubles because of the limited date range they cover.</P>
+
+						</P></div>
+<bR>
+<BR>
+
+					
+					<A name="14"></A>
+						<H5>Implementation Hints</H5>
+						<P>The next list provides some suggestions about using this API.</p>
+
+						<ul>
+<li>
+								<p>The preferred object types for the date/time objects are those defined in the <i>mxDateTime</i> package <a target="_blank" href="http://starship.python.net/~lemburg/mxDateTime.html">(http://starship.python.net/~lemburg/mxDateTime.html)</a>. It provides all necessary constructors and methods both at Python and C level.</P>
+
+							</li>
+<Li>
+								<p>The preferred object type for Binary objects are the buffer types available in standard Python starting with version 1.5.2. See the Python documentation  for details. For information about the C interface, take a look at <tT clasS="monofont">Include/bufferobject.h</tt> and <tT CLAss="monofont">Objects/bufferobject.c</tt> in the Python source distribution.</P>
+
+							</LI>
+<Li>
+								<p>Here is a sample implementation of the UNIX ticks based constructors for date/time delegating work to the generic constructors:</p>
+
+								<pRE>
+									
+import time
+def DateFromTicks(ticks):
+    return apply(Date,time.localtime(ticks)[:3])
+def TimeFromTicks(ticks):
+    return apply(Time,time.localtime(ticks)[3:6])
+def TimestampFromTicks(ticks):
+    return apply(Timestamp,time.localtime(ticks)[:6])
+
+								</PRe>
+
+							</li>
+<lI>
+								<P>This Python class allows implementing the previous type objects even though the description type code field yields multiple values for one type object:<A Name="idx1073745226"></a>
+									<a name="idx1073745227"></a>
+									<a name="idx1073745228"></a>
+									<a namE="idx1073745229"></a>
+								</p>
+
+								<Pre>
+									
+class DBAPITypeObject:
+    def __init__(self,*values):
+        self.values = values
+    def __cmp__(self,other):
+        if other in self.values:
+            return 0
+        if other &lt; self.values:
+            return 1
+        else:
+            return –1
+
+								</pRe>
+
+							</li>
+</uL>
+						<div CLASs="note"><p clASS="notetitle"><B>Note</b></p><p>
+
+							<p>The resulting type object compares equal to all values passed to the constructor.</P>
+
+						</P></DIv>
+<br>
+<bR>
+
+						<UL>
+<Li>
+								<p>Here is a snippet of Python code that implements the exception hierarchy defined previously:</p>
+
+								<pre>
+									
+import exceptions
+class Error(exceptions.StandardError):
+    pass
+class Warning(exceptions.StandardError):
+    pass
+class InterfaceError(Error):
+    pass
+class DatabaseError(Error):
+    pass
+class InternalError(DatabaseError):
+    pass
+class OperationalError(DatabaseError):
+    pass
+class ProgrammingError(DatabaseError):
+    pass
+class IntegrityError(DatabaseError):
+    pass
+class DataError(DatabaseError):
+    pass
+class NotSupportedError(DatabaseError):
+    pass
+							
+								</pre>
+
+							</li>
+</ul>
+						<div clasS="note"><p cLass="notetitle"><B>Note</b></p><p>
+
+							<p>In C you can use the <Tt clASS="monofont">PyErr_NewException(fullname, base, NULL)</Tt> API to create the exception objects.</p>
+
+						</p></dIV>
+<BR>
+<br>
+
+					
+					
+						<h5>Major Changes from Version 1.0 to Version 2.0</h5>
+						<P>The Python Database API 2.0 introduces a few major changes compared to the 1.0 version. Because some of these changes will cause existing DB API 1.0 based scripts to break, the major version number was adjusted to reflect this change.</P>
+
+						<P>These are the most important changes from 1.0 to 2.0:</P>
+
+						<ul>
+<li>
+								<P>The need for a separate <TT Class="monofont">dbi</tt> module was dropped and the functionality merged into the module interface itself.</p>
+
+							</li>
+<li>
+								<p>New constructors and Type Objects were added for date/time values, the <tt class="monofont">RAW</tT> Type Object was renamed to <tt ClasS="monofont">BINARY.</tt> The resulting set should cover all basic data types commonly found in modern SQL databases.</p>
+
+							</lI>
+<li>
+								<p>New constants (<TT CLass="monofont">apilevel, threadlevel, paramstyle</tT>) and methods (<TT Class="monofont">executemany, nextset</TT>) were added to provide better database bindings.</P>
+
+							</Li>
+<li>
+								<p>The semantics of <TT CLass="monofont">.callproc()</tt> needed to call stored procedures are now clearly defined.</p>
+
+							</li>
+<li>
+								<p>The definition of the <tt class="monofont">.execute()</tt> return value changed. Previously, the return value was based on the SQL statement type (which was difficult to implement correctly)—it is undefined now; use the more flexible <Tt cLass="monofont">.rowcount</Tt> attribute instead. Modules are free to return the old style return values, but these are no longer mandated by the specification and should be considered database interface dependent.<a naMe="idx1073745230"></a>
+									<a NAME="idx1073745231"></a>
+									<a naME="idx1073745232"></A>
+									<A name="idx1073745233"></A>
+								</P>
+
+							</LI>
+<li>
+								<p>Class-based exceptions were incorporated into the specification. Module implementers are free to extend the exception layout defined in this specification by subclassing the defined exception classes.</p>
+
+							</LI>
+</UL>
+						
+							<h5>Open Issues</h5>
+							<p>Although the version 2.0 specification clarifies a lot of questions that were left open in the 1.0 version, there are still some remaining issues:</p>
+
+							<ul>
+<li>
+									<p>Define a useful return value for <tt class="monofont">.nextset()</tt> for the case in which a new resultset is available.</p>
+
+								</lI>
+<li>
+									<P>Create a fixed point numeric type for use as loss-less monetary and decimal interchange format.</p>
+
+								</li>
+</Ul>
+						
+					
+					
+						<h5>Footnotes</h5>
+						<oL typE="1">
+<LI>
+
+								<P>As a guideline, the connection constructor parameters should be implemented as keyword parameters for more intuitive use and follow this order of parameters:</p>
+
+								<pre>
+									
+dsn       = Data source name as string
+user      = User name as string          (optional)
+password  = Password as string           (optional)
+host      = Hostname                     (optional)
+database  = Database name                (optional)
+
+								</PRE>
+
+								<P>For example, a connect could look like this:</p>
+
+								<pre>
+									
+connect(dsn='myhost:MYDB',user='guido',password='234$')
+
+								</PRE>
+
+							</Li>
+<li>
+
+								<p>Module implementers should prefer <I>numeric,</I>
+									<I>named,</I> or <i>pyformat</i> over the other formats because these offer more clarity and flexibility.</p>
+
+							</li>
+<li>
+
+								<p>If the database does not support the functionality required by the method, the interface should throw an exception in case the method is used.<a name="idx1073745234"></a>
+									<a name="idx1073745235"></a>
+									<A naMe="idx1073745236"></a>
+									<a Name="idx1073745237"></a>
+								</P>
+
+								<p>The preferred approach is to not implement the method and thus have Python generate an <tt CLASs="monofont">AttributeError</tt> in case the method is requested. This allows the programmer to check for database capabilities using the standard <tT CLAss="monofont">hasattr()</tt> function.</P>
+
+								<P>For some dynamically configured interfaces, it might not be appropriate to require that the method be made available dynamically. These interfaces should then raise a <TT clasS="monofont">NotSupportedError</TT> to indicate the inability to perform the rollback when the method is invoked.</P>
+
+							</li>
+<li>
+
+								<p>A database interface can choose to support named cursors by allowing a string argument to the method. This feature is not part of the specification because it complicates semantics of the <tt class="monofont">.fetchXXX()</tt> methods.</p>
+
+							</li>
+<li>
+
+								<p>The module will use the <Tt cLass="monofont">__getitem__</Tt> method of the parameters object to map either positions (integers) or names (strings) to parameter values. This allows for both sequences and mappings to be used as input.</p>
+
+								<p>The term <i>bound</I> refers to the process of binding an input value to a database execution buffer. In practical terms, this means that the input value is directly used as a value in the operation. The client should not be required to "escape" the value so that it can be used—the value should be equal to the actual database value.</p>
+
+							</li>
+<LI>
+
+								<P>The interface can implement row fetching using arrays and other optimizations. It is not guaranteed that a call to this method will only move the associated cursor forward by one row.</P>
+
+							</li>
+<li>
+
+								<P>The <TT Class="monofont">rowcount</TT> attribute might be coded in a way that updates its value dynamically. This can be useful for databases that return useable rowcount values only after the first call to a <TT clasS="monofont">.fetchXXX()</TT> method.<A name="idx1073745238"></a>
+									<a name="idx1073745239"></a>
+									<a name="idx1073745240"></a>
+									<a naMe="idx1073745241"></a>
+								</P>
+
+							</li>
+</oL>
+
+					
+				
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="145.html" title="Using SQL"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=146" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="146.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="147.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073745132">0 variable</a><BR>
+ <a href="#idx1073745134">1 variable</a><BR>
+ <a href="#idx1073745136">2 variable</a><BR>
+ <a href="#idx1073745138">3 variable</a><BR>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745150">connection objects</a> <a href="#idx1073745157">2nd</a><BR>
+ <a href="#idx1073745124">apilevel variable</a><BR>
+Application Program Interfaces (APIs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745116">Python DB</a> <a href="#idx1073745120">2nd</a> <a href="#idx1073745130">3rd</a> <a href="#idx1073745144">4th</a> <a href="#idx1073745148">5th</a> <a href="#idx1073745155">6th</a> <a href="#idx1073745162">7th</a> <a href="#idx1073745172">8th</a> <a href="#idx1073745186">9th</a> <a href="#idx1073745198">10th</a> <a href="#idx1073745215">11th</a> <a href="#idx1073745219">12th</a> <a href="#idx1073745228">13th</a> <a href="#idx1073745232">14th</a> <a href="#idx1073745236">15th</a> <a href="#idx1073745240">16th</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745212">description</a><BR>
+connect(parametersÉ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745122">) constructor</a><BR>
+connection objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745151">databases</a> <a href="#idx1073745158">2nd</a><BR>
+constructors<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connect(parametersÉ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745123">)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745223">databases</a><BR>
+cursor objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745164">databases</a> <a href="#idx1073745174">2nd</a> <a href="#idx1073745188">3rd</a> <a href="#idx1073745204">4th</a><BR>
+databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745114">Python DB API</a> <a href="#idx1073745118">2nd</a> <a href="#idx1073745128">3rd</a> <a href="#idx1073745142">4th</a> <a href="#idx1073745146">5th</a> <a href="#idx1073745153">6th</a> <a href="#idx1073745160">7th</a> <a href="#idx1073745170">8th</a> <a href="#idx1073745184">9th</a> <a href="#idx1073745196">10th</a> <a href="#idx1073745213">11th</a> <a href="#idx1073745217">12th</a> <a href="#idx1073745226">13th</a> <a href="#idx1073745230">14th</a> <a href="#idx1073745234">15th</a> <a href="#idx1073745238">16th</a><BR>
+ <a href="#idx1073745211">description attribute</a><BR>
+ <a href="#idx1073745176">execute() method</a><BR>
+ <a href="#idx1073745178">executemany(operation,seq_of_parameters) method</a><BR>
+ <a href="#idx1073745180">executeXXX() method</a> <a href="#idx1073745190">2nd</a> <a href="#idx1073745200">3rd</a> <a href="#idx1073745209">4th</a><BR>
+ <a href="#idx1073745192">fetchmany([size=cursor.arraysize]) method</a><BR>
+ <a href="#idx1073745182">fetchone() method</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application program (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745117">Python DB</a> <a href="#idx1073745121">2nd</a> <a href="#idx1073745131">3rd</a> <a href="#idx1073745145">4th</a> <a href="#idx1073745149">5th</a> <a href="#idx1073745156">6th</a> <a href="#idx1073745163">7th</a> <a href="#idx1073745173">8th</a> <a href="#idx1073745187">9th</a> <a href="#idx1073745199">10th</a> <a href="#idx1073745216">11th</a> <a href="#idx1073745220">12th</a> <a href="#idx1073745229">13th</a> <a href="#idx1073745233">14th</a> <a href="#idx1073745237">15th</a> <a href="#idx1073745241">16th</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745177">execute</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745179">executemany(operation,seq_of_parameters)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745181">executeXXX</a> <a href="#idx1073745191">2nd</a> <a href="#idx1073745201">3rd</a> <a href="#idx1073745210">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745193">fetchmany([size=cursor.arraysize])</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745183">fetchone()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745195">nextset()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745169">setinputsizes(sizes)</a> <a href="#idx1073745203">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745207">setoutputsize(size[,column])</a><BR>
+ <a href="#idx1073745194">nextset() method</a><BR>
+NULL values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745225">Structured Query Language (SQL)</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connection<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745152">databases</a> <a href="#idx1073745159">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cursor<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745165">databases</a> <a href="#idx1073745175">2nd</a> <a href="#idx1073745189">3rd</a> <a href="#idx1073745205">4th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745222">databases</a><BR>
+operations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745167">references</a><BR>
+parameters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745208">executeXXX() method</a><BR>
+ <a href="#idx1073745140">paramstyle variable</a><BR>
+ <a href="#idx1073745115">Python DB API</a> <a href="#idx1073745119">2nd</a> <a href="#idx1073745129">3rd</a> <a href="#idx1073745143">4th</a> <a href="#idx1073745147">5th</a> <a href="#idx1073745154">6th</a> <a href="#idx1073745161">7th</a> <a href="#idx1073745171">8th</a> <a href="#idx1073745185">9th</a> <a href="#idx1073745197">10th</a> <a href="#idx1073745214">11th</a> <a href="#idx1073745218">12th</a> <a href="#idx1073745227">13th</a> <a href="#idx1073745231">14th</a> <a href="#idx1073745235">15th</a> <a href="#idx1073745239">16th</a><BR>
+references<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745166">operations</a><BR>
+ <a href="#idx1073745168">setinputsizes(sizes) method</a> <a href="#idx1073745202">2nd</a><BR>
+ <a href="#idx1073745206">setoutputsize(size[,column]) method</a><BR>
+ <a href="#idx1073745126">threadsafety variable</a><BR>
+type objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745221">databases</a><BR>
+values<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NULL<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745224">Structured Query Language (SQL)</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745133">0</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745135">1</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745137">2</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745139">3</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745125">apilevel</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745141">paramstyle</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745127">threadsafety</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

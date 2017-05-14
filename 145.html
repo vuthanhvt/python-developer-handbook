@@ -1,0 +1,758 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Using SQL</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="137.html" class="navtitle">8. Working with Databases</a> &gt; <span class="nonavtitle">Using SQL</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="144.html" title="ADO (ActiveX Data Objects)"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=145" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="145.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="146.html" title="Python DB API"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A39%3A21+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147045098086162037036201</font><a href="read3.asp?bookname=0672319942&snode=145&now=5%2F31%2F2002+4%3A39%3A21+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			Using SQL</h3>
+				<p>
+					<i>SQL</I> stands for <I>Structured Query Language.</I> It was developed in the mid-1970s by <A name="idx1073745060"></A>IBM Research to serve as an English interface query language to the System R relational database prototype.</P>
+
+				<P>SQL consists of a list of powerful and flexible commands that are used to manipulate information collected in tables, by operating and controlling sets of records at a time.</P>
+
+				<ul>
+<li>
+						<P>SQL is an interactive query language for <I>ad hoc</I> database queries.</P>
+
+					</li>
+<li>
+						<p>SQL is a database programming language.</p>
+
+					</li>
+<li>
+						<p>SQL is a data definition and data administration language.</p>
+
+					</li>
+<li>
+						<p>SQL is the language of networked database servers.</p>
+
+					</li>
+<Li>
+						<p>SQL helps protect the data in a multi-user networked environment.</P>
+
+					</li>
+</uL>
+				<p>Nowadays, SQL servers are the dominant model for creating client/server applications. The most important tendency among database servers of any size is the revelation of SQL as the choice for the manipulation, definition, and control of data.</p>
+
+				<p>SQL has been an ISO standard for a long time. It is a powerful language for databases that adhered to the relational model.</p>
+
+				<P>The relational model clearly separates the physical aspects of data from their logical implementation. It frees you from being concerned with the details of how data is stored and makes the access to data purely logical.</p>
+
+				<p>By using SQL statements, you just need to specify the tables, columns, and row qualifiers to get to any data item.</p>
+
+				
+					<H4>SQL Mini-Tutorial</H4>
+					<P>The idea behind this mini-tutorial is to teach you how to change and query the database. Of course, this book does not cover everything. It should give you a brief understanding of the concepts and basic usage of SQL statements. If it becomes necessary to delve deeper in this topic, the last heading of this section contains a list of Web sites that have some beneficial and complete SQL tutorials.<A name="idx1073745061"></A>
+						<A NAme="idx1073745062"></a>
+						<a NAME="idx1073745063"></a>
+						<a naME="idx1073745064"></A>
+						<A name="idx1073745065"></a>
+					</p>
+
+					
+						<h5>
+					
+					
+					Selecting the Information</h5>
+						<p>In a relational database, data is stored in tables. In our example, we have the <tt class="monofont">USERS</tt> Table. <tt ClaSs="monofont">ID, NAME, EMAIL,</tt> and <Tt claSs="monofont">AGE</tt> are the columns of this table.</P>
+
+						<P><TAble bORDEr="1" celLSPAcing="0" CELLpadding="1" width="100%">
+<caption><h5>Table 8.2. 
+								<Tt cLass="monofont">USERS</Tt>
+							</h5></caPtioN><COLgrouP ALIgn="left" spAN="4">
+<TR valiGN="top">
+<TH>
+<font size="2">ID</font></th>
+<th>
+<font SizE="2">NAME</fonT></th>
+<th>
+<Font SIZE="2">EMAIL</font></TH>
+<TH>
+<font SIZE="2">AGE</font></TH>
+</TR>
+<tr valign="top">
+<td>
+<font size="2">1</foNt></tD>
+<td>
+<fOnt siZe="2">Andre</foNT></TD>
+<td>
+<foNT SIze="2">alessa@bebemania.com.br</foNT></TD>
+<td>
+<foNT SIze="2">25</font></td>
+</tr>
+<tr valign="top">
+<td>
+<FonT sizE="2">2</font></Td>
+<td>
+<FONT size="2">Renata</FONT></td>
+<td>
+<FONT size="2">rtaveira@bebemania.com.br</FONT></td>
+<td>
+<font size="2">30</font></td>
+</tr>
+<Tr vAligN="top">
+<td>
+<foNt siZE="2">3</FOnt></td>
+<TD>
+<FOnt siZE="2">Cleber</FOnt></td>
+<TD>
+<FOnt size="2">clessa@bebemania.com.br</font></td>
+<td>
+<font siZe="2">45</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2">4</font></TD>
+<TD>
+<font SIZE="2">Beth</font></td>
+<td>
+<font size="2">beth@alugueaqui.com.br</font></Td>
+<tD>
+<fonT size="2">40</Font></TD>
+</TR>
+</colgROUP>
+</tablE></P>
+
+						<P>Now, say that you want to know the <Tt claSS="monofont">EMAIL</TT> and the <tt class="monofont">AGE</tt> of each user. You have to use the <tt class="monofont">SELECT</tt> statement as follows:</p>
+
+						<pRe>
+							
+SELECT EMAIL, AGE
+FROM USERS
+
+						</pRe>
+
+						<p>The following list is the result of your query:</p>
+
+						<Pre>
+							
+EMAIL                       AGE
+alessa@bebemania.com.br    25
+rtaveira@bebemania.com.br  30
+clessa@bebemania.com.br    45
+beth@alugueaqui.com.br     40
+
+						</prE>
+
+						<p>Let me explain to you what you have done: you asked to see all the rows from the <tt CLASs="monofont">USERS</tt> table, filtering only the <tT CLAss="monofont">EMAIL</tt> and <TT CLass="monofont">AGE</tT> columns. Note that column names and table names do not have spaces—they must be entered as just one word. The general syntax for a <TT Class="monofont">SELECT</tt> statement (when selecting all the rows from a table) is</p>
+
+						<pre>
+							
+SELECT <i>Column1Name, Column2Name,</i> …
+FROM <i>TableName</i>
+					
+						</pre>
+
+						<div ClaSs="note"><p cLass="notetitle"><b>Note</B></p><p>
+
+							<p>This basic syntax doesn't filter which rows are selected or do anything else interesting.<A NAMe="idx1073745066"></a>
+								<a nAME="idx1073745067"></A>
+								<a namE="idx1073745068"></A>
+							</P>
+
+						</P></div>
+<bR>
+<BR>
+
+						<P>You can use the asterisk symbol in order to retrieve all the columns from a table without typing every column name:</p>
+
+						<pre>
+							
+SELECT * FROM <i>TableName;</i>
+					
+						</pre>
+
+					
+					
+						<h5>
+					
+					Relational Operators</h5>
+						<p>Six important relational operators exist in SQL, and after introducing them, we'll see how they're used:</p>
+
+						<p><table bOrdEr="1" ceLlspaCing="0" CELLpaddING="1" Width="100%">
+<COLGroup ALIGn="left" span="2">
+<tr valign="top">
+<td>
+<font sIze="2">
+											<Tt clAss="monofont">=</tt>
+										</Font></TD>
+<TD>
+<font SIZE="2">Equal</font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<font size="2">
+											<tt class="monofont">&lt;&gt;</tt>
+										</fOnt></Td>
+<td>
+<Font sIze="2">Not Equal</fONT></Td>
+</tr>
+<tR VALign="top">
+<tD>
+<FONt sizE="2">
+											<TT Class="monofont">&lt;</tt>
+										</font></td>
+<td>
+<font siZe="2">Less Than</fOnt></tD>
+</tr>
+<tr ValiGN="top">
+<TD>
+<font SIZE="2">
+											<tt clASS="monofont">&gt;</Tt>
+										</fonT></TD>
+<Td>
+<font size="2">Greater Than</font></td>
+</tr>
+<tr vAliGn="top">
+<td>
+<Font sIze="2">
+											<tT CLAss="monofont">&lt;=</tt>
+										</FONT></td>
+<td>
+<FONT size="2">Less Than or Equal To</FONT></td>
+</tr>
+<tr valign="top">
+<td>
+<font siZe="2">
+											<tT claSs="monofont">&gt;=</tt>
+										</fOnt></tD>
+<TD>
+<Font sIZE="2">Greater Than or Equal To</Font></tD>
+</TR>
+</ColgrOUP>
+</Table></p>
+
+						<p>The <a name="idx1073745069"></a>
+							<a name="idx1073745070"></a>
+							<tt ClaSs="monofont">WHERE</tt> clause of a <A name="idx1073745071"></A>
+							<a naME="idx1073745072"></A>
+							<Tt claSS="monofont">SELECT</TT> statement specifies which rows of a table must be selected. For example, let's determine which users are 25 years old.</p>
+
+						<pre>
+							
+SELECT NAME
+FROM USERS
+WHERE AGE = 25;
+
+						</PRE>
+
+						<P>The resultset is as follows:</p>
+
+						<pre>
+							
+NAME
+Andre
+					
+						</PRE>
+
+					
+					
+						<H5>
+					
+					Joins</h5>
+						<p>Good database design suggests that each table in a database must contain data of only one single entity. Detailed information can be acquired by joining tables according to their primary and foreign keys. For example, we will create <a href="145#6.html">Table 8.3</a>.<a name="idx1073745073"></a>
+							<a name="idx1073745074"></a>
+							<A naMe="idx1073745075"></a>
+							<a Name="idx1073745076"></a>
+							<A namE="idx1073745077"></A>
+						</P>
+
+						<A name="6"></A><P><TAble bORDEr="1" celLSPAcing="0" cellpadding="1" width="100%">
+<CapTion><H5>Table 8.3. 
+								<tt clAss="monofont">NATIONALITY</tT>
+							</H5></CAptioN><COLgrouP ALIgn="left" spAN="2">
+<TR valign="top">
+<td>
+<font size="2">ID</font></Td>
+<tD>
+<fonT size="2">ORIGIN</Font></TD>
+</TR>
+<tr vaLIGN="top">
+<td>
+<foNT SIze="2">1</foNT></TD>
+<td>
+<font size="2">Greek</font></td>
+</tr>
+<tr ValIgn="top">
+<tD>
+<font Size="2">2</FONT></td>
+<td>
+<FONT size="2">Spain</FONT></td>
+</tr>
+<TR VAlign="top">
+<td>
+<font size="2">6</font></td>
+<Td>
+<fOnt sIze="2">USA</foNt></td>
+</TR>
+<TR valiGN="top">
+<TD>
+<font SIZE="2">8</font></TD>
+<TD>
+<font size="2">Brazil</font></td>
+</tr>
+</colgRouP>
+</tabLe></p>
+
+						<p>Let's discuss the concept of keys. A <a Name="idx1073745078"></A>
+							<A NAme="idx1073745079"></a>primary key is a column or set of columns that uniquely identifies the rest of the data in any given row. For example, in the <tT CLAss="monofont">USERS</tt> table, the <TT CLass="monofont">ID</tT> column uniquely identifies each row.</P>
+
+						<P>A <A name="idx1073745080"></a>
+							<a name="idx1073745081"></a>foreign key is a column in a table that is a primary key of another table. It means that any data in a foreign key column must exist in the other table where that column is the primary key. For example, in the <tt class="monofont">NATIONALITY</tt> table, the column <Tt cLass="monofont">ID</Tt> is a foreign key to the primary key of the <tt cLass="monofont">USERS</TT> table, which is the <TT clasS="monofont">ID</TT> column.</P>
+
+						<p>The purpose of these keys is to associate data across tables, eliminating data <a naME="idx1073745082"></A>
+							<A name="idx1073745083"></A>redundancy in the tables—this is the power of relational databases.</P>
+
+						<P>To find the names of the user whose name comes from Spain, use the following query:</P>
+
+						<pre>
+							
+SELECT USERS.NAME
+FROM USERS, NATIONALITY
+WHERE USERS.ID = NATIONALITY.ID
+AND NATIONALITY.ORIGIN = "Spain"
+
+						</pre>
+
+						<p>The resultset is as follows:</p>
+
+						<pre>
+							
+NAME
+Renata
+					
+						</pre>
+
+					
+					
+						<h5>
+					
+					Using Aggregate Functions</h5>
+						<p>I will present five important aggregation functions: <tt cLasS="monofont">SUM, AVG, MAX, MIN,</tt> and <tT clasS="monofont">COUNT.</tt> They are called aggregation functions because they summarize the results of a query, rather than listing all the rows.<a NAME="idx1073745084"></a>
+							<a naME="idx1073745085"></A>
+							<A name="idx1073745086"></A>
+							<A NAme="idx1073745087"></a>
+							<a NAME="idx1073745088"></a>
+						</p>
+
+						<ul>
+<li>
+								<p>
+									
+										<tt class="monofont">SUM()—</tt>
+									 
+    
+									Returns the total value of a given column, based on the selected rows.
+								</p>
+
+							</li>
+<lI>
+								<p>
+									
+										<tT claSs="monofont">AVG()—</tt>
+									 
+    
+									Returns the average value of the given column.
+								</p>
+
+							</Li>
+<li>
+								<P>
+									
+										<TT Class="monofont">MAX()—</TT>
+									 
+    
+									Returns the highest value in the given column.
+								</P>
+
+							</Li>
+<li>
+								<p>
+									
+										<TT CLass="monofont">MIN()—</tT>
+									 
+    
+									Returns the lowest value in the given column.
+								</P>
+
+							</LI>
+<li>
+								<p>
+									
+										<tt class="monofont">COUNT(*)—</tt>
+									 
+    
+									Returns the number of rows that satisfy the <tt class="monofont">WHERE</tT> clause.
+								</p>
+
+							</lI>
+</ul>
+						<p>Let's look at some examples:</P>
+
+						<pre>
+							
+SELECT     SUM(AGE), AVG(AGE)
+FROM       USERS
+
+						</pRe>
+
+						<p>The resultset is as follows:</p>
+
+						<PRE>
+							
+SUM      AVG
+135      33.75
+
+SELECT     COUNT(*)
+FROM       USERS
+WHERE      AGE &gt; 30
+
+						</Pre>
+
+						<p>The resultset is as follows:</p>
+
+						<PRE>
+							
+COUNT(*)
+2
+
+						</Pre>
+
+						<p>Sometimes, when you are working with aggregation functions, the <a NAME="idx1073745089"></a>
+							<a naME="idx1073745090"></A>
+							<Tt class="monofont">group by</tt> clause might be required. For instance, let's say that you need to list the average age by username from your <tt class="monofont">USERS</tt> table. The following <tt cLasS="monofont">SELECT</tt> statement can be used to group the resultset of your query.</p>
+
+						<Pre>
+							
+SELECT    NAME, AVG(AGE)
+FROM      USERS
+GROUP BY  NAME
+					
+						</prE>
+
+					
+					
+						<h5>
+					
+					
+					
+					
+					Adding Data</h5>
+						<p>To insert rows in a table, use the following syntax:</P>
+
+						<PRE>
+							
+INSERT INTO &lt;TABLE NAME&gt; [(&lt;COLUMN1 NAME&gt;, &lt;COLUMN2 NAME&gt;, …)]
+ VALUES (&lt;<i>VALUE1</i>&gt;, &lt;<i>VALUE2</i>&gt;, …);
+
+						</PRE>
+
+						<Div clASS="note"><P clasS="notetitle"><B>Note</B></P><p>
+
+							<p>In order to <i>not</i> use the column name part of your statement (because it's optional), in most cases, you need to provide values for all the columns of your table.</p>
+
+						</p></div>
+<br>
+<br>
+
+						<p>For example</p>
+
+						<pre>
+							
+INSERT INTO USERS (ID, NAME, EMAIL, AGE) VALUES (5, "Bruno",
+ "bruno@alugueaqui.com.br", 17)
+					
+						</prE>
+
+					
+					
+						<h5>
+					
+					
+					
+					
+					
+					Deleting Data</h5>
+						<P>Let's delete a row from a table.</p>
+
+						<prE>
+							
+DELETE FROM USERS
+WHERE NAME = "Cleber"
+
+						</pre>
+
+						<p>If more than one row exists in which <Tt clASS="monofont">NAME = "Cleber",</Tt> the other row will be deleted too. Using the primary key is a good way to uniquely identify a row for deletion.</p>
+
+						<p>To delete all the rows from the table, type the following:</p>
+
+						<PRE>
+							
+DELETE FROM USERS
+
+						</Pre>
+
+					
+					
+						<h5>
+					
+					
+					
+					Updating Data</h5>
+						<P>Let's update the age of one user.</P>
+
+						<PRe>
+							
+UPDATE USERS
+SET AGE = 18
+WHERE NAME = "Bruno"
+
+						</pre>
+
+						<P>This statement sets Bruno's age to 18. If we had more than one <I>Bruno</I> in our database, we would have to include more conditions in the <Tt class="monofont">WHERE</tt> clause. It is also possible to update multiple columns at the same time—you just need to separate the attribution statements with commas.<a name="idx1073745091"></a>
+							<a name="idx1073745092"></a>
+							<A naMe="idx1073745093"></a>
+						</p>
+
+						<Pre>
+							
+UPDATE USERS
+SET AGE = 18, EMAIL = "bruno@bebemania.com.br"
+WHERE NAME = "Bruno" AND ID = 5
+					
+						</prE>
+
+					
+					
+						<h5>Cool SQL Language Web Pages</h5>
+						<p>The Introduction to Structured Query Language site can be found at <A TARget="_blank" hREF="http://w3.one.net/~jhoffman/sqltut.htm">http://w3.one.net/~jhoffman/sqltut.htm</A>.</p>
+
+						<p>Several links to SQL material can be found at <a tARGEt="_blank" hreF="http://www.lessaworld.com/links_basics_sql.html">http://www.lessaworld.com/links_basics_sql.html</A>.</P>
+
+					
+				
+				
+					<H4>
+						<tt class="monofont">PostgreSQL</tt> Databases</h4>
+					<p>
+						<tt class="monofont">PostgreSQL</tt> is a free (open-source) SQL database. It is a sophisticated Object-Relational database system derived from Postgres4.2. It conforms to (most of) ANSI SQL and offers many interesting capabilities, including subselects, transactions, and user-defined types and functions. It is the most advanced open-source database available anywhere.</P>
+
+					<p>Commercial Support is also available. For details, check out its Web site at <a TargEt="_blank" hreF="http://www.postgresql.org">http://www.postgresql.org</a>.</p>
+
+					
+						<h5>
+							<TT CLass="monofont">
+								<a NAME="idx1073745094"></a>
+								<a naME="idx1073745095"></A>pg</Tt> Module</h5>
+						<p>The <tT CLAss="monofont">pg</tt> module was written by <a name="idx1073745096"></a>D'Arcy J.M. Cain in order to provide an interface to the <tt class="monofont">PostgreSQL</tt> database system. It embeds the <tT clAss="monofont">PostgreSQL</tT> query library allowing easy use of its powerful features from a Python script. This module is available for download at <a tarGet="_blank" hREF="http://www.druid.net/pygresql">http://www.druid.net/pygresql</A>.</p>
+
+						<p>The <tt CLASs="monofont">pg</tt> module exposes its own DB API interface specification, as you can see next.</p>
+
+						<PRE>
+							
+&gt;&gt;&gt; import pg
+&gt;&gt;&gt; for rs in pg.DB('dbname').query('SELECT * FROM USERS').dictresult():
+…    print rs
+…
+					
+						</Pre>
+
+						<diV CLAss="note"><p class="notetitle"><b>Note</b></p><p>
+
+							<p>At the time of this chapter was written, it was announced that the latest version of <tt class="monofont">pygresql</Tt> began supporting the Python DB API 2.0.<a Name="idx1073745097"></A>
+								<a namE="idx1073745098"></a>
+								<a nAME="idx1073745099"></A>
+								<a namE="idx1073745100"></A>
+							</P>
+
+						</P></div>
+<bR>
+<BR>
+
+					
+				
+				
+					<H4>
+						<tt clASS="monofont">MySQL</Tt> Modules</h4>
+					<p>
+						<tt class="monofont">MySQL</tt> is a true multiuser, multithreaded SQL database server. It is a client/server implementation that consists of a server daemon <tt class="monofont">mysqld</tT> and many different client programs and libraries. <tt ClasS="monofont">MySQL</tt> is very fast for performing queries, but can slow down if lots of updates are being performed. Also, it doesn't have transaction support. For more information, check out <a tArgeT="_blank" HREf="http://www.mysql.com">http://www.mysql.com</a>.</p>
+
+					
+						<h5>
+							<TT CLass="monofont">MySQLdb</tT> Module</H5>
+						<P>You need to get and build the <Tt claSS="monofont">MySQLdb</TT> module before using it. Check out <a target="_blank" href="http://dustman.net/andy/python/MySQLdb">http://dustman.net/andy/python/MySQLdb</a>.</p>
+
+						<pre>
+							
+&gt;&gt;&gt; import MySQLdb
+&gt;&gt;&gt; connection = MySQLdb.connect(host="spam", db="client", port=3316, \
+…                                 user="alessa", passwd="1020erw")
+…
+&gt;&gt;&gt; con = connection.cursor()
+&gt;&gt;&gt; sql_statement = "SELECT * FROM USERS WHERE AGE &gt; 21"
+&gt;&gt;&gt; con.execute(sql_statement)
+&gt;&gt;&gt; result_set = con.fetchall()
+&gt;&gt;&gt; connection.close()
+					
+						</pre>
+
+					
+					
+						<h5>Python Interface for MySQL</H5>
+						<p>This interface was designed by Joseph Skinner and modified by Joerg Senekowitsch. For more information, check out <a TargEt="_blank" hreF="http://www.mysql.com/Contrib/MySQLmodule-1.4.tar.gz">http://www.mysql.com/Contrib/MySQLmodule-1.4.tar.gz</a>.<a nAME="idx1073745101"></A>
+							<a namE="idx1073745102"></A>
+						</P>
+
+					
+				
+				
+					<H4>
+				
+				The <tt clASS="monofont">GadFly</Tt> SQL Module</h4>
+					<p>The <tT CLAss="monofont">GadFly</tt> SQL module is a SQL database engine written entirely in Python by Aaron Watters in compliance with the Python Database API. It uses fewer system resources than <tt class="monofont">PostgreSQL,</tt> and its speed is comparable to Microsoft Access. However, it doesn't have the performance of commercial software (such as Oracle). This module is easily used by client/server applications because it includes TCP/IP support.</p>
+
+					<p>This module entirely fits in a small file, so it doesn't leave huge footprints.<a name="idx1073745103"></A>
+						<a nAme="idx1073745104"></a>
+						<A name="idx1073745105"></A>
+					</p>
+
+					<p>Because it only supports a small subset of the SQL language, it offers excellent code for those who want to learn more about SQL parsing engines and client/server communications. For more information, check out <a TARGet="_blank" hrEF="http://www.chordate.com/gadfly.html">http://www.chordate.com/gadfly.html</A>.<A name="idx1073745106"></A>
+						<A NAme="idx1073745107"></a>
+					</p>
+
+				
+				
+					<H4>
+						<TT Class="monofont">MetaKit</tt> Database Engine</h4>
+					<p>
+						<tt class="monofont">MetaKit</tt> is a C++ library for storage, transport, and manipulation of structured objects and collections. The next examples show how the <tt cLasS="monofont">MetaKit</tt> database engine does on-the-fly restructuring:</p>
+
+					<P>Example 1</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import Mk4py
+&gt;&gt;&gt; dbhandle = Mk4py.Storage('datafile.mk',1)
+&gt;&gt;&gt; workspace = dbhandle.getas('users[name:S,email:S]')
+&gt;&gt;&gt; workspace.append(name='Andre',email='alessa@bebemania.com.br')
+&gt;&gt;&gt; workspace.append(name='Renata',email='rtaveira@bebemania.com.br')
+&gt;&gt;&gt; dbhandle.commit()
+
+					</Pre>
+
+					<p>Example 2</P>
+
+					<PRE>
+						
+&gt;&gt;&gt; import Mk4py
+&gt;&gt;&gt; dbhandle = Mk4py.Storage('datafile.mk',1)
+&gt;&gt;&gt; workspace = dbhandle.getas('users[name:S,email:S,age:I]')
+&gt;&gt;&gt; for user in workspace:
+…print user.name
+…user.age = input('age: ')
+…
+&gt;&gt;&gt; dbhandle.commit()
+&gt;&gt;&gt; for user in workspace.sort():
+&gt;&gt;&gt;   print user.name, user.email, user.age
+
+					</pre>
+
+					<p>If you run these two examples in order, you'll have restructured on-the-fly. It will be instant, regardless of the number of rows. If for any reason the transaction is not completed, neither will the restructure be. For more information, check out their Web site at <A TARget="_blank" hREF="http://www.equi4.com/metakit/python.html">http://www.equi4.com/metakit/python.html</A>.<a namE="idx1073745108"></A>
+						<A Name="idx1073745109"></a>
+						<a name="idx1073745110"></a>
+						<a name="idx1073745111"></a>
+						<a namE="idx1073745112"></a>
+						<a Name="idx1073745113"></A>
+					</p>
+
+				
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="144.html" title="ADO (ActiveX Data Objects)"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=145" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="145.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="146.html" title="Python DB API"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+aggregate functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745087">relational databases</a><BR>
+Cain, DÕ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745096">Arcy J.M.</a><BR>
+clauses<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745090">group by</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745070">WHERE</a><BR>
+database engines<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745112">MetaKit</a><BR>
+databases<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745098">PostgreSQL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relationalÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745065">Ò</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745061">Structured Query Language (SQLs)</a> <a href="#idx1073745066">2nd</a> <a href="#idx1073745073">3rd</a> <a href="#idx1073745084">4th</a> <a href="#idx1073745091">5th</a> <a href="#idx1073745103">6th</a> <a href="#idx1073745108">7th</a><BR>
+engines<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745113">MetaKit</a><BR>
+ <a href="#idx1073745080">foreign key</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aggregate<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745088">relational databases</a><BR>
+ <a href="#idx1073745106">GadFly SQL module</a><BR>
+ <a href="#idx1073745089">group by clause</a><BR>
+IBM Research<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745060">Structured Query Language (SQL)</a><BR>
+joins<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745076">relational databases</a><BR>
+keys<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745081">foreign</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745079">primary</a><BR>
+ <a href="#idx1073745111">MetaKit database engine</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745107">GadFly SQL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745102">MySQL</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745095">pg</a> <a href="#idx1073745100">2nd</a><BR>
+ <a href="#idx1073745101">MySQL module</a><BR>
+ <a href="#idx1073745094">pg module</a> <a href="#idx1073745099">2nd</a><BR>
+ <a href="#idx1073745097">PostgreSQL databases</a><BR>
+ <a href="#idx1073745078">primary key</a><BR>
+programming languages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745063">Structured Query (SQL)</a> <a href="#idx1073745068">2nd</a> <a href="#idx1073745075">3rd</a> <a href="#idx1073745086">4th</a> <a href="#idx1073745093">5th</a> <a href="#idx1073745105">6th</a> <a href="#idx1073745110">7th</a><BR>
+redundancy<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745082">tables</a><BR>
+relational databasesÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745064">Ò</a><BR>
+SELECT statement<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745071">WHERE clause</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745072">WHERE clause</a><BR>
+ <a href="#idx1073745062">Structured Query Language (SQLs)</a> <a href="#idx1073745067">2nd</a> <a href="#idx1073745074">3rd</a> <a href="#idx1073745085">4th</a> <a href="#idx1073745092">5th</a> <a href="#idx1073745104">6th</a> <a href="#idx1073745109">7th</a><BR>
+tables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;joins<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745077">relational databases</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745083">redundancy</a><BR>
+ <a href="#idx1073745069">WHERE clause</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

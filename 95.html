@@ -1,0 +1,414 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Raising Exceptions</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="91.html" class="navtitle">4. Exception Handling</a> &gt; <span class="nonavtitle">Raising Exceptions</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="94.html" title="Standard Exceptions (Getting Help from Other Modules)"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=95" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="95.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="96.html" title="Catching Exceptions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A31%3A58+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147037129068180064019224</font><a href="read9.asp?bookname=0672319942&snode=95&now=5%2F31%2F2002+4%3A31%3A58+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Raising Exceptions</h3>
+				<p>There are several ways to raise exceptions. You can either raise your own exceptions or Python standard exceptions by using any of the four techniques listed as follows:</p>
+
+				<UL>
+<LI><p>raise <i>class</i></p>
+</LI>
+<LI><p>raise <i>exception</i>, <i>argument</I></P>
+</LI>
+<li><p>raise <i>exception</i>, <i>(argument1</i>, <i>argument2</i>, …<i>)</i></p>
+</li>
+<li><p>raise <i>exception (argument1,</i>
+							<i>argument2,</I> …<i>)</i></P>
+
+					</li>
+</uL>
+				<p>Note that the second and third forms of raising exceptions use the old form of passing arguments with the exception. I recommended using only the first and fourth forms.</p>
+
+				<p>Passing <tT claSS="monofont">None,</TT> as the second argument, to the <a namE="idx1073743132"></A><A Name="idx1073743133"></a><TT CLass="monofont">raise</tT> statement is equivalent to omitting it.</P>
+
+				<P><Tt class="monofont">raise class, None</tt> is equivalent to <a name="idx1073743134"></a><a name="idx1073743135"></a><Tt cLass="monofont">raise class()</Tt></p>
+
+				<p>Check the following cases.</p>
+
+				<Pre>
+					
+raise IndexError()
+raise IndexError
+raise IndexError("x is out of range")
+raise IndexError, "x is out of range"
+
+				</pRE>
+
+				<P>In the previous lines, the examples use a standard exception called <A name="idx1073743136"></A><A NAme="idx1073743137"></a><tT CLAss="monofont">IndexError.</tt> However, you can raise any one of the supported <I>built-in</I> exceptions.</P>
+
+				<P>Look at another example that uses a different exception:</p>
+
+				<pre>
+					
+op = raw_input("Enter an operator: ")
+op1 = input("Enter first operand: ")
+op2 = input("Enter second operand: ")
+if op == "+":
+     print op1 + op2
+else:
+     raise RuntimeError("I don't know this command")
+
+				</pre>
+
+				<p>In the next chapter, after learning how you can handle classes, you will be able to easily understand this next example. For the present time, take a deep breath and just have some fun.</p>
+
+				<p>This example raises an exception that blocks your access to nonexistent members of the <tt class="monofont">c</tt> class.<a NamE="idx1073743138"></a><a nAme="idx1073743139"></a></p>
+
+				<Pre>
+					
+ 1: &gt;&gt;&gt; class c:
+ 2: …       def __init__(self, name):
+ 3: …               self.name = name
+ 4: …       def __getattr__(self, attr):
+ 5: …               if attr &lt;&gt; "name":
+ 6: …                       raise AttributeError
+ 7: …
+ 8: &gt;&gt;&gt; a = c("Andre")
+ 9: &gt;&gt;&gt; a.name
+10: 'Andre'
+11: &gt;&gt;&gt; a.age
+
+				</pRE>
+
+				<P>The following traceback message is generated after running the command located at line 11.</P>
+
+				<pre>
+					
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+  File "&lt;stdin&gt;", line 6, in __getattr__
+AttributeError
+
+				</pRE>
+
+				<P>As you can see, line 5 checks the name of the attribute that is being passed to the method. That makes the exception in line 6 to always be raised when the attribute name is not "name".</P>
+
+				<p>However, note that if you assign something to <tt cLASS="monofont">a.age,</tt> as demonstrated next, getting the value of <tt CLASs="monofont">a.age</tt> will no longer cause the error. To handle that, you would need to write a code to deal with the <tt class="monofont">__setattr__</tt> method, but that would be another example.</p>
+
+				<pre>
+					
+&gt;&gt;&gt; a.age = 32
+&gt;&gt;&gt; print a.age
+32
+
+				</pre>
+
+				<h4>Raising an Exception to Leave the Interpreter</H4>
+					<p>Raising the <a Name="idx1073743140"></A><a namE="idx1073743141"></a><tt CLASs="monofont">SystemExit</tt> exception is a generic way to leave the Python interpreter.</p>
+
+					<PRE>
+						
+C:\Program Files\Python&gt;python
+Python 1.5.2 (#0, Apr 13 1999, 10:51:12) [MSC 32 bit (Intel)] on win32
+Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam
+&gt;&gt;&gt; raise SystemExit
+C:\Program Files\Python&gt;
+
+					</Pre>
+
+					<p>The next example demonstrates how you can trap the <tT CLAss="monofont">SystemExit</tt> exception.<A NAMe="idx1073743142"></a><a name="idx1073743143"></a><a name="idx1073743144"></a><a name="idx1073743145"></a><A naMe="idx1073743146"></a></p>
+
+					<Pre>
+						
+&gt;&gt;&gt; try:
+…       raise SystemExit
+…   except SystemExit:
+…       print "Sorry. You can not leave."
+…
+Sorry. You can not leave.
+
+					</prE>
+
+					<p>The <a nAME="idx1073743147"></A><a namE="idx1073743148"></A><TT clasS="monofont">sys.exit()</TT> function raises an exception <Tt claSS="monofont">SystemExit</TT> that, if not caught, causes the thread to exit silently.</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; try:
+…       sys.exit()
+…   except SystemExit:
+…       print "I have already told you. You can not leave."
+…
+I have already told you. You can not leave. 
+
+					</pre>
+
+				
+				<h4>Raising an Exception to Leave Nested Loops</h4>
+					<p>Sometimes you are so deeply involved in your data structures that you only want to get out of all your nested loops quickly. Normally, you would have to use <tt class="monofont">break</tt> for each level of interaction. The next example demonstrates how to handle this situation by using exceptions.</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; ExitLoop = "ExitLoop"
+&gt;&gt;&gt; try:
+…       i=1
+…       while i &lt; 10:
+…               for j in xrange(1,5):
+…                       print i,j
+…                       if (i==2) and (j==3):
+…                               raise ExitLoop
+…               i = i + 1
+…   except ExitLoop:
+…       print "i=2 and j=3 is a special case."
+…
+1 1
+1 2
+1 3
+1 4
+2 1
+2 2
+2 3
+i=2 and j=3 is a special case. 
+
+					</Pre>
+
+				
+				<h4>Raising String Exceptions</H4>
+					<p>Older versions used to support only strings for both Python standard exceptions and user-defined exceptions.</p>
+
+					<prE>
+						
+&gt;&gt;&gt; NetworkError = "NetworkError"
+&gt;&gt;&gt; raise NetworkError, "Bad hostname"
+
+					</pre>
+
+					<P>Nowadays, Python supports both strings and exception classes. There are costs to using class exceptions because they must be instantiated to be caught. Note that most people don't use exceptions to control the flow of their program, so they don't occur much.</P>
+
+					<P>However, classes give you much more flexibility to generalize the type of error that you want to catch.</P>
+
+					<div cLASS="note"><p claSS="notetitle"><B>Tip</B></p><p>
+
+						<p>Try to define your own exceptions as classes instead of strings.<a NAME="idx1073743149"></a><a name="idx1073743150"></a></p>
+
+					</p></div>
+<br>
+<br>
+
+				
+				<h4>Instancing an Exception Class</h4>
+					<p>Every time an exception is raised, an instance of the exception class is created. The next syntax demonstrates how to <a NamE="idx1073743151"></a><a nAme="idx1073743152"></a><a Name="idx1073743153"></A>catch a class instance in your program.</P>
+
+					<PRe>
+						
+try:
+    &lt;statements&gt;
+except exception, instance:
+    &lt;statements&gt;
+
+					</pre>
+
+					<P>The <A NAme="idx1073743154"></a><a NAME="idx1073743155"></a><tt cLASS="monofont">instance</tt> variable is an instance of the raised exception. Therefore, it inherits attributes from the exception class.</p>
+
+					<p>Each instance has an attribute called <a name="idx1073743156"></a><a name="idx1073743157"></a><tt clAss="monofont">args</Tt> that returns the error string in a tuple format.</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; try:
+…       a = [1,2]
+…       print a[4]
+…   except IndexError, b:
+…       print b.args
+…
+('list index out of range',)
+
+					</pre>
+
+					<P>Particularly, the <a naME="idx1073743158"></A><A name="idx1073743159"></A><TT Class="monofont">EnvironmentError</TT> exception has a <I>2-tuple</I> or <i>3-tuple</i> structure that can be translated as (<i>error number,</i>
+						<I>string error message,</I> and an optional <I>filename</I>).<a name="idx1073743160"></a><a name="idx1073743161"></a><a name="idx1073743162"></a><a nAme="idx1073743163"></A><a naMe="idx1073743164"></a></p>
+
+					<pRe>
+						
+&gt;&gt;&gt; try:
+…       file = open("Parrot")
+…   except EnvironmentError, b:
+…       print b.args
+…
+(2, 'No such file or directory')
+
+					</prE>
+
+					<P>When the instance belongs to a <A Name="idx1073743165"></a><A NAMe="idx1073743166"></a><tt CLASs="monofont">SyntaxError</tt> class exception, four special attributes are also returned: <i>filename,</I>
+						<I>lineno,</I>
+						<I>offset,</i> and <i>text.</i></p>
+
+					<pre>
+						
+&gt;&gt;&gt; try:
+…       a = "x===10"
+…       exec a
+…   except SyntaxError, b:
+…       print b.args
+…
+('invalid syntax', (None, 1, 4, 'x===10')) 
+
+					</pre>
+
+					<div class="note"><p cLasS="notetitle"><b>Note</b></p><P>
+
+						<p><a naMe="idx1073743167"></a><a NAME="idx1073743168"></a>Modules are parsed before being run, so syntax errors in a file can't be caught by <a naME="idx1073743169"></A><A name="idx1073743170"></A><TT Class="monofont">try/except</TT> blocks that surround the error. You can catch it from the bit of code that imported the module, however.<A Name="idx1073743171"></a><a name="idx1073743172"></a><a name="idx1073743173"></a></p>
+
+					</p></diV>
+<br>
+<Br>
+
+				
+				<h4>Debugging Your Code</h4>
+					<P>Exceptions are very good for helping to debug your code. You can use the <a namE="idx1073743174"></a><a nAME="idx1073743175"></A><tt clASS="monofont">assert</Tt> command to raise a debugging exception that transports a message to your exception handling code.<a naME="idx1073743176"></A><A name="idx1073743177"></A></P>
+
+					<P><A name="idx1073743178"></a>The syntax is <tt class="monofont">assert &lt;</tt><i><tt claSs="monofont">TestStatement</tT></i><tt Class="monofont">&gt; [,</Tt><i><tT CLAss="monofont">argument</tt></I><TT Class="monofont">]</TT></P>
+
+					<P>This command raises an <tt clASS="monofont">AssertionError</Tt> exception whenever <tt class="monofont">&lt;TestStatement&gt;</tt> evaluates to <tt class="monofont">false.</tt></p>
+
+					<P>For example</p>
+
+					<pRe>
+						
+&gt;&gt;&gt; def divide (a,b):
+…       assert b != 0, "Can't divide by zero"
+…       return a/b
+&gt;&gt;&gt;
+&gt;&gt;&gt; divide(10,0)
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+  File "&lt;stdin&gt;", line 2, in divide
+AssertionError: Can't divide by zero
+
+					</prE>
+
+					<p>The <tt cLass="monofont">assert</TT> command is equivalent to</P>
+
+					<Pre>
+						
+&gt;&gt;&gt; if __debug__:c
+&gt;&gt;&gt;     if not (&lt;TestStatement&gt;):
+&gt;&gt;&gt;         raise AssertionError [, argument]
+
+					</prE>
+
+					<P><TT clasS="monofont">__debug__</TT> is a <I>built-in</i> name and has its value set to <tt cLASS="monofont">true</tt> by default. To set <tt class="monofont">__debug__</tt> to <tt class="monofont">false,</tt> it is necessary to change the interpreter to run in <A naMe="idx1073743179"></a><a Name="idx1073743180"></a><I>optimized mode.</i></p>
+
+					<dIV CLass="note"><p CLASs="notetitle"><b>Tip</b></p><P>
+
+						<P>Calling the interpreter with the <A Name="idx1073743181"></a><A NAMe="idx1073743182"></a><tt class="monofont">-O</tt> option activates the <i>optimized mode.</i></p>
+
+						<pre>
+							
+c:\&gt;python -O
+
+						</pre>
+
+						<P>Currently, Python's command-line option <a nAme="idx1073743183"></a><A name="idx1073743184"></A><tt cLASS="monofont">-X</tt> turns all standard exceptions into strings. Version 1.6 is expected to have this option removed, and make all standard exceptions into classes. User code that deals with string exceptions will still be supported, but not encouraged.</p>
+
+						<p>See <A HREf="227.html">Chapter 17, "Development Tools,"</a>  for more details about other command-line options that you can transport as configuration parameters to the interpreter.<a nAME="idx1073743185"></A><a namE="idx1073743186"></A><A Name="idx1073743187"></a><a name="idx1073743188"></a><a name="idx1073743189"></a><a namE="idx1073743190"></a><a Name="idx1073743191"></A></p>
+
+					</p></diV>
+<br>
+<bR>
+
+				
+			</FONt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="94.html" title="Standard Exceptions (Getting Help from Other Modules)"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=95" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="95.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="96.html" title="Catching Exceptions"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073743181">[nd]O option</a><BR>
+ <a href="#idx1073743183">[nd]X option</a><BR>
+ <a href="#idx1073743156">args attribute</a><BR>
+ <a href="#idx1073743174">assert command</a> <a href="#idx1073743190">2nd</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743157">args</a><BR>
+catching<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743151">class instances</a><BR>
+class instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743152">catching</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exception<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743164">instancing</a> <a href="#idx1073743173">2nd</a><BR>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;debugging<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743187">exceptions</a><BR>
+commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743175">assert</a> <a href="#idx1073743191">2nd</a><BR>
+debugging<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743188">exceptions</a><BR>
+ <a href="#idx1073743158">EnvironmentError exception</a><BR>
+exception classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743163">instancing</a> <a href="#idx1073743172">2nd</a><BR>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743159">EnvironmentError</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743137">IndexError</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743138">raising</a> <a href="#idx1073743142">2nd</a> <a href="#idx1073743160">3rd</a> <a href="#idx1073743176">4th</a> <a href="#idx1073743185">5th</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743150">raising</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743166">SyntaxError</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743141">SystemExit</a> <a href="#idx1073743146">2nd</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743135">raise class()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743148">sys.exit()</a><BR>
+ <a href="#idx1073743136">IndexError exception</a><BR>
+ <a href="#idx1073743154">instance variable</a><BR>
+instances<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743153">catching</a><BR>
+instancing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743162">exception classes</a> <a href="#idx1073743171">2nd</a><BR>
+interpreters<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743144">raising exceptions to leave</a><BR>
+modes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743180">optimized</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743167">parsing</a><BR>
+ <a href="#idx1073743179">optimized mode</a><BR>
+options<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743182">[nd]O</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743184">[nd]X</a><BR>
+parsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743168">modules</a><BR>
+ <a href="#idx1073743134">raise class() function</a><BR>
+ <a href="#idx1073743132">raise statement</a><BR>
+raising<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743139">exceptions</a> <a href="#idx1073743143">2nd</a> <a href="#idx1073743161">3rd</a> <a href="#idx1073743177">4th</a> <a href="#idx1073743186">5th</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;debugging<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743189">exceptions</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743133">raise</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743170">try/except</a><BR>
+string exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743149">raising</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commands<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743178">assert command</a><BR>
+ <a href="#idx1073743165">SyntaxError exception</a><BR>
+ <a href="#idx1073743147">sys.exit() function</a><BR>
+ <a href="#idx1073743140">SystemExit exception</a> <a href="#idx1073743145">2nd</a><BR>
+ <a href="#idx1073743169">try/except statement</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743155">instance</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

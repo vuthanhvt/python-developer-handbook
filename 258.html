@@ -1,0 +1,156 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; The Very High Level Layer</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="255.html" class="navtitle">A. Python/C API</a> &gt; <span class="nonavtitle">The Very High Level Layer</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="257.html" title="Python/C API"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=258" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="258.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="259.html" title="Reference Counting"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A28%3A07+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218072221085031055118075</font><a href="read1.asp?bookname=0672319942&snode=258&now=6%2F1%2F2002+6%3A28%3A07+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>The Very High Level Layer</h3>
+				<p>The functions in this section will let you execute Python source code given in a file or a buffer, but they will not let you interact in a more detailed way with the interpreter. Several of these functions accept a start symbol from the grammar as a parameter. The available start symbols are <tT CLAss="monofont">Py_eval_input,</tt>
+					<TT CLass="monofont">Py_file_input,</tT> and <TT Class="monofont">Py_single_input.</tt> These are described following the functions that accept them as parameters.</p>
+
+				<pre>
+					
+int PyRun_AnyFile(FILE *fp, char *filename)
+
+				</pre>
+
+				<p>If <tt clasS="monofont">fp</tt> refers to a file associated with an interactive device (console or terminal input or UNIX pseudo-terminal), returns the
+ value of <Tt clAss="monofont">PyRun_InteractiveLoop(),</tt> otherwise returns the result of <Tt clASS="monofont">PyRun_SimpleFile().</Tt> If filename is <tt cLASS="monofont">NULL,</tt> use <tt CLASs="monofont">"???"</tt> as the filename.</p>
+
+				<PRE>
+					
+int PyRun_SimpleString(char *command)
+
+				</Pre>
+
+				<p>Executes the Python source code from command in the <tt class="monofont">__main__</tt> module. If <tt class="monofont">__main__</tT> does not already exist, it is created. Returns <tt ClasS="monofont">0</tt> on success or <tt ClasS="monofont">-1</TT> if an exception was raised. If there was an error, it is not possible to get the exception information.</P>
+
+				<pre>
+					
+int PyRun_SimpleFile(FILE *fp, char *filename)
+
+				</pRE>
+
+				<P>Similar to <Tt claSS="monofont">PyRun_SimpleString(),</TT> but the Python source code is read from <tt clASS="monofont">fp</Tt> instead of an in-memory string. <tt class="monofont">filename</tt> should be the name of the file.</p>
+
+				<pre>
+					
+int PyRun_InteractiveOne(FILE *fp, char *filename)
+
+int PyRun_InteractiveLoop(FILE *fp, char *filename)
+
+struct _node* PyParser_SimpleParseString(char *str, int start)
+
+				</pre>
+
+				<p>Parses Python source code from <tt ClaSs="monofont">str</tt> using the start token start. The result can be used to create a code object that can be evaluated efficiently. This is useful if a code fragment must be evaluated many times.</P>
+
+				<pre>
+					
+struct _node* PyParser_SimpleParseFile(FILE *fp, char *filename,
+int start)
+
+				</pRe>
+
+				<p>Similar to <tT CLAss="monofont">PyParser_SimpleParseString(),</tt> but the Python source code is read from <TT CLass="monofont">fp</tT> instead of an in-memory string. <TT Class="monofont">filename</TT> should be the name of the file.</P>
+
+				<Pre>
+					
+PyObject* PyRun_String(char *str, int start, PyObject *globals,
+PyObject *locals)
+
+				</pre>
+
+				<p>Executes Python source code from <tt class="monofont">str</tt> in the context specified by the globals and locals dictionaries. The parameter start specifies the start token that should be used to parse the source code. Returns the result of executing the code as a Python object, or <tt claSs="monofont">NULL</tT> if an exception was raised.</p>
+
+				<prE>
+					
+PyObject* PyRun_File(FILE *fp, char *filename, int start, PyObject
+*globals, PyObject *locals)
+
+				</pre>
+
+				<p>Similar to <Tt clASS="monofont">PyRun_String(),</Tt> but the Python source code is read from <tt cLASS="monofont">fp</tt> instead of an in-memory string. <tt CLASs="monofont">filename</tt> should be the name of the file.</p>
+
+				<PRE>
+					
+PyObject* Py_CompileString(char *str, char *filename, int start)
+
+				</Pre>
+
+				<p>Returns value: New reference. Parses and compiles the Python source code in <tt class="monofont">str,</tt> returning the resulting code object. The start token is given by start; this can be used to constrain the code that can be compiled and should be <tt class="monofont">Py_eval_input,</tT>
+					<tt ClasS="monofont">Py_file_input,</tt> or <tt ClasS="monofont">Py_single_input.</TT> The filename specified by filename is used to construct the code object and can appear in tracebacks or SyntaxError exception messages. This returns <Tt claSS="monofont">NULL</TT> if the code cannot be parsed or compiled.</p>
+
+				<pre>
+					
+int Py_eval_input
+
+				</PRE>
+
+				<P>The start symbol from the Python grammar for isolated expressions; for use with <tt clASS="monofont">Py_CompileString().</Tt></p>
+
+				<pre>
+					
+int Py_file_input
+
+				</pre>
+
+				<p>The start symbol from the Python grammar for sequences of statements as read from a file or other source; for use with <tt class="monofont">Py_CompileString().</tt> This is the symbol to use when compiling arbitrarily long Python source code.</p>
+
+				<pRe>
+					
+int Py_single_input
+
+				</pRe>
+
+				<p>The start symbol from the Python grammar for a single statement; for use with <tT clasS="monofont">Py_CompileString().</tt> This is the symbol used for the interactive interpreter loop.<a NAME="idx1073750922"></a><a naME="idx1073750923"></A><A name="idx1073750924"></A><A NAme="idx1073750925"></a><a NAME="idx1073750926"></a><a name="idx1073750927"></a><a name="idx1073750928"></a><a name="idx1073750929"></a></p>
+
+			</FonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="257.html" title="Python/C API"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=258" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="258.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="259.html" title="Reference Counting"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750923">executing source code, files and buffers</a><BR>
+buffers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750925">executing source code, Python/C Application Programmers Interface (API)</a><BR>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750928">executing, Python/C Application Programmers Interface (API)</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executing source code, Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750926">Python/C</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executing source code, Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750929">Python/C</a><BR>
+interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python/C Application Programmers (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750924">executing source code, files and buffers</a><BR>
+Python/C Application Programmers Interface (API)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750922">executing source code, files and buffers</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750927">executing, Python/C Application Programmers (API)</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

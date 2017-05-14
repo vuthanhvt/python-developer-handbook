@@ -1,0 +1,215 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Exception Handling</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="91.html" class="navtitle">4. Exception Handling</a> &gt; <span class="nonavtitle">Exception Handling</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="92.html" title="4. Exception Handling"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=93" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="93.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="94.html" title="Standard Exceptions (Getting Help from Other Modules)"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A31%3A40+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147037129069031188131198</font><a href="read7.asp?bookname=0672319942&snode=93&now=5%2F31%2F2002+4%3A31%3A40+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Exception Handling</h3>
+				<p>Exceptions are mostly used for error handling and event notification. They work by breaking the regular flow of a program and jumping to a special set of statements that handle the exception case. Python has many standard exceptions, which are exceptions already built into the language. Python also supports user-defined exceptions, which are exceptions created by users. The provided exceptions are almost no different from user-defined exceptions—the only difference is that they are defined in one of the files in the standard library (<tT CLAss="monofont">exceptions.py</tt>).</P>
+
+				<P>Any unexpected program behavior drives the interpreter to raise an exception. Many scenarios can help an exception to be raised, such as dividing a number by zero or reading from a nonexistent file. Note that the programmer can also manually <A Name="idx1073743079"></a><A NAMe="idx1073743080"></a>raise exceptions with the <a name="idx1073743081"></a><a name="idx1073743082"></a><tt clasS="monofont">raise</tt> statement.</P>
+
+				<p>The default behavior of Python, when it encounters unhandled exceptions, is to terminate the program and to display a traceback message that describes the error condition. My goal in this chapter is to show you how to handle those exceptions.</p>
+
+				<p>If you don't handle exceptions in your program, Python's interpreter returns a traceback message that shows the error message, the exception type, the function that contains the error, and the line of code that has caused the error. Hence, a complete history of what has caused the error is provided.<A name="idx1073743083"></A><a naME="idx1073743084"></A></P>
+
+				<p>So that you can start learning how Python raises and handles exceptions, I will define the following example:</p>
+
+				<prE>
+					
+&gt;&gt;&gt; a = { "a":1,"b":2}
+&gt;&gt;&gt; def returnelement(element):
+…     print a[element]
+…
+
+				</PRE>
+
+				<p>Now, we will call this function:</p>
+
+				<prE>
+					
+&gt;&gt;&gt; print returnelement("c")
+
+				</PRE>
+
+				<p>Note that "c" is not part of the <i><tt CLASs="monofont">a</tt></i> dictionary. Therefore, Python raises an exception that displays the following traceback message.</p>
+
+				<pre>
+					
+Traceback (innermost last):
+  File "&lt;stdin&gt;", line 1, in ?
+  File "&lt;stdin&gt;", line 2, in returnelement
+KeyError: c
+
+				</pre>
+
+				<p>The last line of the traceback message tells us what exception was raised and what element has caused the exception to be triggered. If we run the previous code in the interpreter, the <tt class="monofont">File</tT> clause is set to "<i><tT claSs="monofont">&lt;stdin&gt;</tt></i>" by default because the code lines come from the keyboard and not from a file. However, if we run the code from an external file, the filename becomes part of the <Tt clASS="monofont">File</Tt> clause. It is also worth mentioning that the line numbers are relative to the statement where the error occurred when the code was entered interactively. So, we get line 2 in the traceback because the exception occurred on the second line of the function, which was treated as a single statement. The outermost part of the trace says line 1 because the call to <tt cLASS="monofont">returnelement</tt> was treated as a one-line statement.</p>
+
+				<p>Next to the filename, we have a line number, which is the line in which the error has been triggered. Next to the line number is the name of the function that caused the error.</P>
+
+				<DIV clasS="note"><P CLass="notetitle"><b>Tip</b></p><p>
+
+					<p>By handling exceptions, you can save a lot of time while testing your code.</p>
+
+				</p></div>
+<br>
+<br>
+
+				<p>Exceptions can be handled by using either <a nAme="idx1073743085"></A><a naMe="idx1073743086"></a><tt ClasS="monofont">try/except</TT> or <A name="idx1073743087"></A><A NAme="idx1073743088"></a><tT CLAss="monofont">try/finally</tt> statements. The difference between them is that an <TT CLass="monofont">except</tt> clause is only executed when an exception is raised, and a <tt class="monofont">finally</tt> clause is always executed; it doesn't matter whether an exception is raised or not. Also, the <tt clasS="monofont">try/finally</tt> block doesn't catch the exception like <Tt clAss="monofont">try/except</tt> can.<A namE="idx1073743089"></A><A Name="idx1073743090"></a></P>
+
+				<P>Next is the standard structure for a <TT clasS="monofont">try/except</TT> statement:</P>
+
+				<pre>
+					
+try:
+    &lt;statements&gt;
+except [&lt;exception_name&gt; [, &lt;instance_variable&gt;]]:
+    &lt;exception handling statements&gt;
+[else:
+    &lt;statements executed only when no exception is raised&gt;]
+
+				</pRE>
+
+				<P>The <Tt class="monofont">else</tt> block must be inserted after the last exception block, and it is only executed when the <tt class="monofont">try</tt> block doesn't raise any errors.</p>
+
+				<p>In order to handle multiple exceptions, you can use multiple <tT clAss="monofont">except</tT> clauses for the same <tt clAss="monofont">try</tT> block.</P>
+
+				<P>The next example raises an error message whenever it can't find a given element.</P>
+
+				<pre>
+					
+&gt;&gt;&gt; name = ["Andre","Renata","Joao","Rebecca"]
+&gt;&gt;&gt; def getname(order):
+…       try:
+…           if order &lt; 10:
+…               data = name[order]
+…           else:
+…               file = open("names.txt")
+…               data = file.readline()
+…               file.close()
+…           return data
+…       except IndexError:
+…           print "This name is not in the list."
+…       except IOError:
+…           print "The file names.txt does not exist."
+…
+&gt;&gt;&gt; getname(0)
+"Andre"
+&gt;&gt;&gt; getname(8)
+"This name is not in the list."
+&gt;&gt;&gt; getname(20)
+"The file names.txt does not exist."
+
+				</pRE>
+
+				<P>Python syntax also enables you to use a single <Tt claSS="monofont">except</TT> clause that handles all exceptions. The general syntax for the <tt clASS="monofont">except</Tt> clause for handling all exceptions is to not specify any exception types at all, such as<a name="idx1073743091"></a><a name="idx1073743092"></a></p>
+
+				<pre>
+					
+try:
+    &lt;statements&gt;
+except:
+    &lt;exception handling statements&gt;
+
+				</pre>
+
+				<P>Next, you have the <a nAme="idx1073743093"></a>syntax and an example for handling multiple exception types.</P>
+
+				<pre>
+					
+<i>except (exception1, exception 2, exception 3)[, variable]:</I>
+
+&gt;&gt;&gt; name = ["Andre","Renata","Joao","Rebecca"]
+&gt;&gt;&gt; def getname(order):
+…     try:
+…         if order &lt; 10:
+…             data = name[order]
+…         else:
+…             file = open("names.txt")
+…             data = file.readline()
+…             file.close()
+…         return data
+…     except (IndexError, IOError):
+…         print "Data not available."
+…
+&gt;&gt;&gt; getname(8)
+"Data not available."
+&gt;&gt;&gt; getname(20)
+"Data not available."
+
+				</pre>
+
+				<P>You can also use <A NAme="idx1073743094"></a><a NAME="idx1073743095"></a><tt cLASS="monofont">try/except</tt> statements to ignore exceptions. The next structure uses a <a nAME="idx1073743096"></A><a name="idx1073743097"></a><tt class="monofont">pass</tt> statement to ignore an exception whenever it gets raised. However, note that if an exception is raised, all the remaining statements in the <tt claSs="monofont">try</tT> block will not be executed.</p>
+
+				<prE>
+					
+try:
+    &lt;statements&gt;
+except &lt;exception_name&gt;:
+    pass
+
+				</pre>
+
+				<p>In the next example, we use exceptions not to catch and handle an unexpected error, but to ignore errors that we know might happen when the code is running. As you can see, an exception is raised every time you try to convert a <I>text string</i> into a <i>float</i> number in line 6. However the <TT CLass="monofont">pass</tT> statement in line 8 simply ignores the problem.</P>
+
+				<PRe>
+					
+ 1: &gt;&gt;&gt; import string
+ 2: &gt;&gt;&gt; list = ["1","3","Monkey","Parrot","10"]
+ 3: &gt;&gt;&gt; total = 0
+ 4: &gt;&gt;&gt; for z in list:
+ 5: &gt;&gt;&gt;     try:
+ 6: &gt;&gt;&gt;         total = total + string.atof(z)
+ 7: &gt;&gt;&gt;     except:
+ 8: &gt;&gt;&gt;         pass
+ 9: &gt;&gt;&gt; print total
+10: 14
+
+				</pre>
+
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="92.html" title="4. Exception Handling"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=93" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="93.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="94.html" title="Standard Exceptions (Getting Help from Other Modules)"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+exceptions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743083">handling</a> <a href="#idx1073743089">2nd</a> <a href="#idx1073743091">3rd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743080">raising</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743084">exceptions</a> <a href="#idx1073743090">2nd</a> <a href="#idx1073743092">3rd</a><BR>
+ <a href="#idx1073743096">pass statement</a><BR>
+ <a href="#idx1073743081">raise statement</a><BR>
+raising<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743079">exceptions</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743097">pass</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743082">raise</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743086">try/except</a> <a href="#idx1073743095">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743088">try/finally</a><BR>
+syntax<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073743093">handling multiple exceptions</a><BR>
+ <a href="#idx1073743085">try/except statement</a> <a href="#idx1073743094">2nd</a><BR>
+ <a href="#idx1073743087">try/finally statement</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

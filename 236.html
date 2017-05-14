@@ -1,0 +1,906 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Profiling Python</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="227.html" class="navtitle">17. Development Tools</a> &gt; <span class="nonavtitle">Profiling Python</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="235.html" title="Debugging the Application"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=236" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="236.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="237.html" title="Distributing Python Applications"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A22%3A43+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218066183096102193043092</font><a href="read4.asp?bookname=0672319942&snode=236&now=6%2F1%2F2002+6%3A22%3A43+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+
+
+
+Profiling Python</h3>
+				<p>Profiling an application means to be able to sketch an image about what is going on behind the scenes when you execute a program.</p>
+
+				<P>The <A NAme="idx1073750400"></a>
+					<a NAME="idx1073750401"></a>
+					<tt cLASS="monofont">sys</tt> module is able to perform a very simple profiling task by telling you a little bit about what is going on after each function, method, or specific line gets executed.</p>
+
+				<blockquote>
+<p><a name="idx1073750402"></a><A naMe="idx1073750403"></a>
+						<p><Tt claSs="monofont">sys.setprofiler(profiler_function)</tt>— 
+    
+							This function implements a source code profiler, which identifies a function that must be executed whenever a function or method is called.</P>
+
+					</P>
+<P>
+						<A name="idx1073750404"></A>
+						<A NAme="idx1073750405"></a>
+						<p><TT CLass="monofont">sys.settrace(tracer_function)</tT>— 
+    
+							The functionality of this function is basically the same one of the <A NAme="idx1073750406"></a>
+								<a name="idx1073750407"></a>
+								<tt class="monofont">setprofiler()</tt> function. However, this one is called whenever a new line is executed.</p>
+
+					</p>
+</BloCkquOte>
+				<prE>
+					
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; def profiler(frame, event, arguments):
+...     print frame.f_code.co_name, frame.f_lineno, event, arguments
+...
+&gt;&gt;&gt; sys.setprofile(profiler)
+? 1 return None
+&gt;&gt;&gt; lst = ["Spam","Parrot","Knights"]
+? 1 call None
+? 1 return None
+&gt;&gt;&gt; def showlist(_lst):
+...     for l in _lst:
+...         print l
+...     return _lst
+...
+? 1 call None
+? 1 return None
+&gt;&gt;&gt; showlist(lst)
+? 1 call None
+showlist 1 call None
+Spam
+Parrot
+Knights
+showlist 4 return ['Spam', 'Parrot', 'Knights']
+['Spam', 'Parrot', 'Knights']
+? 1 return None
+&gt;&gt;&gt; sys.setprofile(None)
+
+				</pre>
+
+				<P>If you really want to perform a more complete and accurate study, you need to use the <TT Class="monofont">profiler</TT> module.</P>
+
+				
+					<H4>Python Profiler</h4>
+					<p>The information provided here offers a brief overview about how to use the <a nAME="idx1073750408"></A>
+						<a namE="idx1073750409"></A>
+						<TT class="monofont">profile</tt> module to perform the analysis of the run time performance of a Python program. The original <tt class="monofont">profile</tt> module was written by <a namE="idx1073750410"></a>Sjoerd Mullender, and later <a Name="idx1073750411"></A>Guido van Rossum applied some changes to it. All the original documentation is copyrighted by <a namE="idx1073750412"></a>James Roskind (see copyright note in <a hREF="274.html">Appendix C, "Python Copyright Notices)"
+						</A> , and reproduced here with slight modifications.</p>
+
+					<div CLASs="note"><p clASS="notetitle"><B>Note</b></p><p>
+
+						<p>Check out the module's original documentation for more information about its "deterministic profiling" implementation.</P>
+
+					</P></DIv>
+<br>
+<br>
+
+					<p>You have two possible ways to use the <tt class="monofont">profile</tt> module. The first option is to import it, and make it call a function on your program that you want to analyze, such as</p>
+
+					<pre>
+						
+import profile
+def main():
+    for n in xrange(100):
+        print n,
+profile.run("main()")
+
+					</pRe>
+
+					<p>The <A namE="idx1073750413"></a>
+						<a naMe="idx1073750414"></a>
+						<a NAME="idx1073750415"></a>
+						<tt cLASS="monofont">run()</tt> function generates a profiling report that can be manipulated using the <tt CLASs="monofont">pstats</tt> module (the report generating functions are in the <tT CLAss="monofont">pstats</tt> module).</p>
+
+					<p>The second option is to invoke the profiler as a main program and pass the script that needs to be profiled as an argument.</p>
+
+					<pre>
+						
+python profile.py scriptfile [arg...]
+
+					</pre>
+
+					<p>Next, you have the static member functions that are available for the profiler class. Note that an instance of <tt clasS="monofont">Profile()</tt> is <I>not</i> needed to call them.</p>
+
+					<p>To profile an application with a main entry point of <A name="idx1073750416"></A>
+						<a naME="idx1073750417"></A>
+						<Tt claSS="monofont">foo(),</TT> you would add the following to your module:</p>
+
+					<pre>
+						
+import profile
+profile.run("foo()")
+
+					</PRE>
+
+					<P>The previous action would cause <tt clASS="monofont">foo()</Tt> to be run, and a series of informative lines (the profile) to be printed. This approach is most useful when working with the interpreter. If you would like to save the results of a profile into a file for later examination, you can supply a filename as the second argument to the <tt class="monofont">run()</tt> function:<a name="idx1073750418"></a>
+						<a namE="idx1073750419"></a>
+						<a Name="idx1073750420"></A>
+						<a namE="idx1073750421"></a>
+					</p>
+
+					<pRE>
+						
+import profile
+profile.run("foo()", 'fooprof')
+
+					</PRe>
+
+					<p>The primary entry point for the profiler is the global function <a nAME="idx1073750422"></A>
+						<a namE="idx1073750423"></A>
+						<TT clasS="monofont">profile.run().</TT> It is typically used to create any profile information. The reports are formatted and printed using methods for the class <A name="idx1073750424"></a>
+						<a name="idx1073750425"></a>
+						<tt class="monofont">pstats.Stats.</tt> The following is a description of all these standard entry points and functions. For a more in-depth view of some of the code, consider reading the later section on "Extensions: Deriving Better Profilers," which includes a discussion of how to derive better profilers from the classes presented, or reading the source code for these modules.</P>
+
+					<p><tAble BordeR="1" celLSPAcing="0" CELLpaddING="1" Width="100%">
+<COLGroup align="left" span="2">
+<tr valigN="top">
+<td>
+<Font Size="2">FUNCTION</fOnt></tD>
+<TD>
+<Font sIZE="2">profile.run(string, filename_opt)</Font></tD>
+</TR>
+</ColgrOUP>
+</Table></p>
+
+					<p>This function takes a single argument that can be passed to the <a name="idx1073750426"></a>
+						<a name="idx1073750427"></a>
+						<tt ClaSs="monofont">exec</tt> statement, and an optional filename. In all cases, this routine attempts to <Tt claSs="monofont">exec</tt> its first argument, and gathers profiling statistics from the execution. If no filename is present, this function automatically prints a simple profiling report, sorted by the standard name string (file/line/function-name) that is presented in each line. The following is a typical output from such a call:</P>
+
+					<PRE>
+						
+main()
+2706 function calls (2004 primitive calls) in 4.504 CPU seconds
+
+Ordered by: standard name
+
+ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     2    0.006    0.003    0.953    0.477 pobject.py:75(save_objects)
+  43/3    0.533    0.012    0.749    0.250 pobject.py:99(evaluate)
+...
+
+					</pre>
+
+					<p>The first line indicates that this profile was generated by the call: <TT CLass="monofont">profile.run('main()'),</tT> and hence the executed string is <TT Class="monofont">'main()'</TT>. The second line indicates that 2706 calls were monitored. Of those calls, 2004 were <I>primitive</I>. We define primitive to mean that the call was not induced via recursion. The next line, <tt class="monofont">Ordered by: standard name,</tt> indicates that the text string in the far right column was used to sort the output. The <a name="idx1073750428"></a>
+						<a name="idx1073750429"></A>column headings include</p>
+
+					<bLockQuote>
+<P>
+							<p>
+								<a nAME="idx1073750430"></A>
+								<tt clASS="monofont">ncalls</Tt> stands for the number of calls.</p>
+
+						</p>
+<p>
+							<P>
+								<A NAme="idx1073750431"></a>
+								<tT CLAss="monofont">tottime</tt> stands for the total time spent in the given function (and excluding time made in calls to sub-functions).</p>
+
+						</p>
+<p>
+							<p>
+								<a name="idx1073750432"></a>
+								<tt clasS="monofont">percall</tt> is the quotient of <Tt clAss="monofont">tottime</tt> divided by <Tt clASS="monofont">ncalls.</Tt>
+							</p>
+
+						</p>
+<p>
+							<P>
+								<A NAme="idx1073750433"></a>
+								<tT CLAss="monofont">cumtime</tt> is the total time spent in this and all subfunctions (that is, from invocation till exit). This figure is accurate even for recursive functions.</P>
+
+						</P>
+<P>
+							<P>
+								<a name="idx1073750434"></a>
+								<tt class="monofont">percall</tt> is the quotient of <tt claSs="monofont">cumtime</tT> divided by primitive calls.</p>
+
+						</p>
+<p>
+							<P>
+								<a namE="idx1073750435"></a>
+								<tt CLASs="monofont">filename:lineno(function)</tt> provides the respective data of each function.<a NAME="idx1073750436"></a>
+								<a naME="idx1073750437"></A>
+							</P>
+
+						</p>
+</bloCKQUote>
+					<p>When two numbers are in the first column (for instance, 43/3), the latter is the number of primitive calls, and the former is the actual number of calls. Note that when the function does not recurse, these two values are the same, and only the single figure is printed.<a name="idx1073750438"></a>
+						<a name="idx1073750439"></a>
+					</p>
+
+				
+				
+					<h4>
+
+
+
+Analyzing Profiles with the <tt ClaSs="monofont">pstats</tt> Module</H4>
+					<p>The <tt cLass="monofont">pstats</TT> module analyzes the data collected by the Python <TT clasS="monofont">profile</TT> module. The following example demonstrates how we can use this module to manipulate the information generated by the <Tt claSS="monofont">profile</TT> module:</p>
+
+					<pre>
+						
+&gt;&gt;&gt; import profile, pstats
+&gt;&gt;&gt; def main():
+...     for n in xrange(3):
+...         print n
+...
+&gt;&gt;&gt; p = profile.Profile()
+&gt;&gt;&gt; p.run("main()")
+0
+1
+2
+&lt;profile.Profile instance at 7c2c20&gt;
+&gt;&gt;&gt; s = pstats.Stats(p)
+&gt;&gt;&gt; s.sort_stats("time", "name").print_stats()
+3 function calls in 58.727 CPU seconds
+   Ordered by: internal time, function name
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1   58.727   58.727   58.727   58.727 profile:0(main())
+        1    0.000    0.000    0.000    0.000 &lt;stdin&gt;:1(main)
+        1    0.000    0.000    0.000    0.000 &lt;string&gt;:1(?)
+        0    0.000             0.000          profile:0(profiler)
+&lt;pstats.Stats instance at 7c2280&gt;
+&gt;&gt;&gt;
+
+					</PRE>
+
+					<P>This module exposes the <a name="idx1073750440"></a>
+						<a name="idx1073750441"></a>
+						<tt class="monofont">Stats(filename, ...)</tT> class. This class is used for creating reports from data generated by the Profile class. It imports data either by direct access to members of Profile class, or by reading in a dictionary that was emitted (viamarshal) from the Profile class. When you want to review the profile, you should use the methods in the <tt ClasS="monofont">pstats</tt> module. Typically you would load the statistics data as follows:</p>
+
+					<pRe>
+						
+import pstats
+p = pstats.Stats('fooprof')
+
+					</prE>
+
+					<P>The class <TT clasS="monofont">Stats</TT> (the previous code just created an instance of this class) has a variety of methods for manipulating and printing the data that was just read into "p". When you ran <Tt claSS="monofont">profile.run(),</TT> the result of three method calls was printed:</p>
+
+					<pre>
+						
+p.strip_dirs().sort_stats(-1).print_stats()
+
+					</PRE>
+
+					<P>The first method removed the extraneous path from all the module names. The second method sorted all the entries according to the standard module/line/name string that is printed (this is to comply with the semantics of the old profiler). The third method printed out all the statistics. You might try the following sort calls:</p>
+
+					<pre>
+						
+p.sort_stats('name')
+p.print_stats()
+
+					</pre>
+
+					<p>The first call will actually sort the list by function name, and the second call will print out the statistics. The following are some interesting calls to experiment with:</p>
+
+					<pre>
+						
+p.sort_stats('cumulative').print_stats(10)
+
+					</pre>
+
+					<p>This sorts the profile by cumulative time in a function, and then only prints the ten most significant lines. If you want to understand what algorithms are taking time, the previous line is what you would use.<a namE="idx1073750442"></a>
+						<a Name="idx1073750443"></A>
+						<a namE="idx1073750444"></a>
+						<a nAME="idx1073750445"></A>
+						<a namE="idx1073750446"></A>
+						<A Name="idx1073750447"></a>
+						<A NAMe="idx1073750448"></a>
+						<a nAME="idx1073750449"></A>
+					</p>
+
+					<p>If you were looking to see what functions were looping a lot, and taking a lot of time, you would do</p>
+
+					<pre>
+						
+p.sort_stats('time').print_stats(10)
+
+					</pre>
+
+					<p>This sorts according to time spent within each function, and then prints the statistics for the top ten functions.</p>
+
+					<p>You might also try</p>
+
+					<pre>
+						
+p.sort_stats('file').print_stats('__init__')
+
+					</pre>
+
+					<p>This will sort all the statistics by filename, and then print out statistics for only the class init methods (because they are spelled with <Tt cLass="monofont">__init__</Tt> in them). The <tt cLass="monofont">sort_stats()</TT> method takes an arbitrary number of quoted strings to select the sort order. For example, <TT clasS="monofont">sort_stats('time', 'name')</TT> sorts on the major key of <Tt claSS="monofont">"internal function time"</TT>, and on the minor key of <tt clASS="monofont">'the name of the function'.</Tt> As one final example, you could try:</p>
+
+					<pre>
+						
+p.sort_stats('time', 'cum').print_stats(.5, 'init')
+
+					</pre>
+
+					<p>This line sorts stats with a primary key of time and a secondary key of cumulative time, and then prints out some of the statistics. To be specific, the list is first culled down to 50% (.5) of its original size, and then only lines containing <tt class="monofont">"init"</tt> are maintained, and that sub-sub-list is printed.</p>
+
+					<dIv cLass="note"><P clasS="notetitle"><b>Note</b></p><P>
+
+						<P>All the print methods take an argument that indicates how many lines to print. If the arg is a floating point number between 0 and 1.0, it is taken as a decimal percentage of the available lines to be printed (for example, .1 means print 10% of all available lines). If it is an integer, it is taken to mean the number of lines of data that you want to have printed.</P>
+
+					</P></div>
+<bR>
+<BR>
+
+					<P>If you wondered what functions called the previous functions, you could now (p is still sorted according to the last criteria) do</p>
+
+					<pre>
+						
+p.print_callers(.5, 'init')
+
+					</PRE>
+
+					<P>You would get a list of callers for each of the listed functions.</p>
+
+					<p>All methods from the Stats class return <tt CLASs="monofont">self,</tt> so you can string together commands such as</p>
+
+					<pre>
+						
+Stats('foo', 'goo').strip_dirs().sort_stats('calls').}
+print_stats(5).print_callers(5)
+
+					</pre>
+
+					<p>This class constructor creates an instance of a statistics object from a filename (or set of filenames). Stats objects are manipulated by methods in order to print useful reports.</p>
+
+					<p>The file selected by the previous constructor must have been created by the corresponding version of profile. To be specific, there is <i>no</i> file compatibility guaranteed with future versions of this profiler, and there is no compatibility with files produced by other profilers (for example, the standard system profiler).</p>
+
+					<p>If several files are provided, all the statistics for identical functions will be coalesced so that an overall view of several processes can be considered in a single report. If additional files need to be combined with data in an existing <tt cLasS="monofont">Stats</tt> object, the <tT clasS="monofont">add()</tt> method can be used. This can be used to average out the statistics for a short running program to increase the accuracy.</p>
+
+					<P>The following methods are exposed by the <A NAme="idx1073750450"></a>
+						<a NAME="idx1073750451"></a>
+						<a naME="idx1073750452"></A>
+						<Tt claSS="monofont">Stats</TT> class.<a name="idx1073750453"></a>
+						<a name="idx1073750454"></a>
+						<a name="idx1073750455"></a>
+						<a nAme="idx1073750456"></A>
+						<a naMe="idx1073750457"></a>
+						<a nAme="idx1073750458"></a>
+						<A NAMe="idx1073750459"></a>
+						<a nAME="idx1073750460"></A>
+					</p>
+
+					<bloCKQUote>
+<p><A NAMe="idx1073750461"></a><a name="idx1073750462"></a>
+							<p><tt class="monofont">strip_dirs()</tt>— 
+    
+								This method for the <tt ClaSs="monofont">Stats</tt> class removes all leading path information from filenames. It is very useful in reducing the size of the printout to fit within (close to) 80 columns. This method modifies the object, and the striped information is lost. After performing a strip operation, the object is considered to have its entries in a random order, as it was just after object initialization and loading. If <Tt claSs="monofont">strip_dirs()</tt> causes two function names to be indistinguishable (that is, they are on the same line of the same filename, and have the same function name), the statistics for these two entries are accumulated into a single entry.</P>
+
+						</P>
+<P><A name="idx1073750463"></A>
+							<A NAme="idx1073750464"></a>
+							<p><TT CLass="monofont">add(filename, ...)</tT>— 
+    
+								This method of the <TT Class="monofont">Stats</tt> class accumulates additional profiling information into the current profiling object. Its arguments should refer to filenames created by the corresponding version of <tt class="monofont">profile.run().</tt> Statistics for identically named (file, line, name) functions are automatically accumulated into single function statistics.</p>
+
+						</p>
+<p><a nAme="idx1073750465"></A><a naMe="idx1073750466"></a>
+							<p><tT claSS="monofont">sort_stats(key, ...)</TT>— 
+    
+								This method modifies the <tt clASS="monofont">Stats</Tt> object by sorting it according to the supplied criteria. The argument is typically a string identifying the basis of a sort (for example: <tt cLASS="monofont">"time"</tt> or <tt CLASs="monofont">"name".</tt>)</p>
+
+						</p>
+</blockquote>
+					<p>When more than one key is provided, additional keys are used as secondary criteria when equality exists in all keys previously selected. For example, <tt clAss="monofont">sort_stats('name', 'file')</Tt> will sort all the entries according to their function name and resolve all ties (identical function names) by sorting by filename.</p>
+
+					<p>Abbreviations can be used for any key names as long as the abbreviation is unambiguous. The keys currently defined are shown in <A href="236#3.html">Table 17.6</A>.</p>
+
+					<a nAME="3"></A><p><tabLE BOrder="1" CELLspacING="0" Cellpadding="1" width="100%">
+<captiOn><h5>Table 17.6. 
+
+
+  Abbreviations to Use as Sorting Keys</H5></capTion><cOlgrOUP Align="left" SPAN="2">
+<tr vaLIGN="top">
+<th>
+<foNT SIze="2">Valid Argument</font></th>
+<th>
+<font size="2">Meaning</foNt></tH>
+</tr>
+<tR>
+<td>
+<foNt siZE="2"><A Name="idx1073750467"></a>
+										<A NAMe="idx1073750468"></a>
+										<tt CLASs="monofont">"calls"</tt>
+									</fONT></Td>
+<td>
+<font size="2">call count</font></td>
+</tr>
+<tR>
+<td>
+<Font Size="2">
+										<a Name="idx1073750469"></A>
+										<A NAme="idx1073750470"></a>
+										<tT CLAss="monofont">"cumulative"</tt>
+									</FONT></td>
+<td>
+<FONT size="2">cumulative time</font></td>
+</tr>
+<tr>
+<td>
+<font SizE="2">
+										<a naMe="idx1073750471"></a>
+										<a nAme="idx1073750472"></a>
+										<TT CLass="monofont">"file"</tT>
+									</FONt></td>
+<tD>
+<FONt sizE="2">filename</FONt></td>
+</tr>
+<tr>
+<td>
+<font size="2">
+										<a naMe="idx1073750473"></a>
+										<A namE="idx1073750474"></a>
+										<tt cLass="monofont">"module"</TT>
+									</FOnt></td>
+<TD>
+<FOnt siZE="2">filename</FOnt></td>
+</TR>
+<TR>
+<td>
+<font size="2">
+										<a name="idx1073750475"></a>
+										<a namE="idx1073750476"></a>
+										<tT claSs="monofont">"pcalls"</tt>
+									</fOnt></tD>
+<TD>
+<Font sIZE="2">primitive call count</Font></tD>
+</TR>
+<Tr>
+<td>
+<fONT Size="2">
+										<a name="idx1073750477"></a>
+										<a name="idx1073750478"></a>
+										<tt claSs="monofont">"line"</tT>
+									</fonT></td>
+<td>
+<Font SIZE="2">line number</font></TD>
+</TR>
+<tr>
+<td>
+<FONT size="2">
+										<A NAMe="idx1073750479"></a>
+										<a name="idx1073750480"></a>
+										<tt class="monofont">"name"</tt>
+									</fonT></td>
+<Td>
+<foNt sizE="2">function name</fonT></TD>
+</Tr>
+<tr>
+<tD>
+<FONt sizE="2">
+										<A NAme="idx1073750481"></a>
+										<a NAME="idx1073750482"></a>
+										<tt class="monofont">"nfl"</tt>
+									</font></td>
+<td>
+<foNt sIze="2">name/file/line</fOnt></td>
+</Tr>
+<tr>
+<TD>
+<FOnt siZE="2">
+										<A Name="idx1073750483"></a>
+										<A NAMe="idx1073750484"></a>
+										<tt CLASs="monofont">"stdname"</tt>
+									</font></td>
+<td>
+<font size="2">standard name</fOnt></Td>
+</tr>
+<Tr>
+<td>
+<fOnt sIZE="2">
+										<A name="idx1073750485"></A>
+										<A NAme="idx1073750486"></a>
+										<tT CLAss="monofont">"time"</tt>
+									</FONT></td>
+<td>
+<font size="2">internal time<a name="idx1073750487"></a>
+										<a nAme="idx1073750488"></A>
+										<a naMe="idx1073750489"></a>
+										<a nAme="idx1073750490"></a>
+										<A NAMe="idx1073750491"></a>
+										<a nAME="idx1073750492"></A>
+										<a namE="idx1073750493"></A>
+										<A Name="idx1073750494"></a>
+										<A NAMe="idx1073750495"></a>
+										<a name="idx1073750496"></a>
+										<a name="idx1073750497"></a>
+									</font></td>
+</Tr>
+</cOlgrOup>
+</taBle></p>
+
+					<P>Note that all sorts on statistics are in descending order (placing most time-consuming items first), whereas name, file, and line number searches are in ascending order (that is, alphabetical). The subtle distinction between <TT Class="monofont">"nfl"</TT> and <TT clasS="monofont">"stdname"</TT> is that the standard name is a sort of the name as printed, which means that the embedded line numbers get compared in an odd way. For example, lines 3, 20, and 40 would (if the filenames were the same) appear in the string order <Tt claSS="monofont">"20"</TT>, <tt class="monofont">"3",</tt> and <tt class="monofont">"40".</tt> In contrast, <tt ClaSs="monofont">"nfl"</tt> does a numeric compare of the line numbers. In fact, <Tt claSs="monofont">sort_stats("nfl")</tt> is the same as <TT CLass="monofont">sort_stats("name", "file", "line").</tT>
+					</P>
+
+					<BLockqUOTE>
+<p>
+							<a naME="idx1073750498"></A>
+							<A name="idx1073750499"></a>
+							<p><tt class="monofont">reverse_order()</tt>— 
+    
+								This method for the <tt claSs="monofont">Stats</tT> class reverses the ordering of the basic list within the object. This method is provided primarily for compatibility with the standard profiler. Its utility is questionable now that ascending versus descending order is properly selected based on the sort key of choice.</p>
+
+						</p>
+<p><A name="idx1073750500"></A><a naME="idx1073750501"></A>
+							<P><tt clASS="monofont">print_stats(restriction, ...)</Tt>— 
+    
+								This method for the <tt cLASS="monofont">Stats</tt> class prints out a report as described in the <tt CLASs="monofont">profile.run()</tt> definition. The order of the printing is based on the last <tt class="monofont">sort_stats()</tt> operation done on the object (subject to caveats in <tt class="monofont">add()</tT> and <tt ClasS="monofont">strip_dirs()</tt>).</p>
+
+						</p>
+</BlocKQUOte>
+					<p>The arguments provided (if any) can be used to limit the list down to the significant entries. Initially, the list is taken to be the complete set of profiled functions. Each restriction is either an integer (to select a count of lines), or a decimal fraction between 0.0 and 1.0 inclusive (to select a percentage of lines), or a regular expression (to pattern match the standard name that is printed). If several restrictions are provided, they are applied sequentially. For example</p>
+
+					<PRE>
+						
+print_stats(.1, "foo:")
+
+					</Pre>
+
+					<p>would first limit the printing to the first 10% of list, and then only print functions that were part of filename <tT CLAss="monofont">".*foo:".</tt> In contrast, the following command:</P>
+
+					<PRE>
+						
+print_stats(".*foo:", .1)
+
+					</pre>
+
+					<p>would limit the list to all functions having filenames <tt class="monofont">".*foo:",</tt> and then proceed to only print the first 10% of them.</p>
+
+					<blockqUotE>
+<p><a nAme="idx1073750502"></a><a Name="idx1073750503"></A>
+							<P><TT clasS="monofont">print_callers(restrictions, ...)</TT>— 
+    
+								This method for the <Tt claSS="monofont">Stats</TT> class prints a list of all functions that called each function in the profiled database. The ordering is identical to that provided by <tt clASS="monofont">print_stats()</Tt>, and the definition of the restricting argument is also identical. For convenience, a number is shown in parentheses after each caller to show how many times this specific call was made. A second non-parenthesized number is the cumulative time spent in the function at the right.</p>
+
+						</p>
+<p><a name="idx1073750504"></a><a name="idx1073750505"></a>
+							<p><tt cLasS="monofont">print_callees(restrictions, ...)</tt>— 
+    
+								This method for the <tT clasS="monofont">Stats</tt> class prints a list of all functions that were called by the indicated function. Aside from this reversal of direction of calls (called versus was called by), the arguments and ordering are identical to the <tT CLAss="monofont">print_callers()</tt> method.</P>
+
+						</P>
+<P><A name="idx1073750506"></A><A NAme="idx1073750507"></a>
+							<p><TT CLass="monofont">ignore()</tt>— 
+    
+								This method of the <tt class="monofont">Stats</tt> class is used to dispose of the value returned by earlier methods. All standard methods in this class return the instance that is being processed so that the commands can be strung together. For example</p>
+
+							<pre>
+								
+pstats.Stats('foofile').strip_dirs().sort_stats('cum').
+print_stats().ignore()
+
+							</prE>
+
+						</p>
+<p>
+							<P>would perform all the indicated functions, but it would not return the final reference to the <tt cLass="monofont">Stats</tT> instance.<a naME="idx1073750508"></A>
+								<A name="idx1073750509"></A>
+								<A NAme="idx1073750510"></a>
+								<a NAME="idx1073750511"></a>
+								<a naME="idx1073750512"></A>
+								<A name="idx1073750513"></a>
+								<a name="idx1073750514"></a>
+							</p>
+
+						</p>
+</blockquOte>
+					
+						<H5>Limitations</h5>
+						<p>There are two fundamental limitations on this profiler. The first is that it relies on the Python interpreter to dispatch <tT clasS="monofont">"call",</tt>
+							<tT CLAss="monofont">"return",</tt> and <TT CLass="monofont">"exception"</tT> events. Compiled C code does not get interpreted, and hence is invisible to the profiler. All time spent in C code (including built-in functions) will be charged to the Python function that has invoked the C code. If the C code calls out to some native Python code, those calls will be profiled properly.</P>
+
+						<P>The second limitation has to do with accuracy of <A name="idx1073750515"></A>
+							<A NAme="idx1073750516"></a>
+							<a name="idx1073750517"></a>timing information. There is a fundamental problem with deterministic profilers involving accuracy. The most obvious restriction is that the underlying clock is only ticking at a rate (typically) of about .001 seconds. Hence no measurements will be more accurate than that underlying clock. If enough measurements are taken, the error will tend to average out. Unfortunately, removing this first error induces a second source of error.<a name="idx1073750518"></a>
+							<a name="idx1073750519"></A>
+							<a nAme="idx1073750520"></a>
+							<A name="idx1073750521"></A>
+							<a naME="idx1073750522"></A>
+							<A name="idx1073750523"></A>
+							<A NAme="idx1073750524"></a>
+							<a NAME="idx1073750525"></a>
+						</p>
+
+						<p>The second problem is that it "takes a while" from when an event is dispatched until the profiler's call to get the time actually <i>gets</I> the state of the clock. Similarly, there is a certain amount of lag when exiting the profiler event handler from the time that the clock's value was obtained (and then squirreled away), until the user's code is once again executing. As a result, functions that are called many times, or call many functions, will typically accumulate this error.</P>
+
+						<P>The error that accumulates in this fashion is typically less than the accuracy of the clock (that is, less than one clock tick), but it <I>can</i> accumulate and become very significant. This profiler provides a means of calibrating itself for a given platform so that this error can be probabilistically (that is, on the average) removed. After the profiler is calibrated, it will be more accurate (in at least a square sense), but it will sometimes produce negative numbers (when call counts are exceptionally low, and the gods of probability work against you). Do <i>not</i> be alarmed by negative numbers in the profile.</p>
+
+						<p>They should <i>only</i> appear if you have calibrated your profiler, and the results are actually better than without calibration.</p>
+
+					
+					
+						<h5>
+
+
+Calibration</h5>
+						<p>The profiler class has a hard-coded constant added to each event handling time to compensate for the overhead of calling the time function, and storing away the results. The following procedure can be used to obtain this constant for a given platform.</p>
+
+						<pre>
+							
+import profile
+pr = profile.Profile()
+pr.calibrate(100)
+pr.calibrate(100)
+pr.calibrate(100)
+
+						</pre>
+
+						<p>The argument to <tT clAss="monofont">calibrate()</tT> is the number of times to try to do the sample calls to get the CPU times. If your computer is <i>very</i> fast, you might have to do:<a nAme="idx1073750526"></a>
+							<A NAMe="idx1073750527"></a>
+							<a nAME="idx1073750528"></A>
+							<a namE="idx1073750529"></A>
+							<A Name="idx1073750530"></a>
+							<A NAMe="idx1073750531"></a>
+							<a name="idx1073750532"></a>
+							<a name="idx1073750533"></a>
+							<a name="idx1073750534"></a>
+							<A naMe="idx1073750535"></a>
+							<a Name="idx1073750536"></a>
+						</P>
+
+						<pre>
+							
+pr.calibrate(1000)
+
+						</PRE>
+
+						<P>or even</p>
+
+						<pre>
+							
+pr.calibrate(10000)
+
+						</PRE>
+
+						<P>The object of this exercise is to get a fairly consistent result. When you have a consistent answer, you are ready to use that number in the source code. For a Sun Sparcstation 1000 running Solaris 2.3, the magical number is about .00053. If you have a choice, you are better off with a smaller constant, and your results will <i>less often</i> show up as negative in profile statistics.</p>
+
+						<p>The following shows how the <A NAMe="idx1073750537"></a>
+							<a nAME="idx1073750538"></A>
+							<tt class="monofont">trace_dispatch()</tt> method in the <tt class="monofont">Profile</tt> class should be modified to install the calibration constant on a Sun Sparcstation 1000:</p>
+
+						<pRe>
+							
+def trace_dispatch(self, frame, event, arg):
+    t = self.timer()
+    t = t[0] + t[1] - self.t - .00053 # Calibration constant
+    if self.dispatch[event](frame,t):
+        t = self.timer()
+        self.t = t[0] + t[1]
+    else:
+        r = self.timer()
+       self.t = r[0] + r[1] - t # put back unrecorded delta
+    return
+
+						</pRe>
+
+						<p>Note that if there is no calibration constant, the line containing the calibration constant should simply say</p>
+
+						<Pre>
+							
+t = t[0] + t[1] - self.t  # no calibration constant
+
+						</prE>
+
+						<p>You can also achieve the same results using a derived class (and the profiler will actually run equally fast), but the previous method is the simplest to use. If the profiler was made self calibrating, it would have made the initialization of the profiler class slower, and would have required some very fancy coding, or else the use of a variable where the constant .00053 was placed in the code shown. This is a <i>very</i> critical performance section, and there is no reason to use a variable lookup at this point when a constant can be used.<A NAMe="idx1073750539"></a>
+							<a nAME="idx1073750540"></A>
+							<a namE="idx1073750541"></A>
+							<A Name="idx1073750542"></a>
+							<A NAMe="idx1073750543"></a>
+							<a name="idx1073750544"></a>
+							<a name="idx1073750545"></a>
+							<a name="idx1073750546"></a>
+							<A naMe="idx1073750547"></a>
+							<a Name="idx1073750548"></a>
+							<A namE="idx1073750549"></A>
+						</P>
+
+					
+					
+						<H5>
+
+
+Extensions: Deriving Better Profilers</h5>
+						<p>The <tt CLASs="monofont">Profile</tt> class of <tT CLAss="monofont">profile</tt> was written so that derived classes could be developed to extend the profiler. The following two examples of derived classes can be used to do profiling. If the reader is an avid Python programmer, it should be possible to use these as a model and create similar (and perchance better) profile classes.</P>
+
+						<P>If all you want to do is change how the timer is called, or which timer function is used, the basic class has an option for that in the constructor for the class. Consider passing the name of a function to call into the constructor:</P>
+
+						<Pre>
+							
+pr = profile.Profile(your_time_func)
+
+						</pre>
+
+						<p>The resulting profiler will call your time function instead of <a name="idx1073750550"></a>
+							<a name="idx1073750551"></a>
+							<tt ClaSs="monofont">os.times().</tt> The function should return either a single number, or a list of numbers (similar to what <Tt claSs="monofont">os.times()</tt> returns). If the function returns a single time number or the list of returned numbers has length 2, you will get an especially fast version of the dispatch routine.</P>
+
+						<P>Be warned that you <I>should</I> calibrate the profiler class for the timer function that you choose. For most machines, a timer that returns a lone integer value will provide the best results in terms of low overhead during profiling. (<tt clASS="monofont">os.times</Tt> is pretty bad because it returns a tuple of floating point values, so all arithmetic is floating point in the profiler.) If you want to substitute a better timer in the cleanest fashion, you should derive a class, and simply put in the replacement dispatch method that better handles your timer call, along with the appropriate calibration constant.<a naME="idx1073750552"></A>
+							<A name="idx1073750553"></A>
+							<A NAme="idx1073750554"></a>
+							<a name="idx1073750555"></a>
+							<a name="idx1073750556"></a>
+							<a name="idx1073750557"></A>
+							<a nAme="idx1073750558"></a>
+							<A name="idx1073750559"></A>
+							<a naME="idx1073750560"></A>
+							<A name="idx1073750561"></A>
+							<A NAme="idx1073750562"></a>
+						</p>
+
+					
+				
+			</FONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="235.html" title="Debugging the Application"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=236" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="236.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="237.html" title="Distributing Python Applications"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+abbreviations<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750495">sorting keys</a><BR>
+ <a href="#idx1073750464">add(filename, ...) method</a><BR>
+alibration<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750534">profiler class</a> <a href="#idx1073750547">2nd</a><BR>
+analyzing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750448">profiles, pstats module</a> <a href="#idx1073750459">2nd</a> <a href="#idx1073750493">3rd</a> <a href="#idx1073750510">4th</a> <a href="#idx1073750524">5th</a> <a href="#idx1073750532">6th</a> <a href="#idx1073750545">7th</a> <a href="#idx1073750558">8th</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750443">profiling</a> <a href="#idx1073750454">2nd</a> <a href="#idx1073750488">3rd</a> <a href="#idx1073750519">4th</a> <a href="#idx1073750527">5th</a> <a href="#idx1073750540">6th</a> <a href="#idx1073750553">7th</a><BR>
+arguments<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ó<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750468">callsÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750470">cumulativeÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750472">fileÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750478">lineÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750474">moduleÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750480">nameÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750482">nflÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750476">pcallsÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750484">stdnameÓ</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750486">timeÓ</a><BR>
+classes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;profiler<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750536">calibration</a> <a href="#idx1073750549">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750562">extensions</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750517">timing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750425">pstats.Stats</a><BR>
+classs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750440">Stats(filename, ...)</a><BR>
+column headings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750428">profiles</a> <a href="#idx1073750436">2nd</a><BR>
+ <a href="#idx1073750433">cumtime column heading</a><BR>
+ethods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750463">add(filename, ...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750506">ignore()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750504">print_callees(restrictions, ...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750502">print_callers(restrictions, ...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750500">print_stats(restriction, ...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750498">reverse_order()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750465">sort_stats(key, ...)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750450">Stats class</a> <a href="#idx1073750512">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750461">strip_dirs()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750537">trace_dispatch()</a><BR>
+ <a href="#idx1073750426">exec statement</a><BR>
+extensions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750560">profiler class</a><BR>
+filename<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750435">lineno(function) column heading</a><BR>
+ <a href="#idx1073750417">foo() function</a> <a href="#idx1073750419">2nd</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750416">foo()</a> <a href="#idx1073750418">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750550">os.times()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750413">profile module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750422">profile.run()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750414">run()</a> <a href="#idx1073750420">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750406">setprofiler()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750402">sys.setprofiler(profiler_function)</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750404">sys.settrace(tracer_function)</a><BR>
+headings<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750429">column, profiles</a> <a href="#idx1073750437">2nd</a><BR>
+ <a href="#idx1073750507">ignore() method</a><BR>
+iming<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750515">profiler class</a><BR>
+keys<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sorting<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750497">abbreviations</a><BR>
+methods<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750452">Stats class</a> <a href="#idx1073750514">2nd</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750408">profile</a> <a href="#idx1073750438">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750446">pstats</a> <a href="#idx1073750457">2nd</a> <a href="#idx1073750491">3rd</a> <a href="#idx1073750508">4th</a> <a href="#idx1073750522">5th</a> <a href="#idx1073750530">6th</a> <a href="#idx1073750543">7th</a> <a href="#idx1073750556">8th</a><BR>
+ <a href="#idx1073750410">Mullender, Sjoerd</a><BR>
+ <a href="#idx1073750430">ncalls column heading</a><BR>
+Ó<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;callsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750467">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cumulativeÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750469">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750471">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lineÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750477">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;moduleÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750473">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nameÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750479">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nflÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750481">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pcallsÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750475">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stdnameÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750483">argument</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;timeÓ<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750485">argument</a><BR>
+ <a href="#idx1073750551">os.times() function</a><BR>
+ <a href="#idx1073750432">percall column heading</a> <a href="#idx1073750434">2nd</a><BR>
+ <a href="#idx1073750505">print_callees(restrictions, ...) method</a><BR>
+ <a href="#idx1073750503">print_callers(restrictions, ...) method</a><BR>
+ <a href="#idx1073750501">print_stats(restriction, ...) method</a><BR>
+ <a href="#idx1073750409">profile module</a> <a href="#idx1073750439">2nd</a><BR>
+ <a href="#idx1073750423">profile.run() function</a><BR>
+profiler class<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750561">extensions</a><BR>
+profiles<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750449">analyzing, pstats module</a> <a href="#idx1073750460">2nd</a> <a href="#idx1073750494">3rd</a> <a href="#idx1073750511">4th</a> <a href="#idx1073750525">5th</a> <a href="#idx1073750533">6th</a> <a href="#idx1073750546">7th</a> <a href="#idx1073750559">8th</a><BR>
+profiling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750442">applications</a> <a href="#idx1073750453">2nd</a> <a href="#idx1073750487">3rd</a> <a href="#idx1073750518">4th</a> <a href="#idx1073750526">5th</a> <a href="#idx1073750539">6th</a> <a href="#idx1073750552">7th</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750445">profiling</a> <a href="#idx1073750456">2nd</a> <a href="#idx1073750490">3rd</a> <a href="#idx1073750521">4th</a> <a href="#idx1073750529">5th</a> <a href="#idx1073750542">6th</a> <a href="#idx1073750555">7th</a><BR>
+ <a href="#idx1073750447">pstats module</a> <a href="#idx1073750458">2nd</a> <a href="#idx1073750492">3rd</a> <a href="#idx1073750509">4th</a> <a href="#idx1073750523">5th</a> <a href="#idx1073750531">6th</a> <a href="#idx1073750544">7th</a> <a href="#idx1073750557">8th</a><BR>
+ <a href="#idx1073750424">pstats.Stats class</a><BR>
+ <a href="#idx1073750538">race_dispatch() method</a><BR>
+ <a href="#idx1073750499">reverse_order() method</a><BR>
+rofiler class<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750535">calibration</a> <a href="#idx1073750548">2nd</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750516">timing</a><BR>
+ <a href="#idx1073750412">Roskind, James</a><BR>
+ <a href="#idx1073750411">Rossum, Guido van</a><BR>
+ <a href="#idx1073750415">run() function</a> <a href="#idx1073750421">2nd</a><BR>
+ <a href="#idx1073750407">setprofiler() function</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750444">profiling</a> <a href="#idx1073750455">2nd</a> <a href="#idx1073750489">3rd</a> <a href="#idx1073750520">4th</a> <a href="#idx1073750528">5th</a> <a href="#idx1073750541">6th</a> <a href="#idx1073750554">7th</a><BR>
+ <a href="#idx1073750466">sort_stats(key, ...) method</a><BR>
+sorting keys<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750496">abbreviations</a><BR>
+statements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750427">exec</a><BR>
+Stats class<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073750451">methods</a> <a href="#idx1073750513">2nd</a><BR>
+ <a href="#idx1073750441">Stats(filename, ...) class</a><BR>
+ <a href="#idx1073750462">strip_dirs() method</a><BR>
+ <a href="#idx1073750400">sys module</a> <a href="#idx1073750401">2nd</a><BR>
+ <a href="#idx1073750403">sys.setprofiler(profiler_function) function</a><BR>
+ <a href="#idx1073750405">sys.settrace(tracer_function) function</a><BR>
+ <a href="#idx1073750431">tottime column heading</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

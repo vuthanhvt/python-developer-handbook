@@ -1,0 +1,238 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Code Examples</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="117.html" class="navtitle">6. Extending and Embedding Python</a> &gt; <span class="nonavtitle">Code Examples</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="126.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=127" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="127.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="129.html" title="7. Objects Interfacing and Distribution"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A36%3A26+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147034164218028208152157</font><a href="read4.asp?bookname=0672319942&snode=127&now=5%2F31%2F2002+4%3A36%3A26+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Code Examples</h3>
+				
+					<h5>
+Listing 6.1 Benchmark Extension (File benchmarkmodule.c)</h5>
+					<PRE Class="monofont">
+ 1: #include "&lt;Python.h&gt;"
+ 2:
+ 3: static PyObject *
+ 4: benchmark_generate(PyObject *self, PyObject *args);
+ 5: {
+ 6:   int index, number_of_arguments;
+ 7:   PyObject *numberslist = NULL;
+ 8:   PyObject *check_value = NULL;
+ 9:   PyFloatObject *aux_float = NULL;
+10:   double element_value;
+11:   double minimum_value = 100;
+12:   double maximum_value = 0;
+13:   char *exist_check;
+14:
+15:   if (!PyArg_ParseTuple (args, "OO", &amp;numberslist, &amp;check_value))
+16:      return NULL;
+17:
+18:   if (!PyList_Check(numberslist))
+19:   {
+20:     PyErr_SetString(PyExc_TypeError, "Invalid list of values !");
+21:     return NULL;
+22:   }
+23:
+24:   if (!PyFloat_Check(check_value))
+25:   {
+26:     PyErr_SetString(PyExc_TypeError, "Invalid checking value !");
+27:     return NULL;
+28:   }
+29:
+30:   number_of_arguments = PyList_Size(numberslist);
+31:   exist_check = "No";
+32:
+33:   for (index=0; index&lt;number_of_arguments; index++)
+34:   {
+35:      aux_float = (PyFloatObject *) PyList_GetItem(numberslist, index);
+36:      if (!PyFloat_Check(aux_float))
+37:      {
+38:         PyErr_SetString(PyExc_TypeError, "Invalid list value !");
+39:         return NULL;
+40:      }
+41:      element_value = PyFloat_AsDouble(aux_float);
+42:      if (element_value &lt; 0 )
+43:      {
+44:         PyErr_SetString(PyExc_TypeError, "The values cannot be less than 0
+            !");
+45:         return NULL;
+46:      }
+47:
+48:      if (element_value &gt; 100 )
+49:      {
+50:         PyErr_SetString(PyExc_TypeError,
+                     "The values cannot be greater than 100 !");
+51:         return NULL;
+52:      }
+53:
+54:      if (element_value &lt; minimum_value)
+55:          minimum_value = element_value;
+56:
+57:      if (element_value &gt; maximum_value)
+58:          maximum_value = element_value;
+59:
+60:      if (element_value == PyFloat_AsDouble(check_value))
+61:          exist_check = "Yes";
+62:   }
+63:   return Py_BuildValue("(ffs)", minimum_value, maximum_value,
+                              exist_check );
+64: }
+65:
+66: static PyMethodDef benchmark_methods[] = {
+67:       {"generate", benchmark_generate, METH_VARARGS, "Minimum Value,
+             Maximum Value"},
+68:       {NULL, NULL}
+69: };
+70:
+71: DL_EXPORT(void) initbenchmark()
+72: {
+73:     Py_InitModule("benchmark", benchmark_methods);
+74: }
+</PRE>
+				
+				<P>Line 9: <tt clASS="monofont">PyFloatObject</Tt> is a subtype of <tt class="monofont">PyObject.</tt></p>
+
+				<p>Line 18: Checks whether the first argument is a list.</p>
+
+				<p>Line 24: Checks whether the type of the second argument is a float.</p>
+
+				<p>Line 26: Raises a <tt clAss="monofont">TypeError</Tt> exception.</p>
+
+				<p>Line 30: Returns the list's length.</P>
+
+				<p>Line 60: <tt cLass="monofont">PyFloat_AsDouble</TT> converts a Python Float into a C double.</P>
+
+				<P>Next, you can see a small interaction with this program. To execute it, we have to pass two arguments: The first one is a list of numbers, and the second one is a float number. This program returns the minimum and maximum values from the list, along with a logical test that informs whether the float number is part of the list.</p>
+
+				<pre>
+					
+Python 1.5.2 (#0, May 30 2000, 00:16:14) [MSC 32 bit (Intel)] on win32
+Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam
+&gt;&gt;&gt; import benchmark
+&gt;&gt;&gt; benchmark.generate([1.1],1.1)
+(1.1, 1.1, 'Yes')
+&gt;&gt;&gt; benchmark.generate([1,2,3],4.5)
+(1.0, 3.0, 'No')
+&gt;&gt;&gt;
+
+				</PRE>
+
+				<H4>Wrapping C Functions</h4>
+					<p>By wrapping functions, you can use C code files, without changing them. Every time you feel the need to include a C source code file in your Python project, it is necessary to create a special module that wraps its functions, and to include a reference to the file in the <tt CLASs="monofont">python15.dsp.</tt></p>
+
+					<P>The next example wraps the functions stored in the <TT Class="monofont">cfunctions.c</tt> file.</p>
+
+					
+						<h5>
+Listing 6.2 File: <tt class="monofont">cfunctions.c</tt></h5>
+						<prE clAss="monofont">
+#include &lt;stdio.h&gt;
+
+void display_info(char *user, char *domain, char *country) {
+
+   if (country == "USA")
+       printf("%s@%s\n", user, domain);
+   else
+       printf("%s@%s.%s\n", user, domain, country);
+}
+
+int calc_year (int f_year, int m_year, int l_year) {
+   int result;
+   result = ((l_year + m_year + f_year) / 3);
+   return result;
+}
+</pRe>
+					
+					
+						<h5>
+Listing 6.3 File: <tt ClasS="monofont">wrappermodule.c</TT></H5>
+						<pre cLASS="monofont">
+ 1: #include "Python.h"
+ 2:
+ 3: extern void display_info(char *, char *, char *);
+ 4: extern int calc_year(int, int, int);
+ 5:
+ 6: static PyObject *wrapper_display_info(PyObject *self, PyObject *args,
+                                              PyObject *kwargs)
+ 7: {
+ 8:    char *user = "None";
+ 9:    char *domain = "None";
+10:    char *country = "None";
+11:    static char *keywords[] = {"user","domain","country",NULL};
+12:
+13:    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|sss", keywords,
+             &amp;user, &amp;domain, &amp;country)){
+14:       return NULL;
+15:    }
+16:
+17:    display_info(user, domain, country);
+18:    return Py_BuildValue("");
+19: }
+20:
+21: static PyObject *wrapper_calc_year(PyObject *self, PyObject *args) {
+22:    int f_year, m_year, l_year, result;
+23:    if (!PyArg_ParseTuple(args, "iii", &amp;f_year, &amp;m_year, &amp;l_year)) {
+24:        return NULL;
+25:    }
+26:    result = calc_year(f_year, m_year, l_year);
+27:    return Py_BuildValue("i", result);
+28: }
+29:
+30: static PyMethodDef wrappermethods[] = {
+31:    {"display_info", wrapper_display_info, METH_VARARGS|METH_KEYWORDS},
+32:    {"calc_year", wrapper_calc_year, METH_VARARGS},
+33:    {NULL, NULL}
+34: };
+35:
+36: void initwrapper() {
+37:    Py_InitModule("wrapper", wrappermethods);
+38: }
+</pre>
+					
+					<p>Lines 3 and 4: Identify which functions are external to this file.</P>
+
+					<P>Line 11: Creates a dictionary of keywords to be accepted by the function.</P>
+
+					<P>Line 13: <tt clASS="monofont">PyArg_ParseTupleAndKeywords()</Tt> parses the Python-level parameters by accepting a third <tt class="monofont">"PyObject *"</tt> parameter.</p>
+
+					<p>Line 31: The <tt class="monofont">METH_VARARGS|METH_KEYWORDS</tT> clause makes it clear that keyword elements are expected.</p>
+
+					<p>Next, you can see a small interaction with this program. The first function builds an email address based on the information provided. The other one calculates the average age of a family of three people based on the number of years that are passed to the function.</P>
+
+					<pre>
+						
+Python 1.5.2 (#0, May 30 2000, 00:56:46) [MSC 32 bit (Intel)] on win32
+Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam
+&gt;&gt;&gt; import wrapper
+&gt;&gt;&gt; wrapper.display_info("andre2530","aol.com","br")
+andre2530@aol.com.br
+&gt;&gt;&gt; wrapper.calc_year(10, 30, 35)
+25
+&gt;&gt;&gt;
+
+					</Pre>
+
+				
+			</foNt>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="126.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=127" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="127.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="129.html" title="7. Objects Interfacing and Distribution"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

@@ -1,0 +1,331 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Code Examples</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="128.html" class="navtitle">7. Objects Interfacing and Distribution</a> &gt; <span class="nonavtitle">Code Examples</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="135.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=136" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="136.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="138.html" title="8. Working with Databases"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A38%3A10+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162147044209058147120159192</font><a href="read1.asp?bookname=0672319942&snode=136&now=5%2F31%2F2002+4%3A38%3A10+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT><h3>Code Examples</h3>
+				<h4>Parking Lot (File parkinglot.py)</h4>
+					<P>This example generates a Python COM server that exposes a parking lot object. The example uses a Visual Basic graphical interface to manipulate the vehicles of this parking lot. Each vehicle is a Python Object that is also defined as a Python COM Server object.</P>
+
+					<P>The first thing to do is to generate two clsids: one for each object.</P>
+
+					<pre>
+						
+&gt;&gt;&gt; import pythoncom
+&gt;&gt;&gt; print pythoncom.CreateGuid()
+BD2CB7C0-3BB9-11D4-804E-0050041A5111
+&gt;&gt;&gt; print pythoncom.CreateGuid()
+BD2CB7C1-3BB9-11D4-804E-0050041A5111
+
+					</pRE>
+
+					<P>Now, we take these ids and use them to create a module.</P>
+
+					
+						<h5>
+Listing 7.1 parkinglot.py</h5>
+						<prE CLAss="monofont">
+ 1: # File: parkinglot.py
+ 2:
+ 3: from win32com.server.exception import Exception
+ 4: import win32com.server.util
+ 5:
+ 6: class ParkingServer:
+ 7:      _reg_clsid_ = '{ BD2CB7C0-3BB9-11D4-804E-0050041A5111} '
+ 8:      _reg_progid_ = 'Python.ParkingServer'
+ 9:      _public_methods_ = ['ParkVehicle', 'UnparkVehicle',
+10:                 'GetVehiclesCount', 'IdentifyVehicle',
+11:                 'GetLocationList']
+12:
+13:     def __init__(self):
+14:         self.Vehicles = [Vehicle()]
+15:
+16:     def ParkVehicle(self, floor=1, model="", license="", color=""):
+17:         VehicleToPark = Vehicle()
+18:         VehicleToPark.floor = floor
+19:         VehicleToPark.model = str(model)
+20:         VehicleToPark.license = str(license)
+21:         VehicleToPark.color = str(color)
+22:         self.Vehicles.append(VehicleToPark)
+23:
+24:     def UnparkVehicle(self,index):
+25:         del self.Vehicles[index]
+26:
+27:     def IdentifyVehicle(self, index):
+28:         return win32com.server.util.wrap(self.Vehicles[index])
+29:
+30:     def GetLocationList(self):
+31:         return map(lambda x:x.GetLocation(), self.Vehicles)
+32:
+33:     def GetVehiclesCount(self):
+34:         return len(self.Vehicles)
+35:
+36: class Vehicle:
+37:      _reg_clsid_ = '{ BD2CB7C1-3BB9-11D4-804E-0050041A5111} '
+38:      _reg_progid_ = 'Python.Vehicle'
+39:      _public_methods_ = ['GetLocation']
+40:      _public_attrs_ = ['floor','model','license','color']
+41:
+42:     def __init__(self, floor=1, model = 'Dodge Neon',
+                      license = 'LKS-92020', color = 'Red'):
+43:         self.floor = floor
+44:         self.model = model
+45:         self.license = license
+46:         self.color = color
+47:
+48:     def GetLocation(self):
+49:         return 'The %s %s license %s is on the %d floor'% }
+50:                   (self.color, self.model, self.license, self.floor)
+51:
+52: def RegisterClasses():
+53:      print "Registering COM servers…"
+54:      import win32com.server.register
+55:
+56:      win32com.server.register.UseCommandLine(ParkingServer)
+57:      print "ParkingServer Class registered."
+58:
+59:      win32com.server.register.UseCommandLine(Vehicle)
+60:      print "Vehicle Class registered."
+61:
+62: def UnRegisterClasses():
+63:      print "Unregistering COM server…"
+64:      import win32com.server.register
+65:
+66:      win32com.server.register.UnregisterClasses(ParkingServer)
+67:      print "ParkingServer Class unregistered."
+68:
+69:      win32com.server.register.UnregisterClasses(Vehicle)
+70:      print "Vehicle Class unregistered."
+71:
+72: if __name__=='__main__':
+73:     import sys
+74:     if "-unregister" in sys.argv:
+75:             UnRegisterClasses()
+76:     else:
+77:             RegisterClasses()
+</pre>
+					
+					<p>Lines 9–11: List of methods to be exported to the COM interface.</p>
+
+					<p>Line 13: Initializes parking with one vehicle [object].</p>
+
+					<p>Lines 20–21: As COM interfaces use Unicode objects, it is necessary to convert the objects to string.</p>
+
+					<p>Line 28: Wraps the Python Object before sending it to the COM client.</p>
+
+					<p>Line 31: Calls the appropriate <tt clasS="monofont">GetLocation()</tt> method f or each <Tt clAss="monofont">Vehicle</tt> object in the Python <Tt clASS="monofont">List.</Tt> Then, it returns a whole new list of strings.</p>
+
+					<p>Line 33: Counts the number of vehicles in the parking lot.</p>
+
+					<P>Line 52: Registers both COM servers.</P>
+
+					<P>Line 62: Unregisters both servers. (Unregistering them is necessary to clean up the Windows Registry.)</P>
+
+					<p>Line 72: Automatically registers the classes when the module is executed as a script.</p>
+
+					<p>Line 74: If the user calls the script at the command prompt passing the <tT CLAss="monofont">-unregister</tt> argument, the <TT CLass="monofont">UnRegisterClasses()</tt> methods are executed.</p>
+
+					<p>When you have the module stored in the file, you can double-click on the file to execute it, or you can go to a DOS prompt and manually call it to register the server:<a name="idx1073744825"></a><a name="idx1073744826"></a><a NamE="idx1073744827"></a><a nAme="idx1073744828"></a></p>
+
+					<Pre>
+						
+C:\ python parkinglot.py
+Registering COM server…
+ParkingServer Class registered.
+Vehicle Class registered.
+
+					</pRE>
+
+					<P><A href="136#3.html">Listing 7.2</A> implements the Visual Basic 5 project that provides the client interface for our Python COM server. It is the code for the main form.</P>
+
+					
+						<H5>
+<A name="3"></A>Listing 7.2 frmMain.frm</H5>
+						<PRe claSS="monofont">
+ 1: Option Explicit
+ 2: Public ParkingServer As Object
+ 3: Public newVehicle As Object
+ 4: Private Sub cmdPark_Click()
+ 5:     Set newVehicle = CreateObject("Python.Vehicle")
+ 6:     newVehicle.floor = 1
+ 7:     newVehicle.model = ""
+ 8:     newVehicle.license = ""
+ 9:     newVehicle.Color = ""
+10:     If frmVehicle.ModifyInfo(newVehicle) Then
+11:         ParkingServer.ParkVehicle newVehicle.floor, newVehicle.model,
+             newVehicle.license, newVehicle.Color
+12:         RefreshVehiclesList
+13:     End If
+14:     Set newVehicle = Nothing
+15: End Sub
+16:
+17: Private Sub CmdUnpark_Click()
+18:     Dim CarSpot As Integer
+19:     Dim Vehicle As Object
+20:     If Vehicles.ListIndex = -1 Then
+21:        Exit Sub
+22:     Else
+23:        CarSpot = Vehicles.ListIndex
+24:        ParkingServer.UnparkVehicle CarSpot
+25:        RefreshVehiclesList
+26:     End If
+27: End Sub
+28:
+29: Private Sub cmdUpdate_Click()
+30:     Dim CarSpot As Integer, Vehicle As Object
+31:     If Vehicles.ListIndex = -1 Then
+32:        Exit Sub
+33:     Else
+34:        CarSpot = Vehicles.ListIndex
+35:        Set Vehicle = ParkingServer.IdentifyVehicle(CarSpot)
+36:        If frmVehicle.ModifyInfo(Vehicle) Then RefreshVehiclesList
+37:     End If
+38: End Sub
+39:
+40: Private Sub cmdInitializeServer_Click()
+41:      If ParkingServer Is Nothing Then
+42:         On Error GoTo cmdInitializeServer_Click_CreationError
+43:         Set ParkingServer = CreateObject("Python.ParkingServer")
+44:         On Error GoTo 0
+45:         lblStatus.Caption = "The ParkingServer is up and running…"
+46:         cmdInitializeServer.Caption = "&amp;Stop Server"
+47:         Vehicles.Visible = True
+48:         cmdPark.Visible = True
+49:         CmdUpdate.Visible = True
+50:         CmdUnpark.Visible = True
+51:         Label2.Visible = True
+52:         lbvehicles_number.Visible = True
+53:         RefreshVehiclesList
+54:         Vehicles.ListIndex = 0
+55:         Vehicles.SetFocus
+56:         Exit Sub
+57:      Else
+58:          Vehicles.Visible = False
+59:          cmdPark.Visible = False
+60:          CmdUpdate.Visible = False
+61:          CmdUnpark.Visible = False
+62:          lbvehicles_number.Visible = False
+63:          Label2.Visible = False
+64:          Set ParkingServer = Nothing
+65:          cmdInitializeServer.Caption = "&amp;Start Server"
+66:          lblStatus.Caption = "The ParkingServer is not running."
+67:          Exit Sub
+68:      End If
+69: cmdInitializeServer_Click_CreationError:
+70:     MsgBox "An error has happened while initializing the ParkingServer."
+71: End Sub
+72:
+73: Public Sub RefreshVehiclesList()
+74:     Dim VehiclesList As Variant, VehiclesInList As Variant,
+         highlighted As Integer
+75:     lbvehicles_number.Caption = ParkingServer.GetVehiclesCount
+76:     highlighted = Vehicles.ListIndex
+77:     Vehicles.Clear
+78:     VehiclesList = ParkingServer.GetLocationList
+79:     For Each VehiclesInList In VehiclesList
+80:         Vehicles.AddItem VehiclesInList
+81:     Next VehiclesInList
+82:     If highlighted &lt; Vehicles.ListCount Then Vehicles.ListIndex =
+        highlighted
+83:     Vehicles.SetFocus
+84: End Sub
+85:
+86: Private Sub Form_Load()
+87:     Vehicles.Visible = False
+88:     cmdPark.Visible = False
+89:     CmdUpdate.Visible = False
+90:     CmdUnpark.Visible = False
+91:     Label2.Visible = False
+92:     lblStatus.Caption = "The ParkingServer is not running."
+93: End Sub
+</PRe>
+					
+					<p>Lines 2–3: The Python COM Objects are declared as <tt class="monofont">Objects</tt> at the Form level.</p>
+
+					<p>Line 14: Releases the <tt class="monofont">Vehicle</Tt> object from the memory.</p>
+
+					<P>Line 20: Check whether the list is empty.</p>
+
+					<p>Line 35: Calls the Python <tT clasS="monofont">IdentifyVehicle()</tt> method, which returns a Vehicle Object according to the indexing position (spot) provided as the function argument.</p>
+
+					<P>Line 76: Stores the index associated to the selected vehicle.</P>
+
+					<P>Line 78: Python sends a list of strings that becomes an array-type Variant.</P>
+
+					<p>Lines 82–83: Returns the focus to the last selected list item.</p>
+
+					<p><a HREF="136#4.html">Listing 7.3</a> is used by the project's form, which enables you to type each vehicle's data.</p>
+
+					
+						<h5>
+<a NAME="4"></a>Listing 7.3 frmVehicle.frm</h5>
+						<prE CLAss="monofont">
+ 1: Public Function ModifyInfo(VehicleToModify As Object) As Boolean
+ 2:     txt_floor.Text = Str(VehicleToModify.floor)
+ 3:     txt_model.Text = VehicleToModify.model
+ 4:     txt_license.Text = VehicleToModify.license
+ 5:     txt_color.Text = VehicleToModify.Color
+ 6:     Show 1
+ 7:     VehicleToModify.floor = Val(txt_floor.Text)
+ 8:     VehicleToModify.model = txt_model.Text
+ 9:     VehicleToModify.license = txt_license.Text
+10:     VehicleToModify.Color = txt_color.Text
+11:     ModifyInfo = True
+12: End Function
+13:
+14: Private Sub FormExit_Click()
+15:     Me.Visible = False
+16: End Sub
+</pre>
+					
+					<p>Lines 2–5: The public attributes of the Vehicle Object, <tt class="monofont">_public_attrs_,</tt> are transported to the form objects.</p>
+
+					<p>Lines 14–16: If you close the window, the values are not transported back to the form. You must click on the OK button, which hides the form and brings the control back to the <tt cLasS="monofont">ModifyInfo()</tt> function.</p>
+
+					<P>When you execute this project, you have an easy-to-use interface that connects to  the COM servers and accesses all the public methods that are implemented (see  <a hreF="136#5.html">Figure 7.6</a>).</p>
+
+					<cENTEr>
+						<h5>
+<a nAME="5"></A>Figure 7.6. Parking lot demonstration.</h5><img BORDer="0" wiDTH="500" Height="439" src="graphics/07fig06.gif" alt="graphics/07fig06.gif"></center>
+
+					<p>If you have problems trying to connect to the server, check whether you have registered the class from the Python console.<a nAme="idx1073744829"></A><a naMe="idx1073744830"></a><a nAme="idx1073744831"></a><A NAMe="idx1073744832"></a></p>
+
+				
+			</fONT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="135.html" title="Summary"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=136" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="136.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="138.html" title="8. Working with Databases"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744825">parking lot object</a> <a href="#idx1073744829">2nd</a><BR>
+objects<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parking lot<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744828">source code</a> <a href="#idx1073744832">2nd</a><BR>
+parking lot object<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744827">source code</a> <a href="#idx1073744831">2nd</a><BR>
+source code<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073744826">parking lot object</a> <a href="#idx1073744830">2nd</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

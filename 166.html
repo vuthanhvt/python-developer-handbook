@@ -1,0 +1,393 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Accessing URLs</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="161.html" class="navtitle">10. Basic Network Background</a> &gt; <span class="nonavtitle">Accessing URLs</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="165.html" title="HTTP"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=166" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="166.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="167.html" title="FTP"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A42%3A13+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148046198039088135025208</font><a href="read9.asp?bookname=0672319942&snode=166&now=5%2F31%2F2002+4%3A42%3A13+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			Accessing URLs</h3>
+				<p>URL stands for <i>uniform resource locator.</I> URLs are those strings, such as <A TArget="_blank" HREF="http://www.lessaworld.com/">http://www.lessaworld.com/</a>, that you have to type in your Web browser in order to jump to a Web page.</p>
+
+				<p>Python provides the <tT CLAss="monofont">urllib</tt> and <tt class="monofont">urlparse</tt> modules as great tools to process URLs.</p>
+
+				<div claSs="note"><p ClasS="notetitle"><b>Tip</b></p><p>
+
+					<P>Many applications today that have to <a naME="idx1073745986"></A>
+						<A name="idx1073745987"></A>
+						<A NAme="idx1073745988"></a>
+						<a NAME="idx1073745989"></a>
+						<a naME="idx1073745990"></A>
+						<A name="idx1073745991"></a>
+						<a name="idx1073745992"></a>parse Web pages always suffer with changes in the page design. However, these problems will go away when more structural formats (such as XML) start getting used to producing the pages.</p>
+
+				</p></div>
+<br>
+<br>
+
+				
+					<H4>
+				
+				The <tt ClasS="monofont">urllib</tt> Module</h4>
+					<p>The <Tt clASS="monofont">urllib</Tt> module is a high-level interface to retrieve data across the World Wide Web, supporting any HTTP, FTP, and gopher connections by using sockets. This module defines functions for writing programs that must be active users of the Web. It is normally used as an outer interface to other modules, such as <tt cLASS="monofont">httplib, ftplib, gopherlib,</tt> and so on.</p>
+
+					<p>To <A NAMe="idx1073745993"></a>
+						<a nAME="idx1073745994"></A>
+						<a name="idx1073745995"></a>
+						<a name="idx1073745996"></a>retrieve a Web page, use the <tt class="monofont">urllib.urlopen(url [,data])</tT> function. This function returns a <tt ClasS="monofont">stream</tt> object that can be manipulated as easily as any other regular <tt ClasS="monofont">file</TT> object, and is illustrated as follows:</P>
+
+					<pre>
+						
+&gt;&gt;&gt; import urllib
+&gt;&gt;&gt; page = urllib.urlopen("http://www.bog.frb.fed.us")
+&gt;&gt;&gt; page.readline()
+
+					</pRE>
+
+					<P>This stream object has two additional <A name="idx1073745997"></A>attributes: <A NAme="idx1073745998"></a>
+						<a NAME="idx1073745999"></a>
+						<tt class="monofont">url</tt> and <a name="idx1073746000"></a>
+						<a namE="idx1073746001"></a>
+						<tT claSs="monofont">headers.</tt> The first one is the URL that you are opening, and the other is a dictionary that contains the page headers, as illustrated in the next example.</p>
+
+					<Pre>
+						
+&gt;&gt;&gt; page.url
+'http://www.bog.frb.fed.us'
+&gt;&gt;&gt; for key, value in page.headers.items():
+…       print key, " = ", value
+…
+server  =  Microsoft-IIS/4.0
+content-type  =  text/html
+content-length  =  461
+date  =  Thu, 15 Jun 2000 15:31:32 GMT
+				
+					</pRE>
+
+					<P>Next, you have a couple of other <A name="idx1073746002"></A>functions that are made available by the <TT Class="monofont">urllib</TT> module.</P>
+
+					<BlockQUOTe>
+<p>
+							<p>
+								
+									<tt class="monofont">urllib.urlretrieve(url [,filename] [,hook]—</tt>
+								 
+    
+								Copies a network object to a local file.
+							</p>
+
+							<pre>
+								
+&gt;&gt;&gt; urllib.urlretrieve('http://www.lessaworld.com', 'copy.html')
+
+							</pre>
+
+						</p>
+<P>
+							<p>
+								
+									<tT claSs="monofont">
+										<a naMe="idx1073746003"></a>
+										<a NAME="idx1073746004"></a>urllib.urlcleanup()—</tt>
+								 
+    
+								Cleans up the cache used by <tT CLAss="monofont">urllib.urlretrieve.</tt>
+								
+							</P>
+
+						</P>
+<P>
+							<P>
+								
+									<tt clASS="monofont">urllib.quote(string [,safe])—</Tt>
+								 
+    
+								Replaces special characters in string using <tt class="monofont">%xx</tt> escape codes. The optional <tt class="monofont">safe</tt> parameter specifies additional characters that should be quoted.
+							</p>
+
+							<Pre>
+								
+&gt;&gt;&gt; urllib.quote('This &amp; that @ home')
+'this%20%26%20that%20%40%20home'
+
+							</Pre>
+
+							<p>
+								<Tt claSs="monofont">
+									<a nAME="idx1073746005"></A>
+									<a namE="idx1073746006"></A>urllib.quote_plus(string [,safe])—</TT>Works just like <tt clASS="monofont">quote(),</Tt> but it replaces spaces by using plus signs.</p>
+
+						</p>
+<p>
+							<P>
+								
+									<TT Class="monofont">urllib.unquote(string)—</tt>
+								 
+    
+								Returns the original value that was passed to <tt class="monofont">urllib.quote.</tt>
+								
+							</p>
+
+							<pre>
+								
+&gt;&gt;&gt; urllib.unquote('this%20%26%20that%20%40%20home')
+'This &amp; that @ home'
+
+							</pRe>
+
+						</p>
+<P>
+							<p>
+								<tt Class="monofont">
+									<A namE="idx1073746007"></A>
+									<A Name="idx1073746008"></a>urllib.urlencode(dict)—</TT>Converts a dictionary into a URL-encoded string.</P>
+
+							<Pre>
+								
+&gt;&gt;&gt; dict = { 'sex':'female', 'name':'renata lessa'}
+&gt;&gt;&gt; urllib.urlencode(dict)
+'sex=female&amp;name=renata+lessa'
+						
+							</prE>
+
+						</P>
+</BLockqUOTE>
+					<div class="note"><p class="notetitle"><b>Note</b></p><p>
+
+						<p>For those that have Python 2.0 installed, keep<a NamE="idx1073746009"></a>
+							<a nAme="idx1073746010"></a>
+							<a Name="idx1073746011"></A>
+							<A NAme="idx1073746012"></a>
+							<a NAME="idx1073746013"></a> in mind that the new <tt cLASS="monofont">urllib</tt> module is able to scan environment variables for proxy configuration.</p>
+
+						<p>Also note that Python 2.0's version of the <TT CLass="monofont">urllib</tt> module has support to "
+								<tt class="monofont">https://</tt>
+							" URLs over SSL.</p>
+
+					</p></div>
+<bR>
+<br>
+
+				
+				
+					<H4>
+				
+				The <tt cLass="monofont">urlparse</tT> Module</h4>
+					<p>The <tT CLAss="monofont">urlparse</tt> module manipulates an <TT CLass="monofont">URL</tT> string, parsing it into tuples. It is able to break an <TT Class="monofont">URL</TT> up into components, combines them back, and converts relative addresses to absolute addresses. Basically, it rips URLs apart, being able to put them together again.<A Name="idx1073746014"></a>
+						<a name="idx1073746015"></a>
+						<a name="idx1073746016"></a>
+						<a namE="idx1073746017"></a>
+						<a Name="idx1073746018"></A>
+						<a namE="idx1073746019"></a>
+					</p>
+
+					<p>Let's take a look at the <A NAMe="idx1073746020"></a>functions that are provided by this module:</p>
+
+					<bLOCKquotE>
+<P><PRe>
+urlparse.urlparse()
+syntax: urlparse.urlparse(urlstring [,default_scheme [,allow_fragments]])
+
+							</pre>
+</P>
+<P>
+							<P>Parses an URL into six elements—addressing scheme, network location, path, parameters, query, fragment identifier—returning the following tuple:</P>
+
+							<pre>
+								
+&gt;&gt;&gt; urlparse('http://www.python.org/FAQ.html')
+('http', 'www.python.org','FAQ.html','','','')
+
+							</pre>
+
+						</p>
+<p>
+							<p>
+								<tt class="monofont">
+									<a namE="idx1073746021"></a>
+									<a Name="idx1073746022"></A>urlparse.urlunparse(tuple)—</tt>Constructs a URL string from a tuple as returned by <tt ClasS="monofont">urlparse().</TT>
+							</P>
+
+						</p>
+<p>
+							<p>
+								<a NAME="idx1073746023"></a>
+								<a naME="idx1073746024"></A>
+								<Tt claSS="monofont">urlparse.urljoin(base, url [,allow_fragments])—</TT>Combines an absolute URL with a relative URL.</p>
+
+							<pre>
+								
+&gt;&gt;&gt;urljoin('http://www.python.org', 'doc/lib')
+'http://www.python.org/doc/lib'
+
+							</pre>
+
+						</p>
+</blockquote>
+					<p>The next example <a NamE="idx1073746025"></a>
+						<a nAme="idx1073746026"></a>
+						<a Name="idx1073746027"></A>
+						<A NAme="idx1073746028"></a>
+						<a NAME="idx1073746029"></a>
+						<a naME="idx1073746030"></A>
+						<A name="idx1073746031"></A>copies a Web page into a local file:</P>
+
+					<PRe>
+						
+import urllib
+pagehandler = urllib.urlopen("http://www.lessaworld.com")
+outputfile = open("sitecopy.html", "wb")
+while 1:
+    data = pagehandler.read(512)
+    if not data:
+        break
+    outputfile.write(data)
+outputfile.close()
+pagehandler.close()
+
+					</pre>
+
+					<p>If you are behind a <a name="idx1073746032"></a>
+						<a name="idx1073746033"></a>
+						<a naMe="idx1073746034"></a>
+						<A namE="idx1073746035"></a>
+						<a naMe="idx1073746036"></a>firewall, here's a little trick you can do in order to use proxy servers to handle your connections:</p>
+
+					<PRE>
+						
+1: import urllib
+2: proxies = { 'http': 'http://proxy:80'}
+3: urlopener = urllib.FancyURLopener(proxies)
+4: htmlpage = urlopener.open('http://www.bog.frb.fed.us')
+5: data = htmlpage.readlines()
+6: print data
+
+					</Pre>
+
+					<p>Line 2: Creates a dictionary that identifies the proxy location. Note that <tT CLAss="monofont">proxy:80</tt> corresponds to the name of the proxy server along with the port where it is  listening to.</P>
+
+					<P>Line 3: Creates a new function that masks the proxy connection.<A Name="idx1073746037"></a>
+						<A NAMe="idx1073746038"></a>
+						<a name="idx1073746039"></a>
+						<a name="idx1073746040"></a>
+						<a name="idx1073746041"></a>
+						<A naMe="idx1073746042"></a>
+					</p>
+
+				
+			</Font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="165.html" title="HTTP"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=166" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="166.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="167.html" title="FTP"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+accessing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746017">uniform resource locators (URLs)</a> <a href="#idx1073746040">2nd</a><BR>
+applications<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745990">parsing Web pages</a><BR>
+attributes<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746000">headers</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745997">stream object</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745998">url</a><BR>
+connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proxy servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746034">handling</a><BR>
+copying<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746025">Web pages into local files</a><BR>
+duplicating<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746031">Web pages into local files</a><BR>
+environment variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746011">scanning</a><BR>
+files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;local<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746030">copying Web pages into</a><BR>
+firewells<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746032">handling proxy server connections</a><BR>
+functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746002">urllib module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746005">urllib.quote_plus(string [,safe])()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746003">urllib.urlcleanup()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746007">urllib.urlencode(dict)()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746020">urlparse module</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746023">urlparse.urljoin(base, url [,allow_fragments])()</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746021">urlparse.urlunparse(tuple)()</a><BR>
+handling<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746033">proxy server connections</a><BR>
+ <a href="#idx1073746001">headers attribute</a><BR>
+Internet<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746028">copying pages into local files</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745989">parsing Web pages</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745996">retrieving Web pages</a><BR>
+local files<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746029">copying Web pages into</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;urllib<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746010">environment variables, scanning</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746019">urlparse</a> <a href="#idx1073746042">2nd</a><BR>
+networking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746014">accessing uniform resource locators (URLs)</a> <a href="#idx1073746037">2nd</a><BR>
+pages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746027">copying into local files</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745987">parsing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745995">retrieving</a><BR>
+parsing<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745986">Web pages</a><BR>
+programs<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745991">parsing Web pages</a><BR>
+proxy server connections<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746035">handling</a><BR>
+retrieving<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745993">Web pages</a><BR>
+scanning<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746013">environment variables</a><BR>
+servers<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proxy<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746036">handling connections</a><BR>
+software<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745992">parsing Web pages</a><BR>
+uniform resource locators (URLs)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746015">accessing</a> <a href="#idx1073746038">2nd</a><BR>
+ <a href="#idx1073745999">url attribute</a><BR>
+urllib module<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;environment variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746009">scanning</a><BR>
+ <a href="#idx1073746006">urllib.quote_plus(string [,safe])() function</a><BR>
+ <a href="#idx1073746004">urllib.urlcleanup() function</a><BR>
+ <a href="#idx1073746008">urllib.urlencode(dict)() function</a><BR>
+ <a href="#idx1073746018">urlparse module</a> <a href="#idx1073746041">2nd</a><BR>
+ <a href="#idx1073746024">urlparse.urljoin(base, url [,allow_fragments])() function</a><BR>
+ <a href="#idx1073746022">urlparse.urlunparse(tuple)() function</a><BR>
+URLs (uniform resource locators)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746016">accessing</a> <a href="#idx1073746039">2nd</a><BR>
+variables<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;environment<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746012">scanning</a><BR>
+Web pages<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746026">copying into local files</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745988">parsing</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073745994">retrieving</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

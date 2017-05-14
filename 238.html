@@ -1,0 +1,54 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Summary</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="227.html" class="navtitle">17. Development Tools</a> &gt; <span class="nonavtitle">Summary</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="237.html" title="Distributing Python Applications"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=238" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="238.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="240.html" title="Chapter"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="6%2F1%2F2002+6%3A23%3A15+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039196038240039088173205162105045222218067026198136194182048</font><a href="read2.asp?bookname=0672319942&snode=238&now=6%2F1%2F2002+6%3A23%3A15+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>Summary</h3>
+				<p>This chapter demonstrates how to go through all the development stages of creating a Python application. You will learn how to compile the Python interpreter, and how to debug, profile, and distribute Python programs.</p>
+
+				<P>The Python source code distribution comes with complete instructions about how to compile the code for both Windows and UNIX platforms. These same instructions are given here in a general format overview.</P>
+
+				<P>Although there is a binary distribution for Windows systems, binary distributions for the UNIX platforms are not made available by the Python Web site because the compilation process depends much on your system.</P>
+
+				<p>As you already know, Python provides two development environments that offer a lot of useful features which can help you while coding: Pythonwin and IDLE. However, for simple programs, or in case you don't have a graphical environment available, you can stick to simple text editors that can be used to handle the job very nicely. On Windows systems, you can use editors such as Editpad and Notepad to write Python scripts; on DOS systems, EDIT, and on UNIX systems, you have choices like Pico, Vi, Emacs, and others. Note that Emacs lets you use a special Emacs mode, which is called Python Mode, to write Python programs.</p>
+
+				<p>The Python distribution comes with lots of scripts that you can study and use. Those scripts are stored in two directories: <tT CLAss="monofont">\ Tools</tt> and <TT CLass="monofont">\ Demos.</tt>
+				</p>
+
+				<p>Even though a Python bytecode file can automatically be created when importing a module, you can manually create them whenever you need. It is a good idea to bytecompile all files before giving Python access to users that cannot save in that source directory. Otherwise, the interpreter has to byte-compile the module every time the module is loaded, which can slow down program start-up considerably.</p>
+
+				<p>After installing Python, some special environment variables can be configured in order to guarantee the maximum usage of the Python environment.</p>
+
+				<p>Debugging a Python program is something that doesn't require too much work. The Standard Python Library comes with a debugger module called <tt class="monofont">bdb</tt> that can be used by you to subclass your own debuggers. If you don't want to spend time writing your own debug, you can use the Python debugger (the <Tt cLass="monofont">pdb</Tt> module), which is also part of the Python distribution. For those who need highly-specialized debugging information, Python provides a disassembler module called <tt cLass="monofont">dis.</TT>
+				</P>
+
+				<P>The information provided in this chapter also offers a brief overview about how to use the <tt clASS="monofont">profile</Tt> module to perform the analysis of the runtime performance of a Python program. Profiling an application means to be able to sketch an image about what is going on behind the scenes when you execute a program. In addition to that, it is also shown how to use the <tt cLASS="monofont">pstats</tt> module, which analyzes the data collected by the Python <tt CLASs="monofont">profile</tt> module.</p>
+
+				<p>When it comes time to distribute your application, you have more than one way to pack your Python files. It depends only on the kind of goal you are trying to reach. The Python distribution contains a tool that saves much time when you are dealing with distribution issues. This tool is called <tt class="monofont">Freeze</tt>. You have other options too, such as <tt clasS="monofont">SqueezeTool</tt> and Gordon McMillan's installer.</P>
+
+			</fonT>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="237.html" title="Distributing Python Applications"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=238" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="238.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="240.html" title="Chapter"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>

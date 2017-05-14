@@ -1,0 +1,184 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Robots" content="INDEX,NOFOLLOW">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<TITLE>Safari | Python Developer's Handbook -&gt; Newsgroups—Telnet and Gopher</TITLE>
+<LINK REL="stylesheet" HREF="oreillyi/oreillyN.css">
+</HEAD>
+<BODY bgcolor="white" text="black" link="#990000" vlink="#990000" alink="#990000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" cellpadding=5 cellspacing=0 border=0 class="navtopbg"><tr><td><font size="1"><p class="navtitle"><a href="8.html" class="navtitle">Web Development</a> &gt; <a href="0672319942.html" class="navtitle">Python Developer's Handbook</a> &gt; <a href="161.html" class="navtitle">10. Basic Network Background</a> &gt; <span class="nonavtitle">Newsgroups—Telnet and Gopher</span></p></font></td><td align="right" valign="top" nowrap><font size="1"><a href="main.asp?list" class="safnavoff">See All Titles</a></font></td></tr></table>
+<TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="168.html" title="SMTP/POP3/IMAP"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=169" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="169.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="170.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+<a href="5%2F31%2F2002+4%3A42%3A47+PM.html" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><font color=white size=1>152015024128143245168232148039199167010047123209178152124239215162148046198034061128071234</font><a href="read2.asp?bookname=0672319942&snode=169&now=5%2F31%2F2002+4%3A42%3A47+PM" TABINDEX="-1"><img src=images/spacer.gif border=0 width=1 height=1></a><br>
+<FONT>
+				<h3>
+			
+			
+			
+			Newsgroups—Telnet and Gopher</h3>
+				<p>The <a NAME="idx1073746118"></a>
+					<a naME="idx1073746119"></A>
+					<Tt claSS="monofont">nntplib</TT> module implements a low-level interface to the client side of the <a name="idx1073746120"></a>
+					<a name="idx1073746121"></a>
+					<a name="idx1073746122"></a>
+					<i>NNTP (Network News Transfer Protocol)</i> protocol—a service mostly known for providing <I>newsgroups.</i>
+				</p>
+
+				<P>This protocol is text-based because all the communication between the client and the server uses ASCII text. This protocol is also used to exchange Usenet news articles between servers.</p>
+
+				<p>Newsgroups are organized hierarchically, according to their levels, which are separated by <a Name="idx1073746123"></a>
+					<A namE="idx1073746124"></A>
+					<A Name="idx1073746125"></a>
+					<I>dots.</I> In <TT clasS="monofont">comp.lang.python</TT> for example, <Tt claSS="monofont">comp</TT> defines computer-related newsgroups and <tt class="monofont">lang</tt> defines that it refers to computer languages. It is shown as follows:</p>
+
+				<pre>
+					
+ 1: import nntplib
+ 2: import string
+ 3: ServerAlias = "news.lessaworld.com"
+ 4: NewsGroup = "comp.lang.opensource"
+ 5: Keyword = raw_input("Enter keyword to search: ")
+ 6: NewsServer = nntplib.NNTP(ServerAlias)
+ 7: r, count, firstmsg, lastmsg, name = NewsServer.group(NewsGroup)
+ 8: r, messages = NewsServer.xover(first, last)
+ 9: for id, subject, author, date, msgid, refer, size, lines in messages:
+10:     if string.find(subject, Keyword) &gt;= 0:
+11:         r, id, msgid, msgbody = NewsServer.article(id)
+12:         print "Author: %s - Subject: %s - Date: %s\ n" % }
+13:               (author, subject, date)
+14:         print "&lt;-Begin Message-&gt;\ n"
+15:         print msgbody
+16:         print "&lt;-End Message-&gt;\ n"
+
+				</pre>
+
+				<p>Line 6: Creates the NNTP object and connects to a NewsServer.</p>
+
+				<p>Line 7: Selects the newsgroup that you want to read.</p>
+
+				<P>Check out Python's documentation for more details about this module at the following URLs:</p>
+
+				<p>
+					<A tarGet="_blank" hrEf="http://www.python.org/doc/lib/nntp-objects.html">http://www.python.org/doc/lib/nntp-objects.html</a>
+				</p>
+
+				<P>and</P>
+
+				<P>
+					<A targET="_blank" HRef="http://www.python.org/doc/lib/module-nntplib.html">http://www.python.org/doc/lib/module-nntplib.html</a>
+				</p>
+
+				<P>The <A NAme="idx1073746126"></a>
+					<a NAME="idx1073746127"></a>
+					<tt class="monofont">telnetlib</tt> module implements a client for the telnet protocol. This protocol is used to connect to remote computers, usually via the port (23). After you have established your telnet connection, you can execute commands remotely on that computer through your telnet interface. The commands you use are UNIX commands, such as <tt class="monofont">ls, cd, pine, elm, talk, rm</tt> provided that the telnet server is running on a UNIX box. If you have a windows telnet server, you would probably have an MS-DOS style command prompt.</p>
+
+				<P>The protocol is shown in the following:</p>
+
+				<pRe>
+					
+import telnetlib
+hostserver = "http://www.lessaworld.com"
+newline = "\ n"
+username = "user02" + newline
+password = "qwerty0987" + newline
+telnet = telnetlib.Telnet(hostserver)
+telnet.read_until("login: ")
+telnet.write(username)
+telnet.read_until("Password: ")
+telnet.write(password)
+while 1:
+    command = raw_input("[shell]: ")
+    telnet.write(command)
+    if command == "exit":
+        break
+    telnet.read_all()
+			
+				</prE>
+
+				<p>For implementation details, you can check out the official documentation at</p>
+
+				<p>
+					<a TargET="_blank" HRef="http://www.python.org/doc/lib/module-telnetlib.html">http://www.python.org/doc/lib/module-telnetlib.html</a>
+				</p>
+
+				<P>and</P>
+
+				<P>
+					<A targET="_blank" HRef="http://www.python.org/doc/lib/telnet-objects.html">http://www.python.org/doc/lib/telnet-objects.html</a>
+				</p>
+
+				<P>
+					<A NAme="idx1073746128"></a>
+					<a name="idx1073746129"></a>Gopher provides a distributed information delivery system around which a world <a name="idx1073746130"></a>
+					<a name="idx1073746131"></A>
+					<i>campus-wide information system (CWIS)</i> can readily be constructed. While providing a delivery vehicle for local information, Gopher facilitates access to other Gopher and information servers throughout the world.</P>
+
+				<p>The <a nAme="idx1073746132"></a>
+					<a Name="idx1073746133"></A>
+					<TT Class="monofont">gopherlib</TT> module is a minimal client side implementation of the <TT clasS="monofont">Gopher</TT> protocol. Although Gopher is an old protocol, it is still used by many universities. Gopher provides an hierarchical interface for both texts and binaries. This module is used by the <Tt claSS="monofont">urllib</TT> module to handle URLs that use the Gopher protocol. The <tt class="monofont">gopherlib</tt> module is shown as follows:</p>
+
+				<pre>
+					
+import gopherlib
+GopherServer = "gopher.lessaworld.com"
+directory = gopherlib.send_selector("1/", GopherServer)
+for topic in gopherlib.get_directory(directory):
+    print topic
+
+				</pre>
+
+				<p>Check out the official documentation for more details:</p>
+
+				<p>
+					<a TarGet="_blank" hRef="http://www.python.org/doc/lib/module-gopherlib.html">http://www.python.org/doc/lib/module-gopherlib.html</a>
+					<a Name="idx1073746134"></A>
+					<A NAme="idx1073746135"></a>
+					<a NAME="idx1073746136"></a>
+					<a naME="idx1073746137"></A>
+				</P>
+
+			</font>
+<P><TABLE width="100%" border=0><TR valign="top"><TD><font size=1 color="#C0C0C0"><br></font></TD><TD align=right><font size=1 color="#C0C0C0">Last updated on 1/30/2002<br>Python Developer's Handbook, &copy;&nbsp;2002 Sams Publishing</font></TD></TR></TABLE></P>
+<TABLE border=0 width="100%" cellspacing=0 cellpadding=0><TR><td align=left width="15%" class="headingsubbarbg"><a href="168.html" title="SMTP/POP3/IMAP"><font size="1">&lt;&nbsp;BACK</font></a></td><td align=center width="70%" class="headingsubbarbg"><font size="1"><a href="popanote.asp?pubui=oreilly&bookname=0672319942&snode=169" target="_blank" title="Make a public or private annnotation">Make Note</a> | <a href="169.html" title="Use a Safari bookmark to remember this section">Bookmark</a></font></td><td align=right width="15%" class="headingsubbarbg"><a href="170.html" title="Summary"><font size="1">CONTINUE&nbsp;&gt;</font></a></td></TR></TABLE>
+</TD></TR></TABLE>
+<br><TABLE width=100% bgcolor=white border=0 cellspacing=0 cellpadding=5><TR><TD><H4 class=Title>Index terms contained in this section</H4>
+<font size=2>
+ <a href="#idx1073746123">. (dots)</a><BR>
+ <a href="#idx1073746130">campus-wide information system (CWIS)</a><BR>
+ <a href="#idx1073746131">CWIS (campus-wide information system)</a><BR>
+ <a href="#idx1073746124">dots (.)</a><BR>
+ <a href="#idx1073746137">Gopher</a><BR>
+ <a href="#idx1073746128">Gopher protocol</a><BR>
+ <a href="#idx1073746132">gopherlib module</a><BR>
+modules<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746133">gopherlib</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746119">nntplib</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746127">telnetlib</a><BR>
+ <a href="#idx1073746122">Network News Transfer Protocol (NNTP)</a><BR>
+networking<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746134">newsgroups</a><BR>
+ <a href="#idx1073746135">newsgroups</a><BR>
+ <a href="#idx1073746120">NNTP (Network News Transfer Protocol)</a><BR>
+ <a href="#idx1073746118">nntplib module</a><BR>
+ <a href="#idx1073746125">periods (.)</a><BR>
+protocols<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746129">Gopher</a><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#idx1073746121">Network News Transfer (NNTP)</a><BR>
+ <a href="#idx1073746136">Telnet</a><BR>
+ <a href="#idx1073746126">telnetlib module</a><BR>
+<BR>
+</font></TD></TR></TABLE>
+
+
+
+
+<!--EndOfBrowse-->
+
+</TD></TR></TABLE>
+<table width=100% border=0 cellspacing=0 cellpadding=0 bgcolor=#990000><tr><td><p align=center><font size=1 face="verdana,arial,helvetica" color=white>© 2002, O'Reilly & Associates, Inc.</font></p></td></tr></table>
+</BODY>
+</HTML>
